@@ -1,5 +1,6 @@
 import Hero from "@/components/sections/Hero";
 import IntroBlock from "@/components/sections/IntroBlock";
+import BookSection from "@/components/sections/BookSection";
 import ContentGrid from "@/components/sections/ContentGrid";
 import PodcastSection from "@/components/sections/PodcastSection";
 import VideoSection from "@/components/sections/VideoSection";
@@ -13,6 +14,7 @@ const Index = () => {
     <main className="overflow-x-hidden">
       <Hero />
       <IntroBlock />
+      <BookSection />
       <ContentGrid />
       <PodcastSection />
       <VideoSection />

@@ -55,17 +55,17 @@ const posts = [
 
 const ContentGrid = () => {
   return (
-    <section id="writing" className="py-24 md:py-32 bg-background">
+    <section id="writing" className="py-24 md:py-32 bg-card">
       <div className="container px-6 md:px-8">
         <div className="max-w-6xl mx-auto">
           {/* Section header */}
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 md:mb-16">
             <div>
-              <span className="text-primary font-medium text-sm uppercase tracking-wider mb-2 block">
+              <span className="text-accent font-medium text-sm uppercase tracking-wider mb-2 block">
                 Latest Writing
               </span>
               <h2 className="font-display text-5xl md:text-6xl text-foreground">
-                FRESH THOUGHTS
+                FRESH <span className="text-primary">THOUGHTS</span>
               </h2>
             </div>
             <p className="text-muted-foreground text-lg mt-4 md:mt-0 max-w-md">
@@ -78,16 +78,16 @@ const ContentGrid = () => {
             {posts.map((post, index) => (
               <article 
                 key={post.id}
-                className="group bg-card rounded-2xl p-6 md:p-8 shadow-soft hover:shadow-soft-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer border border-transparent hover:border-primary/10"
+                className="group bg-background rounded-2xl p-6 md:p-8 shadow-soft hover:shadow-soft-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer border border-transparent hover:border-accent/20"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 {/* Category badge */}
-                <span className="inline-block px-3 py-1 bg-secondary text-secondary-foreground text-xs font-medium rounded-full mb-4">
+                <span className="inline-block px-3 py-1 bg-secondary text-primary text-xs font-medium rounded-full mb-4">
                   {post.category}
                 </span>
                 
                 {/* Title */}
-                <h3 className="font-display text-2xl md:text-3xl text-foreground mb-3 group-hover:text-primary transition-colors leading-tight">
+                <h3 className="font-display text-2xl md:text-3xl text-foreground mb-3 group-hover:text-accent transition-colors leading-tight">
                   {post.title}
                 </h3>
                 
@@ -110,7 +110,7 @@ const ContentGrid = () => {
             <Button 
               variant="outline" 
               size="lg" 
-              className="rounded-full px-8 group"
+              className="rounded-full px-8 group border-primary text-primary hover:bg-primary hover:text-primary-foreground"
             >
               View all writing
               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />

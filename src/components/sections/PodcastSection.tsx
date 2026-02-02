@@ -15,7 +15,7 @@ const PodcastSection = () => {
               </span>
               
               <h2 className="font-display text-5xl md:text-6xl lg:text-7xl mb-6">
-                CONVERSATIONS<br />THAT MATTER
+                CONVERSATIONS<br />THAT <span className="text-brand-gold">MATTER</span>
               </h2>
               
               <p className="text-lg md:text-xl text-white/80 leading-relaxed mb-8 max-w-lg">
@@ -26,8 +26,7 @@ const PodcastSection = () => {
               <div className="flex flex-wrap gap-4">
                 <Button 
                   size="lg" 
-                  variant="secondary"
-                  className="rounded-full px-8 text-foreground"
+                  className="rounded-full px-8 bg-brand-gold text-foreground hover:bg-brand-gold/90"
                 >
                   <Play className="mr-2 h-5 w-5" />
                   Listen to the podcast
@@ -55,15 +54,15 @@ const PodcastSection = () => {
             <div className="order-1 lg:order-2 relative">
               <div className="aspect-square max-w-md mx-auto relative">
                 {/* Decorative circles */}
-                <div className="absolute inset-0 bg-white/5 rounded-full animate-pulse" />
-                <div className="absolute inset-4 bg-white/5 rounded-full" />
+                <div className="absolute inset-0 bg-brand-gold/10 rounded-full animate-pulse" />
+                <div className="absolute inset-4 bg-brand-gold/10 rounded-full" />
                 <div className="absolute inset-8 bg-white/10 rounded-full flex items-center justify-center">
                   {/* Waveform visualization */}
                   <div className="flex items-center gap-1">
                     {[...Array(12)].map((_, i) => (
                       <div 
                         key={i}
-                        className="w-2 bg-white/80 rounded-full animate-pulse"
+                        className="w-2 bg-brand-gold rounded-full animate-pulse"
                         style={{ 
                           height: `${20 + Math.random() * 60}px`,
                           animationDelay: `${i * 0.1}s`,

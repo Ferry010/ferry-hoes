@@ -1,15 +1,15 @@
 const IntroBlock = () => {
   return (
-    <section className="py-24 md:py-32 bg-warm-grey">
+    <section className="py-24 md:py-32 bg-card">
       <div className="container px-6 md:px-8">
         <div className="max-w-4xl mx-auto">
           {/* Organic layout with offset elements */}
           <div className="relative">
             {/* Decorative element */}
-            <div className="absolute -top-8 -left-4 w-16 h-16 bg-primary/10 rounded-full blur-xl" />
+            <div className="absolute -top-8 -left-4 w-16 h-16 bg-accent/10 rounded-full blur-xl" />
             
             <h2 className="font-display text-5xl md:text-6xl lg:text-7xl text-foreground mb-8">
-              THIS IS MY HOME BASE.
+              THIS IS MY <span className="text-accent">HOME BASE.</span>
             </h2>
             
             <div className="grid md:grid-cols-2 gap-8 md:gap-12">
@@ -25,12 +25,16 @@ const IntroBlock = () => {
               </div>
               
               <div className="relative">
-                {/* Playful visual element */}
-                <div className="aspect-square max-w-xs mx-auto md:ml-auto bg-gradient-to-br from-primary/20 to-primary/5 rounded-3xl flex items-center justify-center p-8 rotate-3 hover:rotate-0 transition-transform duration-500">
-                  <div className="text-center">
-                    <div className="font-display text-6xl text-primary mb-2">💡</div>
+                {/* Playful visual element - heart icon with pixels */}
+                <div className="aspect-square max-w-xs mx-auto md:ml-auto bg-gradient-to-br from-accent/20 to-primary/10 rounded-3xl flex items-center justify-center p-8 rotate-3 hover:rotate-0 transition-transform duration-500">
+                  <div className="text-center relative">
+                    <div className="text-7xl mb-2">❤️</div>
+                    {/* Pixel decorations */}
+                    <div className="absolute top-0 right-0 w-3 h-3 bg-primary rounded-sm" />
+                    <div className="absolute top-4 right-4 w-2 h-2 bg-primary/70 rounded-sm" />
+                    <div className="absolute top-2 right-8 w-2 h-2 bg-primary/50 rounded-sm" />
                     <p className="text-sm text-muted-foreground font-medium">
-                      Ideas brewing daily
+                      Where human meets digital
                     </p>
                   </div>
                 </div>
