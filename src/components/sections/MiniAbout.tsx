@@ -3,13 +3,13 @@ import { ArrowRight } from "lucide-react";
 
 const MiniAbout = () => {
   return (
-    <section className="py-24 md:py-32 bg-background">
+    <section className="py-24 md:py-32 bg-card">
       <div className="container px-6 md:px-8">
         <div className="max-w-4xl mx-auto">
           <div className="grid md:grid-cols-3 gap-8 md:gap-12 items-center">
             {/* Photo placeholder */}
             <div className="md:col-span-1">
-              <div className="aspect-square max-w-xs mx-auto md:mx-0 bg-gradient-to-br from-primary/30 to-primary/10 rounded-3xl overflow-hidden relative">
+              <div className="aspect-square max-w-xs mx-auto md:mx-0 bg-gradient-to-br from-accent/30 to-primary/20 rounded-3xl overflow-hidden relative">
                 {/* Placeholder for photo */}
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center">
@@ -17,15 +17,17 @@ const MiniAbout = () => {
                     <p className="text-sm text-muted-foreground">Ferry Hoes</p>
                   </div>
                 </div>
-                {/* Decorative corner */}
-                <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-primary/20 rounded-full blur-xl" />
+                {/* Decorative pixels */}
+                <div className="absolute -bottom-2 -right-2 w-6 h-6 bg-primary rounded-sm" />
+                <div className="absolute bottom-4 -right-4 w-4 h-4 bg-primary/70 rounded-sm" />
+                <div className="absolute -bottom-4 right-4 w-3 h-3 bg-accent rounded-sm" />
               </div>
             </div>
             
             {/* Bio */}
             <div className="md:col-span-2">
               <h2 className="font-display text-4xl md:text-5xl text-foreground mb-6">
-                HI, I'M FERRY.
+                HI, I'M <span className="text-accent">FERRY.</span>
               </h2>
               
               <div className="space-y-4 text-muted-foreground text-lg leading-relaxed mb-8">
@@ -43,7 +45,7 @@ const MiniAbout = () => {
               
               <Button 
                 variant="outline" 
-                className="rounded-full px-6 group"
+                className="rounded-full px-6 group border-accent text-accent hover:bg-accent hover:text-accent-foreground"
               >
                 Learn more about me
                 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
