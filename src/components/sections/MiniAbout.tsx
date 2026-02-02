@@ -1,0 +1,59 @@
+import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
+
+const MiniAbout = () => {
+  return (
+    <section className="py-24 md:py-32 bg-background">
+      <div className="container px-6 md:px-8">
+        <div className="max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-8 md:gap-12 items-center">
+            {/* Photo placeholder */}
+            <div className="md:col-span-1">
+              <div className="aspect-square max-w-xs mx-auto md:mx-0 bg-gradient-to-br from-primary/30 to-primary/10 rounded-3xl overflow-hidden relative">
+                {/* Placeholder for photo */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="text-center">
+                    <div className="font-display text-6xl mb-2">👋</div>
+                    <p className="text-sm text-muted-foreground">Ferry Hoes</p>
+                  </div>
+                </div>
+                {/* Decorative corner */}
+                <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-primary/20 rounded-full blur-xl" />
+              </div>
+            </div>
+            
+            {/* Bio */}
+            <div className="md:col-span-2">
+              <h2 className="font-display text-4xl md:text-5xl text-foreground mb-6">
+                HI, I'M FERRY.
+              </h2>
+              
+              <div className="space-y-4 text-muted-foreground text-lg leading-relaxed mb-8">
+                <p>
+                  I'm a thinker, speaker, and builder obsessed with the intersection of 
+                  humans and technology. For the past 15 years, I've been helping 
+                  organizations figure out how to use tech without losing their humanity.
+                </p>
+                <p>
+                  When I'm not on stage or writing, you'll find me making music, 
+                  experimenting with AI tools, or having long conversations about the 
+                  future over good coffee.
+                </p>
+              </div>
+              
+              <Button 
+                variant="outline" 
+                className="rounded-full px-6 group"
+              >
+                Learn more about me
+                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default MiniAbout;
