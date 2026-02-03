@@ -1,23 +1,27 @@
 import { ChevronDown } from "lucide-react";
 
 const HeroVideo = () => {
-  const name = "FERRY HOES";
+  const name = "Ferry Hoes";
   const letters = name.split("");
 
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Video background placeholder - dark gradient with subtle animation */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-br from-foreground via-foreground/95 to-primary/20" />
-        {/* Animated grain overlay */}
-        <div 
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+      {/* YouTube video background */}
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        <iframe
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+          src="https://www.youtube.com/embed/foEehJ_pwck?autoplay=1&mute=1&loop=1&playlist=foEehJ_pwck&controls=0&showinfo=0&start=0&end=15&modestbranding=1&rel=0&playsinline=1"
+          allow="autoplay; encrypted-media"
+          style={{ 
+            width: '177.78vh', // 16:9 aspect ratio
+            height: '100vh',
+            minWidth: '100vw',
+            minHeight: '56.25vw', // 16:9 aspect ratio
           }}
+          title="Hero background video"
         />
-        {/* Subtle moving gradient */}
-        <div className="absolute inset-0 bg-gradient-to-t from-foreground via-transparent to-transparent" />
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-foreground/40" />
       </div>
 
       {/* Animated name */}
@@ -28,7 +32,7 @@ const HeroVideo = () => {
             {letters.map((letter, i) => (
               <span
                 key={i}
-                className="inline-block text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] xl:text-[12rem] font-bold text-background animate-fade-up opacity-0"
+                className="inline-block text-8xl sm:text-9xl md:text-[10rem] lg:text-[12rem] xl:text-[14rem] font-bold text-background animate-fade-up opacity-0"
                 style={{ 
                   animationDelay: `${i * 0.08}s`,
                   animationFillMode: "forwards"
