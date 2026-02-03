@@ -61,15 +61,12 @@ const ContentGrid = () => {
           {/* Section header */}
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 md:mb-16">
             <div>
-              <span className="text-accent font-medium text-sm mb-2 block">
-                Latest Writing
-              </span>
               <h2 className="font-display text-5xl md:text-6xl text-foreground font-bold">
-                Fresh <span className="text-primary">thoughts</span>
+                What I'm <span className="text-primary">thinking about</span>
               </h2>
             </div>
             <p className="text-muted-foreground text-lg mt-4 md:mt-0 max-w-md">
-              Essays, ideas, and experiments. No clickbait. No fluff. Just honest thinking.
+              Essays, ideas, and experiments. No clickbait. No fluff.
             </p>
           </div>
 
