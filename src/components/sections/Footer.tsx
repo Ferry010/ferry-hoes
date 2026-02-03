@@ -48,11 +48,6 @@ const Footer = () => {
           {/* Divider */}
           <div className="border-t border-white/10 pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-              {/* Tagline */}
-              <p className="text-white/50 text-sm md:text-base">
-                Humans first. Technology second. Always.
-              </p>
-              
               {/* Social links placeholder */}
               <div className="flex gap-6">
                 <a href="#" className="text-white/50 hover:text-white transition-colors text-sm">
