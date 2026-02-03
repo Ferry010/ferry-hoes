@@ -100,6 +100,16 @@ export default {
           "0%": { opacity: "0" },
           "100%": { opacity: "1" },
         },
+        "text-reveal": {
+          "0%": { 
+            opacity: "0", 
+            transform: "translateY(100%) rotateX(-90deg)" 
+          },
+          "100%": { 
+            opacity: "1", 
+            transform: "translateY(0) rotateX(0)" 
+          },
+        },
         float: {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-10px)" },
@@ -110,6 +120,7 @@ export default {
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-up": "fade-up 0.6s ease-out forwards",
         "fade-in": "fade-in 0.4s ease-out forwards",
+        "text-reveal": "text-reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards",
         float: "float 6s ease-in-out infinite",
       },
     },

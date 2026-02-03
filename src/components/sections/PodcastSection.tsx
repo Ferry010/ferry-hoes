@@ -1,92 +1,122 @@
 import { Button } from "@/components/ui/button";
-import { Headphones, Play } from "lucide-react";
+import { ArrowRight, Headphones, Play } from "lucide-react";
+
+const featuredEpisodes = [
+  {
+    number: 127,
+    title: "The Future of Human Work",
+    guest: "Sarah Chen",
+    duration: "58 min",
+  },
+  {
+    number: 126,
+    title: "Building Brands That Last",
+    guest: "Marcus Williams",
+    duration: "45 min",
+  },
+  {
+    number: 125,
+    title: "AI and Empathy",
+    guest: "Dr. Elena Rodriguez",
+    duration: "62 min",
+  },
+];
 
 const PodcastSection = () => {
+  const openMessagePanel = () => {
+    const bubble = document.querySelector('[aria-label="Open message panel"]') as HTMLButtonElement;
+    bubble?.click();
+  };
+
   return (
-    <section className="py-24 md:py-32 bg-primary text-primary-foreground overflow-hidden">
+    <section className="py-24 md:py-32 bg-card overflow-hidden">
       <div className="container px-6 md:px-8">
         <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Text content */}
-            <div className="order-2 lg:order-1">
-              <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full text-sm font-medium mb-6">
-                <Headphones className="h-4 w-4" />
-                Podcast
-              </span>
-              
-              <h2 className="font-display text-5xl md:text-6xl lg:text-7xl mb-6 font-bold">
-                Conversations<br />that <span className="text-brand-gold">matter</span>
-              </h2>
-              
-              <p className="text-lg md:text-xl text-white/80 leading-relaxed mb-8 max-w-lg">
-                Deep dives with founders, artists, scientists, and anyone doing interesting work 
-                at the intersection of humans and technology. No scripts. No soundbites. Just real talk.
-              </p>
-              
-              <div className="flex flex-wrap gap-4">
-                <Button 
-                  size="lg" 
-                  className="rounded-full px-8 bg-brand-gold text-foreground hover:bg-brand-gold/90"
-                >
-                  <Play className="mr-2 h-5 w-5" />
-                  Listen to the podcast
-                </Button>
-              </div>
-              
-              {/* Micro-engagement */}
-              <p className="text-sm text-white/60 mt-6">
-                Got a topic suggestion?{" "}
-                <button 
-                  onClick={() => {
-                    const bubble = document.querySelector('[aria-label="Open message panel"]') as HTMLButtonElement;
-                    bubble?.click();
-                  }}
-                  className="text-brand-gold hover:text-brand-gold/80 underline underline-offset-4 transition-colors"
-                >
-                  Let me know
-                </button>
-              </p>
-              
-              {/* Stats */}
-              <div className="flex gap-8 mt-10 pt-8 border-t border-white/20">
-                <div>
-                  <div className="font-display text-4xl font-bold text-brand-gold">127</div>
-                  <div className="text-sm text-white/60">Episodes</div>
-                </div>
-                <div>
-                  <div className="font-display text-4xl font-bold text-brand-gold">50K+</div>
-                  <div className="text-sm text-white/60">Downloads</div>
-                </div>
-                <div>
-                  <div className="font-display text-4xl font-bold text-brand-gold">4.9</div>
-                  <div className="text-sm text-white/60">Rating</div>
-                </div>
-              </div>
-            </div>
+          {/* Header */}
+          <div className="text-center mb-16">
+            <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-6">
+              <Headphones className="h-4 w-4" />
+              The Podcast
+            </span>
             
-            {/* Visual */}
-            <div className="order-1 lg:order-2 relative">
-              <div className="aspect-square max-w-md mx-auto relative">
-                {/* Decorative circles */}
-                <div className="absolute inset-0 bg-brand-gold/20 rounded-full animate-pulse" />
-                <div className="absolute inset-4 bg-brand-gold/10 rounded-full" />
-                <div className="absolute inset-8 bg-white/10 rounded-full flex items-center justify-center">
-                  {/* Waveform visualization */}
-                  <div className="flex items-center gap-1">
-                    {[...Array(12)].map((_, i) => (
-                      <div 
-                        key={i}
-                        className="w-2 bg-brand-gold rounded-full animate-pulse"
-                        style={{ 
-                          height: `${20 + Math.random() * 60}px`,
-                          animationDelay: `${i * 0.1}s`,
-                          animationDuration: `${0.8 + Math.random() * 0.5}s`
-                        }}
-                      />
-                    ))}
-                  </div>
+            <h2 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6">
+              Conversations that <span className="text-accent">matter</span>
+            </h2>
+            
+            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+              Deep dives with founders, artists, scientists, and anyone doing interesting work 
+              at the intersection of humans and technology. No scripts. No soundbites. Just real talk.
+            </p>
+          </div>
+
+          {/* Episode cards */}
+          <div className="grid md:grid-cols-3 gap-6 mb-12">
+            {featuredEpisodes.map((episode) => (
+              <article 
+                key={episode.number}
+                className="group bg-background rounded-2xl p-6 shadow-soft hover:shadow-soft-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer border border-transparent hover:border-primary/20"
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <span className="text-sm font-medium text-primary">
+                    Episode {episode.number}
+                  </span>
+                  <span className="text-xs text-muted-foreground">
+                    {episode.duration}
+                  </span>
                 </div>
-              </div>
+                
+                <h3 className="font-display text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+                  {episode.title}
+                </h3>
+                
+                <p className="text-sm text-muted-foreground mb-4">
+                  with {episode.guest}
+                </p>
+                
+                <button className="inline-flex items-center gap-2 text-primary hover:text-primary/80 text-sm font-medium transition-colors group/btn">
+                  <Play className="h-4 w-4" />
+                  <span>Listen now</span>
+                  <ArrowRight className="h-3 w-3 group-hover/btn:translate-x-1 transition-transform" />
+                </button>
+              </article>
+            ))}
+          </div>
+
+          {/* Stats */}
+          <div className="flex justify-center gap-12 mb-12 py-8 border-y border-border">
+            <div className="text-center">
+              <div className="font-display text-4xl font-bold text-primary">127</div>
+              <div className="text-sm text-muted-foreground">Episodes</div>
+            </div>
+            <div className="text-center">
+              <div className="font-display text-4xl font-bold text-primary">50K+</div>
+              <div className="text-sm text-muted-foreground">Downloads</div>
+            </div>
+            <div className="text-center">
+              <div className="font-display text-4xl font-bold text-primary">4.9</div>
+              <div className="text-sm text-muted-foreground">Rating</div>
+            </div>
+          </div>
+
+          {/* CTA */}
+          <div className="text-center">
+            <Button 
+              size="lg" 
+              className="rounded-full px-8 bg-primary hover:bg-primary/90 mb-6"
+            >
+              <Play className="mr-2 h-5 w-5" />
+              Listen to all episodes
+            </Button>
+            
+            {/* Micro-engagement */}
+            <div>
+              <button
+                onClick={openMessagePanel}
+                className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary font-medium transition-colors group"
+              >
+                <span className="underline underline-offset-4">Got a topic suggestion?</span>
+                <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </button>
             </div>
           </div>
         </div>

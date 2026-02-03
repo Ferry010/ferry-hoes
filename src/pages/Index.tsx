@@ -1,6 +1,8 @@
-import Hero from "@/components/sections/Hero";
-import ThreePillars from "@/components/sections/ThreePillars";
-import ContentGrid from "@/components/sections/ContentGrid";
+import HeroVideo from "@/components/sections/HeroVideo";
+import AboutBlock from "@/components/sections/AboutBlock";
+import BrandHumanizingSection from "@/components/sections/BrandHumanizingSection";
+import SpeakerSection from "@/components/sections/SpeakerSection";
+import BookSection from "@/components/sections/BookSection";
 import PodcastSection from "@/components/sections/PodcastSection";
 import CommunitySection from "@/components/sections/CommunitySection";
 import Footer from "@/components/sections/Footer";
@@ -9,10 +11,12 @@ import FloatingChatBubble from "@/components/FloatingChatBubble";
 const Index = () => {
   return (
     <main className="overflow-x-hidden">
-      <Hero />
-      <ThreePillars />
+      <HeroVideo />
+      <AboutBlock />
+      <BrandHumanizingSection />
+      <SpeakerSection />
+      <BookSection />
       <PodcastSection />
-      <ContentGrid />
       <CommunitySection />
       <Footer />
       <FloatingChatBubble />
