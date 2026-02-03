@@ -1,136 +1,219 @@
 
 
-# Homepage Content Restructure
+# Immersive Homepage Redesign
 
-Redesigning the homepage to be authentically YOU - not a copy of GaryVee or Seth Godin. A clear, personal introduction that reflects where you are now.
+A bold, full-screen experience that puts Ferry front and center with cinematic sections, animated text, and multiple engagement touchpoints.
 
 ---
 
 ## New Page Structure
 
 ```text
-1. Hero (new format)
-   - H1: "Public speaker, published author & entrepreneur"
-   - H2: "Unleashing human potential with technology"
-   - Micro-engagement: "Have a question? Just ask"
+1. Hero (full screen video)
+   - Large animated "FERRY HOES" text
+   - Full-screen video background (placeholder)
+   - Scroll indicator
 
-2. Three Pillars Section (NEW)
-   - Ferry the Speaker → links to /speaking
-   - Ferry the Entrepreneur → links to /entrepreneur  
-   - Ferry the Human → links to /about
+2. About Block (full screen image)
+   - Your photo as background
+   - Copy: "Public speaker, published author & entrepreneur..."
+   - Button to About page
 
-3. Podcast Section (keep, update copy)
+3. Brand Humanizing Section (full screen)
+   - Life mission around Brand Humanizing
+   - Placeholder content
 
-4. Blog/Writing Section (keep, simplify)
+4. Speaker Section (full screen)
+   - About speaking work
+   - "Speaker enquiries" button
 
-5. Discord Community Section (change from Slack)
+5. Book Section (full screen)
+   - Translate to English
+   - Note about Dutch-only + English request option
 
-6. Footer with contact touchpoints
+6. Podcast Section
+   - Featured episodes (top 3 or recent 3)
+   - Listen links
+
+7. Discord Community (keep existing)
+
+8. Footer
 ```
 
 ---
 
-## Sections to Remove
+## Section 1: Hero with Animated Name
 
-| Section | Reason |
-|---------|--------|
-| IntroBlock | Replaced by cleaner three pillars section |
-| BookSection | Fold into "Entrepreneur" page later |
-| VideoSection | Content for Speaking/YouTube pages |
-| SpeakingSection | Becomes a pillar card linking to full page |
-| MiniAbout | Content moves to "Human" page |
-
----
-
-## Hero Redesign
-
-**Current**: Big statement headline ("Rebuilding the way the world works")  
-**New**: Personal introduction that tells people who you are
+Full-screen with video background and large animated typography.
 
 ```text
 ┌─────────────────────────────────────────────────────┐
 │                                                     │
-│          Public speaker, published author           │
-│              & entrepreneur                         │
-│                    (H1)                             │
+│          ████████████████████████████████          │
+│          █                              █          │
+│          █    F E R R Y   H O E S       █          │
+│          █    (animated, very large)    █          │
+│          █                              █          │
+│          ████████████████████████████████          │
 │                                                     │
-│   Unleashing human potential with technology        │
-│                    (H2)                             │
+│               [full screen video BG]                │
 │                                                     │
-│     [ Explore my work ]   [ Get in touch ]          │
+│                     ↓ scroll                        │
+└─────────────────────────────────────────────────────┘
+```
+
+Features:
+- Video element with `object-fit: cover` as background
+- Placeholder: dark gradient overlay until real video
+- "FERRY HOES" text animates in letter by letter or with a reveal effect
+- Scroll indicator at bottom
+
+---
+
+## Section 2: About Block
+
+Full-screen with photo background.
+
+```text
+┌─────────────────────────────────────────────────────┐
 │                                                     │
-│        Have a question? Just ask →                  │
+│   [your photo - full screen background]             │
+│                                                     │
+│          ┌────────────────────────────┐             │
+│          │  Ferry Hoes                 │            │
+│          │                             │            │
+│          │  Public speaker, published  │            │
+│          │  author & entrepreneur with │            │
+│          │  a mission to unleash human │            │
+│          │  potential with technology. │            │
+│          │                             │            │
+│          │  [ More about me → ]        │            │
+│          └────────────────────────────┘             │
 │                                                     │
 └─────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Three Pillars Section (NEW)
+## Section 3: Brand Humanizing
 
-A visual way to show the three dimensions of who you are, each linking to a dedicated page.
+Full-screen mission statement.
 
 ```text
-┌─────────────┐  ┌─────────────┐  ┌─────────────┐
-│   🎤        │  │   🚀        │  │   🌱        │
-│  SPEAKER    │  │ENTREPRENEUR │  │   HUMAN     │
-│             │  │             │  │             │
-│ Talks that  │  │ Building    │  │ Thoughts,   │
-│ inspire     │  │ products &  │  │ passions &  │
-│ action      │  │ brands      │  │ perspectives│
-│             │  │             │  │             │
-│  Learn more │  │  Learn more │  │  Learn more │
-└─────────────┘  └─────────────┘  └─────────────┘
-     ↓                 ↓                 ↓
-  /speaking      /entrepreneur        /about
+┌─────────────────────────────────────────────────────┐
+│                                                     │
+│              BRAND HUMANIZING                       │
+│                                                     │
+│    The superpower that makes your brand more        │
+│    human and your business grow faster.             │
+│                                                     │
+│    [Placeholder text about this being your          │
+│     life's work and mission...]                     │
+│                                                     │
+│         "Have a question about this?" →             │
+│                                                     │
+└─────────────────────────────────────────────────────┘
 ```
 
-Each card:
-- Icon or subtle visual
-- Title: "Ferry the Speaker" etc.
-- Short description (1-2 sentences)
-- CTA linking to dedicated page
+---
+
+## Section 4: Speaker Section
+
+Full-screen with bold visual.
+
+```text
+┌─────────────────────────────────────────────────────┐
+│                                                     │
+│             ON STAGE                                │
+│                                                     │
+│    Keynotes that challenge, inspire, and            │
+│    spark action. Topics from AI and the             │
+│    future of work to human-centered design.         │
+│                                                     │
+│         [ Speaker enquiries → ]                     │
+│                                                     │
+│         "Want to discuss an event?" →               │
+│                                                     │
+└─────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Podcast Section Updates
+## Section 5: The Book
 
-Keep the existing design but add a micro-engagement:
+Full-screen, translated to English, with Dutch note.
 
-- Add a small prompt: "Got a topic suggestion?" → opens chat
-- Keep teal background with gold accents
+```text
+┌─────────────────────────────────────────────────────┐
+│                                                     │
+│    [book cover image]       THE BOOK                │
+│                                                     │
+│                             Brand Humanizing        │
+│                                                     │
+│                             The superpower that     │
+│                             makes your brand more   │
+│                             human and your business │
+│                             grow faster.            │
+│                                                     │
+│                             Co-authored with        │
+│                             Jonathan Flores         │
+│                                                     │
+│                             [ Get the book → ]      │
+│                             [ Read a preview ]      │
+│                                                     │
+│      ─────────────────────────────────────────      │
+│      Currently in Dutch only. Want an English       │
+│      edition? Let me know - with enough interest    │
+│      we'll publish!                                 │
+│      [ Request English edition → ]                  │
+│                                                     │
+└─────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Blog Section Updates
+## Section 6: Podcast with Featured Episodes
 
-- Simplify header: "What I'm thinking about"
-- Keep grid of posts
-- Keep inline chat prompt
+Grid of top/recent episodes.
+
+```text
+┌─────────────────────────────────────────────────────┐
+│                                                     │
+│                 THE PODCAST                         │
+│                                                     │
+│    Conversations that matter. No scripts.           │
+│    No soundbites. Just real talk.                   │
+│                                                     │
+│    ┌──────────┐  ┌──────────┐  ┌──────────┐        │
+│    │ Ep 127   │  │ Ep 126   │  │ Ep 125   │        │
+│    │ Guest... │  │ Guest... │  │ Guest... │        │
+│    │ Listen → │  │ Listen → │  │ Listen → │        │
+│    └──────────┘  └──────────┘  └──────────┘        │
+│                                                     │
+│         [ Listen to all episodes → ]                │
+│                                                     │
+│         "Got a topic suggestion?" →                 │
+│                                                     │
+└─────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Discord Community Section
+## Micro-Engagement Points
 
-Change from Slack to Discord:
-- Update icon (Discord logo)
-- Update copy: "Discord community launching soon"
-- Invite link will come later
+Throughout the page, subtle conversation starters:
 
----
-
-## Chat Widget Enhancement
-
-The chat currently can't receive replies (no email collection). Since you want it anonymous:
-
-**Keep it as-is** for now - purely one-way thoughts. We could add context later:
-- Show which page they were on
-- Timestamp
-- A unique session ID (not personal info)
-
-Consider updating the copy to set expectations:
-- "Drop a thought" → "Share a thought" 
-- "I'll get back to you soon" → "I read everything" (more honest if you can't reply)
+| Location | Prompt | Action |
+|----------|--------|--------|
+| Hero | Scroll indicator only | - |
+| About | - | Button to /about |
+| Brand Humanizing | "Have a question about this?" | Opens chat |
+| Speaker | "Want to discuss an event?" | Opens chat |
+| Book | "Request English edition" | Opens chat |
+| Podcast | "Got a topic suggestion?" | Opens chat |
+| Discord | Join waitlist | - |
+| Footer | Message link | Opens chat |
+| Floating bubble | Always visible | Opens chat |
 
 ---
 
@@ -138,116 +221,190 @@ Consider updating the copy to set expectations:
 
 | File | Purpose |
 |------|---------|
-| `src/components/sections/ThreePillars.tsx` | New three-cards section |
+| `src/components/sections/HeroVideo.tsx` | Full-screen hero with animated name |
+| `src/components/sections/AboutBlock.tsx` | Full-screen photo + bio block |
+| `src/components/sections/BrandHumanizingSection.tsx` | Mission statement section |
+| `src/components/sections/SpeakerSection.tsx` | Speaking work section |
 
 ## Files to Modify
 
 | File | Changes |
 |------|---------|
-| `src/pages/Index.tsx` | Remove 5 sections, add ThreePillars |
-| `src/components/sections/Hero.tsx` | New H1/H2 structure |
-| `src/components/sections/ContentGrid.tsx` | Simplified header |
-| `src/components/sections/PodcastSection.tsx` | Add micro-engagement |
-| `src/components/sections/CommunitySection.tsx` | Slack → Discord |
-| `src/components/FloatingChatBubble.tsx` | Update copy for anonymous messages |
+| `src/pages/Index.tsx` | New section order |
+| `src/components/sections/BookSection.tsx` | Translate, add English request |
+| `src/components/sections/PodcastSection.tsx` | Add episode cards |
+| `tailwind.config.ts` | Add text-reveal animation |
 
-## Files to Keep (no changes)
+## Files to Remove from Homepage
 
 | File | Reason |
 |------|--------|
-| `src/components/QuickMessage.tsx` | Works fine as-is |
-| `src/components/sections/Footer.tsx` | Already has contact touchpoints |
+| `src/components/sections/Hero.tsx` | Replaced by HeroVideo |
+| `src/components/sections/ThreePillars.tsx` | Content distributed to full sections |
+| `src/components/sections/ContentGrid.tsx` | Blog content for separate page |
+
+---
+
+## Technical Details
+
+### HeroVideo.tsx Animation
+
+Name animation using staggered letter reveal:
+
+```typescript
+const name = "FERRY HOES";
+const letters = name.split("");
+
+// Each letter animates in with delay
+{letters.map((letter, i) => (
+  <span 
+    key={i}
+    className="inline-block animate-fade-up"
+    style={{ animationDelay: `${i * 0.08}s` }}
+  >
+    {letter === " " ? "\u00A0" : letter}
+  </span>
+))}
+```
+
+Font size: `text-7xl sm:text-8xl md:text-9xl lg:text-[12rem]`
+
+Video placeholder: Dark gradient with subtle animated grain or noise pattern.
+
+### Full-Screen Section Pattern
+
+Each section uses:
+```typescript
+<section className="min-h-screen flex items-center justify-center relative">
+  {/* Background (video/image/color) */}
+  <div className="absolute inset-0 -z-10">
+    {/* ... */}
+  </div>
+  
+  {/* Content */}
+  <div className="container relative z-10">
+    {/* ... */}
+  </div>
+</section>
+```
+
+### AboutBlock.tsx Structure
+
+```typescript
+<section className="min-h-screen relative flex items-center">
+  {/* Photo background */}
+  <div className="absolute inset-0 -z-10">
+    <div className="absolute inset-0 bg-foreground/70" /> {/* Overlay */}
+    {/* Placeholder until real photo */}
+    <div className="w-full h-full bg-gradient-to-br from-primary to-brand-teal-dark" />
+  </div>
+  
+  {/* Content card */}
+  <div className="container">
+    <div className="max-w-2xl bg-background/90 backdrop-blur p-12 rounded-3xl">
+      <h2>Ferry Hoes</h2>
+      <p>Public speaker, published author & entrepreneur...</p>
+      <Button>More about me</Button>
+    </div>
+  </div>
+</section>
+```
+
+### BookSection.tsx Updates
+
+Changes needed:
+1. Translate Dutch copy to English
+2. Add note: "Currently available in Dutch only"
+3. Add micro-engagement: "Want an English edition? Let me know"
+4. Keep existing book cover and layout
+
+### PodcastSection.tsx Episode Cards
+
+Add featured episodes array:
+
+```typescript
+const featuredEpisodes = [
+  {
+    number: 127,
+    title: "The Future of Human Work",
+    guest: "Sarah Chen",
+    duration: "58 min",
+  },
+  // ...
+];
+```
+
+Grid layout for 3 episode cards with play buttons.
+
+### New Animations (tailwind.config.ts)
+
+```typescript
+keyframes: {
+  "text-reveal": {
+    "0%": { 
+      opacity: "0", 
+      transform: "translateY(100%) rotateX(-90deg)" 
+    },
+    "100%": { 
+      opacity: "1", 
+      transform: "translateY(0) rotateX(0)" 
+    },
+  },
+},
+animation: {
+  "text-reveal": "text-reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+}
+```
 
 ---
 
 ## New Page Flow
 
 ```text
-Homepage (Index.tsx)
-├── Hero (who you are)
-├── ThreePillars (what you do)
-├── PodcastSection (listen)
-├── ContentGrid (read)
-├── CommunitySection (join Discord)
+Index.tsx
+├── HeroVideo (name animation, video bg)
+├── AboutBlock (photo, bio, CTA)
+├── BrandHumanizingSection (mission)
+├── SpeakerSection (speaking work)
+├── BookSection (updated, translated)
+├── PodcastSection (with episode cards)
+├── CommunitySection (Discord)
 ├── Footer
 └── FloatingChatBubble
 ```
 
-**5 sections removed**, **1 new section added** = cleaner, more focused.
+---
+
+## Sections Removed from Homepage
+
+| Section | Where it goes |
+|---------|---------------|
+| ThreePillars | Content split into full sections |
+| ContentGrid (blog) | Future /writing or /blog page |
 
 ---
 
-## Technical Details
+## Placeholders Needed
 
-### Hero.tsx Changes
-- H1: Use `text-4xl md:text-5xl lg:text-6xl` for readable subtitle sizing
-- H2: Use `text-lg md:text-xl` for the tagline
-- Keep the teal/coral background blurs
-- Keep the floating chat trigger
-
-### ThreePillars.tsx Structure
-```typescript
-const pillars = [
-  {
-    icon: Mic,
-    title: "Ferry the Speaker",
-    description: "Keynotes and talks that inspire action",
-    link: "/speaking",
-  },
-  {
-    icon: Rocket,
-    title: "Ferry the Entrepreneur", 
-    description: "Building products and humanizing brands",
-    link: "/entrepreneur",
-  },
-  {
-    icon: Heart,
-    title: "Ferry the Human",
-    description: "Thoughts, passions, and perspectives",
-    link: "/about",
-  },
-];
-```
-
-### CommunitySection.tsx Changes
-- Replace `Users` icon with custom Discord SVG or text
-- Change "Slack community" → "Discord community"
-- Keep the email waitlist (disabled for now)
-
-### Index.tsx New Structure
-```typescript
-<main>
-  <Hero />
-  <ThreePillars />
-  <PodcastSection />
-  <ContentGrid />
-  <CommunitySection />
-  <Footer />
-  <FloatingChatBubble />
-</main>
-```
-
----
-
-## Micro-Engagement Points
-
-The homepage will have these touchpoints for interaction:
-
-1. **Hero**: "Have a question? Just ask" link
-2. **Podcast**: "Got a topic suggestion?" (new)
-3. **Blog Grid**: "Something on your mind?" (existing)
-4. **Footer**: Message link (existing)
-5. **Floating Bubble**: Always visible (existing)
+| Element | Placeholder |
+|---------|-------------|
+| Hero video | Dark gradient with subtle grain animation |
+| About photo | Teal gradient with overlay |
+| Speaker background | Accent color gradient |
+| Podcast episodes | 3 placeholder episodes |
 
 ---
 
 ## Expected Result
 
-A focused homepage that:
-- Immediately tells visitors who you are (speaker, author, entrepreneur)
-- Shows your mission (unleashing human potential with technology)
-- Provides clear paths to explore your different facets
-- Maintains multiple low-friction ways to start a conversation
-- Changes community from Slack to Discord
-- Removes clutter from sections that belong on sub-pages
+A bold, immersive homepage that:
+- Opens with cinematic animated name reveal
+- Uses full-screen sections for maximum impact
+- Clearly communicates who you are and what you do
+- Makes Brand Humanizing central to your identity
+- Provides easy paths to book you as a speaker
+- Shows the book with English request option
+- Features podcast with actual episodes
+- Maintains 6+ micro-engagement touchpoints
+- Feels open, approachable, and authentically you
 
