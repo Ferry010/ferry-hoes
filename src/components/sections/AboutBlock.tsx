@@ -7,17 +7,8 @@ const AboutBlock = () => {
       <div className="grid md:grid-cols-2 min-h-screen">
         {/* Left: Text content */}
         <div className="flex flex-col justify-center px-6 md:px-12 lg:px-20 py-16 md:py-0">
-          <p className="text-sm tracking-[0.3em] text-muted-foreground mb-8 uppercase">
-            Ferry Hoes
-          </p>
-          
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold uppercase leading-[1.1] mb-10 text-foreground">
-            Ferry Hoes;{" "}
-            <span className="text-accent">Speaker</span>,{" "}
-            <span className="text-accent">Entrepreneur</span>,{" "}
-            <span className="text-accent">Author</span> and host of{" "}
-            <span className="text-accent">'The Human Side'</span> podcast
-            {" "}- exploring the intersection of technology and humanity.
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-[1.1] mb-10 text-foreground">
+            International speaker, published author and entrepreneur. My mission is to unleash super-human potential with the help of technology.
           </h2>
           
           <Link 
