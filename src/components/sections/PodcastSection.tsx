@@ -11,16 +11,20 @@ const PodcastSection = () => {
             <div className="order-2 lg:order-1">
               <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full text-sm font-medium mb-6">
                 <Headphones className="h-4 w-4" />
-                Podcast
+                Conversations I'm having
               </span>
               
               <h2 className="font-display text-5xl md:text-6xl lg:text-7xl mb-6 font-bold">
-                Conversations<br />that <span className="text-brand-gold">matter</span>
+                Real talk<br />with <span className="text-brand-gold font-handwriting">interesting people</span>
               </h2>
               
               <p className="text-lg md:text-xl text-white/80 leading-relaxed mb-8 max-w-lg">
-                Deep dives with founders, artists, scientists, and anyone doing interesting work 
-                at the intersection of humans and technology. No scripts. No soundbites. Just real talk.
+                Deep dives with founders, artists, scientists, and anyone doing work 
+                at the intersection of humans and tech. No scripts. No soundbites. Just honest conversation.
+              </p>
+
+              <p className="text-sm text-white/60 font-handwriting mb-8">
+                Warning: I ask a lot of follow-up questions.
               </p>
               
               <div className="flex flex-wrap gap-4">
