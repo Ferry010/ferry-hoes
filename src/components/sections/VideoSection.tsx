@@ -36,16 +36,13 @@ const VideoSection = () => {
           {/* Section header */}
           <div className="text-center mb-12 md:mb-16">
             <span className="text-primary font-medium text-sm mb-2 block">
-              Me, on camera
+              Featured talks
             </span>
             <h2 className="font-display text-5xl md:text-6xl text-foreground mb-4 font-bold">
               Watch & <span className="text-accent font-handwriting">learn</span>
             </h2>
             <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-              Talks, keynotes, and behind-the-scenes moments. 
-              <span className="font-handwriting text-muted-foreground/70 block mt-1">
-                (I promise I'm more energetic in person)
-              </span>
+              Keynotes, talks, and ideas worth watching.
             </p>
           </div>
 

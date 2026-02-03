@@ -68,8 +68,8 @@ const ContentGrid = () => {
                 Recent <span className="text-primary font-handwriting">scribbles</span>
               </h2>
             </div>
-            <p className="text-muted-foreground text-lg mt-4 md:mt-0 max-w-md font-handwriting">
-              No clickbait. No fluff. Just honest thinking about things that matter.
+            <p className="text-muted-foreground text-lg mt-4 md:mt-0 max-w-md">
+              Essays, ideas, and perspectives on technology, work, and what it means to be human.
             </p>
           </div>
 
@@ -120,11 +120,8 @@ const ContentGrid = () => {
           {/* Inline conversation prompt */}
           <div className="max-w-xl mx-auto">
             <div className="bg-background rounded-2xl p-6 md:p-8 border border-border shadow-soft text-center">
-              <p className="text-muted-foreground mb-2">
-                Disagree with something? Have a question?
-              </p>
-              <p className="text-sm text-muted-foreground/70 font-handwriting mb-4">
-                I love a good debate.
+              <p className="text-muted-foreground mb-4">
+                Have a question or perspective to share?
               </p>
               <button
                 onClick={() => {

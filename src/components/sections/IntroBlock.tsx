@@ -15,15 +15,12 @@ const IntroBlock = () => {
             <div className="grid md:grid-cols-2 gap-8 md:gap-12">
               <div className="space-y-6">
                 <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-                  This isn't a funnel. Not a sales page. It's where I think out loud, 
-                  share what I'm learning, and connect with people who care about the same things I do.
+                  This isn't a funnel or a sales page. It's where I think out loud, 
+                  share what I'm learning, and connect with people who care about the same things.
                 </p>
                 <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-                  Consider it a creative lab. A digital campfire. A space for real conversations 
-                  about building a better relationship between humans and technology.
-                </p>
-                <p className="text-base text-muted-foreground/80 font-handwriting">
-                  (Also, I overshare about coffee and jazz. Fair warning.)
+                  Consider it a space for real conversations about building a better 
+                  relationship between humans and technology.
                 </p>
               </div>
               
@@ -31,9 +28,9 @@ const IntroBlock = () => {
                 {/* Clean visual element */}
                 <div className="aspect-square max-w-xs mx-auto md:ml-auto bg-gradient-to-br from-accent/20 to-primary/10 rounded-3xl flex items-center justify-center p-8 rotate-3 hover:rotate-0 transition-transform duration-500">
                   <div className="text-center">
-                    <div className="text-7xl mb-2">☕</div>
+                    <div className="text-7xl mb-2">💡</div>
                     <p className="text-sm text-muted-foreground font-medium font-handwriting">
-                      Pull up a chair
+                      Ideas worth exploring
                     </p>
                   </div>
                 </div>

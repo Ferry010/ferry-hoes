@@ -19,12 +19,8 @@ const PodcastSection = () => {
               </h2>
               
               <p className="text-lg md:text-xl text-white/80 leading-relaxed mb-8 max-w-lg">
-                Deep dives with founders, artists, scientists, and anyone doing work 
-                at the intersection of humans and tech. No scripts. No soundbites. Just honest conversation.
-              </p>
-
-              <p className="text-sm text-white/60 font-handwriting mb-8">
-                Warning: I ask a lot of follow-up questions.
+                Deep dives with founders, researchers, and leaders doing meaningful work 
+                at the intersection of humans and technology. Thoughtful conversations that go beyond the surface.
               </p>
               
               <div className="flex flex-wrap gap-4">

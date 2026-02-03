@@ -36,13 +36,9 @@ const SpeakingSection = () => {
                 Let's <span className="text-accent font-handwriting">inspire</span><br />your audience
               </h2>
               
-              <p className="text-muted-foreground text-lg leading-relaxed mb-4">
+              <p className="text-muted-foreground text-lg leading-relaxed mb-6">
                 I speak at conferences, corporate events, and leadership summits worldwide. 
-                No death-by-PowerPoint. Just stories, insights, and ideas that stick.
-              </p>
-
-              <p className="text-sm text-muted-foreground/70 font-handwriting mb-6">
-                (I've been told I'm surprisingly funny for a tech guy)
+                Engaging stories, actionable insights, and ideas that spark real conversations.
               </p>
               
               {/* Topics */}
