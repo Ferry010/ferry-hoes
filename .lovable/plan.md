@@ -1,79 +1,50 @@
 
-# Hero Video & About Block Updates
 
-Two focused changes: embed the YouTube video as a looping background and update the About copy.
+# Hero & About Block Updates
+
+Three changes: bigger teal name in hero, add name header to About, and add your photo.
 
 ---
 
-## Change 1: Hero Video Background
-
-Replace the gradient placeholder with the actual YouTube video as a looping background.
+## Change 1: Hero Name - Bigger & Teal
 
 ### Current
-- Dark gradient with grain overlay
-- Name in ALL CAPS: "FERRY HOES"
+- Font size: `text-8xl sm:text-9xl md:text-[10rem] lg:text-[12rem] xl:text-[14rem]`
+- Color: `text-background` (white)
 
 ### New
-- YouTube video embed (first 15 seconds, looping, muted, autoplay)
-- Name in title case: "Ferry Hoes"
-- Even larger font size
+- Font size: `text-[7rem] sm:text-[9rem] md:text-[12rem] lg:text-[16rem] xl:text-[20rem]`
+- Color: `text-primary` (teal)
 
-### Video Implementation
-
-YouTube videos can't be directly used with `<video>` tags. We'll use a YouTube embed with specific parameters:
-
-```text
-┌─────────────────────────────────────────────────────┐
-│                                                     │
-│         [YouTube video - looped, muted]             │
-│                                                     │
-│              Ferry Hoes                             │
-│           (title case, massive)                     │
-│                                                     │
-│                  ↓ scroll                           │
-└─────────────────────────────────────────────────────┘
-```
-
-YouTube embed URL with parameters:
-- `autoplay=1` - starts automatically
-- `mute=1` - muted (required for autoplay)
-- `loop=1` - loops continuously
-- `playlist=foEehJ_pwck` - required for loop to work
-- `controls=0` - hides controls
-- `showinfo=0` - hides title
-- `start=0&end=15` - plays first 15 seconds
-- `modestbranding=1` - minimal YouTube branding
-
-### Font Size Increase
-Current: `text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] xl:text-[12rem]`
-New: `text-8xl sm:text-9xl md:text-[10rem] lg:text-[12rem] xl:text-[14rem]`
+This makes the name significantly larger and uses your brand teal color to pop against the video background.
 
 ---
 
-## Change 2: About Block Copy
+## Change 2: About Block - Add Name Header
 
-### Current Copy
+Add "Ferry Hoes" as a small header above the mission copy.
+
 ```text
-FERRY HOES (small header)
-
-Ferry Hoes; Speaker, Entrepreneur, Author and host of 
-'The Human Side' podcast - exploring the intersection 
-of technology and humanity.
+┌──────────────────────────────────────────────────────────────┐
+│                                                              │
+│   Ferry Hoes                    [Your photo -                │
+│                                  holding book                │
+│   International speaker,         in bookstore]               │
+│   published author and                                       │
+│   entrepreneur. My mission                                   │
+│   is to unleash super-human                                  │
+│   potential with technology.                                 │
+│                                                              │
+│   About Ferry →                                              │
+│                                                              │
+└──────────────────────────────────────────────────────────────┘
 ```
 
-### New Copy
-```text
-International speaker, published author and entrepreneur. 
-My mission is to unleash super-human potential with the 
-help of technology.
+---
 
-About Ferry →
-```
+## Change 3: Add Your Photo
 
-- Remove the small "FERRY HOES" header
-- Remove highlighted keywords (cleaner read)
-- New mission-focused copy
-- Keep the "About Ferry" link
+The uploaded photo (you in a bookstore holding the Brand Humanizing book) will be placed on the right side of the About block as a full-height image with `object-cover`.
 
 ---
 
@@ -81,8 +52,14 @@ About Ferry →
 
 | File | Changes |
 |------|---------|
-| `src/components/sections/HeroVideo.tsx` | YouTube video background, title case name, larger font |
-| `src/components/sections/AboutBlock.tsx` | Updated copy, remove header |
+| `src/components/sections/HeroVideo.tsx` | Increase font size, change to teal color |
+| `src/components/sections/AboutBlock.tsx` | Add name header, add your photo |
+
+## File to Copy
+
+| From | To |
+|------|-----|
+| `user-uploads://1768228693973.jpeg` | `src/assets/ferry-bookstore.jpg` |
 
 ---
 
@@ -91,55 +68,39 @@ About Ferry →
 ### HeroVideo.tsx
 
 ```typescript
-// Name in title case
-const name = "Ferry Hoes";
-
-// YouTube iframe as background
-<iframe
-  className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-  src="https://www.youtube.com/embed/foEehJ_pwck?autoplay=1&mute=1&loop=1&playlist=foEehJ_pwck&controls=0&showinfo=0&start=0&end=15&modestbranding=1&rel=0"
-  allow="autoplay; encrypted-media"
-  style={{ 
-    width: '100vw',
-    height: '100vh',
-    objectFit: 'cover',
-    transform: 'scale(1.5)' // Zoom to crop and fill screen
-  }}
-/>
-
-// Larger font
-className="text-8xl sm:text-9xl md:text-[10rem] lg:text-[12rem] xl:text-[14rem]"
+// Change text color and increase size
+className="inline-block text-[7rem] sm:text-[9rem] md:text-[12rem] lg:text-[16rem] xl:text-[20rem] font-bold text-primary animate-fade-up opacity-0"
 ```
 
 ### AboutBlock.tsx
 
 ```typescript
-<section className="min-h-screen bg-background">
-  <div className="grid md:grid-cols-2 min-h-screen">
-    <div className="flex flex-col justify-center px-6 md:px-12 lg:px-20 py-16 md:py-0">
-      {/* No more small header */}
-      
-      <h2 className="font-display text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-[1.1] mb-10 text-foreground">
-        International speaker, published author and entrepreneur. 
-        My mission is to unleash super-human potential with the help of technology.
-      </h2>
-      
-      <Link to="/about" className="...">
-        About Ferry
-        <ArrowRight />
-      </Link>
-    </div>
-    
-    {/* Photo placeholder unchanged */}
-  </div>
-</section>
+import ferryPhoto from "@/assets/ferry-bookstore.jpg";
+
+// Add name header above the copy
+<p className="font-display text-2xl md:text-3xl lg:text-4xl font-bold text-primary mb-6">
+  Ferry Hoes
+</p>
+
+<h2 className="font-display text-3xl md:text-4xl lg:text-5xl xl:text-6xl ...">
+  International speaker...
+</h2>
+
+// Replace placeholder with actual photo
+<div className="relative min-h-[400px] md:min-h-screen order-first md:order-last">
+  <img 
+    src={ferryPhoto}
+    alt="Ferry Hoes holding Brand Humanizing book"
+    className="absolute inset-0 w-full h-full object-cover"
+  />
+</div>
 ```
 
 ---
 
 ## Expected Result
 
-- Hero opens with your actual video playing silently in background
-- "Ferry Hoes" appears in title case, even larger than before
-- About section has clean, mission-focused copy without redundant headers
-- Both sections maintain the bold, editorial feel
+- Hero: "Ferry Hoes" displays in massive teal letters over the video
+- About: Your name appears in teal above the mission statement
+- About: Your bookstore photo fills the right side
+
