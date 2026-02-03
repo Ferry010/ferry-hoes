@@ -67,6 +67,8 @@ export default {
           "teal-dark": "hsl(var(--brand-teal-dark))",
           coral: "hsl(var(--brand-coral))",
           "coral-light": "hsl(var(--brand-coral-light))",
+          gold: "hsl(var(--brand-gold))",
+          "gold-light": "hsl(var(--brand-gold-light))",
         },
       },
       borderRadius: {
