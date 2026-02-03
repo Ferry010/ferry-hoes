@@ -4,7 +4,7 @@ import bookCover from "@/assets/brand-humanizing-book.jpg";
 
 const BookSection = () => {
   return (
-    <section className="py-24 md:py-32 bg-brand-gold-light overflow-hidden">
+    <section className="py-24 md:py-32 bg-secondary overflow-hidden">
       <div className="container px-6 md:px-8">
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -20,11 +20,6 @@ const BookSection = () => {
                   alt="Brand Humanizing - De superpower waarmee je merk menselijker wordt en je bedrijf sneller groeit" 
                   className="relative z-10 w-full max-w-sm rounded-lg shadow-soft-xl hover:scale-105 transition-transform duration-500"
                 />
-                
-                {/* Floating pixels decoration */}
-                <div className="absolute -right-8 top-1/4 w-4 h-4 bg-primary rounded-sm animate-float" />
-                <div className="absolute -right-4 top-1/2 w-3 h-3 bg-primary/70 rounded-sm animate-float" style={{ animationDelay: "1s" }} />
-                <div className="absolute -right-6 top-2/3 w-2 h-2 bg-primary/50 rounded-sm animate-float" style={{ animationDelay: "2s" }} />
               </div>
             </div>
             
@@ -35,9 +30,9 @@ const BookSection = () => {
                 The Book
               </span>
               
-              <h2 className="font-display text-5xl md:text-6xl lg:text-7xl text-foreground mb-6">
-                <span className="text-primary">BRAND</span><br />
-                <span className="text-accent">HUMANIZING</span>
+              <h2 className="font-display text-5xl md:text-6xl lg:text-7xl text-foreground mb-6 font-bold">
+                <span className="text-primary">Brand</span><br />
+                <span className="text-accent">Humanizing</span>
               </h2>
               
               <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-6">

@@ -61,11 +61,11 @@ const ContentGrid = () => {
           {/* Section header */}
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 md:mb-16">
             <div>
-              <span className="text-accent font-medium text-sm uppercase tracking-wider mb-2 block">
+              <span className="text-accent font-medium text-sm mb-2 block">
                 Latest Writing
               </span>
-              <h2 className="font-display text-5xl md:text-6xl text-foreground">
-                FRESH <span className="text-primary">THOUGHTS</span>
+              <h2 className="font-display text-5xl md:text-6xl text-foreground font-bold">
+                Fresh <span className="text-primary">thoughts</span>
               </h2>
             </div>
             <p className="text-muted-foreground text-lg mt-4 md:mt-0 max-w-md">
@@ -87,7 +87,7 @@ const ContentGrid = () => {
                 </span>
                 
                 {/* Title */}
-                <h3 className="font-display text-2xl md:text-3xl text-foreground mb-3 group-hover:text-accent transition-colors leading-tight">
+                <h3 className="font-display text-2xl md:text-3xl text-foreground mb-3 group-hover:text-accent transition-colors leading-tight font-semibold">
                   {post.title}
                 </h3>
                 

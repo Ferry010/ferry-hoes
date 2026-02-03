@@ -9,7 +9,7 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-12">
             {/* Logo/Name */}
             <div>
-              <span className="font-display text-3xl md:text-4xl">FERRY HOES</span>
+              <span className="font-display text-3xl md:text-4xl font-bold">Ferry Hoes</span>
             </div>
             
             {/* Navigation */}
