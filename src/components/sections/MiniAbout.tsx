@@ -17,17 +17,13 @@ const MiniAbout = () => {
                     <p className="text-sm text-muted-foreground">Ferry Hoes</p>
                   </div>
                 </div>
-                {/* Decorative pixels */}
-                <div className="absolute -bottom-2 -right-2 w-6 h-6 bg-primary rounded-sm" />
-                <div className="absolute bottom-4 -right-4 w-4 h-4 bg-primary/70 rounded-sm" />
-                <div className="absolute -bottom-4 right-4 w-3 h-3 bg-accent rounded-sm" />
               </div>
             </div>
             
             {/* Bio */}
             <div className="md:col-span-2">
-              <h2 className="font-display text-4xl md:text-5xl text-foreground mb-6">
-                HI, I'M <span className="text-accent">FERRY.</span>
+              <h2 className="font-display text-4xl md:text-5xl text-foreground mb-6 font-bold">
+                Hi, I'm <span className="text-accent">Ferry.</span>
               </h2>
               
               <div className="space-y-4 text-muted-foreground text-lg leading-relaxed mb-8">

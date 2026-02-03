@@ -15,9 +15,9 @@ const CommunitySection = () => {
       <div className="container px-6 md:px-8 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           {/* Big emotional headline */}
-          <h2 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.9] mb-8">
-            DON'T FOLLOW.<br />
-            <span className="text-brand-gold">BUILD WITH ME.</span>
+          <h2 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.9] mb-8 font-bold">
+            Don't follow.<br />
+            <span className="text-accent">Build with me.</span>
           </h2>
           
           <p className="text-lg md:text-xl text-white/70 max-w-2xl mx-auto mb-12 leading-relaxed">
@@ -26,8 +26,8 @@ const CommunitySection = () => {
           </p>
           
           {/* Coming soon notice */}
-          <div className="inline-flex items-center gap-3 px-6 py-4 bg-brand-gold/20 rounded-2xl mb-8">
-            <Users className="h-5 w-5 text-brand-gold" />
+          <div className="inline-flex items-center gap-3 px-6 py-4 bg-accent/20 rounded-2xl mb-8">
+            <Users className="h-5 w-5 text-accent" />
             <span className="text-white/90">
               Slack community launching soon
             </span>
@@ -39,12 +39,12 @@ const CommunitySection = () => {
               <input 
                 type="email" 
                 placeholder="Enter your email"
-                className="flex-1 px-6 py-4 rounded-full bg-white/10 border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:border-brand-gold transition-colors"
+                className="flex-1 px-6 py-4 rounded-full bg-white/10 border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:border-accent transition-colors"
                 disabled
               />
               <Button 
                 size="lg"
-                className="rounded-full px-8 whitespace-nowrap bg-brand-gold text-foreground hover:bg-brand-gold/90"
+                className="rounded-full px-8 whitespace-nowrap bg-accent text-accent-foreground hover:bg-accent/90"
                 disabled
               >
                 Join waitlist

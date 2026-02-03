@@ -15,7 +15,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],
-        display: ["Bebas Neue", "Impact", "sans-serif"],
+        display: ["Archivo", "system-ui", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -62,16 +62,11 @@ export default {
           ring: "hsl(var(--sidebar-ring))",
         },
         brand: {
-          blue: "hsl(var(--brand-blue))",
-          "blue-light": "hsl(var(--brand-blue-light))",
-          "blue-dark": "hsl(var(--brand-blue-dark))",
-          red: "hsl(var(--brand-red))",
-          "red-light": "hsl(var(--brand-red-light))",
-          gold: "hsl(var(--brand-gold))",
-          "gold-light": "hsl(var(--brand-gold-light))",
-        },
-        warm: {
-          grey: "hsl(var(--warm-grey))",
+          cyan: "hsl(var(--brand-cyan))",
+          "cyan-light": "hsl(var(--brand-cyan-light))",
+          "cyan-dark": "hsl(var(--brand-cyan-dark))",
+          violet: "hsl(var(--brand-violet))",
+          "violet-light": "hsl(var(--brand-violet-light))",
         },
       },
       borderRadius: {

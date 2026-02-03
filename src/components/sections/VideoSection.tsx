@@ -30,16 +30,16 @@ const videos = [
 
 const VideoSection = () => {
   return (
-    <section className="py-24 md:py-32 bg-warm-grey">
+    <section className="py-24 md:py-32 bg-muted">
       <div className="container px-6 md:px-8">
         <div className="max-w-6xl mx-auto">
           {/* Section header */}
           <div className="text-center mb-12 md:mb-16">
-            <span className="text-primary font-medium text-sm uppercase tracking-wider mb-2 block">
+            <span className="text-primary font-medium text-sm mb-2 block">
               Video Content
             </span>
-            <h2 className="font-display text-5xl md:text-6xl text-foreground mb-4">
-              WATCH & LEARN
+            <h2 className="font-display text-5xl md:text-6xl text-foreground mb-4 font-bold">
+              Watch & learn
             </h2>
             <p className="text-muted-foreground text-lg max-w-xl mx-auto">
               Talks, keynotes, and behind-the-scenes moments. 
@@ -49,7 +49,7 @@ const VideoSection = () => {
 
           {/* Video grid */}
           <div className="grid md:grid-cols-2 gap-6 md:gap-8 mb-12">
-            {videos.map((video, index) => (
+            {videos.map((video) => (
               <div 
                 key={video.id}
                 className="group relative bg-foreground/5 rounded-2xl overflow-hidden cursor-pointer hover:shadow-soft-lg transition-all duration-300"
@@ -71,7 +71,7 @@ const VideoSection = () => {
                 
                 {/* Video info */}
                 <div className="p-5">
-                  <h3 className="font-display text-xl md:text-2xl text-foreground group-hover:text-primary transition-colors leading-tight mb-2">
+                  <h3 className="font-display text-xl md:text-2xl text-foreground group-hover:text-primary transition-colors leading-tight mb-2 font-semibold">
                     {video.title}
                   </h3>
                   <span className="text-sm text-muted-foreground">{video.views}</span>

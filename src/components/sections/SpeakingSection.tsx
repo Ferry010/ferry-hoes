@@ -29,11 +29,11 @@ const SpeakingSection = () => {
             
             {/* Content */}
             <div className="md:col-span-3">
-              <span className="text-primary font-medium text-sm uppercase tracking-wider mb-2 block">
+              <span className="text-primary font-medium text-sm mb-2 block">
                 Speaking
               </span>
-              <h2 className="font-display text-4xl md:text-5xl text-foreground mb-6">
-                LET'S INSPIRE<br />YOUR AUDIENCE
+              <h2 className="font-display text-4xl md:text-5xl text-foreground mb-6 font-bold">
+                Let's inspire<br />your audience
               </h2>
               
               <p className="text-muted-foreground text-lg leading-relaxed mb-6">

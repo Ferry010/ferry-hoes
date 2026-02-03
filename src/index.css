@@ -1,119 +1,113 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* Ferry Hoes Design System
-   Inspired by Brand Humanizing book cover
-   Colors: Golden yellow, deep blue, vibrant red (human-tech duality)
-   Typography: Bebas Neue (headlines) + Inter (body)
+   Cool modern aesthetic
+   Colors: Electric cyan, vibrant violet, crisp off-white
+   Typography: Archivo (headlines) + Inter (body)
 */
 
 @layer base {
   :root {
-    /* Core brand colors - warm golden base */
-    --background: 45 100% 96%;
-    --foreground: 220 80% 20%;
+    /* Core brand colors - cool modern base */
+    --background: 210 20% 98%;
+    --foreground: 220 25% 12%;
 
     --card: 0 0% 100%;
-    --card-foreground: 220 80% 20%;
+    --card-foreground: 220 25% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 80% 20%;
+    --popover-foreground: 220 25% 12%;
 
-    /* Deep blue primary #0057b8 */
-    --primary: 212 100% 36%;
+    /* Electric cyan primary */
+    --primary: 200 100% 45%;
     --primary-foreground: 0 0% 100%;
 
-    /* Warm golden secondary */
-    --secondary: 45 90% 88%;
-    --secondary-foreground: 220 80% 20%;
+    /* Light cool grey secondary */
+    --secondary: 210 20% 96%;
+    --secondary-foreground: 220 25% 20%;
 
-    --muted: 45 40% 92%;
-    --muted-foreground: 220 20% 45%;
+    --muted: 210 15% 94%;
+    --muted-foreground: 220 15% 50%;
 
-    /* Vibrant red accent - the heart */
-    --accent: 0 85% 50%;
+    /* Vibrant violet accent */
+    --accent: 280 70% 55%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 45 30% 85%;
-    --input: 45 30% 88%;
-    --ring: 212 100% 36%;
+    --border: 210 15% 90%;
+    --input: 210 15% 92%;
+    --ring: 200 100% 45%;
 
     --radius: 1rem;
 
-    /* Extended palette - Brand Humanizing inspired */
-    --brand-blue: 212 100% 36%;
-    --brand-blue-light: 212 80% 92%;
-    --brand-blue-dark: 212 100% 28%;
-    --brand-red: 0 85% 50%;
-    --brand-red-light: 0 80% 95%;
-    --brand-gold: 45 100% 50%;
-    --brand-gold-light: 45 100% 96%;
-    --warm-grey: 45 20% 96%;
-    --soft-shadow: 220 30% 40%;
+    /* Extended palette - Cool modern */
+    --brand-cyan: 200 100% 45%;
+    --brand-cyan-light: 200 60% 95%;
+    --brand-cyan-dark: 200 100% 35%;
+    --brand-violet: 280 70% 55%;
+    --brand-violet-light: 280 50% 95%;
+    --soft-shadow: 220 30% 50%;
 
-    --sidebar-background: 45 40% 98%;
-    --sidebar-foreground: 220 80% 20%;
-    --sidebar-primary: 212 100% 36%;
+    --sidebar-background: 210 20% 98%;
+    --sidebar-foreground: 220 25% 12%;
+    --sidebar-primary: 200 100% 45%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 45 60% 94%;
-    --sidebar-accent-foreground: 220 80% 20%;
-    --sidebar-border: 45 30% 88%;
-    --sidebar-ring: 212 100% 36%;
+    --sidebar-accent: 210 15% 96%;
+    --sidebar-accent-foreground: 220 25% 12%;
+    --sidebar-border: 210 15% 90%;
+    --sidebar-ring: 200 100% 45%;
   }
 
   .dark {
-    --background: 220 40% 8%;
-    --foreground: 45 20% 95%;
+    --background: 220 25% 8%;
+    --foreground: 210 20% 95%;
 
-    --card: 220 40% 12%;
-    --card-foreground: 45 20% 95%;
+    --card: 220 25% 12%;
+    --card-foreground: 210 20% 95%;
 
-    --popover: 220 40% 12%;
-    --popover-foreground: 45 20% 95%;
+    --popover: 220 25% 12%;
+    --popover-foreground: 210 20% 95%;
 
-    --primary: 212 100% 50%;
+    --primary: 200 100% 50%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 30% 18%;
-    --secondary-foreground: 45 20% 95%;
+    --secondary: 220 20% 18%;
+    --secondary-foreground: 210 20% 95%;
 
-    --muted: 220 30% 18%;
-    --muted-foreground: 45 10% 60%;
+    --muted: 220 20% 18%;
+    --muted-foreground: 210 15% 60%;
 
-    --accent: 0 85% 55%;
+    --accent: 280 70% 60%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62% 40%;
     --destructive-foreground: 0 0% 95%;
 
-    --border: 220 30% 20%;
-    --input: 220 30% 20%;
-    --ring: 212 100% 50%;
+    --border: 220 20% 20%;
+    --input: 220 20% 20%;
+    --ring: 200 100% 50%;
 
-    --brand-blue: 212 100% 50%;
-    --brand-blue-light: 212 50% 25%;
-    --brand-blue-dark: 212 100% 40%;
-    --brand-red: 0 85% 55%;
-    --brand-red-light: 0 50% 20%;
-    --brand-gold: 45 100% 50%;
-    --brand-gold-light: 45 50% 15%;
-    --warm-grey: 220 20% 12%;
+    --brand-cyan: 200 100% 50%;
+    --brand-cyan-light: 200 40% 20%;
+    --brand-cyan-dark: 200 100% 40%;
+    --brand-violet: 280 70% 60%;
+    --brand-violet-light: 280 40% 20%;
     --soft-shadow: 0 0% 0%;
 
-    --sidebar-background: 220 40% 10%;
-    --sidebar-foreground: 45 20% 90%;
-    --sidebar-primary: 212 100% 50%;
+    --sidebar-background: 220 25% 10%;
+    --sidebar-foreground: 210 20% 90%;
+    --sidebar-primary: 200 100% 50%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 30% 18%;
-    --sidebar-accent-foreground: 45 20% 95%;
-    --sidebar-border: 220 30% 20%;
-    --sidebar-ring: 212 100% 50%;
+    --sidebar-accent: 220 20% 18%;
+    --sidebar-accent-foreground: 210 20% 95%;
+    --sidebar-border: 220 20% 20%;
+    --sidebar-ring: 200 100% 50%;
   }
 }
 
@@ -142,9 +136,5 @@
 
   .gradient-text {
     @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
-  }
-  
-  .gradient-human-tech {
-    @apply bg-gradient-to-r from-accent via-primary to-primary bg-clip-text text-transparent;
   }
 }
