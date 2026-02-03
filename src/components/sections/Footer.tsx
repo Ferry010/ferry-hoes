@@ -1,6 +1,12 @@
 import { Link } from "react-router-dom";
+import { MessageCircle } from "lucide-react";
 
 const Footer = () => {
+  const openMessagePanel = () => {
+    const bubble = document.querySelector('[aria-label="Open message panel"]') as HTMLButtonElement;
+    bubble?.click();
+  };
+
   return (
     <footer className="py-16 bg-foreground text-background">
       <div className="container px-6 md:px-8">
@@ -29,9 +35,13 @@ const Footer = () => {
               <a href="#" className="text-white/70 hover:text-white transition-colors">
                 Videos
               </a>
-              <a href="#" className="text-white/70 hover:text-white transition-colors">
-                Contact
-              </a>
+              <button 
+                onClick={openMessagePanel}
+                className="text-white/70 hover:text-white transition-colors inline-flex items-center gap-1"
+              >
+                <MessageCircle className="h-4 w-4" />
+                Message
+              </button>
             </nav>
           </div>
           

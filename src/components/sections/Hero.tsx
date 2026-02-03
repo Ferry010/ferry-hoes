@@ -52,6 +52,23 @@ const Hero = () => {
               <span className="ml-2 text-xs opacity-70">(coming soon)</span>
             </Button>
           </div>
+
+          {/* Quick question link */}
+          <p 
+            className="text-sm text-muted-foreground mt-8 animate-fade-up"
+            style={{ animationDelay: "0.6s" }}
+          >
+            Have a question?{" "}
+            <button 
+              onClick={() => {
+                const bubble = document.querySelector('[aria-label="Open message panel"]') as HTMLButtonElement;
+                bubble?.click();
+              }}
+              className="text-primary hover:text-primary/80 underline underline-offset-4 transition-colors"
+            >
+              Just ask
+            </button>
+          </p>
         </div>
       </div>
 
