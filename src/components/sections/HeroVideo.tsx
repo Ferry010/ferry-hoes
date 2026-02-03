@@ -32,7 +32,7 @@ const HeroVideo = () => {
             {letters.map((letter, i) => (
               <span
                 key={i}
-                className="inline-block text-[7rem] sm:text-[9rem] md:text-[12rem] lg:text-[16rem] xl:text-[20rem] font-bold text-primary animate-fade-up opacity-0"
+                className="inline-block text-[4rem] sm:text-[6rem] md:text-[8rem] lg:text-[10rem] xl:text-[12rem] font-bold text-brand-gold animate-fade-up opacity-0"
                 style={{ 
                   animationDelay: `${i * 0.08}s`,
                   animationFillMode: "forwards"
