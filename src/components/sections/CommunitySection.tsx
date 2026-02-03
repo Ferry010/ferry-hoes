@@ -3,7 +3,7 @@ import { Users, ArrowRight } from "lucide-react";
 
 const CommunitySection = () => {
   return (
-    <section id="community" className="py-24 md:py-32 bg-foreground text-background relative overflow-hidden">
+    <section id="community" className="py-24 md:py-32 bg-primary text-primary-foreground relative overflow-hidden">
       {/* Background pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-0 left-0 w-full h-full" style={{
@@ -17,7 +17,7 @@ const CommunitySection = () => {
           {/* Big emotional headline */}
           <h2 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.9] mb-8 font-bold">
             Don't follow.<br />
-            <span className="text-accent">Build with me.</span>
+            <span className="text-brand-gold">Build with me.</span>
           </h2>
           
           <p className="text-lg md:text-xl text-white/70 max-w-2xl mx-auto mb-12 leading-relaxed">
@@ -26,8 +26,8 @@ const CommunitySection = () => {
           </p>
           
           {/* Coming soon notice */}
-          <div className="inline-flex items-center gap-3 px-6 py-4 bg-accent/20 rounded-2xl mb-8">
-            <Users className="h-5 w-5 text-accent" />
+          <div className="inline-flex items-center gap-3 px-6 py-4 bg-brand-gold/20 rounded-2xl mb-8">
+            <Users className="h-5 w-5 text-brand-gold" />
             <span className="text-white/90">
               Slack community launching soon
             </span>
@@ -39,12 +39,12 @@ const CommunitySection = () => {
               <input 
                 type="email" 
                 placeholder="Enter your email"
-                className="flex-1 px-6 py-4 rounded-full bg-white/10 border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:border-accent transition-colors"
+                className="flex-1 px-6 py-4 rounded-full bg-white/10 border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:border-brand-gold transition-colors"
                 disabled
               />
               <Button 
                 size="lg"
-                className="rounded-full px-8 whitespace-nowrap bg-accent text-accent-foreground hover:bg-accent/90"
+                className="rounded-full px-8 whitespace-nowrap bg-brand-gold text-foreground hover:bg-brand-gold/90"
                 disabled
               >
                 Join waitlist
