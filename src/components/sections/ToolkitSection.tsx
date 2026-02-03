@@ -6,32 +6,32 @@ const toolkitCategories = [
     title: "For thinking",
     subtitle: "How I process ideas",
     items: [
-      { name: "Obsidian", note: "Where all my notes live" },
-      { name: "Morning pages", note: "3 pages, every day, no exceptions" },
-      { name: "Long walks", note: "My best ideas happen at 6km/h" },
-      { name: "Four Thousand Weeks", note: "Changed how I see time" },
+      { name: "Writing daily", note: "Clarity through articulation" },
+      { name: "Second-order thinking", note: "What happens next, then what?" },
+      { name: "Diverse inputs", note: "Cross-pollinating ideas across fields" },
+      { name: "Slow reflection", note: "The best insights need time" },
     ],
   },
   {
     icon: Wrench,
     title: "For creating",
-    subtitle: "What I use to make things",
+    subtitle: "What I use to build",
     items: [
-      { name: "Notion", note: "Project management chaos" },
-      { name: "Figma", note: "For talks and visual thinking" },
-      { name: "Descript", note: "Podcast editing magic" },
-      { name: "A good pen", note: "Lamy Safari, always" },
+      { name: "Notion", note: "Knowledge management" },
+      { name: "Figma", note: "Visual thinking and presentations" },
+      { name: "Obsidian", note: "Connecting ideas" },
+      { name: "Analog notebooks", note: "For first drafts" },
     ],
   },
   {
     icon: Heart,
-    title: "For staying sane",
-    subtitle: "Non-negotiable rituals",
+    title: "For focus",
+    subtitle: "Staying intentional",
     items: [
-      { name: "No phone before 9am", note: "Changed everything" },
-      { name: "Jazz vinyl", note: "Focus music of choice" },
-      { name: "Weekly phone-free walks", note: "2 hours minimum" },
-      { name: "Monthly 'unthing' days", note: "No agenda, no goals" },
+      { name: "Protected morning hours", note: "Deep work before meetings" },
+      { name: "Weekly review", note: "What worked, what didn't" },
+      { name: "Saying no", note: "To make room for what matters" },
+      { name: "Digital boundaries", note: "Technology on my terms" },
     ],
   },
 ];
@@ -50,8 +50,7 @@ const ToolkitSection = () => {
               Things I <span className="text-accent font-handwriting">actually use</span>
             </h2>
             <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-              No affiliate links. No sponsorships. Just honest recommendations 
-              from someone who's tried way too many productivity systems.
+              The frameworks and practices I rely on for clear thinking and meaningful work.
             </p>
           </div>
 
@@ -93,8 +92,7 @@ const ToolkitSection = () => {
           {/* Personal note */}
           <div className="mt-12 text-center">
             <p className="text-muted-foreground text-sm font-handwriting">
-              "I've realized that the tools matter less than the consistency. 
-              Pick something and stick with it." — Ferry
+              "The tools matter less than the consistency behind them."
             </p>
           </div>
         </div>

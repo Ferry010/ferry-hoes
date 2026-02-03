@@ -1,11 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, MessageCircle, Coffee, Music, Zap } from "lucide-react";
-
-const funFacts = [
-  { icon: Coffee, text: "Espresso enthusiast (3+ daily)" },
-  { icon: Music, text: "Amateur jazz pianist" },
-  { icon: Zap, text: "Morning person (sorry)" },
-];
+import { ArrowRight, MessageCircle } from "lucide-react";
 
 const MiniAbout = () => {
   const openMessagePanel = () => {
@@ -25,19 +19,9 @@ const MiniAbout = () => {
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center">
                     <div className="font-display text-6xl mb-2 group-hover:scale-110 transition-transform duration-300">👋</div>
-                    <p className="text-sm text-muted-foreground font-handwriting">That's me!</p>
+                    <p className="text-sm text-muted-foreground">Ferry Hoes</p>
                   </div>
                 </div>
-              </div>
-              
-              {/* Fun facts */}
-              <div className="mt-6 space-y-2">
-                {funFacts.map((fact) => (
-                  <div key={fact.text} className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <fact.icon className="h-4 w-4 text-accent" />
-                    <span className="font-handwriting">{fact.text}</span>
-                  </div>
-                ))}
               </div>
             </div>
             
@@ -52,16 +36,12 @@ const MiniAbout = () => {
               
               <div className="space-y-4 text-muted-foreground text-lg leading-relaxed mb-8">
                 <p>
-                  For 15 years, I've been helping organizations figure out how to use 
-                  technology without losing their humanity. It's trickier than it sounds.
+                  For 15 years, I've been helping organizations navigate the intersection 
+                  of technology and humanity—as a speaker, author, and advisor.
                 </p>
                 <p>
-                  When I'm not on stage or writing, you'll find me making music, 
-                  experimenting with AI tools, or having long conversations about the 
-                  future over really good coffee.
-                </p>
-                <p className="text-base font-handwriting text-muted-foreground/80">
-                  (I also have strong opinions about productivity systems. You've been warned.)
+                  My work focuses on how we can build systems, cultures, and technologies 
+                  that amplify what makes us human rather than diminish it.
                 </p>
               </div>
               

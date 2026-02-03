@@ -79,19 +79,19 @@ const NowSection = () => {
             ))}
           </div>
 
-          {/* Behind the scenes */}
+          {/* Perspective */}
           <div className="bg-gradient-to-br from-accent/10 to-primary/5 rounded-3xl p-8 md:p-12 border border-border">
             <div className="flex flex-col md:flex-row gap-8 items-center">
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-4">
                   <Camera className="h-5 w-5 text-accent" />
-                  <span className="text-sm font-medium text-accent">Behind the scenes</span>
+                  <span className="text-sm font-medium text-accent">Current perspective</span>
                 </div>
                 <p className="text-lg text-foreground leading-relaxed mb-2">
-                  "Most of my best ideas come from conversations that start with 'this might sound crazy, but...' 
-                  That's why I built this space—to have more of those."
+                  "The best ideas emerge at the intersection of disciplines. I'm most interested in 
+                  the conversations that challenge conventional thinking about technology and humanity."
                 </p>
-                <p className="text-sm text-muted-foreground font-handwriting">— Ferry, from my studio in Amsterdam</p>
+                <p className="text-sm text-muted-foreground font-handwriting">— Based in Amsterdam</p>
               </div>
               <div className="w-32 h-32 bg-gradient-to-br from-accent/30 to-primary/20 rounded-2xl flex items-center justify-center text-5xl rotate-3">
                 🎙️

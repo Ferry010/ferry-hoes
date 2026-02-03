@@ -3,11 +3,10 @@ import { cn } from "@/lib/utils";
 
 const currentlyItems = [
   { emoji: "📖", text: "Reading 'Four Thousand Weeks'" },
-  { emoji: "✍️", text: "Drafting a piece on AI anxiety" },
-  { emoji: "🎤", text: "Prepping for a keynote in Berlin" },
-  { emoji: "☕", text: "On my third espresso today" },
-  { emoji: "🎵", text: "Obsessed with how jazz musicians collaborate" },
-  { emoji: "🧪", text: "Experimenting with new AI tools" },
+  { emoji: "✍️", text: "Writing about the future of work" },
+  { emoji: "🎤", text: "Preparing for a keynote in Berlin" },
+  { emoji: "🔬", text: "Researching human-AI collaboration" },
+  { emoji: "💭", text: "Thinking about attention in the digital age" },
 ];
 
 const CurrentlyStatus = () => {

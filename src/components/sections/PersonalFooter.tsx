@@ -1,21 +1,11 @@
 import { Link } from "react-router-dom";
 import { MessageCircle, MapPin, Clock, Heart } from "lucide-react";
 
-const personalFacts = [
-  "Currently listening to: Coltrane on repeat",
-  "Coffee count today: Too many",
-  "Last great conversation: About AI ethics with a stranger on a train",
-  "Current obsession: Handwritten notes",
-];
-
 const PersonalFooter = () => {
   const openMessagePanel = () => {
     const bubble = document.querySelector('[aria-label="Open message panel"]') as HTMLButtonElement;
     bubble?.click();
   };
-
-  // Pick a random fact
-  const randomFact = personalFacts[Math.floor(Math.random() * personalFacts.length)];
 
   return (
     <footer className="py-16 md:py-24 bg-foreground text-background">
@@ -58,11 +48,6 @@ const PersonalFooter = () => {
                 <Clock className="h-4 w-4" />
                 <span className="text-sm">CET (UTC+1)</span>
               </div>
-            </div>
-            
-            {/* Random fact */}
-            <div className="text-sm text-white/40 font-handwriting italic">
-              {randomFact}
             </div>
           </div>
 
