@@ -62,14 +62,14 @@ const ContentGrid = () => {
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 md:mb-16">
             <div>
               <span className="text-accent font-medium text-sm mb-2 block">
-                Latest Writing
+                What's on my mind
               </span>
               <h2 className="font-display text-5xl md:text-6xl text-foreground font-bold">
-                Fresh <span className="text-primary">thoughts</span>
+                Recent <span className="text-primary font-handwriting">scribbles</span>
               </h2>
             </div>
-            <p className="text-muted-foreground text-lg mt-4 md:mt-0 max-w-md">
-              Essays, ideas, and experiments. No clickbait. No fluff. Just honest thinking.
+            <p className="text-muted-foreground text-lg mt-4 md:mt-0 max-w-md font-handwriting">
+              No clickbait. No fluff. Just honest thinking about things that matter.
             </p>
           </div>
 
@@ -112,7 +112,7 @@ const ContentGrid = () => {
               size="lg" 
               className="rounded-full px-8 group border-primary text-primary hover:bg-primary hover:text-primary-foreground"
             >
-              View all writing
+              See all my writing
               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Button>
           </div>
@@ -120,8 +120,11 @@ const ContentGrid = () => {
           {/* Inline conversation prompt */}
           <div className="max-w-xl mx-auto">
             <div className="bg-background rounded-2xl p-6 md:p-8 border border-border shadow-soft text-center">
-              <p className="text-muted-foreground mb-4">
-                Something on your mind about this?
+              <p className="text-muted-foreground mb-2">
+                Disagree with something? Have a question?
+              </p>
+              <p className="text-sm text-muted-foreground/70 font-handwriting mb-4">
+                I love a good debate.
               </p>
               <button
                 onClick={() => {
@@ -130,7 +133,7 @@ const ContentGrid = () => {
                 }}
                 className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors group"
               >
-                <span className="underline underline-offset-4">Drop a thought</span>
+                <span className="underline underline-offset-4">Drop me a thought</span>
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
