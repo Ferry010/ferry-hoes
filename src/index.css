@@ -5,109 +5,108 @@
 @tailwind utilities;
 
 /* Ferry Hoes Design System
-   Cool modern aesthetic
-   Colors: Electric cyan, vibrant violet, crisp off-white
+   Teal + Coral complementary palette
    Typography: Archivo (headlines) + Inter (body)
 */
 
 @layer base {
   :root {
-    /* Core brand colors - cool modern base */
-    --background: 210 20% 98%;
-    --foreground: 220 25% 12%;
+    /* Core brand colors - teal base */
+    --background: 180 15% 98%;
+    --foreground: 200 25% 12%;
 
     --card: 0 0% 100%;
-    --card-foreground: 220 25% 12%;
+    --card-foreground: 200 25% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 25% 12%;
+    --popover-foreground: 200 25% 12%;
 
-    /* Electric cyan primary */
-    --primary: 200 100% 45%;
+    /* Teal primary #0E7490 */
+    --primary: 188 80% 31%;
     --primary-foreground: 0 0% 100%;
 
-    /* Light cool grey secondary */
-    --secondary: 210 20% 96%;
-    --secondary-foreground: 220 25% 20%;
+    /* Light teal secondary */
+    --secondary: 180 20% 96%;
+    --secondary-foreground: 200 25% 20%;
 
-    --muted: 210 15% 94%;
-    --muted-foreground: 220 15% 50%;
+    --muted: 180 12% 94%;
+    --muted-foreground: 200 15% 45%;
 
-    /* Vibrant violet accent */
-    --accent: 280 70% 55%;
+    /* Coral accent - complementary */
+    --accent: 15 85% 55%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 210 15% 90%;
-    --input: 210 15% 92%;
-    --ring: 200 100% 45%;
+    --border: 180 12% 90%;
+    --input: 180 12% 92%;
+    --ring: 188 80% 31%;
 
     --radius: 1rem;
 
-    /* Extended palette - Cool modern */
-    --brand-cyan: 200 100% 45%;
-    --brand-cyan-light: 200 60% 95%;
-    --brand-cyan-dark: 200 100% 35%;
-    --brand-violet: 280 70% 55%;
-    --brand-violet-light: 280 50% 95%;
-    --soft-shadow: 220 30% 50%;
+    /* Extended palette */
+    --brand-teal: 188 80% 31%;
+    --brand-teal-light: 188 50% 95%;
+    --brand-teal-dark: 188 85% 22%;
+    --brand-coral: 15 85% 55%;
+    --brand-coral-light: 15 60% 95%;
+    --soft-shadow: 200 30% 40%;
 
-    --sidebar-background: 210 20% 98%;
-    --sidebar-foreground: 220 25% 12%;
-    --sidebar-primary: 200 100% 45%;
+    --sidebar-background: 180 15% 98%;
+    --sidebar-foreground: 200 25% 12%;
+    --sidebar-primary: 188 80% 31%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 210 15% 96%;
-    --sidebar-accent-foreground: 220 25% 12%;
-    --sidebar-border: 210 15% 90%;
-    --sidebar-ring: 200 100% 45%;
+    --sidebar-accent: 180 15% 96%;
+    --sidebar-accent-foreground: 200 25% 12%;
+    --sidebar-border: 180 12% 90%;
+    --sidebar-ring: 188 80% 31%;
   }
 
   .dark {
-    --background: 220 25% 8%;
-    --foreground: 210 20% 95%;
+    --background: 200 25% 8%;
+    --foreground: 180 15% 95%;
 
-    --card: 220 25% 12%;
-    --card-foreground: 210 20% 95%;
+    --card: 200 25% 12%;
+    --card-foreground: 180 15% 95%;
 
-    --popover: 220 25% 12%;
-    --popover-foreground: 210 20% 95%;
+    --popover: 200 25% 12%;
+    --popover-foreground: 180 15% 95%;
 
-    --primary: 200 100% 50%;
+    --primary: 188 75% 40%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 20% 18%;
-    --secondary-foreground: 210 20% 95%;
+    --secondary: 200 20% 18%;
+    --secondary-foreground: 180 15% 95%;
 
-    --muted: 220 20% 18%;
-    --muted-foreground: 210 15% 60%;
+    --muted: 200 20% 18%;
+    --muted-foreground: 180 12% 60%;
 
-    --accent: 280 70% 60%;
+    --accent: 15 80% 55%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62% 40%;
     --destructive-foreground: 0 0% 95%;
 
-    --border: 220 20% 20%;
-    --input: 220 20% 20%;
-    --ring: 200 100% 50%;
+    --border: 200 20% 20%;
+    --input: 200 20% 20%;
+    --ring: 188 75% 40%;
 
-    --brand-cyan: 200 100% 50%;
-    --brand-cyan-light: 200 40% 20%;
-    --brand-cyan-dark: 200 100% 40%;
-    --brand-violet: 280 70% 60%;
-    --brand-violet-light: 280 40% 20%;
+    --brand-teal: 188 75% 40%;
+    --brand-teal-light: 188 40% 20%;
+    --brand-teal-dark: 188 80% 30%;
+    --brand-coral: 15 80% 55%;
+    --brand-coral-light: 15 40% 20%;
     --soft-shadow: 0 0% 0%;
 
-    --sidebar-background: 220 25% 10%;
-    --sidebar-foreground: 210 20% 90%;
-    --sidebar-primary: 200 100% 50%;
+    --sidebar-background: 200 25% 10%;
+    --sidebar-foreground: 180 15% 90%;
+    --sidebar-primary: 188 75% 40%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 20% 18%;
-    --sidebar-accent-foreground: 210 20% 95%;
-    --sidebar-border: 220 20% 20%;
-    --sidebar-ring: 200 100% 50%;
+    --sidebar-accent: 200 20% 18%;
+    --sidebar-accent-foreground: 180 15% 95%;
+    --sidebar-border: 200 20% 20%;
+    --sidebar-ring: 188 75% 40%;
   }
 }
 

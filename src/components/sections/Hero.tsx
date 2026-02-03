@@ -6,9 +6,9 @@ const Hero = () => {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
       {/* Subtle background shapes */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-96 h-96 bg-brand-cyan-light rounded-full blur-3xl opacity-60 animate-float" />
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-brand-violet-light rounded-full blur-3xl opacity-60" style={{ animationDelay: "2s" }} />
-        <div className="absolute top-1/3 left-1/4 w-64 h-64 bg-secondary rounded-full blur-2xl opacity-50" />
+        <div className="absolute -top-40 -right-40 w-96 h-96 bg-brand-teal-light rounded-full blur-3xl opacity-70 animate-float" />
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-brand-coral-light rounded-full blur-3xl opacity-50" style={{ animationDelay: "2s" }} />
+        <div className="absolute top-1/3 left-1/4 w-64 h-64 bg-secondary rounded-full blur-2xl opacity-60" />
       </div>
 
       <div className="container relative z-10 px-6 md:px-8">
@@ -35,7 +35,7 @@ const Hero = () => {
           >
             <Button 
               size="lg" 
-              className="text-lg px-8 py-6 rounded-full shadow-soft hover:shadow-soft-lg transition-all duration-300 hover:-translate-y-0.5 bg-primary hover:bg-brand-cyan-dark"
+              className="text-lg px-8 py-6 rounded-full shadow-soft hover:shadow-soft-lg transition-all duration-300 hover:-translate-y-0.5 bg-primary hover:bg-brand-teal-dark"
               onClick={() => document.getElementById('writing')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <ArrowDown className="mr-2 h-5 w-5" />
