@@ -1,7 +1,12 @@
 import { Button } from "@/components/ui/button";
-import { ArrowDown, Users } from "lucide-react";
+import { ArrowDown, MessageCircle } from "lucide-react";
 
 const Hero = () => {
+  const openMessagePanel = () => {
+    const bubble = document.querySelector('[aria-label="Open message panel"]') as HTMLButtonElement;
+    bubble?.click();
+  };
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
       {/* Subtle background shapes */}
@@ -12,20 +17,19 @@ const Hero = () => {
       </div>
 
       <div className="container relative z-10 px-6 md:px-8">
-        <div className="max-w-5xl mx-auto text-center">
-          {/* Main headline */}
-          <h1 className="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl leading-[0.9] tracking-tight mb-8 animate-fade-up font-bold">
-            <span className="text-primary">Rebuilding</span> the way<br />
-            <span className="text-accent">the world</span> <span className="text-primary">works</span>
+        <div className="max-w-4xl mx-auto text-center">
+          {/* H1 - Who you are */}
+          <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight tracking-tight mb-6 animate-fade-up font-bold">
+            <span className="text-primary">Public speaker</span>, <span className="text-accent">published author</span><br className="hidden sm:block" />
+            <span className="text-foreground">&amp; entrepreneur</span>
           </h1>
 
-          {/* Subtext */}
+          {/* H2 - What you do */}
           <p 
             className="text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed font-light animate-fade-up"
             style={{ animationDelay: "0.2s" }}
           >
-            I explore how humans and technology actually work better together. 
-            Through stories, experiments, talks and conversations.
+            Unleashing human potential with technology
           </p>
 
           {/* CTAs */}
@@ -39,17 +43,16 @@ const Hero = () => {
               onClick={() => document.getElementById('writing')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <ArrowDown className="mr-2 h-5 w-5" />
-              Start reading
+              Explore my work
             </Button>
             <Button 
               variant="outline" 
               size="lg" 
               className="text-lg px-8 py-6 rounded-full border-2 border-accent text-accent hover:bg-accent hover:text-accent-foreground transition-all duration-300 hover:-translate-y-0.5"
-              onClick={() => document.getElementById('community')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={openMessagePanel}
             >
-              <Users className="mr-2 h-5 w-5" />
-              Join the community
-              <span className="ml-2 text-xs opacity-70">(coming soon)</span>
+              <MessageCircle className="mr-2 h-5 w-5" />
+              Get in touch
             </Button>
           </div>
 
@@ -60,10 +63,7 @@ const Hero = () => {
           >
             Have a question?{" "}
             <button 
-              onClick={() => {
-                const bubble = document.querySelector('[aria-label="Open message panel"]') as HTMLButtonElement;
-                bubble?.click();
-              }}
+              onClick={openMessagePanel}
               className="text-primary hover:text-primary/80 underline underline-offset-4 transition-colors"
             >
               Just ask

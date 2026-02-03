@@ -31,10 +31,10 @@ const FloatingChatBubble = () => {
           <div className="flex items-center justify-between p-4 border-b border-border bg-secondary/50">
             <div>
               <h3 className="font-display font-semibold text-foreground">
-                Drop a thought
+                Share a thought
               </h3>
               <p className="text-xs text-muted-foreground">
-                I'll get back to you soon
+                I read everything
               </p>
             </div>
             <button

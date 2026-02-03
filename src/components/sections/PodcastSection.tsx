@@ -33,6 +33,20 @@ const PodcastSection = () => {
                 </Button>
               </div>
               
+              {/* Micro-engagement */}
+              <p className="text-sm text-white/60 mt-6">
+                Got a topic suggestion?{" "}
+                <button 
+                  onClick={() => {
+                    const bubble = document.querySelector('[aria-label="Open message panel"]') as HTMLButtonElement;
+                    bubble?.click();
+                  }}
+                  className="text-brand-gold hover:text-brand-gold/80 underline underline-offset-4 transition-colors"
+                >
+                  Let me know
+                </button>
+              </p>
+              
               {/* Stats */}
               <div className="flex gap-8 mt-10 pt-8 border-t border-white/20">
                 <div>
