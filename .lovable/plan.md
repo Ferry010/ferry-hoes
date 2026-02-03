@@ -1,157 +1,145 @@
 
+# Hero Video & About Block Updates
 
-# About Block Redesign
-
-Transforming the About section from a glassmorphism card to a bold, editorial split-layout inspired by Steven Bartlett's website - but brighter and more open using your teal/white palette.
-
----
-
-## Current vs New Design
-
-**Current**: Gradient background with a glassmorphism card containing all text
-
-**New**: Split layout with text on left, photo placeholder on right, bright background, highlighted keywords
+Two focused changes: embed the YouTube video as a looping background and update the About copy.
 
 ---
 
-## New Layout Structure
+## Change 1: Hero Video Background
+
+Replace the gradient placeholder with the actual YouTube video as a looping background.
+
+### Current
+- Dark gradient with grain overlay
+- Name in ALL CAPS: "FERRY HOES"
+
+### New
+- YouTube video embed (first 15 seconds, looping, muted, autoplay)
+- Name in title case: "Ferry Hoes"
+- Even larger font size
+
+### Video Implementation
+
+YouTube videos can't be directly used with `<video>` tags. We'll use a YouTube embed with specific parameters:
 
 ```text
-┌──────────────────────────────────────────────────────────────┐
-│                                                              │
-│  FERRY HOES                                 [Photo area]     │
-│                                              placeholder     │
-│  FERRY HOES;                                (right side)     │
-│  SPEAKER, ENTREPRENEUR,                                      │
-│  AUTHOR AND HOST OF                                          │
-│  'THE HUMAN SIDE' PODCAST                                    │
-│  - exploring the intersection                                │
-│  of technology and humanity.                                 │
-│                                                              │
-│  ABOUT FERRY →                                               │
-│                                                              │
-└──────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────┐
+│                                                     │
+│         [YouTube video - looped, muted]             │
+│                                                     │
+│              Ferry Hoes                             │
+│           (title case, massive)                     │
+│                                                     │
+│                  ↓ scroll                           │
+└─────────────────────────────────────────────────────┘
 ```
 
----
+YouTube embed URL with parameters:
+- `autoplay=1` - starts automatically
+- `mute=1` - muted (required for autoplay)
+- `loop=1` - loops continuously
+- `playlist=foEehJ_pwck` - required for loop to work
+- `controls=0` - hides controls
+- `showinfo=0` - hides title
+- `start=0&end=15` - plays first 15 seconds
+- `modestbranding=1` - minimal YouTube branding
 
-## Design Details
-
-### Background
-- **Light, open feel**: Use `bg-background` (off-white) instead of dark gradients
-- Optional subtle gradient overlay for depth
-
-### Typography
-- **Name header**: Small, uppercase, tracking-wide (like "STEVEN BARTLETT" in the reference)
-- **Main text**: Large, bold, uppercase display font
-- **Highlighted words**: Coral accent color (`text-accent`) for key terms like "Speaker", "Entrepreneur", "Author"
-- **Regular words**: Foreground color (dark)
-
-### Layout
-- **Two columns**: Text on left (60%), photo placeholder on right (40%)
-- **Mobile**: Stack vertically, photo on top or below
-- **Full height section**: `min-h-screen`
-
-### Photo Placeholder
-- Right side of the screen
-- Currently a subtle gradient or solid teal placeholder
-- Ready for your actual photo later
-
-### CTA Link
-- Simple text link with arrow: "About Ferry →"
-- Coral/accent color on hover
+### Font Size Increase
+Current: `text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] xl:text-[12rem]`
+New: `text-8xl sm:text-9xl md:text-[10rem] lg:text-[12rem] xl:text-[14rem]`
 
 ---
 
-## Copy Structure
+## Change 2: About Block Copy
 
+### Current Copy
 ```text
-FERRY HOES
+FERRY HOES (small header)
 
-FERRY HOES;
-[SPEAKER], [ENTREPRENEUR],
-[AUTHOR] AND HOST OF
-'THE HUMAN SIDE' PODCAST
-- exploring the intersection
+Ferry Hoes; Speaker, Entrepreneur, Author and host of 
+'The Human Side' podcast - exploring the intersection 
 of technology and humanity.
-
-ABOUT FERRY →
 ```
 
-Words in brackets will be highlighted in coral/accent color.
+### New Copy
+```text
+International speaker, published author and entrepreneur. 
+My mission is to unleash super-human potential with the 
+help of technology.
+
+About Ferry →
+```
+
+- Remove the small "FERRY HOES" header
+- Remove highlighted keywords (cleaner read)
+- New mission-focused copy
+- Keep the "About Ferry" link
 
 ---
 
-## File to Modify
+## Files to Modify
 
 | File | Changes |
 |------|---------|
-| `src/components/sections/AboutBlock.tsx` | Complete redesign with split layout |
+| `src/components/sections/HeroVideo.tsx` | YouTube video background, title case name, larger font |
+| `src/components/sections/AboutBlock.tsx` | Updated copy, remove header |
 
 ---
 
-## Technical Implementation
+## Technical Details
 
-### Component Structure
+### HeroVideo.tsx
+
+```typescript
+// Name in title case
+const name = "Ferry Hoes";
+
+// YouTube iframe as background
+<iframe
+  className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+  src="https://www.youtube.com/embed/foEehJ_pwck?autoplay=1&mute=1&loop=1&playlist=foEehJ_pwck&controls=0&showinfo=0&start=0&end=15&modestbranding=1&rel=0"
+  allow="autoplay; encrypted-media"
+  style={{ 
+    width: '100vw',
+    height: '100vh',
+    objectFit: 'cover',
+    transform: 'scale(1.5)' // Zoom to crop and fill screen
+  }}
+/>
+
+// Larger font
+className="text-8xl sm:text-9xl md:text-[10rem] lg:text-[12rem] xl:text-[14rem]"
+```
+
+### AboutBlock.tsx
 
 ```typescript
 <section className="min-h-screen bg-background">
-  <div className="container h-full">
-    <div className="grid md:grid-cols-2 gap-8 min-h-screen items-center">
+  <div className="grid md:grid-cols-2 min-h-screen">
+    <div className="flex flex-col justify-center px-6 md:px-12 lg:px-20 py-16 md:py-0">
+      {/* No more small header */}
       
-      {/* Left: Text content */}
-      <div className="py-16 md:py-0">
-        <p className="text-sm tracking-widest mb-8">FERRY HOES</p>
-        
-        <h2 className="font-display text-3xl md:text-4xl lg:text-5xl 
-                       font-bold uppercase leading-tight mb-8">
-          FERRY HOES;{" "}
-          <span className="text-accent">SPEAKER</span>,{" "}
-          <span className="text-accent">ENTREPRENEUR</span>,{" "}
-          <span className="text-accent">AUTHOR</span> AND HOST OF{" "}
-          <span className="text-accent">'THE HUMAN SIDE' PODCAST</span>{" "}
-          - exploring the intersection of technology and humanity.
-        </h2>
-        
-        <Link className="group inline-flex items-center text-sm 
-                         tracking-widest hover:text-accent">
-          ABOUT FERRY
-          <ArrowRight className="ml-2 group-hover:translate-x-1" />
-        </Link>
-      </div>
+      <h2 className="font-display text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-[1.1] mb-10 text-foreground">
+        International speaker, published author and entrepreneur. 
+        My mission is to unleash super-human potential with the help of technology.
+      </h2>
       
-      {/* Right: Photo placeholder */}
-      <div className="relative h-full min-h-[400px] md:min-h-screen">
-        <div className="absolute inset-0 bg-gradient-to-br 
-                        from-primary/20 to-brand-teal/30" />
-        {/* Placeholder for actual photo */}
-      </div>
-      
+      <Link to="/about" className="...">
+        About Ferry
+        <ArrowRight />
+      </Link>
     </div>
+    
+    {/* Photo placeholder unchanged */}
   </div>
 </section>
 ```
-
-### Bright & Open Approach
-- White/off-white background instead of dark
-- Coral highlights pop against the light background
-- Clean whitespace
-- No glassmorphism cards - content flows naturally
-
-### Photo Placeholder Options
-- Light teal gradient
-- Subtle pattern or texture
-- Ready to accept `<img>` when photo is provided
 
 ---
 
 ## Expected Result
 
-A bold, editorial About section that:
-- Immediately shows your name prominently
-- Uses highlighted keywords for your key roles
-- Feels bright, open, and approachable (not dark like the reference)
-- Has space for your photo on the right
-- Maintains the clean, magazine-like aesthetic
-- Links to the full About page
-
+- Hero opens with your actual video playing silently in background
+- "Ferry Hoes" appears in title case, even larger than before
+- About section has clean, mission-focused copy without redundant headers
+- Both sections maintain the bold, editorial feel
