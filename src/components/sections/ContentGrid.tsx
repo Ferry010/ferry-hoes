@@ -106,7 +106,7 @@ const ContentGrid = () => {
           </div>
 
           {/* CTA */}
-          <div className="text-center">
+          <div className="text-center mb-16">
             <Button 
               variant="outline" 
               size="lg" 
@@ -115,6 +115,25 @@ const ContentGrid = () => {
               View all writing
               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Button>
+          </div>
+
+          {/* Inline conversation prompt */}
+          <div className="max-w-xl mx-auto">
+            <div className="bg-background rounded-2xl p-6 md:p-8 border border-border shadow-soft text-center">
+              <p className="text-muted-foreground mb-4">
+                Something on your mind about this?
+              </p>
+              <button
+                onClick={() => {
+                  const bubble = document.querySelector('[aria-label="Open message panel"]') as HTMLButtonElement;
+                  bubble?.click();
+                }}
+                className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors group"
+              >
+                <span className="underline underline-offset-4">Drop a thought</span>
+                <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </button>
+            </div>
           </div>
         </div>
       </div>

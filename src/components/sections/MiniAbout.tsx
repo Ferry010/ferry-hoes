@@ -1,7 +1,12 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, MessageCircle } from "lucide-react";
 
 const MiniAbout = () => {
+  const openMessagePanel = () => {
+    const bubble = document.querySelector('[aria-label="Open message panel"]') as HTMLButtonElement;
+    bubble?.click();
+  };
+
   return (
     <section className="py-24 md:py-32 bg-card">
       <div className="container px-6 md:px-8">
@@ -39,13 +44,23 @@ const MiniAbout = () => {
                 </p>
               </div>
               
-              <Button 
-                variant="outline" 
-                className="rounded-full px-6 group border-accent text-accent hover:bg-accent hover:text-accent-foreground"
-              >
-                Learn more about me
-                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </Button>
+              <div className="flex flex-wrap gap-4">
+                <Button 
+                  variant="outline" 
+                  className="rounded-full px-6 group border-accent text-accent hover:bg-accent hover:text-accent-foreground"
+                >
+                  Learn more about me
+                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </Button>
+                
+                <Button 
+                  onClick={openMessagePanel}
+                  className="rounded-full px-6 group bg-primary hover:bg-primary/90"
+                >
+                  <MessageCircle className="mr-2 h-4 w-4" />
+                  Want to chat?
+                </Button>
+              </div>
             </div>
           </div>
         </div>

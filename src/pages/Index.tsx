@@ -8,6 +8,7 @@ import SpeakingSection from "@/components/sections/SpeakingSection";
 import CommunitySection from "@/components/sections/CommunitySection";
 import MiniAbout from "@/components/sections/MiniAbout";
 import Footer from "@/components/sections/Footer";
+import FloatingChatBubble from "@/components/FloatingChatBubble";
 
 const Index = () => {
   return (
@@ -22,6 +23,7 @@ const Index = () => {
       <CommunitySection />
       <MiniAbout />
       <Footer />
+      <FloatingChatBubble />
     </main>
   );
 };
