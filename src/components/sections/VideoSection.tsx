@@ -36,13 +36,14 @@ const VideoSection = () => {
           {/* Section header */}
           <div className="text-center mb-12 md:mb-16">
             <span className="text-primary font-medium text-sm mb-2 block">
-              Featured talks
+              Video Content
             </span>
             <h2 className="font-display text-5xl md:text-6xl text-foreground mb-4 font-bold">
-              Watch & <span className="text-accent font-handwriting">learn</span>
+              Watch & learn
             </h2>
             <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-              Keynotes, talks, and ideas worth watching.
+              Talks, keynotes, and behind-the-scenes moments. 
+              Ideas worth seeing, not just reading.
             </p>
           </div>
 
@@ -86,7 +87,7 @@ const VideoSection = () => {
               size="lg" 
               className="rounded-full px-8 group"
             >
-              Watch more videos
+              Watch videos
               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Button>
           </div>

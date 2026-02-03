@@ -30,15 +30,16 @@ const SpeakingSection = () => {
             {/* Content */}
             <div className="md:col-span-3">
               <span className="text-primary font-medium text-sm mb-2 block">
-                Hire me to speak
+                Speaking
               </span>
               <h2 className="font-display text-4xl md:text-5xl text-foreground mb-6 font-bold">
-                Let's <span className="text-accent font-handwriting">inspire</span><br />your audience
+                Let's inspire<br />your audience
               </h2>
               
               <p className="text-muted-foreground text-lg leading-relaxed mb-6">
                 I speak at conferences, corporate events, and leadership summits worldwide. 
-                Engaging stories, actionable insights, and ideas that spark real conversations.
+                No death-by-PowerPoint. Just stories, insights, and practical ideas that 
+                spark real conversations.
               </p>
               
               {/* Topics */}
@@ -59,7 +60,7 @@ const SpeakingSection = () => {
                 className="rounded-full px-8 group"
               >
                 <Link to="/speaking">
-                  See my speaking page
+                  About my speaking
                   <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>

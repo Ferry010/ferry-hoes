@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { ArrowDown, Users } from "lucide-react";
-import CurrentlyStatus from "@/components/CurrentlyStatus";
 
 const Hero = () => {
   return (
@@ -14,40 +13,20 @@ const Hero = () => {
 
       <div className="container relative z-10 px-6 md:px-8">
         <div className="max-w-5xl mx-auto text-center">
-          {/* Personal greeting */}
-          <div 
-            className="mb-8 animate-fade-up"
-          >
-            <span className="inline-flex items-center gap-3 text-lg md:text-xl text-muted-foreground">
-              <span className="text-3xl">👋</span>
-              <span>Hey, I'm <span className="text-foreground font-medium">Ferry</span></span>
-            </span>
-          </div>
-
-          {/* Main headline - personal voice */}
-          <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.95] tracking-tight mb-6 animate-fade-up font-bold" style={{ animationDelay: "0.1s" }}>
-            I help teams stay{" "}
-            <span className="text-accent font-handwriting">human</span><br />
-            while the world goes{" "}
-            <span className="text-primary">digital</span>
+          {/* Main headline */}
+          <h1 className="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl leading-[0.9] tracking-tight mb-8 animate-fade-up font-bold">
+            <span className="text-primary">Rebuilding</span> the way<br />
+            <span className="text-accent">the world</span> <span className="text-primary">works</span>
           </h1>
 
           {/* Subtext */}
           <p 
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 leading-relaxed font-light animate-fade-up"
+            className="text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed font-light animate-fade-up"
             style={{ animationDelay: "0.2s" }}
           >
-            Through speaking, writing, and conversations—I explore how humans 
-            and technology can actually work better together.
+            I explore how humans and technology actually work better together. 
+            Through stories, experiments, talks and conversations.
           </p>
-
-          {/* Currently status */}
-          <div 
-            className="flex justify-center mb-10 animate-fade-up"
-            style={{ animationDelay: "0.3s" }}
-          >
-            <CurrentlyStatus />
-          </div>
 
           {/* CTAs */}
           <div 
@@ -60,7 +39,7 @@ const Hero = () => {
               onClick={() => document.getElementById('writing')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <ArrowDown className="mr-2 h-5 w-5" />
-              See what I'm thinking about
+              Start reading
             </Button>
             <Button 
               variant="outline" 
@@ -77,17 +56,17 @@ const Hero = () => {
           {/* Quick question link */}
           <p 
             className="text-sm text-muted-foreground mt-8 animate-fade-up"
-            style={{ animationDelay: "0.5s" }}
+            style={{ animationDelay: "0.6s" }}
           >
-            Got a question?{" "}
+            Have a question?{" "}
             <button 
               onClick={() => {
                 const bubble = document.querySelector('[aria-label="Open message panel"]') as HTMLButtonElement;
                 bubble?.click();
               }}
-              className="text-primary hover:text-primary/80 underline underline-offset-4 transition-colors font-handwriting text-base"
+              className="text-primary hover:text-primary/80 underline underline-offset-4 transition-colors"
             >
-              Just ask me
+              Just ask
             </button>
           </p>
         </div>

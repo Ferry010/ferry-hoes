@@ -9,18 +9,18 @@ const IntroBlock = () => {
             <div className="absolute -top-8 -left-4 w-16 h-16 bg-accent/10 rounded-full blur-xl" />
             
             <h2 className="font-display text-5xl md:text-6xl lg:text-7xl text-foreground mb-8 font-bold">
-              Welcome to my <span className="text-accent font-handwriting">corner</span> of the internet.
+              This is my <span className="text-accent">home base.</span>
             </h2>
             
             <div className="grid md:grid-cols-2 gap-8 md:gap-12">
               <div className="space-y-6">
                 <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-                  This isn't a funnel or a sales page. It's where I think out loud, 
+                  Not a funnel. Not a sales page. Just a place where I think out loud, 
                   share what I'm learning, and connect with people who care about the same things.
                 </p>
                 <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-                  Consider it a space for real conversations about building a better 
-                  relationship between humans and technology.
+                  Consider it a creative lab. A digital campfire. A space for real conversations 
+                  about how we can build a better relationship between humans and technology.
                 </p>
               </div>
               
@@ -28,9 +28,9 @@ const IntroBlock = () => {
                 {/* Clean visual element */}
                 <div className="aspect-square max-w-xs mx-auto md:ml-auto bg-gradient-to-br from-accent/20 to-primary/10 rounded-3xl flex items-center justify-center p-8 rotate-3 hover:rotate-0 transition-transform duration-500">
                   <div className="text-center">
-                    <div className="text-7xl mb-2">💡</div>
-                    <p className="text-sm text-muted-foreground font-medium font-handwriting">
-                      Ideas worth exploring
+                    <div className="text-7xl mb-2">❤️</div>
+                    <p className="text-sm text-muted-foreground font-medium">
+                      Where human meets digital
                     </p>
                   </div>
                 </div>

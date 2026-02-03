@@ -14,11 +14,11 @@ const MiniAbout = () => {
           <div className="grid md:grid-cols-3 gap-8 md:gap-12 items-center">
             {/* Photo placeholder */}
             <div className="md:col-span-1">
-              <div className="aspect-square max-w-xs mx-auto md:mx-0 bg-gradient-to-br from-accent/30 to-primary/20 rounded-3xl overflow-hidden relative group">
+              <div className="aspect-square max-w-xs mx-auto md:mx-0 bg-gradient-to-br from-accent/30 to-primary/20 rounded-3xl overflow-hidden relative">
                 {/* Placeholder for photo */}
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center">
-                    <div className="font-display text-6xl mb-2 group-hover:scale-110 transition-transform duration-300">👋</div>
+                    <div className="font-display text-6xl mb-2">👋</div>
                     <p className="text-sm text-muted-foreground">Ferry Hoes</p>
                   </div>
                 </div>
@@ -27,21 +27,20 @@ const MiniAbout = () => {
             
             {/* Bio */}
             <div className="md:col-span-2">
-              <span className="text-primary font-medium text-sm mb-2 block">
-                The person behind all this
-              </span>
               <h2 className="font-display text-4xl md:text-5xl text-foreground mb-6 font-bold">
-                Hi, I'm <span className="text-accent font-handwriting">Ferry.</span>
+                Hi, I'm <span className="text-accent">Ferry.</span>
               </h2>
               
               <div className="space-y-4 text-muted-foreground text-lg leading-relaxed mb-8">
                 <p>
-                  For 15 years, I've been helping organizations navigate the intersection 
-                  of technology and humanity—as a speaker, author, and advisor.
+                  I'm a thinker, speaker, and builder obsessed with the intersection of 
+                  humans and technology. For the past 15 years, I've been helping 
+                  organizations figure out how to use tech without losing their humanity.
                 </p>
                 <p>
-                  My work focuses on how we can build systems, cultures, and technologies 
-                  that amplify what makes us human rather than diminish it.
+                  When I'm not on stage or writing, you'll find me making music, 
+                  experimenting with AI tools, or having long conversations about the 
+                  future over good coffee.
                 </p>
               </div>
               
@@ -50,7 +49,7 @@ const MiniAbout = () => {
                   variant="outline" 
                   className="rounded-full px-6 group border-accent text-accent hover:bg-accent hover:text-accent-foreground"
                 >
-                  The full story
+                  Learn more about me
                   <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
                 
@@ -59,7 +58,7 @@ const MiniAbout = () => {
                   className="rounded-full px-6 group bg-primary hover:bg-primary/90"
                 >
                   <MessageCircle className="mr-2 h-4 w-4" />
-                  Say hello
+                  Want to chat?
                 </Button>
               </div>
             </div>

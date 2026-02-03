@@ -3,16 +3,8 @@ import { MessageCircle, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import QuickMessage from "./QuickMessage";
 
-const conversationStarters = [
-  "What's on your mind?",
-  "Ask me anything",
-  "Share a thought",
-  "Let's chat",
-];
-
 const FloatingChatBubble = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [starterIndex] = useState(() => Math.floor(Math.random() * conversationStarters.length));
 
   return (
     <>
@@ -37,19 +29,13 @@ const FloatingChatBubble = () => {
         <div className="bg-card rounded-2xl shadow-soft-lg border border-border overflow-hidden">
           {/* Header */}
           <div className="flex items-center justify-between p-4 border-b border-border bg-secondary/50">
-            <div className="flex items-center gap-3">
-              {/* Avatar */}
-              <div className="w-10 h-10 bg-gradient-to-br from-accent/30 to-primary/20 rounded-full flex items-center justify-center text-lg">
-                👋
-              </div>
-              <div>
-                <h3 className="font-display font-semibold text-foreground">
-                  {conversationStarters[starterIndex]}
-                </h3>
-                <p className="text-xs text-muted-foreground font-handwriting">
-                  I usually reply within a few hours
-                </p>
-              </div>
+            <div>
+              <h3 className="font-display font-semibold text-foreground">
+                Drop a thought
+              </h3>
+              <p className="text-xs text-muted-foreground">
+                I'll get back to you soon
+              </p>
             </div>
             <button
               onClick={() => setIsOpen(false)}

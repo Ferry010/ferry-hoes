@@ -11,16 +11,16 @@ const PodcastSection = () => {
             <div className="order-2 lg:order-1">
               <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full text-sm font-medium mb-6">
                 <Headphones className="h-4 w-4" />
-                Conversations I'm having
+                Podcast
               </span>
               
               <h2 className="font-display text-5xl md:text-6xl lg:text-7xl mb-6 font-bold">
-                Real talk<br />with <span className="text-brand-gold font-handwriting">interesting people</span>
+                Conversations<br />that <span className="text-brand-gold">matter</span>
               </h2>
               
               <p className="text-lg md:text-xl text-white/80 leading-relaxed mb-8 max-w-lg">
-                Deep dives with founders, researchers, and leaders doing meaningful work 
-                at the intersection of humans and technology. Thoughtful conversations that go beyond the surface.
+                Deep dives with founders, artists, scientists, and anyone doing interesting work 
+                at the intersection of humans and technology. No scripts. No soundbites. Just real talk.
               </p>
               
               <div className="flex flex-wrap gap-4">
