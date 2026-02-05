@@ -1,4 +1,11 @@
 import { Button } from "@/components/ui/button";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+} from "@/components/ui/carousel";
 import { ArrowRight, Headphones } from "lucide-react";
 
 // Spotify icon component
@@ -71,45 +78,59 @@ const PodcastSection = () => {
             </p>
           </div>
 
-          {/* Episode cards with Spotify embeds */}
-          <div className="grid md:grid-cols-3 gap-6 mb-12">
-            {featuredEpisodes.map((episode) => (
-              <article 
-                key={episode.number}
-                className="group bg-background rounded-2xl p-6 shadow-soft hover:shadow-soft-lg transition-all duration-300 border border-transparent hover:border-primary/20"
-              >
-                <div className="flex items-start justify-between mb-4">
-                  <span className="text-sm font-medium text-primary">
-                    Episode {episode.number}
-                  </span>
-                  <span className="text-xs text-muted-foreground">
-                    {episode.duration}
-                  </span>
-                </div>
-                
-                <h3 className="font-display text-xl font-semibold text-foreground mb-2">
-                  {episode.title}
-                </h3>
-                
-                <p className="text-sm text-muted-foreground mb-4">
-                  with {episode.guest}
-                </p>
-                
-                {/* Spotify Embed Player */}
-                <div className="rounded-lg overflow-hidden">
-                  <iframe
-                    src={`https://open.spotify.com/embed/episode/${episode.spotifyEpisodeId}?utm_source=generator&theme=0`}
-                    width="100%"
-                    height="152"
-                    frameBorder="0"
-                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                    loading="lazy"
-                    className="rounded-lg"
-                  />
-                </div>
-              </article>
-            ))}
-          </div>
+          {/* Episode cards carousel with Spotify embeds */}
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="w-full mb-12"
+          >
+            <CarouselContent className="-ml-4">
+              {featuredEpisodes.map((episode) => (
+                <CarouselItem 
+                  key={episode.number} 
+                  className="pl-4 basis-full md:basis-1/2"
+                >
+                  <article 
+                    className="group bg-background rounded-2xl p-8 shadow-soft hover:shadow-soft-lg transition-all duration-300 border border-transparent hover:border-primary/20 h-full"
+                  >
+                    <div className="flex items-start justify-between mb-6">
+                      <span className="text-sm font-medium text-primary">
+                        Episode {episode.number}
+                      </span>
+                      <span className="text-sm text-muted-foreground">
+                        {episode.duration}
+                      </span>
+                    </div>
+                    
+                    <h3 className="font-display text-2xl font-semibold text-foreground mb-3">
+                      {episode.title}
+                    </h3>
+                    
+                    <p className="text-base text-muted-foreground mb-6">
+                      with {episode.guest}
+                    </p>
+                    
+                    {/* Spotify Embed Player */}
+                    <div className="rounded-lg overflow-hidden">
+                      <iframe
+                        src={`https://open.spotify.com/embed/episode/${episode.spotifyEpisodeId}?utm_source=generator&theme=0`}
+                        width="100%"
+                        height="180"
+                        frameBorder="0"
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                        loading="lazy"
+                        className="rounded-lg"
+                      />
+                    </div>
+                  </article>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="left-0 md:-left-12" />
+            <CarouselNext className="right-0 md:-right-12" />
+          </Carousel>
 
           {/* Stats */}
           <div className="flex justify-center gap-12 mb-12 py-8 border-y border-border">
