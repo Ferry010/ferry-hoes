@@ -5,7 +5,7 @@ import { CurveDivider } from "@/components/ui/section-divider";
 
 const AboutBlock = () => {
   return (
-    <section className="min-h-screen bg-background relative">
+    <section className="min-h-screen bg-background/95 backdrop-blur-sm relative">
       <div className="grid md:grid-cols-2 min-h-screen">
         {/* Left: Text content */}
         <div className="flex flex-col justify-center px-6 md:px-12 lg:px-20 py-16 md:py-0">

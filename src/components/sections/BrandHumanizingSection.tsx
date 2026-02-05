@@ -8,7 +8,7 @@ const BrandHumanizingSection = () => {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-secondary">
+    <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-secondary/90 backdrop-blur-sm">
       {/* Decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-96 h-96 bg-accent/20 rounded-full blur-3xl" />
@@ -55,7 +55,7 @@ const BrandHumanizingSection = () => {
 
       {/* Bold wave transition to Speaker section */}
       <div className="absolute bottom-0 left-0 right-0 z-10">
-        <BoldWaveDivider className="h-16 md:h-28 text-primary" />
+        <BoldWaveDivider className="h-20 md:h-32 text-primary" />
       </div>
     </section>
   );

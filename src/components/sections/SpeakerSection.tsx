@@ -76,7 +76,7 @@ const SpeakerSection = () => {
 
       {/* Wave transition to Book section (inverted) */}
       <div className="absolute bottom-0 left-0 right-0 z-10">
-        <WaveDivider className="h-16 md:h-24 text-secondary" flip />
+        <WaveDivider className="h-20 md:h-32 text-secondary" flip />
       </div>
     </section>
   );

@@ -5,6 +5,7 @@ import {
   CarouselItem,
   CarouselPrevious,
   CarouselNext,
+  CarouselDots,
 } from "@/components/ui/carousel";
 import { ArrowRight, Headphones } from "lucide-react";
 import { BoldWaveDivider } from "@/components/ui/section-divider";
@@ -54,7 +55,7 @@ const PodcastSection = () => {
   };
 
   return (
-    <section className="py-24 md:py-32 bg-card overflow-hidden relative">
+    <section className="py-24 md:py-32 bg-card/95 backdrop-blur-sm overflow-hidden relative">
       <div className="container px-6 md:px-8">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
@@ -124,6 +125,7 @@ const PodcastSection = () => {
             </CarouselContent>
             <CarouselPrevious className="left-0 md:-left-12" />
             <CarouselNext className="right-0 md:-right-12" />
+            <CarouselDots className="mt-8" />
           </Carousel>
 
           {/* Platform CTAs */}

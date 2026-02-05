@@ -64,7 +64,7 @@ const CommunitySection = () => {
 
       {/* Diagonal transition to Footer */}
       <div className="absolute bottom-0 left-0 right-0 z-10">
-        <DiagonalDivider className="h-12 md:h-20 text-foreground" />
+        <DiagonalDivider className="h-16 md:h-24 text-foreground" />
       </div>
     </section>
   );
