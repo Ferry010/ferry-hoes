@@ -55,7 +55,7 @@ const posts = [
 
 const ContentGrid = () => {
   return (
-    <section id="writing" className="py-24 md:py-32 bg-secondary/90 backdrop-blur-sm">
+    <section id="writing" className="py-24 md:py-32 bg-card">
       <div className="container px-6 md:px-8">
         <div className="max-w-6xl mx-auto">
           {/* Section header */}

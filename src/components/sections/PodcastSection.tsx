@@ -8,6 +8,7 @@ import {
   CarouselDots,
 } from "@/components/ui/carousel";
 import { ArrowRight, Headphones } from "lucide-react";
+import { BoldWaveDivider } from "@/components/ui/section-divider";
 
 // Spotify icon component
 const SpotifyIcon = ({ className }: { className?: string }) => (
@@ -54,7 +55,7 @@ const PodcastSection = () => {
   };
 
   return (
-    <section className="py-24 md:py-32 bg-secondary/90 backdrop-blur-sm overflow-hidden relative">
+    <section className="py-24 md:py-32 bg-card/95 backdrop-blur-sm overflow-hidden relative">
       <div className="container px-6 md:px-8">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
@@ -166,6 +167,11 @@ const PodcastSection = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Bold wave transition to Community section */}
+      <div className="absolute bottom-0 left-0 right-0 z-10">
+        <BoldWaveDivider className="h-16 md:h-24 text-primary" />
       </div>
     </section>
   );

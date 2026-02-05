@@ -1,51 +1,44 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import ferryPhoto from "@/assets/ferry-bookstore.jpg";
+import { CurveDivider } from "@/components/ui/section-divider";
 
 const AboutBlock = () => {
   return (
-    <section className="py-24 md:py-32 bg-secondary/90 backdrop-blur-sm overflow-hidden relative">
-      <div className="container px-6 md:px-8">
-        <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
+    <section className="min-h-screen bg-background/95 backdrop-blur-sm relative">
+      <div className="grid md:grid-cols-2 min-h-screen">
+        {/* Left: Text content */}
+        <div className="flex flex-col justify-center px-6 md:px-12 lg:px-20 py-16 md:py-0">
+          <p className="font-display text-2xl md:text-3xl lg:text-4xl font-bold text-primary mb-6">
+            Ferry Hoes
+          </p>
           
-          {/* Circular image composition */}
-          <div className="relative flex justify-center">
-            {/* Decorative smaller circles */}
-            <div className="absolute -top-10 -left-6 w-20 h-20 rounded-full bg-accent/30" />
-            <div className="absolute -top-6 right-10 w-16 h-16 rounded-full bg-brand-gold/40" />
-            <div className="absolute bottom-16 -left-10 w-24 h-24 rounded-full bg-primary/20" />
-            <div className="absolute -bottom-8 right-6 w-18 h-18 rounded-full bg-accent/25" />
-            <div className="absolute top-1/3 -right-8 w-14 h-14 rounded-full bg-brand-gold/30" />
-            
-            {/* Main circular image */}
-            <div className="w-80 h-80 md:w-[26rem] md:h-[26rem] lg:w-[32rem] lg:h-[32rem] rounded-full overflow-hidden shadow-2xl border-4 border-background/50">
-              <img
-                src={ferryPhoto}
-                alt="Ferry Hoes holding Brand Humanizing book in a bookstore"
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </div>
-
-          {/* Text content */}
-          <div className="text-center md:text-left">
-            <p className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-6">
-              Ferry Hoes
-            </p>
-            
-            <h2 className="font-display text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold leading-[1.1] mb-10 text-foreground">
-              International speaker, published author and entrepreneur. My mission is to unleash super-human potential with the help of technology.
-            </h2>
-            
-            <Link 
-              to="/about"
-              className="group inline-flex items-center text-sm tracking-[0.2em] uppercase text-muted-foreground hover:text-foreground transition-colors"
-            >
-              About Ferry
-              <ArrowRight className="ml-3 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-[1.1] mb-10 text-foreground">
+            International speaker, published author and entrepreneur. My mission is to unleash super-human potential with the help of technology.
+          </h2>
+          
+          <Link 
+            to="/about"
+            className="group inline-flex items-center text-sm tracking-[0.2em] uppercase text-foreground hover:text-accent transition-colors"
+          >
+            About Ferry
+            <ArrowRight className="ml-3 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+          </Link>
         </div>
+        
+        {/* Right: Photo */}
+        <div className="relative min-h-[400px] md:min-h-screen order-first md:order-last">
+          <img 
+            src={ferryPhoto}
+            alt="Ferry Hoes holding Brand Humanizing book in a bookstore"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        </div>
+      </div>
+
+      {/* Curve transition to Brand Humanizing section */}
+      <div className="absolute bottom-0 left-0 right-0 z-10">
+        <CurveDivider className="h-12 md:h-20 text-secondary" />
       </div>
     </section>
   );
