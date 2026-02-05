@@ -1,7 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import ferryPhoto from "@/assets/ferry-bookstore.jpg";
-import { CurveDivider } from "@/components/ui/section-divider";
 
 const AboutBlock = () => {
   return (
@@ -36,10 +35,6 @@ const AboutBlock = () => {
         </div>
       </div>
 
-      {/* Curve transition to Brand Humanizing section */}
-      <div className="absolute bottom-0 left-0 right-0 z-10">
-        <CurveDivider className="h-12 md:h-20 text-secondary" />
-      </div>
     </section>
   );
 };

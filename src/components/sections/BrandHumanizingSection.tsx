@@ -1,5 +1,4 @@
 import { ArrowRight, Heart } from "lucide-react";
-import { BoldWaveDivider } from "@/components/ui/section-divider";
 
 const BrandHumanizingSection = () => {
   const openMessagePanel = () => {
@@ -53,10 +52,6 @@ const BrandHumanizingSection = () => {
         </div>
       </div>
 
-      {/* Bold wave transition to Speaker section */}
-      <div className="absolute bottom-0 left-0 right-0 z-10">
-        <BoldWaveDivider className="h-20 md:h-32 text-primary" />
-      </div>
     </section>
   );
 };
