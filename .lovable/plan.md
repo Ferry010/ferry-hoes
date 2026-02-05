@@ -1,151 +1,137 @@
 
 
-# Podcast Cards Carousel
+# Update Podcast Section with Real Data
 
-Transform the podcast episode cards from a static grid to a swipeable carousel with larger cards.
+Remove vanity stats and integrate real episode data from your RSS feed, with cards linking directly to Spotify.
 
 ---
 
-## Current vs New Layout
+## Changes Overview
+
+| Change | Details |
+|--------|---------|
+| Remove vanity stats | Delete the "127 Episodes / 50K+ Downloads / 4.9 Rating" section |
+| Real episode data | Use actual titles, guests, and durations from your RSS feed |
+| Card behavior | Each card links to Spotify episode (no embed player) |
+| Platform URLs | Update main buttons with your real Spotify and Apple Podcasts links |
+
+---
+
+## New Episode Cards Design
+
+Each card will be clickable and link to Spotify:
 
 ```text
-CURRENT (Static Grid)
-┌────────────────────────────────────────────────────────────────┐
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐                      │
-│  │ Ep 127   │  │ Ep 126   │  │ Ep 125   │                      │
-│  │ [player] │  │ [player] │  │ [player] │                      │
-│  └──────────┘  └──────────┘  └──────────┘                      │
-└────────────────────────────────────────────────────────────────┘
-
-NEW (Swipeable Carousel)
-┌────────────────────────────────────────────────────────────────┐
-│                                                                │
-│  ←  ┌──────────────────────┐  ┌──────────────────────┐   →     │
-│     │     Episode 127      │  │     Episode 126      │         │
-│     │  The Future of...    │  │  Building Brands...  │         │
-│     │  with Sarah Chen     │  │  with Marcus W.      │         │
-│     │                      │  │                      │         │
-│     │  [Spotify Player]    │  │  [Spotify Player]    │         │
-│     │  ▶ ─────●───── ♪     │  │  ▶ ─────○───── ♪     │         │
-│     └──────────────────────┘  └──────────────────────┘         │
-│                                                                │
-│                    ● ○ ○  (dots)                               │
-└────────────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────┐
+│  Episode                    ~65 min    │
+│                                        │
+│  Not a Diversity Checkbox:             │
+│  The Real Work of Inclusive Leadership │
+│                                        │
+│  with Simone Moissidis                 │
+│                                        │
+│  [Spotify icon]  Listen on Spotify  →  │
+└────────────────────────────────────────┘
 ```
 
 ---
 
-## Key Changes
+## Real Episode Data (from RSS)
 
-### 1. Replace Grid with Carousel
-
-- Import Carousel components from `@/components/ui/carousel`
-- Wrap episode cards in `Carousel`, `CarouselContent`, and `CarouselItem`
-- Show 1 card on mobile, 2 on tablet, staying centered
-
-### 2. Larger Cards
-
-- Increase padding from `p-6` to `p-8`
-- Larger title font: `text-xl` to `text-2xl`
-- Increase Spotify embed height from `152px` to `180px`
-- Add more vertical spacing between elements
-
-### 3. Navigation Controls
-
-- Add left/right arrow buttons using `CarouselPrevious` and `CarouselNext`
-- Style arrows to match the editorial aesthetic (rounded, subtle)
-- Enable touch/swipe on mobile via Embla's built-in drag
-
-### 4. Responsive Behavior
-
-- Mobile: 1 card visible at a time (full width swipe)
-- Tablet/Desktop: 2 cards visible with peek effect
-- Smooth snap scrolling between cards
+| Episode | Title | Guest | Duration | Spotify Episode ID |
+|---------|-------|-------|----------|-------------------|
+| Latest | Not a Diversity Checkbox: The Real Work of Inclusive Leadership | Simone Moissidis | 65 min | e34fcs3 |
+| 2nd | The Power of Talking to People You Disagree With | Ruben Treurniet | 73 min | e30mai6 |
+| 3rd | From Local to Global: The New Era of Talent Acquisition | Marco Boomsma | 71 min | e2lthrj |
 
 ---
 
-## File to Modify
+## File Changes
 
-| File | Changes |
-|------|---------|
-| `src/components/sections/PodcastSection.tsx` | Replace grid with carousel, enlarge cards |
+**`src/components/sections/PodcastSection.tsx`**
+
+1. **Update `featuredEpisodes` array** (lines 26-48):
+   - Replace placeholder titles with real episode names
+   - Add real guest names
+   - Use actual durations from RSS
+   - Add Spotify episode URLs for linking
+
+2. **Update platform URLs** (lines 51-52):
+   - Spotify: `https://open.spotify.com/show/6eGkXe767cYZ5Rw627Xpgu`
+   - Apple: `https://podcasts.apple.com/nl/podcast/the-human-era-podcast/id1598552331`
+
+3. **Remove stats section** (lines 135-149):
+   - Delete the entire vanity metrics block
+
+4. **Replace iframe embed with link button** (lines 115-126):
+   - Remove the Spotify iframe player
+   - Add a "Listen on Spotify" button that links to the episode
 
 ---
 
-## Technical Details
+## Technical Implementation
 
-### Carousel Configuration
+### Updated Episode Data Structure
 
 ```typescript
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselPrevious,
-  CarouselNext,
-} from "@/components/ui/carousel";
-
-<Carousel
-  opts={{
-    align: "start",
-    loop: true,
-  }}
-  className="w-full"
->
-  <CarouselContent className="-ml-4">
-    {featuredEpisodes.map((episode) => (
-      <CarouselItem 
-        key={episode.number} 
-        className="pl-4 basis-full md:basis-1/2 lg:basis-1/2"
-      >
-        {/* Episode card content - enlarged */}
-      </CarouselItem>
-    ))}
-  </CarouselContent>
-  <CarouselPrevious className="left-0 md:-left-12" />
-  <CarouselNext className="right-0 md:-right-12" />
-</Carousel>
+const featuredEpisodes = [
+  {
+    title: "Not a Diversity Checkbox: The Real Work of Inclusive Leadership",
+    guest: "Simone Moissidis",
+    duration: "65 min",
+    spotifyUrl: "https://open.spotify.com/episode/...",
+  },
+  {
+    title: "The Power of Talking to People You Disagree With",
+    guest: "Ruben Treurniet",
+    duration: "73 min",
+    spotifyUrl: "https://open.spotify.com/episode/...",
+  },
+  {
+    title: "From Local to Global: The New Era of Talent Acquisition",
+    guest: "Marco Boomsma",
+    duration: "71 min",
+    spotifyUrl: "https://open.spotify.com/episode/...",
+  },
+];
 ```
 
-### Enlarged Card Styling
+### Card with Link Button
 
 ```typescript
-<article className="group bg-background rounded-2xl p-8 shadow-soft hover:shadow-soft-lg transition-all duration-300 border border-transparent hover:border-primary/20">
-  {/* Episode number and duration */}
+<article className="group bg-background rounded-2xl p-8 ...">
   <div className="flex items-start justify-between mb-6">
-    <span className="text-sm font-medium text-primary">
-      Episode {episode.number}
-    </span>
-    <span className="text-sm text-muted-foreground">
-      {episode.duration}
-    </span>
+    <span className="text-sm font-medium text-primary">Episode</span>
+    <span className="text-sm text-muted-foreground">{episode.duration}</span>
   </div>
   
-  {/* Larger title */}
-  <h3 className="font-display text-2xl font-semibold text-foreground mb-3">
+  <h3 className="font-display text-2xl font-semibold mb-3">
     {episode.title}
   </h3>
   
-  {/* Guest */}
   <p className="text-base text-muted-foreground mb-6">
     with {episode.guest}
   </p>
   
-  {/* Taller Spotify embed */}
-  <iframe
-    height="180"
-    ...
-  />
+  <a 
+    href={episode.spotifyUrl}
+    target="_blank"
+    className="inline-flex items-center gap-2 text-[#1DB954] font-medium group-hover:underline"
+  >
+    <SpotifyIcon className="h-5 w-5" />
+    Listen on Spotify
+    <ArrowRight className="h-4 w-4" />
+  </a>
 </article>
 ```
 
 ---
 
-## Expected Result
+## Result
 
-- Swipeable carousel with touch/drag support
-- Larger, more prominent episode cards
-- Arrow navigation buttons on desktop
-- Smooth looping behavior
-- Maintains the editorial magazine aesthetic
+- Cards display real episode titles, guests, and durations
+- Clicking a card opens the episode on Spotify
+- No embedded players (cleaner, faster loading)
+- Vanity stats removed for a cleaner look
+- Main platform buttons link to your actual show pages
 
