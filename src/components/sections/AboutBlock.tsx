@@ -33,7 +33,7 @@ const AboutBlock = () => {
               Ferry Hoes
             </p>
             
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.1] mb-10 text-foreground">
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-[1.1] mb-10 text-foreground">
               International speaker, published author and entrepreneur. My mission is to unleash super-human potential with the help of technology.
             </h2>
             
