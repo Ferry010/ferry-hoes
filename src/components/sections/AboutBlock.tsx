@@ -4,25 +4,8 @@ import ferryPhoto from "@/assets/ferry-bookstore.jpg";
 
 const AboutBlock = () => {
   return (
-    <section className="py-24 md:py-32 relative overflow-hidden">
-      {/* Gradient background - white to teal to white */}
-      <div 
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: `linear-gradient(
-            180deg,
-            hsl(var(--background)) 0%,
-            hsl(var(--background)) 10%,
-            hsl(var(--primary) / 0.15) 30%,
-            hsl(var(--primary)) 50%,
-            hsl(var(--primary) / 0.15) 70%,
-            hsl(var(--background)) 90%,
-            hsl(var(--background)) 100%
-          )`
-        }}
-      />
-
-      <div className="container relative z-10 px-6 md:px-8">
+    <section className="py-24 md:py-32 bg-secondary/90 backdrop-blur-sm overflow-hidden relative">
+      <div className="container px-6 md:px-8">
         <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
           
           {/* Circular image composition */}
@@ -46,17 +29,17 @@ const AboutBlock = () => {
 
           {/* Text content */}
           <div className="text-center md:text-left">
-            <p className="font-display text-2xl md:text-3xl lg:text-4xl font-bold text-primary-foreground mb-6">
+            <p className="font-display text-2xl md:text-3xl lg:text-4xl font-bold text-primary mb-6">
               Ferry Hoes
             </p>
             
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-[1.1] mb-10 text-primary-foreground">
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-[1.1] mb-10 text-foreground">
               International speaker, published author and entrepreneur. My mission is to unleash super-human potential with the help of technology.
             </h2>
             
             <Link 
               to="/about"
-              className="group inline-flex items-center text-sm tracking-[0.2em] uppercase text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+              className="group inline-flex items-center text-sm tracking-[0.2em] uppercase text-muted-foreground hover:text-foreground transition-colors"
             >
               About Ferry
               <ArrowRight className="ml-3 h-4 w-4 group-hover:translate-x-1 transition-transform" />

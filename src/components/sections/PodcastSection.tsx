@@ -54,7 +54,7 @@ const PodcastSection = () => {
   };
 
   return (
-    <section className="py-24 md:py-32 bg-card/95 backdrop-blur-sm overflow-hidden relative">
+    <section className="py-24 md:py-32 bg-secondary/90 backdrop-blur-sm overflow-hidden relative">
       <div className="container px-6 md:px-8">
         <div className="max-w-6xl mx-auto">
           {/* Header */}

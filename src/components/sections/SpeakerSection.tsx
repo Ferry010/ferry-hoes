@@ -10,44 +10,26 @@ const SpeakerSection = () => {
   };
 
   return (
-    <section className="py-24 md:py-32 relative overflow-hidden">
-      {/* Gradient background - white to teal to white */}
-      <div 
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: `linear-gradient(
-            180deg,
-            hsl(var(--background)) 0%,
-            hsl(var(--background)) 5%,
-            hsl(var(--primary) / 0.2) 25%,
-            hsl(var(--primary)) 45%,
-            hsl(var(--primary)) 55%,
-            hsl(var(--primary) / 0.2) 75%,
-            hsl(var(--background)) 95%,
-            hsl(var(--background)) 100%
-          )`
-        }}
-      />
-
-      <div className="container relative z-10 px-6 md:px-8">
+    <section className="py-24 md:py-32 bg-secondary/90 backdrop-blur-sm overflow-hidden relative">
+      <div className="container px-6 md:px-8">
         <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
           
           {/* Text content */}
           <div className="order-2 md:order-1 text-center md:text-left">
             {/* Badge */}
-            <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary-foreground/10 rounded-full text-sm font-medium mb-8 text-primary-foreground">
+            <span className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 rounded-full text-sm font-medium mb-8 text-accent">
               <Mic className="h-4 w-4" />
               On Stage
             </span>
 
             {/* Title */}
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-8 text-primary-foreground">
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-8 text-foreground">
               Keynotes that{" "}
-              <span className="text-brand-gold">inspire action</span>
+              <span className="text-accent">inspire action</span>
             </h2>
 
             {/* Description */}
-            <p className="text-lg md:text-xl text-primary-foreground/80 leading-relaxed max-w-xl mb-12">
+            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl mb-12">
               From AI and the future of work to human-centered design and brand transformation. 
               Talks that challenge assumptions, spark conversations, and leave audiences with actionable insights.
             </p>
@@ -57,7 +39,7 @@ const SpeakerSection = () => {
               <Button 
                 asChild
                 size="lg"
-                className="rounded-full px-8 bg-brand-gold text-foreground hover:bg-brand-gold/90 group"
+                className="rounded-full px-8 bg-accent hover:bg-accent/90 group"
               >
                 <Link to="/speaking">
                   Speaker enquiries
@@ -69,7 +51,7 @@ const SpeakerSection = () => {
             {/* Micro-engagement */}
             <button
               onClick={openMessagePanel}
-              className="inline-flex items-center gap-2 text-brand-gold hover:text-brand-gold/80 font-medium transition-colors group"
+              className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors group"
             >
               <span className="underline underline-offset-4">Want to discuss an event?</span>
               <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
@@ -79,14 +61,14 @@ const SpeakerSection = () => {
           {/* Circular image composition */}
           <div className="relative flex justify-center order-1 md:order-2">
             {/* Decorative circles */}
-            <div className="absolute -top-6 left-8 w-14 h-14 rounded-full bg-brand-gold/40" />
-            <div className="absolute top-1/4 -right-4 w-16 h-16 rounded-full bg-primary-foreground/20" />
+            <div className="absolute -top-6 left-8 w-14 h-14 rounded-full bg-accent/40" />
+            <div className="absolute top-1/4 -right-4 w-16 h-16 rounded-full bg-primary/20" />
             <div className="absolute -bottom-4 left-4 w-12 h-12 rounded-full bg-accent/30" />
-            <div className="absolute bottom-1/3 -right-8 w-16 h-16 rounded-full bg-brand-gold/25" />
-            <div className="absolute top-2/3 -left-6 w-10 h-10 rounded-full bg-primary-foreground/15" />
+            <div className="absolute bottom-1/3 -right-8 w-16 h-16 rounded-full bg-primary/25" />
+            <div className="absolute top-2/3 -left-6 w-10 h-10 rounded-full bg-accent/15" />
             
             {/* Main circular image */}
-            <div className="w-72 h-72 md:w-96 md:h-96 lg:w-[28rem] lg:h-[28rem] rounded-full overflow-hidden shadow-2xl border-4 border-primary-foreground/20">
+            <div className="w-72 h-72 md:w-96 md:h-96 lg:w-[28rem] lg:h-[28rem] rounded-full overflow-hidden shadow-2xl border-4 border-foreground/10">
               <img 
                 src={stagePhoto}
                 alt="Ferry Hoes presenting on stage"
