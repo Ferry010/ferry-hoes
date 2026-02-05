@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, BookOpen, MessageCircle } from "lucide-react";
 import bookCover from "@/assets/brand-humanizing-book.jpg";
+import { AsymmetricWaveDivider } from "@/components/ui/section-divider";
 
 const BookSection = () => {
   const openMessagePanel = () => {
@@ -9,7 +10,7 @@ const BookSection = () => {
   };
 
   return (
-    <section className="min-h-screen flex items-center py-24 md:py-32 bg-secondary overflow-hidden">
+    <section className="min-h-screen flex items-center py-24 md:py-32 bg-secondary overflow-hidden relative">
       <div className="container px-6 md:px-8">
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -88,6 +89,11 @@ const BookSection = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Asymmetric wave transition to Podcast section */}
+      <div className="absolute bottom-0 left-0 right-0 z-10">
+        <AsymmetricWaveDivider className="h-14 md:h-20 text-card" />
       </div>
     </section>
   );

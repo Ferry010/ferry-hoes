@@ -1,4 +1,5 @@
 import { ChevronDown } from "lucide-react";
+import { WaveDivider } from "@/components/ui/section-divider";
 
 const HeroVideo = () => {
   const name = "Ferry Hoes";
@@ -46,11 +47,16 @@ const HeroVideo = () => {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+      <div className="absolute bottom-20 md:bottom-24 left-1/2 -translate-x-1/2 animate-bounce z-20">
         <div className="flex flex-col items-center gap-2 text-background/60">
           <span className="text-sm font-medium tracking-wide uppercase">Scroll</span>
           <ChevronDown className="h-6 w-6" />
         </div>
+      </div>
+
+      {/* Wave transition to About section */}
+      <div className="absolute bottom-0 left-0 right-0 z-10">
+        <WaveDivider className="h-16 md:h-24 text-background" />
       </div>
     </section>
   );

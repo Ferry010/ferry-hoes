@@ -1,10 +1,11 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import ferryPhoto from "@/assets/ferry-bookstore.jpg";
+import { CurveDivider } from "@/components/ui/section-divider";
 
 const AboutBlock = () => {
   return (
-    <section className="min-h-screen bg-background">
+    <section className="min-h-screen bg-background relative">
       <div className="grid md:grid-cols-2 min-h-screen">
         {/* Left: Text content */}
         <div className="flex flex-col justify-center px-6 md:px-12 lg:px-20 py-16 md:py-0">
@@ -33,6 +34,11 @@ const AboutBlock = () => {
             className="absolute inset-0 w-full h-full object-cover"
           />
         </div>
+      </div>
+
+      {/* Curve transition to Brand Humanizing section */}
+      <div className="absolute bottom-0 left-0 right-0 z-10">
+        <CurveDivider className="h-12 md:h-20 text-secondary" />
       </div>
     </section>
   );

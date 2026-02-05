@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Mic } from "lucide-react";
 import { Link } from "react-router-dom";
 import stagePhoto from "@/assets/ferry-on-stage.jpg";
+import { WaveDivider } from "@/components/ui/section-divider";
 
 const SpeakerSection = () => {
   const openMessagePanel = () => {
@@ -71,6 +72,11 @@ const SpeakerSection = () => {
             <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
+      </div>
+
+      {/* Wave transition to Book section (inverted) */}
+      <div className="absolute bottom-0 left-0 right-0 z-10">
+        <WaveDivider className="h-16 md:h-24 text-secondary" flip />
       </div>
     </section>
   );
