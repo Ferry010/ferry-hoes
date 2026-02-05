@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { Users, ArrowRight } from "lucide-react";
-import { DiagonalDivider } from "@/components/ui/section-divider";
 
 const CommunitySection = () => {
   return (
@@ -60,11 +59,6 @@ const CommunitySection = () => {
             </p>
           </div>
         </div>
-      </div>
-
-      {/* Diagonal transition to Footer */}
-      <div className="absolute bottom-0 left-0 right-0 z-10">
-        <DiagonalDivider className="h-16 md:h-24 text-foreground" />
       </div>
     </section>
   );
