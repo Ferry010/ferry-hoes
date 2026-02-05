@@ -22,34 +22,29 @@ const ApplePodcastsIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-// Replace these with your actual Spotify episode IDs
 const featuredEpisodes = [
   {
-    number: 127,
-    title: "The Future of Human Work",
-    guest: "Sarah Chen",
-    duration: "58 min",
-    spotifyEpisodeId: "4rOoJ6Egrf8K2IrywzwOMk", // Demo episode - replace with your actual ID
+    title: "Not a Diversity Checkbox: The Real Work of Inclusive Leadership",
+    guest: "Simone Moissidis",
+    duration: "65 min",
+    spotifyUrl: "https://open.spotify.com/episode/e34fcs3",
   },
   {
-    number: 126,
-    title: "Building Brands That Last",
-    guest: "Marcus Williams",
-    duration: "45 min",
-    spotifyEpisodeId: "4rOoJ6Egrf8K2IrywzwOMk", // Demo episode - replace with your actual ID
+    title: "The Power of Talking to People You Disagree With",
+    guest: "Ruben Treurniet",
+    duration: "73 min",
+    spotifyUrl: "https://open.spotify.com/episode/e30mai6",
   },
   {
-    number: 125,
-    title: "AI and Empathy",
-    guest: "Dr. Elena Rodriguez",
-    duration: "62 min",
-    spotifyEpisodeId: "4rOoJ6Egrf8K2IrywzwOMk", // Demo episode - replace with your actual ID
+    title: "From Local to Global: The New Era of Talent Acquisition",
+    guest: "Marco Boomsma",
+    duration: "71 min",
+    spotifyUrl: "https://open.spotify.com/episode/e2lthrj",
   },
 ];
 
-// Replace these with your actual podcast URLs
-const SPOTIFY_SHOW_URL = "https://open.spotify.com/show/YOUR_SHOW_ID";
-const APPLE_PODCASTS_URL = "https://podcasts.apple.com/YOUR_SHOW";
+const SPOTIFY_SHOW_URL = "https://open.spotify.com/show/6eGkXe767cYZ5Rw627Xpgu";
+const APPLE_PODCASTS_URL = "https://podcasts.apple.com/nl/podcast/the-human-era-podcast/id1598552331";
 
 const PodcastSection = () => {
   const openMessagePanel = () => {
@@ -88,8 +83,8 @@ const PodcastSection = () => {
           >
             <CarouselContent className="-ml-4">
               {featuredEpisodes.map((episode) => (
-                <CarouselItem 
-                  key={episode.number} 
+                <CarouselItem
+                  key={episode.title} 
                   className="pl-4 basis-full md:basis-1/2"
                 >
                   <article 
@@ -97,7 +92,7 @@ const PodcastSection = () => {
                   >
                     <div className="flex items-start justify-between mb-6">
                       <span className="text-sm font-medium text-primary">
-                        Episode {episode.number}
+                        Episode
                       </span>
                       <span className="text-sm text-muted-foreground">
                         {episode.duration}
@@ -112,18 +107,16 @@ const PodcastSection = () => {
                       with {episode.guest}
                     </p>
                     
-                    {/* Spotify Embed Player */}
-                    <div className="rounded-lg overflow-hidden">
-                      <iframe
-                        src={`https://open.spotify.com/embed/episode/${episode.spotifyEpisodeId}?utm_source=generator&theme=0`}
-                        width="100%"
-                        height="180"
-                        frameBorder="0"
-                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                        loading="lazy"
-                        className="rounded-lg"
-                      />
-                    </div>
+                    <a 
+                      href={episode.spotifyUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-[#1DB954] font-medium hover:underline transition-colors"
+                    >
+                      <SpotifyIcon className="h-5 w-5" />
+                      Listen on Spotify
+                      <ArrowRight className="h-4 w-4" />
+                    </a>
                   </article>
                 </CarouselItem>
               ))}
@@ -131,22 +124,6 @@ const PodcastSection = () => {
             <CarouselPrevious className="left-0 md:-left-12" />
             <CarouselNext className="right-0 md:-right-12" />
           </Carousel>
-
-          {/* Stats */}
-          <div className="flex justify-center gap-12 mb-12 py-8 border-y border-border">
-            <div className="text-center">
-              <div className="font-display text-4xl font-bold text-primary">127</div>
-              <div className="text-sm text-muted-foreground">Episodes</div>
-            </div>
-            <div className="text-center">
-              <div className="font-display text-4xl font-bold text-primary">50K+</div>
-              <div className="text-sm text-muted-foreground">Downloads</div>
-            </div>
-            <div className="text-center">
-              <div className="font-display text-4xl font-bold text-primary">4.9</div>
-              <div className="text-sm text-muted-foreground">Rating</div>
-            </div>
-          </div>
 
           {/* Platform CTAs */}
           <div className="text-center">
