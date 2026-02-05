@@ -1,133 +1,151 @@
 
 
-# Podcast Integration with Spotify & Apple
+# Podcast Cards Carousel
 
-Connect your podcast for direct listening while maintaining the current editorial design.
+Transform the podcast episode cards from a static grid to a swipeable carousel with larger cards.
 
 ---
 
-## Integration Options
-
-Since you have your podcast on multiple platforms, here's the recommended approach:
-
-### Option A: Spotify Embed (Recommended)
-
-Spotify offers an official embed that allows visitors to listen directly on your site. We'll embed a compact player within each episode card - maintaining your current design while adding playback functionality.
+## Current vs New Layout
 
 ```text
-┌────────────────────────────────────────────────────────────────────┐
-│                      The Podcast                                    │
-│           Conversations that matter                                 │
-│                                                                     │
-│  ┌──────────────────┐ ┌──────────────────┐ ┌──────────────────┐    │
-│  │ Episode 127      │ │ Episode 126      │ │ Episode 125      │    │
-│  │ The Future of... │ │ Building Brands  │ │ AI and Empathy   │    │
-│  │ with Sarah Chen  │ │ with Marcus W.   │ │ with Dr. Elena   │    │
-│  │                  │ │                  │ │                  │    │
-│  │ [Spotify Player] │ │ [Spotify Player] │ │ [Spotify Player] │    │
-│  │ ▶ ─────●───── ♪  │ │ ▶ ─────○───── ♪  │ │ ▶ ─────○───── ♪  │    │
-│  └──────────────────┘ └──────────────────┘ └──────────────────┘    │
-│                                                                     │
-│            [Listen on Spotify]  [Listen on Apple]                   │
-└────────────────────────────────────────────────────────────────────┘
+CURRENT (Static Grid)
+┌────────────────────────────────────────────────────────────────┐
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐                      │
+│  │ Ep 127   │  │ Ep 126   │  │ Ep 125   │                      │
+│  │ [player] │  │ [player] │  │ [player] │                      │
+│  └──────────┘  └──────────┘  └──────────┘                      │
+└────────────────────────────────────────────────────────────────┘
+
+NEW (Swipeable Carousel)
+┌────────────────────────────────────────────────────────────────┐
+│                                                                │
+│  ←  ┌──────────────────────┐  ┌──────────────────────┐   →     │
+│     │     Episode 127      │  │     Episode 126      │         │
+│     │  The Future of...    │  │  Building Brands...  │         │
+│     │  with Sarah Chen     │  │  with Marcus W.      │         │
+│     │                      │  │                      │         │
+│     │  [Spotify Player]    │  │  [Spotify Player]    │         │
+│     │  ▶ ─────●───── ♪     │  │  ▶ ─────○───── ♪     │         │
+│     └──────────────────────┘  └──────────────────────┘         │
+│                                                                │
+│                    ● ○ ○  (dots)                               │
+└────────────────────────────────────────────────────────────────┘
 ```
-
-### What We'll Need From You
-
-To connect your actual episodes, I'll need:
-
-1. **Spotify Show URI** - Found in Spotify for Podcasters or by right-clicking your show and copying the link (looks like `spotify:show:xxxxx` or `https://open.spotify.com/show/xxxxx`)
-
-2. **Episode URIs** - For each featured episode you want to highlight (same format)
-
-3. **Apple Podcasts Link** - Your show's Apple Podcasts URL for the secondary button
 
 ---
 
-## Implementation Approach
+## Key Changes
 
-### 1. Add Spotify Embed to Episode Cards
+### 1. Replace Grid with Carousel
 
-Replace the static "Listen now" button with a compact Spotify embed player:
+- Import Carousel components from `@/components/ui/carousel`
+- Wrap episode cards in `Carousel`, `CarouselContent`, and `CarouselItem`
+- Show 1 card on mobile, 2 on tablet, staying centered
 
-```typescript
-// Each episode will have its Spotify URI
-const featuredEpisodes = [
-  {
-    number: 127,
-    title: "The Future of Human Work",
-    guest: "Sarah Chen",
-    duration: "58 min",
-    spotifyUri: "spotify:episode:7m...",  // You'll provide this
-  },
-  // ...
-];
+### 2. Larger Cards
 
-// Spotify embed iframe
-<iframe 
-  src={`https://open.spotify.com/embed/episode/${episodeId}?theme=0`}
-  width="100%"
-  height="152"
-  frameBorder="0"
-  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"
-  loading="lazy"
-  className="rounded-lg"
-/>
-```
+- Increase padding from `p-6` to `p-8`
+- Larger title font: `text-xl` to `text-2xl`
+- Increase Spotify embed height from `152px` to `180px`
+- Add more vertical spacing between elements
 
-### 2. Platform Links in CTA
+### 3. Navigation Controls
 
-Update the main CTA area with platform-specific buttons:
+- Add left/right arrow buttons using `CarouselPrevious` and `CarouselNext`
+- Style arrows to match the editorial aesthetic (rounded, subtle)
+- Enable touch/swipe on mobile via Embla's built-in drag
 
-```typescript
-<div className="flex gap-4 justify-center">
-  <Button asChild>
-    <a href="https://open.spotify.com/show/YOUR_SHOW_ID">
-      <SpotifyIcon /> Listen on Spotify
-    </a>
-  </Button>
-  <Button variant="outline" asChild>
-    <a href="https://podcasts.apple.com/YOUR_SHOW">
-      <AppleIcon /> Listen on Apple
-    </a>
-  </Button>
-</div>
-```
+### 4. Responsive Behavior
 
-### 3. Styling the Spotify Embed
-
-Spotify embeds come with a dark theme option (`theme=0`) that works well with your editorial aesthetic. The embed is:
-- Compact (152px height)
-- Includes play/pause, progress bar, and episode info
-- Respects your rounded corners when wrapped in styled container
+- Mobile: 1 card visible at a time (full width swipe)
+- Tablet/Desktop: 2 cards visible with peek effect
+- Smooth snap scrolling between cards
 
 ---
 
-## Files to Modify
+## File to Modify
 
 | File | Changes |
 |------|---------|
-| `src/components/sections/PodcastSection.tsx` | Add Spotify embeds, platform links |
+| `src/components/sections/PodcastSection.tsx` | Replace grid with carousel, enlarge cards |
 
 ---
 
-## Design Considerations
+## Technical Details
 
-- **Maintains current visual style** - Cards keep their rounded corners, soft shadows, and hover effects
-- **Spotify embed blends in** - Dark theme option matches your aesthetic
-- **Multiple platform support** - Both Spotify and Apple Podcasts buttons for listener choice
-- **Fallback** - If someone doesn't have Spotify, they can still click through to the app
+### Carousel Configuration
+
+```typescript
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+} from "@/components/ui/carousel";
+
+<Carousel
+  opts={{
+    align: "start",
+    loop: true,
+  }}
+  className="w-full"
+>
+  <CarouselContent className="-ml-4">
+    {featuredEpisodes.map((episode) => (
+      <CarouselItem 
+        key={episode.number} 
+        className="pl-4 basis-full md:basis-1/2 lg:basis-1/2"
+      >
+        {/* Episode card content - enlarged */}
+      </CarouselItem>
+    ))}
+  </CarouselContent>
+  <CarouselPrevious className="left-0 md:-left-12" />
+  <CarouselNext className="right-0 md:-right-12" />
+</Carousel>
+```
+
+### Enlarged Card Styling
+
+```typescript
+<article className="group bg-background rounded-2xl p-8 shadow-soft hover:shadow-soft-lg transition-all duration-300 border border-transparent hover:border-primary/20">
+  {/* Episode number and duration */}
+  <div className="flex items-start justify-between mb-6">
+    <span className="text-sm font-medium text-primary">
+      Episode {episode.number}
+    </span>
+    <span className="text-sm text-muted-foreground">
+      {episode.duration}
+    </span>
+  </div>
+  
+  {/* Larger title */}
+  <h3 className="font-display text-2xl font-semibold text-foreground mb-3">
+    {episode.title}
+  </h3>
+  
+  {/* Guest */}
+  <p className="text-base text-muted-foreground mb-6">
+    with {episode.guest}
+  </p>
+  
+  {/* Taller Spotify embed */}
+  <iframe
+    height="180"
+    ...
+  />
+</article>
+```
 
 ---
 
-## Next Steps
+## Expected Result
 
-Once you share your Spotify show/episode URIs and Apple Podcasts link, I'll:
-
-1. Update the episode data structure to include Spotify URIs
-2. Replace the "Listen now" button with embedded Spotify players
-3. Add platform links (Spotify + Apple) to the main CTA
-4. Ensure the styling matches your current design
-
-Would you like to share those links so I can implement this?
+- Swipeable carousel with touch/drag support
+- Larger, more prominent episode cards
+- Arrow navigation buttons on desktop
+- Smooth looping behavior
+- Maintains the editorial magazine aesthetic
 
