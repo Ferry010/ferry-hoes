@@ -115,14 +115,14 @@ export default {
           "50%": { transform: "translateY(-10px)" },
         },
         "name-ferry": {
-          "0%, 5%": { opacity: "0", transform: "scale(0.8)" },
-          "10%, 40%": { opacity: "1", transform: "scale(1)" },
-          "45%, 100%": { opacity: "0", transform: "scale(0.8)" },
+          "0%, 5%": { opacity: "0" },
+          "10%, 40%": { opacity: "1" },
+          "45%, 100%": { opacity: "0" },
         },
         "name-hoes": {
-          "0%, 50%": { opacity: "0", transform: "scale(0.8)" },
-          "55%, 90%": { opacity: "1", transform: "scale(1)" },
-          "95%, 100%": { opacity: "0", transform: "scale(0.8)" },
+          "0%, 50%": { opacity: "0" },
+          "55%, 90%": { opacity: "1" },
+          "95%, 100%": { opacity: "0" },
         },
       },
       animation: {
