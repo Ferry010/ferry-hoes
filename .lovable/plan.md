@@ -1,30 +1,30 @@
 
 
-# Update CTAs for Brand Humanizing Section and Book Section
+# Update Speaker Section CTAs and Create Speaking Page
 
-Two simple text and link updates to connect users to external resources.
+This plan covers updating the CTA links in the Speaker section and creating a dedicated speaking/speaker kit page.
 
 ---
 
 ## Changes Overview
 
-### 1. BrandHumanizingSection.tsx
+### 1. SpeakerSection.tsx - Update CTAs
 
-**Current state:**
-- Button text: "Have a question about this?"
-- Action: Opens the message panel
+| Element | Current | New |
+|---------|---------|-----|
+| "Speaker enquiries" button | Links to `/speaking` (internal) | Links to `https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966` (external) |
+| "Want to discuss an event?" link | Opens message panel | Text: "More about Ferry as speaker" → Links to `/speaking` (internal page) |
 
-**New state:**
-- Button text: "Want to learn more about this?"
-- Action: Links to brandhumanizing.com (opens in new tab)
+### 2. New Speaking Page (`/speaking`)
 
-### 2. BookSection.tsx
-
-**Current state:**
-- "Get the book" button has no href (non-functional)
-
-**New state:**
-- "Get the book" button links to brandhumanizingboek.nl (opens in new tab)
+Create a full speaker kit page with sections for:
+- Hero with speaker tagline
+- Bio/About as a speaker
+- Speaking topics
+- Video reel placeholder
+- Testimonials section (placeholder)
+- Event photos (placeholder)
+- CTA to book via Speakers Academy
 
 ---
 
@@ -32,19 +32,58 @@ Two simple text and link updates to connect users to external resources.
 
 | File | Change |
 |------|--------|
-| `src/components/sections/BrandHumanizingSection.tsx` | Update CTA text and convert to external link |
-| `src/components/sections/BookSection.tsx` | Add href to "Get the book" button |
+| `src/components/sections/SpeakerSection.tsx` | Update both CTAs |
+| `src/pages/Speaking.tsx` | **New file** - Speaker kit page |
+| `src/App.tsx` | Add `/speaking` route |
 
 ---
 
-## Implementation Details
+## Technical Implementation
 
-**BrandHumanizingSection.tsx:**
-- Remove the `openMessagePanel` function (no longer needed)
-- Change the button to an anchor tag with `href="https://brandhumanizing.com"` and `target="_blank"`
-- Update text from "Have a question about this?" to "Want to learn more about this?"
+### SpeakerSection.tsx Changes
 
-**BookSection.tsx:**
-- Convert the "Get the book" Button to use `asChild` with an anchor tag
-- Add `href="https://brandhumanizingboek.nl"` and `target="_blank" rel="noopener noreferrer"`
+**Speaker enquiries button:**
+- Change from `<Link to="/speaking">` to `<a href="https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966" target="_blank" rel="noopener noreferrer">`
+
+**Micro-engagement link:**
+- Remove `openMessagePanel` function
+- Change from `<button onClick={...}>` to `<Link to="/speaking">`
+- Update text from "Want to discuss an event?" to "More about Ferry as speaker"
+
+### Speaking.tsx - New Page Structure
+
+```text
+┌─────────────────────────────────────────┐
+│  Hero: "Ferry Hoes - Keynote Speaker"   │
+│  Tagline + Book Now CTA                 │
+├─────────────────────────────────────────┤
+│  About Section                          │
+│  Bio as a speaker, photo                │
+├─────────────────────────────────────────┤
+│  Speaking Topics                        │
+│  Cards for each topic with descriptions │
+├─────────────────────────────────────────┤
+│  Video Reel (placeholder)               │
+├─────────────────────────────────────────┤
+│  Testimonials (placeholder)             │
+├─────────────────────────────────────────┤
+│  CTA: Book via Speakers Academy         │
+└─────────────────────────────────────────┘
+```
+
+### App.tsx Route Addition
+
+Add route before the catch-all:
+```tsx
+<Route path="/speaking" element={<Speaking />} />
+```
+
+---
+
+## Design Notes
+
+- The page will follow the existing design system (colors, typography, spacing)
+- Uses the Coral accent color (#E86A4A) for CTAs to match the Speaker section
+- Includes the FloatingChatBubble and Footer components
+- Responsive layout matching other pages
 
