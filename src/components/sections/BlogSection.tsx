@@ -23,7 +23,7 @@ const BlogSection = () => {
                 The Blog
               </span>
               <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground font-bold">
-                Ideas worth <span className="text-accent">sharing</span>
+                Ideas worth <span className="text-primary">sharing</span>
               </h2>
             </div>
             <p className="text-muted-foreground text-lg mt-4 md:mt-0 max-w-md">

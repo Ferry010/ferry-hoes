@@ -9,7 +9,7 @@ const IntroBlock = () => {
             <div className="absolute -top-8 -left-4 w-16 h-16 bg-accent/10 rounded-full blur-xl" />
             
             <h2 className="font-display text-5xl md:text-6xl lg:text-7xl text-foreground mb-8 font-bold">
-              This is my <span className="text-accent">home base.</span>
+              This is my <span className="text-primary">home base.</span>
             </h2>
             
             <div className="grid md:grid-cols-2 gap-8 md:gap-12">

@@ -65,7 +65,7 @@ const PodcastSection = () => {
             </span>
             
             <h2 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6">
-              Conversations that <span className="text-accent">matter</span>
+              Conversations that <span className="text-primary">matter</span>
             </h2>
             
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
