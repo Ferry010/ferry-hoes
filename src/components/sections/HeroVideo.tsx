@@ -1,9 +1,6 @@
 import { ChevronDown } from "lucide-react";
 
 const HeroVideo = () => {
-  const name = "Ferry Hoes";
-  const letters = name.split("");
-
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
       {/* YouTube video background */}
@@ -13,10 +10,10 @@ const HeroVideo = () => {
           src="https://www.youtube.com/embed/foEehJ_pwck?autoplay=1&mute=1&loop=1&playlist=foEehJ_pwck&controls=0&showinfo=0&start=0&end=15&modestbranding=1&rel=0&playsinline=1"
           allow="autoplay; encrypted-media"
           style={{ 
-            width: '177.78vh', // 16:9 aspect ratio
+            width: '177.78vh',
             height: '100vh',
             minWidth: '100vw',
-            minHeight: '56.25vw', // 16:9 aspect ratio
+            minHeight: '56.25vw',
           }}
           title="Hero background video"
         />
@@ -24,23 +21,42 @@ const HeroVideo = () => {
         <div className="absolute inset-0 bg-foreground/40" />
       </div>
 
-      {/* Animated name */}
+      {/* Animated name with alternating effects */}
       <div className="container relative z-10 px-6 md:px-8">
         <h1 className="font-display text-center tracking-tighter">
           <span className="sr-only">Ferry Hoes</span>
-          <span aria-hidden="true" className="flex flex-wrap justify-center">
-            {letters.map((letter, i) => (
-              <span
-                key={i}
-                className="inline-block text-[4rem] sm:text-[6rem] md:text-[8rem] lg:text-[10rem] xl:text-[12rem] font-bold text-brand-gold animate-fade-up opacity-0"
-                style={{ 
-                  animationDelay: `${i * 0.08}s`,
-                  animationFillMode: "forwards"
-                }}
-              >
-                {letter === " " ? "\u00A0" : letter}
-              </span>
-            ))}
+          <span aria-hidden="true" className="flex flex-col items-center gap-2 md:gap-4">
+            {/* FERRY - with staggered fade up */}
+            <span className="flex">
+              {"Ferry".split("").map((letter, i) => (
+                <span
+                  key={`ferry-${i}`}
+                  className="inline-block text-[5rem] sm:text-[8rem] md:text-[12rem] lg:text-[16rem] xl:text-[20rem] font-bold text-brand-gold animate-fade-up opacity-0 drop-shadow-[0_0_30px_rgba(212,175,55,0.5)]"
+                  style={{ 
+                    animationDelay: `${i * 0.1}s`,
+                    animationFillMode: "forwards"
+                  }}
+                >
+                  {letter}
+                </span>
+              ))}
+            </span>
+            
+            {/* HOES - with different timing and subtle glow effect */}
+            <span className="flex">
+              {"Hoes".split("").map((letter, i) => (
+                <span
+                  key={`hoes-${i}`}
+                  className="inline-block text-[5rem] sm:text-[8rem] md:text-[12rem] lg:text-[16rem] xl:text-[20rem] font-bold text-background/90 animate-fade-up opacity-0 drop-shadow-[0_4px_20px_rgba(0,0,0,0.3)]"
+                  style={{ 
+                    animationDelay: `${0.5 + i * 0.1}s`,
+                    animationFillMode: "forwards"
+                  }}
+                >
+                  {letter}
+                </span>
+              ))}
+            </span>
           </span>
         </h1>
       </div>
