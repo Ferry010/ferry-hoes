@@ -114,6 +114,16 @@ export default {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-10px)" },
         },
+        "name-ferry": {
+          "0%, 5%": { opacity: "0", transform: "scale(0.8)" },
+          "10%, 40%": { opacity: "1", transform: "scale(1)" },
+          "45%, 100%": { opacity: "0", transform: "scale(0.8)" },
+        },
+        "name-hoes": {
+          "0%, 50%": { opacity: "0", transform: "scale(0.8)" },
+          "55%, 90%": { opacity: "1", transform: "scale(1)" },
+          "95%, 100%": { opacity: "0", transform: "scale(0.8)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -122,6 +132,8 @@ export default {
         "fade-in": "fade-in 0.4s ease-out forwards",
         "text-reveal": "text-reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards",
         float: "float 6s ease-in-out infinite",
+        "name-ferry": "name-ferry 4s ease-in-out infinite",
+        "name-hoes": "name-hoes 4s ease-in-out infinite",
       },
     },
   },

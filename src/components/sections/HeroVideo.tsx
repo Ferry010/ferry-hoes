@@ -25,39 +25,31 @@ const HeroVideo = () => {
       <div className="container relative z-10 px-6 md:px-8">
         <h1 className="font-display text-center tracking-tighter">
           <span className="sr-only">Ferry Hoes</span>
-          <span aria-hidden="true" className="flex flex-col items-center gap-2 md:gap-4">
-            {/* FERRY - with staggered fade up */}
-            <span className="flex">
+          <div aria-hidden="true" className="relative h-[5rem] sm:h-[8rem] md:h-[12rem] lg:h-[16rem] xl:h-[20rem]">
+            {/* FERRY - visible first half of cycle */}
+            <span className="absolute inset-0 flex justify-center items-center animate-name-ferry">
               {"Ferry".split("").map((letter, i) => (
                 <span
                   key={`ferry-${i}`}
-                  className="inline-block text-[5rem] sm:text-[8rem] md:text-[12rem] lg:text-[16rem] xl:text-[20rem] font-bold text-brand-gold animate-fade-up opacity-0 drop-shadow-[0_0_30px_rgba(212,175,55,0.5)]"
-                  style={{ 
-                    animationDelay: `${i * 0.1}s`,
-                    animationFillMode: "forwards"
-                  }}
+                  className="inline-block text-[5rem] sm:text-[8rem] md:text-[12rem] lg:text-[16rem] xl:text-[20rem] font-bold text-brand-gold drop-shadow-[0_0_30px_rgba(212,175,55,0.5)]"
                 >
                   {letter}
                 </span>
               ))}
             </span>
             
-            {/* HOES - with different timing and subtle glow effect */}
-            <span className="flex">
+            {/* HOES - visible second half of cycle */}
+            <span className="absolute inset-0 flex justify-center items-center animate-name-hoes">
               {"Hoes".split("").map((letter, i) => (
                 <span
                   key={`hoes-${i}`}
-                  className="inline-block text-[5rem] sm:text-[8rem] md:text-[12rem] lg:text-[16rem] xl:text-[20rem] font-bold text-background/90 animate-fade-up opacity-0 drop-shadow-[0_4px_20px_rgba(0,0,0,0.3)]"
-                  style={{ 
-                    animationDelay: `${0.5 + i * 0.1}s`,
-                    animationFillMode: "forwards"
-                  }}
+                  className="inline-block text-[5rem] sm:text-[8rem] md:text-[12rem] lg:text-[16rem] xl:text-[20rem] font-bold text-background/90 drop-shadow-[0_4px_20px_rgba(0,0,0,0.3)]"
                 >
                   {letter}
                 </span>
               ))}
             </span>
-          </span>
+          </div>
         </h1>
       </div>
 
