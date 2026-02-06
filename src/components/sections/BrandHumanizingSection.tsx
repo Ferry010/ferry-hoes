@@ -20,7 +20,7 @@ const BrandHumanizingSection = () => {
 
           {/* Title */}
           <h2 className="font-display text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-8">
-            <span className="text-primary">Brand</span>{" "}
+            <span className="text-foreground">Brand</span>{" "}
             <span className="text-accent">Humanizing</span>
           </h2>
 
