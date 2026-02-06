@@ -57,9 +57,12 @@ const BookSection = () => {
                 <Button 
                   size="lg"
                   className="rounded-full px-8 bg-accent hover:bg-accent/90"
+                  asChild
                 >
-                  Get the book
-                  <ArrowRight className="ml-2 h-4 w-4" />
+                  <a href="https://brandhumanizingboek.nl" target="_blank" rel="noopener noreferrer">
+                    Get the book
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </a>
                 </Button>
                 <Button 
                   variant="outline"
