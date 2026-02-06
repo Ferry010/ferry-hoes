@@ -1,11 +1,6 @@
 import { ArrowRight, Heart } from "lucide-react";
 
 const BrandHumanizingSection = () => {
-  const openMessagePanel = () => {
-    const bubble = document.querySelector('[aria-label="Open message panel"]') as HTMLButtonElement;
-    bubble?.click();
-  };
-
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-secondary/90 backdrop-blur-sm">
       {/* Decorative elements */}
@@ -42,13 +37,15 @@ const BrandHumanizingSection = () => {
           </p>
 
           {/* Micro-engagement */}
-          <button
-            onClick={openMessagePanel}
+          <a
+            href="https://brandhumanizing.com"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors group"
           >
-            <span className="underline underline-offset-4">Have a question about this?</span>
+            <span className="underline underline-offset-4">Want to learn more about this?</span>
             <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-          </button>
+          </a>
         </div>
       </div>
 
