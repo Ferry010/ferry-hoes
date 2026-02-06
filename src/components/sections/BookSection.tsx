@@ -36,7 +36,7 @@ const BookSection = () => {
               </span>
               
               <h2 className="font-display text-5xl md:text-6xl lg:text-7xl text-foreground mb-6 font-bold">
-                <span className="text-primary">Brand</span><br />
+                <span className="text-foreground">Brand</span><br />
                 <span className="text-accent">Humanizing</span>
               </h2>
               
