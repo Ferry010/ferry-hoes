@@ -4,11 +4,6 @@ import { Link } from "react-router-dom";
 import stagePhoto from "@/assets/ferry-on-stage.jpg";
 
 const SpeakerSection = () => {
-  const openMessagePanel = () => {
-    const bubble = document.querySelector('[aria-label="Open message panel"]') as HTMLButtonElement;
-    bubble?.click();
-  };
-
   return (
     <section className="min-h-screen relative overflow-hidden bg-background/95 backdrop-blur-sm">
       {/* Decorative elements */}
@@ -55,21 +50,25 @@ const SpeakerSection = () => {
               size="lg"
               className="rounded-full px-8 bg-accent text-accent-foreground hover:bg-accent/90 group"
             >
-              <Link to="/speaking">
+              <a 
+                href="https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966" 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
                 Speaker enquiries
                 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
+              </a>
             </Button>
           </div>
 
           {/* Micro-engagement */}
-          <button
-            onClick={openMessagePanel}
+          <Link
+            to="/speaking"
             className="inline-flex items-center gap-2 text-accent hover:text-accent/80 font-medium transition-colors group w-fit"
           >
-            <span className="underline underline-offset-4">Want to discuss an event?</span>
+            <span className="underline underline-offset-4">More about Ferry as speaker</span>
             <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-          </button>
+          </Link>
         </div>
       </div>
 
