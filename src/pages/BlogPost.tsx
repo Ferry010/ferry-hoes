@@ -34,12 +34,16 @@ const BlogPost = () => {
 
   return (
     <>
-      <SEOHead
+<SEOHead
         title={post.seo_title || post.title}
         description={post.seo_description || post.excerpt || undefined}
         keywords={post.seo_keywords || undefined}
         ogImage={post.seo_og_image_url || post.header_image_url || undefined}
+        ogImageAlt={post.title}
         ogType="article"
+        canonicalUrl={`/blog/${post.slug}`}
+        publishedAt={post.published_at || undefined}
+        modifiedAt={post.updated_at}
       />
 
       <main className="min-h-screen bg-background">

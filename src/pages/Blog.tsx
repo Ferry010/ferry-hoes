@@ -9,10 +9,11 @@ const Blog = () => {
 
   return (
     <>
-      <SEOHead
+<SEOHead
         title="Blog | Ferry Hoes"
         description="Essays, insights, and perspectives on technology, humanity, and everything in between."
         ogType="website"
+        canonicalUrl="/blog"
       />
 
       <main className="min-h-screen bg-background">
