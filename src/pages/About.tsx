@@ -27,12 +27,12 @@ const values = [
 ];
 
 const timeline = [
-  { year: "2005", title: "Started in digital", description: "Began building digital products and experiences at the dawn of Web 2.0." },
-  { year: "2012", title: "Founded first company", description: "Launched a digital agency focused on human-centered brand experiences." },
-  { year: "2018", title: "First major keynote", description: "Stepped on stage at a tech summit and discovered a new calling." },
-  { year: "2020", title: "Published Brand Humanizing", description: "Wrote the book on keeping brands authentic in a digital-first world." },
-  { year: "2022", title: "Launched The Human Era Podcast", description: "Started conversations with thinkers and builders shaping the future." },
-  { year: "2024", title: "International speaking circuit", description: "Keynotes across Europe and beyond on AI, leadership, and the future of work." },
+  { year: "2016", title: "Went all in", description: "Quit my corporate job to start as freelance Growth Hacker with zero backup plan." },
+  { year: "2018", title: "Brand Humanizing was born", description: "Published the first \"Brand Humanizing\" article with Jonathan Flores." },
+  { year: "2019", title: "From article to institute", description: "Co-founded the Brand Humanizing Institute after a year of research." },
+  { year: "2020", title: "AI Hackathon win", description: "Won a prestigious Government-hosted AI Hackathon based on Brand Humanizing principles." },
+  { year: "2020", title: "First professional keynote", description: "Got contracted by Speakers Academy and delivered my first professional keynote." },
+  { year: "2025", title: "The book drops", description: "Published our first book: \"Brand Humanizing\" — now available at all major retailers." },
 ];
 
 const About = () => {
