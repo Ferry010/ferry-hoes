@@ -23,12 +23,12 @@ const Footer = () => {
               <Link to="/" className="text-white/70 hover:text-white transition-colors">
                 Home
               </Link>
+              <Link to="/about" className="text-white/70 hover:text-white transition-colors">
+                About
+              </Link>
               <Link to="/speaking" className="text-white/70 hover:text-white transition-colors">
                 Speaking
               </Link>
-              <a href="#writing" className="text-white/70 hover:text-white transition-colors">
-                Writing
-              </a>
               <a href="#" className="text-white/70 hover:text-white transition-colors">
                 Podcast
               </a>
