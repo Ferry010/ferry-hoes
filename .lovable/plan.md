@@ -1,32 +1,19 @@
 
 
-# Podcast Card Styling Enhancement
+# Add Breathing Room to Podcast Cards
 
-Upgrade the episode cards in `PodcastSection.tsx` with subtle audio-themed visual flair while keeping the Spotify green for logos and CTAs.
+## Problem
+The carousel cards sit too tight together and get cut off at the bottom due to tight padding and gap values.
 
-## What Changes
+## Changes
 
 **File: `src/components/sections/PodcastSection.tsx`**
 
-### Card Background
-- Add a subtle audio waveform SVG pattern as a background element inside each card (low opacity, positioned bottom-right or spanning the card)
-- Use `text-muted-foreground/5` or similar near-invisible tint so it reads as texture, not illustration
+1. **Increase gap between cards**: Change `CarouselContent` from `-ml-4` to `-ml-6` and `CarouselItem` from `pl-4` to `pl-6` to widen the spacing between cards.
 
-### Visual Details
-- Add a soft gradient overlay on the card (e.g. `bg-gradient-to-br from-transparent to-primary/5`) for depth
-- Include a small decorative sound-wave or equalizer bar element near the episode duration badge
-- Add a subtle left border accent in Spotify green (`border-l-2 border-[#1DB954]/30`) that intensifies on hover (`hover:border-[#1DB954]`)
+2. **Add vertical padding to the carousel wrapper**: Add `py-4` to `CarouselContent` so shadow and border effects on cards aren't clipped at top/bottom.
 
-### Spotify Green Preserved
-- Keep the Spotify icon and "Listen on Spotify" link in `#1DB954`
-- Keep the main Spotify CTA button unchanged
-- No changes to Apple Podcasts styling
+3. **Increase card internal padding**: Bump the article padding from `p-8` to `p-8 md:p-10` for more internal breathing room on larger screens.
 
-### Implementation Approach
-- Use an inline SVG waveform pattern (3-4 simple rounded bars at varying heights) as a purely decorative `aria-hidden` element positioned absolutely within the card
-- The waveform uses `text-muted-foreground` at ~5-8% opacity in resting state, shifting to ~12% on hover
-- Card gets a subtle `bg-gradient-to-br from-background to-[#1DB954]/[0.03]` to hint at the Spotify connection without being heavy-handed
-
-### No New Dependencies
-All changes are CSS/SVG only within the existing component.
+These are small spacing tweaks in a single file -- no structural or layout changes needed.
 
