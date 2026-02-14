@@ -3,7 +3,7 @@ import { ArrowRight, MessageCircle } from "lucide-react";
 
 const MiniAbout = () => {
   const openMessagePanel = () => {
-    const bubble = document.querySelector('[aria-label="Open message panel"]') as HTMLButtonElement;
+    const bubble = document.querySelector('[aria-label="Open Ask Ferry"]') as HTMLButtonElement;
     bubble?.click();
   };
 

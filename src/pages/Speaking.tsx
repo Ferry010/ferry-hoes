@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, Mic, Users, Lightbulb, TrendingUp, Brain } from "lucide-react";
 import Footer from "@/components/sections/Footer";
-import FloatingChatBubble from "@/components/FloatingChatBubble";
+import AskFerryBubble from "@/components/AskFerryBubble";
 import SEOHead from "@/components/blog/SEOHead";
 import stagePhoto from "@/assets/ferry-on-stage.jpg";
 
@@ -260,7 +260,7 @@ const Speaking = () => {
         </main>
 
         <Footer />
-        <FloatingChatBubble />
+        <AskFerryBubble />
       </div>
     </>
   );

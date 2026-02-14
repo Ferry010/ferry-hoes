@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { MessageCircle, X } from "lucide-react";
+import { Sparkles, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import QuickMessage from "./QuickMessage";
+import AskFerryChat from "./AskFerryChat";
 
-const FloatingChatBubble = () => {
+const AskFerryBubble = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -16,7 +16,7 @@ const FloatingChatBubble = () => {
         />
       )}
 
-      {/* Slide-up Panel */}
+      {/* Chat Panel */}
       <div
         className={cn(
           "fixed bottom-24 right-6 z-50 w-[calc(100vw-3rem)] max-w-sm",
@@ -26,34 +26,30 @@ const FloatingChatBubble = () => {
             : "opacity-0 translate-y-4 pointer-events-none"
         )}
       >
-        <div className="bg-card rounded-2xl shadow-soft-lg border border-border overflow-hidden">
+        <div className="bg-card rounded-2xl shadow-soft-lg border border-border overflow-hidden flex flex-col" style={{ height: "min(480px, 70vh)" }}>
           {/* Header */}
-          <div className="flex items-center justify-between p-4 border-b border-border bg-secondary/50">
+          <div className="flex items-center justify-between p-4 border-b border-border bg-secondary/50 shrink-0">
             <div>
-              <h3 className="font-display font-semibold text-foreground">
-                Share a thought
+              <h3 className="font-display font-semibold text-foreground flex items-center gap-2">
+                <Sparkles className="h-4 w-4 text-primary" />
+                Ask Ferry
               </h3>
               <p className="text-xs text-muted-foreground">
-                I read everything
+                AI-powered, always available
               </p>
             </div>
             <button
               onClick={() => setIsOpen(false)}
               className="p-1.5 rounded-full hover:bg-muted transition-colors"
-              aria-label="Close message panel"
+              aria-label="Close Ask Ferry"
             >
               <X className="h-4 w-4 text-muted-foreground" />
             </button>
           </div>
 
-          {/* Message Input */}
-          <div className="p-4">
-            <QuickMessage
-              variant="compact"
-              onSuccess={() => {
-                setTimeout(() => setIsOpen(false), 2000);
-              }}
-            />
+          {/* Chat body - only render when open to reset conversation */}
+          <div className="flex-1 min-h-0">
+            {isOpen && <AskFerryChat />}
           </div>
         </div>
       </div>
@@ -70,12 +66,11 @@ const FloatingChatBubble = () => {
           "hover:scale-105 active:scale-95",
           "flex items-center justify-center",
           "group",
-          // Subtle pulse animation when closed
           !isOpen && "animate-pulse-subtle"
         )}
-        aria-label={isOpen ? "Close message panel" : "Open message panel"}
+        aria-label={isOpen ? "Close Ask Ferry" : "Open Ask Ferry"}
       >
-        <MessageCircle
+        <Sparkles
           className={cn(
             "h-6 w-6 transition-all duration-300",
             isOpen ? "rotate-12 scale-0 opacity-0" : "rotate-0 scale-100 opacity-100"
@@ -106,4 +101,4 @@ const FloatingChatBubble = () => {
   );
 };
 
-export default FloatingChatBubble;
+export default AskFerryBubble;

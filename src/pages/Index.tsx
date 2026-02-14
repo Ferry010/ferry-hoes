@@ -8,7 +8,7 @@ import PodcastSection from "@/components/sections/PodcastSection";
 import BlogSection from "@/components/sections/BlogSection";
 import CommunitySection from "@/components/sections/CommunitySection";
 import Footer from "@/components/sections/Footer";
-import FloatingChatBubble from "@/components/FloatingChatBubble";
+import AskFerryBubble from "@/components/AskFerryBubble";
 
 const Index = () => {
   return (
@@ -69,7 +69,7 @@ const Index = () => {
         </main>
 
         <Footer />
-        <FloatingChatBubble />
+        <AskFerryBubble />
       </div>
     </>
   );

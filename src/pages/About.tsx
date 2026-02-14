@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, User, BookOpen, Heart, MessageCircle, Cpu, Users, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import Footer from "@/components/sections/Footer";
-import FloatingChatBubble from "@/components/FloatingChatBubble";
+import AskFerryBubble from "@/components/AskFerryBubble";
 import SEOHead from "@/components/blog/SEOHead";
 import ferryBookstore from "@/assets/ferry-bookstore.jpg";
 import ferryOnStage from "@/assets/ferry-on-stage.jpg";
@@ -37,7 +37,7 @@ const timeline = [
 
 const About = () => {
   const openMessagePanel = () => {
-    const bubble = document.querySelector('[aria-label="Open message panel"]') as HTMLButtonElement;
+    const bubble = document.querySelector('[aria-label="Open Ask Ferry"]') as HTMLButtonElement;
     bubble?.click();
   };
 
@@ -319,7 +319,7 @@ const About = () => {
         </main>
 
         <Footer />
-        <FloatingChatBubble />
+        <AskFerryBubble />
       </div>
     </>
   );
