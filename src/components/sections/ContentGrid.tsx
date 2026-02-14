@@ -122,7 +122,7 @@ const ContentGrid = () => {
               </p>
               <button
                 onClick={() => {
-                  const bubble = document.querySelector('[aria-label="Open Ask Ferry"]') as HTMLButtonElement;
+                  const bubble = document.querySelector('[aria-label="Send a message"]') as HTMLButtonElement;
                   bubble?.click();
                 }}
                 className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors group"
