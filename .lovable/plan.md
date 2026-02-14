@@ -1,25 +1,32 @@
 
 
-# Update Career Timeline
+# Podcast Card Styling Enhancement
 
-Replace the placeholder timeline in the About page with Ferry's real career milestones.
+Upgrade the episode cards in `PodcastSection.tsx` with subtle audio-themed visual flair while keeping the Spotify green for logos and CTAs.
 
-## Changes
+## What Changes
 
-**File: `src/pages/About.tsx`** (lines ~36-43)
+**File: `src/components/sections/PodcastSection.tsx`**
 
-Replace the current `timeline` array with:
+### Card Background
+- Add a subtle audio waveform SVG pattern as a background element inside each card (low opacity, positioned bottom-right or spanning the card)
+- Use `text-muted-foreground/5` or similar near-invisible tint so it reads as texture, not illustration
 
-```typescript
-const timeline = [
-  { year: "2016", title: "Went all in", description: "Quit my corporate job to start as freelance Growth Hacker with zero backup plan." },
-  { year: "2018", title: "Brand Humanizing was born", description: "Published the first \"Brand Humanizing\" article with Jonathan Flores." },
-  { year: "2019", title: "From article to institute", description: "Co-founded the Brand Humanizing Institute after a year of research." },
-  { year: "2020", title: "AI Hackathon win", description: "Won a prestigious Government-hosted AI Hackathon based on Brand Humanizing principles." },
-  { year: "2020", title: "First professional keynote", description: "Got contracted by Speakers Academy and delivered my first professional keynote." },
-  { year: "2025", title: "The book drops", description: "Published our first book: \"Brand Humanizing\" — now available at all major retailers." },
-];
-```
+### Visual Details
+- Add a soft gradient overlay on the card (e.g. `bg-gradient-to-br from-transparent to-primary/5`) for depth
+- Include a small decorative sound-wave or equalizer bar element near the episode duration badge
+- Add a subtle left border accent in Spotify green (`border-l-2 border-[#1DB954]/30`) that intensifies on hover (`hover:border-[#1DB954]`)
 
-This is a single-line change in one file. No other modifications needed.
+### Spotify Green Preserved
+- Keep the Spotify icon and "Listen on Spotify" link in `#1DB954`
+- Keep the main Spotify CTA button unchanged
+- No changes to Apple Podcasts styling
+
+### Implementation Approach
+- Use an inline SVG waveform pattern (3-4 simple rounded bars at varying heights) as a purely decorative `aria-hidden` element positioned absolutely within the card
+- The waveform uses `text-muted-foreground` at ~5-8% opacity in resting state, shifting to ~12% on hover
+- Card gets a subtle `bg-gradient-to-br from-background to-[#1DB954]/[0.03]` to hint at the Spotify connection without being heavy-handed
+
+### No New Dependencies
+All changes are CSS/SVG only within the existing component.
 
