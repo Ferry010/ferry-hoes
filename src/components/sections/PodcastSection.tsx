@@ -82,14 +82,14 @@ const PodcastSection = () => {
             }}
             className="w-full mb-12"
           >
-            <CarouselContent className="-ml-4">
+            <CarouselContent className="-ml-6 py-4">
               {featuredEpisodes.map((episode) => (
                 <CarouselItem
                   key={episode.title} 
-                  className="pl-4 basis-full md:basis-1/2"
+                  className="pl-6 basis-full md:basis-1/2"
                 >
                   <article 
-                    className="group relative overflow-hidden bg-gradient-to-br from-background to-[#1DB954]/[0.03] rounded-2xl p-8 shadow-soft hover:shadow-soft-lg transition-all duration-300 border-l-2 border-[#1DB954]/30 hover:border-[#1DB954] border-t border-r border-b border-t-transparent border-r-transparent border-b-transparent hover:border-t-primary/20 hover:border-r-primary/20 hover:border-b-primary/20 h-full"
+                    className="group relative overflow-hidden bg-gradient-to-br from-background to-[#1DB954]/[0.03] rounded-2xl p-8 md:p-10 shadow-soft hover:shadow-soft-lg transition-all duration-300 border-l-2 border-[#1DB954]/30 hover:border-[#1DB954] border-t border-r border-b border-t-transparent border-r-transparent border-b-transparent hover:border-t-primary/20 hover:border-r-primary/20 hover:border-b-primary/20 h-full"
                   >
                     {/* Decorative waveform background */}
                     <svg
