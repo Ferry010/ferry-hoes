@@ -1,95 +1,62 @@
 
-# Replace "Ask Ferry" AI Chat with a Contact Form
+# Update About Page with Real Biography
 
 ## Overview
-Remove the AI-powered chat and replace it with a simple "Shoot me a message" contact form where visitors enter their name, email, and a message. Messages are stored in a new database table so Ferry can read and reply to them later.
+Replace the placeholder bio copy across the About page with Ferry's actual story. The narrative is rich and chronological, so we'll restructure the page sections to match the real content.
 
-## What Gets Removed
-- `src/components/AskFerryChat.tsx` -- the AI chat component
-- `supabase/functions/ask-ferry/index.ts` -- the AI edge function
-- The `react-markdown` dependency (only used by the chat)
+## Changes to `src/pages/About.tsx`
 
-## What Gets Built
+### 1. Hero section
+- Keep the visual structure
+- Update subtitle to: "Speaker, author, entrepreneur -- but mostly just someone who started talking once and never stopped."
 
-### 1. Database: `contact_messages` table
-A new table to store incoming messages:
-- `id` (uuid, primary key)
-- `name` (text, required)
-- `email` (text, required)
-- `message` (text, required)
-- `created_at` (timestamp, default now())
-- `read` (boolean, default false -- for future admin use)
+### 2. "My Story" split section (section 2)
+Replace the three placeholder paragraphs with the early life narrative:
+- Born in 1987 in Delft, hardworking father, stay-at-home mom, grandmother's quote
+- Introverted kid at school, fell in love with the internet, built first website at ten (Ja Rule track, email feature)
+- High school, greenhouse job, always optimizing
 
-RLS: public INSERT (anyone can submit), admin-only SELECT/UPDATE/DELETE.
+### 3. Update timeline (section 4)
+Replace with milestones that match the real story:
+- **1997**: Built first website at age 10
+- **2009**: Graduated marketing after pivoting from development
+- **2016**: Quit corporate life, started as freelance growth hacker
+- **2017**: Coined "Brand Humanizing" over lunch with Jonathan
+- **2018**: Spent a year researching Brand Humanizing
+- **2020**: Joined speakers agency, started speaking professionally
+- **2025**: Published the Brand Humanizing book
 
-### 2. Rewrite `AskFerryBubble.tsx`
-Keep the same floating bubble position and open/close animation, but replace the chat panel content with a contact form:
+### 4. Add a new narrative section between story and values
+A second split-layout section (photo right) covering the professional transformation arc:
+- Studying development, realizing it wasn't for him, teacher's marketing advice
+- Account manager in IT sales, night-time self-education (Cambridge, social psychology, change management)
+- 2016: quitting corporate, going freelance
+- 2017 lunch with Jonathan, coining Brand Humanizing
+- The year of research, falling in love with the intersection of tech, psychology, and innovation
 
-- Header changes to "Shoot me a message" with a Mail icon
-- Subline: "I'll get back to you"
-- Form fields: Name, Email, Message (textarea)
-- Submit button: "Send"
-- Success state after submission: brief "Message sent!" confirmation, then auto-close after a couple seconds
-- Basic client-side validation with zod (name, valid email, non-empty message)
+### 5. "Off Stage" section (section 5) -- becomes "Finding my voice"
+Replace placeholder personal content with the speaking journey arc:
+- Was deeply introverted, public speaking was never the plan
+- Realized the idea wouldn't spread if kept private
+- Started with small student groups, then a LinkedIn request, then a speakers agency
+- Grew to one of the most booked speakers in the Netherlands
+- "That shy, introverted kid grew into someone who now spends most of his time on stages around the world"
 
-### 3. Update references
-- Footer "Message" button continues to trigger the bubble (no change needed, same aria-label pattern)
-- All other `openMessagePanel` references stay the same, just the aria-label text updates from "Open Ask Ferry" to "Send a message"
+### 6. Values section (section 3)
+Keep the three values cards as-is -- they align well with the real story.
 
-### 4. Cleanup
-- Delete `src/components/AskFerryChat.tsx`
-- Delete `supabase/functions/ask-ferry/index.ts`
-- Can keep `react-markdown` since it's lightweight and may be used elsewhere, or remove if not referenced
+### 7. Final CTA (section 6)
+Update closing copy to: "Because what I love most is helping people and technology work together in a way that actually makes work and life more human." -- drawn directly from the final line of the bio.
 
 ## Technical Details
 
-### Database migration
-```sql
-CREATE TABLE public.contact_messages (
-  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  name text NOT NULL,
-  email text NOT NULL,
-  message text NOT NULL,
-  read boolean NOT NULL DEFAULT false,
-  created_at timestamptz NOT NULL DEFAULT now()
-);
+### Single file edit: `src/pages/About.tsx`
+- Update the hero `<p>` subtitle text
+- Replace the three `<p>` tags in the "My Story" section with early-life paragraphs
+- Update the `timeline` array with new milestones
+- Change "My Story" heading from "From entrepreneur to thought leader" to "From Delft to the world stage"
+- Add a second narrative `<article>` block after the story section for the professional journey (marketing pivot, corporate years, freelancing, Brand Humanizing origin)
+- Rewrite the "Off Stage" section heading to "Finding my voice" and replace paragraphs with the speaking journey narrative
+- Update final CTA paragraph text
 
-ALTER TABLE public.contact_messages ENABLE ROW LEVEL SECURITY;
-
--- Anyone can submit
-CREATE POLICY "Anyone can submit a message"
-  ON public.contact_messages FOR INSERT
-  WITH CHECK (true);
-
--- Only admins can read
-CREATE POLICY "Admins can view messages"
-  ON public.contact_messages FOR SELECT
-  USING (has_role(auth.uid(), 'admin'));
-
--- Only admins can update (mark as read)
-CREATE POLICY "Admins can update messages"
-  ON public.contact_messages FOR UPDATE
-  USING (has_role(auth.uid(), 'admin'));
-
--- Only admins can delete
-CREATE POLICY "Admins can delete messages"
-  ON public.contact_messages FOR DELETE
-  USING (has_role(auth.uid(), 'admin'));
-```
-
-### Form validation (zod)
-```typescript
-const contactSchema = z.object({
-  name: z.string().trim().min(1, "Name is required").max(100),
-  email: z.string().trim().email("Please enter a valid email").max(255),
-  message: z.string().trim().min(1, "Message is required").max(2000),
-});
-```
-
-### Files changed
-- **New migration**: Create `contact_messages` table with RLS
-- **Rewrite**: `src/components/AskFerryBubble.tsx` -- contact form panel instead of chat
-- **Delete**: `src/components/AskFerryChat.tsx`
-- **Delete**: `supabase/functions/ask-ferry/index.ts`
-- **Edit**: `src/components/sections/Footer.tsx` -- update aria-label selector string
-- **Edit**: All components with `openMessagePanel` -- update aria-label from "Open Ask Ferry" to "Send a message"
+No new files, no database changes, no new dependencies -- just content updates to a single page.
