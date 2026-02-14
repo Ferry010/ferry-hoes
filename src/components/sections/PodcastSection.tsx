@@ -49,7 +49,7 @@ const APPLE_PODCASTS_URL = "https://podcasts.apple.com/nl/podcast/the-human-era-
 
 const PodcastSection = () => {
   const openMessagePanel = () => {
-    const bubble = document.querySelector('[aria-label="Open Ask Ferry"]') as HTMLButtonElement;
+    const bubble = document.querySelector('[aria-label="Send a message"]') as HTMLButtonElement;
     bubble?.click();
   };
 

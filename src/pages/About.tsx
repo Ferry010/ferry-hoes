@@ -37,7 +37,7 @@ const timeline = [
 
 const About = () => {
   const openMessagePanel = () => {
-    const bubble = document.querySelector('[aria-label="Open Ask Ferry"]') as HTMLButtonElement;
+    const bubble = document.querySelector('[aria-label="Send a message"]') as HTMLButtonElement;
     bubble?.click();
   };
 
