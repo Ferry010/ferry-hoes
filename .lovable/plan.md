@@ -1,89 +1,95 @@
 
+# Replace "Ask Ferry" AI Chat with a Contact Form
 
-# Replace "Send a Message" with "Ask Ferry" AI Q&A
-
-Replace the current purposeless message bubble (which just logs to console) with a live, AI-powered "Ask Ferry" conversational experience. Visitors type a question, and Ferry's AI persona responds based on his areas of expertise -- brand humanizing, technology, humanity, and speaking.
+## Overview
+Remove the AI-powered chat and replace it with a simple "Shoot me a message" contact form where visitors enter their name, email, and a message. Messages are stored in a new database table so Ferry can read and reply to them later.
 
 ## What Gets Removed
-- `src/components/QuickMessage.tsx` -- no longer needed
-- The `FloatingChatBubble` component gets fully rewritten to house the new chat UI
+- `src/components/AskFerryChat.tsx` -- the AI chat component
+- `supabase/functions/ask-ferry/index.ts` -- the AI edge function
+- The `react-markdown` dependency (only used by the chat)
 
 ## What Gets Built
 
-### 1. Backend function: `ask-ferry`
-A new edge function that calls Lovable AI with a system prompt embodying Ferry's voice and expertise areas. Uses streaming for a responsive, token-by-token typing feel.
+### 1. Database: `contact_messages` table
+A new table to store incoming messages:
+- `id` (uuid, primary key)
+- `name` (text, required)
+- `email` (text, required)
+- `message` (text, required)
+- `created_at` (timestamp, default now())
+- `read` (boolean, default false -- for future admin use)
 
-**System prompt will cover:**
-- Ferry's persona (thinker, speaker, brand humanizer, tech-meets-humanity)
-- Concise, warm, conversational tone
-- Nudges toward Ferry's content (book, podcast, speaking) where relevant
-- Keeps answers short and human (not walls of text)
+RLS: public INSERT (anyone can submit), admin-only SELECT/UPDATE/DELETE.
 
-### 2. Rewrite `FloatingChatBubble.tsx` into `AskFerryBubble.tsx`
-The floating bubble stays in the same position but opens a compact chat panel instead of a one-way message form:
+### 2. Rewrite `AskFerryBubble.tsx`
+Keep the same floating bubble position and open/close animation, but replace the chat panel content with a contact form:
 
-- **Bubble**: Same bottom-right position, but with a Sparkles/MessageCircle icon and subtle pulse
-- **Panel**: Slides up with a chat interface containing:
-  - A short header: "Ask Ferry" with a subline like "AI-powered, always available"
-  - A scrollable message area showing the conversation (user messages right-aligned, Ferry's responses left-aligned with markdown rendering)
-  - An input bar at the bottom with a send button
-  - Streaming responses render token-by-token
-  - Conversation resets when the panel closes (no persistence needed)
-- **Starter prompts**: 3 clickable suggestion chips when the chat is empty (e.g. "What is brand humanizing?", "Tell me about your book", "How do you see AI's future?")
+- Header changes to "Shoot me a message" with a Mail icon
+- Subline: "I'll get back to you"
+- Form fields: Name, Email, Message (textarea)
+- Submit button: "Send"
+- Success state after submission: brief "Message sent!" confirmation, then auto-close after a couple seconds
+- Basic client-side validation with zod (name, valid email, non-empty message)
 
-### 3. Update `Index.tsx`
-- Replace `FloatingChatBubble` import with `AskFerryBubble`
+### 3. Update references
+- Footer "Message" button continues to trigger the bubble (no change needed, same aria-label pattern)
+- All other `openMessagePanel` references stay the same, just the aria-label text updates from "Open Ask Ferry" to "Send a message"
 
-### 4. Update all `openMessagePanel` references
-Components that currently trigger the old message bubble (Footer, PodcastSection, Hero, BookSection, ContentGrid, MiniAbout, About page) will be updated to trigger the new "Ask Ferry" panel instead. The aria-label changes from "Open message panel" to "Open Ask Ferry", and all references update accordingly.
-
-### 5. Install `react-markdown`
-Needed to render AI responses with proper formatting (bold, lists, links).
+### 4. Cleanup
+- Delete `src/components/AskFerryChat.tsx`
+- Delete `supabase/functions/ask-ferry/index.ts`
+- Can keep `react-markdown` since it's lightweight and may be used elsewhere, or remove if not referenced
 
 ## Technical Details
 
-### Edge function (`supabase/functions/ask-ferry/index.ts`)
-- Accepts `{ messages: Array<{role, content}> }` 
-- Prepends a system prompt with Ferry's persona
-- Streams response from Lovable AI gateway (`google/gemini-3-flash-preview`)
-- Returns SSE stream to the client
-- Handles 429/402 errors gracefully
+### Database migration
+```sql
+CREATE TABLE public.contact_messages (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  name text NOT NULL,
+  email text NOT NULL,
+  message text NOT NULL,
+  read boolean NOT NULL DEFAULT false,
+  created_at timestamptz NOT NULL DEFAULT now()
+);
 
-### Frontend streaming
-- Uses `fetch` with streaming body reader (same proven SSE pattern from the Lovable AI docs)
-- Token-by-token rendering into the last assistant message
-- Loading state with animated dots while waiting for first token
+ALTER TABLE public.contact_messages ENABLE ROW LEVEL SECURITY;
 
-### Chat UI structure
-```text
-+---------------------------+
-| Ask Ferry            [X]  |
-| AI-powered, always on     |
-+---------------------------+
-|                           |
-| [suggestion chips]        |
-|                           |
-|        [user message] --> |
-| <-- [ferry response]     |
-|                           |
-+---------------------------+
-| [Type your question...] > |
-+---------------------------+
+-- Anyone can submit
+CREATE POLICY "Anyone can submit a message"
+  ON public.contact_messages FOR INSERT
+  WITH CHECK (true);
+
+-- Only admins can read
+CREATE POLICY "Admins can view messages"
+  ON public.contact_messages FOR SELECT
+  USING (has_role(auth.uid(), 'admin'));
+
+-- Only admins can update (mark as read)
+CREATE POLICY "Admins can update messages"
+  ON public.contact_messages FOR UPDATE
+  USING (has_role(auth.uid(), 'admin'));
+
+-- Only admins can delete
+CREATE POLICY "Admins can delete messages"
+  ON public.contact_messages FOR DELETE
+  USING (has_role(auth.uid(), 'admin'));
+```
+
+### Form validation (zod)
+```typescript
+const contactSchema = z.object({
+  name: z.string().trim().min(1, "Name is required").max(100),
+  email: z.string().trim().email("Please enter a valid email").max(255),
+  message: z.string().trim().min(1, "Message is required").max(2000),
+});
 ```
 
 ### Files changed
-- **New**: `supabase/functions/ask-ferry/index.ts` -- edge function
-- **New**: `src/components/AskFerryBubble.tsx` -- replaces FloatingChatBubble
-- **New**: `src/components/AskFerryChat.tsx` -- chat panel UI + streaming logic
-- **Delete**: `src/components/QuickMessage.tsx` -- no longer used
-- **Delete**: `src/components/FloatingChatBubble.tsx` -- replaced
-- **Edit**: `src/pages/Index.tsx` -- swap import
-- **Edit**: `src/components/sections/Footer.tsx` -- update aria-label selector
-- **Edit**: `src/components/sections/PodcastSection.tsx` -- update aria-label selector
-- **Edit**: `src/components/sections/Hero.tsx` -- update aria-label selector
-- **Edit**: `src/components/sections/BookSection.tsx` -- update aria-label selector
-- **Edit**: `src/components/sections/ContentGrid.tsx` -- update aria-label selector
-- **Edit**: `src/components/sections/MiniAbout.tsx` -- update aria-label selector
-- **Edit**: `src/pages/About.tsx` -- update aria-label selector
-- **Install**: `react-markdown`
-
+- **New migration**: Create `contact_messages` table with RLS
+- **Rewrite**: `src/components/AskFerryBubble.tsx` -- contact form panel instead of chat
+- **Delete**: `src/components/AskFerryChat.tsx`
+- **Delete**: `supabase/functions/ask-ferry/index.ts`
+- **Edit**: `src/components/sections/Footer.tsx` -- update aria-label selector string
+- **Edit**: All components with `openMessagePanel` -- update aria-label from "Open Ask Ferry" to "Send a message"
