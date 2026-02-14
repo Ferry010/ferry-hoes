@@ -1,13 +1,15 @@
 import { useEffect } from "react";
-import { useNavigate, Outlet, Link } from "react-router-dom";
+import { useNavigate, Outlet, Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
-import { LogOut, Pen, Home } from "lucide-react";
+import { LogOut, Pen, Home, Mail } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { cn } from "@/lib/utils";
 
 const AdminLayout = () => {
   const { user, isAdmin, loading, signOut } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     if (!loading && (!user || !isAdmin)) {
@@ -51,9 +53,36 @@ const AdminLayout = () => {
                 <Pen className="w-4 h-4 text-accent" />
               </div>
               <span className="font-display font-bold text-foreground">
-                Blog Admin
+                Admin
               </span>
             </Link>
+
+            <nav className="flex items-center gap-1 ml-4">
+              <Link
+                to="/admin/dashboard"
+                className={cn(
+                  "px-3 py-1.5 rounded-md text-sm font-medium transition-colors",
+                  location.pathname === "/admin/dashboard"
+                    ? "bg-accent/10 text-accent"
+                    : "text-muted-foreground hover:text-foreground"
+                )}
+              >
+                <Pen className="w-4 h-4 inline mr-1.5" />
+                Posts
+              </Link>
+              <Link
+                to="/admin/messages"
+                className={cn(
+                  "px-3 py-1.5 rounded-md text-sm font-medium transition-colors",
+                  location.pathname === "/admin/messages"
+                    ? "bg-accent/10 text-accent"
+                    : "text-muted-foreground hover:text-foreground"
+                )}
+              >
+                <Mail className="w-4 h-4 inline mr-1.5" />
+                Messages
+              </Link>
+            </nav>
           </div>
 
           <div className="flex items-center gap-4">
