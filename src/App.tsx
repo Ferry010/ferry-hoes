@@ -12,6 +12,7 @@ import Speaking from "./pages/Speaking";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import PostEditor from "./pages/PostEditor";
+import AdminMessages from "./pages/AdminMessages";
 import About from "./pages/About";
 import AdminLayout from "./components/admin/AdminLayout";
 
@@ -33,6 +34,7 @@ const App = () => (
             <Route path="/admin" element={<AdminLogin />} />
             <Route path="/admin" element={<AdminLayout />}>
               <Route path="dashboard" element={<AdminDashboard />} />
+              <Route path="messages" element={<AdminMessages />} />
               <Route path="posts/new" element={<PostEditor />} />
               <Route path="posts/:id" element={<PostEditor />} />
             </Route>
