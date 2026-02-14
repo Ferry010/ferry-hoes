@@ -89,13 +89,37 @@ const PodcastSection = () => {
                   className="pl-4 basis-full md:basis-1/2"
                 >
                   <article 
-                    className="group bg-background rounded-2xl p-8 shadow-soft hover:shadow-soft-lg transition-all duration-300 border border-transparent hover:border-primary/20 h-full"
+                    className="group relative overflow-hidden bg-gradient-to-br from-background to-[#1DB954]/[0.03] rounded-2xl p-8 shadow-soft hover:shadow-soft-lg transition-all duration-300 border-l-2 border-[#1DB954]/30 hover:border-[#1DB954] border-t border-r border-b border-t-transparent border-r-transparent border-b-transparent hover:border-t-primary/20 hover:border-r-primary/20 hover:border-b-primary/20 h-full"
                   >
-                    <div className="flex items-start justify-between mb-6">
+                    {/* Decorative waveform background */}
+                    <svg
+                      aria-hidden="true"
+                      className="absolute bottom-4 right-4 w-32 h-20 text-muted-foreground opacity-[0.06] group-hover:opacity-[0.12] transition-opacity duration-500"
+                      viewBox="0 0 120 60"
+                      fill="currentColor"
+                    >
+                      <rect x="8" y="20" width="6" height="25" rx="3" />
+                      <rect x="22" y="10" width="6" height="40" rx="3" />
+                      <rect x="36" y="25" width="6" height="20" rx="3" />
+                      <rect x="50" y="5" width="6" height="50" rx="3" />
+                      <rect x="64" y="18" width="6" height="30" rx="3" />
+                      <rect x="78" y="12" width="6" height="38" rx="3" />
+                      <rect x="92" y="22" width="6" height="22" rx="3" />
+                      <rect x="106" y="28" width="6" height="15" rx="3" />
+                    </svg>
+
+                    <div className="flex items-start justify-between mb-6 relative z-10">
                       <span className="text-sm font-medium text-primary">
                         Episode
                       </span>
-                      <span className="text-sm text-muted-foreground">
+                      <span className="inline-flex items-center gap-1.5 text-sm text-muted-foreground">
+                        {/* Mini equalizer bars */}
+                        <svg aria-hidden="true" className="w-3.5 h-3.5 text-[#1DB954]/60" viewBox="0 0 14 14" fill="currentColor">
+                          <rect x="1" y="6" width="2" height="6" rx="1" />
+                          <rect x="4.5" y="3" width="2" height="9" rx="1" />
+                          <rect x="8" y="5" width="2" height="7" rx="1" />
+                          <rect x="11.5" y="7" width="2" height="5" rx="1" />
+                        </svg>
                         {episode.duration}
                       </span>
                     </div>
