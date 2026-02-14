@@ -1,36 +1,89 @@
 
-# Redesign Community Section to Match Site Style
 
-## Problem
-The Community section uses a solid `bg-primary` (teal) background with white text, creating a heavy, corporate block that clashes with the rest of the site's light, editorial, semi-transparent aesthetic.
+# Replace "Send a Message" with "Ask Ferry" AI Q&A
 
-## Design Approach
-Align with the patterns used across other sections: light backgrounds with `backdrop-blur`, soft shadows, brand accent badges, and the same typographic hierarchy.
+Replace the current purposeless message bubble (which just logs to console) with a live, AI-powered "Ask Ferry" conversational experience. Visitors type a question, and Ferry's AI persona responds based on his areas of expertise -- brand humanizing, technology, humanity, and speaking.
 
-## Changes
+## What Gets Removed
+- `src/components/QuickMessage.tsx` -- no longer needed
+- The `FloatingChatBubble` component gets fully rewritten to house the new chat UI
 
-**File: `src/components/sections/CommunitySection.tsx`**
+## What Gets Built
 
-1. **Background**: Replace `bg-primary text-primary-foreground` with `bg-secondary/90 backdrop-blur-sm` to match sections like BookSection and the overall light, open feel.
+### 1. Backend function: `ask-ferry`
+A new edge function that calls Lovable AI with a system prompt embodying Ferry's voice and expertise areas. Uses streaming for a responsive, token-by-token typing feel.
 
-2. **Remove dot-grid pattern**: Drop the radial-gradient dot background -- no other section uses this pattern.
+**System prompt will cover:**
+- Ferry's persona (thinker, speaker, brand humanizer, tech-meets-humanity)
+- Concise, warm, conversational tone
+- Nudges toward Ferry's content (book, podcast, speaking) where relevant
+- Keeps answers short and human (not walls of text)
 
-3. **Badge**: Add a pill badge at the top (like other sections) with a Users/Sparkles icon and "Community" label, using `bg-primary/10 text-primary` styling.
+### 2. Rewrite `FloatingChatBubble.tsx` into `AskFerryBubble.tsx`
+The floating bubble stays in the same position but opens a compact chat panel instead of a one-way message form:
 
-4. **Headline**: Change from white-on-teal to the standard section heading style:
-   - "Don't follow." in `text-foreground` (dark)
-   - "Build with me." in `text-primary` (teal) instead of `text-brand-gold`
-   - Scale down slightly from `text-8xl` to match other sections (`text-5xl md:text-6xl lg:text-7xl`)
+- **Bubble**: Same bottom-right position, but with a Sparkles/MessageCircle icon and subtle pulse
+- **Panel**: Slides up with a chat interface containing:
+  - A short header: "Ask Ferry" with a subline like "AI-powered, always available"
+  - A scrollable message area showing the conversation (user messages right-aligned, Ferry's responses left-aligned with markdown rendering)
+  - An input bar at the bottom with a send button
+  - Streaming responses render token-by-token
+  - Conversation resets when the panel closes (no persistence needed)
+- **Starter prompts**: 3 clickable suggestion chips when the chat is empty (e.g. "What is brand humanizing?", "Tell me about your book", "How do you see AI's future?")
 
-5. **Body text**: Switch from `text-white/70` to `text-muted-foreground` for consistency.
+### 3. Update `Index.tsx`
+- Replace `FloatingChatBubble` import with `AskFerryBubble`
 
-6. **Discord badge**: Restyle from `bg-brand-gold/20` with gold icon to a softer `bg-primary/10` pill with the Discord icon in `text-primary`, matching the editorial tone.
+### 4. Update all `openMessagePanel` references
+Components that currently trigger the old message bubble (Footer, PodcastSection, Hero, BookSection, ContentGrid, MiniAbout, About page) will be updated to trigger the new "Ask Ferry" panel instead. The aria-label changes from "Open message panel" to "Open Ask Ferry", and all references update accordingly.
 
-7. **Email input + button**: 
-   - Input: Switch from dark glass (`bg-white/10 border-white/20`) to light style (`bg-background border-border`) with standard focus states
-   - Button: Change from `bg-brand-gold` to `bg-primary text-primary-foreground hover:bg-primary/90` to match the site's CTA pattern
-   - Keep both disabled with the "Coming soon" note
+### 5. Install `react-markdown`
+Needed to render AI responses with proper formatting (bold, lists, links).
 
-8. **"Coming soon" text**: Change from `text-white/40` to `text-muted-foreground` with slightly smaller sizing.
+## Technical Details
 
-This brings the section fully in line with the rest of the page while keeping the emotional headline and community message intact.
+### Edge function (`supabase/functions/ask-ferry/index.ts`)
+- Accepts `{ messages: Array<{role, content}> }` 
+- Prepends a system prompt with Ferry's persona
+- Streams response from Lovable AI gateway (`google/gemini-3-flash-preview`)
+- Returns SSE stream to the client
+- Handles 429/402 errors gracefully
+
+### Frontend streaming
+- Uses `fetch` with streaming body reader (same proven SSE pattern from the Lovable AI docs)
+- Token-by-token rendering into the last assistant message
+- Loading state with animated dots while waiting for first token
+
+### Chat UI structure
+```text
++---------------------------+
+| Ask Ferry            [X]  |
+| AI-powered, always on     |
++---------------------------+
+|                           |
+| [suggestion chips]        |
+|                           |
+|        [user message] --> |
+| <-- [ferry response]     |
+|                           |
++---------------------------+
+| [Type your question...] > |
++---------------------------+
+```
+
+### Files changed
+- **New**: `supabase/functions/ask-ferry/index.ts` -- edge function
+- **New**: `src/components/AskFerryBubble.tsx` -- replaces FloatingChatBubble
+- **New**: `src/components/AskFerryChat.tsx` -- chat panel UI + streaming logic
+- **Delete**: `src/components/QuickMessage.tsx` -- no longer used
+- **Delete**: `src/components/FloatingChatBubble.tsx` -- replaced
+- **Edit**: `src/pages/Index.tsx` -- swap import
+- **Edit**: `src/components/sections/Footer.tsx` -- update aria-label selector
+- **Edit**: `src/components/sections/PodcastSection.tsx` -- update aria-label selector
+- **Edit**: `src/components/sections/Hero.tsx` -- update aria-label selector
+- **Edit**: `src/components/sections/BookSection.tsx` -- update aria-label selector
+- **Edit**: `src/components/sections/ContentGrid.tsx` -- update aria-label selector
+- **Edit**: `src/components/sections/MiniAbout.tsx` -- update aria-label selector
+- **Edit**: `src/pages/About.tsx` -- update aria-label selector
+- **Install**: `react-markdown`
+
