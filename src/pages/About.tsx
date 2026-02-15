@@ -25,7 +25,7 @@ const About = () => {
           <div className="container px-6 md:px-8">
             <div className="max-w-3xl mx-auto">
               <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-foreground">
-                About <span className="text-accent">Ferry</span>
+                My <span className="text-accent">story</span>
               </h1>
             </div>
           </div>
