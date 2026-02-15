@@ -1,41 +1,22 @@
 
-# Simplify About Page: Title + Text, No Images, No Em Dashes
+
+# Update About Page Copy
 
 ## Overview
-Strip the About page down to a clean, simple layout: one title at the top, followed by the full biography as flowing text paragraphs. Remove all images, split-layout sections, timeline, values cards, decorative orbs, and the visual thread. Also remove every em dash character across the page.
+Replace the biography text in `src/pages/About.tsx` with the new copy provided. The page structure stays exactly the same (title, paragraphs, CTA, footer). No layout or structural changes needed.
 
 ## What changes
 
 ### `src/pages/About.tsx`
-- **Remove** unused imports: `Card`, `CardContent`, image assets (`ferryBookstore`, `ferryOnStage`), and icons no longer needed (`BookOpen`, `Sparkles`, `Mic`, `Cpu`, `Heart`, `Users`, `User`)
-- **Remove** the `values` and `timeline` arrays
-- **Remove** the fixed visual thread (gradient stripe), floating orbs, and all decorative background elements
-- **Remove** all image sections and split-layout grids
-- **Remove** the values cards section and timeline section
-- **Replace all em dashes** (`—`) with commas, periods, or nothing depending on context
-- **Simplify structure** to:
-  1. A hero/title area with "About" heading
-  2. A single content column with all biography paragraphs flowing naturally (the full text the user provided earlier)
-  3. The final CTA section stays at the bottom
-  4. Footer and AskFerryBubble remain
+Replace all biography paragraphs in the `<main>` section with the new copy. Key differences from the current version:
 
-### Resulting page structure
-```text
-[Title: "About Ferry" or similar]
+- New paragraphs about discovering music, writing lyrics, performing in venues, Junior Eurovision auditions, demo on national radio
+- Updated first-website paragraph (now about music/hip-hop instead of "all about me")
+- New section about marketing program, loving presentations, best grades in English/business/social sciences
+- Updated speaking journey (now references musical stage experience as foundation)
+- New closing lines: "And in a strange way, it all connects..." with the poetic four-line reflection and final mic line
+- "And somehow, it worked." gets its own paragraph (separated from the 2016 section)
+- Some subtle wording changes throughout (e.g. "got hooked" instead of "fell in love", "into a home" instead of "in a home")
 
-[Full biography text as consecutive paragraphs]
+No em dashes in the new copy. No images, no layout changes, no new imports. Just paragraph content replacement.
 
-[CTA: "Want to work together?"]
-
-[Footer]
-```
-
-## Technical details
-
-### Single file edit: `src/pages/About.tsx`
-- Remove imports: `Card`, `CardContent`, `BookOpen`, `Sparkles`, `Mic`, `Cpu`, `Heart`, `Users`, `User`, `ferryBookstore`, `ferryOnStage`
-- Remove `values` and `timeline` constants
-- Replace the hero + 5 content sections with a simple centered container holding a title and all paragraphs
-- Keep: `Button`, `ArrowRight`, `MessageCircle`, `Link`, `Footer`, `AskFerryBubble`, `SEOHead`, and the `openMessagePanel` function
-- Keep the final CTA section as-is (minus em dashes)
-- All em dashes replaced throughout (hero subtitle, body text, CTA text)
