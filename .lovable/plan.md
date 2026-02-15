@@ -1,62 +1,41 @@
 
-# Update About Page with Real Biography
+# Simplify About Page: Title + Text, No Images, No Em Dashes
 
 ## Overview
-Replace the placeholder bio copy across the About page with Ferry's actual story. The narrative is rich and chronological, so we'll restructure the page sections to match the real content.
+Strip the About page down to a clean, simple layout: one title at the top, followed by the full biography as flowing text paragraphs. Remove all images, split-layout sections, timeline, values cards, decorative orbs, and the visual thread. Also remove every em dash character across the page.
 
-## Changes to `src/pages/About.tsx`
+## What changes
 
-### 1. Hero section
-- Keep the visual structure
-- Update subtitle to: "Speaker, author, entrepreneur -- but mostly just someone who started talking once and never stopped."
+### `src/pages/About.tsx`
+- **Remove** unused imports: `Card`, `CardContent`, image assets (`ferryBookstore`, `ferryOnStage`), and icons no longer needed (`BookOpen`, `Sparkles`, `Mic`, `Cpu`, `Heart`, `Users`, `User`)
+- **Remove** the `values` and `timeline` arrays
+- **Remove** the fixed visual thread (gradient stripe), floating orbs, and all decorative background elements
+- **Remove** all image sections and split-layout grids
+- **Remove** the values cards section and timeline section
+- **Replace all em dashes** (`—`) with commas, periods, or nothing depending on context
+- **Simplify structure** to:
+  1. A hero/title area with "About" heading
+  2. A single content column with all biography paragraphs flowing naturally (the full text the user provided earlier)
+  3. The final CTA section stays at the bottom
+  4. Footer and AskFerryBubble remain
 
-### 2. "My Story" split section (section 2)
-Replace the three placeholder paragraphs with the early life narrative:
-- Born in 1987 in Delft, hardworking father, stay-at-home mom, grandmother's quote
-- Introverted kid at school, fell in love with the internet, built first website at ten (Ja Rule track, email feature)
-- High school, greenhouse job, always optimizing
+### Resulting page structure
+```text
+[Title: "About Ferry" or similar]
 
-### 3. Update timeline (section 4)
-Replace with milestones that match the real story:
-- **1997**: Built first website at age 10
-- **2009**: Graduated marketing after pivoting from development
-- **2016**: Quit corporate life, started as freelance growth hacker
-- **2017**: Coined "Brand Humanizing" over lunch with Jonathan
-- **2018**: Spent a year researching Brand Humanizing
-- **2020**: Joined speakers agency, started speaking professionally
-- **2025**: Published the Brand Humanizing book
+[Full biography text as consecutive paragraphs]
 
-### 4. Add a new narrative section between story and values
-A second split-layout section (photo right) covering the professional transformation arc:
-- Studying development, realizing it wasn't for him, teacher's marketing advice
-- Account manager in IT sales, night-time self-education (Cambridge, social psychology, change management)
-- 2016: quitting corporate, going freelance
-- 2017 lunch with Jonathan, coining Brand Humanizing
-- The year of research, falling in love with the intersection of tech, psychology, and innovation
+[CTA: "Want to work together?"]
 
-### 5. "Off Stage" section (section 5) -- becomes "Finding my voice"
-Replace placeholder personal content with the speaking journey arc:
-- Was deeply introverted, public speaking was never the plan
-- Realized the idea wouldn't spread if kept private
-- Started with small student groups, then a LinkedIn request, then a speakers agency
-- Grew to one of the most booked speakers in the Netherlands
-- "That shy, introverted kid grew into someone who now spends most of his time on stages around the world"
+[Footer]
+```
 
-### 6. Values section (section 3)
-Keep the three values cards as-is -- they align well with the real story.
-
-### 7. Final CTA (section 6)
-Update closing copy to: "Because what I love most is helping people and technology work together in a way that actually makes work and life more human." -- drawn directly from the final line of the bio.
-
-## Technical Details
+## Technical details
 
 ### Single file edit: `src/pages/About.tsx`
-- Update the hero `<p>` subtitle text
-- Replace the three `<p>` tags in the "My Story" section with early-life paragraphs
-- Update the `timeline` array with new milestones
-- Change "My Story" heading from "From entrepreneur to thought leader" to "From Delft to the world stage"
-- Add a second narrative `<article>` block after the story section for the professional journey (marketing pivot, corporate years, freelancing, Brand Humanizing origin)
-- Rewrite the "Off Stage" section heading to "Finding my voice" and replace paragraphs with the speaking journey narrative
-- Update final CTA paragraph text
-
-No new files, no database changes, no new dependencies -- just content updates to a single page.
+- Remove imports: `Card`, `CardContent`, `BookOpen`, `Sparkles`, `Mic`, `Cpu`, `Heart`, `Users`, `User`, `ferryBookstore`, `ferryOnStage`
+- Remove `values` and `timeline` constants
+- Replace the hero + 5 content sections with a simple centered container holding a title and all paragraphs
+- Keep: `Button`, `ArrowRight`, `MessageCircle`, `Link`, `Footer`, `AskFerryBubble`, `SEOHead`, and the `openMessagePanel` function
+- Keep the final CTA section as-is (minus em dashes)
+- All em dashes replaced throughout (hero subtitle, body text, CTA text)
