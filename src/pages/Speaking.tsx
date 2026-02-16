@@ -4,7 +4,7 @@ import { ArrowRight, Mic, Users, Lightbulb, TrendingUp, Brain } from "lucide-rea
 import Footer from "@/components/sections/Footer";
 import AskFerryBubble from "@/components/AskFerryBubble";
 import SEOHead from "@/components/blog/SEOHead";
-import stagePhoto from "@/assets/ferry-on-stage.jpg";
+import stagePhoto from "@/assets/ferry-speaking.jpg";
 
 const topics = [
   {
