@@ -5,19 +5,15 @@ const HeroVideo = () => {
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
       {/* YouTube video background */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
-        <iframe
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-          src="https://www.youtube.com/embed/foEehJ_pwck?autoplay=1&mute=1&loop=1&playlist=foEehJ_pwck&controls=0&showinfo=0&start=0&end=15&modestbranding=1&rel=0&playsinline=1"
-          allow="autoplay; encrypted-media"
-          style={{ 
-            width: '177.78vh',
-            height: '100vh',
-            minWidth: '100vw',
-            minHeight: '56.25vw',
-          }}
-          title="Hero background video"
+        <video
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+          src="/videos/Ferry_Hero_vid_2026.webm"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
         />
-        {/* Dark overlay for text readability */}
         <div className="absolute inset-0 bg-foreground/40" />
       </div>
 
