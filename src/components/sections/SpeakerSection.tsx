@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Mic } from "lucide-react";
 import { Link } from "react-router-dom";
-import stagePhoto from "@/assets/ferry-on-stage.jpg";
+import stagePhoto from "@/assets/ferry-speaking.jpg";
 
 const SpeakerSection = () => {
   return (
