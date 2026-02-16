@@ -1,15 +1,20 @@
 
+## Hero Text Update
 
-# Replace Hero Video with V2
+Replace the current crossfading "Ferry" / "Hoes" animation with a single, clean static statement: **"The shy kid who ended up on stage."**
 
-## Overview
-Swap the current hero background video file with the new version uploaded by the user.
+### What changes
 
-## Steps
+**File: `src/components/sections/HeroVideo.tsx`**
 
-1. Copy `user-uploads://Ferry_Hero_vid_2026_V2.webm` to `public/videos/Ferry_Hero_vid_2026.webm`, overwriting the existing file
-   - Using the same filename means no code changes are needed in `HeroVideo.tsx`
-   - The `public` folder is correct for large media files
+- Remove the alternating "Ferry" / "Hoes" letter-by-letter spans and their animation wrappers
+- Replace with a single static `<h1>` displaying the new line
+- Style: large serif/display font, light color (white/off-white) with a subtle text shadow for legibility over video, centered
+- Keep the video background, overlay, and scroll indicator exactly as they are
 
-That's it -- single file copy, no code changes required.
+### Visual result
 
+- Full-screen video plays behind a semi-dark overlay
+- Centered on screen: *The shy kid who ended up on stage.*
+- Clean, confident typography -- no animation gimmicks, just the words and the video
+- Scroll indicator remains at the bottom
