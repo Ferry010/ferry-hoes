@@ -1,6 +1,10 @@
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, MessageCircle } from "lucide-react";
 
 const HeroVideo = () => {
+  const handleCTA = () => {
+    window.dispatchEvent(new Event("open-contact"));
+  };
+
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
       {/* Video background */}
@@ -14,7 +18,7 @@ const HeroVideo = () => {
           playsInline
           preload="auto"
         />
-        <div className="absolute inset-0 bg-foreground/40" />
+        <div className="absolute inset-0 bg-foreground/55" />
       </div>
 
       {/* DM-style chat conversation */}
@@ -25,7 +29,7 @@ const HeroVideo = () => {
             className="self-end opacity-0 animate-fade-up max-w-[80%]"
             style={{ animationDelay: "0.3s" }}
           >
-            <div className="rounded-2xl rounded-br-md px-4 py-2.5 bg-foreground/60 backdrop-blur-md text-background/90 text-sm md:text-base">
+            <div className="rounded-2xl rounded-br-md px-4 py-2.5 bg-primary/80 backdrop-blur-md text-primary-foreground text-sm md:text-base font-medium">
               So what do you actually do?
             </div>
           </div>
@@ -35,7 +39,7 @@ const HeroVideo = () => {
             className="opacity-0 animate-fade-up"
             style={{ animationDelay: "1.1s" }}
           >
-            <span className="text-xs font-medium text-background/50 tracking-wide uppercase ml-1">
+            <span className="text-xs font-semibold text-brand-gold tracking-wide uppercase ml-1">
               Ferry
             </span>
           </div>
@@ -45,7 +49,7 @@ const HeroVideo = () => {
             className="self-start opacity-0 animate-fade-up max-w-[80%] -mt-1"
             style={{ animationDelay: "1.1s" }}
           >
-            <div className="rounded-2xl rounded-bl-md px-4 py-2.5 bg-background/15 backdrop-blur-md text-background text-sm md:text-base">
+            <div className="rounded-2xl rounded-bl-md px-4 py-2.5 bg-background/90 backdrop-blur-md text-foreground text-sm md:text-base">
               I spend most of my year on stages.
             </div>
           </div>
@@ -55,7 +59,7 @@ const HeroVideo = () => {
             className="self-start opacity-0 animate-fade-up max-w-[80%]"
             style={{ animationDelay: "1.9s" }}
           >
-            <div className="rounded-2xl rounded-bl-md px-4 py-2.5 bg-background/15 backdrop-blur-md text-background text-sm md:text-base">
+            <div className="rounded-2xl rounded-bl-md px-4 py-2.5 bg-background/90 backdrop-blur-md text-foreground text-sm md:text-base">
               Last year that was 40+ keynotes.
             </div>
           </div>
@@ -65,7 +69,7 @@ const HeroVideo = () => {
             className="self-end opacity-0 animate-fade-up max-w-[80%]"
             style={{ animationDelay: "2.7s" }}
           >
-            <div className="rounded-2xl rounded-br-md px-4 py-2.5 bg-foreground/60 backdrop-blur-md text-background/90 text-sm md:text-base">
+            <div className="rounded-2xl rounded-br-md px-4 py-2.5 bg-primary/80 backdrop-blur-md text-primary-foreground text-sm md:text-base font-medium">
               About what?
             </div>
           </div>
@@ -75,7 +79,7 @@ const HeroVideo = () => {
             className="opacity-0 animate-fade-up"
             style={{ animationDelay: "3.5s" }}
           >
-            <span className="text-xs font-medium text-background/50 tracking-wide uppercase ml-1">
+            <span className="text-xs font-semibold text-brand-gold tracking-wide uppercase ml-1">
               Ferry
             </span>
           </div>
@@ -85,7 +89,7 @@ const HeroVideo = () => {
             className="self-start opacity-0 animate-fade-up max-w-[80%] -mt-1"
             style={{ animationDelay: "3.5s" }}
           >
-            <div className="rounded-2xl rounded-bl-md px-4 py-2.5 bg-background/15 backdrop-blur-md text-background text-sm md:text-base">
+            <div className="rounded-2xl rounded-bl-md px-4 py-2.5 bg-background/90 backdrop-blur-md text-foreground text-sm md:text-base">
               One idea, really.
             </div>
           </div>
@@ -95,7 +99,7 @@ const HeroVideo = () => {
             className="self-start opacity-0 animate-fade-up max-w-[85%]"
             style={{ animationDelay: "4.3s" }}
           >
-            <div className="rounded-2xl rounded-bl-md px-4 py-2.5 bg-background/15 backdrop-blur-md text-background text-sm md:text-base">
+            <div className="rounded-2xl rounded-bl-md px-4 py-2.5 bg-background/90 backdrop-blur-md text-foreground text-sm md:text-base">
               How humans and technology should actually work together.
             </div>
           </div>
@@ -105,13 +109,13 @@ const HeroVideo = () => {
             className="self-start opacity-0 animate-fade-up max-w-[80%]"
             style={{ animationDelay: "5.1s" }}
           >
-            <div className="rounded-2xl rounded-bl-md px-4 py-2.5 bg-background/15 backdrop-blur-md text-background text-sm md:text-base">
+            <div className="rounded-2xl rounded-bl-md px-4 py-2.5 bg-background/90 backdrop-blur-md text-foreground text-sm md:text-base">
               I call it Brand Humanizing.
             </div>
           </div>
         </div>
 
-        {/* Name + subtitle reveal */}
+        {/* Name + subtitle + CTA reveal */}
         <div className="mt-10 md:mt-14">
           <h1
             className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-background tracking-tight opacity-0 animate-fade-up drop-shadow-[0_2px_20px_rgba(0,0,0,0.4)]"
@@ -125,6 +129,14 @@ const HeroVideo = () => {
           >
             Speaker &bull; Author &bull; Brand Humanizing
           </p>
+          <button
+            onClick={handleCTA}
+            className="mt-6 opacity-0 animate-fade-up inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent text-accent-foreground text-sm font-semibold hover:bg-accent/90 transition-colors shadow-soft"
+            style={{ animationDelay: "7.2s" }}
+          >
+            <MessageCircle className="h-4 w-4" />
+            Continue the conversation
+          </button>
         </div>
       </div>
 
