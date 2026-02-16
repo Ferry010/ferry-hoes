@@ -1,31 +1,26 @@
 
 
-# Update About Page Copy
+# Replace Hero YouTube Embed with Local WebM Video
 
 ## Overview
-Replace the biography text in `src/pages/About.tsx` with the new copy provided. The page structure stays exactly the same: title, paragraphs, CTA, footer. No layout, styling, or structural changes needed.
+Swap the YouTube iframe background in the hero section with a self-hosted HTML5 `<video>` element using the uploaded WebM file. This gives better control over playback, removes YouTube branding/loading delays, and avoids external dependencies.
 
-## What changes
+## Steps
 
-### `src/pages/About.tsx`
-Replace all biography paragraphs in the `<main>` section with the new copy. Key differences from the current version:
+### 1. Copy the video file to the project
+- Copy `user-uploads://Ferry_Hero_vid_2026.webm` to `public/videos/Ferry_Hero_vid_2026.webm`
+- Using the `public` folder because large media files should not go through Vite's bundler (src/assets would try to bundle it, which is inefficient for large videos)
 
-- Opening paragraph expanded with more detail about home atmosphere ("always conversation in the house, always movement and energy")
-- School paragraph expanded: "The place where I felt most at ease wasn't the classroom or the playground, but behind a computer screen"
-- High school section rewritten as a single flowing paragraph instead of separate chunks
-- Developer/marketing pivot condensed into fewer, tighter paragraphs
-- 2016 section reworded: "reached a breaking point" and "creatively suffocating" replace previous phrasing
-- Brand Humanizing paragraph now includes "human behavior" in the list of fascinations
-- Speaking journey condensed: "Then I did it again, and again, slowly gaining confidence and refining the message" merged into one paragraph
-- Closing reflection completely rewritten: replaces the poetic four-line format with a single flowing paragraph ("The talkative kid at home. The introverted student at school...")
-- Final mission statement updated to include the life goal about UD Las Palmas
-- Removes the standalone "Put me on a stage..." closing line
+### 2. Update `src/components/sections/HeroVideo.tsx`
+- Replace the YouTube `<iframe>` with a native HTML5 `<video>` element
+- Attributes: `autoPlay`, `muted`, `loop`, `playsInline`, `preload="auto"`
+- Use `object-cover` with `absolute inset-0 w-full h-full` to achieve the same full-bleed background effect
+- Keep the existing dark overlay div for text readability
+- Keep all other elements unchanged (name animation, scroll indicator)
 
-No em dashes in the new copy. No images, no layout changes, no new imports, no new files. Just paragraph content replacement in the single `<main>` section.
-
-## Technical details
-
-- File: `src/pages/About.tsx`
-- Edit scope: Only the `<p>` tags inside the `<main>` element (the biography content)
-- Everything else remains untouched: SEOHead, header, CTA section, Footer, AskFerryBubble
+### Technical details
+- Video source: `/videos/Ferry_Hero_vid_2026.webm`
+- The `<video>` tag replaces the iframe and its sizing styles, simplifying the CSS (no more `177.78vh` width trick needed)
+- `muted` is required for autoplay to work in all browsers
+- No new dependencies needed
 
