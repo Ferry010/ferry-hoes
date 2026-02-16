@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Mail, X, Send, CheckCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { z } from "zod";
@@ -19,6 +19,12 @@ const AskFerryBubble = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSent, setIsSent] = useState(false);
+
+  useEffect(() => {
+    const openHandler = () => setIsOpen(true);
+    window.addEventListener("open-contact", openHandler);
+    return () => window.removeEventListener("open-contact", openHandler);
+  }, []);
 
   const resetForm = () => {
     setName("");
