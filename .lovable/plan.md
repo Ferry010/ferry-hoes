@@ -1,26 +1,58 @@
 
 
-## Hero Section Refinements
+## Simplify the Hero Section
 
-Three tweaks to `src/components/sections/HeroVideo.tsx`:
+The core problem: too many moving parts at once -- video, 7 animated bubbles, labels, CTA, name/subtitle, plus the fixed gradient stripe and floating orbs bleeding through. Here's how to calm it down.
 
-### 1. Shrink the name and subtitle
-- Reduce "Ferry Hoes" from `text-4xl sm:text-5xl md:text-6xl lg:text-7xl` to `text-2xl sm:text-3xl md:text-4xl`
-- Reduce subtitle text size accordingly
+### What changes
 
-### 2. Move CTA up, right after the last chat bubble
-- Move the "Continue the conversation" button out of the name/subtitle block and place it directly after the last Ferry bubble ("I call it Brand Humanizing.") inside the chat flex column
-- Adjust its animation delay to follow the last bubble (~5.9s instead of 7.2s)
-- The name and subtitle still appear below, but smaller and more understated
+**1. Reduce the conversation to 5 elements (from 9)**
 
-### 3. Remove the bouncing scroll indicator
-- Delete the entire `absolute bottom-20` scroll/chevron div at the bottom of the section
+Cut the back-and-forth down to the essential beats:
 
-### Technical detail
+| Element | Text |
+|---------|------|
+| Visitor | "So what do you actually do?" |
+| Ferry | "I help brands become more human." |
+| Ferry | "Through keynotes, a book, and one big idea: Brand Humanizing." |
+| CTA button | "Continue the conversation" |
+| Name + subtitle | Ferry Hoes -- Speaker. Author. Brand Humanizing. |
 
-**File: `src/components/sections/HeroVideo.tsx`**
-- Move the `<button>` element into the chat `flex-col` div, after the last Ferry bubble
-- Reduce heading font sizes
-- Delete the scroll indicator div (~6 lines at the bottom)
-- Adjust animation delays: CTA at ~5.9s, name at ~6.5s, subtitle at ~7.0s
+This removes 4 bubbles and both "Ferry" labels. Fewer items = less visual clutter, and the message lands faster.
+
+**2. Darken the video overlay more**
+
+Change the overlay from `bg-foreground/55` to `bg-foreground/70` so the video becomes more of a texture than a competing focal point. The bubbles pop more against a quieter background.
+
+**3. Slow down the spacing, speed up the total time**
+
+With fewer bubbles, each one gets more breathing room. New timing:
+
+| Delay | Element |
+|-------|---------|
+| 0.5s | Visitor: "So what do you actually do?" |
+| 1.5s | Ferry: "I help brands become more human." |
+| 2.5s | Ferry: "Through keynotes, a book, and one big idea: Brand Humanizing." |
+| 3.5s | CTA button |
+| 4.3s | Ferry Hoes |
+| 4.8s | Speaker. Author. Brand Humanizing. |
+
+Total: ~5 seconds instead of ~7. Faster payoff, less waiting.
+
+**4. Remove the fixed decorative elements during the hero**
+
+Remove the floating orbs and the left gradient stripe from `Index.tsx`. These add visual noise that competes with the hero content. They can be revisited later if needed for other sections, but for now they're adding clutter without purpose.
+
+### Files changed
+
+- **`src/components/sections/HeroVideo.tsx`** -- Simplified to 3 bubbles + CTA + name/subtitle, darker overlay, updated timing
+- **`src/pages/Index.tsx`** -- Remove the fixed gradient stripe and floating orb divs
+
+### What stays the same
+
+- Video background (just darker overlay)
+- Chat bubble visual style (rounded, backdrop-blur, brand colors)
+- CTA linking to contact form via `open-contact` event
+- Name and subtitle at the bottom
+- All other page sections below the hero
 
