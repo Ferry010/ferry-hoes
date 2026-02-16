@@ -6,7 +6,7 @@ const HeroVideo = () => {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
+    <section className="min-h-screen flex items-end relative overflow-hidden pb-16 md:pb-20">
       {/* Video background */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <video
