@@ -1,4 +1,4 @@
-import { ChevronDown, MessageCircle } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 
 const HeroVideo = () => {
   const handleCTA = () => {
@@ -110,41 +110,35 @@ const HeroVideo = () => {
             style={{ animationDelay: "5.1s" }}
           >
             <div className="rounded-2xl rounded-bl-md px-4 py-2.5 bg-background/90 backdrop-blur-md text-foreground text-sm md:text-base">
-              I call it Brand Humanizing.
+            I call it Brand Humanizing.
             </div>
           </div>
-        </div>
 
-        {/* Name + subtitle + CTA reveal */}
-        <div className="mt-10 md:mt-14">
-          <h1
-            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-background tracking-tight opacity-0 animate-fade-up drop-shadow-[0_2px_20px_rgba(0,0,0,0.4)]"
-            style={{ animationDelay: "6.2s" }}
-          >
-            Ferry Hoes
-          </h1>
-          <p
-            className="mt-3 text-sm md:text-base tracking-[0.25em] uppercase text-background/50 font-medium opacity-0 animate-fade-up"
-            style={{ animationDelay: "6.7s" }}
-          >
-            Speaker &bull; Author &bull; Brand Humanizing
-          </p>
+          {/* CTA */}
           <button
             onClick={handleCTA}
-            className="mt-6 opacity-0 animate-fade-up inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent text-accent-foreground text-sm font-semibold hover:bg-accent/90 transition-colors shadow-soft"
-            style={{ animationDelay: "7.2s" }}
+            className="self-start mt-2 opacity-0 animate-fade-up inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent text-accent-foreground text-sm font-semibold hover:bg-accent/90 transition-colors shadow-soft"
+            style={{ animationDelay: "5.9s" }}
           >
             <MessageCircle className="h-4 w-4" />
             Continue the conversation
           </button>
         </div>
-      </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-20 md:bottom-24 left-1/2 -translate-x-1/2 animate-bounce z-20">
-        <div className="flex flex-col items-center gap-2 text-background/60">
-          <span className="text-sm font-medium tracking-wide uppercase">Scroll</span>
-          <ChevronDown className="h-6 w-6" />
+        {/* Name + subtitle */}
+        <div className="mt-8 md:mt-10">
+          <h1
+            className="font-display text-2xl sm:text-3xl md:text-4xl text-background tracking-tight opacity-0 animate-fade-up drop-shadow-[0_2px_20px_rgba(0,0,0,0.4)]"
+            style={{ animationDelay: "6.5s" }}
+          >
+            Ferry Hoes
+          </h1>
+          <p
+            className="mt-2 text-xs md:text-sm tracking-[0.25em] uppercase text-background/50 font-medium opacity-0 animate-fade-up"
+            style={{ animationDelay: "7.0s" }}
+          >
+            Speaker &bull; Author &bull; Brand Humanizing
+          </p>
         </div>
       </div>
     </section>
