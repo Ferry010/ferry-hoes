@@ -19,33 +19,8 @@ const HeroVideo = () => {
 
       {/* Animated name with alternating effects */}
       <div className="container relative z-10 px-6 md:px-8">
-        <h1 className="font-display text-center tracking-tighter">
-          <span className="sr-only">Ferry Hoes</span>
-          <div aria-hidden="true" className="relative h-[5rem] sm:h-[8rem] md:h-[12rem] lg:h-[16rem] xl:h-[20rem]">
-            {/* FERRY - visible first half of cycle */}
-            <span className="absolute inset-0 flex justify-center items-center animate-name-ferry">
-              {"Ferry".split("").map((letter, i) => (
-                <span
-                  key={`ferry-${i}`}
-                  className="inline-block text-[5rem] sm:text-[8rem] md:text-[12rem] lg:text-[16rem] xl:text-[20rem] font-bold text-brand-gold drop-shadow-[0_0_30px_rgba(212,175,55,0.5)]"
-                >
-                  {letter}
-                </span>
-              ))}
-            </span>
-            
-            {/* HOES - visible second half of cycle */}
-            <span className="absolute inset-0 flex justify-center items-center animate-name-hoes">
-              {"Hoes".split("").map((letter, i) => (
-                <span
-                  key={`hoes-${i}`}
-                  className="inline-block text-[5rem] sm:text-[8rem] md:text-[12rem] lg:text-[16rem] xl:text-[20rem] font-bold text-background/90 drop-shadow-[0_4px_20px_rgba(0,0,0,0.3)]"
-                >
-                  {letter}
-                </span>
-              ))}
-            </span>
-          </div>
+        <h1 className="font-display text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-background/90 tracking-tight leading-tight drop-shadow-[0_2px_20px_rgba(0,0,0,0.4)]">
+          The shy kid who ended up on stage.
         </h1>
       </div>
 
