@@ -1,46 +1,26 @@
 
 
-## Updated DM-Style Hero Conversation
+## Hero Section Refinements
 
-Update the chat bubble copy and flow in `src/components/sections/HeroVideo.tsx` to match the new conversation script. The visual style (bubbles, backdrop-blur, animations) stays the same -- only the text and number of messages change.
+Three tweaks to `src/components/sections/HeroVideo.tsx`:
 
-### New conversation flow
+### 1. Shrink the name and subtitle
+- Reduce "Ferry Hoes" from `text-4xl sm:text-5xl md:text-6xl lg:text-7xl` to `text-2xl sm:text-3xl md:text-4xl`
+- Reduce subtitle text size accordingly
 
-1. **Visitor bubble** (right-aligned): "So what do you actually do?"
-2. **Ferry bubble**: "I spend most of my year on stages."
-3. **Ferry bubble**: "Last year that was 40+ keynotes."
-4. **Visitor bubble** (right-aligned): "About what?"
-5. **Ferry bubble**: "One idea, really."
-6. **Ferry bubble**: "How humans and technology should actually work together."
-7. **Ferry bubble**: "I call it Brand Humanizing."
+### 2. Move CTA up, right after the last chat bubble
+- Move the "Continue the conversation" button out of the name/subtitle block and place it directly after the last Ferry bubble ("I call it Brand Humanizing.") inside the chat flex column
+- Adjust its animation delay to follow the last bubble (~5.9s instead of 7.2s)
+- The name and subtitle still appear below, but smaller and more understated
 
-Then the name and subtitle fade in:
+### 3. Remove the bouncing scroll indicator
+- Delete the entire `absolute bottom-20` scroll/chevron div at the bottom of the section
 
-- **Ferry Hoes** (large display font)
-- **Speaker . Author . Brand Humanizing** (subtitle -- updated from "Podcast host")
-
-### Technical changes
+### Technical detail
 
 **File: `src/components/sections/HeroVideo.tsx`**
-
-- Replace the current 4-bubble sequence with the 7-bubble sequence above
-- Add a second "You" label before the "About what?" bubble
-- Add a second "Ferry" label before "One idea, really."
-- Adjust animation delays to keep ~0.8s spacing across 7 bubbles plus the name reveal (total ~7-8s)
-- Update subtitle text from "Speaker . Author . Podcast host" to "Speaker . Author . Brand Humanizing"
-- All existing styling (rounded corners, backdrop-blur, colors, scroll indicator) remains unchanged
-
-### Timing
-
-| Delay | Element |
-|-------|---------|
-| 0.3s | Visitor: "So what do you actually do?" |
-| 1.1s | Ferry label + "I spend most of my year on stages." |
-| 1.9s | "Last year that was 40+ keynotes." |
-| 2.7s | Visitor: "About what?" |
-| 3.5s | Ferry label + "One idea, really." |
-| 4.3s | "How humans and technology should actually work together." |
-| 5.1s | "I call it Brand Humanizing." |
-| 6.2s | Ferry Hoes |
-| 6.7s | Speaker . Author . Brand Humanizing |
+- Move the `<button>` element into the chat `flex-col` div, after the last Ferry bubble
+- Reduce heading font sizes
+- Delete the scroll indicator div (~6 lines at the bottom)
+- Adjust animation delays: CTA at ~5.9s, name at ~6.5s, subtitle at ~7.0s
 
