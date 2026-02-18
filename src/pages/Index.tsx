@@ -8,6 +8,7 @@ import PodcastSection from "@/components/sections/PodcastSection";
 import BlogSection from "@/components/sections/BlogSection";
 import CommunitySection from "@/components/sections/CommunitySection";
 import Footer from "@/components/sections/Footer";
+import ConversationSection from "@/components/sections/ConversationSection";
 import AskFerryBubble from "@/components/AskFerryBubble";
 
 const Index = () => {
@@ -27,6 +28,7 @@ const Index = () => {
         </header>
 
         <main>
+          <ConversationSection />
           <article>
             <AboutBlock />
           </article>

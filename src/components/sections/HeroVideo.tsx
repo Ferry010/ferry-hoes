@@ -2,7 +2,7 @@ import { MessageCircle } from "lucide-react";
 
 const HeroVideo = () => {
   const handleCTA = () => {
-    window.dispatchEvent(new Event("open-contact"));
+    document.getElementById("conversation")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
