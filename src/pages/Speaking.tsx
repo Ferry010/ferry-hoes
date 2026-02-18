@@ -240,7 +240,7 @@ const Speaking = () => {
                       { quote: "I recently organized a workshop where Ferry Hoes and the Brand Humanizing Institute delivered a lecture on the Ethics of AI. No 'Death by PowerPoint,' but a smooth and captivating story that got us as an IT organization thinking. Ferry is second to none at keeping his audience engaged. I received a lot of positive feedback about his contribution to our workshop and wholeheartedly recommend him.", name: "Laurens", company: "Atos" },
                       { quote: "Ferry has the gift of explaining complex theory in an accessible way. The AI experience among participants varied widely — from no experience at all to employees who already use it daily. Even those without any experience came out of the workshop surprised and very enthusiastic.", name: "Maud", company: "Chubb Fire & Security" },
                     ].map((testimonial, i) => (
-                      <CarouselItem key={i} className="pl-6 basis-full md:basis-1/2">
+                      <CarouselItem key={i} className="pl-6 basis-full">
                         <article className="group relative overflow-hidden bg-gradient-to-br from-background to-accent/[0.03] rounded-2xl p-8 md:p-10 shadow-soft hover:shadow-soft-lg transition-all duration-300 border-l-2 border-accent/30 hover:border-accent border-t border-r border-b border-t-transparent border-r-transparent border-b-transparent hover:border-t-accent/20 hover:border-r-accent/20 hover:border-b-accent/20 h-full">
                           <Quote className="h-6 w-6 text-accent/30 mb-4" />
                           <p className="text-muted-foreground italic leading-relaxed mb-6">
