@@ -150,6 +150,36 @@ const About = () => {
           </div>
         </main>
 
+        {/* Timeline */}
+        <section className="py-24 bg-background">
+          <div className="container px-6 md:px-8">
+            <div className="max-w-3xl mx-auto">
+              <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-12">
+                Key <span className="text-accent">milestones</span>
+              </h2>
+              <div className="relative pl-8 border-l-2 border-border space-y-10">
+                {[
+                  { year: "1987", text: "Born in Delft, the Netherlands" },
+                  { year: "1997", text: "Built first website at age 10" },
+                  { year: "2003", text: "Made it to the final 16 of Junior Eurovision auditions" },
+                  { year: "2010", text: "Graduated in Marketing, started career in IT sales" },
+                  { year: "2016", text: "Quit corporate life, became a growth hacker" },
+                  { year: "2017", text: "Coined the term Brand Humanizing" },
+                  { year: "2018", text: "First public speaking gig at a college" },
+                  { year: "2019", text: "Joined a speakers agency, started speaking internationally" },
+                  { year: "Today", text: "One of the most booked speakers in the Netherlands" },
+                ].map((item) => (
+                  <div key={item.year} className="relative">
+                    <span className="absolute -left-[25px] top-1.5 h-3 w-3 rounded-full bg-accent" />
+                    <span className="font-display font-bold text-accent text-lg">{item.year}</span>
+                    <p className="text-muted-foreground mt-1">{item.text}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* CTA */}
         <section className="py-24 md:py-32 bg-foreground text-background">
           <div className="container px-6 md:px-8">
