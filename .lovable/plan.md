@@ -1,29 +1,36 @@
 
 
-## Reposition Hero Content to Bottom-Left
+## Add a Timeline to the About Page
 
-The chat bubbles and name currently sit dead-center, covering your face and body in the video. The fix: anchor everything to the bottom-left so your upper body stays visible and the content feels like a natural overlay.
+A vertical timeline placed right after the biography text and before the CTA section, highlighting the key milestones from Ferry's story.
 
-### Layout change
+### Timeline milestones (extracted from the bio)
 
-Instead of `flex items-center justify-center` (which centers everything vertically and horizontally), switch to `flex items-end` so the content block sits at the bottom of the viewport. Combined with left-alignment and bottom padding, the bubbles will stack in the lower-left corner -- out of the way of the main subject in the video.
+| Year | Milestone |
+|------|-----------|
+| 1987 | Born in Delft, the Netherlands |
+| 1997 | Built first website at age 10 |
+| 2003 | Made it to the final 16 of Junior Eurovision auditions |
+| 2010 | Graduated in Marketing, started career in IT sales |
+| 2016 | Quit corporate life, became a growth hacker |
+| 2017 | Coined the term Brand Humanizing |
+| 2018 | First public speaking gig at a college |
+| 2019 | Joined a speakers agency, started speaking internationally |
+| Today | One of the most booked speakers in the Netherlands |
 
-### What changes
+### Design
 
-**File: `src/components/sections/HeroVideo.tsx`**
+- Clean vertical line on the left with small dots/circles at each milestone
+- Year displayed in bold accent color, milestone text in muted foreground
+- Max-width matches the biography text (max-w-3xl, centered)
+- Subtle fade-in animation as user scrolls (optional, can keep it static for simplicity)
+- Follows the minimalist, text-focused style of the rest of the About page (no images, no decorative elements)
 
-1. Change the section from `flex items-center justify-center` to `flex items-end` so content gravitates to the bottom
-2. Add `pb-16 md:pb-20` padding to give breathing room from the screen edge
-3. Remove `justify-center` -- content naturally aligns left already
-4. The name/subtitle block moves below the bubbles at the bottom-left, which is a common speaker-site pattern (like a lower-third in broadcast)
+### Technical details
 
-### What stays the same
+**File: `src/pages/About.tsx`**
 
-- All bubble text, styling, and animation timing
-- Video background and overlay darkness
-- CTA button behavior (opens contact form)
-- Mobile responsiveness (content just hugs the bottom instead of the center)
+- Add a new timeline section between the `</main>` closing tag (line 151) and the CTA `<section>` (line 154)
+- The timeline will be built inline as a simple mapped array of `{ year, text }` objects -- no separate component needed since it's only used here
+- Uses existing Tailwind classes and brand colors (accent for years, muted-foreground for descriptions, border for the vertical line)
 
-### Result
-
-Your face and upper body stay fully visible in the top/center of the frame. The chat conversation reads like a lower-third overlay -- clean, professional, and out of the way.
