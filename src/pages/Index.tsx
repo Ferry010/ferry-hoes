@@ -9,6 +9,7 @@ import BlogSection from "@/components/sections/BlogSection";
 import CommunitySection from "@/components/sections/CommunitySection";
 import Footer from "@/components/sections/Footer";
 import AskFerryBubble from "@/components/AskFerryBubble";
+import ConversationBridge from "@/components/ConversationBridge";
 
 const Index = () => {
   return (
@@ -27,24 +28,31 @@ const Index = () => {
         </header>
 
         <main>
+          <ConversationBridge question="Wait, who are you?" id="conversation-continue" />
           <article>
             <AboutBlock />
           </article>
+          <ConversationBridge question="So what exactly is Brand Humanizing?" />
           <article>
             <BrandHumanizingSection />
           </article>
+          <ConversationBridge question="Can I see you in action?" />
           <article>
             <SpeakerSection />
           </article>
+          <ConversationBridge question="Is there a book?" />
           <article>
             <BookSection />
           </article>
+          <ConversationBridge question="Got a podcast too?" />
           <article>
             <PodcastSection />
           </article>
+          <ConversationBridge question="What else are you thinking about?" />
           <article>
             <BlogSection />
           </article>
+          <ConversationBridge question="How do I stay in the loop?" />
           <article>
             <CommunitySection />
           </article>
