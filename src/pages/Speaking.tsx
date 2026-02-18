@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -8,6 +8,7 @@ import {
   CarouselPrevious,
   CarouselNext,
   CarouselDots,
+  type CarouselApi,
 } from "@/components/ui/carousel";
 import { ArrowRight, Mic, Quote, ChevronDown } from "lucide-react";
 import Footer from "@/components/sections/Footer";
@@ -36,6 +37,70 @@ const TestimonialCard = ({ quote, name, company }: { quote: string; name: string
         {name ? `${name}, ` : ""}{company}
       </p>
     </article>
+  );
+};
+
+const photoPlaceholders = Array.from({ length: 8 }, (_, i) => ({
+  src: "/placeholder.svg",
+  alt: `Speaking event photo ${i + 1}`,
+}));
+
+const PhotoCarousel = () => {
+  const [api, setApi] = useState<CarouselApi>();
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const onSelect = useCallback(() => {
+    if (!api) return;
+    setActiveIndex(api.selectedScrollSnap());
+  }, [api]);
+
+  useEffect(() => {
+    if (!api) return;
+    onSelect();
+    api.on("select", onSelect);
+    return () => { api.off("select", onSelect); };
+  }, [api, onSelect]);
+
+  return (
+    <section className="py-12 md:py-20 relative overflow-hidden bg-secondary/20">
+      {/* Vignette overlays */}
+      <div className="absolute inset-y-0 left-0 w-24 md:w-40 bg-gradient-to-r from-secondary/20 to-transparent z-10 pointer-events-none" />
+      <div className="absolute inset-y-0 right-0 w-24 md:w-40 bg-gradient-to-l from-secondary/20 to-transparent z-10 pointer-events-none" />
+
+      <Carousel
+        opts={{ align: "center", loop: true, slidesToScroll: 1 }}
+        setApi={setApi}
+        className="w-full"
+      >
+        <CarouselContent className="-ml-4">
+          {photoPlaceholders.map((photo, i) => {
+            const isActive = i === activeIndex;
+            return (
+              <CarouselItem
+                key={i}
+                className="pl-4 basis-3/4 md:basis-1/2 transition-all duration-500 ease-out"
+              >
+                <div
+                  className={`aspect-[3/2] rounded-xl shadow-2xl overflow-hidden transition-all duration-500 ease-out ${
+                    isActive
+                      ? "scale-100 opacity-100 rotate-0"
+                      : "scale-90 opacity-60 rotate-2"
+                  }`}
+                >
+                  <img
+                    src={photo.src}
+                    alt={photo.alt}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </CarouselItem>
+            );
+          })}
+        </CarouselContent>
+        <CarouselPrevious className="left-4 md:left-8 z-20" />
+        <CarouselNext className="right-4 md:right-8 z-20" />
+      </Carousel>
+    </section>
   );
 };
 
@@ -148,6 +213,9 @@ const Speaking = () => {
               </div>
             </div>
           </article>
+
+          {/* Photo Carousel */}
+          <PhotoCarousel />
 
           {/* Speaking Topics - Interactive Q&A */}
           <SpeakingQA />
