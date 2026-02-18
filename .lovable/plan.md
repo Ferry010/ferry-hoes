@@ -1,85 +1,29 @@
 
 
-## Full-Screen Chat Overlay with Gated Entry
+## Reposition Hero Content to Bottom-Left
 
-### Concept
+The chat bubbles and name currently sit dead-center, covering your face and body in the video. The fix: anchor everything to the bottom-left so your upper body stays visible and the content feels like a natural overlay.
 
-When visitors click "Continue the conversation" in the hero, instead of scrolling to a section, a **full-screen overlay** takes over. The page scroll is locked -- they're now "in the chat." The first thing Ferry asks is a fork:
+### Layout change
 
-1. **"I'll explore myself"** -- closes the overlay, unlocks scroll, visitor browses the site freely
-2. **"Let's talk"** -- kicks off the interactive conversation tree about Ferry, Brand Humanizing, and the book
+Instead of `flex items-center justify-center` (which centers everything vertically and horizontally), switch to `flex items-end` so the content block sits at the bottom of the viewport. Combined with left-alignment and bottom padding, the bubbles will stack in the lower-left corner -- out of the way of the main subject in the video.
 
-This creates a moment of intentional engagement. Visitors who want to chat get an immersive experience; those who want to browse aren't held hostage.
+### What changes
 
-### How it works
+**File: `src/components/sections/HeroVideo.tsx`**
 
-1. Hero CTA click opens a full-screen overlay (not a new section -- a fixed overlay on top of everything)
-2. Body scroll is disabled (`overflow: hidden` on `document.body`)
-3. Ferry opens: "Nice. What would you like to do?"
-4. Two options appear:
-   - "I'll look around myself" -- closes overlay, re-enables scroll
-   - "Let's talk" -- starts the conversation tree
-5. The conversation plays out exactly like the current ConversationSection but inside the overlay
-6. When conversation ends (final CTA or "Start over"), visitor can close the overlay and return to the site
+1. Change the section from `flex items-center justify-center` to `flex items-end` so content gravitates to the bottom
+2. Add `pb-16 md:pb-20` padding to give breathing room from the screen edge
+3. Remove `justify-center` -- content naturally aligns left already
+4. The name/subtitle block moves below the bubbles at the bottom-left, which is a common speaker-site pattern (like a lower-third in broadcast)
 
-### Layout
+### What stays the same
 
-```text
-+------------------------------------------+
-|                    [X]   |  (close button, top-right)
-|                                          |
-|          (breathing room)                |
-|                                          |
-|   [Ferry bubble]                         |
-|                          [Your reply]    |
-|   [Ferry bubble]                         |
-|                                          |
-|         [Option A] [Option B] [Option C] |
-+------------------------------------------+
-```
+- All bubble text, styling, and animation timing
+- Video background and overlay darkness
+- CTA button behavior (opens contact form)
+- Mobile responsiveness (content just hugs the bottom instead of the center)
 
-Dark background matching the hero. Same bubble styling. Content anchored to the bottom with `flex justify-end`.
+### Result
 
-### Updated conversation tree
-
-**Gate node** (new root):
-- Ferry: "Nice. What would you like to do?"
-  - "I'll look around myself" --> closes overlay
-  - "Let's talk" --> moves to current "start" node
-
-**Start node** (after choosing "Let's talk"):
-- Ferry: "Glad you're staying. What are you curious about?"
-  - "What is Brand Humanizing?"
-  - "Tell me about your speaking"
-  - "Tell me about your book"
-
-All subsequent branches stay the same as the current tree (Brand Humanizing deep-dives, speaking topics/venues, book details). Every non-final node has 3 options. Final nodes show the "Shoot me a message" CTA plus a "Close" option to exit the overlay.
-
-### Files changed
-
-**`src/components/sections/ConversationSection.tsx`** -- rewrite as overlay component
-- Change from a `<section>` to a `fixed inset-0 z-50` overlay
-- Accept `isOpen` and `onClose` props
-- Add gate node at the start with the "explore myself" / "let's talk" fork
-- On "explore myself", call `onClose()`
-- Lock body scroll when open (`useEffect` toggling `document.body.style.overflow`)
-- Add close button (X) in top-right corner
-- Keep all existing conversation tree nodes and logic
-- Keep bubble styling, animations, auto-scroll
-
-**`src/components/sections/HeroVideo.tsx`** -- manage overlay state
-- Add `useState<boolean>(false)` for overlay visibility
-- CTA onClick sets state to `true` instead of scrolling
-- Render `ConversationSection` with `isOpen` / `onClose` props
-
-**`src/pages/Index.tsx`** -- remove standalone ConversationSection
-- Remove the `<ConversationSection />` from the page layout since it's now rendered inside HeroVideo as an overlay
-
-### Technical details
-
-- Scroll lock: `useEffect` that sets `document.body.style.overflow = 'hidden'` when open, restores on close/unmount
-- Overlay uses `fixed inset-0 z-50 bg-foreground` -- completely covers the page
-- Close button: subtle X in top-right, plus the "explore myself" option also closes
-- Conversation state resets when overlay closes (so re-opening starts fresh)
-- The overlay fades in with `animate-fade-in` for a smooth entrance
-- ESC key also closes the overlay for accessibility
+Your face and upper body stay fully visible in the top/center of the frame. The chat conversation reads like a lower-third overlay -- clean, professional, and out of the way.
