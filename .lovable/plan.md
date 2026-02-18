@@ -1,29 +1,63 @@
 
 
-## Reposition Hero Content to Bottom-Left
+## Interactive Q&A Section: "Continue the Conversation"
 
-The chat bubbles and name currently sit dead-center, covering your face and body in the video. The fix: anchor everything to the bottom-left so your upper body stays visible and the content feels like a natural overlay.
+### Concept
 
-### Layout change
+The hero ends with "Continue the conversation" -- so let's actually continue it. The CTA smooth-scrolls to a new section that extends the chat metaphor: a set of clickable question bubbles that visitors can tap to reveal Ferry's answers. Same visual language as the hero (chat bubbles, same styling), but now the visitor is in control.
 
-Instead of `flex items-center justify-center` (which centers everything vertically and horizontally), switch to `flex items-end` so the content block sits at the bottom of the viewport. Combined with left-alignment and bottom padding, the bubbles will stack in the lower-left corner -- out of the way of the main subject in the video.
+This is stronger than static text because:
+- It maintains the conversational tone established in the hero
+- It gives visitors agency -- they choose what they're curious about
+- It keeps people engaged longer (interactive > passive)
+- It naturally guides visitors toward the content sections below (each answer can hint at speaking, book, brand humanizing, etc.)
 
-### What changes
+### How it works
 
-**File: `src/components/sections/HeroVideo.tsx`**
+1. **"Continue the conversation" CTA** in the hero smooth-scrolls down to the new section (instead of opening the contact form)
+2. **The new section** shows 4-5 clickable question bubbles styled like the visitor bubble from the hero (right-aligned, primary color)
+3. **When a visitor clicks a question**, Ferry's answer fades in below it (left-aligned, light background -- same as hero Ferry bubbles)
+4. **Only one answer is open at a time** -- clicking a new question collapses the previous one, keeping it clean
+5. **A final CTA** at the bottom of the section opens the actual contact form for questions not covered
 
-1. Change the section from `flex items-center justify-center` to `flex items-end` so content gravitates to the bottom
-2. Add `pb-16 md:pb-20` padding to give breathing room from the screen edge
-3. Remove `justify-center` -- content naturally aligns left already
-4. The name/subtitle block moves below the bubbles at the bottom-left, which is a common speaker-site pattern (like a lower-third in broadcast)
+### Question/Answer content
 
-### What stays the same
+| Question (visitor clicks) | Ferry's answer |
+|---|---|
+| "What is Brand Humanizing?" | "It's the practice of using technology to make brands more human, not less. Think of it as the antidote to soulless automation." |
+| "Can I book you as a speaker?" | "Absolutely. I speak at conferences and corporate events worldwide about Brand Humanizing, technology, and human connection." |
+| "Tell me about your book" | "Brand Humanizing is available now. It's the playbook for making your brand feel more human in a tech-driven world." |
+| "How can I work with you?" | "From keynotes to workshops to consulting -- let's figure out what fits. Drop me a message and we'll talk." |
 
-- All bubble text, styling, and animation timing
-- Video background and overlay darkness
-- CTA button behavior (opens contact form)
-- Mobile responsiveness (content just hugs the bottom instead of the center)
+### Visual design
 
-### Result
+- Clean background (secondary/light) to contrast with the dark hero above
+- Section header: small, understated -- something like "Pick a question" or just a subtle prompt
+- Question bubbles: same rounded style as hero visitor bubble, with a subtle hover effect (scale, shadow)
+- Answer bubbles: same style as hero Ferry bubbles, animate in with `animate-fade-up`
+- Final CTA: "Ask me something else" button that opens the contact form
+- The whole section stays compact -- not a full-screen affair, more like a focused interaction zone
 
-Your face and upper body stay fully visible in the top/center of the frame. The chat conversation reads like a lower-third overlay -- clean, professional, and out of the way.
+### Files changed
+
+**New file: `src/components/sections/ConversationSection.tsx`**
+- New component with the interactive Q&A logic
+- Uses React state to track which question is active
+- Smooth collapse/expand animation for answers
+- Final "Ask me something else" CTA triggers the existing `open-contact` event
+
+**Modified: `src/components/sections/HeroVideo.tsx`**
+- Change the CTA `onClick` from dispatching `open-contact` to smooth-scrolling to `#conversation`
+
+**Modified: `src/pages/Index.tsx`**
+- Import and place `ConversationSection` directly after the hero (before `AboutBlock`)
+
+### Technical details
+
+- The Q&A state is a simple `useState<number | null>(null)` tracking the active question index
+- Clicking the same question again collapses it (toggle behavior)
+- Answer reveal uses CSS transition on `max-height` and `opacity` for a smooth expand
+- The section gets `id="conversation"` for the scroll target
+- Scroll behavior uses `document.getElementById('conversation')?.scrollIntoView({ behavior: 'smooth' })`
+- No database or backend needed -- content is hardcoded since it's curated messaging
+
