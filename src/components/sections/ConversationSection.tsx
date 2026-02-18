@@ -22,6 +22,7 @@ const conversationTree: Record<string, ConversationNode> = {
     options: [
       { label: "How did you come up with it?", nextNode: "bhOrigin" },
       { label: "Can I read more?", nextNode: "bhReadMore" },
+      { label: "How does it work in practice?", nextNode: "bhPractice" },
     ],
   },
   bhOrigin: {
@@ -30,25 +31,53 @@ const conversationTree: Record<string, ConversationNode> = {
     options: [
       { label: "That resonates. Let's talk.", nextNode: "final" },
       { label: "Tell me about the book", nextNode: "book" },
+      { label: "How does it work in practice?", nextNode: "bhPractice" },
     ],
   },
   bhReadMore: {
     ferryMessage:
       "The book is the best place to start — it lays out the whole philosophy with real examples. Or just shoot me a message and I'll point you in the right direction.",
-    isFinal: true,
+    options: [
+      { label: "Where can I get it?", nextNode: "bookWhere" },
+      { label: "Tell me more about you", nextNode: "speaking" },
+      { label: "Let's chat", nextNode: "final" },
+    ],
+  },
+  bhPractice: {
+    ferryMessage:
+      "It starts with listening — really listening — to your audience. Then you use tech to amplify empathy, not replace it. Every touchpoint becomes a chance to be genuinely human.",
+    options: [
+      { label: "I want to bring this to my team", nextNode: "final" },
+      { label: "Tell me about the book", nextNode: "book" },
+      { label: "Can you speak about this?", nextNode: "speaking" },
+    ],
   },
   speaking: {
     ferryMessage:
       "Absolutely. I speak at conferences and corporate events worldwide about Brand Humanizing, technology, and human connection.",
     options: [
       { label: "What topics do you cover?", nextNode: "speakingTopics" },
+      { label: "Where have you spoken?", nextNode: "speakingVenues" },
       { label: "Let's talk", nextNode: "final" },
     ],
   },
   speakingTopics: {
     ferryMessage:
       "Everything from the future of human-brand relationships to how AI can actually bring people closer. I tailor every talk to the audience.",
-    isFinal: true,
+    options: [
+      { label: "I'd love to book you", nextNode: "final" },
+      { label: "Tell me about the book", nextNode: "book" },
+      { label: "What is Brand Humanizing?", nextNode: "brandHumanizing" },
+    ],
+  },
+  speakingVenues: {
+    ferryMessage:
+      "From intimate boardrooms to stages with thousands. TNW, SXSW, corporate summits — wherever the conversation matters.",
+    options: [
+      { label: "Let's set something up", nextNode: "final" },
+      { label: "What topics do you cover?", nextNode: "speakingTopics" },
+      { label: "Tell me about your book", nextNode: "book" },
+    ],
   },
   book: {
     ferryMessage:
@@ -56,6 +85,7 @@ const conversationTree: Record<string, ConversationNode> = {
     options: [
       { label: "Where can I get it?", nextNode: "bookWhere" },
       { label: "What's it about?", nextNode: "bookAbout" },
+      { label: "Who is it for?", nextNode: "bookAudience" },
     ],
   },
   bookWhere: {
@@ -66,7 +96,20 @@ const conversationTree: Record<string, ConversationNode> = {
   bookAbout: {
     ferryMessage:
       "It's about using technology to create genuine human connections with your audience — not replacing them. Real stories, real frameworks, no fluff.",
-    isFinal: true,
+    options: [
+      { label: "I need this for my team", nextNode: "final" },
+      { label: "Where can I get it?", nextNode: "bookWhere" },
+      { label: "Can you speak about this?", nextNode: "speaking" },
+    ],
+  },
+  bookAudience: {
+    ferryMessage:
+      "Marketers, founders, anyone building a brand in the digital age who refuses to sacrifice humanity for efficiency.",
+    options: [
+      { label: "That's me. Let's talk.", nextNode: "final" },
+      { label: "Where can I get it?", nextNode: "bookWhere" },
+      { label: "What topics do you speak on?", nextNode: "speakingTopics" },
+    ],
   },
   final: {
     ferryMessage:
@@ -112,9 +155,9 @@ const ConversationSection = () => {
   return (
     <section
       id="conversation"
-      className="py-20 md:py-28 bg-foreground text-background"
+      className="min-h-screen bg-foreground text-background flex flex-col justify-end"
     >
-      <div className="container px-6 md:px-8 max-w-xl md:max-w-2xl">
+      <div className="container px-6 md:px-8 max-w-xl md:max-w-2xl py-16 md:py-24">
         <div className="flex flex-col gap-4">
           {history.map((entry, i) => {
             const node = conversationTree[entry.nodeId];
@@ -129,7 +172,7 @@ const ConversationSection = () => {
                   </div>
                 </div>
 
-                {/* Visitor's chosen reply (if already picked) */}
+                {/* Visitor's chosen reply */}
                 {entry.visitorChoice && (
                   <div className="self-end max-w-[85%]">
                     <div className="rounded-2xl rounded-br-md px-4 py-2.5 bg-primary/80 text-primary-foreground text-sm md:text-base backdrop-blur-sm">
@@ -138,16 +181,16 @@ const ConversationSection = () => {
                   </div>
                 )}
 
-                {/* Active options (only on latest node, if not finished) */}
+                {/* Active options — chip row at bottom */}
                 {isLatest && !isFinished && node.options && (
-                  <div className="flex flex-col items-end gap-2 mt-1 animate-fade-in">
+                  <div className="flex flex-wrap justify-end gap-2 mt-1 animate-fade-in">
                     {node.options.map((option) => (
                       <button
                         key={option.nextNode}
                         onClick={() => handleChoice(option)}
-                        className="max-w-[85%] text-left transition-all duration-200 hover:scale-[1.02] hover:shadow-md"
+                        className="transition-all duration-200 hover:scale-[1.02] hover:shadow-md"
                       >
-                        <div className="rounded-2xl rounded-br-md px-4 py-2.5 bg-primary/60 text-primary-foreground text-sm md:text-base backdrop-blur-sm border border-primary-foreground/10 hover:bg-primary/80">
+                        <div className="rounded-full px-4 py-2 bg-primary/60 text-primary-foreground text-sm backdrop-blur-sm border border-primary-foreground/10 hover:bg-primary/80 whitespace-nowrap">
                           {option.label}
                         </div>
                       </button>
