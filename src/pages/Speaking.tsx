@@ -9,34 +9,13 @@ import {
   CarouselNext,
   CarouselDots,
 } from "@/components/ui/carousel";
-import { ArrowRight, Mic, Users, Lightbulb, TrendingUp, Brain, Quote, ChevronDown } from "lucide-react";
+import { ArrowRight, Mic, Quote, ChevronDown } from "lucide-react";
 import Footer from "@/components/sections/Footer";
 import AskFerryBubble from "@/components/AskFerryBubble";
 import SEOHead from "@/components/blog/SEOHead";
 import stagePhoto from "@/assets/ferry-speaking.jpg";
+import SpeakingQA from "@/components/sections/SpeakingQA";
 
-const topics = [
-  {
-    icon: Brain,
-    title: "Human-Centered Technology",
-    description: "How to leverage AI and emerging tech while keeping humans at the center of innovation.",
-  },
-  {
-    icon: TrendingUp,
-    title: "Future of Work",
-    description: "Navigating the changing landscape of work, leadership, and organizational culture.",
-  },
-  {
-    icon: Lightbulb,
-    title: "Digital Transformation",
-    description: "Moving beyond buzzwords to create meaningful, lasting change in organizations.",
-  },
-  {
-    icon: Users,
-    title: "Leadership in the AI Age",
-    description: "What it means to lead authentically when technology is reshaping everything.",
-  },
-];
 
 const TestimonialCard = ({ quote, name, company }: { quote: string; name: string; company: string }) => {
   const [expanded, setExpanded] = useState(false);
@@ -170,45 +149,8 @@ const Speaking = () => {
             </div>
           </article>
 
-          {/* Speaking Topics */}
-          <section className="py-24 md:py-32 bg-background">
-            <div className="container px-6 md:px-8">
-              <div className="max-w-6xl mx-auto">
-                <div className="text-center mb-16">
-                  <span className="text-accent font-medium text-sm mb-2 block">Topics</span>
-                  <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-foreground">
-                    What Ferry speaks about
-                  </h2>
-                  <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                    Each talk is tailored to your audience, but these themes form 
-                    the foundation of Ferry's speaking repertoire.
-                  </p>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-6">
-                  {topics.map((topic) => (
-                    <Card key={topic.title} className="border-border/50 bg-card/50 backdrop-blur-sm">
-                      <CardContent className="p-8">
-                        <div className="flex items-start gap-6">
-                          <div className="p-3 bg-accent/10 rounded-xl shrink-0">
-                            <topic.icon className="h-6 w-6 text-accent" />
-                          </div>
-                          <div>
-                            <h3 className="font-display text-xl font-semibold mb-2 text-foreground">
-                              {topic.title}
-                            </h3>
-                            <p className="text-muted-foreground leading-relaxed">
-                              {topic.description}
-                            </p>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </section>
+          {/* Speaking Topics - Interactive Q&A */}
+          <SpeakingQA />
 
           {/* Video Reel Placeholder */}
           <section className="py-24 md:py-32 bg-secondary/30">
