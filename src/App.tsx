@@ -15,6 +15,7 @@ import PostEditor from "./pages/PostEditor";
 import AdminMessages from "./pages/AdminMessages";
 import About from "./pages/About";
 import AdminLayout from "./components/admin/AdminLayout";
+import { ScrollToTop } from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +26,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <ScrollToTop />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/blog" element={<Blog />} />
