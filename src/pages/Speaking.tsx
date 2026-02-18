@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -8,7 +9,7 @@ import {
   CarouselNext,
   CarouselDots,
 } from "@/components/ui/carousel";
-import { ArrowRight, Mic, Users, Lightbulb, TrendingUp, Brain, Quote } from "lucide-react";
+import { ArrowRight, Mic, Users, Lightbulb, TrendingUp, Brain, Quote, ChevronDown } from "lucide-react";
 import Footer from "@/components/sections/Footer";
 import AskFerryBubble from "@/components/AskFerryBubble";
 import SEOHead from "@/components/blog/SEOHead";
@@ -36,6 +37,28 @@ const topics = [
     description: "What it means to lead authentically when technology is reshaping everything.",
   },
 ];
+
+const TestimonialCard = ({ quote, name, company }: { quote: string; name: string; company: string }) => {
+  const [expanded, setExpanded] = useState(false);
+  return (
+    <article className="group relative overflow-hidden bg-gradient-to-br from-background to-accent/[0.03] rounded-2xl p-6 md:p-8 shadow-soft hover:shadow-soft-lg transition-all duration-300 border-l-2 border-accent/30 hover:border-accent border-t border-r border-b border-t-transparent border-r-transparent border-b-transparent hover:border-t-accent/20 hover:border-r-accent/20 hover:border-b-accent/20 h-full flex flex-col">
+      <Quote className="h-5 w-5 text-accent/30 mb-3 shrink-0" />
+      <p className={`text-muted-foreground italic leading-relaxed text-sm transition-all duration-300 ${expanded ? "" : "line-clamp-2"}`}>
+        "{quote}"
+      </p>
+      <button
+        onClick={() => setExpanded(!expanded)}
+        className="text-accent text-xs font-medium mt-2 hover:underline inline-flex items-center gap-1 self-start"
+      >
+        {expanded ? "Show less" : "Read full review"}
+        <ChevronDown className={`h-3 w-3 transition-transform duration-200 ${expanded ? "rotate-180" : ""}`} />
+      </button>
+      <p className="font-semibold text-foreground text-sm mt-auto pt-4">
+        {name ? `${name}, ` : ""}{company}
+      </p>
+    </article>
+  );
+};
 
 const Speaking = () => {
   return (
@@ -240,16 +263,8 @@ const Speaking = () => {
                       { quote: "I recently organized a workshop where Ferry Hoes and the Brand Humanizing Institute delivered a lecture on the Ethics of AI. No 'Death by PowerPoint,' but a smooth and captivating story that got us as an IT organization thinking. Ferry is second to none at keeping his audience engaged. I received a lot of positive feedback about his contribution to our workshop and wholeheartedly recommend him.", name: "Laurens", company: "Atos" },
                       { quote: "Ferry has the gift of explaining complex theory in an accessible way. The AI experience among participants varied widely — from no experience at all to employees who already use it daily. Even those without any experience came out of the workshop surprised and very enthusiastic.", name: "Maud", company: "Chubb Fire & Security" },
                     ].map((testimonial, i) => (
-                      <CarouselItem key={i} className="pl-6 basis-full">
-                        <article className="group relative overflow-hidden bg-gradient-to-br from-background to-accent/[0.03] rounded-2xl p-8 md:p-10 shadow-soft hover:shadow-soft-lg transition-all duration-300 border-l-2 border-accent/30 hover:border-accent border-t border-r border-b border-t-transparent border-r-transparent border-b-transparent hover:border-t-accent/20 hover:border-r-accent/20 hover:border-b-accent/20 h-full">
-                          <Quote className="h-6 w-6 text-accent/30 mb-4" />
-                          <p className="text-muted-foreground italic leading-relaxed mb-6">
-                            "{testimonial.quote}"
-                          </p>
-                          <p className="font-semibold text-foreground text-sm">
-                            {testimonial.name ? `${testimonial.name}, ` : ""}{testimonial.company}
-                          </p>
-                        </article>
+                      <CarouselItem key={i} className="pl-6 basis-full md:basis-1/2 lg:basis-1/3">
+                        <TestimonialCard quote={testimonial.quote} name={testimonial.name} company={testimonial.company} />
                       </CarouselItem>
                     ))}
                   </CarouselContent>
