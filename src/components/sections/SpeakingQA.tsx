@@ -20,7 +20,7 @@ const qAndA = [
 ];
 
 const SpeakingQA = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState<number | null>(0);
 
   return (
     <section className="py-24 md:py-32 bg-background">
@@ -36,34 +36,37 @@ const SpeakingQA = () => {
             </p>
           </div>
 
-          {/* Questions — right-aligned visitor bubbles */}
-          <div className="flex flex-col gap-3 mb-8">
-            {qAndA.map((item, i) => (
-              <button
-                key={i}
-                onClick={() => setActiveIndex(i)}
-                className={`self-end max-w-[85%] md:max-w-[70%] text-left px-5 py-3 rounded-2xl rounded-br-sm text-sm md:text-base font-medium transition-all duration-200 ${
-                  activeIndex === i
-                    ? "bg-primary text-primary-foreground shadow-soft"
-                    : "bg-primary/80 text-primary-foreground/90 hover:bg-primary/90 hover:shadow-soft"
-                }`}
-              >
-                {item.question}
-              </button>
-            ))}
-          </div>
+          <div className="flex flex-col gap-4">
+            {qAndA.map((item, i) => {
+              const isActive = activeIndex === i;
+              return (
+                <div key={i} className="flex flex-col gap-2">
+                  {/* Question — right-aligned visitor bubble */}
+                  <button
+                    onClick={() => setActiveIndex(isActive ? null : i)}
+                    className={`self-end max-w-[85%] md:max-w-[70%] text-left px-5 py-3 rounded-2xl rounded-br-sm text-sm md:text-base font-medium transition-all duration-200 ${
+                      isActive
+                        ? "bg-primary text-primary-foreground shadow-soft"
+                        : "bg-primary/80 text-primary-foreground/90 hover:bg-primary/90 hover:shadow-soft"
+                    }`}
+                  >
+                    {item.question}
+                  </button>
 
-          {/* Ferry's answer — left-aligned reply bubble */}
-          <div className="flex flex-col items-start gap-2">
-            <span className="text-xs font-medium text-muted-foreground ml-2">Ferry</span>
-            <div
-              key={activeIndex}
-              className="bg-background/90 backdrop-blur-md border border-border/50 rounded-2xl rounded-bl-sm px-6 py-5 max-w-[90%] md:max-w-[80%] shadow-soft animate-fade-in"
-            >
-              <p className="text-foreground leading-relaxed text-sm md:text-base">
-                {qAndA[activeIndex].answer}
-              </p>
-            </div>
+                  {/* Ferry's answer — left-aligned, shown beneath the question */}
+                  {isActive && (
+                    <div className="flex flex-col items-start gap-1 mt-1">
+                      <span className="text-xs font-medium text-muted-foreground ml-2">Ferry</span>
+                      <div className="bg-background/90 backdrop-blur-md border border-border/50 rounded-2xl rounded-bl-sm px-6 py-5 max-w-[90%] md:max-w-[80%] shadow-soft animate-fade-in">
+                        <p className="text-foreground leading-relaxed text-sm md:text-base">
+                          {item.answer}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
