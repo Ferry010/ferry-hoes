@@ -154,27 +154,69 @@ const About = () => {
         <section className="py-24 bg-background">
           <div className="container px-6 md:px-8">
             <div className="max-w-3xl mx-auto">
-              <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-12">
+              <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-12 md:text-center">
                 Key <span className="text-accent">milestones</span>
               </h2>
-              <div className="relative pl-8 border-l-2 border-border space-y-10">
-                {[
-                  { year: "1987", text: "Born in Delft, the Netherlands" },
-                  { year: "1997", text: "Built first website at age 10" },
-                  { year: "2003", text: "Made it to the final 16 of Junior Eurovision auditions" },
-                  { year: "2010", text: "Graduated in Marketing, started career in IT sales" },
-                  { year: "2016", text: "Quit corporate life, became a growth hacker" },
-                  { year: "2017", text: "Coined the term Brand Humanizing" },
-                  { year: "2018", text: "First public speaking gig at a college" },
-                  { year: "2019", text: "Joined a speakers agency, started speaking internationally" },
-                  { year: "Today", text: "One of the most booked speakers in the Netherlands" },
-                ].map((item) => (
-                  <div key={item.year} className="relative">
-                    <span className="absolute -left-[25px] top-1.5 h-3 w-3 rounded-full bg-accent" />
-                    <span className="font-display font-bold text-accent text-lg">{item.year}</span>
-                    <p className="text-muted-foreground mt-1">{item.text}</p>
-                  </div>
-                ))}
+              <div className="relative">
+                {/* Center line */}
+                <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-border md:-translate-x-px" />
+
+                <div className="space-y-8 md:space-y-12">
+                  {[
+                    { key: "1987", year: "1987", text: "Born in Delft, the Netherlands" },
+                    { key: "1997", year: "1997", text: "Built my first website at age 10" },
+                    { key: "2002", year: "2002", text: "Made it to the final 16 of the Junior Eurovision auditions" },
+                    { key: "2009", year: "2009", text: "Started my career in IT sales" },
+                    { key: "2016", year: "2016", text: "Quit corporate life to become a full-time entrepreneur and business owner" },
+                    { key: "2017", year: "2017", text: "Coined Brand Humanizing" },
+                    { key: "2019", year: "2019", text: "Founded the Brand Humanizing Institute" },
+                    { key: "2021", year: "2021", text: "Joined Speakers Academy as my agent" },
+                    { key: "2022", year: "2022", text: "Won the prestigious Dutch Government's AI Hackathon" },
+                    { key: "2025a", year: "2025", text: "Over 40 stages annually, making it to the top most booked speakers in the country" },
+                    { key: "2025b", year: "2025", text: "Published the Brand Humanizing book" },
+                  ].map((item, i) => {
+                    const isLeft = i % 2 === 0;
+                    return (
+                      <div key={item.key} className="relative flex items-start md:items-center">
+                        {/* Dot */}
+                        <span className="absolute left-4 md:left-1/2 top-5 md:top-1/2 h-3 w-3 -translate-x-1/2 md:-translate-y-1/2 rounded-full bg-accent z-10" />
+
+                        {/* Mobile: always right of line */}
+                        <div className="ml-10 md:hidden">
+                          <div className="bg-card border border-border rounded-xl p-4 shadow-sm">
+                            <span className="font-display font-bold text-accent text-lg">{item.year}</span>
+                            <p className="text-muted-foreground mt-1 text-sm">{item.text}</p>
+                          </div>
+                        </div>
+
+                        {/* Desktop: alternating */}
+                        <div className="hidden md:grid md:grid-cols-2 md:gap-8 w-full">
+                          {isLeft ? (
+                            <>
+                              <div className="flex justify-end">
+                                <div className="bg-card border border-border rounded-xl p-4 shadow-sm max-w-xs text-right">
+                                  <span className="font-display font-bold text-accent text-lg">{item.year}</span>
+                                  <p className="text-muted-foreground mt-1 text-sm">{item.text}</p>
+                                </div>
+                              </div>
+                              <div />
+                            </>
+                          ) : (
+                            <>
+                              <div />
+                              <div className="flex justify-start">
+                                <div className="bg-card border border-border rounded-xl p-4 shadow-sm max-w-xs">
+                                  <span className="font-display font-bold text-accent text-lg">{item.year}</span>
+                                  <p className="text-muted-foreground mt-1 text-sm">{item.text}</p>
+                                </div>
+                              </div>
+                            </>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </div>
