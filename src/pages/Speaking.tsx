@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight, Mic, Users, Lightbulb, TrendingUp, Brain } from "lucide-react";
+import { ArrowRight, Mic, Users, Lightbulb, TrendingUp, Brain, Quote } from "lucide-react";
 import Footer from "@/components/sections/Footer";
 import AskFerryBubble from "@/components/AskFerryBubble";
 import SEOHead from "@/components/blog/SEOHead";
@@ -202,26 +202,41 @@ const Speaking = () => {
             </div>
           </section>
 
-          {/* Testimonials Placeholder */}
+          {/* Testimonials */}
           <section className="py-24 md:py-32 bg-background">
             <div className="container px-6 md:px-8">
-              <div className="max-w-4xl mx-auto text-center">
-                <span className="text-accent font-medium text-sm mb-2 block">Testimonials</span>
-                <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-foreground">
-                  What organizers say
-                </h2>
-                <p className="text-xl text-muted-foreground mb-12">
-                  Feedback from event organizers who have worked with Ferry.
-                </p>
-                
-                {/* Testimonials placeholder */}
+              <div className="max-w-6xl mx-auto">
+                <div className="text-center mb-16">
+                  <span className="text-accent font-medium text-sm mb-2 block">Testimonials</span>
+                  <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-foreground">
+                    What organizers say
+                  </h2>
+                  <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                    Feedback from event organizers who have worked with Ferry.
+                  </p>
+                </div>
+
                 <div className="grid md:grid-cols-2 gap-6">
-                  {[1, 2].map((i) => (
-                    <Card key={i} className="border-border/50 bg-card/50">
+                  {[
+                    { quote: "Ferry took us on an inspiring journey, with the topic perfectly tailored to our audience. He engaged participants effectively and left more than enough room for questions.", name: "", company: "Avans Hogeschool" },
+                    { quote: "From our very first meeting with Ferry, the collaboration was wonderful. He's incredibly enthusiastic, flexible, and loves thinking along about both content and practical matters. The day itself was a great experience too! Participants of the keynote and the in-depth workshop said they felt inspired and gained new insights about ChatGPT and AI. In short: we're enthusiastic about Ferry!", name: "Abel", company: "Aestate" },
+                    { quote: "Ferry is a fantastic speaker. He adapts perfectly to the audience and showed during the workshops that he's highly flexible and alert to reactions from the room. We're very happy with the collaboration and he gave our clients plenty of inspiration they can put into practice.", name: "Almer", company: "ASR" },
+                    { quote: "We booked a speaker through Speakers Academy for our event, and the experience was very positive. Communication was smooth, and they actively helped find a speaker who matched our needs. The speaker made a strong contribution to the success of our event and engaged the audience brilliantly. We're very satisfied with the collaboration.", name: "Rianne", company: "Shared" },
+                    { quote: "Energetic, positive, funny. It was a wonderful session and we received a lot of positive feedback about Ferry's talk. Communication was pleasant, and in the absence of the regular contact person it was seamlessly picked up by a colleague. The aftercare was neatly arranged too. We're happy!", name: "", company: "CPM Nederland" },
+                    { quote: "Ferry is a knowledgeable and approachable speaker. You could tell at our event from the extensive Q&A, where many questions came from the audience about developments in AI. With his expertise on the synergy between humans and technology, Ferry was a strong keynote opening for our event.", name: "", company: "ACES Direct" },
+                    { quote: "Ferry was well prepared and it was great having him as our moderator. He thought along and took action where needed. The reactions from the audience were positive.", name: "Els", company: "Triade Vitree" },
+                    { quote: "I recently organized a workshop where Ferry Hoes and the Brand Humanizing Institute delivered a lecture on the Ethics of AI. No 'Death by PowerPoint,' but a smooth and captivating story that got us as an IT organization thinking. Ferry is second to none at keeping his audience engaged. I received a lot of positive feedback about his contribution to our workshop and wholeheartedly recommend him.", name: "Laurens", company: "Atos" },
+                    { quote: "Ferry has the gift of explaining complex theory in an accessible way. The AI experience among participants varied widely — from no experience at all to employees who already use it daily. Even those without any experience came out of the workshop surprised and very enthusiastic.", name: "Maud", company: "Chubb Fire & Security" },
+                  ].map((testimonial, i) => (
+                    <Card key={i} className="border-border/50 border-l-4 border-l-accent bg-card/50 rounded-xl">
                       <CardContent className="p-8">
-                        <div className="h-32 flex items-center justify-center">
-                          <p className="text-muted-foreground italic">Testimonial coming soon</p>
-                        </div>
+                        <Quote className="h-6 w-6 text-accent/40 mb-4" />
+                        <p className="text-muted-foreground italic leading-relaxed mb-6">
+                          "{testimonial.quote}"
+                        </p>
+                        <p className="font-semibold text-foreground text-sm">
+                          {testimonial.name ? `${testimonial.name}, ` : ""}{testimonial.company}
+                        </p>
                       </CardContent>
                     </Card>
                   ))}
