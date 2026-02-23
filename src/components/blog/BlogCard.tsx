@@ -12,12 +12,13 @@ const BlogCard = ({ post }: BlogCardProps) => {
       <article className="group bg-background rounded-2xl overflow-hidden shadow-soft hover:shadow-soft-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer border border-transparent hover:border-accent/20">
         {/* Header Image */}
         {post.header_image_url ? (
-          <div className="aspect-[16/10] overflow-hidden">
+          <div className="aspect-[16/10] overflow-hidden relative">
             <img
               src={post.header_image_url}
               alt={post.title}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-accent/10 pointer-events-none" />
           </div>
         ) : (
           <div className="aspect-[16/10] bg-gradient-to-br from-accent/20 to-primary/20 flex items-center justify-center">

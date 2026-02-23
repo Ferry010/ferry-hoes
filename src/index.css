@@ -140,4 +140,8 @@
   .gradient-text {
     @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
   }
+
+  .brand-hero-overlay {
+    @apply absolute inset-0 bg-gradient-to-br from-primary/30 via-transparent to-accent/20 pointer-events-none;
+  }
 }
