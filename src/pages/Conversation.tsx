@@ -1,8 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Home, RotateCcw, MessageCircle } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 import SEOHead from "@/components/blog/SEOHead";
-import Footer from "@/components/sections/Footer";
 import AskFerryBubble from "@/components/AskFerryBubble";
 import TypingIndicator from "@/components/conversation/TypingIndicator";
 import { conversationPaths, type CTA } from "@/data/conversationPaths";
@@ -11,9 +10,9 @@ import { conversationPaths, type CTA } from "@/data/conversationPaths";
 type HistoryEntry =
   | { type: "ferry"; text: string }
   | { type: "visitor"; text: string }
-  | { type: "followUpOptions"; branchKey: string }
+  | { type: "options"; options: { label: string; handler: string }[] }
   | { type: "ctas"; branchKey: string }
-  | { type: "branchOptions" };
+  | { type: "topicPicker" };
 
 /* ── Small sub-components ── */
 const FerryBubble = ({ text }: { text: string }) => (
@@ -78,7 +77,7 @@ const CTAButton = ({ cta, onContact }: { cta: CTA; onContact: () => void }) => {
 const Conversation = () => {
   const navigate = useNavigate();
   const [history, setHistory] = useState<HistoryEntry[]>([]);
-  const [answeredFollowUps, setAnsweredFollowUps] = useState<Record<string, string[]>>({});
+  const [phase, setPhase] = useState<Record<string, number>>({});
   const [usedBranches, setUsedBranches] = useState<string[]>([]);
   const [showTyping, setShowTyping] = useState(false);
   const [interactionStarted, setInteractionStarted] = useState(false);
@@ -105,59 +104,175 @@ const Conversation = () => {
     [scrollToBottom]
   );
 
+  /* ── Handlers ── */
+
   const handleSelectBranch = (key: string) => {
     setInteractionStarted(true);
     const branch = conversationPaths[key];
     setUsedBranches((prev) => [...prev, key]);
+    setPhase((prev) => ({ ...prev, [key]: 1 }));
 
-    // Visitor "sends" the branch label, then Ferry responds
     setHistory((prev) => [...prev, { type: "visitor", text: branch.label }]);
-    addWithTyping(
-      [
-        { type: "ferry", text: branch.response },
-        { type: "followUpOptions", branchKey: key },
-      ]
-    );
+
+    const phase1Options = branch.phase1.map((f) => ({
+      label: f.question,
+      handler: `phase1:${key}:${f.question}`,
+    }));
+
+    addWithTyping([
+      { type: "ferry", text: branch.response },
+      { type: "options", options: phase1Options },
+    ]);
   };
 
-  const handleSelectFollowUp = (branchKey: string, question: string) => {
+  const handlePhase1 = (branchKey: string, question: string) => {
     const branch = conversationPaths[branchKey];
-    const followUp = branch.followUps.find((f) => f.question === question);
+    const followUp = branch.phase1.find((f) => f.question === question);
     if (!followUp) return;
 
-    const newAnswered = [...(answeredFollowUps[branchKey] || []), question];
-    setAnsweredFollowUps((prev) => ({ ...prev, [branchKey]: newAnswered }));
+    // Determine if this is an accelerated branch (user already explored another topic)
+    const isAccelerated = usedBranches.length > 1;
 
-    // Remove the old followUpOptions from history, add the Q, then typing -> A + new options
-    setHistory((prev) => prev.filter((e) => !(e.type === "followUpOptions" && e.branchKey === branchKey)));
+    setPhase((prev) => ({ ...prev, [branchKey]: 2 }));
+
+    // Remove old options from history
+    setHistory((prev) => prev.filter((e) => e.type !== "options"));
     setHistory((prev) => [...prev, { type: "visitor", text: question }]);
 
-    const remaining = branch.followUps.filter((f) => !newAnswered.includes(f.question));
-    const newEntries: HistoryEntry[] = [{ type: "ferry", text: followUp.answer }];
+    if (isAccelerated) {
+      // Accelerated: after phase1 answer, go straight to directional
+      const directional = branch.directional;
+      addWithTyping([
+        { type: "ferry", text: followUp.answer },
+        {
+          type: "options",
+          options: [
+            { label: directional.deeperLabel, handler: `deeper:${branchKey}` },
+            { label: directional.ctaLabel, handler: `cta:${branchKey}` },
+            { label: directional.switchLabel, handler: "switch" },
+          ],
+        },
+      ]);
+    } else {
+      const phase2Options = branch.phase2.map((f) => ({
+        label: f.question,
+        handler: `phase2:${branchKey}:${f.question}`,
+      }));
+
+      addWithTyping([
+        { type: "ferry", text: followUp.answer },
+        { type: "options", options: phase2Options },
+      ]);
+    }
+  };
+
+  const handlePhase2 = (branchKey: string, question: string) => {
+    const branch = conversationPaths[branchKey];
+    const followUp = branch.phase2.find((f) => f.question === question);
+    if (!followUp) return;
+
+    setPhase((prev) => ({ ...prev, [branchKey]: 3 }));
+
+    setHistory((prev) => prev.filter((e) => e.type !== "options"));
+    setHistory((prev) => [...prev, { type: "visitor", text: question }]);
+
+    const directional = branch.directional;
+    addWithTyping([
+      { type: "ferry", text: followUp.answer },
+      {
+        type: "options",
+        options: [
+          { label: directional.deeperLabel, handler: `deeper:${branchKey}` },
+          { label: directional.ctaLabel, handler: `cta:${branchKey}` },
+          { label: directional.switchLabel, handler: "switch" },
+        ],
+      },
+    ]);
+  };
+
+  const handleDeeper = (branchKey: string) => {
+    const branch = conversationPaths[branchKey];
+    setHistory((prev) => prev.filter((e) => e.type !== "options"));
+    setHistory((prev) => [...prev, { type: "visitor", text: branch.directional.deeperLabel }]);
+
+    addWithTyping([
+      { type: "ferry", text: branch.directional.deeperResponse },
+      { type: "ctas", branchKey },
+    ]);
+  };
+
+  const handleCTA = (branchKey: string) => {
+    const branch = conversationPaths[branchKey];
+    setHistory((prev) => prev.filter((e) => e.type !== "options"));
+    setHistory((prev) => [...prev, { type: "visitor", text: branch.directional.ctaLabel }]);
+
+    addWithTyping([
+      { type: "ferry", text: branch.directional.ctaResponse },
+      { type: "ctas", branchKey },
+    ]);
+  };
+
+  const handleSwitch = () => {
+    setHistory((prev) => prev.filter((e) => e.type !== "options"));
+
+    const remaining = Object.entries(conversationPaths).filter(
+      ([key]) => !usedBranches.includes(key)
+    );
 
     if (remaining.length > 0) {
-      newEntries.push({ type: "followUpOptions", branchKey });
+      setHistory((prev) => [
+        ...prev,
+        { type: "visitor", text: "I'd like to ask something else" },
+      ]);
+      addWithTyping([
+        { type: "ferry", text: "Of course. What are you curious about?" },
+        { type: "topicPicker" },
+      ]);
+    } else {
+      setHistory((prev) => [
+        ...prev,
+        { type: "visitor", text: "I'd like to ask something else" },
+      ]);
+      addWithTyping([
+        {
+          type: "ferry",
+          text: "We've covered a lot of ground.\nIf something resonated, let's take it further.",
+        },
+        {
+          type: "options",
+          options: Object.entries(conversationPaths).map(([key, branch]) => ({
+            label: branch.directional.ctaLabel,
+            handler: `cta:${key}`,
+          })),
+        },
+      ]);
     }
-    // Always show CTAs after first follow-up answer
-    newEntries.push({ type: "ctas", branchKey });
-    newEntries.push({ type: "branchOptions" });
-
-    addWithTyping(newEntries);
   };
 
-  const handleRestart = () => {
-    setHistory([]);
-    setAnsweredFollowUps({});
-    setUsedBranches([]);
-    setShowTyping(false);
-    setInteractionStarted(false);
+  const handleOptionClick = (handler: string) => {
+    if (handler.startsWith("phase1:")) {
+      const [, branchKey, ...rest] = handler.split(":");
+      handlePhase1(branchKey, rest.join(":"));
+    } else if (handler.startsWith("phase2:")) {
+      const [, branchKey, ...rest] = handler.split(":");
+      handlePhase2(branchKey, rest.join(":"));
+    } else if (handler.startsWith("deeper:")) {
+      handleDeeper(handler.split(":")[1]);
+    } else if (handler.startsWith("cta:")) {
+      handleCTA(handler.split(":")[1]);
+    } else if (handler === "switch") {
+      handleSwitch();
+    } else if (handler.startsWith("branch:")) {
+      handleSelectBranch(handler.split(":")[1]);
+    }
   };
 
+  /* ── Remaining branches for topic picker ── */
   const remainingBranches = Object.entries(conversationPaths).filter(
     ([key]) => !usedBranches.includes(key)
   );
 
-  /* ── Render helpers ── */
+  /* ── Render ── */
   const renderEntry = (entry: HistoryEntry, i: number) => {
     switch (entry.type) {
       case "ferry":
@@ -165,62 +280,52 @@ const Conversation = () => {
       case "visitor":
         return <VisitorBubble key={i} text={entry.text} />;
 
-      case "followUpOptions": {
-        const branch = conversationPaths[entry.branchKey];
-        const answered = answeredFollowUps[entry.branchKey] || [];
-        const remaining = branch.followUps.filter((f) => !answered.includes(f.question));
-        if (remaining.length === 0) return null;
+      case "options":
         return (
           <div key={i} className="flex flex-col items-end gap-2 animate-fade-in">
-            {remaining.map((f) => (
+            {entry.options.map((opt) => (
               <OptionButton
-                key={f.question}
-                label={f.question}
-                onClick={() => handleSelectFollowUp(entry.branchKey, f.question)}
+                key={opt.handler}
+                label={opt.label}
+                onClick={() => handleOptionClick(opt.handler)}
               />
             ))}
           </div>
         );
-      }
 
       case "ctas": {
         const branch = conversationPaths[entry.branchKey];
         return (
-          <div key={i} className="flex flex-wrap gap-2 justify-start animate-fade-in">
-            {branch.ctas.map((cta) => (
-              <CTAButton key={cta.label} cta={cta} onContact={openContact} />
-            ))}
+          <div key={i} className="flex flex-col gap-3 animate-fade-in">
+            <div className="flex flex-wrap gap-2 justify-start">
+              {branch.directional.ctas.map((cta) => (
+                <CTAButton key={cta.label} cta={cta} onContact={openContact} />
+              ))}
+            </div>
+            <button
+              onClick={() => navigate("/")}
+              className="text-xs text-muted-foreground hover:text-foreground transition-colors self-start"
+            >
+              Back to homepage
+            </button>
           </div>
         );
       }
 
-      case "branchOptions":
+      case "topicPicker":
         return (
-          <div key={i} className="flex flex-col gap-2 animate-fade-in pt-2">
-            {remainingBranches.length > 0 && (
-              <div className="flex flex-col items-end gap-2">
-                <span className="text-xs text-muted-foreground mr-1">Another question?</span>
-                {remainingBranches.map(([key, branch]) => (
-                  <OptionButton key={key} label={branch.label} onClick={() => handleSelectBranch(key)} />
-                ))}
-              </div>
-            )}
-            <div className="flex items-center gap-3 pt-2">
-              <button
-                onClick={() => navigate("/")}
-                className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                <Home className="h-4 w-4" />
-                Back to homepage
-              </button>
-              <button
-                onClick={handleRestart}
-                className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                <RotateCcw className="h-4 w-4" />
-                Restart conversation
-              </button>
-            </div>
+          <div key={i} className="flex flex-col items-end gap-2 animate-fade-in">
+            {remainingBranches.map(([key, branch]) => (
+              <OptionButton
+                key={key}
+                label={branch.label}
+                onClick={() => {
+                  // Remove topicPicker from history before selecting
+                  setHistory((prev) => prev.filter((e) => e.type !== "topicPicker"));
+                  handleSelectBranch(key);
+                }}
+              />
+            ))}
           </div>
         );
 
@@ -238,14 +343,13 @@ const Conversation = () => {
       <meta name="robots" content="noindex, nofollow" />
 
       <main className="min-h-screen bg-background">
-        {/* Back button */}
-        <div className="fixed top-6 left-6 z-30">
+        {/* Back to homepage — subtle top-right */}
+        <div className="fixed top-6 right-6 z-30">
           <button
             onClick={() => navigate("/")}
-            className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
+            className="text-xs text-muted-foreground hover:text-foreground transition-colors"
           >
-            <ArrowLeft className="h-4 w-4" />
-            Back
+            Back to homepage
           </button>
         </div>
 
@@ -261,11 +365,15 @@ const Conversation = () => {
           {/* Ferry greeting */}
           <FerryBubble text="I love your curiosity." />
 
-          {/* Initial branch options */}
+          {/* Initial branch options — disappear once one is picked */}
           {!interactionStarted && (
             <div className="flex flex-col items-end gap-2 animate-fade-in">
               {Object.entries(conversationPaths).map(([key, branch]) => (
-                <OptionButton key={key} label={branch.label} onClick={() => handleSelectBranch(key)} />
+                <OptionButton
+                  key={key}
+                  label={branch.label}
+                  onClick={() => handleSelectBranch(key)}
+                />
               ))}
             </div>
           )}
@@ -278,8 +386,6 @@ const Conversation = () => {
 
           <div ref={endRef} />
         </div>
-
-        <Footer />
       </main>
 
       <AskFerryBubble />
