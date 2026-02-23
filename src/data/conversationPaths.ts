@@ -1,76 +1,98 @@
-export interface Exchange {
-  visitor: string;
-  ferry: string;
+export interface FollowUp {
+  question: string;
+  answer: string;
 }
 
-export interface ConversationPath {
+export interface CTA {
   label: string;
-  exchanges: Exchange[];
+  action: "contact" | "link";
+  href?: string;
 }
 
-export const conversationPaths: Record<string, ConversationPath> = {
-  brand: {
-    label: "Brand Humanizing — what is that?",
-    exchanges: [
-      {
-        visitor: "So what is Brand Humanizing exactly?",
-        ferry:
-          "It's a strategic approach to making brands feel genuinely human. Not a rebrand, not a tone-of-voice exercise — it's about embedding empathy, personality, and real connection into every single touchpoint. The result? People trust you, buy from you, and actually want to stick around.",
-      },
-      {
-        visitor: "How is that different from just... good marketing?",
-        ferry:
-          "Good marketing can still feel hollow. You can have a brilliant campaign that wins awards but doesn't make anyone feel anything real. Brand Humanizing goes deeper — it's not about what you say, it's about how you consistently show up. It's the difference between performing authenticity and actually being authentic.",
-      },
-      {
-        visitor: "Where do I start if I want to humanize my brand?",
-        ferry:
-          "Honestly? Start by listening. Talk to your customers like humans, not data points. Then grab a copy of the book — it's packed with frameworks and real examples to get you moving. No fluff, just practical steps you can apply tomorrow.",
-      },
-    ],
-  },
+export interface Branch {
+  label: string;
+  response: string;
+  followUps: FollowUp[];
+  ctas: CTA[];
+}
+
+export const conversationPaths: Record<string, Branch> = {
   speaking: {
-    label: "I have an event and want to figure out if you'd be a good fit",
-    exchanges: [
+    label: "What do you actually speak about?",
+    response:
+      "I speak about what happens when technology becomes available to everyone.\nWhen AI is no longer the advantage.\nWhen speed is normal.\nAnd differentiation disappears.\n\nThat's where Brand Humanizing begins.",
+    followUps: [
       {
-        visitor: "What kind of events do you speak at?",
-        ferry:
-          "Everything from intimate leadership offsites with 30 people to main-stage keynotes at 2,000+ person conferences. Corporate events, industry summits, creative festivals — if there's a stage and an audience that wants to think differently, I'm in.",
+        question: "What problem do you solve?",
+        answer:
+          "Most organizations don't struggle with technology.\nThey struggle with where to put it.\nAI ends up driving processes instead of supporting people.\nThat's when sameness starts.",
       },
       {
-        visitor: "What topics do you cover?",
-        ferry:
-          "My core topics are AI & People, the Future of Work, Digital Transformation, and Leadership. But here's the thing — I don't do cookie-cutter talks. Every keynote gets tailored to your audience, your industry, and what will actually move the needle for your people.",
+        question: "What makes you different from other AI speakers?",
+        answer:
+          "I don't teach tools.\nI teach positioning.\nTechnology is accessible to everyone.\nHuman advantage is not.",
       },
       {
-        visitor: "What makes your talks different?",
-        ferry:
-          "I don't lecture. My favourite moment is when someone in the audience pushes back and we get a real conversation going. That's where the magic happens. I bring energy, honesty, and the occasional uncomfortable truth — and people tend to remember that long after the event.",
-      },
-      {
-        visitor: "Can I book you?",
-        ferry: "Absolutely. Drop me a message right here 👇",
+        question: "Can you give an example?",
+        answer:
+          "Two companies use the same AI tools.\nOne automates for efficiency.\nThe other designs around human judgment.\nOnly one builds long-term loyalty.",
       },
     ],
+    ctas: [
+      { label: "Check availability", action: "contact" },
+      { label: "Download keynote overview", action: "link", href: "#" },
+    ],
   },
-  about: {
-    label: "I want to learn more about who Ferry is",
-    exchanges: [
+  story: {
+    label: "What's your story?",
+    response:
+      "I grew up building websites at ten years old.\nI loved technology before it was cool.\nBut I also saw how easily it can replace meaning.\n\nThat tension shaped everything.",
+    followUps: [
       {
-        visitor: "How did you get into all this?",
-        ferry:
-          "I spent years in marketing and brand strategy, watching companies pour budgets into campaigns that felt hollow. I kept asking: why don't brands just... act like people? That question became a framework, the framework became a book, and the book became a movement.",
+        question: "When did this perspective change?",
+        answer:
+          "During my work in growth and optimization.\nWe optimized metrics.\nBut something human got lost.\nThat bothered me more than the numbers excited me.",
       },
       {
-        visitor: "What drives you?",
-        ferry:
-          "The belief that business doesn't have to feel soulless. Every brand is made of people, built for people — so why do most of them communicate like robots? I want to change that. One brand, one keynote, one conversation at a time.",
+        question: "Why Brand Humanizing?",
+        answer:
+          "Because technology without humanity creates sameness.\nAnd sameness kills strategy.\nBrand Humanizing is about designing systems where people stay central.",
       },
       {
-        visitor: "How do you see AI changing things?",
-        ferry:
-          "AI makes it easier than ever to produce content — and harder than ever to stand out. The brands that win won't be the ones using AI the fastest; they'll be the ones that stay the most human while everyone else automates their personality away.",
+        question: "Why does this matter now?",
+        answer:
+          "Because AI has leveled the playing field.\nThe difference is no longer access.\nIt's choices.",
       },
+    ],
+    ctas: [
+      { label: "Invite Ferry to your podcast", action: "contact" },
+      { label: "Discover the book", action: "link", href: "/#book" },
+    ],
+  },
+  relevance: {
+    label: "Why does this matter for us?",
+    response:
+      "There are two risks right now.\nAI chaos.\nOr strategic stagnation.\n\nBoth are dangerous.",
+    followUps: [
+      {
+        question: "What happens if we ignore this?",
+        answer:
+          "Competitors redesign around human + AI synergy.\nYou optimize old systems.\nAnd slowly become irrelevant.",
+      },
+      {
+        question: "What does good look like?",
+        answer:
+          "Clear governance.\nIntentional AI integration.\nHuman judgment protected and amplified.",
+      },
+      {
+        question: "Where should we start?",
+        answer:
+          "Audit where AI is driving decisions.\nIdentify where human value is irreplaceable.\nDesign from there.",
+      },
+    ],
+    ctas: [
+      { label: "Book a strategy session", action: "contact" },
+      { label: "Bring this to your team", action: "contact" },
     ],
   },
 };
