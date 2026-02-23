@@ -24,7 +24,7 @@ const PostCTA = () => {
         className="rounded-full px-8 bg-accent text-accent-foreground hover:bg-accent/90 group"
       >
         <a
-          href="https://discord.gg/your-invite"
+          href="https://discord.gg/BfZrw5wJ"
           target="_blank"
           rel="noopener noreferrer"
         >
