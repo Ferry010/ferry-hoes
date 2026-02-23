@@ -1,8 +1,10 @@
 import { MessageCircle } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const HeroVideo = () => {
+  const navigate = useNavigate();
   const handleCTA = () => {
-    window.dispatchEvent(new Event("open-contact"));
+    navigate("/conversation");
   };
 
   return (
