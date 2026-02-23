@@ -59,6 +59,9 @@ const Footer = () => {
                 <a href="#" className="text-white/50 hover:text-white transition-colors text-sm">
                   YouTube
                 </a>
+                <a href="https://discord.gg/BfZrw5wJ" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors text-sm">
+                  Discord
+                </a>
               </div>
             </div>
           </div>
