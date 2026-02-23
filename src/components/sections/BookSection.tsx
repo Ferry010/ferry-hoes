@@ -64,13 +64,6 @@ const BookSection = () => {
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </a>
                 </Button>
-                <Button 
-                  variant="outline"
-                  size="lg"
-                  className="rounded-full px-8 border-primary text-primary hover:bg-primary hover:text-primary-foreground"
-                >
-                  Read a preview
-                </Button>
               </div>
 
               {/* Dutch-only note with English request */}
