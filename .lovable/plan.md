@@ -1,28 +1,26 @@
 
 
-## Photo Stack for "Meet Ferry" Section
+## Flip Card for "Meet Ferry" Section
 
-Replace the single image with a stacked/overlapping collage of 3 photos showing Ferry from different angles and settings.
+Replace the 3-image stack with a single card that shows the first uploaded image (behind-the-scenes filming) by default and flips to the second image (presenting at Visma/Dyade event) on hover.
 
-### Assets to copy
-1. `user-uploads://Ferry_Hoes_Public_Speaking-2.jpg` → `src/assets/ferry-speaking-2.jpg` (on stage, blue background)
-2. `user-uploads://Aestate-88.jpg` → `src/assets/ferry-speaking-aestate.jpg` (workshop/intimate setting)
-3. `user-uploads://Ferry_Hoes_Calendly.jpg` → `src/assets/ferry-portrait.jpg` (professional portrait)
+### Assets
+1. Copy `user-uploads://PHOTO-2025-01-20-15-51-14-2.jpg` → `src/assets/ferry-bts.jpg` (behind the scenes, green screen)
+2. Copy `user-uploads://Aestate-88-2.jpg` → `src/assets/ferry-presenting.jpg` (presenting at event)
 
 ### Changes in `src/pages/Speaking.tsx`
 
-**Imports** (top of file): Add 3 new image imports alongside the existing `stagePhoto`.
+**Imports**: Replace the 3 photo imports (`speakingBlue`, `speakingAestate`, `ferryPortrait`) with 2 new imports (`ferryBts`, `ferryPresenting`).
 
-**"Meet Ferry" section** (lines 139-146): Replace the single `<img>` with a stacked photo composition:
+**"Meet Ferry" section image area** (lines ~142-158): Replace the 3-image stack with a CSS 3D flip card:
 
-- A `relative` container with defined aspect ratio
-- 3 images positioned with slight rotation and offset, layered using `z-index`
-  - Back image: rotated -6deg, offset left — the Aestate workshop shot
-  - Middle image: rotated +4deg, offset right — the blue-stage close-up
-  - Front image: centered, no rotation, largest — the professional portrait
-- Each image gets `rounded-xl shadow-lg` and `object-cover` with fixed dimensions
-- On hover, a subtle scale/rotation transition for interactivity
-- The existing decorative blur circle stays
+- Outer container with `perspective` and fixed aspect ratio
+- Inner wrapper that rotates `rotateY(180deg)` on group-hover
+- Front face: `ferry-bts.jpg` (filming setup)
+- Back face: `ferry-presenting.jpg` (on stage presenting)
+- Both faces use `backface-visibility: hidden`, `rounded-2xl`, `object-cover`
+- Smooth `transition-transform duration-700` for the flip
+- Keep the existing decorative blur circle
 
-This creates a casual, dynamic "spread of photos" feel that shows range (stage, workshop, portrait) without needing a carousel.
+This gives a polished, interactive reveal without carousel complexity.
 
