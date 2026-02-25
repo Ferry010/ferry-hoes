@@ -2,7 +2,7 @@ import logoEindhoven from "@/assets/logos/eindhoven.png";
 import logoChubb from "@/assets/logos/chubb.png";
 import logoAma from "@/assets/logos/ama.webp";
 import logoAtos from "@/assets/logos/atos.png";
-import logoErasmus from "@/assets/logos/erasmus.png";
+import logoUwv from "@/assets/logos/uwv.png";
 import logoMinfin from "@/assets/logos/minfin.png";
 import logoAsr from "@/assets/logos/asr.png";
 import logoGsk from "@/assets/logos/gsk.png";
@@ -17,7 +17,7 @@ const logos = [
   { src: logoVodafoneZiggo, alt: "VodafoneZiggo" },
   { src: logoChubb, alt: "Chubb Fire & Security" },
   { src: logoAsr, alt: "a.s.r." },
-  { src: logoErasmus, alt: "Erasmus Universiteit Rotterdam" },
+  { src: logoUwv, alt: "UWV" },
   { src: logoMinfin, alt: "Ministerie van Financiën" },
   { src: logoEindhoven, alt: "Gemeente Eindhoven" },
 ];
