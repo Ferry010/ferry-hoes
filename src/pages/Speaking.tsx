@@ -14,6 +14,7 @@ import Footer from "@/components/sections/Footer";
 import AskFerryBubble from "@/components/AskFerryBubble";
 import SEOHead from "@/components/blog/SEOHead";
 import stagePhoto from "@/assets/ferry-speaking.jpg";
+import speakingHeroBg from "@/assets/speaking-hero-bg.png";
 import SpeakingQA from "@/components/sections/SpeakingQA";
 import ClientLogos from "@/components/sections/ClientLogos";
 
@@ -67,25 +68,30 @@ const Speaking = () => {
         />
 
         {/* Hero Section */}
-        <header className="min-h-[80vh] relative overflow-hidden bg-background">
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute top-1/4 -right-20 w-80 h-80 bg-accent/10 rounded-full blur-3xl" />
-            <div className="absolute bottom-1/4 -left-20 w-64 h-64 bg-primary/10 rounded-full blur-3xl" />
-          </div>
+        <header className="min-h-[80vh] relative overflow-hidden flex items-center">
+          {/* Background image */}
+          <img
+            src={speakingHeroBg}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          {/* Dark overlay */}
+          <div className="absolute inset-0 bg-foreground/60" />
 
           <div className="container px-6 md:px-8 py-24 md:py-32 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
-              <span className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 text-accent rounded-full text-sm font-medium mb-8">
+              <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 text-white backdrop-blur-sm rounded-full text-sm font-medium mb-8">
                 <Mic className="h-4 w-4" />
                 Keynote Speaker
               </span>
               
-              <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-foreground">
+              <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-white">
                 Keynotes that{" "}
                 <span className="text-accent">inspire action</span>
               </h1>
               
-              <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed max-w-2xl mx-auto mb-12">
+              <p className="text-xl md:text-2xl text-white/70 leading-relaxed max-w-2xl mx-auto mb-12">
                 No death-by-PowerPoint. Just stories, insights, and practical ideas 
                 that spark real conversations and drive meaningful change.
               </p>
