@@ -10,16 +10,16 @@ import logoToshiba from "@/assets/logos/toshiba.png";
 import logoVodafoneZiggo from "@/assets/logos/vodafoneziggo.png";
 
 const logos = [
-  { src: logoAtos, alt: "Atos" },
-  { src: logoGsk, alt: "GlaxoSmithKline" },
-  { src: logoToshiba, alt: "Toshiba" },
-  { src: logoAma, alt: "American Marketing Association" },
-  { src: logoVodafoneZiggo, alt: "VodafoneZiggo" },
-  { src: logoChubb, alt: "Chubb Fire & Security" },
-  { src: logoAsr, alt: "a.s.r." },
-  { src: logoUwv, alt: "UWV" },
-  { src: logoMinfin, alt: "Ministerie van Financiën" },
-  { src: logoEindhoven, alt: "Gemeente Eindhoven" },
+  { src: logoAtos, alt: "Atos", className: "max-h-10 max-w-[140px]" },
+  { src: logoGsk, alt: "GlaxoSmithKline", className: "max-h-12 max-w-[160px]" },
+  { src: logoToshiba, alt: "Toshiba", className: "max-h-10 max-w-[150px]" },
+  { src: logoAma, alt: "American Marketing Association", className: "max-h-10 max-w-[160px]" },
+  { src: logoVodafoneZiggo, alt: "VodafoneZiggo", className: "max-h-10 max-w-[170px]" },
+  { src: logoChubb, alt: "Chubb Fire & Security", className: "max-h-10 max-w-[140px]" },
+  { src: logoAsr, alt: "a.s.r.", className: "max-h-14 max-w-[140px]" },
+  { src: logoUwv, alt: "UWV", className: "max-h-12 max-w-[140px]" },
+  { src: logoMinfin, alt: "Ministerie van Financiën", className: "max-h-14 max-w-[120px]" },
+  { src: logoEindhoven, alt: "Gemeente Eindhoven", className: "max-h-14 max-w-[120px]" },
 ];
 
 const ClientLogos = () => {
@@ -39,7 +39,7 @@ const ClientLogos = () => {
                 <img
                   src={logo.src}
                   alt={logo.alt}
-                  className="max-h-10 max-w-[140px] object-contain opacity-50 hover:opacity-80 transition-opacity duration-300 grayscale hover:grayscale-0"
+                  className={`object-contain opacity-50 hover:opacity-80 transition-opacity duration-300 grayscale hover:grayscale-0 ${logo.className}`}
                 />
               </div>
             ))}
