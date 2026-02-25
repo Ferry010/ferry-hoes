@@ -8,51 +8,23 @@ import { conversationNodes, type ConversationOption } from "@/data/conversationP
 type HistoryEntry =
   | { type: "ferry"; text: string }
   | { type: "visitor"; text: string }
-  | { type: "options"; options: ConversationOption[] };
+  | { type: "options"; options: ConversationOption[] }
+  | { type: "cta-button"; label: string; href: string };
 
-/* ── Linkify helper ── */
-const linkify = (text: string) => {
-  const urlRegex = /(https?:\/\/[^\s]+|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g;
-  const parts = text.split(urlRegex);
-
-  return parts.map((part, i) => {
-    if (part.match(/^https?:\/\//)) {
-      return (
-        <a
-          key={i}
-          href={part}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="underline underline-offset-2 hover:text-primary transition-colors break-all"
-        >
-          {part}
-        </a>
-      );
-    }
-    if (part.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)) {
-      return (
-        <a
-          key={i}
-          href={`mailto:${part}`}
-          className="underline underline-offset-2 hover:text-primary transition-colors"
-        >
-          {part}
-        </a>
-      );
-    }
-    return part;
-  });
+/* ── Helpers ── */
+const getTypingDuration = (text: string) => {
+  const base = 700 + text.length * 35;
+  const jitter = (Math.random() - 0.5) * 300;
+  return Math.min(base + jitter, 1800);
 };
 
 /* ── Sub-components ── */
 const FerryBubble = ({ text }: { text: string }) => (
   <div className="flex justify-start animate-fade-in">
     <div className="max-w-[85%] space-y-1">
-      <span className="text-[11px] text-muted-foreground font-medium ml-1">
-        Ferry
-      </span>
+      <span className="text-[11px] text-muted-foreground font-medium ml-1">Ferry</span>
       <div className="rounded-2xl rounded-bl-md px-4 py-2.5 bg-secondary text-foreground text-sm md:text-base leading-relaxed">
-        {linkify(text)}
+        {text}
       </div>
     </div>
   </div>
@@ -66,27 +38,48 @@ const VisitorBubble = ({ text }: { text: string }) => (
   </div>
 );
 
-const OptionButton = ({
-  label,
-  onClick,
-}: {
-  label: string;
-  onClick: () => void;
-}) => (
+const OptionButton = ({ label, onClick, disabled }: { label: string; onClick: () => void; disabled?: boolean }) => (
   <button
     onClick={onClick}
-    className="max-w-[80%] text-left rounded-2xl rounded-br-md px-4 py-2.5 bg-primary/20 border border-primary/30 text-foreground text-sm md:text-base font-medium hover:bg-primary/30 hover:border-primary/50 transition-all duration-200 cursor-pointer"
+    disabled={disabled}
+    className="max-w-[80%] text-left rounded-2xl rounded-br-md px-4 py-2.5 bg-primary/20 border border-primary/30 text-foreground text-sm md:text-base font-medium hover:bg-primary/30 hover:border-primary/50 transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
   >
     {label}
   </button>
 );
 
-/* ── Opening lines (not in data, handled here) ── */
-const OPENER_1 = "Hey. I love that you clicked. Curiosity is a good sign.";
-const OPENER_2 = "What would you like to talk about?";
+const CtaBalloon = ({ label, href }: { label: string; href: string }) => (
+  <div className="flex justify-start animate-fade-in">
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-block rounded-2xl rounded-bl-md px-5 py-3 bg-primary text-primary-foreground font-medium text-sm md:text-base hover:brightness-105 transition-all active:scale-[0.98]"
+    >
+      {label}
+    </a>
+  </div>
+);
+
+/* ── Opening config ── */
+const OPENER_BUBBLES = [
+  "Hey. I'm glad you clicked.",
+  "Most people just scroll.",
+  "You didn't.",
+  "So now I'm curious. Where should we start?",
+];
+
+const OPENER_SCHEDULE = [
+  { showTypingAt: 200, showBubbleAt: 1100 },
+  { showTypingAt: 1900, showBubbleAt: 3100 },
+  { showTypingAt: 4000, showBubbleAt: 5400 },
+  { showTypingAt: 6400, showBubbleAt: 7700 },
+];
+const OPTIONS_APPEAR_AT = 8300;
+
 const ROOT_OPTIONS: ConversationOption[] = [
-  { label: "What's your story?", nodeKey: "story" },
-  { label: "Tell me about your work.", nodeKey: "work" },
+  { label: "How did you end up here?", nodeKey: "story" },
+  { label: "What do you actually do?", nodeKey: "work" },
 ];
 
 /* ── Page ── */
@@ -95,58 +88,123 @@ const Conversation = () => {
   const [history, setHistory] = useState<HistoryEntry[]>([]);
   const [showTyping, setShowTyping] = useState(false);
   const [interactionStarted, setInteractionStarted] = useState(false);
-  const [openerPhase, setOpenerPhase] = useState<0 | 1 | 2>(0);
+  const [isExiting, setIsExiting] = useState(false);
+  const [pageOpacity, setPageOpacity] = useState(1);
+  const [openerBubbles, setOpenerBubbles] = useState<string[]>([]);
+  const [showRootOptions, setShowRootOptions] = useState(false);
+  const nudgeRef = useRef<{ level1: boolean; level2: boolean }>({ level1: false, level2: false });
   const endRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = useCallback(() => {
     setTimeout(
       () => endRef.current?.scrollIntoView({ behavior: "smooth", block: "end" }),
-      100
+      80
     );
   }, []);
 
-  useEffect(scrollToBottom, [history, showTyping, scrollToBottom, openerPhase]);
+  useEffect(scrollToBottom, [history, showTyping, scrollToBottom, openerBubbles, showRootOptions]);
 
-  /* Staggered opener */
+  /* ── Cinematic opener ── */
   useEffect(() => {
-    // Phase 0: show first bubble, then typing
-    const t1 = setTimeout(() => {
-      setShowTyping(true);
-      setOpenerPhase(1);
-    }, 800);
+    const timers: ReturnType<typeof setTimeout>[] = [];
 
-    // Phase 1 → 2: show second bubble + options
-    const t2 = setTimeout(() => {
-      setShowTyping(false);
-      setOpenerPhase(2);
-    }, 2000);
+    OPENER_SCHEDULE.forEach((sched, i) => {
+      timers.push(setTimeout(() => setShowTyping(true), sched.showTypingAt));
+      timers.push(setTimeout(() => {
+        setShowTyping(false);
+        setOpenerBubbles(prev => [...prev, OPENER_BUBBLES[i]]);
+      }, sched.showBubbleAt));
+    });
 
-    return () => { clearTimeout(t1); clearTimeout(t2); };
+    timers.push(setTimeout(() => setShowRootOptions(true), OPTIONS_APPEAR_AT));
+
+    return () => timers.forEach(clearTimeout);
   }, []);
 
+  /* ── Idle nudge system ── */
+  useEffect(() => {
+    if (!interactionStarted || isExiting) return;
+
+    const lastEntry = history[history.length - 1];
+    if (!lastEntry || lastEntry.type !== "options") return;
+
+    // Reset nudge tracking for new decision moment
+    nudgeRef.current = { level1: false, level2: false };
+
+    const t1 = setTimeout(() => {
+      if (nudgeRef.current.level1) return;
+      nudgeRef.current.level1 = true;
+      setShowTyping(true);
+      setTimeout(() => {
+        setShowTyping(false);
+        setHistory(prev => {
+          const lastIsOptions = prev[prev.length - 1]?.type === "options";
+          if (!lastIsOptions) return prev;
+          const optionsEntry = prev[prev.length - 1];
+          return [...prev.slice(0, -1), { type: "ferry" as const, text: "No rush." }, optionsEntry];
+        });
+      }, getTypingDuration("No rush."));
+    }, 15000);
+
+    const t2 = setTimeout(() => {
+      if (nudgeRef.current.level2) return;
+      nudgeRef.current.level2 = true;
+      setShowTyping(true);
+      setTimeout(() => {
+        setShowTyping(false);
+        setHistory(prev => {
+          const lastIsOptions = prev[prev.length - 1]?.type === "options";
+          if (!lastIsOptions) return prev;
+          const optionsEntry = prev[prev.length - 1];
+          return [
+            ...prev.slice(0, -1),
+            { type: "ferry" as const, text: "Still here?" },
+            { type: "ferry" as const, text: "You can head back anytime." },
+            optionsEntry,
+          ];
+        });
+      }, getTypingDuration("Still here?"));
+    }, 30000);
+
+    return () => { clearTimeout(t1); clearTimeout(t2); };
+  }, [history, interactionStarted, isExiting]);
+
+  /* ── Add entries with realistic typing ── */
   const addWithTyping = useCallback(
     (entries: HistoryEntry[]) => {
       setShowTyping(true);
       scrollToBottom();
 
-      let delay = 600 + Math.random() * 400;
+      let delay = 0;
 
       entries.forEach((entry, idx) => {
+        const typeDur = entry.type === "ferry" ? getTypingDuration(entry.text) : 100;
+
+        // Show typing indicator for ferry bubbles
+        if (entry.type === "ferry" && idx > 0) {
+          setTimeout(() => setShowTyping(true), delay);
+          delay += typeDur;
+        } else if (entry.type === "ferry" && idx === 0) {
+          delay += typeDur;
+        } else {
+          // options / cta-button appear quickly
+        }
+
         setTimeout(() => {
-          setHistory((prev) => [...prev, entry]);
+          setHistory(prev => [...prev, entry]);
           scrollToBottom();
 
           const isLast = idx === entries.length - 1;
-          const nextIsFerry = !isLast && entries[idx + 1].type === "ferry";
+          const nextIsFerry = !isLast && entries[idx + 1]?.type === "ferry";
 
-          if (nextIsFerry) {
-            setShowTyping(true);
-          } else {
+          if (!nextIsFerry) {
             setShowTyping(false);
           }
         }, delay);
 
-        delay += entry.type === "ferry" ? 600 + Math.random() * 400 : 100;
+        if (entry.type !== "ferry") {
+          delay += 100;
+        }
       });
     },
     [scrollToBottom]
@@ -155,11 +213,11 @@ const Conversation = () => {
   /* ── Handle option click ── */
   const handleSelect = useCallback(
     (label: string, nodeKey: string) => {
+      if (isExiting) return;
       setInteractionStarted(true);
 
-      // Remove current options, add visitor bubble
-      setHistory((prev) => [
-        ...prev.filter((e) => e.type !== "options"),
+      setHistory(prev => [
+        ...prev.filter(e => e.type !== "options"),
         { type: "visitor", text: label },
       ]);
 
@@ -167,10 +225,14 @@ const Conversation = () => {
       if (!node) return;
 
       const responses = Array.isArray(node.response) ? node.response : [node.response];
-      const entries: HistoryEntry[] = responses.map((text) => ({
+      const entries: HistoryEntry[] = responses.map(text => ({
         type: "ferry" as const,
         text,
       }));
+
+      if (node.ctaButton) {
+        entries.push({ type: "cta-button", label: node.ctaButton.label, href: node.ctaButton.href });
+      }
 
       if (node.options) {
         entries.push({ type: "options", options: node.options });
@@ -178,23 +240,55 @@ const Conversation = () => {
 
       addWithTyping(entries);
     },
-    [addWithTyping]
+    [addWithTyping, isExiting]
   );
 
+  /* ── Exit sequence ── */
+  const handleExit = useCallback(() => {
+    if (isExiting) return;
+    setIsExiting(true);
+
+    // Remove any current options
+    setHistory(prev => prev.filter(e => e.type !== "options"));
+
+    setShowTyping(true);
+    setTimeout(() => {
+      setShowTyping(false);
+      setHistory(prev => [...prev, { type: "ferry", text: "Fair enough." }]);
+
+      setTimeout(() => {
+        setShowTyping(true);
+        setTimeout(() => {
+          setShowTyping(false);
+          setHistory(prev => [...prev, { type: "ferry", text: "Thanks for the chat." }]);
+
+          setTimeout(() => {
+            setPageOpacity(0);
+            setTimeout(() => navigate("/"), 300);
+          }, 600);
+        }, 900);
+      }, 400);
+    }, 600);
+  }, [isExiting, navigate]);
+
+  /* ── Render ── */
   const renderEntry = (entry: HistoryEntry, i: number) => {
     switch (entry.type) {
       case "ferry":
         return <FerryBubble key={i} text={entry.text} />;
       case "visitor":
         return <VisitorBubble key={i} text={entry.text} />;
+      case "cta-button":
+        return <CtaBalloon key={i} label={entry.label} href={entry.href} />;
       case "options":
         return (
           <div key={i} className="flex flex-col items-end gap-2 animate-fade-in">
-            {entry.options.map((opt) => (
+            {entry.options.map(opt => (
               <OptionButton
                 key={opt.nodeKey}
                 label={opt.label}
                 onClick={() => handleSelect(opt.label, opt.nodeKey)}
+                disabled={isExiting}
               />
             ))}
           </div>
@@ -212,31 +306,25 @@ const Conversation = () => {
       />
       <meta name="robots" content="noindex, nofollow" />
 
-      <main className="min-h-screen bg-background">
-        <div className="fixed top-6 right-6 z-30">
-          <button
-            onClick={() => navigate("/")}
-            className="text-xs text-muted-foreground hover:text-foreground transition-colors"
-          >
-            Back to homepage
-          </button>
-        </div>
+      <main
+        className="min-h-screen bg-background transition-opacity duration-300"
+        style={{ opacity: pageOpacity }}
+      >
+        <div className="max-w-xl mx-auto px-6 pt-24 pb-28 space-y-5">
+          {/* Cinematic opener bubbles */}
+          {openerBubbles.map((text, i) => (
+            <FerryBubble key={`opener-${i}`} text={text} />
+          ))}
 
-        <div className="max-w-xl mx-auto px-6 pt-24 pb-16 space-y-5">
-          {/* First opener bubble always visible */}
-          <FerryBubble text={OPENER_1} />
-
-          {/* Second opener bubble after typing pause */}
-          {openerPhase >= 2 && <FerryBubble text={OPENER_2} />}
-
-          {/* Root options (before any interaction) */}
-          {openerPhase >= 2 && !interactionStarted && (
+          {/* Root options */}
+          {showRootOptions && !interactionStarted && (
             <div className="flex flex-col items-end gap-2 animate-fade-in">
-              {ROOT_OPTIONS.map((opt) => (
+              {ROOT_OPTIONS.map(opt => (
                 <OptionButton
                   key={opt.nodeKey}
                   label={opt.label}
                   onClick={() => handleSelect(opt.label, opt.nodeKey)}
+                  disabled={isExiting}
                 />
               ))}
             </div>
@@ -247,6 +335,17 @@ const Conversation = () => {
           {showTyping && <TypingIndicator />}
 
           <div ref={endRef} />
+        </div>
+
+        {/* Persistent bottom button */}
+        <div className="fixed bottom-6 left-0 right-0 flex justify-center z-30 pointer-events-none">
+          <button
+            onClick={handleExit}
+            disabled={isExiting}
+            className="pointer-events-auto px-5 py-2.5 rounded-full bg-secondary text-muted-foreground text-sm font-medium hover:brightness-[1.03] active:scale-[0.97] transition-all duration-120 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            Back to homepage
+          </button>
         </div>
       </main>
     </>

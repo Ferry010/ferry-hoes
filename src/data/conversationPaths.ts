@@ -8,13 +8,14 @@ export interface ConversationOption {
 export interface ConversationNode {
   response: string | string[];
   options?: ConversationOption[];
+  ctaButton?: { label: string; href: string };
 }
 
 /* ── Node Map ── */
 
 export const conversationNodes: Record<string, ConversationNode> = {
 
-  // ─── PATH 1: WHAT'S YOUR STORY? ───
+  // ─── PATH 1: STORY ───
 
   story: {
     response: "I've been fascinated by technology since I was a kid. Built my first website when I was ten. I loved how the internet connected people. At some point I started noticing something else though. The more we optimized everything, the more human nuance disappeared.",
@@ -60,7 +61,7 @@ export const conversationNodes: Record<string, ConversationNode> = {
     ],
   },
 
-  // ─── PATH 2: TELL ME ABOUT YOUR WORK ───
+  // ─── PATH 2: WORK ───
 
   work: {
     response: [
@@ -69,7 +70,7 @@ export const conversationNodes: Record<string, ConversationNode> = {
     ],
     options: [
       { label: "What is Brand Humanizing?", nodeKey: "brand_humanizing" },
-      { label: "Why does that matter now?", nodeKey: "work_why_now" },
+      { label: "Why does this matter now?", nodeKey: "work_why_now" },
       { label: "How did you get into this topic?", nodeKey: "work_origin" },
     ],
   },
@@ -106,9 +107,8 @@ export const conversationNodes: Record<string, ConversationNode> = {
   bh_example: {
     response: "Two companies use the same AI tools. One automates for efficiency only. The other uses AI to support employees so they make better decisions. Both save time. Only one builds long-term loyalty.",
     options: [
-      { label: "That's interesting. What does a keynote look like?", nodeKey: "keynote" },
-      { label: "Do you only do keynotes?", nodeKey: "smaller_teams" },
-      { label: "Tell me more about your journey.", nodeKey: "story" },
+      { label: "Sounds like something for our event.", nodeKey: "keynote_event" },
+      { label: "Tell me more about you personally.", nodeKey: "story_personal" },
     ],
   },
 
@@ -116,7 +116,7 @@ export const conversationNodes: Record<string, ConversationNode> = {
     response: "Especially there. Large organizations have more layers, more automation, more distance between decisions and people. That's exactly where this conversation matters most.",
     options: [
       { label: "What does a keynote look like?", nodeKey: "keynote" },
-      { label: "Do you also work with smaller teams?", nodeKey: "smaller_teams" },
+      { label: "Do you work with teams?", nodeKey: "smaller_teams" },
       { label: "Can you give an example?", nodeKey: "bh_example" },
     ],
   },
@@ -132,26 +132,77 @@ export const conversationNodes: Record<string, ConversationNode> = {
     ],
   },
 
+  // ─── CTA: KEYNOTE EVENT (2-step) ───
+
   keynote_event: {
     response: [
-      "That's great to hear. If you ever want to check availability, that usually goes through Speakers Academy.",
-      "You can request availability here: https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966",
-      "Or if you'd rather just talk it through first, email works too: ferry@brandhumanizing.com",
+      "That's great to hear.",
+      "If you'd like, we can check availability or just talk it through first.",
     ],
     options: [
-      { label: "Tell me more about Brand Humanizing.", nodeKey: "brand_humanizing" },
-      { label: "Tell me more about you personally.", nodeKey: "story_personal" },
+      { label: "Check availability", nodeKey: "keynote_event_availability" },
+      { label: "Talk it through first", nodeKey: "keynote_event_email" },
     ],
   },
 
-  smaller_teams: {
-    response: [
-      "Yes. Smaller sessions are often more interactive. We look at real situations and think through how technology influences daily decisions.",
-      "If you want to explore that for your team, just send me a message: ferry@brandhumanizing.com",
-    ],
+  keynote_event_availability: {
+    response: "Here you go.",
+    ctaButton: {
+      label: "Check availability for your event",
+      href: "https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966",
+    },
     options: [
-      { label: "What does a keynote look like?", nodeKey: "keynote" },
-      { label: "Tell me more about Brand Humanizing.", nodeKey: "brand_humanizing" },
+      { label: "Ask something else", nodeKey: "ask_something_else" },
+    ],
+  },
+
+  keynote_event_email: {
+    response: "Of course.",
+    ctaButton: {
+      label: "Email Ferry",
+      href: "mailto:ferry@brandhumanizing.com",
+    },
+    options: [
+      { label: "Ask something else", nodeKey: "ask_something_else" },
+    ],
+  },
+
+  // ─── CTA: TEAM SESSION (2-step) ───
+
+  smaller_teams: {
+    response: "Yes. Smaller sessions are often more interactive. We look at real situations and think through how technology influences daily decisions.",
+    options: [
+      { label: "That could work for our team.", nodeKey: "team_intent" },
+      { label: "Tell me more about your approach.", nodeKey: "brand_humanizing" },
+    ],
+  },
+
+  team_intent: {
+    response: "That's nice to hear.",
+    options: [
+      { label: "Email Ferry", nodeKey: "team_intent_email" },
+      { label: "Tell me more first", nodeKey: "brand_humanizing" },
+    ],
+  },
+
+  team_intent_email: {
+    response: "Here you go.",
+    ctaButton: {
+      label: "Email Ferry",
+      href: "mailto:ferry@brandhumanizing.com",
+    },
+    options: [
+      { label: "Ask something else", nodeKey: "ask_something_else" },
+    ],
+  },
+
+  // ─── CONTINUATION ───
+
+  ask_something_else: {
+    response: "Sure. What would you like to know?",
+    options: [
+      { label: "Tell me about your work.", nodeKey: "work" },
+      { label: "What is Brand Humanizing?", nodeKey: "brand_humanizing" },
       { label: "Tell me more about your journey.", nodeKey: "story" },
     ],
   },
