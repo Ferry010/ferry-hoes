@@ -16,6 +16,7 @@ import AskFerryBubble from "@/components/AskFerryBubble";
 import SEOHead from "@/components/blog/SEOHead";
 import stagePhoto from "@/assets/ferry-speaking.jpg";
 import SpeakingQA from "@/components/sections/SpeakingQA";
+import ClientLogos from "@/components/sections/ClientLogos";
 
 
 const TestimonialCard = ({ quote, name, company }: { quote: string; name: string; company: string }) => {
@@ -173,6 +174,9 @@ const Speaking = () => {
         </header>
 
         <main>
+          {/* Client Logos */}
+          <ClientLogos />
+
           {/* About as Speaker */}
           <article className="py-24 md:py-32 bg-secondary/30">
             <div className="container px-6 md:px-8">
