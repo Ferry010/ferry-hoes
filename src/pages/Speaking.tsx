@@ -96,7 +96,7 @@ const Speaking = () => {
               
               <p className="text-xl md:text-2xl text-white leading-relaxed max-w-2xl mx-auto mb-12">
                 No death-by-PowerPoint. Just{" "}
-                <span className="bg-accent/30 px-1 py-0.5 rounded">stories, insights, and practical ideas</span>
+                <span className="bg-accent/50 px-1 py-0.5 rounded">stories, insights, and practical ideas</span>
                 {" "}that spark real conversations and drive meaningful change.
               </p>
 
