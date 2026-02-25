@@ -80,9 +80,9 @@ const Speaking = () => {
             preload="auto"
           />
           {/* Abstract frosted overlay */}
-          <div className="absolute inset-0 backdrop-blur-[2px]" />
+          <div className="absolute inset-0 backdrop-blur-[6px]" />
           {/* Teal-tinted dark overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-foreground/80 via-foreground/60 to-primary/50" />
+          <div className="absolute inset-0 bg-gradient-to-br from-foreground/90 via-foreground/80 to-primary/70" />
           {/* Subtle dot pattern */}
           <div 
             className="absolute inset-0 opacity-[0.07]"
