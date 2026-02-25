@@ -1,37 +1,33 @@
 
 
-## Fix Mismatched Logo Sizes with Per-Logo CSS Tuning
+## Auto-Scrolling Logo Ticker
 
-The problem: all logos share the same `max-h-10 max-w-[140px]` constraint, but each logo image has different intrinsic dimensions, whitespace, and visual weight. Logos like AMA (wide text), MinFin (tall crest), GSK (thin wordmark), and VodafoneZiggo (wide) end up looking inconsistent.
-
-The fix: assign a custom `maxHeight` per logo so each one appears visually balanced. No Photoshop or image editing required — pure CSS sizing adjustments.
+Replace the static 5-column grid with a single-row, infinitely auto-scrolling horizontal ticker (marquee effect). Logos will be larger and more readable.
 
 ### Approach
 
-Update the `logos` array in `ClientLogos.tsx` to include a per-logo `className` or inline style override. Logos that appear too small get a larger max-height; logos that appear too large get constrained.
+Use a CSS animation-based marquee: duplicate the logo set twice inside a flex row, animate it with `translateX(-50%)` so it loops seamlessly. No JavaScript timers needed — pure CSS `@keyframes`.
 
-Approximate tuning (will refine visually):
-
-| Logo | Issue | Fix |
-|---|---|---|
-| Atos | Good | Keep as-is |
-| GSK | Thin wordmark, appears small | Increase max-h to 12 |
-| Toshiba | Wordmark may appear thin | Increase max-h to 10 (keep) or bump to 11 |
-| AMA | Wide with text, may shrink | Increase max-w to 160px |
-| VodafoneZiggo | Very wide | Increase max-w to 170px |
-| Chubb | Good | Keep as-is |
-| a.s.r. | May have padding in image | Increase max-h to 14 |
-| UWV | Depends on image | Adjust as needed, likely max-h-12 |
-| MinFin | Tall government crest | Increase max-h to 14, reduce max-w |
-| Eindhoven | Government logo with crest | Increase max-h to 14 |
-
-### Implementation
-
-Each logo entry gets an optional `className` string. The shared `img` tag merges the base classes with the per-logo override. This keeps the component clean while allowing individual tuning.
-
-### File Changed
+### Changes
 
 | File | Change |
 |---|---|
-| `src/components/sections/ClientLogos.tsx` | Add per-logo `className` overrides to the logos array and apply them to each `<img>` element |
+| `src/components/sections/ClientLogos.tsx` | Replace grid layout with a horizontal scrolling marquee. Render logos twice for seamless loop. Increase logo sizes (e.g. `h-10`→`h-14`, wider max-widths). Add `overflow-hidden` wrapper and CSS animation via inline keyframes or a Tailwind `animate-` class. |
+| `src/index.css` | Add a `@keyframes marquee` animation that translates the row from `0` to `-50%` over ~30s, `linear infinite`. |
+
+### Technical Detail
+
+```text
+┌─────────────────────────────────────────┐  ← overflow-hidden
+│ [logos set 1] [logos set 2]             │  ← flex row, animates left
+│  ──────────────────────────►            │
+└─────────────────────────────────────────┘
+```
+
+- The flex row contains all 10 logos twice (20 total)
+- `animation: marquee 30s linear infinite` slides the row left
+- When the first set scrolls out, the duplicate takes its place — seamless loop
+- `pause on hover` via `hover:animation-play-state: paused` for accessibility
+- Logos get bumped to `h-12`–`h-16` range with wider max-widths so they're legible
+- Gaps between logos via `gap-12` or `gap-16`
 
