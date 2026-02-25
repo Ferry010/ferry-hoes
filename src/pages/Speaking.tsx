@@ -9,7 +9,7 @@ import {
   CarouselNext,
   CarouselDots,
 } from "@/components/ui/carousel";
-import { ArrowRight, Mic, Quote, ChevronDown } from "lucide-react";
+import { ArrowRight, Mic, Quote, ChevronDown, Play } from "lucide-react";
 import Footer from "@/components/sections/Footer";
 import AskFerryBubble from "@/components/AskFerryBubble";
 import SEOHead from "@/components/blog/SEOHead";
@@ -180,6 +180,14 @@ const Speaking = () => {
                       summits worldwide, always with the same goal: to spark conversations 
                       that lead to meaningful change.
                     </p>
+                    <Button
+                      variant="outline"
+                      className="rounded-full px-6 mt-2 border-accent text-accent hover:bg-accent hover:text-accent-foreground group"
+                      onClick={() => document.getElementById('speaker-reel')?.scrollIntoView({ behavior: 'smooth' })}
+                    >
+                      <Play className="h-4 w-4 mr-2" />
+                      Watch the reel
+                    </Button>
                   </div>
                 </div>
               </div>
@@ -191,7 +199,7 @@ const Speaking = () => {
           <SpeakingQA />
 
           {/* Video Reel Placeholder */}
-          <section className="py-24 md:py-32 bg-secondary/30">
+          <section id="speaker-reel" className="py-24 md:py-32 bg-secondary/30 scroll-mt-16">
             <div className="container px-6 md:px-8">
               <div className="max-w-4xl mx-auto text-center">
                 <span className="text-accent font-medium text-sm mb-2 block">Watch</span>
