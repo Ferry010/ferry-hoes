@@ -7,14 +7,16 @@ import logoMinfin from "@/assets/logos/minfin.png";
 import logoAsr from "@/assets/logos/asr.png";
 import logoGsk from "@/assets/logos/gsk.png";
 import logoToshiba from "@/assets/logos/toshiba.png";
-import logoVodafoneZiggo from "@/assets/logos/vodafoneziggo.png";
+import logoVodafone from "@/assets/logos/vodafone.png";
+import logoZiggo from "@/assets/logos/ziggo.png";
 
 const logos = [
   { src: logoAtos, alt: "Atos", className: "max-h-12 max-w-[160px]" },
+  { src: logoVodafone, alt: "Vodafone", className: "max-h-12 max-w-[180px]" },
   { src: logoGsk, alt: "GlaxoSmithKline", className: "max-h-14 max-w-[180px]" },
   { src: logoToshiba, alt: "Toshiba", className: "max-h-12 max-w-[170px]" },
   { src: logoAma, alt: "American Marketing Association", className: "max-h-12 max-w-[180px]" },
-  { src: logoVodafoneZiggo, alt: "VodafoneZiggo", className: "max-h-12 max-w-[190px]" },
+  { src: logoZiggo, alt: "Ziggo", className: "max-h-12 max-w-[180px]" },
   { src: logoChubb, alt: "Chubb Fire & Security", className: "max-h-12 max-w-[160px]" },
   { src: logoAsr, alt: "a.s.r.", className: "max-h-16 max-w-[160px]" },
   { src: logoUwv, alt: "UWV", className: "max-h-14 max-w-[160px]" },
