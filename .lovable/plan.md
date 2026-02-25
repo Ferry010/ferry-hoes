@@ -1,22 +1,24 @@
 
 
-Looking at the current state of the Speaking hero, there are two distinct directions here. Let me present both options for you to choose.
+## Improve Speaking Hero Readability
 
-## Option A: Bolder Textmarker (quick fix)
+The current overlay is `from-foreground/80 via-foreground/60 to-primary/50` which lets too much video through, especially in the center/right areas. Two changes to fix this:
 
-Increase the highlight span from `bg-accent/50` to `bg-accent/95` for a near-solid coral marker effect behind "stories, insights, and practical ideas".
+### Changes in `src/pages/Speaking.tsx`
 
-**Change:** `src/pages/Speaking.tsx` line 99 — `bg-accent/50` → `bg-accent/95`
+**1. Darken the gradient overlay** (line 85)
 
-## Option B: Abstract Video Overlay + Bold Marker (recommended)
+Increase opacity across the gradient so the video is more muted and white text pops:
 
-Add a subtle pattern or noise texture overlay on top of the video to soften it further, making all text pop without needing an extremely dark solid overlay. Combined with the bolder textmarker.
+- Before: `from-foreground/80 via-foreground/60 to-primary/50`
+- After: `from-foreground/90 via-foreground/80 to-primary/70`
 
-**Changes in `src/pages/Speaking.tsx`:**
-- Add a second overlay `div` with a CSS dot-pattern or frosted-glass effect (e.g., `backdrop-blur-[1px]` with a subtle repeating gradient) between the video and the existing gradient overlay
-- Increase textmarker to `bg-accent/95`
+**2. Increase backdrop blur** (line 83)
 
----
+Soften the video further so it becomes a texture rather than competing with the text:
 
-Both options include the denser marker. The question is whether we also soften the video.
+- Before: `backdrop-blur-[2px]`
+- After: `backdrop-blur-[6px]`
+
+These two changes together will make the video a soft, teal-tinted backdrop that "shines through" without competing with the text for attention.
 
