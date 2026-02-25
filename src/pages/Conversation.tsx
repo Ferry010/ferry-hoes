@@ -81,12 +81,21 @@ const OptionButton = ({
   </button>
 );
 
+/* ── Opening lines (not in data, handled here) ── */
+const OPENER_1 = "Hey. I love that you clicked. Curiosity is a good sign.";
+const OPENER_2 = "What would you like to talk about?";
+const ROOT_OPTIONS: ConversationOption[] = [
+  { label: "What's your story?", nodeKey: "story" },
+  { label: "Tell me about your work.", nodeKey: "work" },
+];
+
 /* ── Page ── */
 const Conversation = () => {
   const navigate = useNavigate();
   const [history, setHistory] = useState<HistoryEntry[]>([]);
   const [showTyping, setShowTyping] = useState(false);
   const [interactionStarted, setInteractionStarted] = useState(false);
+  const [openerPhase, setOpenerPhase] = useState<0 | 1 | 2>(0);
   const endRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = useCallback(() => {
@@ -96,7 +105,24 @@ const Conversation = () => {
     );
   }, []);
 
-  useEffect(scrollToBottom, [history, showTyping, scrollToBottom]);
+  useEffect(scrollToBottom, [history, showTyping, scrollToBottom, openerPhase]);
+
+  /* Staggered opener */
+  useEffect(() => {
+    // Phase 0: show first bubble, then typing
+    const t1 = setTimeout(() => {
+      setShowTyping(true);
+      setOpenerPhase(1);
+    }, 800);
+
+    // Phase 1 → 2: show second bubble + options
+    const t2 = setTimeout(() => {
+      setShowTyping(false);
+      setOpenerPhase(2);
+    }, 2000);
+
+    return () => { clearTimeout(t1); clearTimeout(t2); };
+  }, []);
 
   const addWithTyping = useCallback(
     (entries: HistoryEntry[]) => {
@@ -115,8 +141,6 @@ const Conversation = () => {
 
           if (nextIsFerry) {
             setShowTyping(true);
-          } else if (isLast) {
-            setShowTyping(false);
           } else {
             setShowTyping(false);
           }
@@ -156,8 +180,6 @@ const Conversation = () => {
     },
     [addWithTyping]
   );
-
-  const rootNode = conversationNodes.root;
 
   const renderEntry = (entry: HistoryEntry, i: number) => {
     switch (entry.type) {
@@ -201,11 +223,16 @@ const Conversation = () => {
         </div>
 
         <div className="max-w-xl mx-auto px-6 pt-24 pb-16 space-y-5">
-          <FerryBubble text={rootNode.response as string} />
+          {/* First opener bubble always visible */}
+          <FerryBubble text={OPENER_1} />
 
-          {!interactionStarted && rootNode.options && (
+          {/* Second opener bubble after typing pause */}
+          {openerPhase >= 2 && <FerryBubble text={OPENER_2} />}
+
+          {/* Root options (before any interaction) */}
+          {openerPhase >= 2 && !interactionStarted && (
             <div className="flex flex-col items-end gap-2 animate-fade-in">
-              {rootNode.options.map((opt) => (
+              {ROOT_OPTIONS.map((opt) => (
                 <OptionButton
                   key={opt.nodeKey}
                   label={opt.label}
