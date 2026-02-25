@@ -265,9 +265,9 @@ const Conversation = () => {
           setTimeout(() => {
             setPageOpacity(0);
             setTimeout(() => navigate("/"), 300);
-          }, 600);
+          }, 1500);
         }, 900);
-      }, 400);
+      }, 1200);
     }, 600);
   }, [isExiting, navigate]);
 
@@ -337,16 +337,14 @@ const Conversation = () => {
           <div ref={endRef} />
         </div>
 
-        {/* Persistent bottom button */}
-        <div className="fixed bottom-6 left-0 right-0 flex justify-center z-30 pointer-events-none">
-          <button
-            onClick={handleExit}
-            disabled={isExiting}
-            className="pointer-events-auto px-5 py-2.5 rounded-full bg-secondary text-muted-foreground text-sm font-medium hover:brightness-[1.03] active:scale-[0.97] transition-all duration-120 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            Back to homepage
-          </button>
-        </div>
+        {/* Back to homepage — top right */}
+        <button
+          onClick={handleExit}
+          disabled={isExiting}
+          className="fixed top-5 right-6 z-30 text-sm font-medium text-accent hover:text-accent/70 transition-colors duration-150 active:scale-[0.97] disabled:opacity-40 disabled:cursor-not-allowed"
+        >
+          Back to homepage
+        </button>
       </main>
     </>
   );
