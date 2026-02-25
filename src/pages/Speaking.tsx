@@ -80,7 +80,7 @@ const Speaking = () => {
             preload="auto"
           />
           {/* Teal-tinted dark overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-foreground/70 via-primary/40 to-foreground/70" />
+          <div className="absolute inset-0 bg-gradient-to-br from-foreground/80 via-foreground/60 to-primary/50" />
 
           <div className="container px-6 md:px-8 py-24 md:py-32 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
