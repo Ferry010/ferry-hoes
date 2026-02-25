@@ -1,33 +1,27 @@
 /* ── Types ── */
 
-export interface CTA {
-  label: string;
-  href: string;
-}
-
 export interface ConversationOption {
   label: string;
   nodeKey: string;
 }
 
 export interface ConversationNode {
-  response: string;
+  response: string | string[];
   options?: ConversationOption[];
-  ctaIntro?: string;
-  ctas?: CTA[];
-  continuationOptions?: ConversationOption[];
 }
 
 /* ── Node Map ── */
 
 export const conversationNodes: Record<string, ConversationNode> = {
   root: {
-    response: "Before I start talking about myself, can I ask you something?",
+    response: "Hey. Before I start explaining what I do, I'm curious. What made you click?",
     options: [
       { label: "I'm organizing something", nodeKey: "organizing" },
       { label: "I'm just exploring", nodeKey: "exploring" },
     ],
   },
+
+  // ─── PATH A: ORGANIZING ───
 
   organizing: {
     response: "Nice. What kind of setting are we talking about?",
@@ -39,285 +33,278 @@ export const conversationNodes: Record<string, ConversationNode> = {
   },
 
   event: {
-    response:
-      "Great. In that setting I usually speak about how organizations can use technology without losing their human edge. It is strategic, practical and energetic. People leave looking differently at how they design work.",
+    response: "Great. In that setting I usually speak about how organizations combine technology and human judgment without losing what makes them distinctive. It's strategic, but accessible. I try to leave people thinking differently about how they design work.",
     options: [
-      { label: "Inspiration", nodeKey: "event_inspiration" },
-      { label: "Practical direction", nodeKey: "event_practical" },
-      { label: "Strategic clarity", nodeKey: "event_strategic" },
+      { label: "Leadership", nodeKey: "event_leadership" },
+      { label: "Mixed professionals", nodeKey: "event_mixed" },
+      { label: "Tech focused", nodeKey: "event_tech" },
     ],
   },
 
-  event_inspiration: {
-    response:
-      "I focus on showing how fast technology is changing expectations, and why human judgment becomes more valuable, not less. It wakes people up without overwhelming them.",
-    ctaIntro: "If this sounds like it could fit your audience, we can explore next steps.",
-    ctas: [
-      { label: "Check availability for your event", href: "https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966" },
-      { label: "Discuss your event directly with Ferry", href: "mailto:ferry@brandhumanizing.com" },
-    ],
-    continuationOptions: [
-      { label: "Tell me more about your keynote style", nodeKey: "keynote_style" },
-      { label: "What makes you different from other speakers?", nodeKey: "speaker_diff" },
-      { label: "Switch topic", nodeKey: "switch_from_a" },
+  event_leadership: {
+    response: "With leadership teams it often becomes a conversation about responsibility. Not just what technology can do, but what it should influence.",
+    options: [
+      { label: "What does a keynote usually look like?", nodeKey: "event_keynote" },
+      { label: "How did you get into this topic?", nodeKey: "event_howinto" },
+      { label: "Something else", nodeKey: "event_other" },
     ],
   },
 
-  event_practical: {
-    response: "I translate the bigger ideas into clear decisions leaders can take immediately. Where to use AI. Where not to. And why.",
-    ctaIntro: "If this sounds like it could fit your audience, we can explore next steps.",
-    ctas: [
-      { label: "Check availability for your event", href: "https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966" },
-      { label: "Discuss your event directly with Ferry", href: "mailto:ferry@brandhumanizing.com" },
-    ],
-    continuationOptions: [
-      { label: "Tell me more about your keynote style", nodeKey: "keynote_style" },
-      { label: "What makes you different from other speakers?", nodeKey: "speaker_diff" },
-      { label: "Switch topic", nodeKey: "switch_from_a" },
+  event_mixed: {
+    response: "Mixed groups are interesting because people from different backgrounds start seeing the same challenge from new angles. That shift usually sticks.",
+    options: [
+      { label: "What does a keynote usually look like?", nodeKey: "event_keynote" },
+      { label: "How did you get into this topic?", nodeKey: "event_howinto" },
+      { label: "Something else", nodeKey: "event_other" },
     ],
   },
 
-  event_strategic: {
-    response: "I help leadership teams rethink how technology shapes positioning. Not just efficiency, but differentiation.",
-    ctaIntro: "If this sounds like it could fit your audience, we can explore next steps.",
-    ctas: [
-      { label: "Check availability for your event", href: "https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966" },
-      { label: "Discuss your event directly with Ferry", href: "mailto:ferry@brandhumanizing.com" },
-    ],
-    continuationOptions: [
-      { label: "Tell me more about your keynote style", nodeKey: "keynote_style" },
-      { label: "What makes you different from other speakers?", nodeKey: "speaker_diff" },
-      { label: "Switch topic", nodeKey: "switch_from_a" },
+  event_tech: {
+    response: "With tech audiences I skip the basics. We go straight into what happens when you build systems that replace judgment instead of supporting it.",
+    options: [
+      { label: "What does a keynote usually look like?", nodeKey: "event_keynote" },
+      { label: "How did you get into this topic?", nodeKey: "event_howinto" },
+      { label: "Something else", nodeKey: "event_other" },
     ],
   },
 
-  keynote_style: {
-    response: "I keep it sharp and visual. No slides full of text. I use real examples, sometimes live demos, and I adapt to the energy in the room. The goal is always that people leave with something they can act on.",
+  event_keynote: {
+    response: [
+      "It usually starts personal. Then we zoom out into the bigger shifts. And I always try to end practical. People should walk out with something to reflect on, not just inspiration.",
+      "If at some point you'd like to check availability or talk through your event, that usually goes through Speakers Academy or directly via email. No pressure.",
+      "Check availability here: https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966",
+      "Or just email me: ferry@brandhumanizing.com",
+    ],
+    options: [
+      { label: "How did you get into this topic?", nodeKey: "event_howinto" },
+      { label: "Tell me about the book", nodeKey: "book" },
+    ],
   },
 
-  speaker_diff: {
-    response: "Most speakers in this space talk about tools or trends. I talk about what happens to people and organizations when those tools become normal. That shift in perspective is what audiences remember.",
+  event_howinto: {
+    response: [
+      "I grew up fascinated by the internet. Built my first website at ten. Over time I moved into growth and optimization. At some point I started noticing that the more we optimized, the more human nuance disappeared. That tension became my work.",
+      "If you'd like to explore whether this fits your event, just reach out.",
+      "Availability: https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966",
+      "Or email me directly: ferry@brandhumanizing.com",
+    ],
+    options: [
+      { label: "What does a keynote usually look like?", nodeKey: "event_keynote" },
+      { label: "Tell me about the book", nodeKey: "book" },
+    ],
   },
+
+  event_other: {
+    response: "Sure. What would you like to know?",
+    options: [
+      { label: "What does a keynote usually look like?", nodeKey: "event_keynote" },
+      { label: "How did you get into this topic?", nodeKey: "event_howinto" },
+      { label: "Tell me about the book", nodeKey: "book" },
+    ],
+  },
+
+  // ─── TEAM ───
 
   team: {
-    response: "Perfect. Team sessions are more interactive. We look at how technology affects daily decisions, culture and collaboration. It becomes practical very quickly.",
+    response: "Those are my favorite actually. Smaller groups allow more interaction. It becomes less about speaking and more about thinking together.",
     options: [
-      { label: "Leadership team", nodeKey: "team_leadership" },
-      { label: "Innovation or digital team", nodeKey: "team_innovation" },
-      { label: "Mixed departments", nodeKey: "team_mixed" },
+      { label: "AI integration", nodeKey: "team_ai" },
+      { label: "Culture and change", nodeKey: "team_culture" },
+      { label: "Positioning and differentiation", nodeKey: "team_positioning" },
     ],
   },
 
-  team_leadership: {
-    response: "With leadership teams I focus on governance and strategic choices. How do you introduce AI without weakening judgment or accountability? That conversation usually opens up fast.",
-    ctaIntro: "If you think this could strengthen your team, let's explore it.",
-    ctas: [
-      { label: "Discuss a team session", href: "mailto:ferry@brandhumanizing.com" },
-      { label: "Check speaking availability", href: "https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966" },
+  team_ai: {
+    response: [
+      "Most teams already use AI in some form. The question is whether they have a shared understanding of where automation helps and where it weakens judgment. That's usually where it gets interesting.",
+      "If you ever want to explore this live with the team, just reach out. I'm happy to think along.",
+      "Email works best: ferry@brandhumanizing.com",
     ],
-    continuationOptions: [
-      { label: "Tell me more about your keynote style", nodeKey: "keynote_style" },
-      { label: "What makes you different from other speakers?", nodeKey: "speaker_diff" },
-      { label: "Switch topic", nodeKey: "switch_from_a" },
+    options: [
+      { label: "What does a session look like?", nodeKey: "team_session" },
+      { label: "Tell me about the book", nodeKey: "book" },
     ],
   },
 
-  team_innovation: {
-    response: "Innovation teams often already use AI but lack a shared framework for when to automate and when to protect human input. That is where the session gets interesting.",
-    ctaIntro: "If you think this could strengthen your team, let's explore it.",
-    ctas: [
-      { label: "Discuss a team session", href: "mailto:ferry@brandhumanizing.com" },
-      { label: "Check speaking availability", href: "https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966" },
+  team_culture: {
+    response: [
+      "Culture shifts are hard to talk about in abstract. In a session we make it concrete. What decisions are changing? Where is friction increasing? That usually opens up the real conversation.",
+      "If you ever want to explore this live with the team, just reach out. I'm happy to think along.",
+      "Email works best: ferry@brandhumanizing.com",
     ],
-    continuationOptions: [
-      { label: "Tell me more about your keynote style", nodeKey: "keynote_style" },
-      { label: "What makes you different from other speakers?", nodeKey: "speaker_diff" },
-      { label: "Switch topic", nodeKey: "switch_from_a" },
+    options: [
+      { label: "What does a session look like?", nodeKey: "team_session" },
+      { label: "Tell me about the book", nodeKey: "book" },
     ],
   },
 
-  team_mixed: {
-    response: "Mixed groups are great because the conversation crosses silos. People from operations, marketing and tech start seeing the same challenge from different angles. That alignment is often the biggest takeaway.",
-    ctaIntro: "If you think this could strengthen your team, let's explore it.",
-    ctas: [
-      { label: "Discuss a team session", href: "mailto:ferry@brandhumanizing.com" },
-      { label: "Check speaking availability", href: "https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966" },
+  team_positioning: {
+    response: [
+      "Positioning is where technology becomes strategic. Not just how you use it, but how it shapes what makes you different. That's a conversation most teams haven't had yet.",
+      "If you ever want to explore this live with the team, just reach out. I'm happy to think along.",
+      "Email works best: ferry@brandhumanizing.com",
     ],
-    continuationOptions: [
-      { label: "Tell me more about your keynote style", nodeKey: "keynote_style" },
-      { label: "What makes you different from other speakers?", nodeKey: "speaker_diff" },
-      { label: "Switch topic", nodeKey: "switch_from_a" },
+    options: [
+      { label: "What does a session look like?", nodeKey: "team_session" },
+      { label: "Tell me about the book", nodeKey: "book" },
     ],
   },
+
+  team_session: {
+    response: "It depends on the group. Sometimes it's a half day. Sometimes ninety minutes. I always start with a short provocation and then we work through real questions together. No slides full of frameworks.",
+  },
+
+  // ─── PODCAST ───
 
   podcast: {
-    response: "Nice. I enjoy conversations more than monologues anyway. Especially when we go beyond tools and talk about design choices.",
+    response: "I enjoy conversations more than monologues anyway. Especially when we go beyond tools and talk about design choices.",
     options: [
       { label: "AI and leadership", nodeKey: "podcast_ai" },
-      { label: "Human judgment in a digital world", nodeKey: "podcast_judgment" },
+      { label: "Human judgment", nodeKey: "podcast_judgment" },
       { label: "Personal journey", nodeKey: "podcast_journey" },
     ],
   },
 
   podcast_ai: {
-    response: "AI and leadership is where I spend most of my time. The interesting question is not whether leaders should use AI, but how they set the rules for everyone else.",
-    ctaIntro: "If you think I'm a fit, feel free to reach out.",
-    ctas: [
-      { label: "Invite Ferry to your podcast", href: "mailto:ferry@brandhumanizing.com" },
-      { label: "Discover the book", href: "https://brandhumanizingbook.nl" },
-    ],
-    continuationOptions: [
-      { label: "What do you actually speak about?", nodeKey: "event" },
-      { label: "Tell me your story", nodeKey: "story_from_podcast" },
+    response: [
+      "AI and leadership is where I spend most of my time. The interesting question is not whether leaders should use AI, but how they set the rules for everyone else.",
+      "If you think I'm a fit for your format, feel free to email me.",
+      "ferry@brandhumanizing.com",
+      "And if you want context beforehand, the book is here: https://brandhumanizingbook.nl",
     ],
   },
 
   podcast_judgment: {
-    response: "This is the core of my work. Technology makes us faster but it does not automatically make us better. The gap between speed and judgment is where most organizations struggle.",
-    ctaIntro: "If you think I'm a fit, feel free to reach out.",
-    ctas: [
-      { label: "Invite Ferry to your podcast", href: "mailto:ferry@brandhumanizing.com" },
-      { label: "Discover the book", href: "https://brandhumanizingbook.nl" },
-    ],
-    continuationOptions: [
-      { label: "What do you actually speak about?", nodeKey: "event" },
-      { label: "Tell me your story", nodeKey: "story_from_podcast" },
+    response: [
+      "This is the core of my work. Technology makes us faster but it does not automatically make us better. The gap between speed and judgment is where most organizations struggle.",
+      "If you think I'm a fit for your format, feel free to email me.",
+      "ferry@brandhumanizing.com",
+      "And if you want context beforehand, the book is here: https://brandhumanizingbook.nl",
     ],
   },
 
   podcast_journey: {
-    response: "I built my first website at ten and have been obsessed with the internet ever since. The journey from building things online to speaking about how technology shapes organizations happened naturally over time.",
-    ctaIntro: "If you think I'm a fit, feel free to reach out.",
-    ctas: [
-      { label: "Invite Ferry to your podcast", href: "mailto:ferry@brandhumanizing.com" },
-      { label: "Discover the book", href: "https://brandhumanizingbook.nl" },
-    ],
-    continuationOptions: [
-      { label: "What do you actually speak about?", nodeKey: "event" },
-      { label: "Tell me your story", nodeKey: "story_from_podcast" },
+    response: [
+      "I built my first website at ten and have been obsessed with the internet ever since. The journey from building things online to speaking about how technology shapes organizations happened naturally over time.",
+      "If you think I'm a fit for your format, feel free to email me.",
+      "ferry@brandhumanizing.com",
+      "And if you want context beforehand, the book is here: https://brandhumanizingbook.nl",
     ],
   },
 
-  story_from_podcast: {
-    response: "I started in growth and optimization. We improved performance metrics constantly but I noticed that the more we optimized for efficiency, the more human nuance disappeared. That tension became my work.",
-  },
-
-  switch_from_a: {
-    response: "Of course. What are you curious about?",
-    options: [
-      { label: "I'm just exploring", nodeKey: "exploring" },
-    ],
-  },
+  // ─── PATH B: EXPLORING ───
 
   exploring: {
-    response: "Love that. What made you click?",
+    response: "Love that. What are you most curious about?",
     options: [
-      { label: "AI is everywhere and I'm trying to make sense of it", nodeKey: "ai_everywhere" },
-      { label: "I saw your name somewhere", nodeKey: "saw_name" },
-      { label: "I'm curious about how humans and tech work together", nodeKey: "humans_tech" },
+      { label: "AI and the future of work", nodeKey: "exploring_ai" },
+      { label: "Your story", nodeKey: "exploring_story" },
+      { label: "What is Brand Humanizing?", nodeKey: "exploring_bh" },
     ],
   },
 
-  ai_everywhere: {
-    response: "Fair. AI is everywhere right now. What interests me is not the tools themselves, but what happens to people when those tools become normal.",
+  exploring_ai: {
+    response: "I think the biggest shift is not technical. It's behavioral. The tools are powerful. The real question is how they influence judgment, creativity and responsibility.",
     options: [
-      { label: "As a leader", nodeKey: "ai_leader" },
-      { label: "Personally curious", nodeKey: "ai_curious" },
+      { label: "Opportunity", nodeKey: "ai_opportunity" },
+      { label: "Risk", nodeKey: "ai_risk" },
+      { label: "Both", nodeKey: "ai_both" },
     ],
   },
 
-  ai_leader: {
-    response: "Then it becomes a design question. How do you introduce technology without weakening judgment or culture?",
-    ctaIntro: "If you ever want to explore this live, I speak at events and within teams about exactly this tension.",
-    ctas: [
-      { label: "See speaking options", href: "https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966" },
-      { label: "Discover the book", href: "https://brandhumanizingbook.nl" },
-    ],
-    continuationOptions: [
-      { label: "What do you actually speak about?", nodeKey: "event" },
-      { label: "Tell me your story", nodeKey: "story_from_exploring" },
+  ai_opportunity: {
+    response: [
+      "If you see it as opportunity, the follow-up question is: opportunity for what? Speed, reach, creativity? Each one changes how you design around it.",
+      "If this topic ever feels relevant for your organization or event, that's usually where I come in.",
+      "Availability goes through Speakers Academy: https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966",
+      "Or you can just email me directly: ferry@brandhumanizing.com",
     ],
   },
 
-  ai_curious: {
-    response: "Then it becomes simpler. How do you use technology without letting it replace what makes you valuable?",
-    ctaIntro: "If you ever want to explore this live, I speak at events and within teams about exactly this tension.",
-    ctas: [
-      { label: "See speaking options", href: "https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966" },
-      { label: "Discover the book", href: "https://brandhumanizingbook.nl" },
-    ],
-    continuationOptions: [
-      { label: "What do you actually speak about?", nodeKey: "event" },
-      { label: "Tell me your story", nodeKey: "story_from_exploring" },
+  ai_risk: {
+    response: [
+      "If you see it as risk, you're probably paying attention. The risk is not in the tools. It's in what happens when people stop questioning the output.",
+      "If this topic ever feels relevant for your organization or event, that's usually where I come in.",
+      "Availability goes through Speakers Academy: https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966",
+      "Or you can just email me directly: ferry@brandhumanizing.com",
     ],
   },
 
-  saw_name: {
-    response: "Good sign. Hopefully in a positive context.",
+  ai_both: {
+    response: [
+      "That's the honest answer. It's both. And the organizations that acknowledge that tend to make better choices about where to automate and where to protect human input.",
+      "If this topic ever feels relevant for your organization or event, that's usually where I come in.",
+      "Availability goes through Speakers Academy: https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966",
+      "Or you can just email me directly: ferry@brandhumanizing.com",
+    ],
+  },
+
+  exploring_story: {
+    response: "I grew up fascinated by the internet. Built my first website at ten. I've always been drawn to technology. At some point I started questioning how it changes people, not just processes.",
     options: [
-      { label: "At an event", nodeKey: "saw_event" },
-      { label: "Online", nodeKey: "saw_online" },
-      { label: "Through someone", nodeKey: "saw_someone" },
+      { label: "Personal", nodeKey: "story_personal" },
+      { label: "Professional", nodeKey: "story_professional" },
     ],
   },
 
-  saw_event: {
-    response: "Nice. Events are where this work comes alive. I focus on helping organizations rethink how they combine technology and human value.",
-    ctaIntro: "If you want to explore what that could look like for your event, here are some options.",
-    ctas: [
-      { label: "Check availability", href: "https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966" },
-      { label: "Reach out directly", href: "mailto:ferry@brandhumanizing.com" },
-      { label: "Discover the book", href: "https://brandhumanizingbook.nl" },
+  story_personal: {
+    response: [
+      "On the personal side, I've always been someone who builds things. Websites, ideas, companies. The thread through all of it is curiosity about what technology does to how people connect.",
+      "If you're ever organizing something around these themes, I speak about it regularly.",
+      "Availability: https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966",
     ],
   },
 
-  saw_online: {
-    response: "The internet is where I started. I focus on helping organizations rethink how they combine technology and human value. Most of my thinking ends up online eventually.",
-    ctaIntro: "If something resonated, feel free to explore further.",
-    ctas: [
-      { label: "Check availability", href: "https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966" },
-      { label: "Reach out directly", href: "mailto:ferry@brandhumanizing.com" },
-      { label: "Discover the book", href: "https://brandhumanizingbook.nl" },
+  story_professional: {
+    response: [
+      "Professionally, I went from building and optimizing digital products to speaking and writing about the human side of technology. The shift happened when I realized optimization without intention makes things worse, not better.",
+      "If you're ever organizing something around these themes, I speak about it regularly.",
+      "Availability: https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966",
     ],
   },
 
-  saw_someone: {
-    response: "Word of mouth is the best filter. I focus on helping organizations rethink how they combine technology and human value.",
-    ctaIntro: "If you want to continue the conversation, here are some ways.",
-    ctas: [
-      { label: "Check availability", href: "https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966" },
-      { label: "Reach out directly", href: "mailto:ferry@brandhumanizing.com" },
-      { label: "Discover the book", href: "https://brandhumanizingbook.nl" },
-    ],
-  },
-
-  humans_tech: {
-    response: "That tension is my work. Technology makes us faster. It does not automatically make us better. That depends on design choices.",
+  exploring_bh: {
+    response: "It's my way of describing a simple tension. Technology makes us faster. It doesn't automatically make us better. Organizations have to consciously design for the human side.",
     options: [
-      { label: "Business", nodeKey: "ht_business" },
-      { label: "Cultural", nodeKey: "ht_cultural" },
+      { label: "Yes", nodeKey: "bh_yes" },
+      { label: "Not sure", nodeKey: "bh_notsure" },
+      { label: "Depends", nodeKey: "bh_depends" },
     ],
   },
 
-  ht_business: {
-    response: "From a business perspective, the question is how you position technology inside strategy. Not as a cost saver but as something that strengthens what makes you different.",
-    ctaIntro: "If this is relevant for your organization, I would enjoy exploring it further.",
-    ctas: [
-      { label: "See speaking options", href: "https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966" },
-      { label: "Discover the book", href: "https://brandhumanizingbook.nl" },
+  bh_yes: {
+    response: [
+      "Good. Then you've probably seen it happen. The challenge is turning that awareness into actual design choices inside an organization.",
+      "If you ever want to explore this live with a group, that's usually what I do on stage or in teams.",
+      "Availability: https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966",
+      "Or just email me: ferry@brandhumanizing.com",
     ],
   },
 
-  ht_cultural: {
-    response: "Culturally, the risk is that we optimize so much for efficiency that we lose the space for creativity, disagreement and judgment. Those are the things that make organizations interesting.",
-    ctaIntro: "If this resonates, I talk about this at events and in teams.",
-    ctas: [
-      { label: "See speaking options", href: "https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966" },
-      { label: "Discover the book", href: "https://brandhumanizingbook.nl" },
+  bh_notsure: {
+    response: [
+      "That's fair. It's easier to see in hindsight. When a company automates something and loses the thing that made people trust them. That's usually the moment it clicks.",
+      "If you ever want to explore this live with a group, that's usually what I do on stage or in teams.",
+      "Availability: https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966",
+      "Or just email me: ferry@brandhumanizing.com",
     ],
   },
 
-  story_from_exploring: {
-    response: "I built my first website at ten and have been obsessed with the internet ever since. I moved into growth and optimization but started noticing that the more we optimized, the more human nuance disappeared. That tension became my work.",
+  bh_depends: {
+    response: [
+      "It does depend. On the industry, the culture, the leadership. But the question itself is always relevant. Are you designing technology around people, or the other way around?",
+      "If you ever want to explore this live with a group, that's usually what I do on stage or in teams.",
+      "Availability: https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966",
+      "Or just email me: ferry@brandhumanizing.com",
+    ],
+  },
+
+  // ─── SHARED ───
+
+  book: {
+    response: [
+      "The book is called Brand Humanizing. It's about the tension between technology and human value inside organizations. It's not a manual. It's more of a perspective shift.",
+      "You can find it here: https://brandhumanizingbook.nl",
+    ],
   },
 };
