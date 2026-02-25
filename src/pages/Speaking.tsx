@@ -79,8 +79,18 @@ const Speaking = () => {
             playsInline
             preload="auto"
           />
+          {/* Abstract frosted overlay */}
+          <div className="absolute inset-0 backdrop-blur-[2px]" />
           {/* Teal-tinted dark overlay */}
           <div className="absolute inset-0 bg-gradient-to-br from-foreground/80 via-foreground/60 to-primary/50" />
+          {/* Subtle dot pattern */}
+          <div 
+            className="absolute inset-0 opacity-[0.07]"
+            style={{
+              backgroundImage: `radial-gradient(circle, hsl(var(--foreground)) 1px, transparent 1px)`,
+              backgroundSize: '20px 20px',
+            }}
+          />
 
           <div className="container px-6 md:px-8 py-24 md:py-32 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
@@ -96,7 +106,7 @@ const Speaking = () => {
               
               <p className="text-xl md:text-2xl text-white leading-relaxed max-w-2xl mx-auto mb-12">
                 No death-by-PowerPoint. Just{" "}
-                <span className="bg-accent/50 px-1 py-0.5 rounded">stories, insights, and practical ideas</span>
+                <span className="bg-accent/95 px-1 py-0.5 rounded">stories, insights, and practical ideas</span>
                 {" "}that spark real conversations and drive meaningful change.
               </p>
 
