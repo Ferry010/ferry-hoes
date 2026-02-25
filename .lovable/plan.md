@@ -1,5 +1,6 @@
 
 
+
 ## Conversation Page: Complete Rework as Speaker-Focused Networking Chat
 
 This is a fundamental redesign. The current 3-topic linear model becomes a 2-path branching tree ("organizing something" vs "just exploring") with sub-branches, persistent CTAs, and continued conversation after CTAs appear. The entire content and flow changes.
@@ -130,4 +131,3 @@ A fixed bottom bar that appears once CTAs are introduced:
 - Does not obscure chat content (chat area gets extra bottom padding)
 - Links open normally (new tab for URLs, default for mailto)
 - Never disappears once shown
-
