@@ -1,33 +1,28 @@
 
 
-## Auto-Scrolling Logo Ticker
-
-Replace the static 5-column grid with a single-row, infinitely auto-scrolling horizontal ticker (marquee effect). Logos will be larger and more readable.
-
-### Approach
-
-Use a CSS animation-based marquee: duplicate the logo set twice inside a flex row, animate it with `translateX(-50%)` so it loops seamlessly. No JavaScript timers needed — pure CSS `@keyframes`.
+## Replace VodafoneZiggo with Separate Vodafone and Ziggo Logos
 
 ### Changes
 
 | File | Change |
 |---|---|
-| `src/components/sections/ClientLogos.tsx` | Replace grid layout with a horizontal scrolling marquee. Render logos twice for seamless loop. Increase logo sizes (e.g. `h-10`→`h-14`, wider max-widths). Add `overflow-hidden` wrapper and CSS animation via inline keyframes or a Tailwind `animate-` class. |
-| `src/index.css` | Add a `@keyframes marquee` animation that translates the row from `0` to `-50%` over ~30s, `linear infinite`. |
+| `src/assets/logos/vodafone.png` | Copy uploaded Vodafone logo |
+| `src/assets/logos/ziggo.png` | Copy uploaded Ziggo logo |
+| `src/components/sections/ClientLogos.tsx` | Remove VodafoneZiggo import and entry. Add Vodafone and Ziggo as separate entries inserted at different positions in the array. Delete the old `vodafoneziggo.png` import. |
 
-### Technical Detail
+### Logo Array (new order)
 
-```text
-┌─────────────────────────────────────────┐  ← overflow-hidden
-│ [logos set 1] [logos set 2]             │  ← flex row, animates left
-│  ──────────────────────────►            │
-└─────────────────────────────────────────┘
-```
+1. Atos
+2. **Vodafone** (inserted here)
+3. GSK
+4. Toshiba
+5. AMA
+6. **Ziggo** (inserted here)
+7. Chubb
+8. a.s.r.
+9. UWV
+10. MinFin
+11. Eindhoven
 
-- The flex row contains all 10 logos twice (20 total)
-- `animation: marquee 30s linear infinite` slides the row left
-- When the first set scrolls out, the duplicate takes its place — seamless loop
-- `pause on hover` via `hover:animation-play-state: paused` for accessibility
-- Logos get bumped to `h-12`–`h-16` range with wider max-widths so they're legible
-- Gaps between logos via `gap-12` or `gap-16`
+Both new logos get similar sizing constraints to match the existing set (`max-h-12 max-w-[180px]` range).
 
