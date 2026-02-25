@@ -13,7 +13,7 @@ import { ArrowRight, Mic, Quote, ChevronDown } from "lucide-react";
 import Footer from "@/components/sections/Footer";
 import AskFerryBubble from "@/components/AskFerryBubble";
 import SEOHead from "@/components/blog/SEOHead";
-import stagePhoto from "@/assets/ferry-speaking.jpg";
+import stagePhoto from "@/assets/ferry-filming.jpg";
 
 import SpeakingQA from "@/components/sections/SpeakingQA";
 import ClientLogos from "@/components/sections/ClientLogos";
