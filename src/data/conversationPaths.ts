@@ -137,30 +137,11 @@ export const conversationNodes: Record<string, ConversationNode> = {
   keynote_event: {
     response: [
       "That's great to hear.",
-      "If you'd like, we can check availability or just talk it through first.",
+      "Let me connect you to my speaking agent. They handle scheduling and availability.",
     ],
-    options: [
-      { label: "Check availability", nodeKey: "keynote_event_availability" },
-      { label: "Talk it through first", nodeKey: "keynote_event_email" },
-    ],
-  },
-
-  keynote_event_availability: {
-    response: "Here you go.",
     ctaButton: {
-      label: "Check availability for your event",
+      label: "Get in touch with my agent",
       href: "https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966",
-    },
-    options: [
-      { label: "Ask something else", nodeKey: "ask_something_else" },
-    ],
-  },
-
-  keynote_event_email: {
-    response: "Of course.",
-    ctaButton: {
-      label: "Email Ferry",
-      href: "mailto:ferry@brandhumanizing.com",
     },
     options: [
       { label: "Ask something else", nodeKey: "ask_something_else" },
@@ -178,17 +159,12 @@ export const conversationNodes: Record<string, ConversationNode> = {
   },
 
   team_intent: {
-    response: "That's nice to hear.",
-    options: [
-      { label: "Email Ferry", nodeKey: "team_intent_email" },
-      { label: "Tell me more first", nodeKey: "brand_humanizing" },
+    response: [
+      "Love to hear that.",
+      "Send me a message and we'll figure out what works.",
     ],
-  },
-
-  team_intent_email: {
-    response: "Here you go.",
     ctaButton: {
-      label: "Email Ferry",
+      label: "Send me an email",
       href: "mailto:ferry@brandhumanizing.com",
     },
     options: [
