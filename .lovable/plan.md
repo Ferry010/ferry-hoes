@@ -1,29 +1,14 @@
 
 
-## Replace Speaking Hero Background with Video
+## Fix Hero Text Readability
 
-Swap the AI-generated abstract image for the same hero video used on the homepage (`/videos/Ferry_Hero_vid_2026.webm`), with a teal-tinted overlay to visually differentiate it.
+The teal-tinted overlay (`from-foreground/70 via-primary/40 to-foreground/70`) has a weak middle section — `primary/40` is only 40% opacity, letting the video bleed through and washing out the white text.
 
-### Changes
+### Change
 
-| File | Change |
-|---|---|
-| `src/pages/Speaking.tsx` | Replace the `<img>` background with a `<video>` element (autoPlay, muted, loop, playsInline) pointing to `/videos/Ferry_Hero_vid_2026.webm`. Change the overlay from `bg-foreground/60` to a teal-tinted dark overlay (`bg-gradient-to-br from-foreground/70 via-primary/40 to-foreground/70`). Remove the `speakingHeroBg` import. |
+| File | Line | Before | After |
+|---|---|---|---|
+| `src/pages/Speaking.tsx` | 83 | `bg-gradient-to-br from-foreground/70 via-primary/40 to-foreground/70` | `bg-gradient-to-br from-foreground/80 via-foreground/60 to-primary/50` |
 
-### Hero structure (after)
-
-```text
-┌──────────────────────────────────────────┐
-│  <video> same as homepage                │
-│  <div> teal-tinted dark overlay          │
-│                                          │
-│         🎤 Keynote Speaker               │
-│     Keynotes that inspire action         │
-│        subtitle text...                  │
-│      [ Book Ferry button ]               │
-│                                          │
-└──────────────────────────────────────────┘
-```
-
-Text colors remain `text-white` / `text-white/70` — no change needed there. The teal tint in the overlay gives the Speaking page a distinct mood compared to the homepage's neutral dark overlay.
+This darkens the center of the overlay significantly (foreground/60 instead of primary/40) while keeping a subtle teal tint at the bottom-right edge. White text will have strong contrast across the entire hero.
 
