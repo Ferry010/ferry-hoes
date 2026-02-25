@@ -1,231 +1,323 @@
-export interface FollowUp {
-  question: string;
-  answer: string;
-}
+/* ── Types ── */
 
 export interface CTA {
   label: string;
   href: string;
 }
 
-export interface Branch {
+export interface ConversationOption {
   label: string;
-  response: string;
-  steps: FollowUp[][];
-  directional: {
-    deeperLabel: string;
-    deeperResponse: string;
-    ctaLabel: string;
-    ctaResponse: string;
-    switchLabel: string;
-    ctas: CTA[];
-    closingMessage: string;
-  };
+  nodeKey: string;
 }
 
-export const conversationPaths: Record<string, Branch> = {
-  speaking: {
-    label: "What do you actually speak about?",
-    response:
-      "I speak about the relationship between people and technology. Most organizations focus on tools. I focus on how those tools change behavior, decision-making and positioning. My work is about designing systems where technology strengthens human value instead of replacing it.",
-    steps: [
-      [
-        {
-          question: "What is Brand Humanizing?",
-          answer:
-            "Brand Humanizing is a strategic approach to organizing work around human strengths. Technology should increase speed and scale, but humans should stay responsible for judgment, creativity and trust. When companies reverse that order, they become efficient but forgettable.",
-        },
-        {
-          question: "Is this mainly about AI?",
-          answer:
-            "AI is the catalyst, but the topic is broader. It is about what happens when powerful tools become available to everyone and efficiency alone stops being a differentiator. The real question is how organizations keep their human edge when technology levels the playing field.",
-        },
-        {
-          question: "What problem do you solve for companies?",
-          answer:
-            "Most companies adopt technology without asking what it replaces. That leads to faster processes but weaker positioning. I help organizations identify where human value matters most and design their systems to protect it.",
-        },
-      ],
-      [
-        {
-          question: "Can you give a concrete example?",
-          answer:
-            "Two companies implement the same AI system in customer service. One automates as much as possible to reduce cost. The other uses AI to assist employees so conversations improve. Both save time, but only one increases loyalty and brand value.",
-        },
-        {
-          question: "How is this different from digital transformation?",
-          answer:
-            "Digital transformation focuses on adoption. Brand Humanizing focuses on intention. It is not about whether you use technology, but about how you design its role relative to the people in your organization.",
-        },
-        {
-          question: "Why is this relevant now?",
-          answer:
-            "Because AI has made advanced technology accessible to everyone. When your competitors have the same tools, the difference is no longer capability. It is how thoughtfully you integrate those tools with human strengths.",
-        },
-      ],
-      [
-        {
-          question: "Where do companies usually go wrong?",
-          answer:
-            "They let technology lead strategy instead of support it. They optimize for speed without protecting what makes them different. The result is a more efficient company that looks and feels like every other company.",
-        },
-        {
-          question: "What results can this create?",
-          answer:
-            "When technology supports people instead of replacing them, employees make better decisions and customers feel the difference. That translates into stronger positioning, higher retention and long-term differentiation.",
-        },
-        {
-          question: "What would this look like in our organization?",
-          answer:
-            "That depends on where AI is currently influencing decisions and where human judgment is being quietly replaced. A good starting point is mapping those touchpoints and designing intentionally from there.",
-        },
-      ],
+export interface ConversationNode {
+  response: string;
+  options?: ConversationOption[];
+  ctaIntro?: string;
+  ctas?: CTA[];
+  continuationOptions?: ConversationOption[];
+}
+
+/* ── Node Map ── */
+
+export const conversationNodes: Record<string, ConversationNode> = {
+  root: {
+    response: "Before I start talking about myself, can I ask you something?",
+    options: [
+      { label: "I'm organizing something", nodeKey: "organizing" },
+      { label: "I'm just exploring", nodeKey: "exploring" },
     ],
-    directional: {
-      deeperLabel: "Go deeper into Brand Humanizing",
-      deeperResponse:
-        "Brand Humanizing is a framework for designing organizations where technology amplifies human strengths. It starts with governance, continues with culture and ends with competitive advantage that cannot be copied. The organizations that get this right do not just perform better. They become harder to replace.",
-      ctaLabel: "See how this applies to your event or organization",
-      ctaResponse:
-        "If you are organizing an event, this topic works well for leadership teams, innovation departments and organizations navigating AI integration. The keynote challenges how technology is positioned inside strategy and gives practical direction.",
-      switchLabel: "Ask something else",
-      ctas: [
-        {
-          label: "Check availability for your event",
-          href: "https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966",
-        },
-        {
-          label: "Discuss keynote content directly",
-          href: "mailto:ferry@brandhumanizing.com",
-        },
-      ],
-      closingMessage: "Sounds good. I look forward to hearing from you.",
-    },
   },
-  story: {
-    label: "What is your story?",
-    response:
-      "I built my first website when I was ten. I was fascinated by the internet long before it became mainstream. Technology always felt natural to me, but I also noticed how easily it could remove the human layer from work and communication.",
-    steps: [
-      [
-        {
-          question: "When did your thinking change?",
-          answer:
-            "During my time working in growth and optimization. We improved performance metrics constantly. But I started noticing that the more we optimized for efficiency, the more human nuance disappeared. That tension stayed with me.",
-        },
-        {
-          question: "How did you move into speaking?",
-          answer:
-            "It happened gradually. I started writing about the tension between technology and human value. People responded to it. Eventually I was invited to share those ideas on stage and it became clear this was a conversation many organizations needed to have.",
-        },
-        {
-          question: "Why focus on this topic long term?",
-          answer:
-            "Because the tension between technology and humanity is only growing. AI will keep accelerating. The question of where to protect human value will become more urgent every year. This is not a trend topic. It is a structural shift.",
-        },
-      ],
-      [
-        {
-          question: "Was there a defining moment?",
-          answer:
-            "Yes. A project where the data said one thing and every person in the room felt another. We followed the data. We were wrong. That experience taught me that human judgment is not a soft skill. It is a strategic asset.",
-        },
-        {
-          question: "How does that influence your talks today?",
-          answer:
-            "It means I do not speak about hype or tools. I speak about responsibility. About how leaders design systems and what those systems reward. That is where culture and strategy meet technology.",
-        },
-        {
-          question: "Why does this matter now?",
-          answer:
-            "Because AI has leveled the playing field. The difference between organizations is no longer access to technology. It is the choices they make about how to use it. Most organizations are not making those choices intentionally.",
-        },
-      ],
+
+  organizing: {
+    response: "Nice. What kind of setting are we talking about?",
+    options: [
+      { label: "Large event or conference", nodeKey: "event" },
+      { label: "Internal team session", nodeKey: "team" },
+      { label: "Podcast or panel", nodeKey: "podcast" },
     ],
-    directional: {
-      deeperLabel: "Go deeper into Ferry's philosophy",
-      deeperResponse:
-        "My philosophy is straightforward. Technology should make humans more human, not less. Every talk, every framework and every conversation I have starts from that belief. The organizations that understand this do not just adopt technology better. They build something worth choosing.",
-      ctaLabel: "Invite Ferry to speak or join a podcast",
-      ctaResponse:
-        "If you are hosting an event or podcast, I enjoy conversations that challenge how organizations think about AI, leadership and differentiation. The best discussions happen when we go beyond tools and talk about design choices.",
-      switchLabel: "Explore a different topic",
-      ctas: [
-        {
-          label: "Invite Ferry to speak",
-          href: "https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966",
-        },
-        {
-          label: "Invite Ferry to your podcast or discuss collaboration",
-          href: "mailto:ferry@brandhumanizing.com",
-        },
-        {
-          label: "Discover the book",
-          href: "https://brandhumanizingbook.nl",
-        },
-      ],
-      closingMessage: "Thank you. I will personally respond.",
-    },
   },
-  relevance: {
-    label: "Why does this matter for our organization?",
+
+  event: {
     response:
-      "Right now organizations face two risks. They either adopt AI without structure, or they avoid it and fall behind. Both create long-term problems. The real issue is not whether you use AI, but how you position it inside your strategy.",
-    steps: [
-      [
-        {
-          question: "What happens if we ignore this?",
-          answer:
-            "Competitors will redesign around human and AI synergy while you optimize old systems. The risk is not falling behind on technology. It is becoming invisible because your positioning no longer stands out.",
-        },
-        {
-          question: "What does good implementation look like?",
-          answer:
-            "Good implementation means clear governance, defined responsibilities and conscious protection of human judgment. Technology should support decisions, not quietly replace them without oversight.",
-        },
-        {
-          question: "Where should we start?",
-          answer:
-            "Start by auditing where AI is currently driving decisions in your organization. Identify where human value is irreplaceable. Design from there. Start small but think strategically.",
-        },
-      ],
-      [
-        {
-          question: "Is this about compliance?",
-          answer:
-            "Compliance is the floor, not the ceiling. Brand Humanizing goes beyond regulation. It is about building systems that are worth trusting, not just legally required to exist.",
-        },
-        {
-          question: "Is this about competitive advantage?",
-          answer:
-            "When AI becomes accessible to everyone, efficiency alone stops being a differentiator. Competitive advantage shifts toward how intentionally you combine automation with human expertise.",
-        },
-        {
-          question: "How long does transformation take?",
-          answer:
-            "The shift in thinking can happen in one conversation. The shift in systems depends on commitment. Most organizations can start seeing results within 90 days if they begin with clear priorities.",
-        },
-      ],
+      "Great. In that setting I usually speak about how organizations can use technology without losing their human edge. It is strategic, practical and energetic. People leave looking differently at how they design work.",
+    options: [
+      { label: "Inspiration", nodeKey: "event_inspiration" },
+      { label: "Practical direction", nodeKey: "event_practical" },
+      { label: "Strategic clarity", nodeKey: "event_strategic" },
     ],
-    directional: {
-      deeperLabel: "Go deeper into strategic application",
-      deeperResponse:
-        "Strategy in the age of AI is not about more tools. It is about clearer choices. Who decides, what gets automated and what stays human. That is where sustainable advantage lives. The organizations that design this intentionally outperform those that simply adopt.",
-      ctaLabel: "Book a strategy session",
-      ctaResponse:
-        "A strategy session helps clarify where AI is currently influencing decisions and where human value should be strengthened. It is practical and tailored to your organization.",
-      switchLabel: "Explore another topic",
-      ctas: [
-        {
-          label: "Book a strategy session",
-          href: "mailto:ferry@brandhumanizing.com",
-        },
-        {
-          label: "Discuss internally first",
-          href: "mailto:ferry@brandhumanizing.com",
-        },
-      ],
-      closingMessage: "I look forward to continuing this conversation.",
-    },
+  },
+
+  event_inspiration: {
+    response:
+      "I focus on showing how fast technology is changing expectations, and why human judgment becomes more valuable, not less. It wakes people up without overwhelming them.",
+    ctaIntro: "If this sounds like it could fit your audience, we can explore next steps.",
+    ctas: [
+      { label: "Check availability for your event", href: "https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966" },
+      { label: "Discuss your event directly with Ferry", href: "mailto:ferry@brandhumanizing.com" },
+    ],
+    continuationOptions: [
+      { label: "Tell me more about your keynote style", nodeKey: "keynote_style" },
+      { label: "What makes you different from other speakers?", nodeKey: "speaker_diff" },
+      { label: "Switch topic", nodeKey: "switch_from_a" },
+    ],
+  },
+
+  event_practical: {
+    response: "I translate the bigger ideas into clear decisions leaders can take immediately. Where to use AI. Where not to. And why.",
+    ctaIntro: "If this sounds like it could fit your audience, we can explore next steps.",
+    ctas: [
+      { label: "Check availability for your event", href: "https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966" },
+      { label: "Discuss your event directly with Ferry", href: "mailto:ferry@brandhumanizing.com" },
+    ],
+    continuationOptions: [
+      { label: "Tell me more about your keynote style", nodeKey: "keynote_style" },
+      { label: "What makes you different from other speakers?", nodeKey: "speaker_diff" },
+      { label: "Switch topic", nodeKey: "switch_from_a" },
+    ],
+  },
+
+  event_strategic: {
+    response: "I help leadership teams rethink how technology shapes positioning. Not just efficiency, but differentiation.",
+    ctaIntro: "If this sounds like it could fit your audience, we can explore next steps.",
+    ctas: [
+      { label: "Check availability for your event", href: "https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966" },
+      { label: "Discuss your event directly with Ferry", href: "mailto:ferry@brandhumanizing.com" },
+    ],
+    continuationOptions: [
+      { label: "Tell me more about your keynote style", nodeKey: "keynote_style" },
+      { label: "What makes you different from other speakers?", nodeKey: "speaker_diff" },
+      { label: "Switch topic", nodeKey: "switch_from_a" },
+    ],
+  },
+
+  keynote_style: {
+    response: "I keep it sharp and visual. No slides full of text. I use real examples, sometimes live demos, and I adapt to the energy in the room. The goal is always that people leave with something they can act on.",
+  },
+
+  speaker_diff: {
+    response: "Most speakers in this space talk about tools or trends. I talk about what happens to people and organizations when those tools become normal. That shift in perspective is what audiences remember.",
+  },
+
+  team: {
+    response: "Perfect. Team sessions are more interactive. We look at how technology affects daily decisions, culture and collaboration. It becomes practical very quickly.",
+    options: [
+      { label: "Leadership team", nodeKey: "team_leadership" },
+      { label: "Innovation or digital team", nodeKey: "team_innovation" },
+      { label: "Mixed departments", nodeKey: "team_mixed" },
+    ],
+  },
+
+  team_leadership: {
+    response: "With leadership teams I focus on governance and strategic choices. How do you introduce AI without weakening judgment or accountability? That conversation usually opens up fast.",
+    ctaIntro: "If you think this could strengthen your team, let's explore it.",
+    ctas: [
+      { label: "Discuss a team session", href: "mailto:ferry@brandhumanizing.com" },
+      { label: "Check speaking availability", href: "https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966" },
+    ],
+    continuationOptions: [
+      { label: "Tell me more about your keynote style", nodeKey: "keynote_style" },
+      { label: "What makes you different from other speakers?", nodeKey: "speaker_diff" },
+      { label: "Switch topic", nodeKey: "switch_from_a" },
+    ],
+  },
+
+  team_innovation: {
+    response: "Innovation teams often already use AI but lack a shared framework for when to automate and when to protect human input. That is where the session gets interesting.",
+    ctaIntro: "If you think this could strengthen your team, let's explore it.",
+    ctas: [
+      { label: "Discuss a team session", href: "mailto:ferry@brandhumanizing.com" },
+      { label: "Check speaking availability", href: "https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966" },
+    ],
+    continuationOptions: [
+      { label: "Tell me more about your keynote style", nodeKey: "keynote_style" },
+      { label: "What makes you different from other speakers?", nodeKey: "speaker_diff" },
+      { label: "Switch topic", nodeKey: "switch_from_a" },
+    ],
+  },
+
+  team_mixed: {
+    response: "Mixed groups are great because the conversation crosses silos. People from operations, marketing and tech start seeing the same challenge from different angles. That alignment is often the biggest takeaway.",
+    ctaIntro: "If you think this could strengthen your team, let's explore it.",
+    ctas: [
+      { label: "Discuss a team session", href: "mailto:ferry@brandhumanizing.com" },
+      { label: "Check speaking availability", href: "https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966" },
+    ],
+    continuationOptions: [
+      { label: "Tell me more about your keynote style", nodeKey: "keynote_style" },
+      { label: "What makes you different from other speakers?", nodeKey: "speaker_diff" },
+      { label: "Switch topic", nodeKey: "switch_from_a" },
+    ],
+  },
+
+  podcast: {
+    response: "Nice. I enjoy conversations more than monologues anyway. Especially when we go beyond tools and talk about design choices.",
+    options: [
+      { label: "AI and leadership", nodeKey: "podcast_ai" },
+      { label: "Human judgment in a digital world", nodeKey: "podcast_judgment" },
+      { label: "Personal journey", nodeKey: "podcast_journey" },
+    ],
+  },
+
+  podcast_ai: {
+    response: "AI and leadership is where I spend most of my time. The interesting question is not whether leaders should use AI, but how they set the rules for everyone else.",
+    ctaIntro: "If you think I'm a fit, feel free to reach out.",
+    ctas: [
+      { label: "Invite Ferry to your podcast", href: "mailto:ferry@brandhumanizing.com" },
+      { label: "Discover the book", href: "https://brandhumanizingbook.nl" },
+    ],
+    continuationOptions: [
+      { label: "What do you actually speak about?", nodeKey: "event" },
+      { label: "Tell me your story", nodeKey: "story_from_podcast" },
+    ],
+  },
+
+  podcast_judgment: {
+    response: "This is the core of my work. Technology makes us faster but it does not automatically make us better. The gap between speed and judgment is where most organizations struggle.",
+    ctaIntro: "If you think I'm a fit, feel free to reach out.",
+    ctas: [
+      { label: "Invite Ferry to your podcast", href: "mailto:ferry@brandhumanizing.com" },
+      { label: "Discover the book", href: "https://brandhumanizingbook.nl" },
+    ],
+    continuationOptions: [
+      { label: "What do you actually speak about?", nodeKey: "event" },
+      { label: "Tell me your story", nodeKey: "story_from_podcast" },
+    ],
+  },
+
+  podcast_journey: {
+    response: "I built my first website at ten and have been obsessed with the internet ever since. The journey from building things online to speaking about how technology shapes organizations happened naturally over time.",
+    ctaIntro: "If you think I'm a fit, feel free to reach out.",
+    ctas: [
+      { label: "Invite Ferry to your podcast", href: "mailto:ferry@brandhumanizing.com" },
+      { label: "Discover the book", href: "https://brandhumanizingbook.nl" },
+    ],
+    continuationOptions: [
+      { label: "What do you actually speak about?", nodeKey: "event" },
+      { label: "Tell me your story", nodeKey: "story_from_podcast" },
+    ],
+  },
+
+  story_from_podcast: {
+    response: "I started in growth and optimization. We improved performance metrics constantly but I noticed that the more we optimized for efficiency, the more human nuance disappeared. That tension became my work.",
+  },
+
+  switch_from_a: {
+    response: "Of course. What are you curious about?",
+    options: [
+      { label: "I'm just exploring", nodeKey: "exploring" },
+    ],
+  },
+
+  exploring: {
+    response: "Love that. What made you click?",
+    options: [
+      { label: "AI is everywhere and I'm trying to make sense of it", nodeKey: "ai_everywhere" },
+      { label: "I saw your name somewhere", nodeKey: "saw_name" },
+      { label: "I'm curious about how humans and tech work together", nodeKey: "humans_tech" },
+    ],
+  },
+
+  ai_everywhere: {
+    response: "Fair. AI is everywhere right now. What interests me is not the tools themselves, but what happens to people when those tools become normal.",
+    options: [
+      { label: "As a leader", nodeKey: "ai_leader" },
+      { label: "Personally curious", nodeKey: "ai_curious" },
+    ],
+  },
+
+  ai_leader: {
+    response: "Then it becomes a design question. How do you introduce technology without weakening judgment or culture?",
+    ctaIntro: "If you ever want to explore this live, I speak at events and within teams about exactly this tension.",
+    ctas: [
+      { label: "See speaking options", href: "https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966" },
+      { label: "Discover the book", href: "https://brandhumanizingbook.nl" },
+    ],
+    continuationOptions: [
+      { label: "What do you actually speak about?", nodeKey: "event" },
+      { label: "Tell me your story", nodeKey: "story_from_exploring" },
+    ],
+  },
+
+  ai_curious: {
+    response: "Then it becomes simpler. How do you use technology without letting it replace what makes you valuable?",
+    ctaIntro: "If you ever want to explore this live, I speak at events and within teams about exactly this tension.",
+    ctas: [
+      { label: "See speaking options", href: "https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966" },
+      { label: "Discover the book", href: "https://brandhumanizingbook.nl" },
+    ],
+    continuationOptions: [
+      { label: "What do you actually speak about?", nodeKey: "event" },
+      { label: "Tell me your story", nodeKey: "story_from_exploring" },
+    ],
+  },
+
+  saw_name: {
+    response: "Good sign. Hopefully in a positive context.",
+    options: [
+      { label: "At an event", nodeKey: "saw_event" },
+      { label: "Online", nodeKey: "saw_online" },
+      { label: "Through someone", nodeKey: "saw_someone" },
+    ],
+  },
+
+  saw_event: {
+    response: "Nice. Events are where this work comes alive. I focus on helping organizations rethink how they combine technology and human value.",
+    ctaIntro: "If you want to explore what that could look like for your event, here are some options.",
+    ctas: [
+      { label: "Check availability", href: "https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966" },
+      { label: "Reach out directly", href: "mailto:ferry@brandhumanizing.com" },
+      { label: "Discover the book", href: "https://brandhumanizingbook.nl" },
+    ],
+  },
+
+  saw_online: {
+    response: "The internet is where I started. I focus on helping organizations rethink how they combine technology and human value. Most of my thinking ends up online eventually.",
+    ctaIntro: "If something resonated, feel free to explore further.",
+    ctas: [
+      { label: "Check availability", href: "https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966" },
+      { label: "Reach out directly", href: "mailto:ferry@brandhumanizing.com" },
+      { label: "Discover the book", href: "https://brandhumanizingbook.nl" },
+    ],
+  },
+
+  saw_someone: {
+    response: "Word of mouth is the best filter. I focus on helping organizations rethink how they combine technology and human value.",
+    ctaIntro: "If you want to continue the conversation, here are some ways.",
+    ctas: [
+      { label: "Check availability", href: "https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966" },
+      { label: "Reach out directly", href: "mailto:ferry@brandhumanizing.com" },
+      { label: "Discover the book", href: "https://brandhumanizingbook.nl" },
+    ],
+  },
+
+  humans_tech: {
+    response: "That tension is my work. Technology makes us faster. It does not automatically make us better. That depends on design choices.",
+    options: [
+      { label: "Business", nodeKey: "ht_business" },
+      { label: "Cultural", nodeKey: "ht_cultural" },
+    ],
+  },
+
+  ht_business: {
+    response: "From a business perspective, the question is how you position technology inside strategy. Not as a cost saver but as something that strengthens what makes you different.",
+    ctaIntro: "If this is relevant for your organization, I would enjoy exploring it further.",
+    ctas: [
+      { label: "See speaking options", href: "https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966" },
+      { label: "Discover the book", href: "https://brandhumanizingbook.nl" },
+    ],
+  },
+
+  ht_cultural: {
+    response: "Culturally, the risk is that we optimize so much for efficiency that we lose the space for creativity, disagreement and judgment. Those are the things that make organizations interesting.",
+    ctaIntro: "If this resonates, I talk about this at events and in teams.",
+    ctas: [
+      { label: "See speaking options", href: "https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966" },
+      { label: "Discover the book", href: "https://brandhumanizingbook.nl" },
+    ],
+  },
+
+  story_from_exploring: {
+    response: "I built my first website at ten and have been obsessed with the internet ever since. I moved into growth and optimization but started noticing that the more we optimized, the more human nuance disappeared. That tension became my work.",
   },
 };

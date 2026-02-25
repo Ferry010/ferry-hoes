@@ -1,18 +1,14 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import SEOHead from "@/components/blog/SEOHead";
-import AskFerryBubble from "@/components/AskFerryBubble";
 import TypingIndicator from "@/components/conversation/TypingIndicator";
-import { conversationPaths } from "@/data/conversationPaths";
+import { conversationNodes, type CTA, type ConversationOption } from "@/data/conversationPaths";
 
 /* ── Types ── */
 type HistoryEntry =
   | { type: "ferry"; text: string }
   | { type: "visitor"; text: string }
-  | { type: "options"; options: { label: string; handler: string }[] }
-  | { type: "ctas"; branchKey: string }
-  | { type: "closing"; message: string }
-  | { type: "topicPicker" };
+  | { type: "options"; options: ConversationOption[] };
 
 /* ── Sub-components ── */
 const FerryBubble = ({ text }: { text: string }) => (
@@ -51,15 +47,41 @@ const OptionButton = ({
   </button>
 );
 
+/* ── Persistent CTA Bar ── */
+const CTABar = ({ ctas }: { ctas: CTA[] }) => {
+  if (ctas.length === 0) return null;
+
+  // Deduplicate by label
+  const unique = ctas.filter(
+    (cta, i, arr) => arr.findIndex((c) => c.label === cta.label) === i
+  );
+
+  return (
+    <div className="fixed bottom-0 left-0 right-0 z-20 border-t border-border/50 bg-background/80 backdrop-blur-md">
+      <div className="max-w-xl mx-auto px-6 py-4 flex flex-wrap gap-2 justify-center">
+        {unique.map((cta) => (
+          <a
+            key={cta.label}
+            href={cta.href}
+            target={cta.href.startsWith("mailto:") ? undefined : "_blank"}
+            rel="noopener noreferrer"
+            className="rounded-xl px-4 py-2.5 border border-border text-foreground text-sm font-medium hover:bg-secondary transition-colors"
+          >
+            {cta.label}
+          </a>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 /* ── Page ── */
 const Conversation = () => {
   const navigate = useNavigate();
   const [history, setHistory] = useState<HistoryEntry[]>([]);
-  const [stepIndex, setStepIndex] = useState<Record<string, number>>({});
-  const [usedBranches, setUsedBranches] = useState<string[]>([]);
+  const [persistentCtas, setPersistentCtas] = useState<CTA[]>([]);
   const [showTyping, setShowTyping] = useState(false);
   const [interactionStarted, setInteractionStarted] = useState(false);
-  const [pathClosed, setPathClosed] = useState(false);
   const endRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = useCallback(() => {
@@ -84,162 +106,49 @@ const Conversation = () => {
     [scrollToBottom]
   );
 
-  /* ── Handlers ── */
+  /* ── Handle option click ── */
+  const handleSelect = useCallback(
+    (label: string, nodeKey: string) => {
+      setInteractionStarted(true);
 
-  const handleSelectBranch = (key: string) => {
-    setInteractionStarted(true);
-    const branch = conversationPaths[key];
-    setUsedBranches((prev) => [...prev, key]);
-    setStepIndex((prev) => ({ ...prev, [key]: 0 }));
-
-    setHistory((prev) => [...prev, { type: "visitor", text: branch.label }]);
-
-    const options = branch.steps[0].map((f) => ({
-      label: f.question,
-      handler: `step:${key}:0:${f.question}`,
-    }));
-
-    addWithTyping([
-      { type: "ferry", text: branch.response },
-      { type: "options", options },
-    ]);
-  };
-
-  const handleStep = (branchKey: string, stepIdx: number, question: string) => {
-    const branch = conversationPaths[branchKey];
-    const followUp = branch.steps[stepIdx]?.find((f) => f.question === question);
-    if (!followUp) return;
-
-    const nextIdx = stepIdx + 1;
-    setStepIndex((prev) => ({ ...prev, [branchKey]: nextIdx }));
-
-    // Remove old options
-    setHistory((prev) => prev.filter((e) => e.type !== "options"));
-    setHistory((prev) => [...prev, { type: "visitor", text: question }]);
-
-    // If there are more steps, show them
-    if (nextIdx < branch.steps.length) {
-      const options = branch.steps[nextIdx].map((f) => ({
-        label: f.question,
-        handler: `step:${branchKey}:${nextIdx}:${f.question}`,
-      }));
-      addWithTyping([
-        { type: "ferry", text: followUp.answer },
-        { type: "options", options },
-      ]);
-    } else {
-      // Show directional options
-      const d = branch.directional;
-      addWithTyping([
-        { type: "ferry", text: followUp.answer },
-        {
-          type: "options",
-          options: [
-            { label: d.deeperLabel, handler: `deeper:${branchKey}` },
-            { label: d.ctaLabel, handler: `cta:${branchKey}` },
-            { label: d.switchLabel, handler: "switch" },
-          ],
-        },
-      ]);
-    }
-  };
-
-  const handleDeeper = (branchKey: string) => {
-    const branch = conversationPaths[branchKey];
-    setHistory((prev) => prev.filter((e) => e.type !== "options"));
-    setHistory((prev) => [
-      ...prev,
-      { type: "visitor", text: branch.directional.deeperLabel },
-    ]);
-
-    addWithTyping([
-      { type: "ferry", text: branch.directional.deeperResponse },
-      { type: "ctas", branchKey },
-    ]);
-  };
-
-  const handleCTA = (branchKey: string) => {
-    const branch = conversationPaths[branchKey];
-    setHistory((prev) => prev.filter((e) => e.type !== "options"));
-    setHistory((prev) => [
-      ...prev,
-      { type: "visitor", text: branch.directional.ctaLabel },
-    ]);
-
-    addWithTyping([
-      { type: "ferry", text: branch.directional.ctaResponse },
-      { type: "ctas", branchKey },
-    ]);
-  };
-
-  const handleSwitch = () => {
-    setHistory((prev) => prev.filter((e) => e.type !== "options"));
-
-    const remaining = Object.entries(conversationPaths).filter(
-      ([key]) => !usedBranches.includes(key)
-    );
-
-    if (remaining.length > 0) {
+      // Remove current options from history, add visitor bubble
       setHistory((prev) => [
-        ...prev,
-        { type: "visitor", text: "I would like to ask something else" },
+        ...prev.filter((e) => e.type !== "options"),
+        { type: "visitor", text: label },
       ]);
-      addWithTyping([
-        { type: "ferry", text: "Of course. What are you curious about?" },
-        { type: "topicPicker" },
-      ]);
-    } else {
-      // All topics explored, offer CTAs from all branches
-      setHistory((prev) => [
-        ...prev,
-        { type: "visitor", text: "I would like to ask something else" },
-      ]);
-      addWithTyping([
-        {
-          type: "ferry",
-          text: "We have covered a lot of ground. If something resonated, let's take it further.",
-        },
-        {
-          type: "options",
-          options: Object.entries(conversationPaths).map(([key, branch]) => ({
-            label: branch.directional.ctaLabel,
-            handler: `cta:${key}`,
-          })),
-        },
-      ]);
-    }
-  };
 
-  const handleCtaClick = (branchKey: string, label: string) => {
-    // Remove CTA buttons from history
-    setHistory((prev) => prev.filter((e) => e.type !== "ctas"));
-    setHistory((prev) => [...prev, { type: "visitor", text: label }]);
+      const node = conversationNodes[nodeKey];
+      if (!node) return;
 
-    const branch = conversationPaths[branchKey];
-    addWithTyping([{ type: "closing", message: branch.directional.closingMessage }], () => {
-      setPathClosed(true);
-    });
-  };
+      const entries: HistoryEntry[] = [{ type: "ferry", text: node.response }];
 
-  const handleOptionClick = (handler: string) => {
-    if (handler.startsWith("step:")) {
-      const [, branchKey, idxStr, ...rest] = handler.split(":");
-      handleStep(branchKey, parseInt(idxStr), rest.join(":"));
-    } else if (handler.startsWith("deeper:")) {
-      handleDeeper(handler.split(":")[1]);
-    } else if (handler.startsWith("cta:")) {
-      handleCTA(handler.split(":")[1]);
-    } else if (handler === "switch") {
-      handleSwitch();
-    } else if (handler.startsWith("branch:")) {
-      handleSelectBranch(handler.split(":")[1]);
-    }
-  };
+      // If node has ctaIntro, add it
+      if (node.ctaIntro) {
+        entries.push({ type: "ferry", text: node.ctaIntro });
+      }
 
-  /* ── Remaining branches for topic picker ── */
-  const remainingBranches = Object.entries(conversationPaths).filter(
-    ([key]) => !usedBranches.includes(key)
+      // If node has regular options, show them
+      if (node.options) {
+        entries.push({ type: "options", options: node.options });
+      }
+
+      // If node has continuation options (shown after CTA), show those
+      if (node.continuationOptions) {
+        entries.push({ type: "options", options: node.continuationOptions });
+      }
+
+      addWithTyping(entries, () => {
+        // Add CTAs to persistent bar after entries render
+        if (node.ctas) {
+          setPersistentCtas((prev) => [...prev, ...node.ctas!]);
+        }
+      });
+    },
+    [addWithTyping]
   );
+
+  /* ── Initial options from root ── */
+  const rootNode = conversationNodes.root;
 
   /* ── Render ── */
   const renderEntry = (entry: HistoryEntry, i: number) => {
@@ -248,87 +157,24 @@ const Conversation = () => {
         return <FerryBubble key={i} text={entry.text} />;
       case "visitor":
         return <VisitorBubble key={i} text={entry.text} />;
-
       case "options":
         return (
           <div key={i} className="flex flex-col items-end gap-2 animate-fade-in">
             {entry.options.map((opt) => (
               <OptionButton
-                key={opt.handler}
+                key={opt.nodeKey}
                 label={opt.label}
-                onClick={() => handleOptionClick(opt.handler)}
+                onClick={() => handleSelect(opt.label, opt.nodeKey)}
               />
             ))}
           </div>
         );
-
-      case "ctas": {
-        const branch = conversationPaths[entry.branchKey];
-        return (
-          <div key={i} className="flex flex-col gap-3 animate-fade-in">
-            <div className="flex flex-wrap gap-2 justify-start">
-              {branch.directional.ctas.map((cta) => (
-                <a
-                  key={cta.label}
-                  href={cta.href}
-                  target={cta.href.startsWith("mailto:") ? undefined : "_blank"}
-                  rel="noopener noreferrer"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    // Open the link
-                    if (cta.href.startsWith("mailto:")) {
-                      window.location.href = cta.href;
-                    } else {
-                      window.open(cta.href, "_blank", "noopener,noreferrer");
-                    }
-                    // Close the path
-                    handleCtaClick(entry.branchKey, cta.label);
-                  }}
-                  className="flex items-center gap-2 rounded-xl px-4 py-2.5 border border-border text-foreground text-sm font-medium hover:bg-secondary transition-colors cursor-pointer"
-                >
-                  {cta.label}
-                </a>
-              ))}
-            </div>
-          </div>
-        );
-      }
-
-      case "closing":
-        return (
-          <div key={i} className="space-y-4 animate-fade-in">
-            <FerryBubble text={entry.message} />
-            <button
-              onClick={() => navigate("/")}
-              className="text-xs text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Back to homepage
-            </button>
-          </div>
-        );
-
-      case "topicPicker":
-        return (
-          <div key={i} className="flex flex-col items-end gap-2 animate-fade-in">
-            {remainingBranches.map(([key, branch]) => (
-              <OptionButton
-                key={key}
-                label={branch.label}
-                onClick={() => {
-                  setHistory((prev) =>
-                    prev.filter((e) => e.type !== "topicPicker")
-                  );
-                  handleSelectBranch(key);
-                }}
-              />
-            ))}
-          </div>
-        );
-
       default:
         return null;
     }
   };
+
+  const hasCtas = persistentCtas.length > 0;
 
   return (
     <>
@@ -350,34 +196,38 @@ const Conversation = () => {
         </div>
 
         {/* Chat thread */}
-        <div className="max-w-xl mx-auto px-6 pt-24 pb-16 space-y-5">
-          {/* Ferry greeting */}
-          <FerryBubble text="I like curious people. What would you like to know?" />
+        <div
+          className="max-w-xl mx-auto px-6 pt-24 space-y-5"
+          style={{ paddingBottom: hasCtas ? "8rem" : "4rem" }}
+        >
+          {/* Opening bubble */}
+          <FerryBubble text={rootNode.response} />
 
-          {/* Initial branch options */}
-          {!interactionStarted && (
+          {/* Initial options */}
+          {!interactionStarted && rootNode.options && (
             <div className="flex flex-col items-end gap-2 animate-fade-in">
-              {Object.entries(conversationPaths).map(([key, branch]) => (
+              {rootNode.options.map((opt) => (
                 <OptionButton
-                  key={key}
-                  label={branch.label}
-                  onClick={() => handleSelectBranch(key)}
+                  key={opt.nodeKey}
+                  label={opt.label}
+                  onClick={() => handleSelect(opt.label, opt.nodeKey)}
                 />
               ))}
             </div>
           )}
 
-          {/* Conversation history */}
+          {/* History */}
           {history.map(renderEntry)}
 
-          {/* Typing indicator */}
+          {/* Typing */}
           {showTyping && <TypingIndicator />}
 
           <div ref={endRef} />
         </div>
-      </main>
 
-      {!pathClosed && <AskFerryBubble />}
+        {/* Persistent CTA bar */}
+        <CTABar ctas={persistentCtas} />
+      </main>
     </>
   );
 };
