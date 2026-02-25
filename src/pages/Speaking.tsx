@@ -14,7 +14,7 @@ import Footer from "@/components/sections/Footer";
 import AskFerryBubble from "@/components/AskFerryBubble";
 import SEOHead from "@/components/blog/SEOHead";
 import stagePhoto from "@/assets/ferry-speaking.jpg";
-import speakingHeroBg from "@/assets/speaking-hero-bg.png";
+
 import SpeakingQA from "@/components/sections/SpeakingQA";
 import ClientLogos from "@/components/sections/ClientLogos";
 
@@ -69,15 +69,18 @@ const Speaking = () => {
 
         {/* Hero Section */}
         <header className="min-h-[80vh] relative overflow-hidden flex items-center">
-          {/* Background image */}
-          <img
-            src={speakingHeroBg}
-            alt=""
-            aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-cover"
+          {/* Video background */}
+          <video
+            className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+            src="/videos/Ferry_Hero_vid_2026.webm"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
           />
-          {/* Dark overlay */}
-          <div className="absolute inset-0 bg-foreground/60" />
+          {/* Teal-tinted dark overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-foreground/70 via-primary/40 to-foreground/70" />
 
           <div className="container px-6 md:px-8 py-24 md:py-32 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
