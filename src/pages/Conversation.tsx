@@ -2,13 +2,47 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import SEOHead from "@/components/blog/SEOHead";
 import TypingIndicator from "@/components/conversation/TypingIndicator";
-import { conversationNodes, type CTA, type ConversationOption } from "@/data/conversationPaths";
+import { conversationNodes, type ConversationOption } from "@/data/conversationPaths";
 
 /* ── Types ── */
 type HistoryEntry =
   | { type: "ferry"; text: string }
   | { type: "visitor"; text: string }
   | { type: "options"; options: ConversationOption[] };
+
+/* ── Linkify helper ── */
+const linkify = (text: string) => {
+  const urlRegex = /(https?:\/\/[^\s]+|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g;
+  const parts = text.split(urlRegex);
+
+  return parts.map((part, i) => {
+    if (part.match(/^https?:\/\//)) {
+      return (
+        <a
+          key={i}
+          href={part}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline underline-offset-2 hover:text-primary transition-colors break-all"
+        >
+          {part}
+        </a>
+      );
+    }
+    if (part.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)) {
+      return (
+        <a
+          key={i}
+          href={`mailto:${part}`}
+          className="underline underline-offset-2 hover:text-primary transition-colors"
+        >
+          {part}
+        </a>
+      );
+    }
+    return part;
+  });
+};
 
 /* ── Sub-components ── */
 const FerryBubble = ({ text }: { text: string }) => (
@@ -18,7 +52,7 @@ const FerryBubble = ({ text }: { text: string }) => (
         Ferry
       </span>
       <div className="rounded-2xl rounded-bl-md px-4 py-2.5 bg-secondary text-foreground text-sm md:text-base leading-relaxed">
-        {text}
+        {linkify(text)}
       </div>
     </div>
   </div>
@@ -47,39 +81,10 @@ const OptionButton = ({
   </button>
 );
 
-/* ── Persistent CTA Bar ── */
-const CTABar = ({ ctas }: { ctas: CTA[] }) => {
-  if (ctas.length === 0) return null;
-
-  // Deduplicate by label
-  const unique = ctas.filter(
-    (cta, i, arr) => arr.findIndex((c) => c.label === cta.label) === i
-  );
-
-  return (
-    <div className="fixed bottom-0 left-0 right-0 z-20 border-t border-border/50 bg-background/80 backdrop-blur-md">
-      <div className="max-w-xl mx-auto px-6 py-4 flex flex-wrap gap-2 justify-center">
-        {unique.map((cta) => (
-          <a
-            key={cta.label}
-            href={cta.href}
-            target={cta.href.startsWith("mailto:") ? undefined : "_blank"}
-            rel="noopener noreferrer"
-            className="rounded-xl px-4 py-2.5 border border-border text-foreground text-sm font-medium hover:bg-secondary transition-colors"
-          >
-            {cta.label}
-          </a>
-        ))}
-      </div>
-    </div>
-  );
-};
-
 /* ── Page ── */
 const Conversation = () => {
   const navigate = useNavigate();
   const [history, setHistory] = useState<HistoryEntry[]>([]);
-  const [persistentCtas, setPersistentCtas] = useState<CTA[]>([]);
   const [showTyping, setShowTyping] = useState(false);
   const [interactionStarted, setInteractionStarted] = useState(false);
   const endRef = useRef<HTMLDivElement>(null);
@@ -94,14 +99,31 @@ const Conversation = () => {
   useEffect(scrollToBottom, [history, showTyping, scrollToBottom]);
 
   const addWithTyping = useCallback(
-    (entries: HistoryEntry[], callback?: () => void) => {
+    (entries: HistoryEntry[]) => {
       setShowTyping(true);
       scrollToBottom();
-      setTimeout(() => {
-        setShowTyping(false);
-        setHistory((prev) => [...prev, ...entries]);
-        callback?.();
-      }, 800);
+
+      let delay = 600 + Math.random() * 400;
+
+      entries.forEach((entry, idx) => {
+        setTimeout(() => {
+          setHistory((prev) => [...prev, entry]);
+          scrollToBottom();
+
+          const isLast = idx === entries.length - 1;
+          const nextIsFerry = !isLast && entries[idx + 1].type === "ferry";
+
+          if (nextIsFerry) {
+            setShowTyping(true);
+          } else if (isLast) {
+            setShowTyping(false);
+          } else {
+            setShowTyping(false);
+          }
+        }, delay);
+
+        delay += entry.type === "ferry" ? 600 + Math.random() * 400 : 100;
+      });
     },
     [scrollToBottom]
   );
@@ -111,7 +133,7 @@ const Conversation = () => {
     (label: string, nodeKey: string) => {
       setInteractionStarted(true);
 
-      // Remove current options from history, add visitor bubble
+      // Remove current options, add visitor bubble
       setHistory((prev) => [
         ...prev.filter((e) => e.type !== "options"),
         { type: "visitor", text: label },
@@ -120,37 +142,23 @@ const Conversation = () => {
       const node = conversationNodes[nodeKey];
       if (!node) return;
 
-      const entries: HistoryEntry[] = [{ type: "ferry", text: node.response }];
+      const responses = Array.isArray(node.response) ? node.response : [node.response];
+      const entries: HistoryEntry[] = responses.map((text) => ({
+        type: "ferry" as const,
+        text,
+      }));
 
-      // If node has ctaIntro, add it
-      if (node.ctaIntro) {
-        entries.push({ type: "ferry", text: node.ctaIntro });
-      }
-
-      // If node has regular options, show them
       if (node.options) {
         entries.push({ type: "options", options: node.options });
       }
 
-      // If node has continuation options (shown after CTA), show those
-      if (node.continuationOptions) {
-        entries.push({ type: "options", options: node.continuationOptions });
-      }
-
-      addWithTyping(entries, () => {
-        // Add CTAs to persistent bar after entries render
-        if (node.ctas) {
-          setPersistentCtas((prev) => [...prev, ...node.ctas!]);
-        }
-      });
+      addWithTyping(entries);
     },
     [addWithTyping]
   );
 
-  /* ── Initial options from root ── */
   const rootNode = conversationNodes.root;
 
-  /* ── Render ── */
   const renderEntry = (entry: HistoryEntry, i: number) => {
     switch (entry.type) {
       case "ferry":
@@ -174,8 +182,6 @@ const Conversation = () => {
     }
   };
 
-  const hasCtas = persistentCtas.length > 0;
-
   return (
     <>
       <SEOHead
@@ -185,7 +191,6 @@ const Conversation = () => {
       <meta name="robots" content="noindex, nofollow" />
 
       <main className="min-h-screen bg-background">
-        {/* Back to homepage */}
         <div className="fixed top-6 right-6 z-30">
           <button
             onClick={() => navigate("/")}
@@ -195,15 +200,9 @@ const Conversation = () => {
           </button>
         </div>
 
-        {/* Chat thread */}
-        <div
-          className="max-w-xl mx-auto px-6 pt-24 space-y-5"
-          style={{ paddingBottom: hasCtas ? "8rem" : "4rem" }}
-        >
-          {/* Opening bubble */}
-          <FerryBubble text={rootNode.response} />
+        <div className="max-w-xl mx-auto px-6 pt-24 pb-16 space-y-5">
+          <FerryBubble text={rootNode.response as string} />
 
-          {/* Initial options */}
           {!interactionStarted && rootNode.options && (
             <div className="flex flex-col items-end gap-2 animate-fade-in">
               {rootNode.options.map((opt) => (
@@ -216,17 +215,12 @@ const Conversation = () => {
             </div>
           )}
 
-          {/* History */}
           {history.map(renderEntry)}
 
-          {/* Typing */}
           {showTyping && <TypingIndicator />}
 
           <div ref={endRef} />
         </div>
-
-        {/* Persistent CTA bar */}
-        <CTABar ctas={persistentCtas} />
       </main>
     </>
   );
