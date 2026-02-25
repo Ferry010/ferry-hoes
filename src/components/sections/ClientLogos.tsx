@@ -10,19 +10,32 @@ import logoToshiba from "@/assets/logos/toshiba.png";
 import logoVodafoneZiggo from "@/assets/logos/vodafoneziggo.png";
 
 const logos = [
-  { src: logoAtos, alt: "Atos", className: "max-h-10 max-w-[140px]" },
-  { src: logoGsk, alt: "GlaxoSmithKline", className: "max-h-12 max-w-[160px]" },
-  { src: logoToshiba, alt: "Toshiba", className: "max-h-10 max-w-[150px]" },
-  { src: logoAma, alt: "American Marketing Association", className: "max-h-10 max-w-[160px]" },
-  { src: logoVodafoneZiggo, alt: "VodafoneZiggo", className: "max-h-10 max-w-[170px]" },
-  { src: logoChubb, alt: "Chubb Fire & Security", className: "max-h-10 max-w-[140px]" },
-  { src: logoAsr, alt: "a.s.r.", className: "max-h-14 max-w-[140px]" },
-  { src: logoUwv, alt: "UWV", className: "max-h-12 max-w-[140px]" },
-  { src: logoMinfin, alt: "Ministerie van Financiën", className: "max-h-14 max-w-[120px]" },
-  { src: logoEindhoven, alt: "Gemeente Eindhoven", className: "max-h-14 max-w-[120px]" },
+  { src: logoAtos, alt: "Atos", className: "max-h-12 max-w-[160px]" },
+  { src: logoGsk, alt: "GlaxoSmithKline", className: "max-h-14 max-w-[180px]" },
+  { src: logoToshiba, alt: "Toshiba", className: "max-h-12 max-w-[170px]" },
+  { src: logoAma, alt: "American Marketing Association", className: "max-h-12 max-w-[180px]" },
+  { src: logoVodafoneZiggo, alt: "VodafoneZiggo", className: "max-h-12 max-w-[190px]" },
+  { src: logoChubb, alt: "Chubb Fire & Security", className: "max-h-12 max-w-[160px]" },
+  { src: logoAsr, alt: "a.s.r.", className: "max-h-16 max-w-[160px]" },
+  { src: logoUwv, alt: "UWV", className: "max-h-14 max-w-[160px]" },
+  { src: logoMinfin, alt: "Ministerie van Financiën", className: "max-h-16 max-w-[140px]" },
+  { src: logoEindhoven, alt: "Gemeente Eindhoven", className: "max-h-16 max-w-[140px]" },
 ];
 
 const ClientLogos = () => {
+  const logoSet = logos.map((logo) => (
+    <div
+      key={logo.alt}
+      className="flex-shrink-0 flex items-center justify-center px-8"
+    >
+      <img
+        src={logo.src}
+        alt={logo.alt}
+        className={`object-contain opacity-50 grayscale transition-all duration-300 ${logo.className}`}
+      />
+    </div>
+  ));
+
   return (
     <section className="py-16 md:py-20 bg-background">
       <div className="container px-6 md:px-8">
@@ -30,19 +43,22 @@ const ClientLogos = () => {
           <p className="text-center text-sm font-medium text-muted-foreground/60 uppercase tracking-widest mb-10">
             Trusted by organizations like
           </p>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 md:gap-12 items-center justify-items-center">
-            {logos.map((logo) => (
-              <div
-                key={logo.alt}
-                className="flex items-center justify-center h-12 w-full"
-              >
-                <img
-                  src={logo.src}
-                  alt={logo.alt}
-                  className={`object-contain opacity-50 hover:opacity-80 transition-opacity duration-300 grayscale hover:grayscale-0 ${logo.className}`}
-                />
-              </div>
-            ))}
+          <div className="overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+            <div className="flex animate-marquee hover:[animation-play-state:paused] w-max gap-4">
+              {logoSet}
+              {logos.map((logo) => (
+                <div
+                  key={`dup-${logo.alt}`}
+                  className="flex-shrink-0 flex items-center justify-center px-8"
+                >
+                  <img
+                    src={logo.src}
+                    alt={logo.alt}
+                    className={`object-contain opacity-50 grayscale transition-all duration-300 ${logo.className}`}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
