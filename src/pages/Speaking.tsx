@@ -233,11 +233,14 @@ const Speaking = () => {
                 </p>
                 
                 {/* Video placeholder */}
-                <div className="aspect-video bg-foreground/5 rounded-2xl flex items-center justify-center border border-border/50">
-                  <div className="text-center p-8">
-                    <Mic className="h-16 w-16 text-muted-foreground/30 mx-auto mb-4" />
-                    <p className="text-muted-foreground">Speaker reel coming soon</p>
-                  </div>
+                <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl">
+                  <iframe
+                    src="https://www.youtube.com/embed/foEehJ_pwck?start=2&controls=0&rel=0&modestbranding=1"
+                    title="Ferry Hoes – Speaker Reel"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full border-0"
+                  />
                 </div>
               </div>
             </div>
