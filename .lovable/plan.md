@@ -1,31 +1,22 @@
 
 
-## Highlight Key Phrase + White Text
+Looking at the current state of the Speaking hero, there are two distinct directions here. Let me present both options for you to choose.
 
-### Change
+## Option A: Bolder Textmarker (quick fix)
 
-**File: `src/pages/Speaking.tsx`** (lines 97-99)
+Increase the highlight span from `bg-accent/50` to `bg-accent/95` for a near-solid coral marker effect behind "stories, insights, and practical ideas".
 
-Update the subtitle paragraph:
-- Change `text-white/70` to `text-white` for full readability
-- Wrap "stories, insights, and practical ideas" in a `<span>` with a textmarker-style highlight using the accent/coral color as background
+**Change:** `src/pages/Speaking.tsx` line 99 — `bg-accent/50` → `bg-accent/95`
 
-**Before:**
-```
-<p className="text-xl md:text-2xl text-white/70 leading-relaxed max-w-2xl mx-auto mb-12">
-  No death-by-PowerPoint. Just stories, insights, and practical ideas 
-  that spark real conversations and drive meaningful change.
-</p>
-```
+## Option B: Abstract Video Overlay + Bold Marker (recommended)
 
-**After:**
-```
-<p className="text-xl md:text-2xl text-white leading-relaxed max-w-2xl mx-auto mb-12">
-  No death-by-PowerPoint. Just{" "}
-  <span className="bg-accent/30 px-1 py-0.5 rounded">stories, insights, and practical ideas</span>
-  {" "}that spark real conversations and drive meaningful change.
-</p>
-```
+Add a subtle pattern or noise texture overlay on top of the video to soften it further, making all text pop without needing an extremely dark solid overlay. Combined with the bolder textmarker.
 
-The highlight uses `bg-accent/30` (semi-transparent coral) to create a textmarker/highlighter effect that fits the brand palette without overpowering the text.
+**Changes in `src/pages/Speaking.tsx`:**
+- Add a second overlay `div` with a CSS dot-pattern or frosted-glass effect (e.g., `backdrop-blur-[1px]` with a subtle repeating gradient) between the video and the existing gradient overlay
+- Increase textmarker to `bg-accent/95`
+
+---
+
+Both options include the denser marker. The question is whether we also soften the video.
 
