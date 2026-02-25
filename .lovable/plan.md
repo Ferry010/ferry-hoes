@@ -1,15 +1,28 @@
 
 
-## Add "Watch the reel" CTA to Meet Ferry Section
+## Enhanced Speaking FAQ
 
-### Changes in `src/pages/Speaking.tsx`
+Update the Q&A data in `src/components/sections/SpeakingQA.tsx` with the 10 new questions and multi-paragraph answers.
 
-After the three paragraphs in the "Meet Ferry" text column (around line 173), add a "Watch the reel" button that smooth-scrolls to the video section.
+### Changes in `src/components/sections/SpeakingQA.tsx`
 
-**Implementation:**
-- Add an `id="speaker-reel"` to the video section's `<section>` element so we have a scroll target
-- Add a `Button` with a play icon (`Play` from lucide-react) styled as outline/ghost with accent color, using `onClick` to `document.getElementById('speaker-reel')?.scrollIntoView({ behavior: 'smooth' })`
-- Import `Play` from lucide-react (already using lucide in this file)
+**Data**: Replace the 4-item `qAndA` array with 10 new items. Answers contain multiple paragraphs, so change the `answer` field from a single string to a `string[]` (array of paragraphs).
 
-This keeps users on the page and naturally guides them to the video proof point after reading the bio.
+New questions:
+1. What topics do you speak about? (3 paragraphs)
+2. Is your keynote inspirational or practical? (3 paragraphs)
+3. Who are your talks best suited for? (2 paragraphs)
+4. Do you speak in Dutch or English? (3 paragraphs)
+5. What formats do you offer? (3 paragraphs)
+6. How can we book you? (2 paragraphs)
+7. Do you customize your keynote? (3 paragraphs)
+8. What makes your talks different from other AI speakers? (3 paragraphs)
+9. Can you host or moderate events? (2 paragraphs)
+10. Slightly important question: do you use slides? (3 paragraphs)
+
+**Rendering**: Update the answer rendering from a single `<p>` to mapping over the array, rendering each paragraph as a separate `<p>` with `mb-2 last:mb-0` spacing.
+
+**Section header**: Update subtitle to something like "Everything you need to know about working with Ferry." to better fit a proper FAQ.
+
+Everything else (bubble styling, expand/collapse behavior, layout) stays exactly the same.
 
