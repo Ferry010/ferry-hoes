@@ -14,9 +14,8 @@ import Footer from "@/components/sections/Footer";
 import AskFerryBubble from "@/components/AskFerryBubble";
 import SEOHead from "@/components/blog/SEOHead";
 import stagePhoto from "@/assets/ferry-filming.jpg";
-import speakingBlue from "@/assets/ferry-speaking-2.jpg";
-import speakingAestate from "@/assets/ferry-speaking-aestate.jpg";
-import ferryPortrait from "@/assets/ferry-portrait.jpg";
+import ferryBts from "@/assets/ferry-bts.jpg";
+import ferryPresenting from "@/assets/ferry-presenting.jpg";
 
 import SpeakingQA from "@/components/sections/SpeakingQA";
 import ClientLogos from "@/components/sections/ClientLogos";
@@ -139,25 +138,23 @@ const Speaking = () => {
           <article className="py-24 md:py-32 bg-secondary/30">
             <div className="container px-6 md:px-8">
               <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center max-w-6xl mx-auto">
-                <div className="relative w-full aspect-[4/5] md:aspect-[3/4]">
-                  {/* Back — workshop shot */}
-                  <img
-                    src={speakingAestate}
-                    alt="Ferry Hoes in a workshop setting"
-                    className="absolute top-4 -left-4 w-[65%] h-[60%] object-cover rounded-xl shadow-lg rotate-[-6deg] z-10 hover:rotate-[-3deg] hover:scale-105 transition-all duration-300"
-                  />
-                  {/* Middle — blue stage */}
-                  <img
-                    src={speakingBlue}
-                    alt="Ferry Hoes on stage with blue background"
-                    className="absolute top-2 -right-2 w-[60%] h-[55%] object-cover rounded-xl shadow-lg rotate-[4deg] z-20 hover:rotate-[1deg] hover:scale-105 transition-all duration-300"
-                  />
-                  {/* Front — portrait */}
-                  <img
-                    src={ferryPortrait}
-                    alt="Ferry Hoes professional portrait"
-                    className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[70%] h-[65%] object-cover rounded-xl shadow-2xl z-30 hover:scale-105 transition-all duration-300"
-                  />
+                <div className="relative w-full aspect-[4/5] md:aspect-[3/4] group" style={{ perspective: '1000px' }}>
+                  <div className="relative w-full h-full transition-transform duration-700 group-hover:[transform:rotateY(180deg)]" style={{ transformStyle: 'preserve-3d' }}>
+                    {/* Front face */}
+                    <img
+                      src={ferryBts}
+                      alt="Ferry Hoes behind the scenes"
+                      className="absolute inset-0 w-full h-full object-cover rounded-2xl shadow-2xl"
+                      style={{ backfaceVisibility: 'hidden' }}
+                    />
+                    {/* Back face */}
+                    <img
+                      src={ferryPresenting}
+                      alt="Ferry Hoes presenting on stage"
+                      className="absolute inset-0 w-full h-full object-cover rounded-2xl shadow-2xl [transform:rotateY(180deg)]"
+                      style={{ backfaceVisibility: 'hidden' }}
+                    />
+                  </div>
                   <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-accent/20 rounded-full blur-2xl" />
                 </div>
                 
