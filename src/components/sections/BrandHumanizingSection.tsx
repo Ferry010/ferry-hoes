@@ -2,7 +2,7 @@ import { ArrowRight, Heart } from "lucide-react";
 
 const BrandHumanizingSection = () => {
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-secondary/90 backdrop-blur-sm">
+    <section id="brand-humanizing" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-secondary/90 backdrop-blur-sm">
       {/* Decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-96 h-96 bg-accent/20 rounded-full blur-3xl" />
