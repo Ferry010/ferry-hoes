@@ -29,6 +29,7 @@ export type Database = {
           seo_og_image_url: string | null
           seo_title: string | null
           slug: string
+          sort_order: number
           title: string
           updated_at: string
         }
@@ -46,6 +47,7 @@ export type Database = {
           seo_og_image_url?: string | null
           seo_title?: string | null
           slug: string
+          sort_order?: number
           title: string
           updated_at?: string
         }
@@ -63,6 +65,7 @@ export type Database = {
           seo_og_image_url?: string | null
           seo_title?: string | null
           slug?: string
+          sort_order?: number
           title?: string
           updated_at?: string
         }
