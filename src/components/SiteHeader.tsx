@@ -8,6 +8,7 @@ const NAV_ITEMS = [
   { label: "The Idea", route: "/#brand-humanizing" },
   { label: "The Book", route: "/#book" },
   { label: "Ideas", route: "/podcast" },
+  { label: "Blog", route: "/blog" },
   { label: "The Story", route: "/about" },
 ];
 
