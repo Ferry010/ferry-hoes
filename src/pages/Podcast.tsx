@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Headphones, Mic2 } from "lucide-react";
+import podcastHero from "@/assets/podcast-hero.jpg";
 import Footer from "@/components/sections/Footer";
 import AskFerryBubble from "@/components/AskFerryBubble";
 import SEOHead from "@/components/blog/SEOHead";
@@ -88,14 +89,10 @@ const Podcast = () => {
 
         {/* Hero Section */}
         <header className="min-h-[80vh] relative overflow-hidden flex items-center">
-          <video
+          <img
+            src={podcastHero}
+            alt="Ferry Hoes recording The Human Era Podcast"
             className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-            src="/videos/Ferry_Hero_vid_2026.webm"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
           />
           <div className="absolute inset-0 backdrop-blur-[6px]" />
           <div className="absolute inset-0 bg-gradient-to-br from-foreground/90 via-foreground/80 to-primary/70" />
@@ -237,8 +234,8 @@ const Podcast = () => {
                     </a>
                   </article>
 
-                  {/* Right side: 2x2 grid of smaller cards */}
-                  <div className="grid grid-cols-2 gap-4">
+                  {/* Right side: stacked cards */}
+                  <div className="flex flex-col gap-4">
                     {allEpisodes.slice(1, 5).map((episode) => (
                       <article 
                         key={episode.title}
