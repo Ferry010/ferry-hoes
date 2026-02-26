@@ -1,25 +1,20 @@
 
 
-## Create Podcast Page
+## Podcast Page Updates
 
-A dedicated `/podcast` page following the same structure and design patterns as the Speaking page.
+### 1. Fix Apple Podcasts button readability
+- **Hero CTA** (line 126-136): Change from outline white to solid purple `bg-[#9933FF] hover:bg-[#9933FF]/90 text-white`
+- **Bottom CTA** (line 268-278): Already uses purple border/text but on dark bg it's hard to read. Change to solid `bg-[#9933FF] hover:bg-[#9933FF]/90 text-white`
 
-### 1. Create `src/pages/Podcast.tsx`
+### 2. Remove em dashes from copy
+- Line 158: Change `"honest, unscripted conversation — no pre-written questions, no rehearsed answers."` to `"honest, unscripted conversation. No pre-written questions, no rehearsed answers."`
 
-- **Hero section**: Full-width header with video background (reuse the same hero video pattern from Speaking), podcast badge, title "The Human Era Podcast", subtitle about the show's mission, and CTA buttons for Spotify + Apple Podcasts.
-- **Episodes section**: Full list of all episodes (reuse the `featuredEpisodes` data from PodcastSection, expanded with more episodes fetched from the RSS feed or hardcoded). Display as a grid or list of episode cards with title, guest, duration, and Spotify link — same card design as PodcastSection but laid out in a responsive grid rather than carousel.
-- **About the podcast section**: Short description of what the show is about, who it's for, and what listeners can expect.
-- **Platform CTAs**: Spotify and Apple Podcasts buttons (reuse from PodcastSection).
-- **Footer + AskFerryBubble**: Same as other pages.
+### 3. Redesign episodes layout: featured + stacked
+Add a 4th episode to the data array (need one more to fill the layout).
 
-Extract shared components (SpotifyIcon, ApplePodcastsIcon, episode data, platform URLs) from `PodcastSection.tsx` into a shared location or import directly.
+Replace the 3-column grid with a 2-column layout:
+- **Left half**: Large featured card for the most recent episode (`allEpisodes[0]`), full height, bigger text, more padding
+- **Right half**: 3 smaller cards stacked vertically (`allEpisodes[1-3]`), each a compact row-style card
 
-### 2. Add route in `src/App.tsx`
-
-- Import `Podcast` page component
-- Add `<Route path="/podcast" element={<Podcast />} />` before the catch-all
-
-### 3. Update Footer link in `src/components/sections/Footer.tsx`
-
-- Change the placeholder `<a href="#">Podcast</a>` to `<Link to="/podcast">Podcast</Link>`
+On mobile: stack all 4 cards vertically, featured card still visually larger.
 
