@@ -1,16 +1,25 @@
 
 
-## Fix Broken Spotify Episode Links
+## Create Podcast Page
 
-The individual episode links use fake Spotify episode URLs constructed from Anchor IDs (e.g., `e34fcs3`). These won't resolve on Spotify. The RSS feed provides the correct links via `podcasters.spotify.com`.
+A dedicated `/podcast` page following the same structure and design patterns as the Speaking page.
 
-### Changes in `src/components/sections/PodcastSection.tsx`
+### 1. Create `src/pages/Podcast.tsx`
 
-Update the `spotifyUrl` values in the `featuredEpisodes` array to use the actual links from the RSS feed:
+- **Hero section**: Full-width header with video background (reuse the same hero video pattern from Speaking), podcast badge, title "The Human Era Podcast", subtitle about the show's mission, and CTA buttons for Spotify + Apple Podcasts.
+- **Episodes section**: Full list of all episodes (reuse the `featuredEpisodes` data from PodcastSection, expanded with more episodes fetched from the RSS feed or hardcoded). Display as a grid or list of episode cards with title, guest, duration, and Spotify link — same card design as PodcastSection but laid out in a responsive grid rather than carousel.
+- **About the podcast section**: Short description of what the show is about, who it's for, and what listeners can expect.
+- **Platform CTAs**: Spotify and Apple Podcasts buttons (reuse from PodcastSection).
+- **Footer + AskFerryBubble**: Same as other pages.
 
-- Episode 1 (Simone Moissidis): `https://podcasters.spotify.com/pod/show/thehumanerapodcast/episodes/Not-a-Diversity-Checkbox-The-Real-Work-of-Inclusive-Leadership-with-Simone-Moissidis-e34fcs3`
-- Episode 2 (Ruben Treurniet): `https://podcasters.spotify.com/pod/show/thehumanerapodcast/episodes/The-Power-of-Talking-to-People-You-Disagree-With-with-Ruben-Treurniet-e30mai6`
-- Episode 3 (Marco Boomsma): `https://podcasters.spotify.com/pod/show/thehumanerapodcast/episodes/From-Local-to-Global-The-New-Era-of-Talent-Acquisition-with-Marco-Boomsma-from-Bullhorn-e2lthrj`
+Extract shared components (SpotifyIcon, ApplePodcastsIcon, episode data, platform URLs) from `PodcastSection.tsx` into a shared location or import directly.
 
-The main show URL (`https://open.spotify.com/show/6eGkXe767cYZ5Rw627Xpgu`) and Apple Podcasts URL appear correct and should work as-is.
+### 2. Add route in `src/App.tsx`
+
+- Import `Podcast` page component
+- Add `<Route path="/podcast" element={<Podcast />} />` before the catch-all
+
+### 3. Update Footer link in `src/components/sections/Footer.tsx`
+
+- Change the placeholder `<a href="#">Podcast</a>` to `<Link to="/podcast">Podcast</Link>`
 
