@@ -28,19 +28,19 @@ const featuredEpisodes = [
     title: "Not a Diversity Checkbox: The Real Work of Inclusive Leadership",
     guest: "Simone Moissidis",
     duration: "65 min",
-    spotifyUrl: "https://open.spotify.com/episode/e34fcs3",
+    spotifyUrl: "https://podcasters.spotify.com/pod/show/thehumanerapodcast/episodes/Not-a-Diversity-Checkbox-The-Real-Work-of-Inclusive-Leadership-with-Simone-Moissidis-e34fcs3",
   },
   {
     title: "The Power of Talking to People You Disagree With",
     guest: "Ruben Treurniet",
     duration: "73 min",
-    spotifyUrl: "https://open.spotify.com/episode/e30mai6",
+    spotifyUrl: "https://podcasters.spotify.com/pod/show/thehumanerapodcast/episodes/The-Power-of-Talking-to-People-You-Disagree-With-with-Ruben-Treurniet-e30mai6",
   },
   {
     title: "From Local to Global: The New Era of Talent Acquisition",
     guest: "Marco Boomsma",
     duration: "71 min",
-    spotifyUrl: "https://open.spotify.com/episode/e2lthrj",
+    spotifyUrl: "https://podcasters.spotify.com/pod/show/thehumanerapodcast/episodes/From-Local-to-Global-The-New-Era-of-Talent-Acquisition-with-Marco-Boomsma-from-Bullhorn-e2lthrj",
   },
 ];
 
