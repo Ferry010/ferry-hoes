@@ -1,16 +1,21 @@
 
 
-## Replace hero collage image
+## Restructure About Page to Stacked Layout
 
-Copy the uploaded photo to `src/assets/ferry-brand-humanizing.jpg`, then update `src/pages/About.tsx` to import and use it in place of `ferry-on-stage.jpg` in the hero collage (both desktop and mobile layouts). Update alt text accordingly.
+Change the hero from a 2-column grid to a single-column stacked layout: collage on top, then headline + subtitle below.
 
-### Changes
+### Changes in `src/pages/About.tsx`
 
-**Copy file**
-- `user-uploads://PHOTO-2025-11-21-23-06-46.jpg` → `src/assets/ferry-brand-humanizing.jpg`
+**Hero section (lines ~33-82)**:
+- Remove the `grid md:grid-cols-2` layout — make it a single centered column
+- Move the image collage above the text (currently text is left, images right)
+- Center the headline "My story" and subtitle below the collage
+- Keep the collage styling (rotations, overlays, animations) intact but adjust sizing to work as a full-width centered element
+- Reduce collage height since it now spans the full width
+- On mobile, keep the compact 2-col grid as-is, just ensure it sits above the title
 
-**`src/pages/About.tsx`**
-- Replace `import ferryOnStage` with import of the new image
-- Update all references from `ferryOnStage` to the new import
-- Update alt text from "Ferry Hoes on stage" to "Ferry Hoes with Brand Humanizing banner"
+**Structure order**:
+1. Image collage (full-width, centered)
+2. "My story" headline + subtitle (centered text)
+3. Biography copy (unchanged)
 
