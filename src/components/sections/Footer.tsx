@@ -29,9 +29,9 @@ const Footer = () => {
               <Link to="/speaking" className="text-white/70 hover:text-white transition-colors">
                 Speaking
               </Link>
-              <a href="#" className="text-white/70 hover:text-white transition-colors">
+              <Link to="/podcast" className="text-white/70 hover:text-white transition-colors">
                 Podcast
-              </a>
+              </Link>
               <a href="#" className="text-white/70 hover:text-white transition-colors">
                 Videos
               </a>
