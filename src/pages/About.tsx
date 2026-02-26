@@ -3,6 +3,11 @@ import { ArrowRight, MessageCircle } from "lucide-react";
 import Footer from "@/components/sections/Footer";
 import AskFerryBubble from "@/components/AskFerryBubble";
 import SEOHead from "@/components/blog/SEOHead";
+import ferryOnStage from "@/assets/ferry-on-stage.jpg";
+import ferrySpeaking from "@/assets/ferry-speaking.jpg";
+import ferryBookstore from "@/assets/ferry-bookstore.jpg";
+import ferryPresenting from "@/assets/ferry-presenting.jpg";
+import ferryBts from "@/assets/ferry-bts.jpg";
 
 const About = () => {
   const openMessagePanel = () => {
@@ -20,13 +25,60 @@ const About = () => {
       />
 
       <div className="overflow-x-hidden relative">
-        {/* Title */}
-        <header className="pt-32 pb-16 bg-background">
+        {/* Hero with Image Collage */}
+        <header className="min-h-[80vh] bg-background pt-24 pb-16">
           <div className="container px-6 md:px-8">
-            <div className="max-w-3xl mx-auto">
-              <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-foreground">
-                My <span className="text-accent">story</span>
-              </h1>
+            <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center min-h-[70vh]">
+              {/* Left: Headline */}
+              <div className="order-2 md:order-1 flex flex-col justify-center">
+                <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 animate-fade-in">
+                  My <span className="text-accent">story</span>
+                </h1>
+                <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed animate-fade-in" style={{ animationDelay: "0.15s", animationFillMode: "both" }}>
+                  International speaker, published author, and entrepreneur on a mission to unleash super-human potential with the help of technology.
+                </p>
+              </div>
+
+              {/* Right: Image Collage */}
+              <div className="order-1 md:order-2 relative">
+                {/* Desktop collage */}
+                <div className="hidden md:block relative h-[520px] lg:h-[580px]">
+                  <div className="absolute top-0 left-0 w-[55%] h-[48%] rounded-2xl overflow-hidden shadow-lg rotate-[-2deg] animate-fade-in" style={{ animationDelay: "0.1s", animationFillMode: "both" }}>
+                    <img src={ferryOnStage} alt="Ferry Hoes on stage" className="w-full h-full object-cover" />
+                    <div className="brand-hero-overlay" />
+                  </div>
+                  <div className="absolute top-2 right-0 w-[42%] h-[35%] rounded-2xl overflow-hidden shadow-lg rotate-[1.5deg] animate-fade-in" style={{ animationDelay: "0.2s", animationFillMode: "both" }}>
+                    <img src={ferrySpeaking} alt="Ferry Hoes speaking" className="w-full h-full object-cover" />
+                    <div className="brand-hero-overlay" />
+                  </div>
+                  <div className="absolute bottom-[8%] left-[5%] w-[40%] h-[38%] rounded-2xl overflow-hidden shadow-lg rotate-[2deg] animate-fade-in" style={{ animationDelay: "0.3s", animationFillMode: "both" }}>
+                    <img src={ferryBookstore} alt="Ferry Hoes in a bookstore" className="w-full h-full object-cover" />
+                    <div className="brand-hero-overlay" />
+                  </div>
+                  <div className="absolute top-[42%] right-[2%] w-[38%] h-[30%] rounded-2xl overflow-hidden shadow-lg rotate-[-1deg] animate-fade-in" style={{ animationDelay: "0.4s", animationFillMode: "both" }}>
+                    <img src={ferryPresenting} alt="Ferry Hoes presenting" className="w-full h-full object-cover" />
+                    <div className="brand-hero-overlay" />
+                  </div>
+                  <div className="absolute bottom-0 right-[10%] w-[35%] h-[25%] rounded-2xl overflow-hidden shadow-lg rotate-[1deg] animate-fade-in" style={{ animationDelay: "0.5s", animationFillMode: "both" }}>
+                    <img src={ferryBts} alt="Ferry Hoes behind the scenes" className="w-full h-full object-cover" />
+                    <div className="brand-hero-overlay" />
+                  </div>
+                </div>
+
+                {/* Mobile compact grid */}
+                <div className="md:hidden grid grid-cols-2 gap-3">
+                  {[
+                    { src: ferryOnStage, alt: "Ferry on stage", span: "col-span-2 h-48" },
+                    { src: ferrySpeaking, alt: "Ferry speaking", span: "h-36" },
+                    { src: ferryBookstore, alt: "Ferry in bookstore", span: "h-36" },
+                  ].map((img, i) => (
+                    <div key={i} className={`${img.span} rounded-2xl overflow-hidden shadow-lg relative animate-fade-in`} style={{ animationDelay: `${i * 0.1}s`, animationFillMode: "both" }}>
+                      <img src={img.src} alt={img.alt} className="w-full h-full object-cover" />
+                      <div className="brand-hero-overlay" />
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </header>
