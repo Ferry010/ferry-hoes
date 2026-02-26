@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, MessageCircle } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Footer from "@/components/sections/Footer";
 import AskFerryBubble from "@/components/AskFerryBubble";
 import SEOHead from "@/components/blog/SEOHead";
@@ -284,31 +284,20 @@ const About = () => {
                 Because what I love most is helping people and technology work together
                 in a way that actually makes work and life more human.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button
-                  asChild
-                  size="lg"
-                  className="rounded-full px-8 bg-accent text-accent-foreground hover:bg-accent/90 group"
+              <Button
+                asChild
+                size="lg"
+                className="rounded-full px-8 bg-accent text-accent-foreground hover:bg-accent/90 group"
+              >
+                <a
+                  href="https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  <a
-                    href="https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Book as speaker
-                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </a>
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  onClick={openMessagePanel}
-                  className="rounded-full px-8 border-white/20 text-white hover:bg-white/10 hover:text-white group"
-                >
-                  <MessageCircle className="mr-2 h-4 w-4" />
-                  Send a message
-                </Button>
-              </div>
+                  Book as speaker
+                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </a>
+              </Button>
             </div>
           </div>
         </section>
