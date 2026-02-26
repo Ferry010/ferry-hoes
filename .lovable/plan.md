@@ -1,20 +1,36 @@
 
 
-## Podcast Page Updates
+## Podcast Page: Show Notes Snippet + Brand Color Update
 
-### 1. Fix Apple Podcasts button readability
-- **Hero CTA** (line 126-136): Change from outline white to solid purple `bg-[#9933FF] hover:bg-[#9933FF]/90 text-white`
-- **Bottom CTA** (line 268-278): Already uses purple border/text but on dark bg it's hard to read. Change to solid `bg-[#9933FF] hover:bg-[#9933FF]/90 text-white`
+### 1. Add `description` field to episode data (lines 25-48)
 
-### 2. Remove em dashes from copy
-- Line 158: Change `"honest, unscripted conversation — no pre-written questions, no rehearsed answers."` to `"honest, unscripted conversation. No pre-written questions, no rehearsed answers."`
+Add a `description` string to the first episode in `allEpisodes`:
 
-### 3. Redesign episodes layout: featured + stacked
-Add a 4th episode to the data array (need one more to fill the layout).
+```
+{
+  title: "Not a Diversity Checkbox...",
+  guest: "Simone Moissidis",
+  duration: "65 min",
+  description: "Simone Moissidis shares what inclusive leadership really looks like beyond checkboxes and quotas. We explore how organizations can move from performative diversity to genuine belonging, and why the hardest conversations are often the most important ones.",
+  spotifyUrl: "...",
+}
+```
 
-Replace the 3-column grid with a 2-column layout:
-- **Left half**: Large featured card for the most recent episode (`allEpisodes[0]`), full height, bigger text, more padding
-- **Right half**: 3 smaller cards stacked vertically (`allEpisodes[1-3]`), each a compact row-style card
+### 2. Change "Latest Episode" badge to brand Coral/orange (line 213)
 
-On mobile: stack all 4 cards vertically, featured card still visually larger.
+Replace the green Spotify color on the badge:
+- From: `text-[#1DB954] bg-[#1DB954]/10`
+- To: `text-accent bg-accent/10`
+
+This uses the brand Coral (`#E86A4A`) defined in the theme.
+
+### 3. Add show notes snippet below guest name in featured card (after line 228)
+
+Insert a `<p>` with the description text, styled as a readable snippet with muted color and smaller text:
+
+```tsx
+<p className="text-base text-muted-foreground/80 leading-relaxed">
+  {allEpisodes[0].description}
+</p>
+```
 
