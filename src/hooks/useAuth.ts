@@ -24,18 +24,29 @@ export function useAuth() {
         const user = session?.user ?? null;
         
         if (user) {
-          // Check admin role using the has_role function
-          const { data: isAdmin } = await supabase.rpc('has_role', {
-            _user_id: user.id,
-            _role: 'admin'
-          });
-          
-          setState({
-            user,
-            session,
-            isAdmin: isAdmin ?? false,
-            loading: false,
-          });
+          // Defer the RPC call to avoid blocking the auth state change callback
+          setTimeout(async () => {
+            try {
+              const { data: isAdmin } = await supabase.rpc('has_role', {
+                _user_id: user.id,
+                _role: 'admin'
+              });
+              
+              setState({
+                user,
+                session,
+                isAdmin: isAdmin ?? false,
+                loading: false,
+              });
+            } catch {
+              setState({
+                user,
+                session,
+                isAdmin: false,
+                loading: false,
+              });
+            }
+          }, 0);
         } else {
           setState({
             user: null,
@@ -52,17 +63,26 @@ export function useAuth() {
       const user = session?.user ?? null;
       
       if (user) {
-        const { data: isAdmin } = await supabase.rpc('has_role', {
-          _user_id: user.id,
-          _role: 'admin'
-        });
-        
-        setState({
-          user,
-          session,
-          isAdmin: isAdmin ?? false,
-          loading: false,
-        });
+        try {
+          const { data: isAdmin } = await supabase.rpc('has_role', {
+            _user_id: user.id,
+            _role: 'admin'
+          });
+          
+          setState({
+            user,
+            session,
+            isAdmin: isAdmin ?? false,
+            loading: false,
+          });
+        } catch {
+          setState({
+            user,
+            session,
+            isAdmin: false,
+            loading: false,
+          });
+        }
       } else {
         setState({
           user: null,
