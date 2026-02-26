@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { MessageCircle } from "lucide-react";
+import logoWhite from "@/assets/ferry-hoes-logo-white.png";
 
 const Footer = () => {
   const openMessagePanel = () => {
@@ -15,7 +16,7 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-12">
             {/* Logo/Name */}
             <div>
-              <span className="font-display text-3xl md:text-4xl font-bold">Ferry Hoes</span>
+              <img src={logoWhite} alt="Ferry Hoes" className="h-8 md:h-10 w-auto" />
             </div>
             
             {/* Navigation */}

@@ -2,12 +2,13 @@ import { useState, useEffect, useCallback } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Menu, X } from "lucide-react";
+import logoBlack from "@/assets/ferry-hoes-logo-black.png";
 
 const NAV_ITEMS = [
   { label: "On Stage", route: "/speaking" },
   { label: "The Idea", route: "/#brand-humanizing" },
   { label: "The Book", route: "/#book" },
-  { label: "Ideas", route: "/podcast" },
+  { label: "Podcast", route: "/podcast" },
   { label: "Blog", route: "/blog" },
   { label: "The Story", route: "/about" },
 ];
@@ -73,11 +74,8 @@ const SiteHeader = () => {
       >
         <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-14 flex items-center justify-between">
           {/* Logo */}
-          <Link
-            to="/"
-            className="font-display text-lg md:text-xl font-bold tracking-widest uppercase text-foreground hover:brightness-[1.03] transition-none"
-          >
-            Ferry Hoes
+          <Link to="/" className="hover:brightness-[1.03] transition-none">
+            <img src={logoBlack} alt="Ferry Hoes" className="h-6 md:h-7 w-auto" />
           </Link>
 
           {/* Desktop nav */}
