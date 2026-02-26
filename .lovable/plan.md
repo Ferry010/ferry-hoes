@@ -1,54 +1,30 @@
 
 
-## Plan: Create Premium Contact Page
+## Plan: Add copy blocks and press/media option to Contact page
 
-### 1. Database migration — add columns to `contact_messages`
+### Changes to `src/pages/Contact.tsx`
 
-Add nullable columns to the existing table so the new form fields are stored without breaking the existing AskFerryBubble or AdminMessages functionality:
+**1. Update header copy**
 
-```sql
-ALTER TABLE public.contact_messages
-  ADD COLUMN IF NOT EXISTS organization text,
-  ADD COLUMN IF NOT EXISTS inquiry_type text,
-  ADD COLUMN IF NOT EXISTS inquiry_other text,
-  ADD COLUMN IF NOT EXISTS timeline text,
-  ADD COLUMN IF NOT EXISTS privacy_accepted boolean NOT NULL DEFAULT false;
-```
+Replace the current headline "Start a conversation." and subtext with:
 
-No new RLS policies needed — existing anon-insert + admin-read policies cover this.
+- Headline: **"Contact"**
+- Subtext: "Please find a way to connect with me or my team that suits you best."
 
-### 2. Create `src/pages/Contact.tsx`
+**2. Add two info cards between header and form**
 
-New page with the full structure:
+Insert two clean cards/blocks after the header section and before the form:
 
-- **Header**: "Start a conversation." headline + calm subtext. Clean white space, no graphics.
-- **Form** (single-column, Zod-validated):
-  - Full Name (required)
-  - Email Address (required, placeholder: `name@company.com`)
-  - Organization / Company (optional)
-  - "How can I help?" dropdown (required) with 6 options. Conditional "Tell me more" field when "Other" selected.
-  - "Tell me about your request" textarea (required)
-  - "Preferred timeline" dropdown (optional, 4 options)
-  - Privacy checkbox (required) with subtext
-  - "Send message" submit button with brand color, hover brightness, 120ms active press
-- **Smart pre-selection**: Read `location.state?.from` to pre-select inquiry type if navigated from `/speaking` or `/podcast`
-- **Submit behavior**: Insert into `contact_messages` via Supabase. On success, fade form out (200ms opacity transition), show calm confirmation: "Message received." + "Thank you for reaching out..."
-- Includes `SEOHead`, `Footer`, `AskFerryBubble`
+- **Press** card: "For all interviews, media opportunities, and anything else press-related, please use this option." with a CTA button linking to the contact form with press pre-selected (or a mailto/anchor).
+- **Book Ferry To Speak** card: "I'm exclusively represented by Speakers Academy. Click here to book me to speak at your next event." with a link to `https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966` (opens in new tab).
 
-### 3. Add route in `src/App.tsx`
+Both cards styled minimally — border, generous padding, clean typography. No heavy shadows.
 
-Add `/contact` route pointing to the new Contact page.
+**3. Add "Press / media enquiry" to inquiry dropdown**
 
-### 4. Update navigation
+Add `{ value: "press", label: "Press / media enquiry" }` to `INQUIRY_OPTIONS` array (after podcast or near the top).
 
-- **`src/components/SiteHeader.tsx`**: Update the CTA button from linking to `/conversation` to `/contact`
-- **`src/components/sections/Footer.tsx`**: Add "Contact" to footer nav links
+**4. Press card behavior**
 
-### 5. Update `src/pages/AdminMessages.tsx`
-
-Display the new fields (organization, inquiry type, timeline) in the expanded message view so admins can see the richer context.
-
-### 6. Update links from Speaking/Podcast pages
-
-Where those pages have CTA buttons or links that could route to contact, pass `state: { from: "speaking" }` or `state: { from: "podcast" }` via React Router so the contact form can pre-select the inquiry type.
+The Press card CTA scrolls to the form and pre-selects "Press / media enquiry" in the dropdown.
 
