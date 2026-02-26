@@ -188,8 +188,8 @@ const Podcast = () => {
                   </p>
                 </div>
 
-                <div className="grid gap-6 md:grid-cols-2">
-                  {/* Featured latest episode - left half */}
+                <div className="space-y-8">
+                  {/* Featured latest episode */}
                   <article 
                     className="group relative overflow-hidden bg-gradient-to-br from-background to-[#1DB954]/[0.05] rounded-2xl p-10 shadow-soft hover:shadow-soft-lg transition-all duration-300 border-l-4 border-[#1DB954]/40 hover:border-[#1DB954] flex flex-col justify-between md:row-span-1"
                   >
@@ -244,8 +244,8 @@ const Podcast = () => {
                     </a>
                   </article>
 
-                  {/* Right side: 3 stacked smaller cards */}
-                  <div className="flex flex-col gap-4">
+                  {/* Previous episodes */}
+                  <div className="grid gap-4 md:grid-cols-3">
                     {allEpisodes.slice(1).map((episode) => (
                       <article 
                         key={episode.title}
