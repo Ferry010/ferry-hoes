@@ -4,7 +4,7 @@ import Footer from "@/components/sections/Footer";
 import AskFerryBubble from "@/components/AskFerryBubble";
 import SEOHead from "@/components/blog/SEOHead";
 import ferryBrandHumanizing from "@/assets/ferry-brand-humanizing.jpg";
-import ferrySpeaking from "@/assets/ferry-speaking.jpg";
+import ferrySpeakingAudience from "@/assets/ferry-speaking-audience.jpg";
 import ferryBookstore from "@/assets/ferry-bookstore.jpg";
 import ferryPresenting from "@/assets/ferry-presenting.jpg";
 import ferryBts from "@/assets/ferry-bts.jpg";
@@ -32,25 +32,25 @@ const About = () => {
               {/* Image Collage */}
               <div className="w-full max-w-4xl relative mb-12">
                 {/* Desktop collage */}
-                <div className="hidden md:block relative h-[380px] lg:h-[420px]">
+                <div className="hidden md:block relative h-[440px] lg:h-[480px]">
                   <div className="absolute top-0 left-[5%] w-[38%] h-[55%] rounded-2xl overflow-hidden shadow-lg rotate-[-2deg] animate-fade-in" style={{ animationDelay: "0.1s", animationFillMode: "both" }}>
-                    <img src={ferryBrandHumanizing} alt="Ferry Hoes with Brand Humanizing banner" className="w-full h-full object-cover" />
+                    <img src={ferryBrandHumanizing} alt="Ferry Hoes with Brand Humanizing banner" className="w-full h-full object-cover object-center" />
                     <div className="brand-hero-overlay" />
                   </div>
-                  <div className="absolute top-0 right-[22%] w-[28%] h-[45%] rounded-2xl overflow-hidden shadow-lg rotate-[1.5deg] animate-fade-in" style={{ animationDelay: "0.2s", animationFillMode: "both" }}>
-                    <img src={ferrySpeaking} alt="Ferry Hoes speaking" className="w-full h-full object-cover" />
+                  <div className="absolute top-0 right-[22%] w-[28%] h-[48%] rounded-2xl overflow-hidden shadow-lg rotate-[1.5deg] animate-fade-in" style={{ animationDelay: "0.2s", animationFillMode: "both" }}>
+                    <img src={ferrySpeakingAudience} alt="Ferry Hoes speaking to audience" className="w-full h-full object-cover object-top" />
                     <div className="brand-hero-overlay" />
                   </div>
                   <div className="absolute top-[10%] right-[2%] w-[22%] h-[40%] rounded-2xl overflow-hidden shadow-lg rotate-[-1deg] animate-fade-in" style={{ animationDelay: "0.3s", animationFillMode: "both" }}>
-                    <img src={ferryPresenting} alt="Ferry Hoes presenting" className="w-full h-full object-cover" />
+                    <img src={ferryPresenting} alt="Ferry Hoes presenting" className="w-full h-full object-cover object-top" />
                     <div className="brand-hero-overlay" />
                   </div>
-                  <div className="absolute bottom-[5%] left-[15%] w-[30%] h-[45%] rounded-2xl overflow-hidden shadow-lg rotate-[2deg] animate-fade-in" style={{ animationDelay: "0.4s", animationFillMode: "both" }}>
-                    <img src={ferryBookstore} alt="Ferry Hoes in a bookstore" className="w-full h-full object-cover" />
+                  <div className="absolute bottom-[5%] left-[15%] w-[30%] h-[48%] rounded-2xl overflow-hidden shadow-lg rotate-[2deg] animate-fade-in" style={{ animationDelay: "0.4s", animationFillMode: "both" }}>
+                    <img src={ferryBookstore} alt="Ferry Hoes in a bookstore" className="w-full h-full object-cover object-center" />
                     <div className="brand-hero-overlay" />
                   </div>
-                  <div className="absolute bottom-[0%] right-[15%] w-[28%] h-[38%] rounded-2xl overflow-hidden shadow-lg rotate-[1deg] animate-fade-in" style={{ animationDelay: "0.5s", animationFillMode: "both" }}>
-                    <img src={ferryBts} alt="Ferry Hoes behind the scenes" className="w-full h-full object-cover" />
+                  <div className="absolute bottom-[0%] right-[15%] w-[28%] h-[42%] rounded-2xl overflow-hidden shadow-lg rotate-[1deg] animate-fade-in" style={{ animationDelay: "0.5s", animationFillMode: "both" }}>
+                    <img src={ferryBts} alt="Ferry Hoes behind the scenes" className="w-full h-full object-cover object-center" />
                     <div className="brand-hero-overlay" />
                   </div>
                 </div>
@@ -59,11 +59,11 @@ const About = () => {
                 <div className="md:hidden grid grid-cols-2 gap-3">
                   {[
                     { src: ferryBrandHumanizing, alt: "Ferry with Brand Humanizing banner", span: "col-span-2 h-48" },
-                    { src: ferrySpeaking, alt: "Ferry speaking", span: "h-36" },
+                    { src: ferrySpeakingAudience, alt: "Ferry speaking to audience", span: "h-36" },
                     { src: ferryBookstore, alt: "Ferry in bookstore", span: "h-36" },
                   ].map((img, i) => (
                     <div key={i} className={`${img.span} rounded-2xl overflow-hidden shadow-lg relative animate-fade-in`} style={{ animationDelay: `${i * 0.1}s`, animationFillMode: "both" }}>
-                      <img src={img.src} alt={img.alt} className="w-full h-full object-cover" />
+                      <img src={img.src} alt={img.alt} className="w-full h-full object-cover object-center" />
                       <div className="brand-hero-overlay" />
                     </div>
                   ))}
