@@ -3,7 +3,7 @@ import { ArrowRight, MessageCircle } from "lucide-react";
 import Footer from "@/components/sections/Footer";
 import AskFerryBubble from "@/components/AskFerryBubble";
 import SEOHead from "@/components/blog/SEOHead";
-import ferryOnStage from "@/assets/ferry-on-stage.jpg";
+import ferryBrandHumanizing from "@/assets/ferry-brand-humanizing.jpg";
 import ferrySpeaking from "@/assets/ferry-speaking.jpg";
 import ferryBookstore from "@/assets/ferry-bookstore.jpg";
 import ferryPresenting from "@/assets/ferry-presenting.jpg";
@@ -44,7 +44,7 @@ const About = () => {
                 {/* Desktop collage */}
                 <div className="hidden md:block relative h-[520px] lg:h-[580px]">
                   <div className="absolute top-0 left-0 w-[55%] h-[48%] rounded-2xl overflow-hidden shadow-lg rotate-[-2deg] animate-fade-in" style={{ animationDelay: "0.1s", animationFillMode: "both" }}>
-                    <img src={ferryOnStage} alt="Ferry Hoes on stage" className="w-full h-full object-cover" />
+                    <img src={ferryBrandHumanizing} alt="Ferry Hoes with Brand Humanizing banner" className="w-full h-full object-cover" />
                     <div className="brand-hero-overlay" />
                   </div>
                   <div className="absolute top-2 right-0 w-[42%] h-[35%] rounded-2xl overflow-hidden shadow-lg rotate-[1.5deg] animate-fade-in" style={{ animationDelay: "0.2s", animationFillMode: "both" }}>
@@ -68,7 +68,7 @@ const About = () => {
                 {/* Mobile compact grid */}
                 <div className="md:hidden grid grid-cols-2 gap-3">
                   {[
-                    { src: ferryOnStage, alt: "Ferry on stage", span: "col-span-2 h-48" },
+                    { src: ferryBrandHumanizing, alt: "Ferry with Brand Humanizing banner", span: "col-span-2 h-48" },
                     { src: ferrySpeaking, alt: "Ferry speaking", span: "h-36" },
                     { src: ferryBookstore, alt: "Ferry in bookstore", span: "h-36" },
                   ].map((img, i) => (
