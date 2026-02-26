@@ -1,21 +1,14 @@
 
 
-## Fix Image Collage + Replace Top Middle Image
+## Single-Row Image Collage
+
+Replace the absolute-positioned overlapping collage with a simple horizontal flex row of all 5 images, each in a taller card for better cropping.
 
 ### Changes in `src/pages/About.tsx`
 
-**1. Copy uploaded image**
-- Copy `user-uploads://PHOTO-2025-11-17-13-37-58.jpg` → `src/assets/ferry-speaking-audience.jpg`
+**Desktop collage (lines 35-56)**: Replace the `relative h-[440px]` absolute-positioned layout with a `flex gap-4` row. Each image gets a `flex-1 h-[280px] lg:h-[320px] rounded-2xl overflow-hidden shadow-lg` container with subtle alternating rotations kept. Images use `object-cover object-center`.
 
-**2. Update imports**
-- Replace `ferrySpeaking` import with new `ferrySpeakingAudience` from `ferry-speaking-audience.jpg`
+**Mobile grid (lines 58-70)**: Change to a horizontal scroll row (`flex gap-3 overflow-x-auto snap-x`) showing all 5 images at `w-[70vw] h-48 flex-shrink-0 snap-center` for swipeable browsing.
 
-**3. Fix image cropping — add `object-center` or `object-top` positioning**
-- All collage images: change `object-cover` to `object-cover object-center` (or `object-top` where faces are near the top) so subjects aren't awkwardly cropped
-- Increase collage container height from `h-[380px] lg:h-[420px]` to `h-[440px] lg:h-[480px]` to give images more room
-- Adjust individual image tile aspect ratios (increase heights slightly) so content isn't as tightly cropped
-
-**4. Replace top middle image**
-- Swap `ferrySpeaking` → `ferrySpeakingAudience` in the desktop collage (line 40) and mobile grid (line 62)
-- Update alt text to "Ferry Hoes speaking to audience"
+**Container**: Widen from `max-w-4xl` to `max-w-6xl` to give the row more space.
 
