@@ -1,16 +1,33 @@
 
 
-## Plan: Fix blog image upload hanging issue
+## Plan: Add manual blog post ordering
 
-### Root cause analysis
-The `handleDrop` callback uses `useCallback` with an empty dependency array `[]`, which creates a stale closure over `uploadFile`. When `uploadFile` is called from the stale closure, state updates (like `setIsUploading(false)` in `finally`) may not work correctly, causing the spinner to hang indefinitely.
+### 1. Database migration — add `sort_order` column
 
-Additionally, the file input `onChange` handler (`handleChange`) is not wrapped in `useCallback` but calls the same `uploadFile` — both paths may be affected if the component re-renders.
+Add an integer column `sort_order` to `blog_posts` with a default of `0`. Lower values appear first.
 
-### Fix in `src/components/admin/ImageUpload.tsx`
+```sql
+ALTER TABLE public.blog_posts ADD COLUMN sort_order integer NOT NULL DEFAULT 0;
+```
 
-1. **Wrap `uploadFile` in `useCallback`** with `[onChange]` as dependency
-2. **Update `handleDrop` dependency array** to include `uploadFile` so it always calls the current version
-3. **Add a timeout safeguard** — if the upload takes longer than 30 seconds, reset `isUploading` and show an error toast, preventing the spinner from hanging forever
-4. **Add more specific error logging** to surface the actual Supabase error message in the toast description (e.g. "row-level security policy violation") so the real issue is visible to the admin
+### 2. Update public queries to sort by `sort_order`
+
+**`src/hooks/useBlogPosts.ts`**: Change `.order("published_at", { ascending: false })` to `.order("sort_order", { ascending: true }).order("published_at", { ascending: false })` so posts sort by manual order first, then by date as a tiebreaker.
+
+**`src/components/sections/BlogSection.tsx`**: Uses the same hook — no changes needed.
+
+### 3. Update admin queries
+
+**`src/hooks/useAdminPosts.ts`**: Change `.order("updated_at", { ascending: false })` to `.order("sort_order", { ascending: true }).order("updated_at", { ascending: false })`.
+
+### 4. Add up/down reorder buttons in admin dashboard
+
+**`src/pages/AdminDashboard.tsx`**:
+- Import `ChevronUp` and `ChevronDown` icons from lucide-react.
+- Add a new mutation hook `useUpdatePostOrder` (in `useAdminPosts.ts`) that updates the `sort_order` of two posts (swap values) in a single call.
+- Add up/down arrow buttons next to each post row. Clicking swaps the `sort_order` value with the adjacent post. First post hides "up", last post hides "down".
+
+### 5. New hook: `useUpdatePostOrder` in `src/hooks/useAdminPosts.ts`
+
+A mutation that takes two post IDs and their new `sort_order` values and performs two updates, then invalidates the admin-posts and blog-posts query keys.
 
