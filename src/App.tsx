@@ -16,6 +16,7 @@ import AdminMessages from "./pages/AdminMessages";
 import About from "./pages/About";
 import Conversation from "./pages/Conversation";
 import Podcast from "./pages/Podcast";
+import Contact from "./pages/Contact";
 import AdminLayout from "./components/admin/AdminLayout";
 import { ScrollToTop } from "./components/ScrollToTop";
 import IndexNavigation from "./components/IndexNavigation";
@@ -39,6 +40,7 @@ const App = () => (
             <Route path="/about" element={<About />} />
             <Route path="/podcast" element={<Podcast />} />
             <Route path="/conversation" element={<Conversation />} />
+            <Route path="/contact" element={<Contact />} />
             <Route path="/admin" element={<AdminLogin />} />
             <Route path="/admin" element={<AdminLayout />}>
               <Route path="dashboard" element={<AdminDashboard />} />

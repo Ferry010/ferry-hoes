@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Headphones, Mic2 } from "lucide-react";
 import podcastHero from "@/assets/podcast-hero.jpg";
@@ -309,13 +310,14 @@ const Podcast = () => {
                   </Button>
                 </div>
                 
-                <button
-                  onClick={openMessagePanel}
+                <Link
+                  to="/contact"
+                  state={{ from: "podcast" }}
                   className="inline-flex items-center gap-2 text-white/50 hover:text-white font-medium transition-colors group"
                 >
                   <span className="underline underline-offset-4">Got a topic suggestion?</span>
                   <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                </button>
+                </Link>
               </div>
             </div>
           </section>

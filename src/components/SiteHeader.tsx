@@ -102,10 +102,10 @@ const SiteHeader = () => {
 
               {/* CTA */}
               <Link
-                to="/conversation"
+                to="/contact"
                 className="ml-2 px-5 py-2 bg-primary text-primary-foreground font-sans text-sm font-medium rounded-md hover:brightness-[1.05] active:scale-[0.97] transition-all duration-120"
               >
-                Start the conversation
+                Get in touch
               </Link>
             </nav>
           )}
@@ -146,11 +146,11 @@ const SiteHeader = () => {
             ))}
 
             <Link
-              to="/conversation"
+              to="/contact"
               onClick={() => setMobileOpen(false)}
               className="mt-8 w-full text-center px-6 py-3.5 bg-primary text-primary-foreground font-sans text-base font-medium rounded-md hover:brightness-[1.05] active:scale-[0.97] transition-all duration-120"
             >
-              Start the conversation
+              Get in touch
             </Link>
           </div>
         </div>

@@ -137,6 +137,29 @@ const AdminMessages = () => {
 
               {expandedId === msg.id && (
                 <div className="px-5 pb-5 pl-14">
+                  {/* Extra fields */}
+                  {((msg as any).organization || (msg as any).inquiry_type || (msg as any).timeline) && (
+                    <div className="flex flex-wrap gap-2 mb-3">
+                      {(msg as any).inquiry_type && (
+                        <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full">
+                          {(msg as any).inquiry_type}
+                        </span>
+                      )}
+                      {(msg as any).organization && (
+                        <span className="text-xs bg-muted text-muted-foreground px-2 py-1 rounded-full">
+                          {(msg as any).organization}
+                        </span>
+                      )}
+                      {(msg as any).timeline && (
+                        <span className="text-xs bg-muted text-muted-foreground px-2 py-1 rounded-full">
+                          {(msg as any).timeline}
+                        </span>
+                      )}
+                    </div>
+                  )}
+                  {(msg as any).inquiry_other && (
+                    <p className="text-xs text-muted-foreground mb-2 italic">Other: {(msg as any).inquiry_other}</p>
+                  )}
                   <p className="text-sm text-foreground whitespace-pre-wrap mb-4">{msg.message}</p>
                   <div className="flex items-center gap-3">
                     <Button size="sm" variant="outline" asChild>
