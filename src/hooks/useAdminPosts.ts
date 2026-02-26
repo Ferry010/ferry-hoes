@@ -26,6 +26,7 @@ export function useAdminPosts() {
       const { data, error } = await supabase
         .from("blog_posts")
         .select("*")
+        .order("sort_order", { ascending: true })
         .order("updated_at", { ascending: false });
 
       if (error) throw error;
@@ -131,6 +132,27 @@ export function useDeletePost() {
         .eq("id", id);
 
       if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admin-posts"] });
+      queryClient.invalidateQueries({ queryKey: ["blog-posts"] });
+    },
+  });
+}
+
+// Swap sort_order between two posts
+export function useUpdatePostOrder() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (swaps: { id: string; sort_order: number }[]) => {
+      for (const swap of swaps) {
+        const { error } = await supabase
+          .from("blog_posts")
+          .update({ sort_order: swap.sort_order } as any)
+          .eq("id", swap.id);
+        if (error) throw error;
+      }
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["admin-posts"] });

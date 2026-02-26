@@ -1,13 +1,27 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { useAdminPosts, useDeletePost } from "@/hooks/useAdminPosts";
+import { useAdminPosts, useDeletePost, useUpdatePostOrder } from "@/hooks/useAdminPosts";
 import { formatPostDate } from "@/hooks/useBlogPosts";
-import { Plus, Edit, Trash2, Eye, EyeOff } from "lucide-react";
+import { Plus, Edit, Trash2, Eye, EyeOff, ChevronUp, ChevronDown } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 
 const AdminDashboard = () => {
   const { data: posts, isLoading } = useAdminPosts();
   const deletePost = useDeletePost();
+  const updateOrder = useUpdatePostOrder();
+
+  const handleMove = async (index: number, direction: "up" | "down") => {
+    if (!posts) return;
+    const targetIndex = direction === "up" ? index - 1 : index + 1;
+    if (targetIndex < 0 || targetIndex >= posts.length) return;
+
+    const a = posts[index];
+    const b = posts[targetIndex];
+    await updateOrder.mutateAsync([
+      { id: a.id, sort_order: (b as any).sort_order ?? targetIndex },
+      { id: b.id, sort_order: (a as any).sort_order ?? index },
+    ]);
+  };
 
   const handleDelete = async (id: string, title: string) => {
     if (!confirm(`Are you sure you want to delete "${title}"?`)) return;
@@ -63,7 +77,7 @@ const AdminDashboard = () => {
         </div>
       ) : posts && posts.length > 0 ? (
         <div className="space-y-4">
-          {posts.map((post) => (
+          {posts.map((post, idx) => (
             <div
               key={post.id}
               className="bg-card rounded-lg p-6 border border-border hover:border-accent/30 transition-colors"
@@ -102,7 +116,25 @@ const AdminDashboard = () => {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => handleMove(idx, "up")}
+                    disabled={idx === 0 || updateOrder.isPending}
+                    className={idx === 0 ? "invisible" : ""}
+                  >
+                    <ChevronUp className="w-4 h-4" />
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => handleMove(idx, "down")}
+                    disabled={idx === posts.length - 1 || updateOrder.isPending}
+                    className={idx === posts.length - 1 ? "invisible" : ""}
+                  >
+                    <ChevronDown className="w-4 h-4" />
+                  </Button>
                   <Button variant="ghost" size="sm" asChild>
                     <Link to={`/admin/posts/${post.id}`}>
                       <Edit className="w-4 h-4" />
