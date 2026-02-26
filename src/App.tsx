@@ -15,6 +15,7 @@ import PostEditor from "./pages/PostEditor";
 import AdminMessages from "./pages/AdminMessages";
 import About from "./pages/About";
 import Conversation from "./pages/Conversation";
+import Podcast from "./pages/Podcast";
 import AdminLayout from "./components/admin/AdminLayout";
 import { ScrollToTop } from "./components/ScrollToTop";
 
@@ -34,6 +35,7 @@ const App = () => (
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/speaking" element={<Speaking />} />
             <Route path="/about" element={<About />} />
+            <Route path="/podcast" element={<Podcast />} />
             <Route path="/conversation" element={<Conversation />} />
             <Route path="/admin" element={<AdminLogin />} />
             <Route path="/admin" element={<AdminLayout />}>
