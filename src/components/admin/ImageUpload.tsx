@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Upload, X, Image as ImageIcon } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
@@ -11,8 +11,16 @@ interface ImageUploadProps {
 const ImageUpload = ({ value, onChange }: ImageUploadProps) => {
   const [isUploading, setIsUploading] = useState(false);
   const [dragActive, setDragActive] = useState(false);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const uploadFile = async (file: File) => {
+  // Clear timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
+
+  const uploadFile = useCallback(async (file: File) => {
     if (!file.type.startsWith("image/")) {
       toast({
         title: "Invalid file type",
@@ -32,6 +40,16 @@ const ImageUpload = ({ value, onChange }: ImageUploadProps) => {
     }
 
     setIsUploading(true);
+
+    // 30-second timeout safeguard
+    timeoutRef.current = setTimeout(() => {
+      setIsUploading(false);
+      toast({
+        title: "Upload timed out",
+        description: "The upload took too long. Please try again.",
+        variant: "destructive",
+      });
+    }, 30000);
 
     try {
       const fileExt = file.name.split(".").pop();
@@ -53,17 +71,18 @@ const ImageUpload = ({ value, onChange }: ImageUploadProps) => {
         title: "Image uploaded",
         description: "Your header image has been uploaded successfully.",
       });
-    } catch (error) {
+    } catch (error: any) {
       console.error("Upload error:", error);
       toast({
         title: "Upload failed",
-        description: "Something went wrong. Please try again.",
+        description: error?.message || "Something went wrong. Please try again.",
         variant: "destructive",
       });
     } finally {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
       setIsUploading(false);
     }
-  };
+  }, [onChange]);
 
   const handleDrag = useCallback((e: React.DragEvent) => {
     e.preventDefault();
@@ -83,13 +102,13 @@ const ImageUpload = ({ value, onChange }: ImageUploadProps) => {
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
       uploadFile(e.dataTransfer.files[0]);
     }
-  }, []);
+  }, [uploadFile]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       uploadFile(e.target.files[0]);
     }
-  };
+  }, [uploadFile]);
 
   const removeImage = () => {
     onChange(undefined);
