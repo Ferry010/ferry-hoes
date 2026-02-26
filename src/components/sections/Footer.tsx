@@ -32,9 +32,6 @@ const Footer = () => {
               <Link to="/podcast" className="text-white/70 hover:text-white transition-colors">
                 Podcast
               </Link>
-              <a href="#" className="text-white/70 hover:text-white transition-colors">
-                Videos
-              </a>
               <button 
                 onClick={openMessagePanel}
                 className="text-white/70 hover:text-white transition-colors inline-flex items-center gap-1"
