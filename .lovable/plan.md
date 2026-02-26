@@ -1,20 +1,16 @@
 
 
-## Plan: Two-column layout — cards left, form right
+## Plan: Fix blog image upload hanging issue
 
-### Change in `src/pages/Contact.tsx`
+### Root cause analysis
+The `handleDrop` callback uses `useCallback` with an empty dependency array `[]`, which creates a stale closure over `uploadFile`. When `uploadFile` is called from the stale closure, state updates (like `setIsUploading(false)` in `finally`) may not work correctly, causing the spinner to hang indefinitely.
 
-Restructure the page below the header into a two-column grid layout:
+Additionally, the file input `onChange` handler (`handleChange`) is not wrapped in `useCallback` but calls the same `uploadFile` — both paths may be affected if the component re-renders.
 
-- **Left column**: The two info cards (Press + Book Ferry To Speak), stacked vertically
-- **Right column**: The contact form
+### Fix in `src/components/admin/ImageUpload.tsx`
 
-**Layout details:**
-- Wrap cards and form in a single `container max-w-6xl` section with `grid md:grid-cols-[1fr_2fr] gap-8 md:gap-12`
-- Left column contains the two cards stacked with `space-y-6`
-- Right column contains the form (or the success message)
-- On mobile, cards stack above the form (single column)
-- Remove the separate Info Cards `<section>` and merge into the Form section
-- Widen the container from `max-w-2xl` to `max-w-5xl` or `max-w-6xl` to accommodate the side-by-side layout
-- Keep the header at `max-w-2xl` centered as-is
+1. **Wrap `uploadFile` in `useCallback`** with `[onChange]` as dependency
+2. **Update `handleDrop` dependency array** to include `uploadFile` so it always calls the current version
+3. **Add a timeout safeguard** — if the upload takes longer than 30 seconds, reset `isUploading` and show an error toast, preventing the spinner from hanging forever
+4. **Add more specific error logging** to surface the actual Supabase error message in the toast description (e.g. "row-level security policy violation") so the real issue is visible to the admin
 
