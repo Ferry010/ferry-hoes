@@ -26,6 +26,7 @@ const allEpisodes = [
     title: "Not a Diversity Checkbox: The Real Work of Inclusive Leadership",
     guest: "Simone Moissidis",
     duration: "65 min",
+    description: "Simone Moissidis shares what inclusive leadership really looks like beyond checkboxes and quotas. We explore how organizations can move from performative diversity to genuine belonging, and why the hardest conversations are often the most important ones.",
     spotifyUrl: "https://podcasters.spotify.com/pod/show/thehumanerapodcast/episodes/Not-a-Diversity-Checkbox-The-Real-Work-of-Inclusive-Leadership-with-Simone-Moissidis-e34fcs3",
   },
   {
@@ -210,7 +211,7 @@ const Podcast = () => {
 
                     <div>
                       <div className="flex items-start justify-between mb-6 relative z-10">
-                        <span className="inline-flex items-center gap-2 text-sm font-semibold text-[#1DB954] bg-[#1DB954]/10 px-3 py-1 rounded-full">
+                        <span className="inline-flex items-center gap-2 text-sm font-semibold text-accent bg-accent/10 px-3 py-1 rounded-full">
                           <Mic2 className="h-3.5 w-3.5" />
                           Latest Episode
                         </span>
@@ -223,8 +224,11 @@ const Podcast = () => {
                         {allEpisodes[0].title}
                       </h3>
                       
-                      <p className="text-lg text-muted-foreground mb-8">
+                      <p className="text-lg text-muted-foreground mb-4">
                         with {allEpisodes[0].guest}
+                      </p>
+                      <p className="text-base text-muted-foreground/80 leading-relaxed mb-8">
+                        {allEpisodes[0].description}
                       </p>
                     </div>
                     
