@@ -11,7 +11,6 @@ const NAV_ITEMS = [
   { label: "Podcast", route: "/podcast" },
   { label: "Blog", route: "/blog" },
   { label: "The Book", route: "/#book" },
-  { label: "Get in Touch", route: "/contact" },
 ];
 
 const SiteHeader = () => {
