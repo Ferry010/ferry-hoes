@@ -5,12 +5,13 @@ import { Menu, X } from "lucide-react";
 import logoBlack from "@/assets/ferry-hoes-logo-black.png";
 
 const NAV_ITEMS = [
-  { label: "On Stage", route: "/speaking" },
+  { label: "My Story", route: "/about" },
   { label: "The Idea", route: "/#brand-humanizing" },
-  { label: "The Book", route: "/#book" },
+  { label: "On Stage", route: "/speaking" },
   { label: "Podcast", route: "/podcast" },
   { label: "Blog", route: "/blog" },
-  { label: "The Story", route: "/about" },
+  { label: "The Book", route: "/#book" },
+  { label: "Get in Touch", route: "/contact" },
 ];
 
 const SiteHeader = () => {
