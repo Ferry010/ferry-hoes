@@ -133,53 +133,53 @@ const Contact = () => {
           </div>
         </section>
 
-        {/* Two-column: cards + form */}
-        <section className="pb-24 md:pb-32">
-          <div className="container px-6 md:px-8 max-w-6xl mx-auto grid md:grid-cols-[1fr_2fr] gap-8 md:gap-12">
-            {/* Left column — info cards */}
-            <div className="space-y-6 md:sticky md:top-32 md:self-start">
-              {/* Press card */}
-              <div className="rounded-lg border-l-4 border-l-primary bg-brand-teal-light p-6 space-y-4">
-                <h2 className="font-display text-lg font-semibold text-foreground">Press</h2>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  For all interviews, media opportunities, and anything else press-related, please use this option.
-                </p>
-                <Button
-                  variant="default"
-                  size="sm"
-                  onClick={() => {
-                    updateField("inquiryType", "press");
-                    document.getElementById("contact-form")?.scrollIntoView({ behavior: "smooth" });
-                  }}
-                >
-                  Press enquiry
-                </Button>
-              </div>
-
-              {/* Book to speak card */}
-              <div className="rounded-lg border-l-4 border-l-accent bg-brand-coral-light p-6 space-y-4">
-                <h2 className="font-display text-lg font-semibold text-foreground">Book Ferry To Speak</h2>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  I'm exclusively represented by Speakers Academy. Go here to book me to speak at your next event.
-                </p>
-                <Button
-                  size="sm"
-                  className="bg-accent text-accent-foreground hover:bg-accent/90"
-                  asChild
-                >
-                  <a
-                    href="https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Book via Speakers Academy
-                  </a>
-                </Button>
-              </div>
+        {/* Info Cards */}
+        <section className="pb-12 md:pb-16">
+          <div className="container px-6 md:px-8 max-w-2xl mx-auto grid gap-6 sm:grid-cols-2">
+            {/* Press card */}
+            <div className="rounded-lg border-l-4 border-l-primary bg-brand-teal-light p-6 space-y-4">
+              <h2 className="font-display text-xl font-semibold text-foreground">Press</h2>
+              <p className="text-muted-foreground text-base leading-relaxed">
+                For all interviews, media opportunities, and anything else press-related, please use this option.
+              </p>
+              <Button
+                variant="default"
+                size="sm"
+                onClick={() => {
+                  updateField("inquiryType", "press");
+                  document.getElementById("contact-form")?.scrollIntoView({ behavior: "smooth" });
+                }}
+              >
+                Press enquiry
+              </Button>
             </div>
 
-            {/* Right column — form */}
-            <div>
+            {/* Book to speak card */}
+            <div className="rounded-lg border-l-4 border-l-accent bg-brand-coral-light p-6 space-y-4">
+              <h2 className="font-display text-xl font-semibold text-foreground">Book Ferry To Speak</h2>
+              <p className="text-muted-foreground text-base leading-relaxed">
+                I'm exclusively represented by Speakers Academy. Go here to book me to speak at your next event.
+              </p>
+              <Button
+                size="sm"
+                className="bg-accent text-accent-foreground hover:bg-accent/90"
+                asChild
+              >
+                <a
+                  href="https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Book via Speakers Academy
+                </a>
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        {/* Form / Confirmation */}
+        <section className="pb-24 md:pb-32">
+          <div className="container px-6 md:px-8 max-w-2xl mx-auto">
               {isSent ? (
                 <div className="animate-fade-in py-16">
                   <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-4">
@@ -334,7 +334,6 @@ const Contact = () => {
                   </Button>
                 </form>
               )}
-            </div>
           </div>
         </section>
       </main>
