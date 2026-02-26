@@ -1,14 +1,16 @@
 
 
-## Single-Row Image Collage
+## Fix Broken Spotify Episode Links
 
-Replace the absolute-positioned overlapping collage with a simple horizontal flex row of all 5 images, each in a taller card for better cropping.
+The individual episode links use fake Spotify episode URLs constructed from Anchor IDs (e.g., `e34fcs3`). These won't resolve on Spotify. The RSS feed provides the correct links via `podcasters.spotify.com`.
 
-### Changes in `src/pages/About.tsx`
+### Changes in `src/components/sections/PodcastSection.tsx`
 
-**Desktop collage (lines 35-56)**: Replace the `relative h-[440px]` absolute-positioned layout with a `flex gap-4` row. Each image gets a `flex-1 h-[280px] lg:h-[320px] rounded-2xl overflow-hidden shadow-lg` container with subtle alternating rotations kept. Images use `object-cover object-center`.
+Update the `spotifyUrl` values in the `featuredEpisodes` array to use the actual links from the RSS feed:
 
-**Mobile grid (lines 58-70)**: Change to a horizontal scroll row (`flex gap-3 overflow-x-auto snap-x`) showing all 5 images at `w-[70vw] h-48 flex-shrink-0 snap-center` for swipeable browsing.
+- Episode 1 (Simone Moissidis): `https://podcasters.spotify.com/pod/show/thehumanerapodcast/episodes/Not-a-Diversity-Checkbox-The-Real-Work-of-Inclusive-Leadership-with-Simone-Moissidis-e34fcs3`
+- Episode 2 (Ruben Treurniet): `https://podcasters.spotify.com/pod/show/thehumanerapodcast/episodes/The-Power-of-Talking-to-People-You-Disagree-With-with-Ruben-Treurniet-e30mai6`
+- Episode 3 (Marco Boomsma): `https://podcasters.spotify.com/pod/show/thehumanerapodcast/episodes/From-Local-to-Global-The-New-Era-of-Talent-Acquisition-with-Marco-Boomsma-from-Bullhorn-e2lthrj`
 
-**Container**: Widen from `max-w-4xl` to `max-w-6xl` to give the row more space.
+The main show URL (`https://open.spotify.com/show/6eGkXe767cYZ5Rw627Xpgu`) and Apple Podcasts URL appear correct and should work as-is.
 
