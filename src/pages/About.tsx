@@ -30,39 +30,37 @@ const About = () => {
           <div className="container px-6 md:px-8">
             <div className="flex flex-col items-center">
               {/* Image Collage */}
-              <div className="w-full max-w-4xl relative mb-12">
-                {/* Desktop collage */}
-                <div className="hidden md:block relative h-[440px] lg:h-[480px]">
-                  <div className="absolute top-0 left-[5%] w-[38%] h-[55%] rounded-2xl overflow-hidden shadow-lg rotate-[-2deg] animate-fade-in" style={{ animationDelay: "0.1s", animationFillMode: "both" }}>
-                    <img src={ferryBrandHumanizing} alt="Ferry Hoes with Brand Humanizing banner" className="w-full h-full object-cover object-center" />
-                    <div className="brand-hero-overlay" />
-                  </div>
-                  <div className="absolute top-0 right-[22%] w-[28%] h-[48%] rounded-2xl overflow-hidden shadow-lg rotate-[1.5deg] animate-fade-in" style={{ animationDelay: "0.2s", animationFillMode: "both" }}>
-                    <img src={ferrySpeakingAudience} alt="Ferry Hoes speaking to audience" className="w-full h-full object-cover object-top" />
-                    <div className="brand-hero-overlay" />
-                  </div>
-                  <div className="absolute top-[10%] right-[2%] w-[22%] h-[40%] rounded-2xl overflow-hidden shadow-lg rotate-[-1deg] animate-fade-in" style={{ animationDelay: "0.3s", animationFillMode: "both" }}>
-                    <img src={ferryPresenting} alt="Ferry Hoes presenting" className="w-full h-full object-cover object-top" />
-                    <div className="brand-hero-overlay" />
-                  </div>
-                  <div className="absolute bottom-[5%] left-[15%] w-[30%] h-[48%] rounded-2xl overflow-hidden shadow-lg rotate-[2deg] animate-fade-in" style={{ animationDelay: "0.4s", animationFillMode: "both" }}>
-                    <img src={ferryBookstore} alt="Ferry Hoes in a bookstore" className="w-full h-full object-cover object-center" />
-                    <div className="brand-hero-overlay" />
-                  </div>
-                  <div className="absolute bottom-[0%] right-[15%] w-[28%] h-[42%] rounded-2xl overflow-hidden shadow-lg rotate-[1deg] animate-fade-in" style={{ animationDelay: "0.5s", animationFillMode: "both" }}>
-                    <img src={ferryBts} alt="Ferry Hoes behind the scenes" className="w-full h-full object-cover object-center" />
-                    <div className="brand-hero-overlay" />
-                  </div>
+              <div className="w-full max-w-6xl relative mb-12">
+                {/* Desktop: single row */}
+                <div className="hidden md:flex gap-4">
+                  {[
+                    { src: ferryBrandHumanizing, alt: "Ferry Hoes with Brand Humanizing banner", rotate: "-1.5deg" },
+                    { src: ferrySpeakingAudience, alt: "Ferry Hoes speaking to audience", rotate: "1deg" },
+                    { src: ferryPresenting, alt: "Ferry Hoes presenting", rotate: "-0.5deg" },
+                    { src: ferryBookstore, alt: "Ferry Hoes in a bookstore", rotate: "1.5deg" },
+                    { src: ferryBts, alt: "Ferry Hoes behind the scenes", rotate: "-1deg" },
+                  ].map((img, i) => (
+                    <div
+                      key={i}
+                      className="flex-1 h-[280px] lg:h-[320px] rounded-2xl overflow-hidden shadow-lg relative animate-fade-in"
+                      style={{ animationDelay: `${i * 0.1}s`, animationFillMode: "both", transform: `rotate(${img.rotate})` }}
+                    >
+                      <img src={img.src} alt={img.alt} className="w-full h-full object-cover object-center" />
+                      <div className="brand-hero-overlay" />
+                    </div>
+                  ))}
                 </div>
 
-                {/* Mobile compact grid */}
-                <div className="md:hidden grid grid-cols-2 gap-3">
+                {/* Mobile: horizontal scroll */}
+                <div className="md:hidden flex gap-3 overflow-x-auto snap-x snap-mandatory pb-2 -mx-2 px-2">
                   {[
-                    { src: ferryBrandHumanizing, alt: "Ferry with Brand Humanizing banner", span: "col-span-2 h-48" },
-                    { src: ferrySpeakingAudience, alt: "Ferry speaking to audience", span: "h-36" },
-                    { src: ferryBookstore, alt: "Ferry in bookstore", span: "h-36" },
+                    { src: ferryBrandHumanizing, alt: "Ferry with Brand Humanizing banner" },
+                    { src: ferrySpeakingAudience, alt: "Ferry speaking to audience" },
+                    { src: ferryPresenting, alt: "Ferry presenting" },
+                    { src: ferryBookstore, alt: "Ferry in bookstore" },
+                    { src: ferryBts, alt: "Ferry behind the scenes" },
                   ].map((img, i) => (
-                    <div key={i} className={`${img.span} rounded-2xl overflow-hidden shadow-lg relative animate-fade-in`} style={{ animationDelay: `${i * 0.1}s`, animationFillMode: "both" }}>
+                    <div key={i} className="w-[70vw] h-48 flex-shrink-0 snap-center rounded-2xl overflow-hidden shadow-lg relative animate-fade-in" style={{ animationDelay: `${i * 0.1}s`, animationFillMode: "both" }}>
                       <img src={img.src} alt={img.alt} className="w-full h-full object-cover object-center" />
                       <div className="brand-hero-overlay" />
                     </div>
