@@ -1,7 +1,13 @@
-import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+  CarouselDots,
+} from "@/components/ui/carousel";
 import { ArrowRight, Headphones } from "lucide-react";
-import { Skeleton } from "@/components/ui/skeleton";
 
 // Spotify icon component
 const SpotifyIcon = ({ className }: { className?: string }) => (
@@ -17,205 +23,175 @@ const ApplePodcastsIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-interface Episode {
-  title: string;
-  link: string;
-  duration: string;
-  pubDate: string;
-}
+const featuredEpisodes = [
+  {
+    title: "Not a Diversity Checkbox: The Real Work of Inclusive Leadership",
+    guest: "Simone Moissidis",
+    duration: "65 min",
+    spotifyUrl: "https://open.spotify.com/episode/e34fcs3",
+  },
+  {
+    title: "The Power of Talking to People You Disagree With",
+    guest: "Ruben Treurniet",
+    duration: "73 min",
+    spotifyUrl: "https://open.spotify.com/episode/e30mai6",
+  },
+  {
+    title: "From Local to Global: The New Era of Talent Acquisition",
+    guest: "Marco Boomsma",
+    duration: "71 min",
+    spotifyUrl: "https://open.spotify.com/episode/e2lthrj",
+  },
+];
 
 const SPOTIFY_SHOW_URL = "https://open.spotify.com/show/6eGkXe767cYZ5Rw627Xpgu";
 const APPLE_PODCASTS_URL = "https://podcasts.apple.com/nl/podcast/the-human-era-podcast/id1598552331";
-const RSS_URL = "https://anchor.fm/s/757f60b4/podcast/rss";
-
-const parseDuration = (raw: string): string => {
-  // Could be "HH:MM:SS" or seconds
-  if (raw.includes(":")) {
-    const parts = raw.split(":");
-    if (parts.length === 3) {
-      const h = parseInt(parts[0]);
-      const m = parseInt(parts[1]);
-      return h > 0 ? `${h}h ${m}m` : `${m} min`;
-    }
-    return raw;
-  }
-  const secs = parseInt(raw);
-  if (isNaN(secs)) return raw;
-  const mins = Math.round(secs / 60);
-  return mins >= 60 ? `${Math.floor(mins / 60)}h ${mins % 60}m` : `${mins} min`;
-};
 
 const PodcastSection = () => {
-  const [episodes, setEpisodes] = useState<Episode[]>([]);
-  const [coverUrl, setCoverUrl] = useState<string>("");
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-
-  useEffect(() => {
-    const fetchRSS = async () => {
-      try {
-        const res = await fetch(RSS_URL);
-        const text = await res.text();
-        const parser = new DOMParser();
-        const xml = parser.parseFromString(text, "text/xml");
-
-        // Get cover art
-        const channelImage = xml.querySelector("channel > image > url")?.textContent
-          || xml.querySelector("channel > *|image")?.getAttribute("href")
-          || "";
-        setCoverUrl(channelImage);
-
-        const items = xml.querySelectorAll("item");
-        const parsed: Episode[] = [];
-        for (let i = 0; i < Math.min(items.length, 5); i++) {
-          const item = items[i];
-          const title = item.querySelector("title")?.textContent || "Untitled";
-          const link = item.querySelector("link")?.textContent || SPOTIFY_SHOW_URL;
-          const durationEl = item.getElementsByTagNameNS("http://www.itunes.com/dtds/podcast-1.0.dtd", "duration")[0];
-          const duration = durationEl?.textContent || "";
-          const pubDate = item.querySelector("pubDate")?.textContent || "";
-          parsed.push({ title, link, duration: parseDuration(duration), pubDate });
-        }
-        setEpisodes(parsed);
-      } catch {
-        setError(true);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchRSS();
-  }, []);
-
   const openMessagePanel = () => {
     const bubble = document.querySelector('[aria-label="Send a message"]') as HTMLButtonElement;
     bubble?.click();
   };
 
   return (
-    <section className="min-h-screen relative overflow-hidden bg-card/95 backdrop-blur-sm">
-      {/* Decorative elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 -right-20 w-80 h-80 bg-primary/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 -left-20 w-64 h-64 bg-accent/10 rounded-full blur-3xl" />
-      </div>
-
-      {/* Two-column grid */}
-      <div className="grid md:grid-cols-2 min-h-screen">
-        {/* Left: Cover art + branding */}
-        <div className="relative min-h-[400px] md:min-h-screen flex flex-col items-center justify-center px-8 py-16 bg-gradient-to-br from-background to-primary/5">
-          {/* Cover art */}
-          {coverUrl ? (
-            <img
-              src={coverUrl}
-              alt="The Human Era Podcast cover art"
-              className="w-64 h-64 md:w-80 md:h-80 rounded-2xl shadow-lg object-cover mb-8"
-            />
-          ) : (
-            <div className="w-64 h-64 md:w-80 md:h-80 rounded-2xl bg-muted/30 flex items-center justify-center mb-8">
-              <Headphones className="h-20 w-20 text-muted-foreground/40" />
-            </div>
-          )}
-
-          {/* Platform buttons */}
-          <div className="flex flex-wrap justify-center gap-3">
-            <Button
-              size="lg"
-              className="rounded-full px-6 bg-[#1DB954] hover:bg-[#1DB954]/90"
-              asChild
-            >
-              <a href={SPOTIFY_SHOW_URL} target="_blank" rel="noopener noreferrer">
-                <SpotifyIcon className="mr-2 h-5 w-5" />
-                Spotify
-              </a>
-            </Button>
-
-            <Button
-              size="lg"
-              variant="outline"
-              className="rounded-full px-6 border-[#9933FF] text-[#9933FF] hover:bg-[#9933FF]/10"
-              asChild
-            >
-              <a href={APPLE_PODCASTS_URL} target="_blank" rel="noopener noreferrer">
-                <ApplePodcastsIcon className="mr-2 h-5 w-5" />
-                Apple Podcasts
-              </a>
-            </Button>
-          </div>
-        </div>
-
-        {/* Right: Content + episode list */}
-        <div className="flex flex-col justify-center px-6 md:px-12 lg:px-16 py-16 md:py-0 relative z-10">
-          {/* Badge */}
-          <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-8 w-fit">
-            <Headphones className="h-4 w-4" />
-            The Podcast
-          </span>
-
-          {/* Title */}
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 text-foreground">
-            Conversations that{" "}
-            <span className="text-primary">matter</span>
-          </h2>
-
-          {/* Description */}
-          <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl mb-10">
-            Deep dives with founders, artists, scientists, and anyone doing interesting work
-            at the intersection of humans and technology. No scripts. No soundbites. Just real talk.
-          </p>
-
-          {/* Episode list */}
-          <div className="space-y-3 mb-10">
-            {loading ? (
-              Array.from({ length: 4 }).map((_, i) => (
-                <div key={i} className="flex items-center gap-4 p-4 rounded-xl bg-background/60">
-                  <Skeleton className="h-5 w-5 rounded-full flex-shrink-0" />
-                  <div className="flex-1 space-y-2">
-                    <Skeleton className="h-4 w-3/4" />
-                    <Skeleton className="h-3 w-1/4" />
-                  </div>
-                </div>
-              ))
-            ) : error ? (
-              <p className="text-muted-foreground">
-                Couldn't load episodes — listen on{" "}
-                <a href={SPOTIFY_SHOW_URL} target="_blank" rel="noopener noreferrer" className="text-primary underline">
-                  Spotify
-                </a>{" "}instead.
-              </p>
-            ) : (
-              episodes.map((ep) => (
-                <a
-                  key={ep.title}
-                  href={ep.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-start gap-4 p-4 rounded-xl bg-background/60 border-l-2 border-[#1DB954]/30 hover:border-[#1DB954] hover:shadow-soft transition-all duration-200 hover:-translate-y-0.5"
-                >
-                  <SpotifyIcon className="h-5 w-5 text-[#1DB954]/60 group-hover:text-[#1DB954] flex-shrink-0 mt-0.5 transition-colors" />
-                  <div className="flex-1 min-w-0">
-                    <h3 className="font-medium text-foreground group-hover:text-primary transition-colors line-clamp-2 text-sm md:text-base">
-                      {ep.title}
-                    </h3>
-                    {ep.duration && (
-                      <span className="text-xs text-muted-foreground mt-1 block">{ep.duration}</span>
-                    )}
-                  </div>
-                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all flex-shrink-0 mt-1" />
-                </a>
-              ))
-            )}
+    <section className="py-24 md:py-32 bg-card/95 backdrop-blur-sm overflow-hidden relative">
+      <div className="container px-6 md:px-8">
+        <div className="max-w-6xl mx-auto">
+          {/* Header */}
+          <div className="text-center mb-16">
+            <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-6">
+              <Headphones className="h-4 w-4" />
+              The Podcast
+            </span>
+            
+            <h2 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6">
+              Conversations that <span className="text-primary">matter</span>
+            </h2>
+            
+            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+              Deep dives with founders, artists, scientists, and anyone doing interesting work 
+              at the intersection of humans and technology. No scripts. No soundbites. Just real talk.
+            </p>
           </div>
 
-          {/* Micro-engagement */}
-          <button
-            onClick={openMessagePanel}
-            className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary font-medium transition-colors group w-fit"
+          {/* Episode cards carousel with Spotify embeds */}
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="w-full mb-12"
           >
-            <span className="underline underline-offset-4">Got a topic suggestion?</span>
-            <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-          </button>
+            <CarouselContent className="-ml-6 py-4">
+              {featuredEpisodes.map((episode) => (
+                <CarouselItem
+                  key={episode.title} 
+                  className="pl-6 basis-full md:basis-1/2"
+                >
+                  <article 
+                    className="group relative overflow-hidden bg-gradient-to-br from-background to-[#1DB954]/[0.03] rounded-2xl p-8 md:p-10 shadow-soft hover:shadow-soft-lg transition-all duration-300 border-l-2 border-[#1DB954]/30 hover:border-[#1DB954] border-t border-r border-b border-t-transparent border-r-transparent border-b-transparent hover:border-t-primary/20 hover:border-r-primary/20 hover:border-b-primary/20 h-full"
+                  >
+                    {/* Decorative waveform background */}
+                    <svg
+                      aria-hidden="true"
+                      className="absolute bottom-4 right-4 w-32 h-20 text-muted-foreground opacity-[0.06] group-hover:opacity-[0.12] transition-opacity duration-500"
+                      viewBox="0 0 120 60"
+                      fill="currentColor"
+                    >
+                      <rect x="8" y="20" width="6" height="25" rx="3" />
+                      <rect x="22" y="10" width="6" height="40" rx="3" />
+                      <rect x="36" y="25" width="6" height="20" rx="3" />
+                      <rect x="50" y="5" width="6" height="50" rx="3" />
+                      <rect x="64" y="18" width="6" height="30" rx="3" />
+                      <rect x="78" y="12" width="6" height="38" rx="3" />
+                      <rect x="92" y="22" width="6" height="22" rx="3" />
+                      <rect x="106" y="28" width="6" height="15" rx="3" />
+                    </svg>
+
+                    <div className="flex items-start justify-between mb-6 relative z-10">
+                      <span className="text-sm font-medium text-primary">
+                        Episode
+                      </span>
+                      <span className="inline-flex items-center gap-1.5 text-sm text-muted-foreground">
+                        {/* Mini equalizer bars */}
+                        <svg aria-hidden="true" className="w-3.5 h-3.5 text-[#1DB954]/60" viewBox="0 0 14 14" fill="currentColor">
+                          <rect x="1" y="6" width="2" height="6" rx="1" />
+                          <rect x="4.5" y="3" width="2" height="9" rx="1" />
+                          <rect x="8" y="5" width="2" height="7" rx="1" />
+                          <rect x="11.5" y="7" width="2" height="5" rx="1" />
+                        </svg>
+                        {episode.duration}
+                      </span>
+                    </div>
+                    
+                    <h3 className="font-display text-2xl font-semibold text-foreground mb-3">
+                      {episode.title}
+                    </h3>
+                    
+                    <p className="text-base text-muted-foreground mb-6">
+                      with {episode.guest}
+                    </p>
+                    
+                    <a 
+                      href={episode.spotifyUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-[#1DB954] font-medium hover:underline transition-colors"
+                    >
+                      <SpotifyIcon className="h-5 w-5" />
+                      Listen on Spotify
+                      <ArrowRight className="h-4 w-4" />
+                    </a>
+                  </article>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="left-0 md:-left-12" />
+            <CarouselNext className="right-0 md:-right-12" />
+            <CarouselDots className="mt-8" />
+          </Carousel>
+
+          {/* Platform CTAs */}
+          <div className="text-center">
+            <div className="flex flex-wrap justify-center gap-4 mb-6">
+              <Button 
+                size="lg" 
+                className="rounded-full px-8 bg-[#1DB954] hover:bg-[#1DB954]/90"
+                asChild
+              >
+                <a href={SPOTIFY_SHOW_URL} target="_blank" rel="noopener noreferrer">
+                  <SpotifyIcon className="mr-2 h-5 w-5" />
+                  Listen on Spotify
+                </a>
+              </Button>
+              
+              <Button 
+                size="lg" 
+                variant="outline"
+                className="rounded-full px-8 border-[#9933FF] text-[#9933FF] hover:bg-[#9933FF]/10"
+                asChild
+              >
+                <a href={APPLE_PODCASTS_URL} target="_blank" rel="noopener noreferrer">
+                  <ApplePodcastsIcon className="mr-2 h-5 w-5" />
+                  Listen on Apple
+                </a>
+              </Button>
+            </div>
+            
+            {/* Micro-engagement */}
+            <div>
+              <button
+                onClick={openMessagePanel}
+                className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary font-medium transition-colors group"
+              >
+                <span className="underline underline-offset-4">Got a topic suggestion?</span>
+                <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
+
     </section>
   );
 };
