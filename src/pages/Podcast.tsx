@@ -47,6 +47,12 @@ const allEpisodes = [
     duration: "58 min",
     spotifyUrl: "https://podcasters.spotify.com/pod/show/thehumanerapodcast",
   },
+  {
+    title: "Why Great Leaders Listen More Than They Talk",
+    guest: "Daan Roosegaarde",
+    duration: "62 min",
+    spotifyUrl: "https://podcasters.spotify.com/pod/show/thehumanerapodcast",
+  },
 ];
 
 const Podcast = () => {
@@ -147,38 +153,25 @@ const Podcast = () => {
 
         <main>
           {/* About the Podcast */}
-          <section className="py-24 md:py-32 bg-secondary/30">
+          <section className="py-16 md:py-20 bg-secondary/30">
             <div className="container px-6 md:px-8">
               <div className="max-w-3xl mx-auto text-center">
                 <span className="text-accent font-medium text-sm mb-2 block">About the show</span>
                 <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-foreground">
                   No scripts. No soundbites.
                 </h2>
-                <div className="space-y-4 text-muted-foreground text-lg leading-relaxed">
-                  <p>
-                    The Human Era Podcast is where Ferry Hoes sits down with fascinating people 
-                    to explore the big questions about technology, leadership, and what it means 
-                    to be human in a rapidly changing world.
-                  </p>
-                  <p>
-                    Each episode is an honest, unscripted conversation. No pre-written questions, 
-                    no rehearsed answers. Just two people thinking out loud about the things that matter.
-                  </p>
-                  <p>
-                    Whether you're a founder, a creative, or simply curious about where the world 
-                    is heading, these conversations will challenge your assumptions and leave you 
-                    with new ideas to explore.
-                  </p>
-                </div>
+                <p className="text-muted-foreground text-lg leading-relaxed">
+                  Honest, unscripted conversations with fascinating people about technology, leadership, and what it means to be human. No pre-written questions. Just thinking out loud about the things that matter.
+                </p>
               </div>
             </div>
           </section>
 
           {/* Episodes Grid */}
-          <section className="py-24 md:py-32 bg-background">
+          <section className="pt-12 md:pt-16 pb-24 md:pb-32 bg-background">
             <div className="container px-6 md:px-8">
               <div className="max-w-6xl mx-auto">
-                <div className="text-center mb-16">
+                <div className="text-center mb-10">
                   <span className="text-accent font-medium text-sm mb-2 block">Episodes</span>
                   <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-foreground">
                     Recent conversations
@@ -188,10 +181,10 @@ const Podcast = () => {
                   </p>
                 </div>
 
-                <div className="space-y-8">
-                  {/* Featured latest episode */}
+                <div className="grid gap-6 md:grid-cols-2">
+                  {/* Featured latest episode - left side */}
                   <article 
-                    className="group relative overflow-hidden bg-gradient-to-br from-background to-[#1DB954]/[0.05] rounded-2xl p-10 shadow-soft hover:shadow-soft-lg transition-all duration-300 border-l-4 border-[#1DB954]/40 hover:border-[#1DB954] flex flex-col justify-between md:row-span-1"
+                    className="group relative overflow-hidden bg-gradient-to-br from-background to-[#1DB954]/[0.05] rounded-2xl p-10 shadow-soft hover:shadow-soft-lg transition-all duration-300 border-l-4 border-[#1DB954]/40 hover:border-[#1DB954] flex flex-col justify-between"
                   >
                     <svg
                       aria-hidden="true"
@@ -244,25 +237,25 @@ const Podcast = () => {
                     </a>
                   </article>
 
-                  {/* Previous episodes */}
-                  <div className="grid gap-4 md:grid-cols-3">
-                    {allEpisodes.slice(1).map((episode) => (
+                  {/* Right side: 2x2 grid of smaller cards */}
+                  <div className="grid grid-cols-2 gap-4">
+                    {allEpisodes.slice(1, 5).map((episode) => (
                       <article 
                         key={episode.title}
-                        className="group relative overflow-hidden bg-gradient-to-br from-background to-[#1DB954]/[0.03] rounded-2xl p-6 shadow-soft hover:shadow-soft-lg transition-all duration-300 border-l-2 border-[#1DB954]/30 hover:border-[#1DB954] flex flex-col"
+                        className="group relative overflow-hidden bg-gradient-to-br from-background to-[#1DB954]/[0.03] rounded-2xl p-5 shadow-soft hover:shadow-soft-lg transition-all duration-300 border-l-2 border-[#1DB954]/30 hover:border-[#1DB954] flex flex-col"
                       >
-                        <div className="flex items-start justify-between mb-3 relative z-10">
-                          <span className="text-sm font-medium text-primary">Episode</span>
-                          <span className="inline-flex items-center gap-1.5 text-sm text-muted-foreground">
+                        <div className="flex items-start justify-between mb-2 relative z-10">
+                          <span className="text-xs font-medium text-primary">Episode</span>
+                          <span className="text-xs text-muted-foreground">
                             {episode.duration}
                           </span>
                         </div>
                         
-                        <h3 className="font-display text-lg font-semibold text-foreground mb-2">
+                        <h3 className="font-display text-sm font-semibold text-foreground mb-1.5 leading-snug">
                           {episode.title}
                         </h3>
                         
-                        <p className="text-sm text-muted-foreground mb-4">
+                        <p className="text-xs text-muted-foreground mb-3">
                           with {episode.guest}
                         </p>
                         
@@ -270,11 +263,11 @@ const Podcast = () => {
                           href={episode.spotifyUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 text-[#1DB954] font-medium text-sm hover:underline transition-colors mt-auto"
+                          className="inline-flex items-center gap-1.5 text-[#1DB954] font-medium text-xs hover:underline transition-colors mt-auto"
                         >
-                          <SpotifyIcon className="h-4 w-4" />
-                          Listen on Spotify
-                          <ArrowRight className="h-3.5 w-3.5" />
+                          <SpotifyIcon className="h-3.5 w-3.5" />
+                          Listen
+                          <ArrowRight className="h-3 w-3" />
                         </a>
                       </article>
                     ))}
