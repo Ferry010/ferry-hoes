@@ -43,16 +43,16 @@ const allEpisodes = [
     spotifyUrl: "https://podcasters.spotify.com/pod/show/thehumanerapodcast/episodes/From-Local-to-Global-The-New-Era-of-Talent-Acquisition-with-Marco-Boomsma-from-Bullhorn-e2lthrj",
   },
   {
-    title: "Human-Centered Innovation in a Tech-Driven World",
-    guest: "Annet de Lange",
-    duration: "58 min",
-    spotifyUrl: "https://podcasters.spotify.com/pod/show/thehumanerapodcast",
+    title: "How Generational Preferences and Technology Influence Work Culture",
+    guest: "Valérie de Haan",
+    duration: "62 min",
+    spotifyUrl: "https://podcasters.spotify.com/pod/show/thehumanerapodcast/episodes/How-generational-preferences-and-technology-influence-work-culture-with-Toshibas-Valrie-de-Haan-e2fiqo2",
   },
   {
-    title: "Why Great Leaders Listen More Than They Talk",
-    guest: "Daan Roosegaarde",
-    duration: "62 min",
-    spotifyUrl: "https://podcasters.spotify.com/pod/show/thehumanerapodcast",
+    title: "Why Football Club Panathinaikos FC Sees a Future in E-sports",
+    guest: "Paraskevas Spiliopoulos",
+    duration: "67 min",
+    spotifyUrl: "https://podcasters.spotify.com/pod/show/thehumanerapodcast/episodes/Why-football-club-Panathinaikos-FC-sees-a-future-in-E-sports-with-Paraskevas-Spiliopoulos-e1ui1uq",
   },
 ];
 
