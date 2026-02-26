@@ -18,6 +18,7 @@ import Conversation from "./pages/Conversation";
 import Podcast from "./pages/Podcast";
 import AdminLayout from "./components/admin/AdminLayout";
 import { ScrollToTop } from "./components/ScrollToTop";
+import IndexNavigation from "./components/IndexNavigation";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +30,7 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <ScrollToTop />
+          <IndexNavigation />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/blog" element={<Blog />} />
