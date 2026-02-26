@@ -1,30 +1,20 @@
 
 
-## Plan: Add copy blocks and press/media option to Contact page
+## Plan: Update Contact page copy and add brand color
 
-### Changes to `src/pages/Contact.tsx`
+### 1. Fix booking card copy (line 161)
+Change "Click here to book me to speak" to "Go here to book me to speak"
 
-**1. Update header copy**
+### 2. Add brand color to the info cards
+- **Press card**: Add a teal left border accent (`border-l-4 border-l-primary`) and use a light teal background (`bg-[hsl(var(--brand-teal-light))]`)
+- **Book to speak card**: Add a coral left border accent (`border-l-4 border-l-accent`) and use a light coral background (`bg-[hsl(var(--brand-coral-light))]`)
 
-Replace the current headline "Start a conversation." and subtext with:
+### 3. Style the CTA buttons with brand colors
+- **Press enquiry button**: Use primary variant (teal) instead of outline
+- **Book via Speakers Academy button**: Use accent-colored styling (`bg-accent text-accent-foreground hover:bg-accent/90`) instead of outline
 
-- Headline: **"Contact"**
-- Subtext: "Please find a way to connect with me or my team that suits you best."
+### 4. Style the Submit button
+Ensure the "Send message" button uses the primary (teal) brand color, which it already does via the default Button variant.
 
-**2. Add two info cards between header and form**
-
-Insert two clean cards/blocks after the header section and before the form:
-
-- **Press** card: "For all interviews, media opportunities, and anything else press-related, please use this option." with a CTA button linking to the contact form with press pre-selected (or a mailto/anchor).
-- **Book Ferry To Speak** card: "I'm exclusively represented by Speakers Academy. Click here to book me to speak at your next event." with a link to `https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966` (opens in new tab).
-
-Both cards styled minimally — border, generous padding, clean typography. No heavy shadows.
-
-**3. Add "Press / media enquiry" to inquiry dropdown**
-
-Add `{ value: "press", label: "Press / media enquiry" }` to `INQUIRY_OPTIONS` array (after podcast or near the top).
-
-**4. Press card behavior**
-
-The Press card CTA scrolls to the form and pre-selects "Press / media enquiry" in the dropdown.
+These changes bring the page in line with the teal + coral brand palette and make the cards feel intentional rather than generic.
 
