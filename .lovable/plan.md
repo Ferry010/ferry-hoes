@@ -1,18 +1,22 @@
 
 
-## Podcast Page: Stack Cards + New Hero Image
+## Fix Fake Episode Data
 
-### 1. Copy uploaded image to project assets
-- Copy `user-uploads://Podcast_hero.jpg` to `src/assets/podcast-hero.jpg`
+Replace the two fabricated episodes (Annet de Lange, Daan Roosegaarde) with real episodes from your RSS feed.
 
-### 2. Replace video hero with static image hero (lines 90-152)
-- Remove the `<video>` element
-- Use the new image as background via an `<img>` with `object-cover` (imported as ES6 module)
-- Keep all existing overlay gradients, text, and CTAs
+### Changes to `src/pages/Podcast.tsx` (lines 45-56)
 
-### 3. Redesign episodes layout (lines 184-274)
-Replace the 2-column (1 featured + 2x2 grid) layout with:
-- **Left column**: Single tall featured card for `allEpisodes[0]` (unchanged content)
-- **Right column**: 4 smaller cards stacked vertically (`flex flex-col gap-4`) for `allEpisodes[1-4]` (unchanged content, compact row style)
-- On mobile: stack everything vertically
+Replace the two fake entries with:
+
+**Episode 4:**
+- Title: "How Generational Preferences and Technology Influence Work Culture"
+- Guest: Valérie de Haan
+- Duration: 62 min
+- URL: `.../How-generational-preferences-and-technology-influence-work-culture-with-Toshibas-Valrie-de-Haan-e2fiqo2`
+
+**Episode 5:**
+- Title: "Why Football Club Panathinaikos FC Sees a Future in E-sports"
+- Guest: Paraskevas Spiliopoulos
+- Duration: 67 min
+- URL: `.../Why-football-club-Panathinaikos-FC-sees-a-future-in-E-sports-with-Paraskevas-Spiliopoulos-e1ui1uq`
 
