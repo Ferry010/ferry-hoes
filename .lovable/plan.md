@@ -1,21 +1,21 @@
 
 
-## Restructure About Page to Stacked Layout
-
-Change the hero from a 2-column grid to a single-column stacked layout: collage on top, then headline + subtitle below.
+## Fix Image Collage + Replace Top Middle Image
 
 ### Changes in `src/pages/About.tsx`
 
-**Hero section (lines ~33-82)**:
-- Remove the `grid md:grid-cols-2` layout — make it a single centered column
-- Move the image collage above the text (currently text is left, images right)
-- Center the headline "My story" and subtitle below the collage
-- Keep the collage styling (rotations, overlays, animations) intact but adjust sizing to work as a full-width centered element
-- Reduce collage height since it now spans the full width
-- On mobile, keep the compact 2-col grid as-is, just ensure it sits above the title
+**1. Copy uploaded image**
+- Copy `user-uploads://PHOTO-2025-11-17-13-37-58.jpg` → `src/assets/ferry-speaking-audience.jpg`
 
-**Structure order**:
-1. Image collage (full-width, centered)
-2. "My story" headline + subtitle (centered text)
-3. Biography copy (unchanged)
+**2. Update imports**
+- Replace `ferrySpeaking` import with new `ferrySpeakingAudience` from `ferry-speaking-audience.jpg`
+
+**3. Fix image cropping — add `object-center` or `object-top` positioning**
+- All collage images: change `object-cover` to `object-cover object-center` (or `object-top` where faces are near the top) so subjects aren't awkwardly cropped
+- Increase collage container height from `h-[380px] lg:h-[420px]` to `h-[440px] lg:h-[480px]` to give images more room
+- Adjust individual image tile aspect ratios (increase heights slightly) so content isn't as tightly cropped
+
+**4. Replace top middle image**
+- Swap `ferrySpeaking` → `ferrySpeakingAudience` in the desktop collage (line 40) and mobile grid (line 62)
+- Update alt text to "Ferry Hoes speaking to audience"
 
