@@ -133,206 +133,208 @@ const Contact = () => {
           </div>
         </section>
 
-        {/* Info Cards */}
-        <section className="pb-12 md:pb-16">
-          <div className="container px-6 md:px-8 max-w-2xl mx-auto grid gap-6 sm:grid-cols-2">
-            {/* Press card */}
-            <div className="rounded-lg border-l-4 border-l-primary bg-brand-teal-light p-6 space-y-4">
-              <h2 className="font-display text-lg font-semibold text-foreground">Press</h2>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                For all interviews, media opportunities, and anything else press-related, please use this option.
-              </p>
-              <Button
-                variant="default"
-                size="sm"
-                onClick={() => {
-                  updateField("inquiryType", "press");
-                  document.getElementById("contact-form")?.scrollIntoView({ behavior: "smooth" });
-                }}
-              >
-                Press enquiry
-              </Button>
-            </div>
-
-            {/* Book to speak card */}
-            <div className="rounded-lg border-l-4 border-l-accent bg-brand-coral-light p-6 space-y-4">
-              <h2 className="font-display text-lg font-semibold text-foreground">Book Ferry To Speak</h2>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                I'm exclusively represented by Speakers Academy. Go here to book me to speak at your next event.
-              </p>
-              <Button
-                size="sm"
-                className="bg-accent text-accent-foreground hover:bg-accent/90"
-                asChild
-              >
-                <a
-                  href="https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Book via Speakers Academy
-                </a>
-              </Button>
-            </div>
-          </div>
-        </section>
-
-        {/* Form / Confirmation */}
+        {/* Two-column: cards + form */}
         <section className="pb-24 md:pb-32">
-          <div className="container px-6 md:px-8 max-w-2xl mx-auto">
-            {isSent ? (
-              <div className="animate-fade-in py-16">
-                <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-4">
-                  Message received.
-                </h2>
-                <p className="text-muted-foreground text-lg leading-relaxed">
-                  Thank you for reaching out. I read every message personally and aim to reply within 48 hours.
+          <div className="container px-6 md:px-8 max-w-6xl mx-auto grid md:grid-cols-[1fr_2fr] gap-8 md:gap-12">
+            {/* Left column — info cards */}
+            <div className="space-y-6 md:sticky md:top-32 md:self-start">
+              {/* Press card */}
+              <div className="rounded-lg border-l-4 border-l-primary bg-brand-teal-light p-6 space-y-4">
+                <h2 className="font-display text-lg font-semibold text-foreground">Press</h2>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  For all interviews, media opportunities, and anything else press-related, please use this option.
                 </p>
-              </div>
-            ) : (
-              <form
-                onSubmit={handleSubmit}
-                className="space-y-8 transition-opacity duration-200"
-                style={{ opacity: isSubmitting ? 0.6 : 1 }}
-                noValidate
-              >
-                {/* Name */}
-                <div className="space-y-2">
-                  <Label htmlFor="name">Full Name <span className="text-destructive">*</span></Label>
-                  <Input
-                    id="name"
-                    value={form.name}
-                    onChange={(e) => updateField("name", e.target.value)}
-                    className={errors.name ? "border-destructive" : ""}
-                  />
-                  {errors.name && <p className="text-sm text-destructive">{errors.name}</p>}
-                </div>
-
-                {/* Email */}
-                <div className="space-y-2">
-                  <Label htmlFor="email">Email Address <span className="text-destructive">*</span></Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="name@company.com"
-                    value={form.email}
-                    onChange={(e) => updateField("email", e.target.value)}
-                    className={errors.email ? "border-destructive" : ""}
-                  />
-                  {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
-                </div>
-
-                {/* Organization */}
-                <div className="space-y-2">
-                  <Label htmlFor="organization">Organization / Company</Label>
-                  <Input
-                    id="organization"
-                    value={form.organization}
-                    onChange={(e) => updateField("organization", e.target.value)}
-                  />
-                </div>
-
-                {/* Inquiry Type */}
-                <div className="space-y-2">
-                  <Label>How can I help? <span className="text-destructive">*</span></Label>
-                  <Select
-                    value={form.inquiryType}
-                    onValueChange={(v) => updateField("inquiryType", v)}
-                  >
-                    <SelectTrigger className={errors.inquiryType ? "border-destructive" : ""}>
-                      <SelectValue placeholder="Select an option" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {INQUIRY_OPTIONS.map((opt) => (
-                        <SelectItem key={opt.value} value={opt.value}>
-                          {opt.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  {errors.inquiryType && <p className="text-sm text-destructive">{errors.inquiryType}</p>}
-                </div>
-
-                {/* Conditional "Other" field */}
-                {form.inquiryType === "other" && (
-                  <div className="space-y-2 animate-fade-in">
-                    <Label htmlFor="inquiryOther">Tell me more</Label>
-                    <Input
-                      id="inquiryOther"
-                      value={form.inquiryOther}
-                      onChange={(e) => updateField("inquiryOther", e.target.value)}
-                    />
-                  </div>
-                )}
-
-                {/* Message */}
-                <div className="space-y-2">
-                  <Label htmlFor="message">Tell me about your request <span className="text-destructive">*</span></Label>
-                  <Textarea
-                    id="message"
-                    rows={6}
-                    placeholder="What are you thinking? The more context you share, the better the conversation."
-                    value={form.message}
-                    onChange={(e) => updateField("message", e.target.value)}
-                    className={errors.message ? "border-destructive" : ""}
-                  />
-                  {errors.message && <p className="text-sm text-destructive">{errors.message}</p>}
-                </div>
-
-                {/* Timeline */}
-                <div className="space-y-2">
-                  <Label>Preferred timeline</Label>
-                  <Select
-                    value={form.timeline}
-                    onValueChange={(v) => updateField("timeline", v)}
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a timeline" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {TIMELINE_OPTIONS.map((opt) => (
-                        <SelectItem key={opt.value} value={opt.value}>
-                          {opt.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                {/* Privacy */}
-                <div className="space-y-2">
-                  <div className="flex items-start gap-3">
-                    <Checkbox
-                      id="privacy"
-                      checked={form.privacyAccepted === true}
-                      onCheckedChange={(checked) =>
-                        updateField("privacyAccepted", checked === true ? true : undefined as any)
-                      }
-                      className={errors.privacyAccepted ? "border-destructive" : ""}
-                    />
-                    <div className="space-y-1">
-                      <Label htmlFor="privacy" className="leading-snug cursor-pointer">
-                        I agree that my information will be used to respond to this message.
-                      </Label>
-                      <p className="text-xs text-muted-foreground">
-                        Your information will only be used to reply to you. Nothing else.
-                      </p>
-                    </div>
-                  </div>
-                  {errors.privacyAccepted && <p className="text-sm text-destructive">{errors.privacyAccepted}</p>}
-                </div>
-
-                {/* Submit */}
                 <Button
-                  type="submit"
-                  size="lg"
-                  disabled={isSubmitting}
-                  className="hover:brightness-[1.05] active:scale-[0.97] transition-all duration-[120ms]"
+                  variant="default"
+                  size="sm"
+                  onClick={() => {
+                    updateField("inquiryType", "press");
+                    document.getElementById("contact-form")?.scrollIntoView({ behavior: "smooth" });
+                  }}
                 >
-                  {isSubmitting ? "Sending..." : "Send message"}
+                  Press enquiry
                 </Button>
-              </form>
-            )}
+              </div>
+
+              {/* Book to speak card */}
+              <div className="rounded-lg border-l-4 border-l-accent bg-brand-coral-light p-6 space-y-4">
+                <h2 className="font-display text-lg font-semibold text-foreground">Book Ferry To Speak</h2>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  I'm exclusively represented by Speakers Academy. Go here to book me to speak at your next event.
+                </p>
+                <Button
+                  size="sm"
+                  className="bg-accent text-accent-foreground hover:bg-accent/90"
+                  asChild
+                >
+                  <a
+                    href="https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Book via Speakers Academy
+                  </a>
+                </Button>
+              </div>
+            </div>
+
+            {/* Right column — form */}
+            <div>
+              {isSent ? (
+                <div className="animate-fade-in py-16">
+                  <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-4">
+                    Message received.
+                  </h2>
+                  <p className="text-muted-foreground text-lg leading-relaxed">
+                    Thank you for reaching out. I read every message personally and aim to reply within 48 hours.
+                  </p>
+                </div>
+              ) : (
+                <form
+                  id="contact-form"
+                  onSubmit={handleSubmit}
+                  className="space-y-8 transition-opacity duration-200"
+                  style={{ opacity: isSubmitting ? 0.6 : 1 }}
+                  noValidate
+                >
+                  {/* Name */}
+                  <div className="space-y-2">
+                    <Label htmlFor="name">Full Name <span className="text-destructive">*</span></Label>
+                    <Input
+                      id="name"
+                      value={form.name}
+                      onChange={(e) => updateField("name", e.target.value)}
+                      className={errors.name ? "border-destructive" : ""}
+                    />
+                    {errors.name && <p className="text-sm text-destructive">{errors.name}</p>}
+                  </div>
+
+                  {/* Email */}
+                  <div className="space-y-2">
+                    <Label htmlFor="email">Email Address <span className="text-destructive">*</span></Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="name@company.com"
+                      value={form.email}
+                      onChange={(e) => updateField("email", e.target.value)}
+                      className={errors.email ? "border-destructive" : ""}
+                    />
+                    {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
+                  </div>
+
+                  {/* Organization */}
+                  <div className="space-y-2">
+                    <Label htmlFor="organization">Organization / Company</Label>
+                    <Input
+                      id="organization"
+                      value={form.organization}
+                      onChange={(e) => updateField("organization", e.target.value)}
+                    />
+                  </div>
+
+                  {/* Inquiry Type */}
+                  <div className="space-y-2">
+                    <Label>How can I help? <span className="text-destructive">*</span></Label>
+                    <Select
+                      value={form.inquiryType}
+                      onValueChange={(v) => updateField("inquiryType", v)}
+                    >
+                      <SelectTrigger className={errors.inquiryType ? "border-destructive" : ""}>
+                        <SelectValue placeholder="Select an option" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {INQUIRY_OPTIONS.map((opt) => (
+                          <SelectItem key={opt.value} value={opt.value}>
+                            {opt.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    {errors.inquiryType && <p className="text-sm text-destructive">{errors.inquiryType}</p>}
+                  </div>
+
+                  {/* Conditional "Other" field */}
+                  {form.inquiryType === "other" && (
+                    <div className="space-y-2 animate-fade-in">
+                      <Label htmlFor="inquiryOther">Tell me more</Label>
+                      <Input
+                        id="inquiryOther"
+                        value={form.inquiryOther}
+                        onChange={(e) => updateField("inquiryOther", e.target.value)}
+                      />
+                    </div>
+                  )}
+
+                  {/* Message */}
+                  <div className="space-y-2">
+                    <Label htmlFor="message">Tell me about your request <span className="text-destructive">*</span></Label>
+                    <Textarea
+                      id="message"
+                      rows={6}
+                      placeholder="What are you thinking? The more context you share, the better the conversation."
+                      value={form.message}
+                      onChange={(e) => updateField("message", e.target.value)}
+                      className={errors.message ? "border-destructive" : ""}
+                    />
+                    {errors.message && <p className="text-sm text-destructive">{errors.message}</p>}
+                  </div>
+
+                  {/* Timeline */}
+                  <div className="space-y-2">
+                    <Label>Preferred timeline</Label>
+                    <Select
+                      value={form.timeline}
+                      onValueChange={(v) => updateField("timeline", v)}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a timeline" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {TIMELINE_OPTIONS.map((opt) => (
+                          <SelectItem key={opt.value} value={opt.value}>
+                            {opt.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  {/* Privacy */}
+                  <div className="space-y-2">
+                    <div className="flex items-start gap-3">
+                      <Checkbox
+                        id="privacy"
+                        checked={form.privacyAccepted === true}
+                        onCheckedChange={(checked) =>
+                          updateField("privacyAccepted", checked === true ? true : undefined as any)
+                        }
+                        className={errors.privacyAccepted ? "border-destructive" : ""}
+                      />
+                      <div className="space-y-1">
+                        <Label htmlFor="privacy" className="leading-snug cursor-pointer">
+                          I agree that my information will be used to respond to this message.
+                        </Label>
+                        <p className="text-xs text-muted-foreground">
+                          Your information will only be used to reply to you. Nothing else.
+                        </p>
+                      </div>
+                    </div>
+                    {errors.privacyAccepted && <p className="text-sm text-destructive">{errors.privacyAccepted}</p>}
+                  </div>
+
+                  {/* Submit */}
+                  <Button
+                    type="submit"
+                    size="lg"
+                    disabled={isSubmitting}
+                    className="hover:brightness-[1.05] active:scale-[0.97] transition-all duration-[120ms]"
+                  >
+                    {isSubmitting ? "Sending..." : "Send message"}
+                  </Button>
+                </form>
+              )}
+            </div>
           </div>
         </section>
       </main>
