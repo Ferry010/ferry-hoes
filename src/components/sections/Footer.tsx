@@ -47,13 +47,10 @@ const Footer = () => {
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               {/* Social links placeholder */}
               <div className="flex gap-6">
-                <a href="#" className="text-white/50 hover:text-white transition-colors text-sm">
+                <a href="https://www.linkedin.com/in/ferryhoes/" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors text-sm">
                   LinkedIn
                 </a>
-                <a href="#" className="text-white/50 hover:text-white transition-colors text-sm">
-                  Twitter
-                </a>
-                <a href="#" className="text-white/50 hover:text-white transition-colors text-sm">
+                <a href="https://www.youtube.com/@ferry-hoes" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors text-sm">
                   YouTube
                 </a>
                 <a href="https://discord.gg/BfZrw5wJ" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors text-sm">
