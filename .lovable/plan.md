@@ -1,28 +1,44 @@
 
 
-## Enhanced Speaking FAQ
+## About Page Hero — Image Collage
 
-Update the Q&A data in `src/components/sections/SpeakingQA.tsx` with the 10 new questions and multi-paragraph answers.
+Replace the plain text header with a full-height hero section featuring a dynamic image collage and the "My story" headline.
 
-### Changes in `src/components/sections/SpeakingQA.tsx`
+### Layout
 
-**Data**: Replace the 4-item `qAndA` array with 10 new items. Answers contain multiple paragraphs, so change the `answer` field from a single string to a `string[]` (array of paragraphs).
+```text
+┌─────────────────────────────────────────────┐
+│                                             │
+│   "My story"          ┌──────┐ ┌──────┐    │
+│   subtitle text       │ img1 │ │ img2 │    │
+│                       └──────┘ └──────┘    │
+│                       ┌──────┐ ┌──────┐    │
+│                       │ img3 │ │ img4 │    │
+│                       └──────┘ └──────┘    │
+│                                  ┌──────┐  │
+│                                  │ img5 │  │
+│                                  └──────┘  │
+└─────────────────────────────────────────────┘
+```
 
-New questions:
-1. What topics do you speak about? (3 paragraphs)
-2. Is your keynote inspirational or practical? (3 paragraphs)
-3. Who are your talks best suited for? (2 paragraphs)
-4. Do you speak in Dutch or English? (3 paragraphs)
-5. What formats do you offer? (3 paragraphs)
-6. How can we book you? (2 paragraphs)
-7. Do you customize your keynote? (3 paragraphs)
-8. What makes your talks different from other AI speakers? (3 paragraphs)
-9. Can you host or moderate events? (2 paragraphs)
-10. Slightly important question: do you use slides? (3 paragraphs)
+**Desktop**: Two-column split — left has the headline + a short subtitle, right has a staggered collage grid of 5 photos with varying sizes, rounded corners, subtle rotation/offset, and the brand gradient overlay on each image.
 
-**Rendering**: Update the answer rendering from a single `<p>` to mapping over the array, rendering each paragraph as a separate `<p>` with `mb-2 last:mb-0` spacing.
+**Mobile**: Title stacks on top, collage becomes a 2-column masonry-style grid below.
 
-**Section header**: Update subtitle to something like "Everything you need to know about working with Ferry." to better fit a proper FAQ.
+### Images used (from `src/assets/`)
+1. `ferry-on-stage.jpg` — largest, anchor image
+2. `ferry-speaking.jpg`
+3. `ferry-bookstore.jpg`
+4. `ferry-presenting.jpg`
+5. `ferry-bts.jpg`
 
-Everything else (bubble styling, expand/collapse behavior, layout) stays exactly the same.
+### Changes
+
+**`src/pages/About.tsx`**
+- Replace the current `<header>` block (lines 23-32) with a new hero section component
+- Import 5 images from `src/assets/`
+- Hero section: `min-h-[80vh]` with `grid md:grid-cols-2`, left column centered vertically with "My story" headline + subtitle "International speaker, published author, entrepreneur", right column with the collage grid
+- Each collage image gets `rounded-2xl shadow-lg` + the brand overlay (`bg-gradient-to-br from-primary/20 via-transparent to-accent/15`) + slight CSS transforms (rotate, translate) for an editorial scattered look
+- Subtle entrance animations using existing `animate-fade-up` with staggered delays
+- On mobile, reduce to a compact 2-col grid with smaller images above the title
 
