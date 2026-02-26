@@ -22,6 +22,7 @@ const INQUIRY_OPTIONS = [
   { value: "talk", label: "Enquiry about a talk / event" },
   { value: "workshop", label: "Workshop or team session" },
   { value: "podcast", label: "Podcast / interview request" },
+  { value: "press", label: "Press / media enquiry" },
   { value: "collaboration", label: "Collaboration" },
   { value: "general", label: "Curious / general question" },
   { value: "other", label: "Other" },
@@ -124,13 +125,55 @@ const Contact = () => {
         <section className="pt-32 pb-12 md:pt-40 md:pb-16">
           <div className="container px-6 md:px-8 max-w-2xl mx-auto">
             <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-6">
-              Start a conversation.
+              Contact
             </h1>
             <p className="text-muted-foreground text-lg leading-relaxed">
-              Whether it's about a keynote, a team session, a podcast conversation or something else entirely — feel free to reach out.
-              <br className="hidden md:block" />
-              I read every message personally.
+              Please find a way to connect with me or my team that suits you best.
             </p>
+          </div>
+        </section>
+
+        {/* Info Cards */}
+        <section className="pb-12 md:pb-16">
+          <div className="container px-6 md:px-8 max-w-2xl mx-auto grid gap-6 sm:grid-cols-2">
+            {/* Press card */}
+            <div className="rounded-lg border border-border p-6 space-y-4">
+              <h2 className="font-display text-lg font-semibold text-foreground">Press</h2>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                For all interviews, media opportunities, and anything else press-related, please use this option.
+              </p>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  updateField("inquiryType", "press");
+                  document.getElementById("contact-form")?.scrollIntoView({ behavior: "smooth" });
+                }}
+              >
+                Press enquiry
+              </Button>
+            </div>
+
+            {/* Book to speak card */}
+            <div className="rounded-lg border border-border p-6 space-y-4">
+              <h2 className="font-display text-lg font-semibold text-foreground">Book Ferry To Speak</h2>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                I'm exclusively represented by Speakers Academy. Click here to book me to speak at your next event.
+              </p>
+              <Button
+                variant="outline"
+                size="sm"
+                asChild
+              >
+                <a
+                  href="https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Book via Speakers Academy
+                </a>
+              </Button>
+            </div>
           </div>
         </section>
 
