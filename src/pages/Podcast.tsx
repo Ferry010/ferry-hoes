@@ -40,6 +40,12 @@ const allEpisodes = [
     duration: "71 min",
     spotifyUrl: "https://podcasters.spotify.com/pod/show/thehumanerapodcast/episodes/From-Local-to-Global-The-New-Era-of-Talent-Acquisition-with-Marco-Boomsma-from-Bullhorn-e2lthrj",
   },
+  {
+    title: "Human-Centered Innovation in a Tech-Driven World",
+    guest: "Annet de Lange",
+    duration: "58 min",
+    spotifyUrl: "https://podcasters.spotify.com/pod/show/thehumanerapodcast",
+  },
 ];
 
 const Podcast = () => {
@@ -126,8 +132,7 @@ const Podcast = () => {
                 <Button 
                   asChild
                   size="lg"
-                  variant="outline"
-                  className="rounded-full px-8 border-white/30 text-white hover:bg-white/10 group"
+                  className="rounded-full px-8 bg-[#9933FF] hover:bg-[#9933FF]/90 text-white border-none group"
                 >
                   <a href={APPLE_PODCASTS_URL} target="_blank" rel="noopener noreferrer">
                     <ApplePodcastsIcon className="mr-2 h-5 w-5" />
@@ -155,7 +160,7 @@ const Podcast = () => {
                     to be human in a rapidly changing world.
                   </p>
                   <p>
-                    Each episode is an honest, unscripted conversation — no pre-written questions, 
+                    Each episode is an honest, unscripted conversation. No pre-written questions, 
                     no rehearsed answers. Just two people thinking out loud about the things that matter.
                   </p>
                   <p>
@@ -182,62 +187,94 @@ const Podcast = () => {
                   </p>
                 </div>
 
-                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                  {allEpisodes.map((episode) => (
-                    <article 
-                      key={episode.title}
-                      className="group relative overflow-hidden bg-gradient-to-br from-background to-[#1DB954]/[0.03] rounded-2xl p-8 shadow-soft hover:shadow-soft-lg transition-all duration-300 border-l-2 border-[#1DB954]/30 hover:border-[#1DB954] border-t border-r border-b border-t-transparent border-r-transparent border-b-transparent hover:border-t-primary/20 hover:border-r-primary/20 hover:border-b-primary/20 flex flex-col"
+                <div className="grid gap-6 md:grid-cols-2">
+                  {/* Featured latest episode - left half */}
+                  <article 
+                    className="group relative overflow-hidden bg-gradient-to-br from-background to-[#1DB954]/[0.05] rounded-2xl p-10 shadow-soft hover:shadow-soft-lg transition-all duration-300 border-l-4 border-[#1DB954]/40 hover:border-[#1DB954] flex flex-col justify-between md:row-span-1"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      className="absolute bottom-6 right-6 w-40 h-24 text-muted-foreground opacity-[0.06] group-hover:opacity-[0.12] transition-opacity duration-500"
+                      viewBox="0 0 120 60"
+                      fill="currentColor"
                     >
-                      {/* Decorative waveform */}
-                      <svg
-                        aria-hidden="true"
-                        className="absolute bottom-4 right-4 w-32 h-20 text-muted-foreground opacity-[0.06] group-hover:opacity-[0.12] transition-opacity duration-500"
-                        viewBox="0 0 120 60"
-                        fill="currentColor"
-                      >
-                        <rect x="8" y="20" width="6" height="25" rx="3" />
-                        <rect x="22" y="10" width="6" height="40" rx="3" />
-                        <rect x="36" y="25" width="6" height="20" rx="3" />
-                        <rect x="50" y="5" width="6" height="50" rx="3" />
-                        <rect x="64" y="18" width="6" height="30" rx="3" />
-                        <rect x="78" y="12" width="6" height="38" rx="3" />
-                        <rect x="92" y="22" width="6" height="22" rx="3" />
-                        <rect x="106" y="28" width="6" height="15" rx="3" />
-                      </svg>
+                      <rect x="8" y="20" width="6" height="25" rx="3" />
+                      <rect x="22" y="10" width="6" height="40" rx="3" />
+                      <rect x="36" y="25" width="6" height="20" rx="3" />
+                      <rect x="50" y="5" width="6" height="50" rx="3" />
+                      <rect x="64" y="18" width="6" height="30" rx="3" />
+                      <rect x="78" y="12" width="6" height="38" rx="3" />
+                      <rect x="92" y="22" width="6" height="22" rx="3" />
+                      <rect x="106" y="28" width="6" height="15" rx="3" />
+                    </svg>
 
+                    <div>
                       <div className="flex items-start justify-between mb-6 relative z-10">
-                        <span className="text-sm font-medium text-primary">Episode</span>
+                        <span className="inline-flex items-center gap-2 text-sm font-semibold text-[#1DB954] bg-[#1DB954]/10 px-3 py-1 rounded-full">
+                          <Mic2 className="h-3.5 w-3.5" />
+                          Latest Episode
+                        </span>
                         <span className="inline-flex items-center gap-1.5 text-sm text-muted-foreground">
-                          <svg aria-hidden="true" className="w-3.5 h-3.5 text-[#1DB954]/60" viewBox="0 0 14 14" fill="currentColor">
-                            <rect x="1" y="6" width="2" height="6" rx="1" />
-                            <rect x="4.5" y="3" width="2" height="9" rx="1" />
-                            <rect x="8" y="5" width="2" height="7" rx="1" />
-                            <rect x="11.5" y="7" width="2" height="5" rx="1" />
-                          </svg>
-                          {episode.duration}
+                          {allEpisodes[0].duration}
                         </span>
                       </div>
                       
-                      <h3 className="font-display text-xl font-semibold text-foreground mb-3">
-                        {episode.title}
+                      <h3 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-4">
+                        {allEpisodes[0].title}
                       </h3>
                       
-                      <p className="text-base text-muted-foreground mb-6">
-                        with {episode.guest}
+                      <p className="text-lg text-muted-foreground mb-8">
+                        with {allEpisodes[0].guest}
                       </p>
-                      
-                      <a 
-                        href={episode.spotifyUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 text-[#1DB954] font-medium hover:underline transition-colors mt-auto"
+                    </div>
+                    
+                    <a 
+                      href={allEpisodes[0].spotifyUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-[#1DB954] font-medium text-lg hover:underline transition-colors"
+                    >
+                      <SpotifyIcon className="h-5 w-5" />
+                      Listen on Spotify
+                      <ArrowRight className="h-4 w-4" />
+                    </a>
+                  </article>
+
+                  {/* Right side: 3 stacked smaller cards */}
+                  <div className="flex flex-col gap-4">
+                    {allEpisodes.slice(1).map((episode) => (
+                      <article 
+                        key={episode.title}
+                        className="group relative overflow-hidden bg-gradient-to-br from-background to-[#1DB954]/[0.03] rounded-2xl p-6 shadow-soft hover:shadow-soft-lg transition-all duration-300 border-l-2 border-[#1DB954]/30 hover:border-[#1DB954] flex flex-col"
                       >
-                        <SpotifyIcon className="h-5 w-5" />
-                        Listen on Spotify
-                        <ArrowRight className="h-4 w-4" />
-                      </a>
-                    </article>
-                  ))}
+                        <div className="flex items-start justify-between mb-3 relative z-10">
+                          <span className="text-sm font-medium text-primary">Episode</span>
+                          <span className="inline-flex items-center gap-1.5 text-sm text-muted-foreground">
+                            {episode.duration}
+                          </span>
+                        </div>
+                        
+                        <h3 className="font-display text-lg font-semibold text-foreground mb-2">
+                          {episode.title}
+                        </h3>
+                        
+                        <p className="text-sm text-muted-foreground mb-4">
+                          with {episode.guest}
+                        </p>
+                        
+                        <a 
+                          href={episode.spotifyUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 text-[#1DB954] font-medium text-sm hover:underline transition-colors mt-auto"
+                        >
+                          <SpotifyIcon className="h-4 w-4" />
+                          Listen on Spotify
+                          <ArrowRight className="h-3.5 w-3.5" />
+                        </a>
+                      </article>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -268,7 +305,7 @@ const Podcast = () => {
                   <Button 
                     size="lg" 
                     variant="outline"
-                    className="rounded-full px-8 border-[#9933FF] text-[#9933FF] hover:bg-[#9933FF]/10"
+                    className="rounded-full px-8 bg-[#9933FF] hover:bg-[#9933FF]/90 text-white border-none"
                     asChild
                   >
                     <a href={APPLE_PODCASTS_URL} target="_blank" rel="noopener noreferrer">
