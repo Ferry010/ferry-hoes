@@ -73,25 +73,40 @@ export type Database = {
           created_at: string
           email: string
           id: string
+          inquiry_other: string | null
+          inquiry_type: string | null
           message: string
           name: string
+          organization: string | null
+          privacy_accepted: boolean
           read: boolean
+          timeline: string | null
         }
         Insert: {
           created_at?: string
           email: string
           id?: string
+          inquiry_other?: string | null
+          inquiry_type?: string | null
           message: string
           name: string
+          organization?: string | null
+          privacy_accepted?: boolean
           read?: boolean
+          timeline?: string | null
         }
         Update: {
           created_at?: string
           email?: string
           id?: string
+          inquiry_other?: string | null
+          inquiry_type?: string | null
           message?: string
           name?: string
+          organization?: string | null
+          privacy_accepted?: boolean
           read?: boolean
+          timeline?: string | null
         }
         Relationships: []
       }

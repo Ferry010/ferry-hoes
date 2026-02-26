@@ -1,13 +1,7 @@
 import { Link } from "react-router-dom";
-import { MessageCircle } from "lucide-react";
 import logoWhite from "@/assets/ferry-hoes-logo-white.png";
 
 const Footer = () => {
-  const openMessagePanel = () => {
-    const bubble = document.querySelector('[aria-label="Send a message"]') as HTMLButtonElement;
-    bubble?.click();
-  };
-
   return (
     <footer className="py-16 bg-foreground text-background">
       <div className="container px-6 md:px-8">
@@ -33,13 +27,9 @@ const Footer = () => {
               <Link to="/podcast" className="text-white/70 hover:text-white transition-colors">
                 Podcast
               </Link>
-              <button 
-                onClick={openMessagePanel}
-                className="text-white/70 hover:text-white transition-colors inline-flex items-center gap-1"
-              >
-                <MessageCircle className="h-4 w-4" />
-                Message
-              </button>
+              <Link to="/contact" className="text-white/70 hover:text-white transition-colors">
+                Contact
+              </Link>
             </nav>
           </div>
           
