@@ -17,9 +17,12 @@ const AdminDashboard = () => {
 
     const a = posts[index];
     const b = posts[targetIndex];
+    const aOrder = a.sort_order ?? index;
+    const bOrder = b.sort_order ?? targetIndex;
+
     await updateOrder.mutateAsync([
-      { id: a.id, sort_order: (b as any).sort_order ?? targetIndex },
-      { id: b.id, sort_order: (a as any).sort_order ?? index },
+      { id: a.id, sort_order: aOrder === bOrder ? targetIndex : bOrder },
+      { id: b.id, sort_order: aOrder === bOrder ? index : aOrder },
     ]);
   };
 

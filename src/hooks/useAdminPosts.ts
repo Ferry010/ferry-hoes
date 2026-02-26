@@ -149,7 +149,7 @@ export function useUpdatePostOrder() {
       for (const swap of swaps) {
         const { error } = await supabase
           .from("blog_posts")
-          .update({ sort_order: swap.sort_order } as any)
+          .update({ sort_order: swap.sort_order })
           .eq("id", swap.id);
         if (error) throw error;
       }
