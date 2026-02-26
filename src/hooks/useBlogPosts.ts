@@ -17,6 +17,7 @@ export interface BlogPost {
   author_id: string | null;
   created_at: string;
   updated_at: string;
+  sort_order: number;
 }
 
 export function useBlogPosts(limit?: number) {
