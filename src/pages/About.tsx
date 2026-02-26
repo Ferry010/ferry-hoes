@@ -60,7 +60,7 @@ const About = () => {
                     { src: ferryBookstore, alt: "Ferry in bookstore" },
                     { src: ferryBts, alt: "Ferry behind the scenes" },
                   ].map((img, i) => (
-                    <div key={i} className="w-[70vw] h-48 flex-shrink-0 snap-center rounded-2xl overflow-hidden shadow-lg relative animate-fade-in" style={{ animationDelay: `${i * 0.1}s`, animationFillMode: "both" }}>
+                    <div key={i} className="w-[60vw] h-64 flex-shrink-0 snap-center rounded-2xl overflow-hidden shadow-lg relative animate-fade-in" style={{ animationDelay: `${i * 0.1}s`, animationFillMode: "both" }}>
                       <img src={img.src} alt={img.alt} className="w-full h-full object-cover object-center" />
                       <div className="brand-hero-overlay" />
                     </div>
