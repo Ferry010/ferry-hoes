@@ -1,26 +1,18 @@
 
 
-## Podcast Page Layout & Copy Updates
+## Podcast Page: Stack Cards + New Hero Image
 
-### 1. Shorten "No scripts" copy (lines 157-171)
-Replace the three paragraphs with one snappy paragraph:
+### 1. Copy uploaded image to project assets
+- Copy `user-uploads://Podcast_hero.jpg` to `src/assets/podcast-hero.jpg`
 
-```
-Honest, unscripted conversations with fascinating people about technology, leadership, and what it means to be human. No pre-written questions. Just thinking out loud about the things that matter.
-```
+### 2. Replace video hero with static image hero (lines 90-152)
+- Remove the `<video>` element
+- Use the new image as background via an `<img>` with `object-cover` (imported as ES6 module)
+- Keep all existing overlay gradients, text, and CTAs
 
-### 2. Reduce spacing between "No scripts" section and "Recent conversations" (lines 150, 178)
-- Change "About" section padding from `py-24 md:py-32` to `py-16 md:py-20`
-- Change "Episodes" section padding from `py-24 md:py-32` to `pt-12 md:pt-16 pb-24 md:pb-32`
-- Reduce `mb-16` on the episodes header to `mb-10`
-
-### 3. Add a 5th episode to `allEpisodes` (after line 49)
-Need 5 total (1 featured + 4 smaller). Add one more episode entry with a generic Spotify URL.
-
-### 4. Redesign episodes layout to side-by-side (lines 191-281)
-Replace the vertical `space-y-8` layout with a 2-column grid:
-- **Left**: Featured card (`allEpisodes[0]`) spanning full height, keep existing card content unchanged
-- **Right**: 2x2 grid of 4 smaller cards (`allEpisodes[1-4]`), keep existing card content unchanged
-- Use `grid md:grid-cols-2 gap-6` for outer, `grid grid-cols-2 gap-4` for the right side
-- On mobile: stack vertically
+### 3. Redesign episodes layout (lines 184-274)
+Replace the 2-column (1 featured + 2x2 grid) layout with:
+- **Left column**: Single tall featured card for `allEpisodes[0]` (unchanged content)
+- **Right column**: 4 smaller cards stacked vertically (`flex flex-col gap-4`) for `allEpisodes[1-4]` (unchanged content, compact row style)
+- On mobile: stack everything vertically
 
