@@ -26,40 +26,30 @@ const About = () => {
 
       <div className="overflow-x-hidden relative">
         {/* Hero with Image Collage */}
-        <header className="min-h-[80vh] bg-background pt-24 pb-16">
+        <header className="bg-background pt-24 pb-16">
           <div className="container px-6 md:px-8">
-            <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center min-h-[70vh]">
-              {/* Left: Headline */}
-              <div className="order-2 md:order-1 flex flex-col justify-center">
-                <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 animate-fade-in">
-                  My <span className="text-accent">story</span>
-                </h1>
-                <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed animate-fade-in" style={{ animationDelay: "0.15s", animationFillMode: "both" }}>
-                  International speaker, published author, and entrepreneur on a mission to unleash super-human potential with the help of technology.
-                </p>
-              </div>
-
-              {/* Right: Image Collage */}
-              <div className="order-1 md:order-2 relative">
+            <div className="flex flex-col items-center">
+              {/* Image Collage */}
+              <div className="w-full max-w-4xl relative mb-12">
                 {/* Desktop collage */}
-                <div className="hidden md:block relative h-[520px] lg:h-[580px]">
-                  <div className="absolute top-0 left-0 w-[55%] h-[48%] rounded-2xl overflow-hidden shadow-lg rotate-[-2deg] animate-fade-in" style={{ animationDelay: "0.1s", animationFillMode: "both" }}>
+                <div className="hidden md:block relative h-[380px] lg:h-[420px]">
+                  <div className="absolute top-0 left-[5%] w-[38%] h-[55%] rounded-2xl overflow-hidden shadow-lg rotate-[-2deg] animate-fade-in" style={{ animationDelay: "0.1s", animationFillMode: "both" }}>
                     <img src={ferryBrandHumanizing} alt="Ferry Hoes with Brand Humanizing banner" className="w-full h-full object-cover" />
                     <div className="brand-hero-overlay" />
                   </div>
-                  <div className="absolute top-2 right-0 w-[42%] h-[35%] rounded-2xl overflow-hidden shadow-lg rotate-[1.5deg] animate-fade-in" style={{ animationDelay: "0.2s", animationFillMode: "both" }}>
+                  <div className="absolute top-0 right-[22%] w-[28%] h-[45%] rounded-2xl overflow-hidden shadow-lg rotate-[1.5deg] animate-fade-in" style={{ animationDelay: "0.2s", animationFillMode: "both" }}>
                     <img src={ferrySpeaking} alt="Ferry Hoes speaking" className="w-full h-full object-cover" />
                     <div className="brand-hero-overlay" />
                   </div>
-                  <div className="absolute bottom-[8%] left-[5%] w-[40%] h-[38%] rounded-2xl overflow-hidden shadow-lg rotate-[2deg] animate-fade-in" style={{ animationDelay: "0.3s", animationFillMode: "both" }}>
-                    <img src={ferryBookstore} alt="Ferry Hoes in a bookstore" className="w-full h-full object-cover" />
-                    <div className="brand-hero-overlay" />
-                  </div>
-                  <div className="absolute top-[42%] right-[2%] w-[38%] h-[30%] rounded-2xl overflow-hidden shadow-lg rotate-[-1deg] animate-fade-in" style={{ animationDelay: "0.4s", animationFillMode: "both" }}>
+                  <div className="absolute top-[10%] right-[2%] w-[22%] h-[40%] rounded-2xl overflow-hidden shadow-lg rotate-[-1deg] animate-fade-in" style={{ animationDelay: "0.3s", animationFillMode: "both" }}>
                     <img src={ferryPresenting} alt="Ferry Hoes presenting" className="w-full h-full object-cover" />
                     <div className="brand-hero-overlay" />
                   </div>
-                  <div className="absolute bottom-0 right-[10%] w-[35%] h-[25%] rounded-2xl overflow-hidden shadow-lg rotate-[1deg] animate-fade-in" style={{ animationDelay: "0.5s", animationFillMode: "both" }}>
+                  <div className="absolute bottom-[5%] left-[15%] w-[30%] h-[45%] rounded-2xl overflow-hidden shadow-lg rotate-[2deg] animate-fade-in" style={{ animationDelay: "0.4s", animationFillMode: "both" }}>
+                    <img src={ferryBookstore} alt="Ferry Hoes in a bookstore" className="w-full h-full object-cover" />
+                    <div className="brand-hero-overlay" />
+                  </div>
+                  <div className="absolute bottom-[0%] right-[15%] w-[28%] h-[38%] rounded-2xl overflow-hidden shadow-lg rotate-[1deg] animate-fade-in" style={{ animationDelay: "0.5s", animationFillMode: "both" }}>
                     <img src={ferryBts} alt="Ferry Hoes behind the scenes" className="w-full h-full object-cover" />
                     <div className="brand-hero-overlay" />
                   </div>
@@ -78,6 +68,16 @@ const About = () => {
                     </div>
                   ))}
                 </div>
+              </div>
+
+              {/* Headline + Subtitle */}
+              <div className="max-w-3xl text-center">
+                <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 animate-fade-in" style={{ animationDelay: "0.3s", animationFillMode: "both" }}>
+                  My <span className="text-accent">story</span>
+                </h1>
+                <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed animate-fade-in" style={{ animationDelay: "0.45s", animationFillMode: "both" }}>
+                  International speaker, published author, and entrepreneur on a mission to unleash super-human potential with the help of technology.
+                </p>
               </div>
             </div>
           </div>
