@@ -121,10 +121,7 @@ const ContentGrid = () => {
                 Something on your mind about this?
               </p>
               <button
-                onClick={() => {
-                  const bubble = document.querySelector('[aria-label="Send a message"]') as HTMLButtonElement;
-                  bubble?.click();
-                }}
+                onClick={() => window.dispatchEvent(new Event("open-contact"))}
                 className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors group"
               >
                 <span className="underline underline-offset-4">Drop a thought</span>

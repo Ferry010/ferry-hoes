@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Headphones, Mic2 } from "lucide-react";
 import podcastHero from "@/assets/podcast-hero.jpg";
 import Footer from "@/components/sections/Footer";
-import AskFerryBubble from "@/components/AskFerryBubble";
+
 import SEOHead from "@/components/blog/SEOHead";
 
 // Spotify icon component
@@ -59,8 +59,7 @@ const allEpisodes = [
 
 const Podcast = () => {
   const openMessagePanel = () => {
-    const bubble = document.querySelector('[aria-label="Send a message"]') as HTMLButtonElement;
-    bubble?.click();
+    window.dispatchEvent(new Event("open-contact"));
   };
 
   return (
@@ -324,7 +323,7 @@ const Podcast = () => {
         </main>
 
         <Footer />
-        <AskFerryBubble />
+        
       </div>
     </>
   );

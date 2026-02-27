@@ -3,8 +3,7 @@ import { ArrowRight, MessageCircle } from "lucide-react";
 
 const MiniAbout = () => {
   const openMessagePanel = () => {
-    const bubble = document.querySelector('[aria-label="Send a message"]') as HTMLButtonElement;
-    bubble?.click();
+    window.dispatchEvent(new Event("open-contact"));
   };
 
   return (
