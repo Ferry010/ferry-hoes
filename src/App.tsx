@@ -20,8 +20,15 @@ import Contact from "./pages/Contact";
 import AdminLayout from "./components/admin/AdminLayout";
 import { ScrollToTop } from "./components/ScrollToTop";
 import IndexNavigation from "./components/IndexNavigation";
+import CookieConsent from "./components/CookieConsent";
+import { usePageTracking } from "./hooks/usePageTracking";
 
 const queryClient = new QueryClient();
+
+const PageTracker = () => {
+  usePageTracking();
+  return null;
+};
 
 const App = () => (
   <HelmetProvider>
@@ -31,7 +38,9 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <ScrollToTop />
+          <PageTracker />
           <IndexNavigation />
+          <CookieConsent />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/blog" element={<Blog />} />
