@@ -15,7 +15,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import Footer from "@/components/sections/Footer";
-import AskFerryBubble from "@/components/AskFerryBubble";
+
 import SEOHead from "@/components/blog/SEOHead";
 
 const INQUIRY_OPTIONS = [
@@ -339,7 +339,7 @@ const Contact = () => {
       </main>
 
       <Footer />
-      <AskFerryBubble />
+      
     </>
   );
 };

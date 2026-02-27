@@ -174,42 +174,7 @@ const AskFerryBubble = () => {
         </div>
       </div>
 
-      {/* Floating Bubble */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className={cn(
-          "fixed bottom-6 right-6 z-50",
-          "h-14 w-14 rounded-full",
-          "bg-primary text-primary-foreground",
-          "shadow-soft-lg hover:shadow-soft-lg",
-          "transition-all duration-300 ease-out",
-          "hover:scale-105 active:scale-95",
-          "flex items-center justify-center",
-          !isOpen && "animate-pulse-subtle"
-        )}
-        aria-label={isOpen ? "Close contact form" : "Send a message"}
-      >
-        <Mail
-          className={cn(
-            "h-6 w-6 transition-all duration-300",
-            isOpen ? "rotate-12 scale-0 opacity-0" : "rotate-0 scale-100 opacity-100"
-          )}
-        />
-        <X
-          className={cn(
-            "h-6 w-6 absolute transition-all duration-300",
-            isOpen ? "rotate-0 scale-100 opacity-100" : "-rotate-12 scale-0 opacity-0"
-          )}
-        />
-      </button>
-
-      <style>{`
-        @keyframes pulse-subtle {
-          0%, 100% { box-shadow: 0 0 0 0 hsl(var(--primary) / 0.4); }
-          50% { box-shadow: 0 0 0 8px hsl(var(--primary) / 0); }
-        }
-        .animate-pulse-subtle { animation: pulse-subtle 3s ease-in-out infinite; }
-      `}</style>
+      {/* Bubble removed — panel opens via "open-contact" event only */}
     </>
   );
 };

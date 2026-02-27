@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import Footer from "@/components/sections/Footer";
-import AskFerryBubble from "@/components/AskFerryBubble";
+
 import SEOHead from "@/components/blog/SEOHead";
 import ferryBrandHumanizing from "@/assets/ferry-brand-humanizing.jpg";
 import ferrySpeakingAudience from "@/assets/ferry-speaking-audience.jpg";
@@ -11,8 +11,7 @@ import ferryBts from "@/assets/ferry-bts.jpg";
 
 const About = () => {
   const openMessagePanel = () => {
-    const bubble = document.querySelector('[aria-label="Send a message"]') as HTMLButtonElement;
-    bubble?.click();
+    window.dispatchEvent(new Event("open-contact"));
   };
 
   return (
@@ -303,7 +302,7 @@ const About = () => {
         </section>
 
         <Footer />
-        <AskFerryBubble />
+        
       </div>
     </>
   );

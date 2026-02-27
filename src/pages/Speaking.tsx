@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/carousel";
 import { ArrowRight, Mic, Quote, ChevronDown, Play } from "lucide-react";
 import Footer from "@/components/sections/Footer";
-import AskFerryBubble from "@/components/AskFerryBubble";
+
 import SEOHead from "@/components/blog/SEOHead";
 import stagePhoto from "@/assets/ferry-filming.jpg";
 import ferryBts from "@/assets/ferry-bts.jpg";
@@ -297,7 +297,7 @@ const Speaking = () => {
         </main>
 
         <Footer />
-        <AskFerryBubble />
+        
       </div>
     </>
   );

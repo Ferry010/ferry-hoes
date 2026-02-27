@@ -21,6 +21,7 @@ import AdminLayout from "./components/admin/AdminLayout";
 import { ScrollToTop } from "./components/ScrollToTop";
 import IndexNavigation from "./components/IndexNavigation";
 import CookieConsent from "./components/CookieConsent";
+import AskFerryBubble from "./components/AskFerryBubble";
 import { usePageTracking } from "./hooks/usePageTracking";
 
 const queryClient = new QueryClient();
@@ -41,6 +42,7 @@ const App = () => (
           <PageTracker />
           <IndexNavigation />
           <CookieConsent />
+          <AskFerryBubble />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/blog" element={<Blog />} />

@@ -4,8 +4,7 @@ import bookCover from "@/assets/brand-humanizing-book.jpg";
 
 const BookSection = () => {
   const openMessagePanel = () => {
-    const bubble = document.querySelector('[aria-label="Send a message"]') as HTMLButtonElement;
-    bubble?.click();
+    window.dispatchEvent(new Event("open-contact"));
   };
 
   return (
