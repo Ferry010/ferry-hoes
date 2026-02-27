@@ -1,31 +1,35 @@
 
 
-## Plan: Add Google Analytics with on-brand cookie consent bar
+## Plan: Set GA ID, remove floating bubble, make contact form CTA-only
 
-### 1. Google Analytics setup
+### 1. Set Google Analytics Measurement ID
 
-You'll need a **Google Analytics Measurement ID** (format: `G-XXXXXXXXXX`). You can get one from [analytics.google.com](https://analytics.google.com) by creating a property for your site.
+**`src/lib/analytics.ts`** — Change `G-XXXXXXXXXX` to `G-039HEJE92H`.
 
-Once you have the ID, I'll:
+### 2. Remove the floating message bubble
 
-- Add the GA4 `gtag.js` script to `index.html`, but **only load it after the user consents** (no tracking before consent)
-- Create a small utility (`src/lib/analytics.ts`) that initializes GA and fires `gtag('consent', 'update', ...)` when the user accepts
+**`src/components/AskFerryBubble.tsx`** — Remove the floating bubble button at the bottom of the component (the `<button>` with `aria-label`). Keep the panel and backdrop — it will only open via the `open-contact` custom event.
 
-### 2. Cookie consent bar component
+### 3. Update all CTAs to use the `open-contact` event
 
-Create `src/components/CookieConsent.tsx` — a slim, on-brand bar fixed to the bottom of the viewport:
+Currently 6 places use `document.querySelector('[aria-label="Send a message"]').click()`. Since the bubble is removed, switch all of them to `window.dispatchEvent(new Event("open-contact"))`:
 
-- **Style**: Dark background (`bg-foreground`), white text, teal primary CTA button ("Accept"), ghost/outline "Decline" button — matching the existing footer and brand palette
-- **Copy**: Short, friendly message: "This site uses cookies to improve your experience and analyze traffic."
-- **Behavior**: Stores consent in `localStorage`. If already answered, the bar doesn't appear. On accept → load GA script dynamically. On decline → no tracking scripts loaded.
-- **Animation**: Slides up on mount, slides out on dismiss
+- **`src/components/sections/Hero.tsx`** — `openMessagePanel`
+- **`src/components/sections/BookSection.tsx`** — `openMessagePanel`
+- **`src/components/sections/PodcastSection.tsx`** — `openMessagePanel`
+- **`src/components/sections/MiniAbout.tsx`** — `openMessagePanel`
+- **`src/components/sections/ContentGrid.tsx`** — inline onClick
+- **`src/pages/About.tsx`** — `openMessagePanel`
+- **`src/pages/Podcast.tsx`** — `openMessagePanel`
 
-### 3. Integration
+### 4. Remove `<AskFerryBubble />` from individual pages, render once in App
 
-- Render `<CookieConsent />` in `src/App.tsx` (outside routes, visible on all pages)
-- Add GA page-view tracking on route changes via a small `useEffect` in App that calls `gtag('event', 'page_view', ...)` when the pathname changes (only if consent was given)
+Currently `<AskFerryBubble />` is rendered on every page individually (Index, About, Speaking, Podcast, Contact). Since it's now a headless panel (no bubble), render it once in `src/App.tsx` and remove it from all page files.
 
-### 4. What I'll need from you
-
-Your **Google Analytics Measurement ID** (e.g. `G-XXXXXXXXXX`). I can hard-code it since it's a public/publishable key — no secret storage needed.
+### Files changed
+- `src/lib/analytics.ts` — GA ID
+- `src/components/AskFerryBubble.tsx` — remove floating button
+- `src/App.tsx` — add `<AskFerryBubble />`
+- `src/pages/Index.tsx`, `src/pages/About.tsx`, `src/pages/Speaking.tsx`, `src/pages/Podcast.tsx`, `src/pages/Contact.tsx` — remove `<AskFerryBubble />`
+- `src/components/sections/Hero.tsx`, `BookSection.tsx`, `PodcastSection.tsx`, `MiniAbout.tsx`, `ContentGrid.tsx`, `src/pages/About.tsx`, `src/pages/Podcast.tsx` — update `openMessagePanel` to use `open-contact` event
 
