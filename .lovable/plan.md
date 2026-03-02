@@ -1,33 +1,22 @@
 
 
-## Redesign Blog Section on Homepage
+## Redesign Blog Section — Clean, Minimal Cards
 
-### Changes to `src/components/sections/BlogSection.tsx`
+### `src/components/sections/BlogSection.tsx`
+- Change from stacked layout (featured + secondary grid) to a single **2-column grid** for all posts (limit to 2 posts instead of 3)
+- Update loading skeleton to match the new 2-column equal layout
+- Remove the featured/secondary distinction
 
-Split the posts array: first post = featured card, remaining posts = secondary cards. Replace the uniform 3-column grid with a stacked layout.
-
-**Featured card (first post):**
-- No thumbnail image
-- Teal left border (`border-l-4 border-primary`)
-- Pull quote from the excerpt in Caveat font, italic, teal color
-- Article title in bold below the quote
-- Date + read time in small grey text
-- Full-width card
-
-**Secondary posts (posts 2+):**
-- Displayed in a 2-column grid
-- Thumbnail with dark overlay (`bg-black/50`) and title in white text on top
-- No separate title/excerpt below the image — all info overlaid
-- Date + read time in small white/grey text overlaid
-
-### Changes to `src/components/blog/BlogCard.tsx`
-
-Add a `variant` prop: `"featured"` | `"secondary"` (default keeps current behavior for the `/blog` page).
-
-- **`variant="featured"`**: Renders the quote-based card with teal left border, no image, Caveat pull quote, bold title, meta below.
-- **`variant="secondary"`**: Renders image with dark gradient overlay, title + meta in white on top of image, no content below.
+### `src/components/blog/BlogCard.tsx`
+- Add new `variant="homepage"` (or repurpose `featured`/`secondary` into one)
+- Card structure: `bg-background rounded-2xl p-6 md:p-8`, no image, no overlay, no pull quote, no Caveat font
+  - Small teal category tag at top (use a `<span>` styled like a pill badge in `bg-primary/10 text-primary`)
+  - Bold title
+  - One-line excerpt in grey (`text-muted-foreground`, `line-clamp-1`)
+  - Date + read time small at bottom
+- Keep hover effects consistent with site (`shadow-soft`, `hover:-translate-y-1`)
 
 ### Files changed
-- `src/components/blog/BlogCard.tsx` — add `variant` prop with featured/secondary rendering
-- `src/components/sections/BlogSection.tsx` — split posts into featured + secondary, use new variants
+- `src/components/blog/BlogCard.tsx` — replace `featured` and `secondary` variants with a single clean `homepage` variant
+- `src/components/sections/BlogSection.tsx` — 2-column grid, limit 2, use `homepage` variant
 
