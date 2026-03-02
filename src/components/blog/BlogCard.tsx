@@ -5,25 +5,31 @@ import type { BlogPost } from "@/hooks/useBlogPosts";
 interface BlogCardProps {
   post: BlogPost;
   variant?: "default" | "homepage";
+  colorIndex?: number;
 }
 
-const BlogCard = ({ post, variant = "default" }: BlogCardProps) => {
+const CARD_COLORS = [
+  "bg-[#5aa6b2]",
+  "bg-[#E86A4A]",
+];
+
+const BlogCard = ({ post, variant = "default", colorIndex = 0 }: BlogCardProps) => {
   if (variant === "homepage") {
     return (
       <Link to={`/blog/${post.slug}`}>
-        <article className="group bg-background rounded-2xl shadow-soft hover:shadow-soft-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer p-6 md:p-8 h-full flex flex-col">
-          <span className="inline-block self-start px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-medium mb-4">
+        <article className={`group ${CARD_COLORS[colorIndex % CARD_COLORS.length]} rounded-2xl shadow-soft hover:shadow-soft-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer p-6 md:p-8 h-full flex flex-col`}>
+          <span className="inline-block self-start px-3 py-1 bg-white/20 text-white rounded-full text-xs font-medium mb-4">
             Blog
           </span>
-          <h3 className="font-display text-xl md:text-2xl text-foreground font-bold mb-3 group-hover:text-accent transition-colors leading-tight line-clamp-2">
+          <h3 className="font-display text-xl md:text-2xl text-white font-bold mb-3 leading-tight">
             {post.title}
           </h3>
           {post.excerpt && (
-            <p className="text-muted-foreground text-sm md:text-base mb-auto leading-relaxed line-clamp-1">
+            <p className="text-white/70 text-sm md:text-base mb-auto leading-relaxed line-clamp-1">
               {post.excerpt}
             </p>
           )}
-          <div className="flex items-center gap-3 text-xs text-muted-foreground mt-6 pt-4 border-t border-border">
+          <div className="flex items-center gap-3 text-xs text-white/60 mt-6 pt-4 border-t border-white/20">
             <span>{formatPostDate(post.published_at)}</span>
             <span>·</span>
             <span>{getReadTime(post.content)}</span>
