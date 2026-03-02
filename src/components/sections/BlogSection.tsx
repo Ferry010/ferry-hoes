@@ -34,26 +34,31 @@ const BlogSection = () => {
 
           {/* Blog grid */}
           {isLoading ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12">
-              {[1, 2, 3].map((i) => (
-                <div
-                  key={i}
-                  className="bg-background rounded-2xl overflow-hidden animate-pulse"
-                >
-                  <div className="aspect-[16/10] bg-muted" />
-                  <div className="p-6 md:p-8 space-y-4">
-                    <div className="h-6 bg-muted rounded w-3/4" />
-                    <div className="h-4 bg-muted rounded w-full" />
-                    <div className="h-4 bg-muted rounded w-1/2" />
-                  </div>
-                </div>
-              ))}
+            <div className="space-y-8 mb-12">
+              <div className="bg-background rounded-2xl overflow-hidden animate-pulse border-l-4 border-primary p-8 md:p-12 space-y-4">
+                <div className="h-8 bg-muted rounded w-3/4" />
+                <div className="h-6 bg-muted rounded w-1/2" />
+                <div className="h-4 bg-muted rounded w-1/4" />
+              </div>
+              <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+                {[1, 2].map((i) => (
+                  <div key={i} className="aspect-[16/10] bg-muted rounded-2xl animate-pulse" />
+                ))}
+              </div>
             </div>
           ) : posts && posts.length > 0 ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12">
-              {posts.map((post) => (
-                <BlogCard key={post.id} post={post} />
-              ))}
+            <div className="space-y-8 mb-12">
+              {/* Featured post */}
+              <BlogCard post={posts[0]} variant="featured" />
+
+              {/* Secondary posts */}
+              {posts.length > 1 && (
+                <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+                  {posts.slice(1).map((post) => (
+                    <BlogCard key={post.id} post={post} variant="secondary" />
+                  ))}
+                </div>
+              )}
             </div>
           ) : (
             <div className="text-center py-16 mb-12">
