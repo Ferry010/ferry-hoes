@@ -1,22 +1,21 @@
 
 
-## Redesign Blog Section — Clean, Minimal Cards
-
-### `src/components/sections/BlogSection.tsx`
-- Change from stacked layout (featured + secondary grid) to a single **2-column grid** for all posts (limit to 2 posts instead of 3)
-- Update loading skeleton to match the new 2-column equal layout
-- Remove the featured/secondary distinction
+## Blog Section — Colored Background Cards
 
 ### `src/components/blog/BlogCard.tsx`
-- Add new `variant="homepage"` (or repurpose `featured`/`secondary` into one)
-- Card structure: `bg-background rounded-2xl p-6 md:p-8`, no image, no overlay, no pull quote, no Caveat font
-  - Small teal category tag at top (use a `<span>` styled like a pill badge in `bg-primary/10 text-primary`)
-  - Bold title
-  - One-line excerpt in grey (`text-muted-foreground`, `line-clamp-1`)
-  - Date + read time small at bottom
-- Keep hover effects consistent with site (`shadow-soft`, `hover:-translate-y-1`)
+- Change `homepage` variant to accept a `colorIndex` prop (0 = teal, 1 = coral)
+- Remove `line-clamp-2` from title to allow full display
+- Card backgrounds: first card `bg-[#5aa6b2]`, second card `bg-[#E86A4A]`
+- Title text: white, bold, no truncation
+- "Blog" tag: white text on `white/20` background
+- Excerpt: `text-white/70`
+- Date/read time: `text-white/60`, border-t `border-white/20`
+- Remove hover text color change (already white)
+
+### `src/components/sections/BlogSection.tsx`
+- Pass `colorIndex` to each `BlogCard` so first gets teal, second gets coral
 
 ### Files changed
-- `src/components/blog/BlogCard.tsx` — replace `featured` and `secondary` variants with a single clean `homepage` variant
-- `src/components/sections/BlogSection.tsx` — 2-column grid, limit 2, use `homepage` variant
+- `src/components/blog/BlogCard.tsx`
+- `src/components/sections/BlogSection.tsx`
 
