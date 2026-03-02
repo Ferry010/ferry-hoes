@@ -63,9 +63,8 @@ const BlogSection = () => {
             <div className="text-center">
               <Button
                 asChild
-                variant="outline"
                 size="lg"
-                className="rounded-full px-8 group border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                className="rounded-full px-8 group bg-primary text-primary-foreground hover:bg-primary/90"
               >
                 <Link to="/blog">
                   View all articles
