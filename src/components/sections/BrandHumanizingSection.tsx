@@ -29,6 +29,10 @@ const BrandHumanizingSection = () => {
             Brand Humanizing is my idea. I co-created it, I wrote a book about it, and I've spent the last ten years putting it on stages across the world.
           </p>
 
+          <p className="text-lg md:text-xl text-muted-foreground leading-relaxed text-center mt-6">
+            Technology should make organisations more human, not less.
+          </p>
+
           {/* Pull quote – handwritten margin note, left-aligned aside */}
           <p
             className="text-2xl md:text-3xl text-primary py-10 pl-4 md:pl-8 rotate-[-2deg] max-w-md"
@@ -38,7 +42,7 @@ const BrandHumanizingSection = () => {
           </p>
 
           <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-12 text-center">
-            Technology should make organisations more human, not less. It's not a framework I borrowed. It's something I built from scratch.
+            It's not a framework I borrowed. It's something I built from scratch.
           </p>
 
           {/* Micro-engagement */}
