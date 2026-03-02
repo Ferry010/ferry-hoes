@@ -46,8 +46,8 @@ const BlogSection = () => {
             </div>
           ) : posts && posts.length > 0 ? (
             <div className="grid md:grid-cols-2 gap-6 md:gap-8 mb-12">
-              {posts.map((post) => (
-                <BlogCard key={post.id} post={post} variant="homepage" />
+              {posts.map((post, index) => (
+                <BlogCard key={post.id} post={post} variant="homepage" colorIndex={index} />
               ))}
             </div>
           ) : (
