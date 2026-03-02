@@ -4,65 +4,29 @@ import type { BlogPost } from "@/hooks/useBlogPosts";
 
 interface BlogCardProps {
   post: BlogPost;
-  variant?: "default" | "featured" | "secondary";
+  variant?: "default" | "homepage";
 }
 
 const BlogCard = ({ post, variant = "default" }: BlogCardProps) => {
-  if (variant === "featured") {
+  if (variant === "homepage") {
     return (
       <Link to={`/blog/${post.slug}`}>
-        <article className="group bg-background rounded-2xl overflow-hidden shadow-soft hover:shadow-soft-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer border-l-4 border-primary p-8 md:p-12">
-          {/* Pull quote from excerpt */}
-          {post.excerpt && (
-            <p className="font-caveat text-2xl md:text-3xl lg:text-4xl text-primary italic leading-snug mb-6">
-              "{post.excerpt}"
-            </p>
-          )}
-
-          {/* Title */}
-          <h3 className="font-display text-xl md:text-2xl text-foreground font-bold mb-4 group-hover:text-accent transition-colors leading-tight">
+        <article className="group bg-background rounded-2xl shadow-soft hover:shadow-soft-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer p-6 md:p-8 h-full flex flex-col">
+          <span className="inline-block self-start px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-medium mb-4">
+            Blog
+          </span>
+          <h3 className="font-display text-xl md:text-2xl text-foreground font-bold mb-3 group-hover:text-accent transition-colors leading-tight line-clamp-2">
             {post.title}
           </h3>
-
-          {/* Meta */}
-          <div className="flex items-center gap-4 text-xs text-muted-foreground">
+          {post.excerpt && (
+            <p className="text-muted-foreground text-sm md:text-base mb-auto leading-relaxed line-clamp-1">
+              {post.excerpt}
+            </p>
+          )}
+          <div className="flex items-center gap-3 text-xs text-muted-foreground mt-6 pt-4 border-t border-border">
             <span>{formatPostDate(post.published_at)}</span>
             <span>·</span>
             <span>{getReadTime(post.content)}</span>
-          </div>
-        </article>
-      </Link>
-    );
-  }
-
-  if (variant === "secondary") {
-    return (
-      <Link to={`/blog/${post.slug}`}>
-        <article className="group relative rounded-2xl overflow-hidden shadow-soft hover:shadow-soft-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer aspect-[16/10]">
-          {/* Background image or fallback */}
-          {post.header_image_url ? (
-            <img
-              src={post.header_image_url}
-              alt={post.title}
-              className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-            />
-          ) : (
-            <div className="absolute inset-0 bg-gradient-to-br from-accent/30 to-primary/30" />
-          )}
-
-          {/* Dark overlay */}
-          <div className="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition-colors" />
-
-          {/* Content on top */}
-          <div className="absolute inset-0 flex flex-col justify-end p-6">
-            <h3 className="font-display text-lg md:text-xl text-white font-semibold leading-tight mb-2 line-clamp-2">
-              {post.title}
-            </h3>
-            <div className="flex items-center gap-3 text-xs text-white/70">
-              <span>{formatPostDate(post.published_at)}</span>
-              <span>·</span>
-              <span>{getReadTime(post.content)}</span>
-            </div>
           </div>
         </article>
       </Link>
