@@ -181,7 +181,7 @@ const About = () => {
                     Looking back, it all connects. The talkative kid at home. The introverted student at school. The teenager writing lyrics. The marketer fascinated by human behaviour. Every phase was preparing me for the same thing: standing on a stage and helping organisations find a better balance between people and technology.
                   </p>
                   <p>
-                    My life goal is to build Brand Humanizing into a global movement that reshapes how work is designed and how technology is used — and to use that success to one day buy UD Las Palmas and bring the club to its first-ever European glory.
+                    My life goal is to build Brand Humanizing into a global movement that reshapes how work is designed and how technology is used, and to use that success to one day buy UD Las Palmas and bring the club to its first-ever European glory.
                   </p>
                 </div>
               </section>
