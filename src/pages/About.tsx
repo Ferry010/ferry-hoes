@@ -102,7 +102,7 @@ const About = () => {
                     I was a cheerful kid who started talking early. My grandmother used to laugh and say, <em>"He started talking once… and never stopped."</em> That line would follow me for the rest of my life.
                   </p>
                   <p>
-                    At home, I was curious, talkative, and creative, but at school I was a different kid — introverted, a little insecure, and mostly average. The place where I felt most at ease was behind a computer screen. At ten years old, I built my first website, entirely about music.
+                    At home, I was curious, talkative, and creative, but at school I was a different kid. Introverted, a little insecure, and mostly average. The place where I felt most at ease was behind a computer screen. At ten years old, I built my first website, entirely about music.
                   </p>
                 </div>
               </section>
