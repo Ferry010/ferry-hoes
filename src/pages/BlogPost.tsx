@@ -46,8 +46,14 @@ const BlogPost = () => {
         publishedAt={post.published_at || undefined}
         modifiedAt={post.updated_at}
       />
+      <StructuredData
+        data={breadcrumbSchema([
+          { name: "Home", url: "https://ferryhoes.com" },
+          { name: "Blog", url: "https://ferryhoes.com/blog" },
+          { name: post.title, url: `https://ferryhoes.com/blog/${post.slug}` },
+        ])}
+      />
 
-      <main className="min-h-screen bg-background">
         {/* Hero Image */}
         {post.header_image_url ? (
           <div className="relative h-[50vh] md:h-[60vh] overflow-hidden">
