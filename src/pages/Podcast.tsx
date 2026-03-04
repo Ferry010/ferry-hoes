@@ -71,6 +71,15 @@ const Podcast = () => {
         ogType="website"
         canonicalUrl="/podcast"
       />
+      <StructuredData
+        data={[
+          podcastSchema,
+          breadcrumbSchema([
+            { name: "Home", url: "https://ferryhoes.com" },
+            { name: "Podcast", url: "https://ferryhoes.com/podcast" },
+          ]),
+        ]}
+      />
 
       <div className="overflow-x-hidden relative">
         {/* Continuous visual thread */}

@@ -3,6 +3,7 @@ import { ArrowLeft, Pen } from "lucide-react";
 import { useBlogPosts } from "@/hooks/useBlogPosts";
 import BlogCard from "@/components/blog/BlogCard";
 import SEOHead from "@/components/blog/SEOHead";
+import StructuredData, { breadcrumbSchema } from "@/components/StructuredData";
 
 const Blog = () => {
   const { data: posts, isLoading } = useBlogPosts();
