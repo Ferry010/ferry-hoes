@@ -15,7 +15,7 @@ const About = () => {
     <>
       <SEOHead
         title="About Ferry Hoes | Speaker, Author & Brand Humanizing Pioneer"
-        description="The story of Ferry Hoes — from building websites at age 10 to becoming one of the Netherlands' most booked keynote speakers. Discover the journey behind Brand Humanizing."
+        description="The story of Ferry Hoes, from building websites at age 10 to becoming one of the Netherlands' most booked keynote speakers. Discover the journey behind Brand Humanizing."
         ogType="website"
         canonicalUrl="/about"
       />
