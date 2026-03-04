@@ -16,6 +16,12 @@ const Blog = () => {
         ogType="website"
         canonicalUrl="/blog"
       />
+      <StructuredData
+        data={breadcrumbSchema([
+          { name: "Home", url: "https://ferryhoes.com" },
+          { name: "Blog", url: "https://ferryhoes.com/blog" },
+        ])}
+      />
 
       <main className="min-h-screen bg-background">
         {/* Header */}
