@@ -65,7 +65,7 @@ const Podcast = () => {
   return (
     <>
       <SEOHead
-        title="The Human Era Podcast | Ferry Hoes"
+        title="The Human Era Podcast | Ferry Hoes – Conversations on Humans & Technology"
         description="Deep conversations with founders, artists, scientists, and anyone doing interesting work at the intersection of humans and technology. Hosted by Ferry Hoes."
         ogType="website"
         canonicalUrl="/podcast"

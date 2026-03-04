@@ -14,6 +14,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import PostEditor from "./pages/PostEditor";
 import AdminMessages from "./pages/AdminMessages";
 import About from "./pages/About";
+import Press from "./pages/Press";
 import Conversation from "./pages/Conversation";
 import Podcast from "./pages/Podcast";
 import Contact from "./pages/Contact";

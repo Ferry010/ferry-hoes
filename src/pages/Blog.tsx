@@ -10,8 +10,8 @@ const Blog = () => {
   return (
     <>
 <SEOHead
-        title="Blog | Ferry Hoes"
-        description="Essays, insights, and perspectives on technology, humanity, and everything in between."
+        title="Blog | Ferry Hoes – Essays on Technology, Humanity & Brand Humanizing"
+        description="Essays, insights, and perspectives on technology, humanity, and Brand Humanizing by Ferry Hoes."
         ogType="website"
         canonicalUrl="/blog"
       />
