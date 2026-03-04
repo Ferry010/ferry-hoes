@@ -175,7 +175,7 @@ const About = () => {
                 <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-6">Where I am now</h2>
                 <div className="space-y-5 text-lg text-muted-foreground leading-relaxed">
                   <p>
-                    One day, someone found me on LinkedIn and asked me to speak at a small corporate event. The talk went well, and I used that momentum to apply to a speakers agency. From there things moved quickly — speaking across the country, then internationally, working with major organisations from fast-growing companies to global corporates.
+                    One day, someone found me on LinkedIn and asked me to speak at a small corporate event. The talk went well, and I used that momentum to apply to a speakers agency. From there things moved quickly. Speaking across the country, then internationally, working with major organisations from fast-growing companies to global corporates.
                   </p>
                   <p>
                     Looking back, it all connects. The talkative kid at home. The introverted student at school. The teenager writing lyrics. The marketer fascinated by human behaviour. Every phase was preparing me for the same thing: standing on a stage and helping organisations find a better balance between people and technology.
