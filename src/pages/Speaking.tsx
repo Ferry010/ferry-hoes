@@ -148,7 +148,7 @@ const Speaking = () => {
                   <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-foreground">Meet Ferry</h2>
                   <div className="space-y-4 text-muted-foreground text-lg leading-relaxed">
                     <p>
-                      Ferry spent over a decade at the intersection of technology, marketing, and human behaviour before stepping onto stages worldwide. He built the concept of Brand Humanizing from scratch — not borrowed, not adapted — and has spent years stress-testing it with global organisations.
+                      Ferry spent over a decade at the intersection of technology, marketing, and human behaviour before stepping onto stages worldwide. He built the concept of Brand Humanizing from scratch. Not borrowed, not adapted. He has spent years stress-testing it with global organisations.
                     </p>
                     <p>
                       His talks are built around one provocation: technology should make you more human, not less. Audiences leave with a clear idea of what to do on Monday morning.
