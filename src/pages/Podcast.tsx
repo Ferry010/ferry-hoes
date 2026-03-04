@@ -5,6 +5,7 @@ import podcastHero from "@/assets/podcast-hero.jpg";
 import Footer from "@/components/sections/Footer";
 
 import SEOHead from "@/components/blog/SEOHead";
+import StructuredData, { podcastSchema, breadcrumbSchema } from "@/components/StructuredData";
 
 // Spotify icon component
 const SpotifyIcon = ({ className }: { className?: string }) => (
