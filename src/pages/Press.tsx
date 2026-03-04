@@ -98,7 +98,7 @@ const Press = () => {
               {HEADSHOTS.map((img) => (
                 <a key={img.label} href={img.src} target="_blank" rel="noopener noreferrer" className="group">
                   <div className="aspect-[3/4] rounded-xl overflow-hidden shadow-sm group-hover:shadow-lg transition-shadow">
-                    <img src={img.src} alt={`Ferry Hoes — ${img.label}`} className="w-full h-full object-cover" />
+                    <img src={img.src} alt={`Ferry Hoes, ${img.label}`} className="w-full h-full object-cover" />
                   </div>
                   <p className="text-sm text-muted-foreground mt-2 text-center">{img.label}</p>
                 </a>

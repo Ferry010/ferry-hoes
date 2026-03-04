@@ -13,7 +13,7 @@ const posts = [
   },
   {
     id: 2,
-    title: "The Future of Work Isn't Remote—It's Human",
+    title: "The Future of Work Isn't Remote. It's Human.",
     excerpt: "We've been so focused on where we work, we forgot to ask how we work. Let's change that.",
     category: "Work",
     readTime: "4 min read",

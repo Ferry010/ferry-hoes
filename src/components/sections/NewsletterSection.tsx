@@ -36,7 +36,7 @@ const NewsletterSection = () => {
             Stay in the loop
           </h2>
           <p className="text-lg md:text-xl text-primary-foreground/70 mb-10 leading-relaxed">
-            Insights on technology, humanity, and Brand Humanizing — straight to your inbox. No noise.
+            Insights on technology, humanity, and Brand Humanizing, straight to your inbox. No noise.
           </p>
 
           {status === "success" ? (

@@ -86,7 +86,7 @@ const About = () => {
           </div>
         </header>
 
-        {/* Biography — structured with subheadings */}
+        {/* Biography, structured with subheadings */}
         <main className="pb-24 bg-background">
           <div className="container px-6 md:px-8">
             <div className="max-w-3xl mx-auto">

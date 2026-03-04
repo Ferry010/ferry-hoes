@@ -66,7 +66,7 @@ const Speaking = () => {
   return (
     <>
       <SEOHead
-        title="Keynote Speaking | Ferry Hoes – Inspiring Talks on AI & Brand Humanizing"
+        title="Keynote Speaking | Ferry Hoes. Inspiring Talks on AI & Brand Humanizing"
         description="Book Ferry Hoes for your next event. Keynotes on AI, technology, and Brand Humanizing that inspire action and spark real conversations."
         ogType="website"
         canonicalUrl="/speaking"
