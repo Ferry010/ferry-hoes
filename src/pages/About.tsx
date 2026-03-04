@@ -136,7 +136,7 @@ const About = () => {
                 <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-6">From tech sales to big ideas</h2>
                 <div className="space-y-5 text-lg text-muted-foreground leading-relaxed">
                   <p>
-                    After studying development — and realising I didn't enjoy it — a teacher pulled me aside: <em>"You should probably do something in marketing. Something where you can talk."</em> It sounded like casual advice, but in hindsight it was a golden insight.
+                    After studying development, and realising I didn't enjoy it, a teacher pulled me aside: <em>"You should probably do something in marketing. Something where you can talk."</em> It sounded like casual advice, but in hindsight it was a golden insight.
                   </p>
                   <p>
                     I switched to marketing, where I discovered my strengths. After graduating, I chose work over more studies and started as an account manager in IT sales. During the day, I sold technology. At night, I invested in myself — studying Business English at Cambridge, exploring social psychology, and specialising in change management and innovation.
