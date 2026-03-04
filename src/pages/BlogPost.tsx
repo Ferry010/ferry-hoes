@@ -54,6 +54,7 @@ const BlogPost = () => {
         ])}
       />
 
+      <main className="min-h-screen bg-background">
         {/* Hero Image */}
         {post.header_image_url ? (
           <div className="relative h-[50vh] md:h-[60vh] overflow-hidden">
