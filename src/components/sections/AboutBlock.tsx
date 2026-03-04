@@ -13,7 +13,7 @@ const AboutBlock = () => {
           </p>
           
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-[1.1] mb-10 text-foreground">
-            Keynote speaker, author, and the mind behind Brand Humanizing. He helps organisations stay human in a world run by technology.
+            Most people make technology complicated. I make it human. Through keynotes, a book, and one big idea that's been ten years in the making. That's it. That's the job.
           </h2>
           
           <Link 
