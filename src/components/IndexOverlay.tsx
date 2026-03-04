@@ -37,7 +37,7 @@ const NAV_ITEMS: NavItem[] = [
   {
     label: "THE BOOK",
     route: "/#book",
-    copy: "Brand Humanizing — the book on staying distinctive in a world of sameness.",
+    copy: "Brand Humanizing, the book on staying distinctive in a world of sameness.",
   },
   {
     label: "GET IN TOUCH",

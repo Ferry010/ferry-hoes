@@ -159,7 +159,7 @@ const About = () => {
                 <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-6">The birth of Brand Humanizing</h2>
                 <div className="space-y-5 text-lg text-muted-foreground leading-relaxed">
                   <p>
-                    In 2017, I was having lunch with my best friend Jonathan. We were both working as growth hackers, and during that conversation something clicked. We realised that much of what we were doing felt off — endless experiments on consumers, all for marginal revenue gains. Technology being used to manipulate instead of empower.
+                    In 2017, I was having lunch with my best friend Jonathan. We were both working as growth hackers, and during that conversation something clicked. We realised that much of what we were doing felt off. Endless experiments on consumers, all for marginal revenue gains. Technology being used to manipulate instead of empower.
                   </p>
                   <p>
                     That day, we coined the term <strong>Brand Humanizing</strong>. We spent a full year researching the concept while I freelanced to pay the bills. It was the perfect intersection of everything that fascinated me: technology, psychology, innovation, and human behaviour.

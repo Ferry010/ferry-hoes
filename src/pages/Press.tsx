@@ -127,7 +127,7 @@ const Press = () => {
           <div className="container px-6 md:px-8 max-w-3xl mx-auto text-center">
             <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Media enquiry?</h2>
             <p className="text-white/70 text-lg mb-8">
-              For interviews, quotes, or event programme copy — get in touch directly.
+              For interviews, quotes, or event programme copy, get in touch directly.
             </p>
             <Button asChild size="lg" className="rounded-full px-8 bg-accent text-accent-foreground hover:bg-accent/90 group">
               <Link to="/contact" state={{ from: "press" }}>
