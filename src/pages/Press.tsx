@@ -18,9 +18,9 @@ const HEADSHOTS = [
 ];
 
 const TOPICS = [
-  "Brand Humanizing — using technology to make brands more human",
-  "The Human Side of AI — what AI can and can't replace",
-  "The Future of Work — combining AI and human judgment",
+  "Brand Humanizing: using technology to make brands more human",
+  "The Human Side of AI: what AI can and can't replace",
+  "The Future of Work: combining AI and human judgment",
   "Digital transformation and customer experience",
   "Ethics and responsible use of technology",
 ];
