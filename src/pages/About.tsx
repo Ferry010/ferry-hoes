@@ -112,7 +112,7 @@ const About = () => {
                 <p className="font-display text-xl md:text-2xl text-foreground italic leading-relaxed">
                   "He started talking once… and never stopped."
                 </p>
-                <cite className="text-sm text-muted-foreground mt-2 block not-italic">— Ferry's grandmother</cite>
+                <cite className="text-sm text-muted-foreground mt-2 block not-italic">Ferry's grandmother</cite>
               </blockquote>
 
               {/* Discovering the stage */}
