@@ -74,7 +74,7 @@ const Press = () => {
             <div>
               <h2 className="font-display text-2xl font-bold text-foreground mb-4">Extended bio (150 words)</h2>
               <p className="text-muted-foreground leading-relaxed mb-4">
-                Ferry Hoes spent over a decade at the intersection of technology, marketing, and human behaviour before stepping onto stages worldwide. In 2017, he coined the term <strong>Brand Humanizing</strong> — a framework for using technology to make brands more distinctive and human — and spent years stress-testing it with global organisations.
+                Ferry Hoes spent over a decade at the intersection of technology, marketing, and human behaviour before stepping onto stages worldwide. In 2017, he coined the term <strong>Brand Humanizing</strong>, a framework for using technology to make brands more distinctive and human, and spent years stress-testing it with global organisations.
               </p>
               <p className="text-muted-foreground leading-relaxed mb-4">
                 He is the co-author of <em>Brand Humanizing</em> (with Jonathan Flores), founder of the Brand Humanizing Institute, and host of <em>The Human Era Podcast</em>. His talks are built around one provocation: technology should make you more human, not less.
