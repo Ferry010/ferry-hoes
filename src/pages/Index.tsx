@@ -1,27 +1,28 @@
 import SEOHead from "@/components/blog/SEOHead";
+import StructuredData, { personSchema, bookSchema } from "@/components/StructuredData";
 import HeroVideo from "@/components/sections/HeroVideo";
 import AboutBlock from "@/components/sections/AboutBlock";
 import BrandHumanizingSection from "@/components/sections/BrandHumanizingSection";
 import SpeakerSection from "@/components/sections/SpeakerSection";
 import BookSection from "@/components/sections/BookSection";
+import NewsletterSection from "@/components/sections/NewsletterSection";
 import PodcastSection from "@/components/sections/PodcastSection";
 import BlogSection from "@/components/sections/BlogSection";
 import CommunitySection from "@/components/sections/CommunitySection";
 import Footer from "@/components/sections/Footer";
 
-
 const Index = () => {
   return (
     <>
       <SEOHead
-        title="Ferry Hoes"
-        description="Essays, insights, and perspectives on technology, humanity, and everything in between."
+        title="Ferry Hoes | Keynote Speaker on AI, Technology & Brand Humanizing"
+        description="Ferry Hoes is an international keynote speaker, author of Brand Humanizing, and host of The Human Era Podcast. Helping brands become more human through technology."
         ogType="website"
         canonicalUrl="/"
       />
+      <StructuredData data={[personSchema, bookSchema]} />
 
       <div className="overflow-x-hidden relative">
-        
         <header>
           <HeroVideo />
         </header>
@@ -39,6 +40,7 @@ const Index = () => {
           <article>
             <BookSection />
           </article>
+          <NewsletterSection />
           <article>
             <PodcastSection />
           </article>
@@ -51,7 +53,6 @@ const Index = () => {
         </main>
 
         <Footer />
-        
       </div>
     </>
   );
