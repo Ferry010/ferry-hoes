@@ -139,7 +139,7 @@ const About = () => {
                     After studying development, and realising I didn't enjoy it, a teacher pulled me aside: <em>"You should probably do something in marketing. Something where you can talk."</em> It sounded like casual advice, but in hindsight it was a golden insight.
                   </p>
                   <p>
-                    I switched to marketing, where I discovered my strengths. After graduating, I chose work over more studies and started as an account manager in IT sales. During the day, I sold technology. At night, I invested in myself — studying Business English at Cambridge, exploring social psychology, and specialising in change management and innovation.
+                    I switched to marketing, where I discovered my strengths. After graduating, I chose work over more studies and started as an account manager in IT sales. During the day, I sold technology. At night, I invested in myself, studying Business English at Cambridge, exploring social psychology, and specialising in change management and innovation.
                   </p>
                   <p>
                     By 2016, corporate life felt restrictive and creatively suffocating. I quit my job and started my own business as a growth hacker, with no backup plan and no safety net. Just a belief that I would figure it out along the way.
