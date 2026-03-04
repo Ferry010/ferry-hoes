@@ -114,8 +114,8 @@ const Contact = () => {
   return (
     <>
       <SEOHead
-        title="Contact | Ferry Hoes – Get in Touch"
-        description="Get in touch with Ferry Hoes. Whether it's about a keynote, workshop, podcast or collaboration — reach out directly."
+        title="Contact | Ferry Hoes"
+        description="Get in touch with Ferry Hoes. Whether it's about a keynote, workshop, podcast or collaboration, reach out directly."
         ogType="website"
         canonicalUrl="/contact"
       />

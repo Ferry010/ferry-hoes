@@ -27,7 +27,7 @@ const CommunitySection = () => {
 
           {/* Social proof */}
           <p className="text-sm font-medium text-primary mb-8">
-            Join 400+ builders, thinkers, and doers already in the community.
+            A growing community of builders, thinkers, and doers.
           </p>
 
           {/* Benefits */}

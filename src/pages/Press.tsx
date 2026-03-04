@@ -18,9 +18,9 @@ const HEADSHOTS = [
 ];
 
 const TOPICS = [
-  "Brand Humanizing — using technology to make brands more human",
-  "The Human Side of AI — what AI can and can't replace",
-  "The Future of Work — combining AI and human judgment",
+  "Brand Humanizing: using technology to make brands more human",
+  "The Human Side of AI: what AI can and can't replace",
+  "The Future of Work: combining AI and human judgment",
   "Digital transformation and customer experience",
   "Ethics and responsible use of technology",
 ];
@@ -74,7 +74,7 @@ const Press = () => {
             <div>
               <h2 className="font-display text-2xl font-bold text-foreground mb-4">Extended bio (150 words)</h2>
               <p className="text-muted-foreground leading-relaxed mb-4">
-                Ferry Hoes spent over a decade at the intersection of technology, marketing, and human behaviour before stepping onto stages worldwide. In 2017, he coined the term <strong>Brand Humanizing</strong> — a framework for using technology to make brands more distinctive and human — and spent years stress-testing it with global organisations.
+                Ferry Hoes spent over a decade at the intersection of technology, marketing, and human behaviour before stepping onto stages worldwide. In 2017, he coined the term <strong>Brand Humanizing</strong>, a framework for using technology to make brands more distinctive and human, and spent years stress-testing it with global organisations.
               </p>
               <p className="text-muted-foreground leading-relaxed mb-4">
                 He is the co-author of <em>Brand Humanizing</em> (with Jonathan Flores), founder of the Brand Humanizing Institute, and host of <em>The Human Era Podcast</em>. His talks are built around one provocation: technology should make you more human, not less.
@@ -98,7 +98,7 @@ const Press = () => {
               {HEADSHOTS.map((img) => (
                 <a key={img.label} href={img.src} target="_blank" rel="noopener noreferrer" className="group">
                   <div className="aspect-[3/4] rounded-xl overflow-hidden shadow-sm group-hover:shadow-lg transition-shadow">
-                    <img src={img.src} alt={`Ferry Hoes — ${img.label}`} className="w-full h-full object-cover" />
+                    <img src={img.src} alt={`Ferry Hoes, ${img.label}`} className="w-full h-full object-cover" />
                   </div>
                   <p className="text-sm text-muted-foreground mt-2 text-center">{img.label}</p>
                 </a>
@@ -127,7 +127,7 @@ const Press = () => {
           <div className="container px-6 md:px-8 max-w-3xl mx-auto text-center">
             <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Media enquiry?</h2>
             <p className="text-white/70 text-lg mb-8">
-              For interviews, quotes, or event programme copy — get in touch directly.
+              For interviews, quotes, or event programme copy, get in touch directly.
             </p>
             <Button asChild size="lg" className="rounded-full px-8 bg-accent text-accent-foreground hover:bg-accent/90 group">
               <Link to="/contact" state={{ from: "press" }}>

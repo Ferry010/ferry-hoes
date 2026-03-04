@@ -66,7 +66,7 @@ const Speaking = () => {
   return (
     <>
       <SEOHead
-        title="Keynote Speaking | Ferry Hoes – Inspiring Talks on AI & Brand Humanizing"
+        title="Keynote Speaking | Ferry Hoes. Inspiring Talks on AI & Brand Humanizing"
         description="Book Ferry Hoes for your next event. Keynotes on AI, technology, and Brand Humanizing that inspire action and spark real conversations."
         ogType="website"
         canonicalUrl="/speaking"
@@ -148,7 +148,7 @@ const Speaking = () => {
                   <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-foreground">Meet Ferry</h2>
                   <div className="space-y-4 text-muted-foreground text-lg leading-relaxed">
                     <p>
-                      Ferry spent over a decade at the intersection of technology, marketing, and human behaviour before stepping onto stages worldwide. He built the concept of Brand Humanizing from scratch — not borrowed, not adapted — and has spent years stress-testing it with global organisations.
+                      Ferry spent over a decade at the intersection of technology, marketing, and human behaviour before stepping onto stages worldwide. He built the concept of Brand Humanizing from scratch. Not borrowed, not adapted. He has spent years stress-testing it with global organisations.
                     </p>
                     <p>
                       His talks are built around one provocation: technology should make you more human, not less. Audiences leave with a clear idea of what to do on Monday morning.
@@ -244,7 +244,7 @@ const Speaking = () => {
                       { quote: "Ferry is a knowledgeable and approachable speaker. You could tell at our event from the extensive Q&A, where many questions came from the audience about developments in AI. With his expertise on the synergy between humans and technology, Ferry was a strong keynote opening for our event.", name: "", company: "ACES Direct" },
                       { quote: "Ferry was well prepared and it was great having him as our moderator. He thought along and took action where needed. The reactions from the audience were positive.", name: "Els", company: "Triade Vitree" },
                       { quote: "I recently organized a workshop where Ferry Hoes and the Brand Humanizing Institute delivered a lecture on the Ethics of AI. No 'Death by PowerPoint,' but a smooth and captivating story that got us as an IT organization thinking. Ferry is second to none at keeping his audience engaged. I received a lot of positive feedback about his contribution to our workshop and wholeheartedly recommend him.", name: "Laurens", company: "Atos" },
-                      { quote: "Ferry has the gift of explaining complex theory in an accessible way. The AI experience among participants varied widely — from no experience at all to employees who already use it daily. Even those without any experience came out of the workshop surprised and very enthusiastic.", name: "Maud", company: "Chubb Fire & Security" },
+                      { quote: "Ferry has the gift of explaining complex theory in an accessible way. The AI experience among participants varied widely, from no experience at all to employees who already use it daily. Even those without any experience came out of the workshop surprised and very enthusiastic.", name: "Maud", company: "Chubb Fire & Security" },
                     ].map((testimonial, i) => (
                       <CarouselItem key={i} className="pl-6 basis-full md:basis-1/2">
                         <TestimonialCard quote={testimonial.quote} name={testimonial.name} company={testimonial.company} />

@@ -15,7 +15,7 @@ const About = () => {
     <>
       <SEOHead
         title="About Ferry Hoes | Speaker, Author & Brand Humanizing Pioneer"
-        description="The story of Ferry Hoes — from building websites at age 10 to becoming one of the Netherlands' most booked keynote speakers. Discover the journey behind Brand Humanizing."
+        description="The story of Ferry Hoes, from building websites at age 10 to becoming one of the Netherlands' most booked keynote speakers. Discover the journey behind Brand Humanizing."
         ogType="website"
         canonicalUrl="/about"
       />
@@ -86,7 +86,7 @@ const About = () => {
           </div>
         </header>
 
-        {/* Biography — structured with subheadings */}
+        {/* Biography, structured with subheadings */}
         <main className="pb-24 bg-background">
           <div className="container px-6 md:px-8">
             <div className="max-w-3xl mx-auto">
@@ -102,7 +102,7 @@ const About = () => {
                     I was a cheerful kid who started talking early. My grandmother used to laugh and say, <em>"He started talking once… and never stopped."</em> That line would follow me for the rest of my life.
                   </p>
                   <p>
-                    At home, I was curious, talkative, and creative, but at school I was a different kid — introverted, a little insecure, and mostly average. The place where I felt most at ease was behind a computer screen. At ten years old, I built my first website, entirely about music.
+                    At home, I was curious, talkative, and creative, but at school I was a different kid. Introverted, a little insecure, and mostly average. The place where I felt most at ease was behind a computer screen. At ten years old, I built my first website, entirely about music.
                   </p>
                 </div>
               </section>
@@ -112,7 +112,7 @@ const About = () => {
                 <p className="font-display text-xl md:text-2xl text-foreground italic leading-relaxed">
                   "He started talking once… and never stopped."
                 </p>
-                <cite className="text-sm text-muted-foreground mt-2 block not-italic">— Ferry's grandmother</cite>
+                <cite className="text-sm text-muted-foreground mt-2 block not-italic">Ferry's grandmother</cite>
               </blockquote>
 
               {/* Discovering the stage */}
@@ -136,10 +136,10 @@ const About = () => {
                 <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-6">From tech sales to big ideas</h2>
                 <div className="space-y-5 text-lg text-muted-foreground leading-relaxed">
                   <p>
-                    After studying development — and realising I didn't enjoy it — a teacher pulled me aside: <em>"You should probably do something in marketing. Something where you can talk."</em> It sounded like casual advice, but in hindsight it was a golden insight.
+                    After studying development, and realising I didn't enjoy it, a teacher pulled me aside: <em>"You should probably do something in marketing. Something where you can talk."</em> It sounded like casual advice, but in hindsight it was a golden insight.
                   </p>
                   <p>
-                    I switched to marketing, where I discovered my strengths. After graduating, I chose work over more studies and started as an account manager in IT sales. During the day, I sold technology. At night, I invested in myself — studying Business English at Cambridge, exploring social psychology, and specialising in change management and innovation.
+                    I switched to marketing, where I discovered my strengths. After graduating, I chose work over more studies and started as an account manager in IT sales. During the day, I sold technology. At night, I invested in myself, studying Business English at Cambridge, exploring social psychology, and specialising in change management and innovation.
                   </p>
                   <p>
                     By 2016, corporate life felt restrictive and creatively suffocating. I quit my job and started my own business as a growth hacker, with no backup plan and no safety net. Just a belief that I would figure it out along the way.
@@ -159,7 +159,7 @@ const About = () => {
                 <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-6">The birth of Brand Humanizing</h2>
                 <div className="space-y-5 text-lg text-muted-foreground leading-relaxed">
                   <p>
-                    In 2017, I was having lunch with my best friend Jonathan. We were both working as growth hackers, and during that conversation something clicked. We realised that much of what we were doing felt off — endless experiments on consumers, all for marginal revenue gains. Technology being used to manipulate instead of empower.
+                    In 2017, I was having lunch with my best friend Jonathan. We were both working as growth hackers, and during that conversation something clicked. We realised that much of what we were doing felt off. Endless experiments on consumers, all for marginal revenue gains. Technology being used to manipulate instead of empower.
                   </p>
                   <p>
                     That day, we coined the term <strong>Brand Humanizing</strong>. We spent a full year researching the concept while I freelanced to pay the bills. It was the perfect intersection of everything that fascinated me: technology, psychology, innovation, and human behaviour.
@@ -175,13 +175,13 @@ const About = () => {
                 <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-6">Where I am now</h2>
                 <div className="space-y-5 text-lg text-muted-foreground leading-relaxed">
                   <p>
-                    One day, someone found me on LinkedIn and asked me to speak at a small corporate event. The talk went well, and I used that momentum to apply to a speakers agency. From there things moved quickly — speaking across the country, then internationally, working with major organisations from fast-growing companies to global corporates.
+                    One day, someone found me on LinkedIn and asked me to speak at a small corporate event. The talk went well, and I used that momentum to apply to a speakers agency. From there things moved quickly. Speaking across the country, then internationally, working with major organisations from fast-growing companies to global corporates.
                   </p>
                   <p>
                     Looking back, it all connects. The talkative kid at home. The introverted student at school. The teenager writing lyrics. The marketer fascinated by human behaviour. Every phase was preparing me for the same thing: standing on a stage and helping organisations find a better balance between people and technology.
                   </p>
                   <p>
-                    My life goal is to build Brand Humanizing into a global movement that reshapes how work is designed and how technology is used — and to use that success to one day buy UD Las Palmas and bring the club to its first-ever European glory.
+                    My life goal is to build Brand Humanizing into a global movement that reshapes how work is designed and how technology is used, and to use that success to one day buy UD Las Palmas and bring the club to its first-ever European glory.
                   </p>
                 </div>
               </section>
