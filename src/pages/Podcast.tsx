@@ -5,6 +5,7 @@ import podcastHero from "@/assets/podcast-hero.jpg";
 import Footer from "@/components/sections/Footer";
 
 import SEOHead from "@/components/blog/SEOHead";
+import StructuredData, { podcastSchema, breadcrumbSchema } from "@/components/StructuredData";
 
 // Spotify icon component
 const SpotifyIcon = ({ className }: { className?: string }) => (
@@ -65,10 +66,19 @@ const Podcast = () => {
   return (
     <>
       <SEOHead
-        title="The Human Era Podcast | Ferry Hoes"
+        title="The Human Era Podcast | Ferry Hoes – Conversations on Humans & Technology"
         description="Deep conversations with founders, artists, scientists, and anyone doing interesting work at the intersection of humans and technology. Hosted by Ferry Hoes."
         ogType="website"
         canonicalUrl="/podcast"
+      />
+      <StructuredData
+        data={[
+          podcastSchema,
+          breadcrumbSchema([
+            { name: "Home", url: "https://ferryhoes.com" },
+            { name: "Podcast", url: "https://ferryhoes.com/podcast" },
+          ]),
+        ]}
       />
 
       <div className="overflow-x-hidden relative">

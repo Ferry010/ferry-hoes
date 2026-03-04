@@ -2,6 +2,7 @@ import { Link, useParams, Navigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { useBlogPost, formatPostDate, getReadTime } from "@/hooks/useBlogPosts";
 import SEOHead from "@/components/blog/SEOHead";
+import StructuredData, { breadcrumbSchema } from "@/components/StructuredData";
 import PostCTA from "@/components/blog/PostCTA";
 
 const BlogPost = () => {
@@ -44,6 +45,13 @@ const BlogPost = () => {
         canonicalUrl={`/blog/${post.slug}`}
         publishedAt={post.published_at || undefined}
         modifiedAt={post.updated_at}
+      />
+      <StructuredData
+        data={breadcrumbSchema([
+          { name: "Home", url: "https://ferryhoes.com" },
+          { name: "Blog", url: "https://ferryhoes.com/blog" },
+          { name: post.title, url: `https://ferryhoes.com/blog/${post.slug}` },
+        ])}
       />
 
       <main className="min-h-screen bg-background">

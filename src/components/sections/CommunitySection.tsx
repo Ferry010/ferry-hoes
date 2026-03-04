@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Users } from "lucide-react";
+import { ArrowRight, Users, Zap, MessageSquare, Network } from "lucide-react";
 
 const DISCORD_URL = "https://discord.gg/BfZrw5wJ";
 
@@ -20,10 +20,31 @@ const CommunitySection = () => {
             <span className="text-primary">Build with me.</span>
           </h2>
           
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed">
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-4 leading-relaxed">
             I'm creating a community of builders, thinkers, and doers who want to 
             shape the future of work and technology. Not as followers, but as collaborators.
           </p>
+
+          {/* Social proof */}
+          <p className="text-sm font-medium text-primary mb-8">
+            Join 400+ builders, thinkers, and doers already in the community.
+          </p>
+
+          {/* Benefits */}
+          <div className="flex flex-col sm:flex-row justify-center gap-6 mb-12 text-left max-w-xl mx-auto">
+            <div className="flex items-start gap-3">
+              <Zap className="h-5 w-5 text-accent mt-0.5 shrink-0" />
+              <span className="text-muted-foreground text-sm">Early access to ideas, frameworks, and content before anyone else</span>
+            </div>
+            <div className="flex items-start gap-3">
+              <MessageSquare className="h-5 w-5 text-accent mt-0.5 shrink-0" />
+              <span className="text-muted-foreground text-sm">Live Q&As and direct conversations with Ferry</span>
+            </div>
+            <div className="flex items-start gap-3">
+              <Network className="h-5 w-5 text-accent mt-0.5 shrink-0" />
+              <span className="text-muted-foreground text-sm">A network of like-minded professionals across industries</span>
+            </div>
+          </div>
           
           {/* Discord CTA */}
           <Button

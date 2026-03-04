@@ -3,6 +3,7 @@ import { ArrowLeft, Pen } from "lucide-react";
 import { useBlogPosts } from "@/hooks/useBlogPosts";
 import BlogCard from "@/components/blog/BlogCard";
 import SEOHead from "@/components/blog/SEOHead";
+import StructuredData, { breadcrumbSchema } from "@/components/StructuredData";
 
 const Blog = () => {
   const { data: posts, isLoading } = useBlogPosts();
@@ -10,10 +11,16 @@ const Blog = () => {
   return (
     <>
 <SEOHead
-        title="Blog | Ferry Hoes"
-        description="Essays, insights, and perspectives on technology, humanity, and everything in between."
+        title="Blog | Ferry Hoes – Essays on Technology, Humanity & Brand Humanizing"
+        description="Essays, insights, and perspectives on technology, humanity, and Brand Humanizing by Ferry Hoes."
         ogType="website"
         canonicalUrl="/blog"
+      />
+      <StructuredData
+        data={breadcrumbSchema([
+          { name: "Home", url: "https://ferryhoes.com" },
+          { name: "Blog", url: "https://ferryhoes.com/blog" },
+        ])}
       />
 
       <main className="min-h-screen bg-background">

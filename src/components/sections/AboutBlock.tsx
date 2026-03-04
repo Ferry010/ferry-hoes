@@ -1,6 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import ferryPhoto from "@/assets/ferry-bookstore.jpg";
+import ferryPhoto from "@/assets/ferry-speaking-audience.jpg";
 
 const AboutBlock = () => {
   return (
@@ -13,7 +13,7 @@ const AboutBlock = () => {
           </p>
           
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-[1.1] mb-10 text-foreground">
-            Most people make technology complicated. I make it human. Through keynotes, a book, and one big idea that's been ten years in the making. That's it. That's the job.
+            Keynote speaker, author, and the mind behind Brand Humanizing — helping organisations stay human in a world run by technology.
           </h2>
           
           <Link 
@@ -29,12 +29,11 @@ const AboutBlock = () => {
         <div className="relative min-h-[400px] md:min-h-screen order-first md:order-last">
           <img 
             src={ferryPhoto}
-            alt="Ferry Hoes holding Brand Humanizing book in a bookstore"
+            alt="Ferry Hoes speaking on stage in front of an audience"
             className="absolute inset-0 w-full h-full object-cover"
           />
         </div>
       </div>
-
     </section>
   );
 };

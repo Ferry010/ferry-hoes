@@ -14,6 +14,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import PostEditor from "./pages/PostEditor";
 import AdminMessages from "./pages/AdminMessages";
 import About from "./pages/About";
+import Press from "./pages/Press";
 import Conversation from "./pages/Conversation";
 import Podcast from "./pages/Podcast";
 import Contact from "./pages/Contact";
@@ -52,6 +53,7 @@ const App = () => (
             <Route path="/podcast" element={<Podcast />} />
             <Route path="/conversation" element={<Conversation />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/press" element={<Press />} />
             <Route path="/admin" element={<AdminLogin />} />
             <Route path="/admin" element={<AdminLayout />}>
               <Route path="dashboard" element={<AdminDashboard />} />

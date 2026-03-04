@@ -66,20 +66,20 @@ const HeroVideo = () => {
           </button>
         </div>
 
-        {/* Name + subtitle */}
+        {/* Name + H1 */}
         <div className="mt-8 md:mt-10">
-          <h1
-            className="font-display text-2xl sm:text-3xl md:text-4xl text-background tracking-tight opacity-0 animate-fade-up drop-shadow-[0_2px_20px_rgba(0,0,0,0.4)]"
+          <p
+            className="text-xs md:text-sm tracking-[0.25em] uppercase text-background/50 font-medium opacity-0 animate-fade-up"
             style={{ animationDelay: "4.3s" }}
           >
             Ferry Hoes
-          </h1>
-          <p
-            className="mt-2 text-xs md:text-sm tracking-[0.25em] uppercase text-background/50 font-medium opacity-0 animate-fade-up"
+          </p>
+          <h1
+            className="font-display text-2xl sm:text-3xl md:text-4xl text-background tracking-tight opacity-0 animate-fade-up mt-2 drop-shadow-[0_2px_20px_rgba(0,0,0,0.4)]"
             style={{ animationDelay: "4.8s" }}
           >
-            Speaker &bull; Author &bull; Brand Humanizing
-          </p>
+            Most people make technology complicated. I make it human.
+          </h1>
         </div>
       </div>
     </section>

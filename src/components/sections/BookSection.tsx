@@ -1,10 +1,28 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, BookOpen, MessageCircle } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { ArrowRight, BookOpen, MessageCircle, Mail, CheckCircle } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 import bookCover from "@/assets/brand-humanizing-book.jpg";
 
 const BookSection = () => {
-  const openMessagePanel = () => {
-    window.dispatchEvent(new Event("open-contact"));
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+  const handleWaitlist = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.trim()) return;
+    setStatus("loading");
+    const { error } = await supabase.from("email_subscribers" as any).insert({
+      email: email.trim(),
+      source: "english_waitlist",
+    } as any);
+    if (error && !error.message.includes("duplicate")) {
+      setStatus("error");
+      return;
+    }
+    setStatus("success");
+    setEmail("");
   };
 
   return (
@@ -15,10 +33,7 @@ const BookSection = () => {
             {/* Book cover */}
             <div className="relative flex justify-center lg:justify-end order-1">
               <div className="relative">
-                {/* Shadow effect */}
                 <div className="absolute inset-0 bg-foreground/20 rounded-lg blur-2xl translate-x-4 translate-y-4" />
-                
-                {/* Book image */}
                 <img 
                   src={bookCover} 
                   alt="Brand Humanizing - The superpower that makes your brand more human and your business grow faster" 
@@ -45,7 +60,7 @@ const BookSection = () => {
               
               <p className="text-muted-foreground leading-relaxed mb-6">
                 Featuring case studies from a.s.r., Ben & Jerry's, Dove, Octopus Energy, Patagonia and other 
-                organizations showing how to use technology to become more human, not less.
+                organisations showing how to use technology to become more human, not less.
               </p>
               
               <p className="text-sm text-muted-foreground mb-8">
@@ -65,26 +80,42 @@ const BookSection = () => {
                 </Button>
               </div>
 
-              {/* Dutch-only note with English request */}
+              {/* English edition waitlist */}
               <div className="bg-background/60 backdrop-blur rounded-2xl p-6 border border-border">
-                <p className="text-sm text-muted-foreground mb-3">
-                  <strong className="text-foreground">Currently available in Dutch only.</strong>
-                  {" "}Want an English edition? Let me know — with enough interest, we'll publish!
+                <p className="text-sm text-foreground font-semibold mb-1">
+                  Currently available in Dutch only.
                 </p>
-                <button
-                  onClick={openMessagePanel}
-                  className="inline-flex items-center gap-2 text-primary hover:text-primary/80 text-sm font-medium transition-colors group"
-                >
-                  <MessageCircle className="h-4 w-4" />
-                  <span className="underline underline-offset-4">Request English edition</span>
-                  <ArrowRight className="h-3 w-3 group-hover:translate-x-1 transition-transform" />
-                </button>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Get notified when the English edition launches.
+                </p>
+                {status === "success" ? (
+                  <p className="inline-flex items-center gap-2 text-sm text-primary font-medium animate-fade-in">
+                    <CheckCircle className="h-4 w-4" />
+                    You're on the list!
+                  </p>
+                ) : (
+                  <form onSubmit={handleWaitlist} className="flex gap-2">
+                    <Input
+                      type="email"
+                      placeholder="your@email.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                      className="max-w-xs text-sm"
+                    />
+                    <Button type="submit" size="sm" disabled={status === "loading"}>
+                      {status === "loading" ? "..." : "Join the waitlist"}
+                    </Button>
+                  </form>
+                )}
+                {status === "error" && (
+                  <p className="text-xs text-destructive mt-2">Something went wrong. Please try again.</p>
+                )}
               </div>
             </div>
           </div>
         </div>
       </div>
-
     </section>
   );
 };
