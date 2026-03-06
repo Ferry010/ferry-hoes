@@ -1,35 +1,21 @@
 
 
-## Google SEO Optimization
+## Blog Section — Colored Background Cards
 
-The site already has good foundations (structured data, SEO meta tags, canonical URLs pointing to ferryhoes.com). The main gaps are:
+### `src/components/blog/BlogCard.tsx`
+- Change `homepage` variant to accept a `colorIndex` prop (0 = teal, 1 = coral)
+- Remove `line-clamp-2` from title to allow full display
+- Card backgrounds: first card `bg-[#5aa6b2]`, second card `bg-[#E86A4A]`
+- Title text: white, bold, no truncation
+- "Blog" tag: white text on `white/20` background
+- Excerpt: `text-white/70`
+- Date/read time: `text-white/60`, border-t `border-white/20`
+- Remove hover text color change (already white)
 
-### 1. Fix sitemap.xml (critical)
-**File: `public/sitemap.xml`**
-- Still uses `https://yourdomain.com` placeholder URLs
-- Update all URLs to `https://ferryhoes.com`
-- Add missing pages: `/about`, `/podcast`, `/contact`, `/press`
-- Add `<lastmod>` dates for better crawl signaling
-
-### 2. Fix robots.txt (critical)
-**File: `public/robots.txt`**
-- Sitemap reference still points to `https://yourdomain.com/sitemap.xml`
-- Update to `https://ferryhoes.com/sitemap.xml`
-- Simplify to a single `User-agent: *` block
-
-### 3. Add WebSite schema with SearchAction
-**File: `src/components/StructuredData.tsx`**
-- Add a `WebSite` schema (helps Google understand site identity and can enable sitelinks in search results)
-
-### 4. Enhance Person schema
-**File: `src/components/StructuredData.tsx`**
-- Add `image`, `knowsAbout`, and `brand` properties to the existing Person schema for richer knowledge panel data
-
-### 5. Add `<lastmod>` and all routes to sitemap
-All public routes added: `/`, `/about`, `/speaking`, `/podcast`, `/blog`, `/contact`, `/press`
+### `src/components/sections/BlogSection.tsx`
+- Pass `colorIndex` to each `BlogCard` so first gets teal, second gets coral
 
 ### Files changed
-- `public/sitemap.xml`
-- `public/robots.txt`
-- `src/components/StructuredData.tsx`
+- `src/components/blog/BlogCard.tsx`
+- `src/components/sections/BlogSection.tsx`
 
