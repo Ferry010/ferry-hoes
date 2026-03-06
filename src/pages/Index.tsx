@@ -1,5 +1,5 @@
 import SEOHead from "@/components/blog/SEOHead";
-import StructuredData, { personSchema, bookSchema } from "@/components/StructuredData";
+import StructuredData, { personSchema, bookSchema, websiteSchema } from "@/components/StructuredData";
 import HeroVideo from "@/components/sections/HeroVideo";
 import AboutBlock from "@/components/sections/AboutBlock";
 import BrandHumanizingSection from "@/components/sections/BrandHumanizingSection";
