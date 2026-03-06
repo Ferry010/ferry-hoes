@@ -26,12 +26,29 @@ export const personSchema = {
   name: "Ferry Hoes",
   jobTitle: "Keynote Speaker & Author",
   url: "https://ferryhoes.com",
+  image: "https://ferryhoes.com/og-image.jpg",
   sameAs: [
     "https://www.linkedin.com/in/ferryhoes/",
     "https://www.youtube.com/@ferry-hoes",
   ],
   description:
     "International keynote speaker, published author, and creator of Brand Humanizing.",
+  knowsAbout: ["Brand Humanizing", "Keynote Speaking", "AI", "Technology", "Marketing"],
+  brand: {
+    "@type": "Brand",
+    name: "Brand Humanizing",
+    url: "https://brandhumanizingboek.nl",
+  },
+};
+
+export const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Ferry Hoes",
+  url: "https://ferryhoes.com",
+  description:
+    "Essays, insights, and perspectives on technology, humanity, and everything in between.",
+  author: { "@type": "Person", name: "Ferry Hoes" },
 };
 
 export const bookSchema = {
