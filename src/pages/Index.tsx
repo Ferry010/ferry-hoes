@@ -20,7 +20,7 @@ const Index = () => {
         ogType="website"
         canonicalUrl="/"
       />
-      <StructuredData data={[personSchema, bookSchema]} />
+      <StructuredData data={[personSchema, bookSchema, websiteSchema]} />
 
       <div className="overflow-x-hidden relative">
         <header>
