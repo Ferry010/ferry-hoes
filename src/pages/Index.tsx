@@ -5,7 +5,6 @@ import AboutBlock from "@/components/sections/AboutBlock";
 import BrandHumanizingSection from "@/components/sections/BrandHumanizingSection";
 import SpeakerSection from "@/components/sections/SpeakerSection";
 import BookSection from "@/components/sections/BookSection";
-import NewsletterSection from "@/components/sections/NewsletterSection";
 import PodcastSection from "@/components/sections/PodcastSection";
 import BlogSection from "@/components/sections/BlogSection";
 import CommunitySection from "@/components/sections/CommunitySection";
@@ -40,16 +39,13 @@ const Index = () => {
           <article>
             <BookSection />
           </article>
-          <NewsletterSection />
           <article>
             <PodcastSection />
           </article>
           <article>
             <BlogSection />
           </article>
-          <article>
-            <CommunitySection />
-          </article>
+          <CommunitySection />
         </main>
 
         <Footer />
