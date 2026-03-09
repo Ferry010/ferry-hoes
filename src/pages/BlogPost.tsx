@@ -63,7 +63,7 @@ const BlogPost = () => {
               alt={post.title}
               className="w-full h-full object-cover"
             />
-            {/* Brand overlay */}
+            
             <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-transparent to-accent/20 pointer-events-none" />
             {/* Bottom fade */}
             <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
