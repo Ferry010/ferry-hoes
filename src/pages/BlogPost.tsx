@@ -57,29 +57,43 @@ const BlogPost = () => {
 
       <main className="min-h-screen bg-background">
       {/* Hero Image */}
-        {post.header_image_url && (
-          <div className="w-full aspect-[21/9] overflow-hidden">
+        {post.header_image_url ? (
+          <div className="relative h-[50vh] md:h-[65vh] overflow-hidden">
             <img
               src={post.header_image_url}
               alt={post.title}
               className="w-full h-full object-cover"
             />
+            {/* Dark scrim for text readability */}
+            <div className="absolute inset-0 bg-foreground/50" />
+            {/* Title over hero */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 md:px-8">
+              <div className="max-w-3xl mx-auto">
+                <h1 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight uppercase tracking-tight">
+                  {post.title}
+                </h1>
+                <div className="flex items-center justify-center gap-3 text-sm text-white/70">
+                  <span>{formatPostDate(post.published_at)}</span>
+                  <span className="text-white/40">|</span>
+                  <span>{getReadTime(post.content)}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="container px-6 md:px-8 pt-10 md:pt-14">
+            <div className="max-w-3xl mx-auto">
+              <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight uppercase">
+                {post.title}
+              </h1>
+              <div className="flex items-center gap-3 text-sm text-muted-foreground mt-4">
+                <span>{formatPostDate(post.published_at)}</span>
+                <span>·</span>
+                <span>{getReadTime(post.content)}</span>
+              </div>
+            </div>
           </div>
         )}
-
-        {/* Title & Meta */}
-        <div className="container px-6 md:px-8 pt-10 md:pt-14">
-          <div className="max-w-3xl mx-auto">
-            <div className="flex items-center gap-3 text-sm text-muted-foreground mb-4">
-              <span>{formatPostDate(post.published_at)}</span>
-              <span>·</span>
-              <span>{getReadTime(post.content)}</span>
-            </div>
-            <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
-              {post.title}
-            </h1>
-          </div>
-        </div>
 
         {/* Content */}
         <article className="container px-6 md:px-8 py-12 md:py-16">
