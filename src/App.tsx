@@ -63,6 +63,7 @@ const App = () => (
               <Route path="messages" element={<AdminMessages />} />
               <Route path="posts/new" element={<PostEditor />} />
               <Route path="posts/:id" element={<PostEditor />} />
+              <Route path="now" element={<AdminNowPage />} />
             </Route>
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

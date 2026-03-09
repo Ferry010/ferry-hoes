@@ -82,6 +82,18 @@ const AdminLayout = () => {
                 <Mail className="w-4 h-4 inline mr-1.5" />
                 Messages
               </Link>
+              <Link
+                to="/admin/now"
+                className={cn(
+                  "px-3 py-1.5 rounded-md text-sm font-medium transition-colors",
+                  location.pathname === "/admin/now"
+                    ? "bg-accent/10 text-accent"
+                    : "text-muted-foreground hover:text-foreground"
+                )}
+              >
+                <Clock className="w-4 h-4 inline mr-1.5" />
+                Now Page
+              </Link>
             </nav>
           </div>
 

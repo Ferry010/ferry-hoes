@@ -21,6 +21,7 @@ const Footer = () => {
               <Link to="/podcast" className="text-white/70 hover:text-white transition-colors">Podcast</Link>
               <Link to="/blog" className="text-white/70 hover:text-white transition-colors">Blog</Link>
               <a href="/#book" className="text-white/70 hover:text-white transition-colors">The Book</a>
+              <Link to="/now" className="text-white/70 hover:text-white transition-colors">Now</Link>
               <Link to="/contact" className="text-white/70 hover:text-white transition-colors">Contact</Link>
               <Link to="/press" className="text-white/70 hover:text-white transition-colors">Press</Link>
             </nav>
