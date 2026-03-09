@@ -1,13 +1,21 @@
 
 
-## Fix Client Logo Hover Glitch
+## Blog Section — Colored Background Cards
 
-**Problem**: Two issues cause the glitch:
-1. `hover:[animation-play-state:paused]` on the marquee container — hovering anywhere pauses the animation abruptly, causing a visual jump
-2. `transition-all` on logo images transitions layout-related properties (size, position) which causes jittery rendering during hover
+### `src/components/blog/BlogCard.tsx`
+- Change `homepage` variant to accept a `colorIndex` prop (0 = teal, 1 = coral)
+- Remove `line-clamp-2` from title to allow full display
+- Card backgrounds: first card `bg-[#5aa6b2]`, second card `bg-[#E86A4A]`
+- Title text: white, bold, no truncation
+- "Blog" tag: white text on `white/20` background
+- Excerpt: `text-white/70`
+- Date/read time: `text-white/60`, border-t `border-white/20`
+- Remove hover text color change (already white)
 
-**Fix in `src/components/sections/ClientLogos.tsx`**:
-- Remove `hover:[animation-play-state:paused]` from the marquee container — continuous scroll feels smoother and more professional
-- Replace `transition-all` with `transition-opacity` on logo images so only opacity animates on hover (no layout recalculations)
-- Add `hover:opacity-80` to each logo for a subtle hover feedback without affecting grayscale or triggering layout shifts
+### `src/components/sections/BlogSection.tsx`
+- Pass `colorIndex` to each `BlogCard` so first gets teal, second gets coral
+
+### Files changed
+- `src/components/blog/BlogCard.tsx`
+- `src/components/sections/BlogSection.tsx`
 

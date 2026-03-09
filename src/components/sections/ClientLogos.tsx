@@ -33,7 +33,7 @@ const ClientLogos = () => {
       <img
         src={logo.src}
         alt={logo.alt}
-        className={`object-contain opacity-50 grayscale transition-all duration-300 ${logo.className}`}
+        className={`object-contain opacity-50 grayscale transition-opacity duration-300 hover:opacity-80 ${logo.className}`}
       />
     </div>
   ));
@@ -46,7 +46,7 @@ const ClientLogos = () => {
             Trusted by organizations like
           </p>
           <div className="overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-            <div className="flex animate-marquee hover:[animation-play-state:paused] w-max gap-4">
+            <div className="flex animate-marquee w-max gap-4">
               {logoSet}
               {logos.map((logo) => (
                 <div
@@ -56,7 +56,7 @@ const ClientLogos = () => {
                   <img
                     src={logo.src}
                     alt={logo.alt}
-                    className={`object-contain opacity-50 grayscale transition-all duration-300 ${logo.className}`}
+                    className={`object-contain opacity-50 grayscale transition-opacity duration-300 hover:opacity-80 ${logo.className}`}
                   />
                 </div>
               ))}
