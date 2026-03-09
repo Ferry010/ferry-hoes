@@ -54,22 +54,33 @@ const KEYNOTE_TOPICS = [
   {
     title: "Brand Humanizing: become irreplaceable in a world of AI",
     subtitle: "Why the organisations that deliberately combine people and technology will win the future",
+    description: "AI can copy your content, your processes, even your customer service. What it cannot replicate is the distinctly human qualities that make people trust, follow, and buy from you. In this keynote Ferry unpacks the Brand Humanizing framework and shows how organisations can turn their human edge into an unassailable competitive advantage.",
   },
   {
     title: "The AI conversation most organisations skip",
     subtitle: "What AI is, what it is not, and what it concretely means for your organisation",
+    description: "Most AI conversations start with tools and end with confusion. Ferry flips the script: he demystifies the technology, cuts through vendor hype, and helps your audience build a shared vocabulary so they can make smarter decisions about where AI fits — and where it doesn't.",
   },
   {
     title: "Leading when AI has a say",
     subtitle: "Human-centred leadership in an era of automation and algorithmic decision-making",
+    description: "When algorithms recommend who to hire, what to prioritise, and how to allocate resources, the leader's role fundamentally changes. This talk explores what human-centred leadership looks like when machines have a seat at the table — and why the best leaders will be those who know when not to listen to the data.",
   },
   {
     title: "The biggest AI mistake organisations are making right now",
     subtitle: "Why we are building solutions for problems we have never defined",
+    description: "Organisations are racing to adopt AI without first asking the most important question: what problem are we actually solving? Ferry shares real-world examples of costly missteps and offers a practical framework for making sure your AI investments solve the right problems in the right order.",
   },
   {
     title: "From AI law to AI advantage: literacy as a strategic foundation",
     subtitle: "Demonstrably compliant under the EU AI Act and strategically stronger",
+    description: "The EU AI Act is not just a compliance exercise — it is an opportunity to build organisational AI literacy from the ground up. Ferry explains what the regulation requires in plain language and shows how the smartest organisations are using it as a catalyst for strategic advantage rather than a bureaucratic burden.",
+  },
+  {
+    title: "Your topic, our expertise",
+    subtitle: "Don't see what you're looking for?",
+    description: "Ferry regularly develops custom keynotes tailored to specific industries, themes, or internal challenges. Whether it is a board retreat, a leadership offsite, or a large-scale conference — let's explore how we can create something that fits your event perfectly.",
+    isCustom: true,
   },
 ];
 
