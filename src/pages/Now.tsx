@@ -264,9 +264,9 @@ const Now = () => {
         return <VisitorBubble key={i} text={entry.text} />;
       case "options":
         return (
-          <div key={i} className="flex flex-col gap-2 pl-1">
+          <div key={i} className="flex flex-col items-end gap-2 animate-fade-in">
             {entry.options.map((o) => (
-              <OptionButton key={o.key} label={o.label} onClick={() => handleSelect(o)} />
+              <OptionButton key={o.key} label={o.label} onClick={() => handleSelect(o)} disabled={exiting} />
             ))}
           </div>
         );
