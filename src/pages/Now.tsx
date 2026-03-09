@@ -67,22 +67,20 @@ const FIELD_MAP: Record<string, keyof NowData> = {
 
 /* ── sub-components ── */
 const FerryBubble = ({ text }: { text: string }) => (
-  <div className="flex justify-start">
+  <div className="flex justify-start animate-fade-in">
     <div className="max-w-[85%] space-y-1">
       <span className="text-[11px] text-muted-foreground font-medium ml-1">Ferry</span>
-      <div className="rounded-2xl rounded-bl-md px-4 py-3 bg-secondary text-secondary-foreground">
-        <p className="text-[15px] leading-relaxed whitespace-pre-line">{text}</p>
+      <div className="rounded-2xl rounded-bl-md px-4 py-2.5 bg-secondary text-foreground text-sm md:text-base leading-relaxed">
+        <p className="whitespace-pre-line">{text}</p>
       </div>
     </div>
   </div>
 );
 
 const VisitorBubble = ({ text }: { text: string }) => (
-  <div className="flex justify-end">
-    <div className="max-w-[85%]">
-      <div className="rounded-2xl rounded-br-md px-4 py-3 bg-primary text-primary-foreground">
-        <p className="text-[15px] leading-relaxed">{text}</p>
-      </div>
+  <div className="flex justify-end animate-fade-in">
+    <div className="max-w-[80%] rounded-2xl rounded-br-md px-4 py-2.5 bg-primary/80 backdrop-blur-md text-primary-foreground text-sm md:text-base font-medium">
+      {text}
     </div>
   </div>
 );
@@ -90,13 +88,16 @@ const VisitorBubble = ({ text }: { text: string }) => (
 const OptionButton = ({
   label,
   onClick,
+  disabled,
 }: {
   label: string;
   onClick: () => void;
+  disabled?: boolean;
 }) => (
   <button
     onClick={onClick}
-    className="text-left text-[15px] px-4 py-2.5 rounded-xl border border-border bg-background text-foreground hover:bg-accent transition-colors"
+    disabled={disabled}
+    className="max-w-[80%] text-left rounded-2xl rounded-br-md px-4 py-2.5 bg-primary/20 border border-primary/30 text-foreground text-sm md:text-base font-medium hover:bg-primary/30 hover:border-primary/50 transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
   >
     {label}
   </button>
