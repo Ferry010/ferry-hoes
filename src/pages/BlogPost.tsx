@@ -1,6 +1,5 @@
 import { Link, useParams, Navigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
-import ReactMarkdown from "react-markdown";
 import { useBlogPost, formatPostDate, getReadTime } from "@/hooks/useBlogPosts";
 import SEOHead from "@/components/blog/SEOHead";
 import StructuredData, { breadcrumbSchema } from "@/components/StructuredData";
@@ -102,9 +101,10 @@ const BlogPost = () => {
             <div className="w-24 h-1 bg-accent rounded-full mb-12" />
 
             {/* Content */}
-            <div className="prose prose-lg max-w-none text-foreground/90 prose-headings:text-foreground prose-headings:font-display prose-a:text-accent prose-strong:text-foreground mb-16">
-              <ReactMarkdown>{post.content || ""}</ReactMarkdown>
-            </div>
+            <div
+              className="prose prose-lg max-w-none text-foreground/90 prose-headings:text-foreground prose-headings:font-display prose-a:text-accent prose-strong:text-foreground mb-16"
+              dangerouslySetInnerHTML={{ __html: post.content || "" }}
+            />
 
             {/* CTA */}
             <PostCTA />

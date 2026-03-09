@@ -11,6 +11,7 @@ import {
   generateSlug,
 } from "@/hooks/useAdminPosts";
 import ImageUpload from "@/components/admin/ImageUpload";
+import RichTextEditor from "@/components/admin/RichTextEditor";
 import SEOFields from "@/components/admin/SEOFields";
 import { toast } from "@/hooks/use-toast";
 import { ArrowLeft, Save, Send } from "lucide-react";
@@ -228,25 +229,7 @@ const PostEditor = () => {
           <Label htmlFor="content" className="text-base font-medium">
             Content
           </Label>
-          <div className="flex flex-wrap gap-2 text-xs text-muted-foreground bg-muted/50 rounded-md px-3 py-2 border border-border">
-            <span className="font-mono">## Heading</span>
-            <span>·</span>
-            <span className="font-mono">**bold**</span>
-            <span>·</span>
-            <span className="font-mono">*italic*</span>
-            <span>·</span>
-            <span className="font-mono">- list item</span>
-            <span>·</span>
-            <span className="font-mono">[link](url)</span>
-          </div>
-          <Textarea
-            id="content"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            placeholder="Write your post content in Markdown..."
-            rows={16}
-            className="font-mono text-sm"
-          />
+          <RichTextEditor value={content} onChange={setContent} />
         </div>
 
         {/* Excerpt */}
