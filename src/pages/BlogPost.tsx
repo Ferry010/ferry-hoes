@@ -1,6 +1,5 @@
 import { Link, useParams, Navigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
-import ReactMarkdown from "react-markdown";
 import { useBlogPost, formatPostDate, getReadTime } from "@/hooks/useBlogPosts";
 import SEOHead from "@/components/blog/SEOHead";
 import StructuredData, { breadcrumbSchema } from "@/components/StructuredData";
