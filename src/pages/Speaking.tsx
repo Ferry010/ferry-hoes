@@ -8,7 +8,7 @@ import {
   CarouselNext,
   CarouselDots,
 } from "@/components/ui/carousel";
-import { ArrowRight, Mic, Quote, ChevronDown, Play, Clock } from "lucide-react";
+import { ArrowRight, Mic, Quote, ChevronDown, Play } from "lucide-react";
 import Footer from "@/components/sections/Footer";
 
 import SEOHead from "@/components/blog/SEOHead";
