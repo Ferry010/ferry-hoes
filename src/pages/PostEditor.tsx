@@ -11,6 +11,7 @@ import {
   generateSlug,
 } from "@/hooks/useAdminPosts";
 import ImageUpload from "@/components/admin/ImageUpload";
+import RichTextEditor from "@/components/admin/RichTextEditor";
 import SEOFields from "@/components/admin/SEOFields";
 import { toast } from "@/hooks/use-toast";
 import { ArrowLeft, Save, Send } from "lucide-react";
