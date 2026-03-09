@@ -8,7 +8,7 @@ import {
   CarouselNext,
   CarouselDots,
 } from "@/components/ui/carousel";
-import { ArrowRight, Mic, Quote, ChevronDown, Play, Clock } from "lucide-react";
+import { ArrowRight, Mic, Quote, ChevronDown, Play } from "lucide-react";
 import Footer from "@/components/sections/Footer";
 
 import SEOHead from "@/components/blog/SEOHead";
@@ -46,19 +46,24 @@ const TestimonialCard = ({ quote, name, company }: { quote: string; name: string
 
 const KEYNOTE_TOPICS = [
   {
-    title: "Brand Humanizing",
-    premise: "How to stay distinctive and human in a world where technology makes everything look the same.",
-    duration: "45–60 min keynote",
+    title: "Brand Humanizing: become irreplaceable in a world of AI",
+    subtitle: "Why the organisations that deliberately combine people and technology will win the future",
   },
   {
-    title: "The Human Side of AI",
-    premise: "What AI can and can't replace, and how to use it without losing what makes your organisation worth working for.",
-    duration: "45–60 min keynote",
+    title: "The AI conversation most organisations skip",
+    subtitle: "What AI is, what it is not, and what it concretely means for your organisation",
   },
   {
-    title: "The Future of Work is Human",
-    premise: "A practical look at how organisations can combine AI and human judgment to become faster, smarter, and more human at the same time.",
-    duration: "45–60 min keynote",
+    title: "Leading when AI has a say",
+    subtitle: "Human-centred leadership in an era of automation and algorithmic decision-making",
+  },
+  {
+    title: "The biggest AI mistake organisations are making right now",
+    subtitle: "Why we are building solutions for problems we have never defined",
+  },
+  {
+    title: "From AI law to AI advantage: literacy as a strategic foundation",
+    subtitle: "Demonstrably compliant under the EU AI Act and strategically stronger",
   },
 ];
 
@@ -179,23 +184,27 @@ const Speaking = () => {
                   </p>
                 </div>
 
-                <div className="grid md:grid-cols-3 gap-8">
-                  {KEYNOTE_TOPICS.map((topic) => (
-                    <article key={topic.title} className="group bg-card border border-border rounded-2xl p-8 shadow-soft hover:shadow-soft-lg transition-all duration-300 flex flex-col">
-                      <h3 className="font-display text-2xl font-bold text-foreground mb-3">{topic.title}</h3>
-                      <p className="text-muted-foreground leading-relaxed mb-6 flex-1">{topic.premise}</p>
-                      <div className="flex items-center justify-between mt-auto pt-4 border-t border-border">
-                        <span className="inline-flex items-center gap-1.5 text-sm text-muted-foreground">
-                          <Clock className="h-3.5 w-3.5" />
-                          {topic.duration}
-                        </span>
-                        <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-accent text-sm font-medium hover:underline group-hover:gap-2 transition-all">
-                          Enquire
-                          <ArrowRight className="h-3.5 w-3.5" />
-                        </a>
+                <div className="divide-y divide-border">
+                  {KEYNOTE_TOPICS.map((topic, i) => (
+                    <div key={topic.title} className="flex gap-6 py-8 first:pt-0">
+                      <span className="text-accent/40 font-mono text-sm font-medium pt-1 shrink-0 w-8">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <div>
+                        <h3 className="font-display text-xl md:text-2xl font-bold text-foreground mb-1">{topic.title}</h3>
+                        <p className="text-muted-foreground leading-relaxed">{topic.subtitle}</p>
                       </div>
-                    </article>
+                    </div>
                   ))}
+                </div>
+
+                <div className="text-center mt-12">
+                  <Button asChild size="lg" className="rounded-full px-8 bg-accent text-accent-foreground hover:bg-accent/90 group">
+                    <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
+                      Book Ferry for your event
+                      <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    </a>
+                  </Button>
                 </div>
               </div>
             </div>
