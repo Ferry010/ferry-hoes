@@ -66,6 +66,10 @@ const AskFerryBubble = () => {
     }
 
     setIsSent(true);
+    // Fire-and-forget notification
+    supabase.functions.invoke("notify-contact", {
+      body: { name: result.data.name, email: result.data.email, message: result.data.message },
+    });
     setTimeout(handleClose, 2500);
   };
 
