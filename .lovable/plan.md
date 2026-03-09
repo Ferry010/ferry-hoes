@@ -1,21 +1,18 @@
 
 
-## Blog Section — Colored Background Cards
+## Blog Post Hero: Full Image with Title Overlay
 
-### `src/components/blog/BlogCard.tsx`
-- Change `homepage` variant to accept a `colorIndex` prop (0 = teal, 1 = coral)
-- Remove `line-clamp-2` from title to allow full display
-- Card backgrounds: first card `bg-[#5aa6b2]`, second card `bg-[#E86A4A]`
-- Title text: white, bold, no truncation
-- "Blog" tag: white text on `white/20` background
-- Excerpt: `text-white/70`
-- Date/read time: `text-white/60`, border-t `border-white/20`
-- Remove hover text color change (already white)
+**File: `src/pages/BlogPost.tsx`**
 
-### `src/components/sections/BlogSection.tsx`
-- Pass `colorIndex` to each `BlogCard` so first gets teal, second gets coral
+### Changes
 
-### Files changed
-- `src/components/blog/BlogCard.tsx`
-- `src/components/sections/BlogSection.tsx`
+Remove the gradient overlay (`bg-gradient-to-br from-primary/30 via-transparent to-accent/20`) from the hero image. Keep only the bottom-fade gradient (`bg-gradient-to-t from-background`) so the white title text remains readable against the image.
+
+The current layout already has the title + date/read-time overlaid on the bottom of the image — this matches what you want (like the homepage cards without excerpt). Just need to remove line 67's color gradient overlay.
+
+**Summary of edits (lines 66-68):**
+- Delete the brand overlay div (line 67)
+- Keep the bottom fade (line 69) for text legibility
+
+Single file, single line removal.
 
