@@ -18,6 +18,8 @@ import Press from "./pages/Press";
 import Conversation from "./pages/Conversation";
 import Podcast from "./pages/Podcast";
 import Contact from "./pages/Contact";
+import Now from "./pages/Now";
+import AdminNowPage from "./pages/AdminNowPage";
 import AdminLayout from "./components/admin/AdminLayout";
 import { ScrollToTop } from "./components/ScrollToTop";
 import IndexNavigation from "./components/IndexNavigation";
@@ -53,6 +55,7 @@ const App = () => (
             <Route path="/podcast" element={<Podcast />} />
             <Route path="/conversation" element={<Conversation />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/now" element={<Now />} />
             <Route path="/press" element={<Press />} />
             <Route path="/admin" element={<AdminLogin />} />
             <Route path="/admin" element={<AdminLayout />}>
@@ -60,6 +63,7 @@ const App = () => (
               <Route path="messages" element={<AdminMessages />} />
               <Route path="posts/new" element={<PostEditor />} />
               <Route path="posts/:id" element={<PostEditor />} />
+              <Route path="now" element={<AdminNowPage />} />
             </Route>
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

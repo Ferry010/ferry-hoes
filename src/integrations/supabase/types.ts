@@ -134,6 +134,36 @@ export type Database = {
         }
         Relationships: []
       }
+      now_page: {
+        Row: {
+          id: number
+          in_the_studio: string | null
+          last_updated: string | null
+          on_stage: string | null
+          reading_thinking: string | null
+          updated_at: string | null
+          working_on: string | null
+        }
+        Insert: {
+          id?: number
+          in_the_studio?: string | null
+          last_updated?: string | null
+          on_stage?: string | null
+          reading_thinking?: string | null
+          updated_at?: string | null
+          working_on?: string | null
+        }
+        Update: {
+          id?: number
+          in_the_studio?: string | null
+          last_updated?: string | null
+          on_stage?: string | null
+          reading_thinking?: string | null
+          updated_at?: string | null
+          working_on?: string | null
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string

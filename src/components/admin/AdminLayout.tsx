@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useNavigate, Outlet, Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
-import { LogOut, Pen, Home, Mail } from "lucide-react";
+import { LogOut, Pen, Home, Mail, Clock } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 
@@ -81,6 +81,18 @@ const AdminLayout = () => {
               >
                 <Mail className="w-4 h-4 inline mr-1.5" />
                 Messages
+              </Link>
+              <Link
+                to="/admin/now"
+                className={cn(
+                  "px-3 py-1.5 rounded-md text-sm font-medium transition-colors",
+                  location.pathname === "/admin/now"
+                    ? "bg-accent/10 text-accent"
+                    : "text-muted-foreground hover:text-foreground"
+                )}
+              >
+                <Clock className="w-4 h-4 inline mr-1.5" />
+                Now Page
               </Link>
             </nav>
           </div>
