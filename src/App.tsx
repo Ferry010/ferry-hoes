@@ -18,6 +18,8 @@ import Press from "./pages/Press";
 import Conversation from "./pages/Conversation";
 import Podcast from "./pages/Podcast";
 import Contact from "./pages/Contact";
+import Now from "./pages/Now";
+import AdminNowPage from "./pages/AdminNowPage";
 import AdminLayout from "./components/admin/AdminLayout";
 import { ScrollToTop } from "./components/ScrollToTop";
 import IndexNavigation from "./components/IndexNavigation";
