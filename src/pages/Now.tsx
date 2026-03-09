@@ -195,8 +195,11 @@ const Now = () => {
     async (option: OptionDef) => {
       if (typing || exiting) return;
 
-      // Add visitor bubble
-      setHistory((h) => [...h, { type: "visitor", text: option.label }]);
+      // Remove options and add visitor bubble
+      setHistory((h) => [
+        ...h.filter((e) => e.type !== "options"),
+        { type: "visitor", text: option.label },
+      ]);
       scrollToBottom();
 
       const newAsked = new Set(askedKeys);
