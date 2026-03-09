@@ -93,7 +93,7 @@ const BlogPost = () => {
               </div>
             </div>
           </div>
-        )
+        )}
 
         {/* Content */}
         <article className="container px-6 md:px-8 py-12 md:py-16">
