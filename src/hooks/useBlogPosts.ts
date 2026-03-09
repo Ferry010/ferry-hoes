@@ -28,7 +28,6 @@ export function useBlogPosts(limit?: number) {
         .from("blog_posts")
         .select("*")
         .eq("published", true)
-        .order("sort_order", { ascending: true })
         .order("published_at", { ascending: false });
 
       if (limit) {

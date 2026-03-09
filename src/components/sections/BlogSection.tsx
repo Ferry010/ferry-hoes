@@ -36,18 +36,20 @@ const BlogSection = () => {
           {isLoading ? (
             <div className="grid md:grid-cols-2 gap-6 md:gap-8 mb-12">
               {[1, 2].map((i) => (
-                <div key={i} className="bg-background rounded-2xl animate-pulse p-6 md:p-8 space-y-4">
-                  <div className="h-5 bg-muted rounded-full w-16" />
-                  <div className="h-7 bg-muted rounded w-3/4" />
-                  <div className="h-5 bg-muted rounded w-1/2" />
-                  <div className="h-4 bg-muted rounded w-1/3 mt-6" />
+                <div key={i} className="bg-card rounded-2xl overflow-hidden animate-pulse">
+                  <div className="aspect-[16/10] bg-muted" />
+                  <div className="p-6 md:p-8 space-y-4">
+                    <div className="h-6 bg-muted rounded w-3/4" />
+                    <div className="h-4 bg-muted rounded w-full" />
+                    <div className="h-4 bg-muted rounded w-1/2" />
+                  </div>
                 </div>
               ))}
             </div>
           ) : posts && posts.length > 0 ? (
             <div className="grid md:grid-cols-2 gap-6 md:gap-8 mb-12">
-              {posts.map((post, index) => (
-                <BlogCard key={post.id} post={post} variant="homepage" colorIndex={index} />
+              {posts.map((post) => (
+                <BlogCard key={post.id} post={post} />
               ))}
             </div>
           ) : (
