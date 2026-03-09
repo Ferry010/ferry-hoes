@@ -1,3 +1,4 @@
+// Blog post page
 import { Link, useParams, Navigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { useBlogPost, formatPostDate, getReadTime } from "@/hooks/useBlogPosts";
