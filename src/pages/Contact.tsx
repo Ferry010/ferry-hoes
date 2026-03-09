@@ -109,6 +109,17 @@ const Contact = () => {
       return;
     }
     setIsSent(true);
+    // Fire-and-forget notification
+    supabase.functions.invoke("notify-contact", {
+      body: {
+        name: result.data.name,
+        email: result.data.email,
+        message: result.data.message,
+        organization: result.data.organization || undefined,
+        inquiryType: result.data.inquiryType,
+        timeline: result.data.timeline || undefined,
+      },
+    });
   };
 
   return (
