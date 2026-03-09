@@ -38,6 +38,17 @@ serve(async (req) => {
           console.error("Slack channel #website-messages not found");
           results.slack = "channel_not_found";
         } else {
+          // Join channel first (in case bot isn't a member yet)
+          await fetch(`${SLACK_GATEWAY_URL}/conversations.join`, {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${LOVABLE_API_KEY}`,
+              "X-Connection-Api-Key": SLACK_API_KEY,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ channel: channel.id }),
+          }).then((r) => r.json());
+
           const preview = message?.length > 200 ? message.slice(0, 200) + "…" : message;
           const blocks = [
             {
