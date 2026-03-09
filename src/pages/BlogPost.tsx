@@ -1,5 +1,6 @@
 import { Link, useParams, Navigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
+import ReactMarkdown from "react-markdown";
 import { useBlogPost, formatPostDate, getReadTime } from "@/hooks/useBlogPosts";
 import SEOHead from "@/components/blog/SEOHead";
 import StructuredData, { breadcrumbSchema } from "@/components/StructuredData";
@@ -55,41 +56,30 @@ const BlogPost = () => {
       />
 
       <main className="min-h-screen bg-background">
-        {/* Hero Image */}
-        {post.header_image_url ? (
-          <div className="relative h-[50vh] md:h-[60vh] overflow-hidden">
+      {/* Hero Image */}
+        {post.header_image_url && (
+          <div className="w-full aspect-[21/9] overflow-hidden">
             <img
               src={post.header_image_url}
               alt={post.title}
               className="w-full h-full object-cover"
             />
-            
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-transparent to-accent/20 pointer-events-none" />
-            {/* Bottom fade */}
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
-            {/* Title over hero */}
-            <div className="absolute inset-0 flex flex-col justify-end px-6 md:px-8 pb-12">
-              <div className="container max-w-3xl mx-auto">
-                <div className="flex items-center gap-3 text-sm text-white/80 mb-4 drop-shadow-md">
-                  <span>{formatPostDate(post.published_at)}</span>
-                  <span>·</span>
-                  <span>{getReadTime(post.content)}</span>
-                </div>
-                <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-0 leading-tight drop-shadow-lg">
-                  {post.title}
-                </h1>
-              </div>
-            </div>
-          </div>
-        ) : (
-          <div className="relative h-32 md:h-48 bg-gradient-to-br from-accent/20 to-primary/20 flex items-end px-6 md:px-8 pb-8">
-            <div className="container max-w-3xl mx-auto">
-              <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
-                {post.title}
-              </h1>
-            </div>
           </div>
         )}
+
+        {/* Title & Meta */}
+        <div className="container px-6 md:px-8 pt-10 md:pt-14">
+          <div className="max-w-3xl mx-auto">
+            <div className="flex items-center gap-3 text-sm text-muted-foreground mb-4">
+              <span>{formatPostDate(post.published_at)}</span>
+              <span>·</span>
+              <span>{getReadTime(post.content)}</span>
+            </div>
+            <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
+              {post.title}
+            </h1>
+          </div>
+        </div>
 
         {/* Content */}
         <article className="container px-6 md:px-8 py-12 md:py-16">
@@ -98,13 +88,8 @@ const BlogPost = () => {
             <div className="w-24 h-1 bg-accent rounded-full mb-12" />
 
             {/* Content */}
-            <div className="prose prose-lg max-w-none text-foreground/90 mb-16">
-              {/* Simple markdown-like rendering */}
-              {post.content?.split("\n\n").map((paragraph, index) => (
-                <p key={index} className="mb-6 leading-relaxed">
-                  {paragraph}
-                </p>
-              ))}
+            <div className="prose prose-lg max-w-none text-foreground/90 prose-headings:text-foreground prose-headings:font-display prose-a:text-accent prose-strong:text-foreground mb-16">
+              <ReactMarkdown>{post.content || ""}</ReactMarkdown>
             </div>
 
             {/* CTA */}
