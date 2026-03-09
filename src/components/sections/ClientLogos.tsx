@@ -46,7 +46,7 @@ const ClientLogos = () => {
             Trusted by organizations like
           </p>
           <div className="overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-            <div className="flex animate-marquee hover:[animation-play-state:paused] w-max gap-4">
+            <div className="flex animate-marquee w-max gap-4">
               {logoSet}
               {logos.map((logo) => (
                 <div
