@@ -55,6 +55,7 @@ const App = () => (
             <Route path="/podcast" element={<Podcast />} />
             <Route path="/conversation" element={<Conversation />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/now" element={<Now />} />
             <Route path="/press" element={<Press />} />
             <Route path="/admin" element={<AdminLogin />} />
             <Route path="/admin" element={<AdminLayout />}>
