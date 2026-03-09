@@ -201,19 +201,38 @@ const Speaking = () => {
                   </p>
                 </div>
 
-                <div className="divide-y divide-border">
+                <Accordion type="multiple" className="grid md:grid-cols-2 gap-4">
                   {KEYNOTE_TOPICS.map((topic, i) => (
-                    <div key={topic.title} className="flex gap-6 py-8 first:pt-0">
-                      <span className="text-accent/40 font-mono text-sm font-medium pt-1 shrink-0 w-8">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      <div>
-                        <h3 className="font-display text-xl md:text-2xl font-bold text-foreground mb-1">{topic.title}</h3>
-                        <p className="text-muted-foreground leading-relaxed">{topic.subtitle}</p>
-                      </div>
-                    </div>
+                    <AccordionItem
+                      key={topic.title}
+                      value={topic.title}
+                      className={`rounded-2xl border px-6 py-2 shadow-soft hover:shadow-soft-lg transition-all duration-300 ${
+                        topic.isCustom
+                          ? "border-dashed border-accent/50 bg-accent/[0.04]"
+                          : "border-border bg-gradient-to-br from-background to-accent/[0.03]"
+                      }`}
+                    >
+                      <AccordionTrigger className="hover:no-underline gap-4 text-left">
+                        <div className="flex items-start gap-4">
+                          <span className="text-accent/40 font-mono text-sm font-medium pt-0.5 shrink-0">
+                            {topic.isCustom ? (
+                              <MessageSquarePlus className="h-5 w-5 text-accent" />
+                            ) : (
+                              String(i + 1).padStart(2, "0")
+                            )}
+                          </span>
+                          <div>
+                            <h3 className="font-display text-lg md:text-xl font-bold text-foreground">{topic.title}</h3>
+                            <p className="text-muted-foreground text-sm mt-1">{topic.subtitle}</p>
+                          </div>
+                        </div>
+                      </AccordionTrigger>
+                      <AccordionContent className="pl-12 text-muted-foreground leading-relaxed">
+                        {topic.description}
+                      </AccordionContent>
+                    </AccordionItem>
                   ))}
-                </div>
+                </Accordion>
 
                 <div className="text-center mt-12">
                   <Button asChild size="lg" className="rounded-full px-8 bg-accent text-accent-foreground hover:bg-accent/90 group">
