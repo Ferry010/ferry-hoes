@@ -88,13 +88,8 @@ const BlogPost = () => {
             <div className="w-24 h-1 bg-accent rounded-full mb-12" />
 
             {/* Content */}
-            <div className="prose prose-lg max-w-none text-foreground/90 mb-16">
-              {/* Simple markdown-like rendering */}
-              {post.content?.split("\n\n").map((paragraph, index) => (
-                <p key={index} className="mb-6 leading-relaxed">
-                  {paragraph}
-                </p>
-              ))}
+            <div className="prose prose-lg max-w-none text-foreground/90 prose-headings:text-foreground prose-headings:font-display prose-a:text-accent prose-strong:text-foreground mb-16">
+              <ReactMarkdown>{post.content || ""}</ReactMarkdown>
             </div>
 
             {/* CTA */}

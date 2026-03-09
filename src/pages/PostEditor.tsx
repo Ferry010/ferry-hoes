@@ -228,13 +228,22 @@ const PostEditor = () => {
           <Label htmlFor="content" className="text-base font-medium">
             Content
           </Label>
+          <div className="flex flex-wrap gap-2 text-xs text-muted-foreground bg-muted/50 rounded-md px-3 py-2 border border-border">
+            <span className="font-mono">## Heading</span>
+            <span>·</span>
+            <span className="font-mono">**bold**</span>
+            <span>·</span>
+            <span className="font-mono">*italic*</span>
+            <span>·</span>
+            <span className="font-mono">- list item</span>
+            <span>·</span>
+            <span className="font-mono">[link](url)</span>
+          </div>
           <Textarea
             id="content"
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            placeholder="Write your post content here...
-
-Use double line breaks for new paragraphs."
+            placeholder="Write your post content in Markdown..."
             rows={16}
             className="font-mono text-sm"
           />
