@@ -136,29 +136,41 @@ export type Database = {
       }
       now_page: {
         Row: {
+          currently_reading: string | null
           id: number
           in_the_studio: string | null
           last_updated: string | null
+          latest_podcast_guest: string | null
+          next_gig: string | null
           on_stage: string | null
           reading_thinking: string | null
+          thinking_about: string | null
           updated_at: string | null
           working_on: string | null
         }
         Insert: {
+          currently_reading?: string | null
           id?: number
           in_the_studio?: string | null
           last_updated?: string | null
+          latest_podcast_guest?: string | null
+          next_gig?: string | null
           on_stage?: string | null
           reading_thinking?: string | null
+          thinking_about?: string | null
           updated_at?: string | null
           working_on?: string | null
         }
         Update: {
+          currently_reading?: string | null
           id?: number
           in_the_studio?: string | null
           last_updated?: string | null
+          latest_podcast_guest?: string | null
+          next_gig?: string | null
           on_stage?: string | null
           reading_thinking?: string | null
+          thinking_about?: string | null
           updated_at?: string | null
           working_on?: string | null
         }

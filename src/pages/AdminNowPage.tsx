@@ -10,14 +10,27 @@ import { CalendarIcon, Loader2 } from "lucide-react";
 import { format, parseISO } from "date-fns";
 import { cn } from "@/lib/utils";
 
+const FIELDS = [
+  { id: "next_gig", label: "Next gig", placeholder: "Speaking at a leadership summit in Amsterdam next week..." },
+  { id: "working_on", label: "Working on", placeholder: "Finalising the AI literacy training with Speakers Academy..." },
+  { id: "currently_reading", label: "Currently reading", placeholder: "The Anxious Generation by Jonathan Haidt..." },
+  { id: "latest_podcast_guest", label: "Latest podcast guest", placeholder: "Just recorded with Simone Moissidis on inclusive leadership..." },
+  { id: "thinking_about", label: "Thinking about", placeholder: "Why most AI strategies skip the human design phase entirely..." },
+] as const;
+
+type FieldId = typeof FIELDS[number]["id"];
+
 const AdminNowPage = () => {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [lastUpdated, setLastUpdated] = useState<Date>(new Date());
-  const [onStage, setOnStage] = useState("");
-  const [workingOn, setWorkingOn] = useState("");
-  const [readingThinking, setReadingThinking] = useState("");
-  const [inTheStudio, setInTheStudio] = useState("");
+  const [values, setValues] = useState<Record<FieldId, string>>({
+    next_gig: "",
+    working_on: "",
+    currently_reading: "",
+    latest_podcast_guest: "",
+    thinking_about: "",
+  });
 
   useEffect(() => {
     fetchData();
@@ -33,10 +46,13 @@ const AdminNowPage = () => {
       toast({ title: "Error loading data", description: error.message, variant: "destructive" });
     } else if (data) {
       if (data.last_updated) setLastUpdated(parseISO(data.last_updated));
-      setOnStage(data.on_stage || "");
-      setWorkingOn(data.working_on || "");
-      setReadingThinking(data.reading_thinking || "");
-      setInTheStudio(data.in_the_studio || "");
+      setValues({
+        next_gig: (data as any).next_gig || "",
+        working_on: data.working_on || "",
+        currently_reading: (data as any).currently_reading || "",
+        latest_podcast_guest: (data as any).latest_podcast_guest || "",
+        thinking_about: (data as any).thinking_about || "",
+      });
     }
     setLoading(false);
   };
@@ -47,10 +63,8 @@ const AdminNowPage = () => {
       .from("now_page")
       .update({
         last_updated: format(lastUpdated, "yyyy-MM-dd"),
-        on_stage: onStage,
-        working_on: workingOn,
-        reading_thinking: readingThinking,
-        in_the_studio: inTheStudio,
+        working_on: values.working_on,
+        ...({ next_gig: values.next_gig, currently_reading: values.currently_reading, latest_podcast_guest: values.latest_podcast_guest, thinking_about: values.thinking_about } as any),
       })
       .eq("id", 1);
 
@@ -60,6 +74,10 @@ const AdminNowPage = () => {
       toast({ title: "Now page updated" });
     }
     setSaving(false);
+  };
+
+  const updateField = (id: FieldId, value: string) => {
+    setValues((v) => ({ ...v, [id]: value }));
   };
 
   if (loading) {
@@ -102,25 +120,18 @@ const AdminNowPage = () => {
         </div>
 
         {/* Text areas */}
-        <div className="space-y-2">
-          <Label htmlFor="on_stage">On stage</Label>
-          <Textarea id="on_stage" value={onStage} onChange={(e) => setOnStage(e.target.value)} rows={4} placeholder="What speaking engagements are coming up..." />
-        </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="working_on">Working on</Label>
-          <Textarea id="working_on" value={workingOn} onChange={(e) => setWorkingOn(e.target.value)} rows={4} placeholder="Current projects and focus areas..." />
-        </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="reading_thinking">Reading & thinking about</Label>
-          <Textarea id="reading_thinking" value={readingThinking} onChange={(e) => setReadingThinking(e.target.value)} rows={4} placeholder="Books, ideas, themes on your mind..." />
-        </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="in_the_studio">In the studio</Label>
-          <Textarea id="in_the_studio" value={inTheStudio} onChange={(e) => setInTheStudio(e.target.value)} rows={4} placeholder="Creative work, recordings, content in progress..." />
-        </div>
+        {FIELDS.map(({ id, label, placeholder }) => (
+          <div key={id} className="space-y-2">
+            <Label htmlFor={id}>{label}</Label>
+            <Textarea
+              id={id}
+              value={values[id]}
+              onChange={(e) => updateField(id, e.target.value)}
+              rows={3}
+              placeholder={placeholder}
+            />
+          </div>
+        ))}
 
         <Button onClick={handleSave} disabled={saving} className="w-full sm:w-auto">
           {saving && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
