@@ -1,21 +1,18 @@
 
 
-## Blog Section — Colored Background Cards
+## Update Keynote Topics Section
 
-### `src/components/blog/BlogCard.tsx`
-- Change `homepage` variant to accept a `colorIndex` prop (0 = teal, 1 = coral)
-- Remove `line-clamp-2` from title to allow full display
-- Card backgrounds: first card `bg-[#5aa6b2]`, second card `bg-[#E86A4A]`
-- Title text: white, bold, no truncation
-- "Blog" tag: white text on `white/20` background
-- Excerpt: `text-white/70`
-- Date/read time: `text-white/60`, border-t `border-white/20`
-- Remove hover text color change (already white)
+**File: `src/pages/Speaking.tsx`**
 
-### `src/components/sections/BlogSection.tsx`
-- Pass `colorIndex` to each `BlogCard` so first gets teal, second gets coral
+Replace the `KEYNOTE_TOPICS` array and the card grid with a numbered vertical list layout.
 
-### Files changed
-- `src/components/blog/BlogCard.tsx`
-- `src/components/sections/BlogSection.tsx`
+### Data
+Replace the 3 topics with the 5 new ones, each having a `title` and `subtitle`.
+
+### Layout
+- Keep section header ("Keynote topics") and subtext
+- Replace `grid md:grid-cols-3` card layout with a vertical stack
+- Each item: flexbox row with `01`–`05` number label (muted, monospace) on the left, bold title + muted subtitle on the right, separated by a bottom border
+- Remove `Clock` icon, duration, and per-topic "Enquire" links
+- Single "Book Ferry for your event" CTA button at the bottom, linking to `BOOKING_URL`
 
