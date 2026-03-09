@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useNavigate, Outlet, Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
-import { LogOut, Pen, Home, Mail } from "lucide-react";
+import { LogOut, Pen, Home, Mail, Clock } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 
