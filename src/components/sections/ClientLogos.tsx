@@ -56,7 +56,7 @@ const ClientLogos = () => {
                   <img
                     src={logo.src}
                     alt={logo.alt}
-                    className={`object-contain opacity-50 grayscale transition-all duration-300 ${logo.className}`}
+                    className={`object-contain opacity-50 grayscale transition-opacity duration-300 hover:opacity-80 ${logo.className}`}
                   />
                 </div>
               ))}
