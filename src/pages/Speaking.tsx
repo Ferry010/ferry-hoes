@@ -46,19 +46,24 @@ const TestimonialCard = ({ quote, name, company }: { quote: string; name: string
 
 const KEYNOTE_TOPICS = [
   {
-    title: "Brand Humanizing",
-    premise: "How to stay distinctive and human in a world where technology makes everything look the same.",
-    duration: "45–60 min keynote",
+    title: "Brand Humanizing: become irreplaceable in a world of AI",
+    subtitle: "Why the organisations that deliberately combine people and technology will win the future",
   },
   {
-    title: "The Human Side of AI",
-    premise: "What AI can and can't replace, and how to use it without losing what makes your organisation worth working for.",
-    duration: "45–60 min keynote",
+    title: "The AI conversation most organisations skip",
+    subtitle: "What AI is, what it is not, and what it concretely means for your organisation",
   },
   {
-    title: "The Future of Work is Human",
-    premise: "A practical look at how organisations can combine AI and human judgment to become faster, smarter, and more human at the same time.",
-    duration: "45–60 min keynote",
+    title: "Leading when AI has a say",
+    subtitle: "Human-centred leadership in an era of automation and algorithmic decision-making",
+  },
+  {
+    title: "The biggest AI mistake organisations are making right now",
+    subtitle: "Why we are building solutions for problems we have never defined",
+  },
+  {
+    title: "From AI law to AI advantage: literacy as a strategic foundation",
+    subtitle: "Demonstrably compliant under the EU AI Act and strategically stronger",
   },
 ];
 
