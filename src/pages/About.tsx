@@ -50,7 +50,7 @@ const About = () => {
                       className="flex-1 h-[280px] lg:h-[320px] rounded-2xl overflow-hidden shadow-lg relative animate-fade-in"
                       style={{ animationDelay: `${i * 0.1}s`, animationFillMode: "both", transform: `rotate(${img.rotate})` }}
                     >
-                      <img src={img.src} alt={img.alt} className="w-full h-full object-cover object-center" />
+                      <img src={img.src} alt={img.alt} loading="lazy" className="w-full h-full object-cover object-center" />
                       <div className="brand-hero-overlay" />
                     </div>
                   ))}
