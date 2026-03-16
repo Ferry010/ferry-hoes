@@ -14,8 +14,8 @@ const Index = () => {
   return (
     <>
       <SEOHead
-        title="Ferry Hoes | Keynote Speaker on AI, Technology & Brand Humanizing"
-        description="Ferry Hoes is an international keynote speaker, author of Brand Humanizing, and host of The Human Era Podcast. Helping brands become more human through technology."
+        title="Keynote Speaker on AI & Brand Humanizing | Ferry Hoes"
+        description="Ferry Hoes is an international keynote speaker on AI, technology, and Brand Humanizing. Trusted by Vodafone, GlaxoSmithKline, and Toshiba. Book for your next conference or corporate event."
         ogType="website"
         canonicalUrl="/"
       />

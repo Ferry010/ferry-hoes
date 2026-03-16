@@ -102,6 +102,8 @@ const Podcast = () => {
           <img
             src={podcastHero}
             alt="Ferry Hoes recording The Human Era Podcast"
+            loading="eager"
+            fetchPriority="high"
             className="absolute inset-0 w-full h-full object-cover pointer-events-none"
           />
           <div className="absolute inset-0 backdrop-blur-[6px]" />

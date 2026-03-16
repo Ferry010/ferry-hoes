@@ -1,10 +1,13 @@
-// Blog post page
 import { Link, useParams, Navigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { useBlogPost, formatPostDate, getReadTime } from "@/hooks/useBlogPosts";
 import SEOHead from "@/components/blog/SEOHead";
-import StructuredData, { breadcrumbSchema } from "@/components/StructuredData";
+import StructuredData, { breadcrumbSchema, blogPostingSchema } from "@/components/StructuredData";
 import PostCTA from "@/components/blog/PostCTA";
+
+/** Strip HTML tags and return plain text */
+const stripHtml = (html: string) =>
+  html.replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim();
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -13,7 +16,6 @@ const BlogPost = () => {
   if (isLoading) {
     return (
       <main className="min-h-screen bg-background">
-        {/* Loading skeleton */}
         <div className="aspect-[21/9] bg-muted animate-pulse" />
         <div className="container px-6 md:px-8 py-12">
           <div className="max-w-3xl mx-auto space-y-6">
@@ -34,11 +36,16 @@ const BlogPost = () => {
     return <Navigate to="/blog" replace />;
   }
 
+  // Auto-generate meta description from content if not manually set
+  const autoDescription = post.seo_description
+    || post.excerpt
+    || (post.content ? stripHtml(post.content).slice(0, 155) : undefined);
+
   return (
     <>
-<SEOHead
+      <SEOHead
         title={post.seo_title || post.title}
-        description={post.seo_description || post.excerpt || undefined}
+        description={autoDescription}
         keywords={post.seo_keywords || undefined}
         ogImage={post.seo_og_image_url || post.header_image_url || undefined}
         ogImageAlt={post.title}
@@ -48,25 +55,28 @@ const BlogPost = () => {
         modifiedAt={post.updated_at}
       />
       <StructuredData
-        data={breadcrumbSchema([
-          { name: "Home", url: "https://ferryhoes.com" },
-          { name: "Blog", url: "https://ferryhoes.com/blog" },
-          { name: post.title, url: `https://ferryhoes.com/blog/${post.slug}` },
-        ])}
+        data={[
+          breadcrumbSchema([
+            { name: "Home", url: "https://ferryhoes.com" },
+            { name: "Blog", url: "https://ferryhoes.com/blog" },
+            { name: post.title, url: `https://ferryhoes.com/blog/${post.slug}` },
+          ]),
+          blogPostingSchema(post),
+        ]}
       />
 
       <main className="min-h-screen bg-background">
-      {/* Hero Image */}
+        {/* Hero Image */}
         {post.header_image_url ? (
           <div className="relative h-[50vh] md:h-[65vh] overflow-hidden">
             <img
               src={post.header_image_url}
               alt={post.title}
               className="w-full h-full object-cover"
+              loading="eager"
+              fetchPriority="high"
             />
-            {/* Dark scrim for text readability */}
             <div className="absolute inset-0 bg-foreground/50" />
-            {/* Title over hero */}
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 md:px-8">
               <div className="max-w-3xl mx-auto">
                 <h1 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight uppercase tracking-tight">
@@ -98,19 +108,12 @@ const BlogPost = () => {
         {/* Content */}
         <article className="container px-6 md:px-8 py-12 md:py-16">
           <div className="max-w-3xl mx-auto">
-            {/* Divider */}
             <div className="w-24 h-1 bg-accent rounded-full mb-12" />
-
-            {/* Content */}
             <div
               className="prose prose-lg max-w-none text-foreground/90 prose-headings:text-foreground prose-headings:font-display prose-a:text-accent prose-strong:text-foreground mb-16"
               dangerouslySetInnerHTML={{ __html: post.content || "" }}
             />
-
-            {/* CTA */}
             <PostCTA />
-
-            {/* Back link */}
             <div className="mt-12 pt-8 border-t border-border">
               <Link
                 to="/blog"

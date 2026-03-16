@@ -48,6 +48,7 @@ const BlogCard = ({ post, variant = "default", colorIndex = 0 }: BlogCardProps) 
             <img
               src={post.header_image_url}
               alt={post.title}
+              loading="lazy"
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
             <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-accent/10 pointer-events-none" />

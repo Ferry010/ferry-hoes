@@ -19,6 +19,7 @@ const SpeakerSection = () => {
           <img 
             src={stagePhoto}
             alt="Ferry Hoes presenting on stage"
+            loading="lazy"
             className="absolute inset-0 w-full h-full object-cover"
           />
         </div>

@@ -78,7 +78,7 @@ const HeroVideo = () => {
             className="font-display text-2xl sm:text-3xl md:text-4xl text-background tracking-tight opacity-0 animate-fade-up mt-2 drop-shadow-[0_2px_20px_rgba(0,0,0,0.4)]"
             style={{ animationDelay: "4.8s" }}
           >
-            Speaker, author and brand humanizer
+            AI &amp; Technology Keynote Speaker
           </h1>
         </div>
       </div>

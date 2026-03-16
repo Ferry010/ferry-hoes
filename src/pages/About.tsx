@@ -14,8 +14,8 @@ const About = () => {
   return (
     <>
       <SEOHead
-        title="About Ferry Hoes | Speaker, Author & Brand Humanizing Pioneer"
-        description="The story of Ferry Hoes, from building websites at age 10 to becoming one of the Netherlands' most booked keynote speakers. Discover the journey behind Brand Humanizing."
+        title="About Ferry Hoes | International AI Keynote Speaker & Author"
+        description="Ferry Hoes is an international keynote speaker, author of Brand Humanizing, and founder of the Brand Humanizing Institute. With over a decade in technology and marketing, he helps organisations stay human in an AI world."
         ogType="website"
         canonicalUrl="/about"
       />
@@ -50,7 +50,7 @@ const About = () => {
                       className="flex-1 h-[280px] lg:h-[320px] rounded-2xl overflow-hidden shadow-lg relative animate-fade-in"
                       style={{ animationDelay: `${i * 0.1}s`, animationFillMode: "both", transform: `rotate(${img.rotate})` }}
                     >
-                      <img src={img.src} alt={img.alt} className="w-full h-full object-cover object-center" />
+                      <img src={img.src} alt={img.alt} loading="lazy" className="w-full h-full object-cover object-center" />
                       <div className="brand-hero-overlay" />
                     </div>
                   ))}
@@ -66,7 +66,7 @@ const About = () => {
                     { src: ferryBts, alt: "Ferry behind the scenes" },
                   ].map((img, i) => (
                     <div key={i} className="w-[60vw] h-64 flex-shrink-0 snap-center rounded-2xl overflow-hidden shadow-lg relative animate-fade-in" style={{ animationDelay: `${i * 0.1}s`, animationFillMode: "both" }}>
-                      <img src={img.src} alt={img.alt} className="w-full h-full object-cover object-center" />
+                      <img src={img.src} alt={img.alt} loading="lazy" className="w-full h-full object-cover object-center" />
                       <div className="brand-hero-overlay" />
                     </div>
                   ))}
@@ -76,7 +76,7 @@ const About = () => {
               {/* Headline + Subtitle */}
               <div className="max-w-3xl text-center">
                 <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 animate-fade-in" style={{ animationDelay: "0.3s", animationFillMode: "both" }}>
-                  My <span className="text-accent">story</span>
+                  About Ferry Hoes — International AI <span className="text-accent">Keynote Speaker</span>
                 </h1>
                 <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed animate-fade-in" style={{ animationDelay: "0.45s", animationFillMode: "both" }}>
                   International speaker, published author, and entrepreneur on a mission to unleash super-human potential with the help of technology.
