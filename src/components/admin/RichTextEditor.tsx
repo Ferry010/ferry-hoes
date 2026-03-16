@@ -275,28 +275,6 @@ const RichTextEditor = ({ value, onChange }: RichTextEditorProps) => {
         </Toggle>
       </div>
 
-      {/* Bubble menu for links */}
-      {editor && (
-        <BubbleMenu editor={editor} tippyOptions={{ duration: 150 }} shouldShow={({ editor }) => editor.isActive("link")}>
-          <div className="flex items-center gap-1 bg-popover border border-border rounded-md px-2 py-1 shadow-md">
-            <a
-              href={editor.getAttributes("link").href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs text-accent hover:underline max-w-[200px] truncate"
-            >
-              {editor.getAttributes("link").href}
-            </a>
-            <Button size="sm" variant="ghost" className="h-6 w-6 p-0" onClick={openLinkPopover}>
-              <ExternalLink className="w-3 h-3" />
-            </Button>
-            <Button size="sm" variant="ghost" className="h-6 w-6 p-0" onClick={handleRemoveLink}>
-              <Unlink className="w-3 h-3" />
-            </Button>
-          </div>
-        </BubbleMenu>
-      )}
-
       {/* Editor */}
       <EditorContent editor={editor} />
 
