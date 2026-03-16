@@ -280,7 +280,7 @@ const Now = () => {
   return (
     <>
       <SEOHead
-        title="Now — Ferry Hoes"
+        title="What Ferry Is Doing Now | Ferry Hoes"
         description="What Ferry Hoes is up to right now — speaking, projects, reading, and creative work."
         canonicalUrl="/now"
       />
