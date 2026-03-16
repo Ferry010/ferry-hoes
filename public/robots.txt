@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://ferryhoes.com/sitemap.xml
+Sitemap: https://lwqbobcuytcwyolyzzcw.supabase.co/functions/v1/sitemap
