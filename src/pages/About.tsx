@@ -14,8 +14,8 @@ const About = () => {
   return (
     <>
       <SEOHead
-        title="About Ferry Hoes | Speaker, Author & Brand Humanizing Pioneer"
-        description="The story of Ferry Hoes, from building websites at age 10 to becoming one of the Netherlands' most booked keynote speakers. Discover the journey behind Brand Humanizing."
+        title="About Ferry Hoes | International AI Keynote Speaker & Author"
+        description="Ferry Hoes is an international keynote speaker, author of Brand Humanizing, and founder of the Brand Humanizing Institute. With over a decade in technology and marketing, he helps organisations stay human in an AI world."
         ogType="website"
         canonicalUrl="/about"
       />
