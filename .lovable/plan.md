@@ -1,21 +1,47 @@
 
 
-## Blog Section — Colored Background Cards
+# WordPress-style WYSIWYG Blog Editor
 
-### `src/components/blog/BlogCard.tsx`
-- Change `homepage` variant to accept a `colorIndex` prop (0 = teal, 1 = coral)
-- Remove `line-clamp-2` from title to allow full display
-- Card backgrounds: first card `bg-[#5aa6b2]`, second card `bg-[#E86A4A]`
-- Title text: white, bold, no truncation
-- "Blog" tag: white text on `white/20` background
-- Excerpt: `text-white/70`
-- Date/read time: `text-white/60`, border-t `border-white/20`
-- Remove hover text color change (already white)
+The current editor has a basic TipTap toolbar (bold, italic, headings, lists). To make it feel more like WordPress, I'll add missing features: links, images inline, blockquotes, text alignment, and a link insertion dialog. I'll also add keyboard shortcuts display and improve the toolbar UX.
 
-### `src/components/sections/BlogSection.tsx`
-- Pass `colorIndex` to each `BlogCard` so first gets teal, second gets coral
+## Changes
+
+### `src/components/admin/RichTextEditor.tsx` — Major upgrade
+
+**Add TipTap extensions:**
+- `@tiptap/extension-link` — clickable links with a URL input popover
+- `@tiptap/extension-image` — inline images within content
+- `@tiptap/extension-placeholder` — "Start writing..." placeholder text
+- `@tiptap/extension-underline` — underline formatting
+- `@tiptap/extension-text-align` — left/center/right alignment
+- `@tiptap/extension-blockquote` (already in StarterKit)
+
+**Enhanced toolbar with grouped sections:**
+- **Text formatting**: Bold, Italic, Underline, Strikethrough
+- **Headings**: H2, H3
+- **Lists**: Bullet, Ordered
+- **Block**: Blockquote, Horizontal rule
+- **Insert**: Link (popover dialog for URL input), Image (URL input or upload)
+- **Alignment**: Left, Center, Right
+- **History**: Undo, Redo
+
+**Link insertion**: A small popover/dialog that appears when clicking the Link button — input for URL, option to open in new tab, and apply/remove buttons.
+
+**Image insertion**: A button that opens a dialog to paste an image URL or upload directly to storage (reusing existing upload logic from `ImageUpload.tsx`).
+
+**Better editor area**: Increase min-height, add placeholder text, improve prose styling to better match the published blog appearance.
+
+### New packages to install
+- `@tiptap/extension-link`
+- `@tiptap/extension-image`
+- `@tiptap/extension-placeholder`
+- `@tiptap/extension-underline`
+- `@tiptap/extension-text-align`
 
 ### Files changed
-- `src/components/blog/BlogCard.tsx`
-- `src/components/sections/BlogSection.tsx`
+
+| File | Change |
+|------|--------|
+| `src/components/admin/RichTextEditor.tsx` | Full rewrite with expanded toolbar, link/image dialogs, new extensions |
+| `package.json` | Add 5 new TipTap extension packages |
 
