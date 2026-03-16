@@ -25,7 +25,6 @@ import {
   Undo,
   Redo,
   Upload,
-  ExternalLink,
   Unlink,
   Check,
 } from "lucide-react";
