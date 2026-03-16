@@ -5,12 +5,12 @@ import { Menu, X } from "lucide-react";
 import logoBlack from "@/assets/ferry-hoes-logo-black.png";
 
 const NAV_ITEMS = [
-  { label: "My Story", route: "/about" },
-  { label: "The Idea", route: "/#brand-humanizing" },
-  { label: "On Stage", route: "/speaking" },
-  { label: "Podcast", route: "/podcast" },
-  { label: "Blog", route: "/blog" },
-  { label: "The Book", route: "/#book" },
+  { label: "My Story", route: "/about", ariaLabel: "About Ferry Hoes" },
+  { label: "The Idea", route: "/#brand-humanizing", ariaLabel: "Brand Humanizing concept" },
+  { label: "On Stage", route: "/speaking", ariaLabel: "Keynote speaking and booking" },
+  { label: "Podcast", route: "/podcast", ariaLabel: "The Human Era Podcast" },
+  { label: "Blog", route: "/blog", ariaLabel: "Blog – insights on AI and technology" },
+  { label: "The Book", route: "/#book", ariaLabel: "Brand Humanizing book" },
 ];
 
 const SiteHeader = () => {
