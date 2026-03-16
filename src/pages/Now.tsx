@@ -288,6 +288,7 @@ const Now = () => {
         className="min-h-screen bg-background flex flex-col transition-opacity duration-300"
         style={{ opacity }}
       >
+        <h1 className="sr-only">What Ferry Is Doing Now</h1>
         {/* back link */}
         <div className="fixed top-6 right-6 z-50">
           <button

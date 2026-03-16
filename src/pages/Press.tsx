@@ -29,8 +29,8 @@ const Press = () => {
   return (
     <>
       <SEOHead
-        title="Press & Media Kit | Ferry Hoes"
-        description="Official bio, high-resolution headshots, and speaking topics for Ferry Hoes. For press and media enquiries."
+        title="Press & Media Kit | Ferry Hoes | Keynote Speaker"
+        description="Media resources for journalists and event organisers. Download bios, headshots, and speaking topics for Ferry Hoes, international keynote speaker on AI and Brand Humanizing."
         ogType="website"
         canonicalUrl="/press"
       />

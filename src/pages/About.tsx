@@ -76,7 +76,7 @@ const About = () => {
               {/* Headline + Subtitle */}
               <div className="max-w-3xl text-center">
                 <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 animate-fade-in" style={{ animationDelay: "0.3s", animationFillMode: "both" }}>
-                  My <span className="text-accent">story</span>
+                  About Ferry Hoes — International AI <span className="text-accent">Keynote Speaker</span>
                 </h1>
                 <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed animate-fade-in" style={{ animationDelay: "0.45s", animationFillMode: "both" }}>
                   International speaker, published author, and entrepreneur on a mission to unleash super-human potential with the help of technology.

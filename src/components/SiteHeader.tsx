@@ -86,6 +86,7 @@ const SiteHeader = () => {
                   key={item.route}
                   to={item.route}
                   onClick={(e) => handleNavClick(e, item.route)}
+                  aria-label={item.ariaLabel}
                   className="group relative font-sans text-sm font-medium tracking-wide text-foreground/80 hover:text-foreground transition-colors duration-150"
                 >
                   {item.label}

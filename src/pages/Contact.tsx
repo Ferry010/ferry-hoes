@@ -135,9 +135,12 @@ const Contact = () => {
         {/* Header */}
         <section className="pt-32 pb-12 md:pt-40 md:pb-16">
           <div className="container px-6 md:px-8 max-w-2xl mx-auto">
-            <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-6">
+            <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4">
               Contact
             </h1>
+            <h2 className="font-display text-2xl md:text-3xl font-semibold text-accent mb-6">
+              Book Ferry for Your Event
+            </h2>
             <p className="text-muted-foreground text-lg leading-relaxed">
               Please find a way to connect with me or my team that suits you best.
             </p>
