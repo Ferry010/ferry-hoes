@@ -178,6 +178,25 @@ const Speaking = () => {
             </div>
           </section>
 
+          {/* Upcoming Events */}
+          <section className="py-16 bg-background">
+            <div className="container px-6 md:px-8">
+              <div className="max-w-4xl mx-auto text-center">
+                <span className="text-accent font-medium text-sm mb-2 block">Calendar</span>
+                <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-6">Upcoming Events</h2>
+                <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+                  Dates are announced regularly. Follow Ferry on LinkedIn for the latest schedule and event announcements.
+                </p>
+                <Button asChild variant="outline" className="rounded-full px-6 border-accent text-accent hover:bg-accent hover:text-accent-foreground group">
+                  <a href="https://www.linkedin.com/in/ferryhoes/" target="_blank" rel="noopener noreferrer">
+                    Follow on LinkedIn
+                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  </a>
+                </Button>
+              </div>
+            </div>
+          </section>
+
           {/* About as Speaker */}
           <article className="py-24 md:py-32 bg-secondary/30">
             <div className="container px-6 md:px-8">
