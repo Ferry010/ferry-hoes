@@ -125,8 +125,8 @@ const Contact = () => {
   return (
     <>
       <SEOHead
-        title="Contact | Ferry Hoes"
-        description="Get in touch with Ferry Hoes. Whether it's about a keynote, workshop, podcast or collaboration, reach out directly."
+        title="Book Ferry Hoes | Keynote Speaker Enquiries & Contact"
+        description="Get in touch to book Ferry Hoes for your conference or corporate event. Available for keynotes, workshops, panel moderation, and hosting. International speaker based in the Netherlands."
         ogType="website"
         canonicalUrl="/contact"
       />
