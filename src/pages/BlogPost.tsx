@@ -1,6 +1,6 @@
 import { Link, useParams, Navigate } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
-import { useBlogPost, formatPostDate, getReadTime } from "@/hooks/useBlogPosts";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import { useBlogPost, useBlogPosts, formatPostDate, getReadTime } from "@/hooks/useBlogPosts";
 import SEOHead from "@/components/blog/SEOHead";
 import StructuredData, { breadcrumbSchema, blogPostingSchema } from "@/components/StructuredData";
 import PostCTA from "@/components/blog/PostCTA";
@@ -12,6 +12,7 @@ const stripHtml = (html: string) =>
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
   const { data: post, isLoading, error } = useBlogPost(slug || "");
+  const { data: allPosts } = useBlogPosts();
 
   if (isLoading) {
     return (
@@ -40,6 +41,9 @@ const BlogPost = () => {
   const autoDescription = post.seo_description
     || post.excerpt
     || (post.content ? stripHtml(post.content).slice(0, 155) : undefined);
+
+  // Related posts: up to 3 other posts
+  const relatedPosts = allPosts?.filter((p) => p.slug !== post.slug).slice(0, 3) || [];
 
   return (
     <>
@@ -108,12 +112,54 @@ const BlogPost = () => {
         {/* Content */}
         <article className="container px-6 md:px-8 py-12 md:py-16">
           <div className="max-w-3xl mx-auto">
+            {/* Author byline */}
+            <div className="flex items-center gap-3 mb-8 pb-8 border-b border-border">
+              <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center text-accent font-bold text-sm">FH</div>
+              <div>
+                <Link to="/about" className="text-foreground font-medium hover:text-accent transition-colors">Ferry Hoes</Link>
+                <p className="text-xs text-muted-foreground">Keynote Speaker & Author</p>
+              </div>
+            </div>
+
             <div className="w-24 h-1 bg-accent rounded-full mb-12" />
             <div
               className="prose prose-lg max-w-none text-foreground/90 prose-headings:text-foreground prose-headings:font-display prose-a:text-accent prose-strong:text-foreground mb-16"
               dangerouslySetInnerHTML={{ __html: post.content || "" }}
             />
+
             <PostCTA />
+
+            {/* Related Posts */}
+            {relatedPosts.length > 0 && (
+              <div className="mt-16 pt-8 border-t border-border">
+                <h3 className="font-display text-xl font-bold text-foreground mb-6">You might also like</h3>
+                <div className="grid gap-4">
+                  {relatedPosts.map((rp) => (
+                    <Link
+                      key={rp.slug}
+                      to={`/blog/${rp.slug}`}
+                      className="flex items-center gap-4 p-4 rounded-xl border border-border hover:border-accent/30 hover:bg-accent/[0.03] transition-colors group"
+                    >
+                      {rp.header_image_url && (
+                        <img src={rp.header_image_url} alt={rp.title} loading="lazy" width={80} height={56} className="w-20 h-14 object-cover rounded-lg shrink-0" />
+                      )}
+                      <div className="flex-1 min-w-0">
+                        <p className="font-medium text-foreground group-hover:text-accent transition-colors line-clamp-1">{rp.title}</p>
+                        <p className="text-xs text-muted-foreground mt-1">{formatPostDate(rp.published_at)} · {getReadTime(rp.content)}</p>
+                      </div>
+                      <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-accent shrink-0" />
+                    </Link>
+                  ))}
+                </div>
+
+                <div className="mt-6">
+                  <Link to="/speaking" className="inline-flex items-center gap-2 text-sm text-accent hover:underline">
+                    See Ferry's keynote topics <ArrowRight className="h-3.5 w-3.5" />
+                  </Link>
+                </div>
+              </div>
+            )}
+
             <div className="mt-12 pt-8 border-t border-border">
               <Link
                 to="/blog"

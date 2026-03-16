@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
@@ -14,9 +14,28 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Clock, Mic, MessageCircle } from "lucide-react";
 import Footer from "@/components/sections/Footer";
-
 import SEOHead from "@/components/blog/SEOHead";
+import StructuredData, { contactPageSchema, breadcrumbSchema } from "@/components/StructuredData";
+
+const KEYNOTE_TOPICS = [
+  { value: "brand-humanizing", label: "Brand Humanizing: become irreplaceable in a world of AI" },
+  { value: "ai-conversation", label: "The AI conversation most organisations skip" },
+  { value: "leading-ai", label: "Leading when AI has a say" },
+  { value: "ai-mistake", label: "The biggest AI mistake organisations are making right now" },
+  { value: "ai-law", label: "From AI law to AI advantage: literacy as a strategic foundation" },
+  { value: "other", label: "Other / custom topic" },
+];
+
+const AUDIENCE_SIZES = [
+  { value: "under-50", label: "Under 50" },
+  { value: "50-100", label: "50–100" },
+  { value: "100-300", label: "100–300" },
+  { value: "300-1000", label: "300–1,000" },
+  { value: "1000+", label: "1,000+" },
+];
 
 const INQUIRY_OPTIONS = [
   { value: "talk", label: "Enquiry about a talk / event" },
@@ -35,12 +54,27 @@ const TIMELINE_OPTIONS = [
   { value: "exploring", label: "Just exploring" },
 ];
 
-const FROM_TO_INQUIRY: Record<string, string> = {
-  speaking: "talk",
-  podcast: "podcast",
+const FROM_TO_TAB: Record<string, string> = {
+  speaking: "booking",
+  press: "general",
 };
 
-const contactSchema = z.object({
+const bookingSchema = z.object({
+  name: z.string().trim().min(1, "Please enter your name").max(100),
+  email: z.string().trim().email("Please enter a valid email address").max(255),
+  organization: z.string().trim().min(1, "Please enter your organisation").max(200),
+  eventName: z.string().trim().max(200).optional().or(z.literal("")),
+  eventDate: z.string().trim().max(100).optional().or(z.literal("")),
+  eventLocation: z.string().trim().max(200).optional().or(z.literal("")),
+  audienceSize: z.string().optional().or(z.literal("")),
+  topic: z.string().min(1, "Please select a topic of interest"),
+  message: z.string().trim().min(1, "Please share some details about your event").max(5000),
+  privacyAccepted: z.literal(true, {
+    errorMap: () => ({ message: "Please accept the privacy agreement" }),
+  }),
+});
+
+const generalSchema = z.object({
   name: z.string().trim().min(1, "Please enter your name").max(100),
   email: z.string().trim().email("Please enter a valid email address").max(255),
   organization: z.string().trim().max(200).optional().or(z.literal("")),
@@ -53,74 +87,114 @@ const contactSchema = z.object({
   }),
 });
 
-type ContactForm = z.infer<typeof contactSchema>;
-
 const Contact = () => {
   const location = useLocation();
   const fromPage = (location.state as { from?: string })?.from;
+  const defaultTab = fromPage ? FROM_TO_TAB[fromPage] || "booking" : "booking";
 
-  const [form, setForm] = useState<Partial<ContactForm>>({
-    name: "",
-    email: "",
-    organization: "",
-    inquiryType: fromPage ? FROM_TO_INQUIRY[fromPage] || "" : "",
-    inquiryOther: "",
-    message: "",
-    timeline: "",
-    privacyAccepted: undefined,
+  // Booking form state
+  const [booking, setBooking] = useState({
+    name: "", email: "", organization: "", eventName: "", eventDate: "",
+    eventLocation: "", audienceSize: "", topic: "", message: "", privacyAccepted: undefined as boolean | undefined,
   });
-  const [errors, setErrors] = useState<Partial<Record<keyof ContactForm, string>>>({});
+  const [bookingErrors, setBookingErrors] = useState<Record<string, string>>({});
+
+  // General form state
+  const [general, setGeneral] = useState({
+    name: "", email: "", organization: "",
+    inquiryType: fromPage === "press" ? "press" : "",
+    inquiryOther: "", message: "", timeline: "", privacyAccepted: undefined as boolean | undefined,
+  });
+  const [generalErrors, setGeneralErrors] = useState<Record<string, string>>({});
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSent, setIsSent] = useState(false);
 
-  const updateField = <K extends keyof ContactForm>(key: K, value: ContactForm[K]) => {
-    setForm((prev) => ({ ...prev, [key]: value }));
-    if (errors[key]) setErrors((prev) => ({ ...prev, [key]: undefined }));
+  const updateBooking = (key: string, value: any) => {
+    setBooking((prev) => ({ ...prev, [key]: value }));
+    if (bookingErrors[key]) setBookingErrors((prev) => ({ ...prev, [key]: undefined as any }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const updateGeneral = (key: string, value: any) => {
+    setGeneral((prev) => ({ ...prev, [key]: value }));
+    if (generalErrors[key]) setGeneralErrors((prev) => ({ ...prev, [key]: undefined as any }));
+  };
+
+  const handleBookingSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const result = contactSchema.safeParse(form);
+    const result = bookingSchema.safeParse(booking);
     if (!result.success) {
-      const fieldErrors: Partial<Record<keyof ContactForm, string>> = {};
-      result.error.errors.forEach((err) => {
-        const key = err.path[0] as keyof ContactForm;
-        if (!fieldErrors[key]) fieldErrors[key] = err.message;
-      });
-      setErrors(fieldErrors);
+      const errs: Record<string, string> = {};
+      result.error.errors.forEach((err) => { if (!errs[err.path[0] as string]) errs[err.path[0] as string] = err.message; });
+      setBookingErrors(errs);
       return;
     }
 
     setIsSubmitting(true);
+    const d = result.data;
+    const structuredMessage = [
+      d.eventName && `Event: ${d.eventName}`,
+      d.eventDate && `Date: ${d.eventDate}`,
+      d.eventLocation && `Location: ${d.eventLocation}`,
+      d.audienceSize && `Audience size: ${AUDIENCE_SIZES.find(a => a.value === d.audienceSize)?.label || d.audienceSize}`,
+      d.topic && `Topic: ${KEYNOTE_TOPICS.find(t => t.value === d.topic)?.label || d.topic}`,
+      "",
+      d.message,
+    ].filter(Boolean).join("\n");
+
     const { error } = await supabase.from("contact_messages").insert({
-      name: result.data.name,
-      email: result.data.email,
-      message: result.data.message,
-      organization: result.data.organization || null,
-      inquiry_type: result.data.inquiryType,
-      inquiry_other: result.data.inquiryOther || null,
-      timeline: result.data.timeline || null,
-      privacy_accepted: true,
+      name: d.name, email: d.email, message: structuredMessage,
+      organization: d.organization || null,
+      inquiry_type: "talk", timeline: null, privacy_accepted: true,
     } as any);
 
     setIsSubmitting(false);
-    if (error) {
-      setErrors({ name: "Something went wrong. Please try again." });
-      return;
-    }
+    if (error) { setBookingErrors({ name: "Something went wrong. Please try again." }); return; }
     setIsSent(true);
-    // Fire-and-forget notification
     supabase.functions.invoke("notify-contact", {
-      body: {
-        name: result.data.name,
-        email: result.data.email,
-        message: result.data.message,
-        organization: result.data.organization || undefined,
-        inquiryType: result.data.inquiryType,
-        timeline: result.data.timeline || undefined,
-      },
+      body: { name: d.name, email: d.email, message: structuredMessage, organization: d.organization, inquiryType: "talk" },
     });
   };
+
+  const handleGeneralSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const result = generalSchema.safeParse(general);
+    if (!result.success) {
+      const errs: Record<string, string> = {};
+      result.error.errors.forEach((err) => { if (!errs[err.path[0] as string]) errs[err.path[0] as string] = err.message; });
+      setGeneralErrors(errs);
+      return;
+    }
+
+    setIsSubmitting(true);
+    const d = result.data;
+    const { error } = await supabase.from("contact_messages").insert({
+      name: d.name, email: d.email, message: d.message,
+      organization: d.organization || null,
+      inquiry_type: d.inquiryType, inquiry_other: d.inquiryOther || null,
+      timeline: d.timeline || null, privacy_accepted: true,
+    } as any);
+
+    setIsSubmitting(false);
+    if (error) { setGeneralErrors({ name: "Something went wrong. Please try again." }); return; }
+    setIsSent(true);
+    supabase.functions.invoke("notify-contact", {
+      body: { name: d.name, email: d.email, message: d.message, organization: d.organization, inquiryType: d.inquiryType, timeline: d.timeline },
+    });
+  };
+
+  const PrivacyCheckbox = ({ checked, onChange, error }: { checked: boolean | undefined; onChange: (v: any) => void; error?: string }) => (
+    <div className="space-y-2">
+      <div className="flex items-start gap-3">
+        <Checkbox id="privacy" checked={checked === true} onCheckedChange={(c) => onChange(c === true ? true : undefined)} className={error ? "border-destructive" : ""} />
+        <div className="space-y-1">
+          <Label htmlFor="privacy" className="leading-snug cursor-pointer">I agree that my information will be used to respond to this message.</Label>
+          <p className="text-xs text-muted-foreground">Your information will only be used to reply to you. Nothing else.</p>
+        </div>
+      </div>
+      {error && <p className="text-sm text-destructive">{error}</p>}
+    </div>
+  );
 
   return (
     <>
@@ -130,230 +204,188 @@ const Contact = () => {
         ogType="website"
         canonicalUrl="/contact"
       />
+      <StructuredData
+        data={[
+          contactPageSchema,
+          breadcrumbSchema([
+            { name: "Home", url: "https://ferryhoes.com" },
+            { name: "Contact", url: "https://ferryhoes.com/contact" },
+          ]),
+        ]}
+      />
 
       <main className="min-h-screen bg-background">
         {/* Header */}
         <section className="pt-32 pb-12 md:pt-40 md:pb-16">
           <div className="container px-6 md:px-8 max-w-2xl mx-auto">
-            <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4">
-              Contact
-            </h1>
-            <h2 className="font-display text-2xl md:text-3xl font-semibold text-accent mb-6">
-              Book Ferry for Your Event
-            </h2>
-            <p className="text-muted-foreground text-lg leading-relaxed">
-              Please find a way to connect with me or my team that suits you best.
-            </p>
-          </div>
-        </section>
-
-        {/* Info Cards */}
-        <section className="pb-12 md:pb-16">
-          <div className="container px-6 md:px-8 max-w-2xl mx-auto grid gap-6 sm:grid-cols-2">
-            {/* Press card */}
-            <div className="rounded-lg border-l-4 border-l-primary bg-brand-teal-light p-6 space-y-4">
-              <h2 className="font-display text-xl font-semibold text-foreground">Press</h2>
-              <p className="text-muted-foreground text-base leading-relaxed">
-                For all interviews, media opportunities, and anything else press-related, please use this option.
-              </p>
-              <Button
-                variant="default"
-                size="sm"
-                onClick={() => {
-                  updateField("inquiryType", "press");
-                  document.getElementById("contact-form")?.scrollIntoView({ behavior: "smooth" });
-                }}
-              >
-                Press enquiry
-              </Button>
-            </div>
-
-            {/* Book to speak card */}
-            <div className="rounded-lg border-l-4 border-l-accent bg-brand-coral-light p-6 space-y-4">
-              <h2 className="font-display text-xl font-semibold text-foreground">Book Ferry To Speak</h2>
-              <p className="text-muted-foreground text-base leading-relaxed">
-                I'm exclusively represented by Speakers Academy. Go here to book me to speak at your next event.
-              </p>
-              <Button
-                size="sm"
-                className="bg-accent text-accent-foreground hover:bg-accent/90"
-                asChild
-              >
-                <a
-                  href="https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Book via Speakers Academy
-                </a>
-              </Button>
-            </div>
+            <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4">Contact</h1>
+            <h2 className="font-display text-2xl md:text-3xl font-semibold text-accent mb-6">Book Ferry for Your Event</h2>
+            <p className="text-muted-foreground text-lg leading-relaxed">Choose the option that fits your enquiry best.</p>
           </div>
         </section>
 
         {/* Form / Confirmation */}
         <section className="pb-24 md:pb-32">
           <div className="container px-6 md:px-8 max-w-2xl mx-auto">
-              {isSent ? (
-                <div className="animate-fade-in py-16">
-                  <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-4">
-                    Message received.
-                  </h2>
-                  <p className="text-muted-foreground text-lg leading-relaxed">
-                    Thank you for reaching out. I read every message personally and aim to reply within 48 hours.
-                  </p>
-                </div>
-              ) : (
-                <form
-                  id="contact-form"
-                  onSubmit={handleSubmit}
-                  className="space-y-8 transition-opacity duration-200"
-                  style={{ opacity: isSubmitting ? 0.6 : 1 }}
-                  noValidate
-                >
-                  {/* Name */}
-                  <div className="space-y-2">
-                    <Label htmlFor="name">Full Name <span className="text-destructive">*</span></Label>
-                    <Input
-                      id="name"
-                      value={form.name}
-                      onChange={(e) => updateField("name", e.target.value)}
-                      className={errors.name ? "border-destructive" : ""}
-                    />
-                    {errors.name && <p className="text-sm text-destructive">{errors.name}</p>}
+            {isSent ? (
+              <div className="animate-fade-in py-16">
+                <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-4">Message received.</h2>
+                <p className="text-muted-foreground text-lg leading-relaxed">Thank you for reaching out. I read every message personally and aim to reply within 48 hours.</p>
+              </div>
+            ) : (
+              <Tabs defaultValue={defaultTab} className="w-full">
+                <TabsList className="grid w-full grid-cols-2 mb-8">
+                  <TabsTrigger value="booking" className="gap-2"><Mic className="h-4 w-4" /> Book to Speak</TabsTrigger>
+                  <TabsTrigger value="general" className="gap-2"><MessageCircle className="h-4 w-4" /> General Enquiry</TabsTrigger>
+                </TabsList>
+
+                {/* ── Booking Form ── */}
+                <TabsContent value="booking">
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground mb-8 bg-accent/5 rounded-lg px-4 py-3">
+                    <Clock className="h-4 w-4 text-accent shrink-0" />
+                    I respond to all speaking enquiries within 2 business days.
                   </div>
 
-                  {/* Email */}
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email Address <span className="text-destructive">*</span></Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="name@company.com"
-                      value={form.email}
-                      onChange={(e) => updateField("email", e.target.value)}
-                      className={errors.email ? "border-destructive" : ""}
-                    />
-                    {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
-                  </div>
-
-                  {/* Organization */}
-                  <div className="space-y-2">
-                    <Label htmlFor="organization">Organization / Company</Label>
-                    <Input
-                      id="organization"
-                      value={form.organization}
-                      onChange={(e) => updateField("organization", e.target.value)}
-                    />
-                  </div>
-
-                  {/* Inquiry Type */}
-                  <div className="space-y-2">
-                    <Label>How can I help? <span className="text-destructive">*</span></Label>
-                    <Select
-                      value={form.inquiryType}
-                      onValueChange={(v) => updateField("inquiryType", v)}
-                    >
-                      <SelectTrigger className={errors.inquiryType ? "border-destructive" : ""}>
-                        <SelectValue placeholder="Select an option" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {INQUIRY_OPTIONS.map((opt) => (
-                          <SelectItem key={opt.value} value={opt.value}>
-                            {opt.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    {errors.inquiryType && <p className="text-sm text-destructive">{errors.inquiryType}</p>}
-                  </div>
-
-                  {/* Conditional "Other" field */}
-                  {form.inquiryType === "other" && (
-                    <div className="space-y-2 animate-fade-in">
-                      <Label htmlFor="inquiryOther">Tell me more</Label>
-                      <Input
-                        id="inquiryOther"
-                        value={form.inquiryOther}
-                        onChange={(e) => updateField("inquiryOther", e.target.value)}
-                      />
-                    </div>
-                  )}
-
-                  {/* Message */}
-                  <div className="space-y-2">
-                    <Label htmlFor="message">Tell me about your request <span className="text-destructive">*</span></Label>
-                    <Textarea
-                      id="message"
-                      rows={6}
-                      placeholder="What are you thinking? The more context you share, the better the conversation."
-                      value={form.message}
-                      onChange={(e) => updateField("message", e.target.value)}
-                      className={errors.message ? "border-destructive" : ""}
-                    />
-                    {errors.message && <p className="text-sm text-destructive">{errors.message}</p>}
-                  </div>
-
-                  {/* Timeline */}
-                  <div className="space-y-2">
-                    <Label>Preferred timeline</Label>
-                    <Select
-                      value={form.timeline}
-                      onValueChange={(v) => updateField("timeline", v)}
-                    >
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select a timeline" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {TIMELINE_OPTIONS.map((opt) => (
-                          <SelectItem key={opt.value} value={opt.value}>
-                            {opt.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  {/* Privacy */}
-                  <div className="space-y-2">
-                    <div className="flex items-start gap-3">
-                      <Checkbox
-                        id="privacy"
-                        checked={form.privacyAccepted === true}
-                        onCheckedChange={(checked) =>
-                          updateField("privacyAccepted", checked === true ? true : undefined as any)
-                        }
-                        className={errors.privacyAccepted ? "border-destructive" : ""}
-                      />
-                      <div className="space-y-1">
-                        <Label htmlFor="privacy" className="leading-snug cursor-pointer">
-                          I agree that my information will be used to respond to this message.
-                        </Label>
-                        <p className="text-xs text-muted-foreground">
-                          Your information will only be used to reply to you. Nothing else.
-                        </p>
+                  <form onSubmit={handleBookingSubmit} className="space-y-6" style={{ opacity: isSubmitting ? 0.6 : 1 }} noValidate>
+                    <div className="grid sm:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <Label htmlFor="b-name">Full Name <span className="text-destructive">*</span></Label>
+                        <Input id="b-name" value={booking.name} onChange={(e) => updateBooking("name", e.target.value)} className={bookingErrors.name ? "border-destructive" : ""} />
+                        {bookingErrors.name && <p className="text-sm text-destructive">{bookingErrors.name}</p>}
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="b-email">Email Address <span className="text-destructive">*</span></Label>
+                        <Input id="b-email" type="email" placeholder="name@company.com" value={booking.email} onChange={(e) => updateBooking("email", e.target.value)} className={bookingErrors.email ? "border-destructive" : ""} />
+                        {bookingErrors.email && <p className="text-sm text-destructive">{bookingErrors.email}</p>}
                       </div>
                     </div>
-                    {errors.privacyAccepted && <p className="text-sm text-destructive">{errors.privacyAccepted}</p>}
-                  </div>
 
-                  {/* Submit */}
-                  <Button
-                    type="submit"
-                    size="lg"
-                    disabled={isSubmitting}
-                    className="hover:brightness-[1.05] active:scale-[0.97] transition-all duration-[120ms]"
-                  >
-                    {isSubmitting ? "Sending..." : "Send message"}
-                  </Button>
-                </form>
-              )}
+                    <div className="space-y-2">
+                      <Label htmlFor="b-org">Organisation <span className="text-destructive">*</span></Label>
+                      <Input id="b-org" value={booking.organization} onChange={(e) => updateBooking("organization", e.target.value)} className={bookingErrors.organization ? "border-destructive" : ""} />
+                      {bookingErrors.organization && <p className="text-sm text-destructive">{bookingErrors.organization}</p>}
+                    </div>
+
+                    <div className="grid sm:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <Label htmlFor="b-event">Event Name</Label>
+                        <Input id="b-event" value={booking.eventName} onChange={(e) => updateBooking("eventName", e.target.value)} />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="b-date">Event Date</Label>
+                        <Input id="b-date" placeholder="e.g. September 2026" value={booking.eventDate} onChange={(e) => updateBooking("eventDate", e.target.value)} />
+                      </div>
+                    </div>
+
+                    <div className="grid sm:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <Label htmlFor="b-location">Event Location</Label>
+                        <Input id="b-location" placeholder="e.g. Amsterdam, Netherlands" value={booking.eventLocation} onChange={(e) => updateBooking("eventLocation", e.target.value)} />
+                      </div>
+                      <div className="space-y-2">
+                        <Label>Expected Audience Size</Label>
+                        <Select value={booking.audienceSize} onValueChange={(v) => updateBooking("audienceSize", v)}>
+                          <SelectTrigger><SelectValue placeholder="Select size" /></SelectTrigger>
+                          <SelectContent>
+                            {AUDIENCE_SIZES.map((s) => <SelectItem key={s.value} value={s.value}>{s.label}</SelectItem>)}
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label>Topic of Interest <span className="text-destructive">*</span></Label>
+                      <Select value={booking.topic} onValueChange={(v) => updateBooking("topic", v)}>
+                        <SelectTrigger className={bookingErrors.topic ? "border-destructive" : ""}><SelectValue placeholder="Select a topic" /></SelectTrigger>
+                        <SelectContent>
+                          {KEYNOTE_TOPICS.map((t) => <SelectItem key={t.value} value={t.value}>{t.label}</SelectItem>)}
+                        </SelectContent>
+                      </Select>
+                      {bookingErrors.topic && <p className="text-sm text-destructive">{bookingErrors.topic}</p>}
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="b-message">Tell me about your event <span className="text-destructive">*</span></Label>
+                      <Textarea id="b-message" rows={5} placeholder="What are the goals for your event? Who will be in the audience?" value={booking.message} onChange={(e) => updateBooking("message", e.target.value)} className={bookingErrors.message ? "border-destructive" : ""} />
+                      {bookingErrors.message && <p className="text-sm text-destructive">{bookingErrors.message}</p>}
+                    </div>
+
+                    <PrivacyCheckbox checked={booking.privacyAccepted} onChange={(v) => updateBooking("privacyAccepted", v)} error={bookingErrors.privacyAccepted} />
+
+                    <Button type="submit" size="lg" disabled={isSubmitting} className="hover:brightness-[1.05] active:scale-[0.97] transition-all duration-[120ms]">
+                      {isSubmitting ? "Sending..." : "Send booking enquiry"}
+                    </Button>
+                  </form>
+                </TabsContent>
+
+                {/* ── General Form ── */}
+                <TabsContent value="general">
+                  <form onSubmit={handleGeneralSubmit} className="space-y-6" style={{ opacity: isSubmitting ? 0.6 : 1 }} noValidate>
+                    <div className="space-y-2">
+                      <Label htmlFor="g-name">Full Name <span className="text-destructive">*</span></Label>
+                      <Input id="g-name" value={general.name} onChange={(e) => updateGeneral("name", e.target.value)} className={generalErrors.name ? "border-destructive" : ""} />
+                      {generalErrors.name && <p className="text-sm text-destructive">{generalErrors.name}</p>}
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="g-email">Email Address <span className="text-destructive">*</span></Label>
+                      <Input id="g-email" type="email" placeholder="name@company.com" value={general.email} onChange={(e) => updateGeneral("email", e.target.value)} className={generalErrors.email ? "border-destructive" : ""} />
+                      {generalErrors.email && <p className="text-sm text-destructive">{generalErrors.email}</p>}
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="g-org">Organization / Company</Label>
+                      <Input id="g-org" value={general.organization} onChange={(e) => updateGeneral("organization", e.target.value)} />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label>How can I help? <span className="text-destructive">*</span></Label>
+                      <Select value={general.inquiryType} onValueChange={(v) => updateGeneral("inquiryType", v)}>
+                        <SelectTrigger className={generalErrors.inquiryType ? "border-destructive" : ""}><SelectValue placeholder="Select an option" /></SelectTrigger>
+                        <SelectContent>
+                          {INQUIRY_OPTIONS.map((opt) => <SelectItem key={opt.value} value={opt.value}>{opt.label}</SelectItem>)}
+                        </SelectContent>
+                      </Select>
+                      {generalErrors.inquiryType && <p className="text-sm text-destructive">{generalErrors.inquiryType}</p>}
+                    </div>
+
+                    {general.inquiryType === "other" && (
+                      <div className="space-y-2 animate-fade-in">
+                        <Label htmlFor="g-other">Tell me more</Label>
+                        <Input id="g-other" value={general.inquiryOther} onChange={(e) => updateGeneral("inquiryOther", e.target.value)} />
+                      </div>
+                    )}
+
+                    <div className="space-y-2">
+                      <Label htmlFor="g-message">Tell me about your request <span className="text-destructive">*</span></Label>
+                      <Textarea id="g-message" rows={6} placeholder="What are you thinking?" value={general.message} onChange={(e) => updateGeneral("message", e.target.value)} className={generalErrors.message ? "border-destructive" : ""} />
+                      {generalErrors.message && <p className="text-sm text-destructive">{generalErrors.message}</p>}
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label>Preferred timeline</Label>
+                      <Select value={general.timeline} onValueChange={(v) => updateGeneral("timeline", v)}>
+                        <SelectTrigger><SelectValue placeholder="Select a timeline" /></SelectTrigger>
+                        <SelectContent>
+                          {TIMELINE_OPTIONS.map((opt) => <SelectItem key={opt.value} value={opt.value}>{opt.label}</SelectItem>)}
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <PrivacyCheckbox checked={general.privacyAccepted} onChange={(v) => updateGeneral("privacyAccepted", v)} error={generalErrors.privacyAccepted} />
+
+                    <Button type="submit" size="lg" disabled={isSubmitting} className="hover:brightness-[1.05] active:scale-[0.97] transition-all duration-[120ms]">
+                      {isSubmitting ? "Sending..." : "Send message"}
+                    </Button>
+                  </form>
+                </TabsContent>
+              </Tabs>
+            )}
           </div>
         </section>
       </main>
 
       <Footer />
-      
     </>
   );
 };

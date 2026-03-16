@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Download, User } from "lucide-react";
+import { ArrowRight, Download, User, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Footer from "@/components/sections/Footer";
 import SEOHead from "@/components/blog/SEOHead";
-import StructuredData, { personSchema, breadcrumbSchema } from "@/components/StructuredData";
+import StructuredData, { personSchema, breadcrumbSchema, pressItemListSchema } from "@/components/StructuredData";
 
 import ferryPortrait from "@/assets/ferry-portrait.jpg";
 import ferrySpeaking from "@/assets/ferry-speaking.jpg";
@@ -25,6 +25,15 @@ const TOPICS = [
   "Ethics and responsible use of technology",
 ];
 
+const FEATURED_IN = [
+  "Speakers Academy",
+  "Avans Hogeschool",
+  "ASR",
+  "Atos",
+  "Chubb Fire & Security",
+  "The Human Era Podcast",
+];
+
 const Press = () => {
   return (
     <>
@@ -37,6 +46,7 @@ const Press = () => {
       <StructuredData
         data={[
           personSchema,
+          pressItemListSchema,
           breadcrumbSchema([
             { name: "Home", url: "https://ferryhoes.com" },
             { name: "Press", url: "https://ferryhoes.com/press" },
@@ -86,29 +96,51 @@ const Press = () => {
           </div>
         </section>
 
-        {/* Headshots */}
+        {/* Headshots with download */}
         <section className="pb-16 bg-secondary/30 py-16">
           <div className="container px-6 md:px-8 max-w-5xl mx-auto">
-            <h2 className="font-display text-2xl font-bold text-foreground mb-8">
+            <h2 className="font-display text-2xl font-bold text-foreground mb-4">
               <Download className="inline h-5 w-5 mr-2 text-accent" />
               Headshots
             </h2>
-            <p className="text-muted-foreground mb-8">Right-click and save, or open in a new tab for full resolution.</p>
+            <p className="text-muted-foreground mb-8">Click to open full resolution, or use the download button.</p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {HEADSHOTS.map((img) => (
-                <a key={img.label} href={img.src} target="_blank" rel="noopener noreferrer" className="group">
-                  <div className="aspect-[3/4] rounded-xl overflow-hidden shadow-sm group-hover:shadow-lg transition-shadow">
-                    <img src={img.src} alt={`Ferry Hoes, ${img.label}`} loading="lazy" className="w-full h-full object-cover" />
+                <div key={img.label} className="group">
+                  <a href={img.src} target="_blank" rel="noopener noreferrer">
+                    <div className="aspect-[3/4] rounded-xl overflow-hidden shadow-sm group-hover:shadow-lg transition-shadow">
+                      <img src={img.src} alt={`Ferry Hoes — ${img.label}`} loading="lazy" width={400} height={533} className="w-full h-full object-cover" />
+                    </div>
+                  </a>
+                  <div className="flex items-center justify-between mt-2">
+                    <p className="text-sm text-muted-foreground">{img.label}</p>
+                    <a href={img.src} download={`ferry-hoes-${img.label.toLowerCase().replace(/\s+/g, "-")}.jpg`} className="text-xs text-accent hover:underline flex items-center gap-1">
+                      <Download className="h-3 w-3" /> Download
+                    </a>
                   </div>
-                  <p className="text-sm text-muted-foreground mt-2 text-center">{img.label}</p>
-                </a>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* As Featured In */}
+        <section className="py-16">
+          <div className="container px-6 md:px-8 max-w-3xl mx-auto">
+            <h2 className="font-display text-2xl font-bold text-foreground mb-6">As featured in & spoken at</h2>
+            <p className="text-muted-foreground mb-6">Ferry has spoken at events and been featured by the following organisations:</p>
+            <div className="flex flex-wrap gap-3">
+              {FEATURED_IN.map((name) => (
+                <span key={name} className="px-4 py-2 rounded-full bg-secondary text-foreground text-sm font-medium border border-border">
+                  {name}
+                </span>
               ))}
             </div>
           </div>
         </section>
 
         {/* Topics */}
-        <section className="py-16">
+        <section className="py-16 bg-secondary/30">
           <div className="container px-6 md:px-8 max-w-3xl mx-auto">
             <h2 className="font-display text-2xl font-bold text-foreground mb-6">Topics Ferry speaks about</h2>
             <ul className="space-y-3">
@@ -122,12 +154,12 @@ const Press = () => {
           </div>
         </section>
 
-        {/* Contact CTA */}
+        {/* Media Enquiries CTA */}
         <section className="py-16 md:py-24 bg-foreground text-background">
           <div className="container px-6 md:px-8 max-w-3xl mx-auto text-center">
             <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Media enquiry?</h2>
             <p className="text-white/70 text-lg mb-8">
-              For interviews, quotes, or event programme copy, get in touch directly.
+              For interviews, quotes, or event programme copy, get in touch directly. I aim to respond to all press enquiries within 1 business day.
             </p>
             <Button asChild size="lg" className="rounded-full px-8 bg-accent text-accent-foreground hover:bg-accent/90 group">
               <Link to="/contact" state={{ from: "press" }}>
