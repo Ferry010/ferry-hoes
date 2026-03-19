@@ -175,6 +175,9 @@ const Speaking = () => {
                 <Globe className="h-5 w-5 text-accent shrink-0" />
                 Based in the Netherlands. Speaking at conferences and corporate events across Europe, the US, and worldwide. Available in English and Dutch.
               </p>
+              <Link to="/press" className="text-accent hover:underline text-sm font-medium inline-flex items-center gap-1 mt-2">
+                View Press Kit <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
             </div>
           </section>
 
