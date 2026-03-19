@@ -9,12 +9,14 @@ import ferryPortrait from "@/assets/ferry-portrait.jpg";
 import ferrySpeaking from "@/assets/ferry-speaking.jpg";
 import ferrySpeakingAudience from "@/assets/ferry-speaking-audience.jpg";
 import ferryPresenting from "@/assets/ferry-presenting.jpg";
+import ferryKallenbach from "@/assets/ferry-kallenbach.jpg";
 
 const HEADSHOTS = [
   { src: ferryPortrait, label: "Portrait" },
   { src: ferrySpeaking, label: "Speaking" },
   { src: ferrySpeakingAudience, label: "On stage with audience" },
   { src: ferryPresenting, label: "Presenting" },
+  { src: ferryKallenbach, label: "Portrait © Walter Kallenbach" },
 ];
 
 const TOPICS = [
