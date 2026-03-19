@@ -16,6 +16,7 @@ import ferryPresenting from "@/assets/ferry-presenting.jpg";
 import ferryKallenbach from "@/assets/ferry-kallenbach.jpg";
 import ferryAcesDirect from "@/assets/ferry-aces-direct.png";
 import ferrySpeaking3 from "@/assets/ferry-speaking-3.jpg";
+import jarigeJobLogo from "@/assets/jarige-job-logo.png";
 
 const HEADSHOTS = [
   { src: ferryPortrait, label: "Portrait" },
@@ -224,11 +225,13 @@ const Press = () => {
         {/* Stichting Jarige Job */}
         <section className="py-12">
           <div className="container px-6 md:px-8 max-w-3xl mx-auto">
-            <div className="flex items-start gap-4 p-6 rounded-2xl bg-accent/5 border border-accent/20">
-              <Heart className="h-6 w-6 text-accent mt-1 shrink-0" />
+            <div className="flex flex-col sm:flex-row items-start gap-5 p-6 rounded-2xl bg-accent/5 border border-accent/20">
+              <a href="https://stichtingjarigejob.nl/" target="_blank" rel="noopener noreferrer" className="shrink-0">
+                <img src={jarigeJobLogo} alt="Stichting Jarige Job" className="h-14 w-auto" />
+              </a>
               <div>
-                <h3 className="font-display text-lg font-bold text-foreground mb-2">Stichting Jarige Job</h3>
                 <p className="text-muted-foreground leading-relaxed mb-3">
+                  <Heart className="inline h-4 w-4 text-accent mr-1 -mt-0.5" />
                   {isDutch
                     ? "Ferry waardeert het altijd enorm, maar liever na afloop geen bloemen of wijn. In plaats van cadeaus zou hij het geweldig vinden als je een donatie doet aan Stichting Jarige Job. Zo zorgen we samen dat ook kinderen die het minder breed hebben hun verjaardag kunnen vieren."
                     : "Ferry appreciates kind gestures, but instead of flowers or wine after an event, he'd love it if you made a donation to Stichting Jarige Job. Together we can make sure children who have less can also celebrate their birthday."}
