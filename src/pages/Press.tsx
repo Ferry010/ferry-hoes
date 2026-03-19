@@ -146,9 +146,13 @@ const Press = () => {
           <div className="container px-6 md:px-8 max-w-5xl mx-auto">
             <h2 className="font-display text-2xl font-bold text-foreground mb-4">
               <Download className="inline h-5 w-5 mr-2 text-accent" />
-              Headshots
+              {isDutch ? "Foto's" : "Headshots"}
             </h2>
-            <p className="text-muted-foreground mb-8">Click to open full resolution, or use the download button.</p>
+            <p className="text-muted-foreground mb-8">
+              {isDutch
+                ? "Klik om de volledige resolutie te openen, of gebruik de downloadknop."
+                : "Click to open full resolution, or use the download button."}
+            </p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {HEADSHOTS.map((img) => (
                 <div key={img.label} className="group">
