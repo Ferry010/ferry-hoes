@@ -10,6 +10,8 @@ import ferrySpeaking from "@/assets/ferry-speaking.jpg";
 import ferrySpeakingAudience from "@/assets/ferry-speaking-audience.jpg";
 import ferryPresenting from "@/assets/ferry-presenting.jpg";
 import ferryKallenbach from "@/assets/ferry-kallenbach.jpg";
+import ferryAcesDirect from "@/assets/ferry-aces-direct.png";
+import ferrySpeaking3 from "@/assets/ferry-speaking-3.jpg";
 
 const HEADSHOTS = [
   { src: ferryPortrait, label: "Portrait" },
@@ -17,6 +19,8 @@ const HEADSHOTS = [
   { src: ferrySpeakingAudience, label: "On stage with audience" },
   { src: ferryPresenting, label: "Presenting" },
   { src: ferryKallenbach, label: "Portrait © Walter Kallenbach" },
+  { src: ferryAcesDirect, label: "Speaking at Aces Direct" },
+  { src: ferrySpeaking3, label: "Keynote with audience" },
 ];
 
 const TOPICS = [
