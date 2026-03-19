@@ -72,13 +72,15 @@ const Press = () => {
           <div className="container px-6 md:px-8 max-w-3xl mx-auto">
             <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-6">
               <User className="h-4 w-4" />
-              Press & Media
+              {isDutch ? "Pers & Media" : "Press & Media"}
             </span>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
               Media Kit
             </h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Everything you need for articles, event programmes, and introductions.
+              {isDutch
+                ? "Alles wat je nodig hebt voor artikelen, evenementprogramma's en introducties."
+                : "Everything you need for articles, event programmes, and introductions."}
             </p>
           </div>
         </section>
