@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Download, User } from "lucide-react";
+import { ArrowRight, Download, User, Mic, Monitor, Cable, GlassWater, Heart, Video } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
@@ -183,6 +183,66 @@ const Press = () => {
                 </li>
               ))}
             </ul>
+          </div>
+        </section>
+
+        {/* Technical Requirements */}
+        <section className="py-16">
+          <div className="container px-6 md:px-8 max-w-3xl mx-auto">
+            <h2 className="font-display text-2xl font-bold text-foreground mb-4">
+              {isDutch ? "Technische vereisten" : "Technical Requirements"}
+            </h2>
+            <p className="text-muted-foreground leading-relaxed mb-8">
+              {isDutch
+                ? "Ferry presenteert met zijn eigen MacBook Air (Apple Keynote) en neemt zijn eigen adapters mee. Hij vraagt de organisatie het volgende te voorzien:"
+                : "Ferry presents using his own MacBook Air with Apple Keynote and brings his own adapters. He asks the venue to provide:"}
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+              {[
+                { icon: Mic, en: "DPA headset microphone with sound amplification", nl: "DPA headset-microfoon met geluidsversterking" },
+                { icon: Monitor, en: "Projector/beamer & screen or large 16:9 LCD display", nl: "Beamer & scherm of groot 16:9 LCD-display" },
+                { icon: Cable, en: "HDMI connection with audio", nl: "HDMI-aansluiting met audio" },
+                { icon: GlassWater, en: "Glass or carafe of still water", nl: "Glas of karaf stil water" },
+              ].map((item) => (
+                <div key={item.en} className="flex items-start gap-3 p-4 rounded-xl bg-secondary/30">
+                  <item.icon className="h-5 w-5 text-accent mt-0.5 shrink-0" />
+                  <p className="text-sm text-muted-foreground">{isDutch ? item.nl : item.en}</p>
+                </div>
+              ))}
+            </div>
+            <div className="flex items-start gap-3 p-4 rounded-xl border border-border">
+              <Video className="h-5 w-5 text-accent mt-0.5 shrink-0" />
+              <p className="text-sm text-muted-foreground">
+                {isDutch
+                  ? "Opnames (audio/video) van de presentatie zijn niet toegestaan zonder voorafgaande toestemming van Speakers Academy. Met goedkeuring mag er gefilmd worden voor social media, met een maximale compilatieduur van 2,5 minuten."
+                  : "Recording (audio/video) of the presentation is not permitted without prior consent from Speakers Academy. With approval, filming for social media is allowed with a maximum compilation length of 2.5 minutes."}
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Stichting Jarige Job */}
+        <section className="py-12">
+          <div className="container px-6 md:px-8 max-w-3xl mx-auto">
+            <div className="flex items-start gap-4 p-6 rounded-2xl bg-accent/5 border border-accent/20">
+              <Heart className="h-6 w-6 text-accent mt-1 shrink-0" />
+              <div>
+                <h3 className="font-display text-lg font-bold text-foreground mb-2">Stichting Jarige Job</h3>
+                <p className="text-muted-foreground leading-relaxed mb-3">
+                  {isDutch
+                    ? "Ferry waardeert het altijd enorm, maar liever na afloop geen bloemen of wijn. In plaats van cadeaus zou hij het geweldig vinden als je een donatie doet aan Stichting Jarige Job. Zo zorgen we samen dat ook kinderen die het minder breed hebben hun verjaardag kunnen vieren."
+                    : "Ferry appreciates kind gestures, but instead of flowers or wine after an event, he'd love it if you made a donation to Stichting Jarige Job. Together we can make sure children who have less can also celebrate their birthday."}
+                </p>
+                <a
+                  href="https://stichtingjarigejob.nl/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-sm font-medium text-accent hover:underline"
+                >
+                  stichtingjarigejob.nl <ArrowRight className="h-3 w-3" />
+                </a>
+              </div>
+            </div>
           </div>
         </section>
 
