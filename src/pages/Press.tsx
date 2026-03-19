@@ -72,13 +72,15 @@ const Press = () => {
           <div className="container px-6 md:px-8 max-w-3xl mx-auto">
             <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-6">
               <User className="h-4 w-4" />
-              Press & Media
+              {isDutch ? "Pers & Media" : "Press & Media"}
             </span>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
               Media Kit
             </h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Everything you need for articles, event programmes, and introductions.
+              {isDutch
+                ? "Alles wat je nodig hebt voor artikelen, evenementprogramma's en introducties."
+                : "Everything you need for articles, event programmes, and introductions."}
             </p>
           </div>
         </section>
@@ -144,9 +146,13 @@ const Press = () => {
           <div className="container px-6 md:px-8 max-w-5xl mx-auto">
             <h2 className="font-display text-2xl font-bold text-foreground mb-4">
               <Download className="inline h-5 w-5 mr-2 text-accent" />
-              Headshots
+              {isDutch ? "Foto's" : "Headshots"}
             </h2>
-            <p className="text-muted-foreground mb-8">Click to open full resolution, or use the download button.</p>
+            <p className="text-muted-foreground mb-8">
+              {isDutch
+                ? "Klik om de volledige resolutie te openen, of gebruik de downloadknop."
+                : "Click to open full resolution, or use the download button."}
+            </p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {HEADSHOTS.map((img) => (
                 <div key={img.label} className="group">
@@ -157,9 +163,9 @@ const Press = () => {
                   </a>
                   <div className="flex items-center justify-between mt-2">
                     <p className="text-sm text-muted-foreground">{img.label}</p>
-                    <a href={img.src} download={`ferry-hoes-${img.label.toLowerCase().replace(/\s+/g, "-")}.jpg`} className="text-xs text-accent hover:underline flex items-center gap-1">
-                      <Download className="h-3 w-3" /> Download
-                    </a>
+                     <a href={img.src} download={`ferry-hoes-${img.label.toLowerCase().replace(/\s+/g, "-")}.jpg`} className="text-xs text-accent hover:underline flex items-center gap-1">
+                       <Download className="h-3 w-3" /> {isDutch ? "Download" : "Download"}
+                     </a>
                   </div>
                 </div>
               ))}
