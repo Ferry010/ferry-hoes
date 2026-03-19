@@ -1,32 +1,38 @@
 
 
-# Three changes: Logo slider on Press page, Press Kit link on Speaking page, Bio language switch
+# Add Technical Requirements and Charity sections to Press page
 
-## 1. Press page: Replace text badges with ClientLogos slider
+Two new sections on the Press page, both respecting the EN/NL toggle.
 
-Replace the "As featured in" section (lines 133-146 in `Press.tsx`) which currently shows plain text badges with the same `ClientLogos` component used on the Speaking page. Import `ClientLogos` and render it in place of the current markup.
+## 1. Technical Requirements section
 
-## 2. Speaking page: Add "Press Kit" link
+Add after the Topics section (before the Media Enquiries CTA). Based on the uploaded Speakers Academy rider, present Ferry's tech setup in a clean, on-brand grid layout:
 
-Add a link to `/press` on the Speaking page. A natural placement is near the "Meet Ferry" section or in the geography/availability bar — a small inline link like "View Press Kit →".
+**Content (EN / NL):**
+- Intro text: Ferry presents using his own MacBook Air with Apple Keynote and brings his own adapters for projector connection. He asks the venue to provide:
+  1. DPA headset microphone with sound amplification
+  2. Projector/beamer and screen or large 16:9 LCD display
+  3. HDMI connection with audio
+  4. Glass or carafe of still water
 
-## 3. Press page: EN/NL bio toggle with Switch
+- Recording policy note: Recording (audio/video) of the presentation is not permitted without prior consent from Speakers Academy. With approval, filming for social media is allowed with a maximum compilation length of 2.5 minutes.
 
-Add a `Switch` component (already exists in `src/components/ui/switch.tsx`) at the top of the bio section to toggle between English and Dutch. Store the toggle state in local React state.
+**Design:** Use a numbered list or small icon grid (Mic, Monitor, Cable, GlassWater from lucide-react) with short labels. Keep it minimal and on-brand, no images from the PDF.
 
-**Dutch translations needed:**
+## 2. Stichting Jarige Job section
 
-- **Short bio**: "Ferry Hoes is een internationaal keynote spreker, auteur van *Brand Humanizing* en oprichter van het Brand Humanizing Institute. Hij helpt organisaties technologie te gebruiken om menselijker te worden, niet minder. Ferry spreekt op conferenties en zakelijke evenementen wereldwijd en combineert storytelling met praktische inzichten."
+Add a warm, personal note (as seen in the rider) after the tech requirements:
 
-- **Extended bio** (3 paragraphs):
-  1. "Ferry Hoes werkte ruim tien jaar op het snijvlak van technologie, marketing en menselijk gedrag voordat hij wereldwijd podia betrad. In 2017 introduceerde hij het concept *Brand Humanizing*, een raamwerk om technologie in te zetten zodat merken onderscheidender en menselijker worden. Hij heeft dit jarenlang getest en verfijnd bij internationale organisaties."
-  2. "Hij is co-auteur van *Brand Humanizing* (met Jonathan Flores), oprichter van het Brand Humanizing Institute en host van *The Human Era Podcast*. Zijn presentaties draaien om één kerngedachte: technologie moet je menselijker maken, niet minder."
-  3. "Ferry wordt exclusief vertegenwoordigd door Speakers Academy en heeft gesproken bij evenementen van onder meer ASR, Atos, Chubb, GSK, Vodafone en het Ministerie van Financiën. Hij is een van de meest geboekte sprekers van Nederland."
+**Content (EN / NL):**
+- EN: "Ferry appreciates kind gestures, but instead of flowers or wine after an event, he'd love it if you made a donation to Stichting Jarige Job. Together we can make sure children who have less can also celebrate their birthday."
+- NL: "Ferry waardeert het altijd enorm, maar liever na afloop geen bloemen of wijn... in plaats van cadeaus zou hij het geweldig vinden als je een donatie doet aan Stichting Jarige Job. Zo zorgen we samen dat ook kinderen die het minder breed hebben hun verjaardag kunnen vieren."
+- Link to https://stichtingjarigejob.nl/
 
-### Files changed
+**Design:** A subtle callout card with a heart icon, slightly distinct background. External link opens in new tab.
+
+## Files changed
 
 | File | Change |
 |------|--------|
-| `src/pages/Press.tsx` | Import `ClientLogos` + `Switch`; replace "As featured in" badges with `<ClientLogos />`; add EN/NL toggle state and conditional bio rendering |
-| `src/pages/Speaking.tsx` | Add a "Press Kit" link (e.g. in the geography bar or Meet Ferry section) |
+| `src/pages/Press.tsx` | Add Technical Requirements section and Stichting Jarige Job callout, both with EN/NL variants |
 
