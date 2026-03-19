@@ -1,7 +1,11 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Download, User, ExternalLink } from "lucide-react";
+import { ArrowRight, Download, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
 import Footer from "@/components/sections/Footer";
+import ClientLogos from "@/components/sections/ClientLogos";
 import SEOHead from "@/components/blog/SEOHead";
 import StructuredData, { personSchema, breadcrumbSchema, pressItemListSchema } from "@/components/StructuredData";
 
@@ -31,16 +35,17 @@ const TOPICS = [
   "Ethics and responsible use of technology",
 ];
 
-const FEATURED_IN = [
-  "Speakers Academy",
-  "Avans Hogeschool",
-  "ASR",
-  "Atos",
-  "Chubb Fire & Security",
-  "The Human Era Podcast",
+const TOPICS_NL = [
+  "Brand Humanizing: technologie inzetten om merken menselijker te maken",
+  "De menselijke kant van AI: wat AI wel en niet kan vervangen",
+  "De toekomst van werk: AI en menselijk oordeelsvermogen combineren",
+  "Digitale transformatie en klantbeleving",
+  "Ethiek en verantwoord gebruik van technologie",
 ];
 
 const Press = () => {
+  const [isDutch, setIsDutch] = useState(false);
+
   return (
     <>
       <SEOHead
@@ -80,25 +85,56 @@ const Press = () => {
         {/* Bio */}
         <section className="pb-16">
           <div className="container px-6 md:px-8 max-w-3xl mx-auto space-y-10">
-            <div>
-              <h2 className="font-display text-2xl font-bold text-foreground mb-4">Short bio (50 words)</h2>
-              <p className="text-muted-foreground leading-relaxed">
-                Ferry Hoes is an international keynote speaker, author of <em>Brand Humanizing</em>, and founder of the Brand Humanizing Institute. He helps organisations use technology to become more human, not less. Ferry speaks at conferences and corporate events worldwide, blending storytelling with actionable insight.
-              </p>
+            {/* Language toggle */}
+            <div className="flex items-center gap-3">
+              <Label htmlFor="lang-toggle" className={`text-sm font-medium ${!isDutch ? 'text-foreground' : 'text-muted-foreground'}`}>EN</Label>
+              <Switch id="lang-toggle" checked={isDutch} onCheckedChange={setIsDutch} />
+              <Label htmlFor="lang-toggle" className={`text-sm font-medium ${isDutch ? 'text-foreground' : 'text-muted-foreground'}`}>NL</Label>
             </div>
 
-            <div>
-              <h2 className="font-display text-2xl font-bold text-foreground mb-4">Extended bio (150 words)</h2>
-              <p className="text-muted-foreground leading-relaxed mb-4">
-                Ferry Hoes spent over a decade at the intersection of technology, marketing, and human behaviour before stepping onto stages worldwide. In 2017, he coined the term <strong>Brand Humanizing</strong>, a framework for using technology to make brands more distinctive and human, and spent years stress-testing it with global organisations.
-              </p>
-              <p className="text-muted-foreground leading-relaxed mb-4">
-                He is the co-author of <em>Brand Humanizing</em> (with Jonathan Flores), founder of the Brand Humanizing Institute, and host of <em>The Human Era Podcast</em>. His talks are built around one provocation: technology should make you more human, not less.
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                Ferry is exclusively represented by Speakers Academy and has spoken at events for organisations including ASR, Atos, Chubb, GSK, Vodafone, and the Dutch Ministry of Finance. He is one of the most booked speakers in the Netherlands.
-              </p>
-            </div>
+            {!isDutch ? (
+              <>
+                <div>
+                  <h2 className="font-display text-2xl font-bold text-foreground mb-4">Short bio (50 words)</h2>
+                  <p className="text-muted-foreground leading-relaxed">
+                    Ferry Hoes is an international keynote speaker, author of <em>Brand Humanizing</em>, and founder of the Brand Humanizing Institute. He helps organisations use technology to become more human, not less. Ferry speaks at conferences and corporate events worldwide, blending storytelling with actionable insight.
+                  </p>
+                </div>
+                <div>
+                  <h2 className="font-display text-2xl font-bold text-foreground mb-4">Extended bio (150 words)</h2>
+                  <p className="text-muted-foreground leading-relaxed mb-4">
+                    Ferry Hoes spent over a decade at the intersection of technology, marketing, and human behaviour before stepping onto stages worldwide. In 2017, he coined the term <strong>Brand Humanizing</strong>, a framework for using technology to make brands more distinctive and human, and spent years stress-testing it with global organisations.
+                  </p>
+                  <p className="text-muted-foreground leading-relaxed mb-4">
+                    He is the co-author of <em>Brand Humanizing</em> (with Jonathan Flores), founder of the Brand Humanizing Institute, and host of <em>The Human Era Podcast</em>. His talks are built around one provocation: technology should make you more human, not less.
+                  </p>
+                  <p className="text-muted-foreground leading-relaxed">
+                    Ferry is exclusively represented by Speakers Academy and has spoken at events for organisations including ASR, Atos, Chubb, GSK, Vodafone, and the Dutch Ministry of Finance. He is one of the most booked speakers in the Netherlands.
+                  </p>
+                </div>
+              </>
+            ) : (
+              <>
+                <div>
+                  <h2 className="font-display text-2xl font-bold text-foreground mb-4">Korte bio (50 woorden)</h2>
+                  <p className="text-muted-foreground leading-relaxed">
+                    Ferry Hoes is een internationaal keynote spreker, auteur van <em>Brand Humanizing</em> en oprichter van het Brand Humanizing Institute. Hij helpt organisaties technologie te gebruiken om menselijker te worden, niet minder. Ferry spreekt op conferenties en zakelijke evenementen wereldwijd en combineert storytelling met praktische inzichten.
+                  </p>
+                </div>
+                <div>
+                  <h2 className="font-display text-2xl font-bold text-foreground mb-4">Uitgebreide bio (150 woorden)</h2>
+                  <p className="text-muted-foreground leading-relaxed mb-4">
+                    Ferry Hoes werkte ruim tien jaar op het snijvlak van technologie, marketing en menselijk gedrag voordat hij wereldwijd podia betrad. In 2017 introduceerde hij het concept <strong>Brand Humanizing</strong>, een raamwerk om technologie in te zetten zodat merken onderscheidender en menselijker worden. Hij heeft dit jarenlang getest en verfijnd bij internationale organisaties.
+                  </p>
+                  <p className="text-muted-foreground leading-relaxed mb-4">
+                    Hij is co-auteur van <em>Brand Humanizing</em> (met Jonathan Flores), oprichter van het Brand Humanizing Institute en host van <em>The Human Era Podcast</em>. Zijn presentaties draaien om één kerngedachte: technologie moet je menselijker maken, niet minder.
+                  </p>
+                  <p className="text-muted-foreground leading-relaxed">
+                    Ferry wordt exclusief vertegenwoordigd door Speakers Academy en heeft gesproken bij evenementen van onder meer ASR, Atos, Chubb, GSK, Vodafone en het Ministerie van Financiën. Hij is een van de meest geboekte sprekers van Nederland.
+                  </p>
+                </div>
+              </>
+            )}
           </div>
         </section>
 
@@ -130,27 +166,17 @@ const Press = () => {
           </div>
         </section>
 
-        {/* As Featured In */}
-        <section className="py-16">
-          <div className="container px-6 md:px-8 max-w-3xl mx-auto">
-            <h2 className="font-display text-2xl font-bold text-foreground mb-6">As featured in & spoken at</h2>
-            <p className="text-muted-foreground mb-6">Ferry has spoken at events and been featured by the following organisations:</p>
-            <div className="flex flex-wrap gap-3">
-              {FEATURED_IN.map((name) => (
-                <span key={name} className="px-4 py-2 rounded-full bg-secondary text-foreground text-sm font-medium border border-border">
-                  {name}
-                </span>
-              ))}
-            </div>
-          </div>
-        </section>
+        {/* Client Logos */}
+        <ClientLogos />
 
         {/* Topics */}
         <section className="py-16 bg-secondary/30">
           <div className="container px-6 md:px-8 max-w-3xl mx-auto">
-            <h2 className="font-display text-2xl font-bold text-foreground mb-6">Topics Ferry speaks about</h2>
+            <h2 className="font-display text-2xl font-bold text-foreground mb-6">
+              {isDutch ? "Onderwerpen waar Ferry over spreekt" : "Topics Ferry speaks about"}
+            </h2>
             <ul className="space-y-3">
-              {TOPICS.map((topic) => (
+              {(isDutch ? TOPICS_NL : TOPICS).map((topic) => (
                 <li key={topic} className="flex items-start gap-3 text-muted-foreground">
                   <span className="mt-1.5 h-2 w-2 rounded-full bg-accent shrink-0" />
                   {topic}
@@ -163,13 +189,17 @@ const Press = () => {
         {/* Media Enquiries CTA */}
         <section className="py-16 md:py-24 bg-foreground text-background">
           <div className="container px-6 md:px-8 max-w-3xl mx-auto text-center">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Media enquiry?</h2>
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
+              {isDutch ? "Media-aanvraag?" : "Media enquiry?"}
+            </h2>
             <p className="text-white/70 text-lg mb-8">
-              For interviews, quotes, or event programme copy, get in touch directly. I aim to respond to all press enquiries within 1 business day.
+              {isDutch
+                ? "Voor interviews, quotes of evenementprogramma's, neem direct contact op. Ik streef ernaar alle persaanvragen binnen 1 werkdag te beantwoorden."
+                : "For interviews, quotes, or event programme copy, get in touch directly. I aim to respond to all press enquiries within 1 business day."}
             </p>
             <Button asChild size="lg" className="rounded-full px-8 bg-accent text-accent-foreground hover:bg-accent/90 group">
               <Link to="/contact" state={{ from: "press" }}>
-                Contact Ferry
+                {isDutch ? "Neem contact op" : "Contact Ferry"}
                 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </Button>
