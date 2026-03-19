@@ -163,9 +163,9 @@ const Press = () => {
                   </a>
                   <div className="flex items-center justify-between mt-2">
                     <p className="text-sm text-muted-foreground">{img.label}</p>
-                    <a href={img.src} download={`ferry-hoes-${img.label.toLowerCase().replace(/\s+/g, "-")}.jpg`} className="text-xs text-accent hover:underline flex items-center gap-1">
-                      <Download className="h-3 w-3" /> Download
-                    </a>
+                     <a href={img.src} download={`ferry-hoes-${img.label.toLowerCase().replace(/\s+/g, "-")}.jpg`} className="text-xs text-accent hover:underline flex items-center gap-1">
+                       <Download className="h-3 w-3" /> {isDutch ? "Download" : "Download"}
+                     </a>
                   </div>
                 </div>
               ))}
