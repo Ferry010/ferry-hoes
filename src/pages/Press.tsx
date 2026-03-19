@@ -16,6 +16,7 @@ import ferryPresenting from "@/assets/ferry-presenting.jpg";
 import ferryKallenbach from "@/assets/ferry-kallenbach.jpg";
 import ferryAcesDirect from "@/assets/ferry-aces-direct.png";
 import ferrySpeaking3 from "@/assets/ferry-speaking-3.jpg";
+import jarigeJobLogo from "@/assets/jarige-job-logo.png";
 
 const HEADSHOTS = [
   { src: ferryPortrait, label: "Portrait" },
