@@ -32,7 +32,7 @@ serve(async (req) => {
           },
         });
         const listData = await listRes.json();
-        const channel = listData.channels?.find((c: any) => c.name === "website-messages");
+        const channel = listData.channels?.find((c: any) => c.name === "ferryhoes");
 
         if (!channel) {
           console.error("Slack channel #website-messages not found");
