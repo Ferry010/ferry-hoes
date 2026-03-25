@@ -3,12 +3,14 @@ import { supabase } from "@/integrations/supabase/client";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle, Mail } from "lucide-react";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const DISCORD_URL = "https://discord.gg/BfZrw5wJ";
 
 const CommunitySection = () => {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const revealRef = useScrollReveal();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,9 +29,9 @@ const CommunitySection = () => {
   };
 
   return (
-    <section id="community" className="py-24 md:py-32 bg-secondary/40">
+    <section id="community" className="py-24 md:py-32 bg-gradient-to-br from-[hsl(38,35%,95%)] to-[hsl(188,30%,94%)]">
       <div className="container px-6 md:px-8">
-        <div className="max-w-4xl mx-auto">
+        <div ref={revealRef} className="scroll-reveal max-w-4xl mx-auto">
           <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4 text-center">
             Stay connected
           </h2>

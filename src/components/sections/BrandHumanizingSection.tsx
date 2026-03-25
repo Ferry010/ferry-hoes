@@ -1,6 +1,9 @@
-import { ArrowRight, Heart } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const BrandHumanizingSection = () => {
+  const revealRef = useScrollReveal();
+
   return (
     <section id="brand-humanizing" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-secondary/90 backdrop-blur-sm">
       {/* Decorative elements */}
@@ -11,11 +14,11 @@ const BrandHumanizingSection = () => {
 
       {/* Content */}
       <div className="container relative z-10 px-6 md:px-8 pb-16">
-        <div className="max-w-3xl mx-auto">
+        <div ref={revealRef} className="scroll-reveal max-w-3xl mx-auto">
           {/* Badge */}
           <div className="text-center">
             <span className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 text-accent rounded-full text-sm font-medium mb-8">
-              <Heart className="h-4 w-4" />
+              <span className="w-2 h-2 rounded-full bg-accent" />
               Life's Work
             </span>
 
@@ -33,7 +36,7 @@ const BrandHumanizingSection = () => {
             Technology should make organisations more human, not less.
           </p>
 
-          {/* Pull quote – handwritten margin note, left-aligned aside */}
+          {/* Pull quote */}
           <p
             className="text-2xl md:text-3xl text-primary py-10 pl-4 md:pl-8 rotate-[-2deg] max-w-md"
             style={{ fontFamily: "'Caveat', cursive" }}

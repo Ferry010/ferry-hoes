@@ -1,13 +1,16 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import ferryPhoto from "@/assets/ferry-speaking-audience.jpg";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const AboutBlock = () => {
+  const revealRef = useScrollReveal();
+
   return (
     <section className="min-h-screen bg-background/95 backdrop-blur-sm relative">
       <div className="grid md:grid-cols-2 min-h-screen">
         {/* Left: Text content */}
-        <div className="flex flex-col justify-center px-6 md:px-12 lg:px-20 py-16 md:py-0">
+        <div ref={revealRef} className="scroll-reveal flex flex-col justify-center px-6 md:px-12 lg:px-20 py-16 md:py-0">
           <p className="font-display text-2xl md:text-3xl lg:text-4xl font-bold text-primary mb-6">
             Ferry Hoes
           </p>
@@ -25,13 +28,24 @@ const AboutBlock = () => {
           </Link>
         </div>
         
-        {/* Right: Photo */}
-        <div className="relative min-h-[400px] md:min-h-screen order-first md:order-last">
-          <img 
-            src={ferryPhoto}
-            alt="Ferry Hoes speaking on stage in front of an audience"
-            className="absolute inset-0 w-full h-full object-cover"
-          />
+        {/* Right: Polaroid photo */}
+        <div className="relative min-h-[400px] md:min-h-screen order-first md:order-last flex items-center justify-center p-8 md:p-12">
+          <div 
+            className="relative bg-white p-2 pb-10 shadow-[4px_6px_24px_rgba(0,0,0,0.12)] max-w-lg w-full"
+            style={{ transform: "rotate(-1.5deg)" }}
+          >
+            <img 
+              src={ferryPhoto}
+              alt="Ferry Hoes speaking on stage in front of an audience"
+              className="w-full aspect-[4/3] object-cover"
+            />
+            <p 
+              className="text-center mt-3 text-lg text-foreground/70 italic"
+              style={{ fontFamily: "'Caveat', cursive" }}
+            >
+              Ferry — actual human
+            </p>
+          </div>
         </div>
       </div>
     </section>
