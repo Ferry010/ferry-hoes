@@ -40,9 +40,11 @@ const BlogCard = ({ post, variant = "default", colorIndex = 0 }: BlogCardProps) 
   }
 
   // Default variant (used on /blog page)
+  const rotation = colorIndex % 2 === 0 ? 'rotate-[0.5deg]' : 'rotate-[-0.5deg]';
+  
   return (
     <Link to={`/blog/${post.slug}`}>
-      <article className="group bg-background rounded-2xl overflow-hidden shadow-soft hover:shadow-soft-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer border border-transparent hover:border-accent/20">
+      <article className={`group bg-background rounded-2xl overflow-hidden shadow-soft hover:shadow-soft-lg transition-all duration-300 hover:-translate-y-1 hover:rotate-0 cursor-pointer border border-transparent hover:border-accent/20 ${rotation}`}>
         {post.header_image_url ? (
           <div className="aspect-[16/10] overflow-hidden relative">
             <img
@@ -61,7 +63,7 @@ const BlogCard = ({ post, variant = "default", colorIndex = 0 }: BlogCardProps) 
           </div>
         )}
 
-        <div className="p-6 md:p-8">
+        <div className="p-6 md:p-8 bg-[hsl(38,30%,97%)]">
           <h3 className="font-display text-xl md:text-2xl text-foreground mb-3 group-hover:text-accent transition-colors leading-tight font-semibold line-clamp-2">
             {post.title}
           </h3>

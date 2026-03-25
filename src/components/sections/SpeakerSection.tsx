@@ -1,9 +1,12 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Mic } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import stagePhoto from "@/assets/ferry-speaking.jpg";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const SpeakerSection = () => {
+  const revealRef = useScrollReveal();
+
   return (
     <section className="min-h-screen relative overflow-hidden bg-background/95 backdrop-blur-sm">
       {/* Decorative elements */}
@@ -25,10 +28,10 @@ const SpeakerSection = () => {
         </div>
 
         {/* Right: Content */}
-        <div className="flex flex-col justify-center px-6 md:px-12 lg:px-16 py-16 md:py-0 relative z-10">
+        <div ref={revealRef} className="scroll-reveal flex flex-col justify-center px-6 md:px-12 lg:px-16 py-16 md:py-0 relative z-10">
           {/* Badge */}
           <span className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 text-accent rounded-full text-sm font-medium mb-8 w-fit">
-            <Mic className="h-4 w-4" />
+            <span className="w-2 h-2 rounded-full bg-accent" />
             On Stage
           </span>
 
@@ -72,7 +75,6 @@ const SpeakerSection = () => {
           </Link>
         </div>
       </div>
-
     </section>
   );
 };

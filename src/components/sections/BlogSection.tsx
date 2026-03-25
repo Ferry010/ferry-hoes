@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Pen } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useBlogPosts } from "@/hooks/useBlogPosts";
 import BlogCard from "@/components/blog/BlogCard";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const BlogSection = () => {
   const { data: posts, isLoading } = useBlogPosts(2);
+  const revealRef = useScrollReveal();
 
   return (
     <section className="py-24 md:py-32 bg-card relative overflow-hidden">
@@ -16,10 +18,10 @@ const BlogSection = () => {
       <div className="container px-6 md:px-8 relative z-10">
         <div className="max-w-6xl mx-auto">
           {/* Section header */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 md:mb-16">
+          <div ref={revealRef} className="scroll-reveal flex flex-col md:flex-row md:items-end justify-between mb-12 md:mb-16">
             <div>
               <span className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 text-accent rounded-full text-sm font-medium mb-6">
-                <Pen className="w-4 h-4" />
+                <span className="w-2 h-2 rounded-full bg-accent" />
                 The Blog
               </span>
               <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground font-bold">
@@ -48,8 +50,8 @@ const BlogSection = () => {
             </div>
           ) : posts && posts.length > 0 ? (
             <div className="grid md:grid-cols-2 gap-6 md:gap-8 mb-12">
-              {posts.map((post) => (
-                <BlogCard key={post.id} post={post} />
+              {posts.map((post, index) => (
+                <BlogCard key={post.id} post={post} colorIndex={index} />
               ))}
             </div>
           ) : (

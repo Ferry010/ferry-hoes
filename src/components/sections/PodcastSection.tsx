@@ -7,7 +7,8 @@ import {
   CarouselNext,
   CarouselDots,
 } from "@/components/ui/carousel";
-import { ArrowRight, Headphones } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 // Spotify icon component
 const SpotifyIcon = ({ className }: { className?: string }) => (
@@ -48,6 +49,8 @@ const SPOTIFY_SHOW_URL = "https://open.spotify.com/show/6eGkXe767cYZ5Rw627Xpgu";
 const APPLE_PODCASTS_URL = "https://podcasts.apple.com/nl/podcast/the-human-era-podcast/id1598552331";
 
 const PodcastSection = () => {
+  const revealRef = useScrollReveal();
+
   const openMessagePanel = () => {
     window.dispatchEvent(new Event("open-contact"));
   };
@@ -57,9 +60,9 @@ const PodcastSection = () => {
       <div className="container px-6 md:px-8">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
-          <div className="text-center mb-16">
+          <div ref={revealRef} className="scroll-reveal text-center mb-16">
             <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-6">
-              <Headphones className="h-4 w-4" />
+              <span className="w-2 h-2 rounded-full bg-primary" />
               The Podcast
             </span>
             
@@ -73,7 +76,7 @@ const PodcastSection = () => {
             </p>
           </div>
 
-          {/* Episode cards carousel with Spotify embeds */}
+          {/* Episode cards carousel */}
           <Carousel
             opts={{
               align: "start",
@@ -88,7 +91,7 @@ const PodcastSection = () => {
                   className="pl-6 basis-full md:basis-1/2"
                 >
                   <article 
-                    className="group relative overflow-hidden bg-gradient-to-br from-background to-[#1DB954]/[0.03] rounded-2xl p-8 md:p-10 shadow-soft hover:shadow-soft-lg transition-all duration-300 border-l-2 border-[#1DB954]/30 hover:border-[#1DB954] border-t border-r border-b border-t-transparent border-r-transparent border-b-transparent hover:border-t-primary/20 hover:border-r-primary/20 hover:border-b-primary/20 h-full"
+                    className="group relative overflow-hidden bg-gradient-to-br from-[hsl(38,40%,96%)] to-[#1DB954]/[0.03] rounded-2xl p-8 md:p-10 shadow-soft hover:shadow-soft-lg transition-all duration-300 border-l-2 border-[#1DB954]/30 hover:border-[#1DB954] border-t border-r border-b border-t-transparent border-r-transparent border-b-transparent hover:border-t-primary/20 hover:border-r-primary/20 hover:border-b-primary/20 h-full"
                   >
                     {/* Decorative waveform background */}
                     <svg
@@ -112,7 +115,6 @@ const PodcastSection = () => {
                         Episode
                       </span>
                       <span className="inline-flex items-center gap-1.5 text-sm text-muted-foreground">
-                        {/* Mini equalizer bars */}
                         <svg aria-hidden="true" className="w-3.5 h-3.5 text-[#1DB954]/60" viewBox="0 0 14 14" fill="currentColor">
                           <rect x="1" y="6" width="2" height="6" rx="1" />
                           <rect x="4.5" y="3" width="2" height="9" rx="1" />
@@ -190,7 +192,6 @@ const PodcastSection = () => {
           </div>
         </div>
       </div>
-
     </section>
   );
 };

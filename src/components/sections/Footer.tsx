@@ -23,7 +23,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="py-16 bg-foreground text-background">
+    <footer className="py-16 text-background" style={{ backgroundColor: "hsl(25, 15%, 13%)" }}>
       <div className="container px-6 md:px-8">
         <div className="max-w-6xl mx-auto">
           {/* Main footer content */}
@@ -32,15 +32,15 @@ const Footer = () => {
               <img src={logoWhite} alt="Ferry Hoes" className="h-8 md:h-10 w-auto" />
             </div>
             <nav className="flex flex-wrap gap-6 md:gap-8">
-              <Link to="/" className="text-white/70 hover:text-white transition-colors">Home</Link>
-              <Link to="/about" className="text-white/70 hover:text-white transition-colors">About</Link>
-              <Link to="/speaking" className="text-white/70 hover:text-white transition-colors">Speaking</Link>
-              <Link to="/podcast" className="text-white/70 hover:text-white transition-colors">Podcast</Link>
-              <Link to="/blog" className="text-white/70 hover:text-white transition-colors">Blog</Link>
-              <a href="/#book" className="text-white/70 hover:text-white transition-colors">The Book</a>
-              <Link to="/now" className="text-white/70 hover:text-white transition-colors">Now</Link>
-              <Link to="/contact" className="text-white/70 hover:text-white transition-colors">Contact</Link>
-              <Link to="/press" className="text-white/70 hover:text-white transition-colors">Press</Link>
+              <Link to="/" className="text-[hsl(38,30%,88%)] hover:text-white transition-colors">Home</Link>
+              <Link to="/about" className="text-[hsl(38,30%,88%)] hover:text-white transition-colors">About</Link>
+              <Link to="/speaking" className="text-[hsl(38,30%,88%)] hover:text-white transition-colors">Speaking</Link>
+              <Link to="/podcast" className="text-[hsl(38,30%,88%)] hover:text-white transition-colors">Podcast</Link>
+              <Link to="/blog" className="text-[hsl(38,30%,88%)] hover:text-white transition-colors">Blog</Link>
+              <a href="/#book" className="text-[hsl(38,30%,88%)] hover:text-white transition-colors">The Book</a>
+              <Link to="/now" className="text-[hsl(38,30%,88%)] hover:text-white transition-colors">Now</Link>
+              <Link to="/contact" className="text-[hsl(38,30%,88%)] hover:text-white transition-colors">Contact</Link>
+              <Link to="/press" className="text-[hsl(38,30%,88%)] hover:text-white transition-colors">Press</Link>
             </nav>
           </div>
 
@@ -49,14 +49,14 @@ const Footer = () => {
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
               {/* Social links */}
               <div className="flex gap-6">
-                <a href="https://www.linkedin.com/in/ferryhoes/" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors text-sm">LinkedIn</a>
-                <a href="https://www.youtube.com/@ferry-hoes" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors text-sm">YouTube</a>
-                <a href="https://discord.gg/BfZrw5wJ" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors text-sm">Discord</a>
+                <a href="https://www.linkedin.com/in/ferryhoes/" target="_blank" rel="noopener noreferrer" className="text-[hsl(38,30%,75%)] hover:text-white transition-colors text-sm">LinkedIn</a>
+                <a href="https://www.youtube.com/@ferry-hoes" target="_blank" rel="noopener noreferrer" className="text-[hsl(38,30%,75%)] hover:text-white transition-colors text-sm">YouTube</a>
+                <a href="https://discord.gg/BfZrw5wJ" target="_blank" rel="noopener noreferrer" className="text-[hsl(38,30%,75%)] hover:text-white transition-colors text-sm">Discord</a>
               </div>
 
               {/* Inline newsletter */}
               {status === "success" ? (
-                <span className="inline-flex items-center gap-1.5 text-white/50 text-sm">
+                <span className="inline-flex items-center gap-1.5 text-[hsl(38,30%,75%)] text-sm">
                   <CheckCircle className="h-3.5 w-3.5" />
                   Subscribed
                 </span>
@@ -85,7 +85,7 @@ const Footer = () => {
 
           {/* Copyright */}
           <div className="text-center mt-8">
-            <p className="text-white/30 text-xs">
+            <p className="text-[hsl(38,30%,40%)] text-xs">
               © {new Date().getFullYear()} Ferry Hoes. All rights reserved.
             </p>
           </div>
