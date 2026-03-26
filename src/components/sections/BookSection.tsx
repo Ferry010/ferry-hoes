@@ -28,7 +28,7 @@ const BookSection = () => {
   };
 
   return (
-    <section id="book" className="min-h-screen flex items-center py-24 md:py-32 bg-gradient-to-br from-[hsl(38,35%,94%)] to-[hsl(188,25%,92%)] backdrop-blur-sm overflow-hidden relative">
+    <section id="book" className="min-h-screen flex items-center py-24 md:py-32 bg-secondary/90 backdrop-blur-sm overflow-hidden relative">
       <div className="container px-6 md:px-8">
         <div className="max-w-6xl mx-auto">
           <div ref={revealRef} className="scroll-reveal grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">

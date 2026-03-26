@@ -73,20 +73,6 @@ const SpeakerSection = () => {
             <span className="underline underline-offset-4">More about Ferry as speaker</span>
             <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
           </Link>
-
-          {/* Attribution */}
-          <p className="text-sm text-muted-foreground mt-8">
-            Ferry is exclusively represented by{" "}
-            <a
-              href="https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline underline-offset-2 hover:text-foreground transition-colors"
-            >
-              Speakers Academy
-            </a>
-            . His full speaker profile is available there.
-          </p>
         </div>
       </div>
     </section>
