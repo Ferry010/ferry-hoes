@@ -10,19 +10,14 @@ interface NavItem {
 
 const NAV_ITEMS: NavItem[] = [
   {
-    label: "MY STORY",
-    route: "/about",
-    copy: "The journey from building websites at ten to speaking internationally.",
-  },
-  {
     label: "THE IDEA",
     route: "/#brand-humanizing",
     copy: "Brand Humanizing and essays exploring how organizations stay distinctive.",
   },
   {
-    label: "ON STAGE",
-    route: "/speaking",
-    copy: "Keynotes, workshops and live conversations about technology and human judgment.",
+    label: "WRITING",
+    route: "/blog",
+    copy: "Essays, ideas, and experiments worth reading.",
   },
   {
     label: "PODCAST",
@@ -30,14 +25,19 @@ const NAV_ITEMS: NavItem[] = [
     copy: "Podcast episodes and writing where thinking happens in public.",
   },
   {
-    label: "BLOG",
-    route: "/blog",
-    copy: "Essays, ideas, and experiments worth reading.",
+    label: "SPEAKING",
+    route: "/speaking",
+    copy: "Keynotes, workshops and live conversations about technology and human judgment.",
   },
   {
     label: "THE BOOK",
     route: "/#book",
     copy: "Brand Humanizing, the book on staying distinctive in a world of sameness.",
+  },
+  {
+    label: "ABOUT",
+    route: "/about",
+    copy: "The journey from building websites at ten to speaking internationally.",
   },
   {
     label: "GET IN TOUCH",

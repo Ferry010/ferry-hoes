@@ -29,10 +29,10 @@ const Index = () => {
 
         <main>
           <article>
-            <AboutBlock />
+            <BrandHumanizingSection />
           </article>
           <article>
-            <BrandHumanizingSection />
+            <AboutBlock />
           </article>
           <article>
             <SpeakerSection />

@@ -22,7 +22,7 @@ const BlogSection = () => {
             <div>
               <span className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 text-accent rounded-full text-sm font-medium mb-6">
                 <span className="w-2 h-2 rounded-full bg-accent" />
-                The Blog
+                Writing
               </span>
               <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground font-bold">
                 Ideas worth <span className="text-primary">sharing</span>
