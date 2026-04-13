@@ -19,8 +19,8 @@ const AboutBlock = () => {
             Ferry Hoes
           </p>
           
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-[1.1] mb-10 text-foreground">
-            Most people make technology complicated. I make it human. Through keynotes, a book, and one big idea that's been ten years in the making. That's it. That's the job.
+          <h2 className="font-display text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold leading-[1.15] mb-10 text-foreground">
+            Most people make technology complicated. I make it <span className="text-accent">human</span>. Through <span className="text-primary">keynotes</span>, a <span className="text-primary">book</span>, and one big idea that's been ten years in the making. That's it. That's the job.
           </h2>
           
           <Link 
