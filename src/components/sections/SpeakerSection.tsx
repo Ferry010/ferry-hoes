@@ -12,14 +12,21 @@ const SpeakerSection = () => {
     <section className="relative overflow-hidden bg-background">
       {/* Two-column grid */}
       <div className="grid md:grid-cols-2 min-h-[80vh]">
-        {/* Left: Photo */}
-        <div className="relative min-h-[400px] md:min-h-[80vh] order-last md:order-first">
-          <img 
-            src={stagePhoto}
-            alt="Ferry Hoes presenting on stage"
-            loading="lazy"
-            className="absolute inset-0 w-full h-full object-cover"
-          />
+        {/* Left: Polaroid Photo */}
+        <div className="relative min-h-[400px] md:min-h-[80vh] order-last md:order-first flex items-center justify-center p-8 md:p-12">
+          <div className="bg-white p-3 pb-14 rounded-sm shadow-xl -rotate-1 hover:rotate-0 transition-transform duration-500 max-w-md w-full relative">
+            <div className="aspect-[4/3] overflow-hidden rounded-sm">
+              <img 
+                src={stagePhoto}
+                alt="Ferry Hoes presenting on stage"
+                loading="lazy"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <p className="absolute bottom-3 left-3 right-3 text-center font-caveat text-base text-muted-foreground">
+              Ferry during his Woningbouwers 2025 keynote
+            </p>
+          </div>
         </div>
 
         {/* Right: Content */}

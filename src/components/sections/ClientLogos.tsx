@@ -43,7 +43,7 @@ const ClientLogos = () => {
       <div className="container px-6 md:px-8">
         <div className="max-w-6xl mx-auto">
           <p className="text-center text-sm font-medium text-muted-foreground/60 uppercase tracking-widest mb-10">
-            Trusted by organizations like
+            I've had the pleasure to work with great brands like
           </p>
           <div className="overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
             <div className="flex animate-marquee w-max gap-4">
