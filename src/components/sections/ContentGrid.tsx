@@ -126,7 +126,7 @@ const ContentGrid = () => {
               >
                 <span className="underline underline-offset-4">Drop a thought</span>
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </button>
+              </a>
             </div>
           </div>
         </div>
