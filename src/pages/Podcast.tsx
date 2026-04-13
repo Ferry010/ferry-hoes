@@ -6,6 +6,11 @@ import Footer from "@/components/sections/Footer";
 
 import SEOHead from "@/components/blog/SEOHead";
 import StructuredData, { podcastSchema, breadcrumbSchema } from "@/components/StructuredData";
+import SectionLabel from "@/components/SectionLabel";
+
+const HeadingDot = () => (
+  <span className="inline-block w-2 h-2 bg-accent rounded-full ml-1.5 mb-1 align-baseline" />
+);
 
 // Spotify icon component
 const SpotifyIcon = ({ className }: { className?: string }) => (
@@ -118,14 +123,12 @@ const Podcast = () => {
 
           <div className="container px-6 md:px-8 py-24 md:py-32 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
-              <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 text-white backdrop-blur-sm rounded-full text-sm font-medium mb-8">
-                <Headphones className="h-4 w-4" />
-                Podcast
-              </span>
+              <SectionLabel text="Podcast" center />
               
               <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-white">
                 The Human Era{" "}
                 <span className="text-accent">Podcast</span>
+                <HeadingDot />
               </h1>
               
               <p className="text-xl md:text-2xl text-white leading-relaxed max-w-2xl mx-auto mb-12">
@@ -165,9 +168,9 @@ const Podcast = () => {
           <section className="py-16 md:py-20 bg-secondary/30">
             <div className="container px-6 md:px-8">
               <div className="max-w-3xl mx-auto text-center">
-                <span className="text-accent font-medium text-sm mb-2 block">About the show</span>
+                <SectionLabel text="About the show" center />
                 <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-foreground">
-                  No scripts. No soundbites.
+                  No scripts. No soundbites.<HeadingDot />
                 </h2>
                 <p className="text-muted-foreground text-lg leading-relaxed">
                   Honest, unscripted conversations with fascinating people about technology, leadership, and what it means to be human. No pre-written questions. Just thinking out loud about the things that matter.
@@ -181,9 +184,9 @@ const Podcast = () => {
             <div className="container px-6 md:px-8">
               <div className="max-w-6xl mx-auto">
                 <div className="text-center mb-10">
-                  <span className="text-accent font-medium text-sm mb-2 block">Episodes</span>
+                  <SectionLabel text="Episodes" center />
                   <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-foreground">
-                    Recent conversations
+                    Recent conversations<HeadingDot />
                   </h2>
                   <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
                     Dive into the latest episodes.
@@ -291,7 +294,7 @@ const Podcast = () => {
             <div className="container px-6 md:px-8">
               <div className="max-w-3xl mx-auto text-center">
                 <h2 className="font-display text-4xl md:text-5xl font-bold mb-6">
-                  Subscribe & never miss an episode
+                  Subscribe & never miss an episode<HeadingDot />
                 </h2>
                 <p className="text-xl text-white/70 mb-12">
                   Available on all major podcast platforms.
