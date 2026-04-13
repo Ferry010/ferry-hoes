@@ -8,76 +8,63 @@ const HeroVideo = () => {
   };
 
   return (
-    <section className="min-h-[90vh] flex items-center bg-background relative overflow-hidden pt-16 pb-8 md:py-0">
-      <div className="container px-6 md:px-8">
-        <div className="grid md:grid-cols-[1fr_1.2fr] gap-6 md:gap-8 items-center">
-          {/* Left: Chat bubbles */}
-          <div className="flex flex-col justify-center order-first md:order-first py-6 md:py-0 md:pl-8 lg:pl-16">
-            <div className="flex flex-col gap-3 max-w-md">
-              {/* Visitor bubble - left aligned */}
-              <div
-                className="self-start opacity-0 animate-fade-up max-w-[80%]"
-                style={{ animationDelay: "0.8s" }}
-              >
-                <div className="rounded-2xl rounded-bl-md px-4 py-2.5 bg-secondary text-foreground text-sm md:text-base font-medium">
-                  So Ferry, what do you actually do?
-                </div>
-              </div>
+    <section className="relative min-h-[90vh] flex items-center overflow-hidden">
+      {/* Video background */}
+      <video
+        className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+        src="/videos/Ferry_Hero_vid_2026.webm"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+      />
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-black/50" />
 
-              {/* Ferry bubble 1 - right aligned */}
-              <div
-                className="self-end opacity-0 animate-fade-up max-w-[80%]"
-                style={{ animationDelay: "1.8s" }}
-              >
-                <div className="rounded-2xl rounded-br-md px-4 py-2.5 bg-primary/80 text-primary-foreground text-sm md:text-base">
-                  I help brands become more human.
-                </div>
-              </div>
-
-              {/* Ferry bubble 2 - right aligned */}
-              <div
-                className="self-end opacity-0 animate-fade-up max-w-[85%]"
-                style={{ animationDelay: "2.8s" }}
-              >
-                <div className="rounded-2xl rounded-br-md px-4 py-2.5 bg-primary/80 text-primary-foreground text-sm md:text-base">
-                  Through keynotes, a book, and one big idea: Brand Humanizing.
-                </div>
-              </div>
-
-              {/* CTA - right aligned */}
-              <button
-                onClick={handleCTA}
-                className="self-end mt-2 opacity-0 animate-fade-up inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent text-accent-foreground text-sm font-semibold hover:bg-accent/90 transition-colors shadow-soft"
-                style={{ animationDelay: "3.8s" }}
-              >
-              <MessageCircle className="h-4 w-4" />
-                Continue the conversation
-              </button>
-
-            </div>
-          </div>
-
-          {/* Right: Polaroid with video */}
-          <div className="flex items-center justify-center order-last md:order-last p-6 md:p-0">
+      {/* Content overlay */}
+      <div className="container relative z-10 px-6 md:px-8 pt-16 md:pt-0">
+        <div className="max-w-lg">
+          <div className="flex flex-col gap-3">
+            {/* Visitor bubble - left aligned */}
             <div
-              className="bg-white p-3 pb-12 rounded-sm shadow-xl rotate-1 hover:rotate-0 transition-transform duration-500 max-w-lg w-full opacity-0 animate-fade-up relative"
-              style={{ animationDelay: "0.5s" }}
+              className="self-start opacity-0 animate-fade-up max-w-[80%]"
+              style={{ animationDelay: "0.8s" }}
             >
-              <div className="aspect-[4/3] overflow-hidden rounded-sm">
-                <video
-                  className="w-full h-full object-cover object-center pointer-events-none"
-                  src="/videos/Ferry_Hero_vid_2026.webm"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  preload="auto"
-                />
+              <div className="rounded-2xl rounded-bl-md px-4 py-2.5 bg-white/20 backdrop-blur-sm text-white text-sm md:text-base font-medium">
+                So Ferry, what do you actually do?
               </div>
-              <p className="absolute bottom-3 left-3 right-3 text-center font-signature text-2xl text-muted-foreground">
-                My passion
-              </p>
             </div>
+
+            {/* Ferry bubble 1 - right aligned */}
+            <div
+              className="self-end opacity-0 animate-fade-up max-w-[80%]"
+              style={{ animationDelay: "1.8s" }}
+            >
+              <div className="rounded-2xl rounded-br-md px-4 py-2.5 bg-white/30 backdrop-blur-sm text-white text-sm md:text-base">
+                I help brands become more human.
+              </div>
+            </div>
+
+            {/* Ferry bubble 2 - right aligned */}
+            <div
+              className="self-end opacity-0 animate-fade-up max-w-[85%]"
+              style={{ animationDelay: "2.8s" }}
+            >
+              <div className="rounded-2xl rounded-br-md px-4 py-2.5 bg-white/30 backdrop-blur-sm text-white text-sm md:text-base">
+                Through keynotes, a book, and one big idea: Brand Humanizing.
+              </div>
+            </div>
+
+            {/* CTA - right aligned */}
+            <button
+              onClick={handleCTA}
+              className="self-end mt-2 opacity-0 animate-fade-up inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent text-accent-foreground text-sm font-semibold hover:bg-accent/90 transition-colors shadow-soft"
+              style={{ animationDelay: "3.8s" }}
+            >
+              <MessageCircle className="h-4 w-4" />
+              Continue the conversation
+            </button>
           </div>
         </div>
       </div>
