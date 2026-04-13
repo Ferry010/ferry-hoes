@@ -25,7 +25,7 @@ const BlogSection = () => {
                 The Blog
               </span>
               <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground font-bold">
-                Ideas worth <span className="text-primary">sharing</span>
+                Ideas worth <span className="text-accent">sharing</span>
               </h2>
             </div>
             <p className="text-muted-foreground text-lg mt-4 md:mt-0 max-w-md">
@@ -68,7 +68,7 @@ const BlogSection = () => {
               <Button
                 asChild
                 size="lg"
-                className="rounded-full px-8 group bg-primary text-primary-foreground hover:bg-primary/90"
+                className="rounded-full px-8 group bg-accent text-accent-foreground hover:bg-accent/90"
               >
                 <Link to="/blog">
                   View all articles

@@ -76,6 +76,7 @@ const SiteHeader = () => {
           {/* Logo */}
           <Link to="/" className="hover:brightness-[1.03] transition-none">
             <img src={logoBlack} alt="Ferry Hoes" className="h-6 md:h-7 w-auto" />
+            <span className="w-1.5 h-1.5 rounded-full bg-accent inline-block ml-1 mb-3" />
           </Link>
 
           {/* Desktop nav */}

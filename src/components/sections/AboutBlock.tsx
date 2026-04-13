@@ -11,7 +11,11 @@ const AboutBlock = () => {
       <div className="grid md:grid-cols-2 min-h-screen">
         {/* Left: Text content */}
         <div ref={revealRef} className="scroll-reveal flex flex-col justify-center px-6 md:px-12 lg:px-20 py-16 md:py-0">
-          <p className="font-display text-2xl md:text-3xl lg:text-4xl font-bold text-primary mb-6">
+          <span className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 text-accent rounded-full text-sm font-medium mb-6">
+            <span className="w-2 h-2 rounded-full bg-accent" />
+            My Story
+          </span>
+          <p className="font-display text-2xl md:text-3xl lg:text-4xl font-bold text-accent mb-6">
             Ferry Hoes
           </p>
           
