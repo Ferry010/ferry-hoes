@@ -1,24 +1,26 @@
 
 
-# Move intro card down, unify polaroid captions
+# Redesign Hero Chat: Centered, Bottom-Half Layout
 
-## Changes
+## Changes to `src/components/sections/HeroVideo.tsx`
 
-### 1. HeroVideo.tsx
-- **Move intro card outside** the chat `flex-col` container so it sits below with more spacing. Change `mt-6` to `mt-10` for more distance from the chat/CTA.
-- **Change polaroid caption** from "Ferry Hoes, 2026" to "My passion"
+### Layout
+- Move the entire content block to **center-aligned, bottom half** of the hero using `items-end justify-center text-center` and bottom padding (`pb-16 md:pb-20`).
+- Remove the current `max-w-lg` left-aligned container; replace with a centered `max-w-xl mx-auto` wrapper.
 
-### 2. Unify all polaroid caption styling
-All three polaroids should use identical font/size classes: `font-caveat text-lg text-muted-foreground`
+### Bubble styling
+- **First bubble** ("So Ferry, what do you actually do?"): Use `bg-brand-teal text-white` (the site's teal/green) instead of `bg-white/20`. Keep `self-start`.
+- **Ferry response bubbles**: Use `bg-white text-primary` (solid white) instead of `bg-white/30 text-white`. Keep `self-end`.
+- **CTA button**: Stays as-is with `bg-accent` (coral/orange).
 
-- **HeroVideo.tsx** (line 87): currently `font-caveat text-base` → change to `font-caveat text-lg`
-- **AboutBlock.tsx** (line 45): currently `font-caveat text-lg` → already correct, no change
-- **SpeakerSection.tsx** (line 26): currently `font-caveat text-base` → change to `font-caveat text-lg`
+### Add name + tagline below chat
+- After the CTA button, add a centered block with:
+  - "Ferry Hoes" in white, bold, ~`text-2xl md:text-3xl`
+  - "International keynote speaker. Author. Entrepreneur. Helping organizations stay powerfully human in a world full of AI." in white/80, ~`text-sm md:text-base`
+- This block fades in after the CTA (animationDelay ~4.8s).
 
-## Files changed
-
+### File changed
 | File | Change |
 |------|--------|
-| `src/components/sections/HeroVideo.tsx` | Move intro card down with more margin; change polaroid caption to "My passion"; unify font size to `text-lg` |
-| `src/components/sections/SpeakerSection.tsx` | Change caption font size from `text-base` to `text-lg` |
+| `src/components/sections/HeroVideo.tsx` | Restyle bubbles, center layout at bottom, add name/tagline |
 
