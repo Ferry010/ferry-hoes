@@ -55,6 +55,7 @@ const HeroVideo = () => {
               </button>
 
             </div>
+          </div>
 
           {/* Right: Polaroid with video */}
           <div className="flex items-center justify-center order-first md:order-last">
