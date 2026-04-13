@@ -1,27 +1,27 @@
 
 
-# Hero chat alignment, wider polaroid, and AboutBlock caption update
+# Fix hero polaroid caption overflow
 
-## Changes
+## Problem
+The caption text ("Ferry Hoes" + the full tagline) is crammed into the bottom white area of the polaroid (`pb-20` = 80px). The long tagline overflows or gets clipped at smaller viewports.
 
-### 1. HeroVideo.tsx
+## Solution
+Move the caption **below** the polaroid as a standalone block instead of trying to fit it inside the white border. This is cleaner and gives the text room to breathe.
 
-- **Remove** the H1 "AI & Technology Keynote Speaker" entirely
-- **Flip chat alignment**: visitor bubble ("So Ferry, what do you actually do?") aligned **left** (self-start), Ferry's replies and CTA aligned **right** (self-end)
-- **Wider polaroid**: change `max-w-sm` to `max-w-md`, change aspect ratio from `aspect-[3/4]` to `aspect-[4/3]` (landscape/wider)
-- **Caption rewrite**: increase `pb-16` to `pb-20` to give more room. Replace the three separate caption lines with a single block:
-  - "FERRY HOES" in `font-display` bold uppercase (keep)
-  - Below: "International keynote speaker. Author. Entrepreneur. Helping organizations stay powerfully human in a world full of AI." in `font-caveat text-base` on one flowing line
-- Use `absolute bottom-4 left-4 right-4` positioning so text sits on the white paper area
+### HeroVideo.tsx changes
 
-### 2. AboutBlock.tsx
+- Remove `pb-20` from the polaroid wrapper (change to `pb-3` so the polaroid is a simple even-bordered frame)
+- Remove the absolute-positioned caption `div` from inside the polaroid
+- Add a new `div` directly **below** the polaroid card with:
+  - "FERRY HOES" in `font-display text-sm font-bold uppercase tracking-wide`
+  - The tagline in `font-caveat text-lg text-muted-foreground`
+  - Centered, with `mt-4` spacing
 
-- Change the polaroid caption from `"Ferry, actual human"` to `"Often times listening is more important than talking"`
+This keeps the polaroid clean (just the video in a white frame) and lets the text flow naturally underneath without any overflow issues.
 
 ## Files changed
 
 | File | Change |
 |------|--------|
-| `src/components/sections/HeroVideo.tsx` | Remove H1, flip bubble alignment, widen polaroid, fit caption on paper |
-| `src/components/sections/AboutBlock.tsx` | Update polaroid caption text |
+| `src/components/sections/HeroVideo.tsx` | Move caption below polaroid, remove `pb-20` |
 
