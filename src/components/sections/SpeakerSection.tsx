@@ -3,22 +3,17 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import stagePhoto from "@/assets/ferry-speaking.jpg";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import SectionLabel from "@/components/SectionLabel";
 
 const SpeakerSection = () => {
   const revealRef = useScrollReveal();
 
   return (
-    <section className="min-h-screen relative overflow-hidden bg-background/95 backdrop-blur-sm">
-      {/* Decorative elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 -right-20 w-80 h-80 bg-accent/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 -left-20 w-64 h-64 bg-primary/10 rounded-full blur-3xl" />
-      </div>
-
+    <section className="relative overflow-hidden bg-background">
       {/* Two-column grid */}
-      <div className="grid md:grid-cols-2 min-h-screen">
+      <div className="grid md:grid-cols-2 min-h-[80vh]">
         {/* Left: Photo */}
-        <div className="relative min-h-[400px] md:min-h-screen order-last md:order-first">
+        <div className="relative min-h-[400px] md:min-h-[80vh] order-last md:order-first">
           <img 
             src={stagePhoto}
             alt="Ferry Hoes presenting on stage"
@@ -29,19 +24,14 @@ const SpeakerSection = () => {
 
         {/* Right: Content */}
         <div ref={revealRef} className="scroll-reveal flex flex-col justify-center px-6 md:px-12 lg:px-16 py-16 md:py-0 relative z-10">
-          {/* Badge */}
-          <span className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 text-accent rounded-full text-sm font-medium mb-8 w-fit">
-            <span className="w-2 h-2 rounded-full bg-accent" />
-            On Stage
-          </span>
+          <SectionLabel text="On Stage" />
 
-          {/* Title */}
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-8 text-foreground">
+          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-8 text-foreground">
             Keynotes that{" "}
             <span className="text-accent">inspire action</span>
+            <span className="inline-block w-2 h-2 bg-accent rounded-full ml-1.5 mb-1 align-baseline" />
           </h2>
 
-          {/* Description */}
           <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl mb-12">
             From AI and the future of work to human-centered design and brand transformation. 
             Talks that challenge assumptions, spark conversations, and leave audiences with actionable insights.
