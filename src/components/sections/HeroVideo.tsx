@@ -8,7 +8,7 @@ const HeroVideo = () => {
   };
 
   return (
-    <section className="min-h-[90vh] flex items-center bg-background relative overflow-hidden">
+    <section className="min-h-[90vh] flex items-center bg-background relative overflow-hidden py-8 md:py-0">
       <div className="container px-6 md:px-8">
         <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
           {/* Left: Chat bubbles */}
@@ -58,7 +58,7 @@ const HeroVideo = () => {
           </div>
 
           {/* Right: Polaroid with video */}
-          <div className="flex items-center justify-center order-first md:order-last">
+          <div className="flex items-center justify-center order-first md:order-last p-6 md:p-0">
             <div
               className="bg-white p-3 pb-12 rounded-sm shadow-xl rotate-1 hover:rotate-0 transition-transform duration-500 max-w-md w-full opacity-0 animate-fade-up relative"
               style={{ animationDelay: "0.5s" }}
