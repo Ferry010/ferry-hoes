@@ -59,7 +59,7 @@ const HeroVideo = () => {
           {/* Right: Polaroid with video */}
           <div className="flex items-center justify-center order-first md:order-last">
             <div
-              className="bg-white p-3 rounded-sm shadow-xl rotate-1 hover:rotate-0 transition-transform duration-500 max-w-md w-full opacity-0 animate-fade-up"
+              className="bg-white p-3 pb-20 rounded-sm shadow-xl rotate-1 hover:rotate-0 transition-transform duration-500 max-w-md w-full opacity-0 animate-fade-up relative"
               style={{ animationDelay: "0.5s" }}
             >
               <div className="aspect-[4/3] overflow-hidden rounded-sm">
@@ -73,14 +73,15 @@ const HeroVideo = () => {
                   preload="auto"
                 />
               </div>
-            </div>
-            <div className="mt-4 text-center opacity-0 animate-fade-up" style={{ animationDelay: "0.7s" }}>
-              <p className="font-display text-sm font-bold tracking-wide text-foreground/80 uppercase">
-                Ferry Hoes
-              </p>
-              <p className="font-caveat text-lg text-muted-foreground leading-snug mt-1">
-                International keynote speaker. Author. Entrepreneur. Helping organizations stay powerfully human in a world full of AI.
-              </p>
+              {/* Caption on the paper area */}
+              <div className="absolute bottom-4 left-4 right-4 text-center">
+                <p className="font-display text-sm font-bold tracking-wide text-foreground/80 uppercase">
+                  Ferry Hoes
+                </p>
+                <p className="font-caveat text-base text-muted-foreground leading-snug mt-1">
+                  International keynote speaker. Author. Entrepreneur. Helping organizations stay powerfully human in a world full of AI.
+                </p>
+              </div>
             </div>
           </div>
         </div>
