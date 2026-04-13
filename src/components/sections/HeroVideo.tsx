@@ -8,7 +8,7 @@ const HeroVideo = () => {
   };
 
   return (
-    <section className="min-h-[90vh] flex items-center bg-background relative overflow-hidden py-8 md:py-0">
+    <section className="min-h-[90vh] flex items-center bg-background relative overflow-hidden pt-16 pb-8 md:py-0">
       <div className="container px-6 md:px-8">
         <div className="grid md:grid-cols-[1fr_1.2fr] gap-6 md:gap-8 items-center">
           {/* Left: Chat bubbles */}
