@@ -85,6 +85,7 @@ const BlogPost = () => {
               <div className="max-w-3xl mx-auto">
                 <h1 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight uppercase tracking-tight">
                   {post.title}
+                  <span className="inline-block w-2 h-2 bg-accent rounded-full ml-1.5 mb-1 align-baseline" />
                 </h1>
                 <div className="flex items-center justify-center gap-3 text-sm text-white/70">
                   <span>{formatPostDate(post.published_at)}</span>
@@ -99,6 +100,7 @@ const BlogPost = () => {
             <div className="max-w-3xl mx-auto">
               <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight uppercase">
                 {post.title}
+                <span className="inline-block w-2 h-2 bg-accent rounded-full ml-1.5 mb-1 align-baseline" />
               </h1>
               <div className="flex items-center gap-3 text-sm text-muted-foreground mt-4">
                 <span>{formatPostDate(post.published_at)}</span>
