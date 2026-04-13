@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ArrowRight } from "lucide-react";
 import logo2026 from "@/assets/ferry-hoes-logo-2026.png";
 
 const NAV_ITEMS = [
@@ -60,25 +60,22 @@ const SiteHeader = () => {
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
-  // Hide on admin routes
   if (location.pathname.startsWith("/admin")) return null;
 
   return (
     <>
       <header
-        className="fixed top-0 left-0 right-0 z-[900] bg-white/95 backdrop-blur-sm transition-all duration-200"
+        className="fixed top-0 left-0 right-0 z-[900] bg-background/95 backdrop-blur-sm transition-all duration-200"
         style={{
           paddingTop: scrolled ? "0.625rem" : "1rem",
           paddingBottom: scrolled ? "0.625rem" : "1rem",
         }}
       >
         <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-14 flex items-center justify-between">
-          {/* Logo */}
           <Link to="/" className="hover:brightness-[1.03] transition-none">
             <img src={logo2026} alt="Ferry Hoes" className="h-6 md:h-7 w-auto" />
           </Link>
 
-          {/* Desktop nav */}
           {!isMobile && (
             <nav className="flex items-center gap-8 lg:gap-10">
               {NAV_ITEMS.map((item) => (
@@ -101,17 +98,18 @@ const SiteHeader = () => {
                 </Link>
               ))}
 
-              {/* CTA */}
-              <Link
-                to="/contact"
-                className="ml-2 px-5 py-2 bg-primary text-primary-foreground font-sans text-sm font-medium rounded-md hover:brightness-[1.05] active:scale-[0.97] transition-all duration-120"
+              <a
+                href="https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-2 inline-flex items-center gap-1.5 px-5 py-2 bg-accent text-accent-foreground font-sans text-sm font-medium rounded-full hover:bg-accent/90 active:scale-[0.97] transition-all duration-120"
               >
-                Get in touch
-              </Link>
+                Book a session
+                <ArrowRight className="h-3.5 w-3.5" />
+              </a>
             </nav>
           )}
 
-          {/* Mobile hamburger */}
           {isMobile && (
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
@@ -124,10 +122,9 @@ const SiteHeader = () => {
         </div>
       </header>
 
-      {/* Mobile slide-down menu */}
       {isMobile && (
         <div
-          className="fixed inset-0 z-[899] bg-white flex flex-col transition-all duration-200 ease-out"
+          className="fixed inset-0 z-[899] bg-background flex flex-col transition-all duration-200 ease-out"
           style={{
             opacity: mobileOpen ? 1 : 0,
             pointerEvents: mobileOpen ? "auto" : "none",
@@ -140,19 +137,21 @@ const SiteHeader = () => {
                 key={item.route}
                 to={item.route}
                 onClick={(e) => { handleNavClick(e, item.route); setMobileOpen(false); }}
-                className="font-sans text-xl font-medium text-foreground py-4 border-b border-border/40 hover:text-primary transition-colors duration-150"
+                className="font-sans text-xl font-medium text-foreground py-4 border-b border-border/40 hover:text-accent transition-colors duration-150"
               >
                 {item.label}
               </Link>
             ))}
 
-            <Link
-              to="/contact"
+            <a
+              href="https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966"
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setMobileOpen(false)}
-              className="mt-8 w-full text-center px-6 py-3.5 bg-primary text-primary-foreground font-sans text-base font-medium rounded-md hover:brightness-[1.05] active:scale-[0.97] transition-all duration-120"
+              className="mt-8 w-full text-center px-6 py-3.5 bg-accent text-accent-foreground font-sans text-base font-medium rounded-full hover:bg-accent/90 active:scale-[0.97] transition-all duration-120"
             >
-              Get in touch
-            </Link>
+              Book a session
+            </a>
           </div>
         </div>
       )}
