@@ -8,7 +8,7 @@ const HeroVideo = () => {
   };
 
   return (
-    <section className="relative min-h-[90vh] flex items-end justify-center overflow-hidden pb-16 md:pb-20">
+    <section className="relative min-h-[90vh] flex items-end overflow-hidden pb-16 md:pb-20">
       {/* Video background */}
       <video
         className="absolute inset-0 w-full h-full object-cover pointer-events-none"
@@ -23,16 +23,16 @@ const HeroVideo = () => {
       <div className="absolute inset-0 bg-black/50" />
 
       {/* Content overlay */}
-      <div className="relative z-10 w-full px-6 md:px-8">
-        <div className="max-w-xl mx-auto">
+      <div className="container relative z-10 px-6 md:px-8">
+        <div className="max-w-xl">
           <div className="flex flex-col gap-3">
-            {/* Visitor bubble - right aligned, green */}
+            {/* Visitor bubble - right aligned, teal */}
             <div
               className="self-end opacity-0 animate-fade-up max-w-[80%]"
               style={{ animationDelay: "0.8s" }}
             >
               <div className="rounded-2xl rounded-br-md px-4 py-2.5 bg-brand-teal text-white text-sm md:text-base font-medium">
-                So Ferry, what do you actually do?
+                So what do you actually do?
               </div>
             </div>
 
@@ -56,10 +56,10 @@ const HeroVideo = () => {
               </div>
             </div>
 
-            {/* CTA - right aligned, orange */}
+            {/* CTA - left aligned, orange */}
             <button
               onClick={handleCTA}
-              className="self-end mt-2 opacity-0 animate-fade-up inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent text-accent-foreground text-sm font-semibold hover:bg-accent/90 transition-colors shadow-soft"
+              className="self-start mt-2 opacity-0 animate-fade-up inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent text-accent-foreground text-sm font-semibold hover:bg-accent/90 transition-colors shadow-soft"
               style={{ animationDelay: "3.8s" }}
             >
               <MessageCircle className="h-4 w-4" />
@@ -69,15 +69,15 @@ const HeroVideo = () => {
 
           {/* Name + tagline */}
           <div
-            className="mt-8 text-center opacity-0 animate-fade-up"
+            className="mt-10 opacity-0 animate-fade-up"
             style={{ animationDelay: "4.8s" }}
           >
-            <h1 className="text-2xl md:text-3xl font-bold text-white">
+            <p className="text-xs md:text-sm font-semibold tracking-[0.2em] uppercase text-white/70">
               Ferry Hoes
-            </h1>
-            <p className="mt-2 text-sm md:text-base text-white/80 max-w-md mx-auto">
-              International keynote speaker. Author. Entrepreneur. Helping organizations stay powerfully human in a world full of AI.
             </p>
+            <h1 className="mt-1 text-3xl md:text-5xl font-bold text-white">
+              AI & Technology Keynote Speaker
+            </h1>
           </div>
         </div>
       </div>
