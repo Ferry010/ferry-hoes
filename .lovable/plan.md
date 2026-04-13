@@ -1,70 +1,71 @@
 
 
-# Consistent accent colour, wordmark, section pills, and dark closing section
+# Design upgrade — borrow AIGA + Brand Humanizing vibe
 
 ## Summary
 
-Five coordinated changes: (1) commit to coral/salmon as the primary accent for highlights and interactive elements, teal as the calmer secondary; (2) give the nav wordmark more personality; (3) ensure every homepage section has a pill label; (4) merge CommunitySection + Footer into a single dark closing panel.
+Replace the logo with the new uploaded version (which already has the orange dot baked in). Create a reusable `SectionLabel` component inspired by AIGA's pattern — a simple dot + uppercase text, no pill background — and apply it consistently. Then make several flow improvements to reduce the "corporate sections stacked on top of each other" feeling.
 
 ---
 
-## 1. Commit to coral as the single accent colour
+## 1. New logo asset
 
-Currently some sections use `text-primary` (teal) for highlighted heading words and some use `text-accent` (coral). Standardise so **coral is always the highlight colour** for heading spans, badge pills, and interactive links. Teal stays only for the nav CTA button and subtle secondary elements.
+Copy the uploaded `Ferry_Hoes_logo_2026-2.png` to `src/assets/` as both the black logo (it already has the orange dot). Update imports in `SiteHeader.tsx` and `Footer.tsx`. Remove the manually-added `<span>` coral dot from the header since it's now part of the logo itself.
 
-**Files & changes:**
+Also need a white version for the footer — we'll keep the existing white logo for now (or invert with CSS if needed).
 
-| Section | Current | Change to |
-|---------|---------|-----------|
-| `SpeakerSection.tsx` | `"text-primary"` on "inspire action" | `"text-accent"` |
-| `SpeakerSection.tsx` | badge uses `bg-accent/10 text-accent` | keep (already coral) |
-| `PodcastSection.tsx` | badge + heading highlight use `text-primary` | `text-accent`, badge `bg-accent/10 text-accent` |
-| `BlogSection.tsx` | heading highlight `text-primary` | `text-accent` |
-| `BlogSection.tsx` | CTA button `bg-primary` | `bg-accent` |
-| `BrandHumanizingSection.tsx` | already coral | keep |
-| `BookSection.tsx` | already coral | keep |
-| `AboutBlock.tsx` | "Ferry Hoes" name `text-primary` | `text-accent` |
-| `CommunitySection.tsx` | newsletter/discord labels `text-primary` | `text-accent` |
-| `AboutFerryLLM.tsx` | links `text-accent` | keep |
+## 2. Reusable `SectionLabel` component
 
-## 2. Strengthen the wordmark
+**New file:** `src/components/SectionLabel.tsx`
 
-Replace the plain logo `<img>` in `SiteHeader.tsx` with a typographic treatment: keep the logo image but add a subtle vertical bar separator and "FH" monogram or simply style the existing logo with a slight scale-up. **Simpler approach**: keep the existing logo PNG (it's already a designed wordmark image), but add a small coral dot accent after it — a 6px filled circle in `bg-accent` positioned as a superscript — to give it more brand personality. This is lightweight and distinctive.
-
-**File:** `SiteHeader.tsx` — after the `<img>` tag, add a `<span className="w-1.5 h-1.5 rounded-full bg-accent inline-block ml-1 mb-3" />` dot.
-
-## 3. Section-label pills on every section
-
-Currently missing from: `AboutBlock`, `AboutFerryLLM`, `CommunitySection`, `HeroVideo`.
-
-Add pills to:
-- **AboutBlock.tsx**: Add `"My Story"` pill before the "Ferry Hoes" name
-- **AboutFerryLLM.tsx**: Add `"About"` pill before the heading
-- **CommunitySection.tsx**: Add `"Stay Connected"` pill before the heading
-
-Skip HeroVideo (it's a full-bleed video hero, pill doesn't fit).
-
-**Pattern** (consistent with existing):
+Borrowing AIGA's pattern — minimal, no pill background:
 ```tsx
-<span className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 text-accent rounded-full text-sm font-medium mb-6">
-  <span className="w-2 h-2 rounded-full bg-accent" />
-  Label
-</span>
+const SectionLabel = ({ text }: { text: string }) => (
+  <div className="flex items-center gap-2.5 mb-4">
+    <div className="w-2 h-2 bg-accent rounded-full" />
+    <span className="text-xs font-medium uppercase tracking-[0.15em] text-accent">
+      {text}
+    </span>
+  </div>
+);
 ```
 
-## 4. Dark closing section
+Replace all current inline pill badges across every section with this component. This gives a cleaner, less corporate feel — the orange dot becomes the consistent brand mark matching the logo.
 
-Merge `CommunitySection` into the footer's dark background to create one strong visual landing panel.
+**Sections to update:** `AboutBlock`, `BrandHumanizingSection`, `SpeakerSection`, `BookSection`, `PodcastSection`, `BlogSection`, `CommunitySection`, `AboutFerryLLM`.
 
-**File:** `CommunitySection.tsx`
-- Change background from the warm gradient to dark: `bg-[hsl(25,15%,13%)] text-white`
-- Update all text colours to light variants matching the footer palette
-- Headings → `text-white`, body → `text-[hsl(38,30%,82%)]`, labels → `text-[hsl(38,30%,88%)]`
-- Input/button styles: match footer's dark input style (`bg-white/5 border-white/10 text-white`)
+## 3. Reduce section padding + remove backdrop-blur
 
-**File:** `Footer.tsx` — remove the top `py-16` and border-t to make it flow seamlessly from the Community section. Or keep a subtle `border-t border-white/10` as a divider.
+The current sections feel heavy and disconnected because they each have `min-h-screen`, heavy padding, and `backdrop-blur-sm`. Changes:
 
-**File:** `Index.tsx` — wrap `<CommunitySection />` and `<Footer />` in a single `<div>` with the dark background so they share the same visual panel (or just let each component set its own matching dark bg).
+- Remove `backdrop-blur-sm` from all sections (it adds a corporate glass feel)
+- Remove `min-h-screen` from `BrandHumanizingSection` — let content determine height
+- Reduce some `py-24 md:py-32` to `py-16 md:py-24` for tighter flow
+- Remove decorative blur orbs from `SpeakerSection` and `BlogSection` (the subtle coral/teal blobs add visual noise)
+
+## 4. Headings — add orange dot after key words
+
+Following the logo's signature style, add a small orange square/dot after section heading text. This can be done with a CSS pseudo-element or a small inline span. Applied to all `h2` section headings:
+
+```tsx
+<h2 className="font-display text-5xl font-bold">
+  Brand <span className="text-accent">Humanizing</span>
+  <span className="inline-block w-2 h-2 bg-accent rounded-sm ml-1 mb-1 align-baseline" />
+</h2>
+```
+
+This mirrors the logo's orange dot and creates visual consistency.
+
+## 5. Flow improvements
+
+- **Remove `bg-secondary/90`** from BrandHumanizing and BookSection — use `bg-background` so sections flow into each other on the same cream instead of alternating grey/cream
+- **Add thin dividers** between sections instead: a subtle `<div className="max-w-xs mx-auto border-t border-border" />` between major sections in `Index.tsx`
+- **SpeakerSection**: remove the full-bleed photo grid layout — wrap the photo in a polaroid treatment like AboutBlock for consistency, or keep the current layout but with no decorative blobs
+
+## 6. Typography refinement
+
+- Section headings: reduce max size from `text-7xl/text-8xl` to `text-5xl/text-6xl` — the current sizes feel like a startup landing page
+- Body text: increase line-height slightly for warmth (already using Inter which is good)
 
 ---
 
@@ -72,12 +73,16 @@ Merge `CommunitySection` into the footer's dark background to create one strong 
 
 | File | Change |
 |------|--------|
-| `src/components/sections/SpeakerSection.tsx` | Heading highlight → coral |
-| `src/components/sections/PodcastSection.tsx` | Badge + heading highlight → coral |
-| `src/components/sections/BlogSection.tsx` | Heading highlight + CTA → coral |
-| `src/components/sections/AboutBlock.tsx` | Name colour → coral, add pill |
-| `src/components/sections/AboutFerryLLM.tsx` | Add pill |
-| `src/components/sections/CommunitySection.tsx` | Dark bg, light text, add pill |
-| `src/components/sections/Footer.tsx` | Minor spacing tweak for seamless dark panel |
-| `src/components/SiteHeader.tsx` | Add coral dot accent to logo |
+| `src/assets/ferry-hoes-logo-black.png` | Replace with new uploaded logo |
+| `src/components/SectionLabel.tsx` | New reusable component |
+| `src/components/SiteHeader.tsx` | Remove manual coral dot span, use new logo |
+| `src/components/sections/AboutBlock.tsx` | Use SectionLabel, add heading dot |
+| `src/components/sections/BrandHumanizingSection.tsx` | Use SectionLabel, remove min-h-screen/backdrop-blur, reduce heading size, add heading dot |
+| `src/components/sections/SpeakerSection.tsx` | Use SectionLabel, remove blur orbs, add heading dot |
+| `src/components/sections/BookSection.tsx` | Use SectionLabel, remove backdrop-blur, add heading dot |
+| `src/components/sections/PodcastSection.tsx` | Use SectionLabel, remove backdrop-blur, add heading dot |
+| `src/components/sections/BlogSection.tsx` | Use SectionLabel, remove blur orbs, add heading dot |
+| `src/components/sections/CommunitySection.tsx` | Use SectionLabel (light variant for dark bg), add heading dot |
+| `src/components/sections/AboutFerryLLM.tsx` | Use SectionLabel |
+| `src/pages/Index.tsx` | Add subtle dividers between sections |
 
