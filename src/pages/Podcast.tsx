@@ -64,9 +64,6 @@ const allEpisodes = [
 ];
 
 const Podcast = () => {
-  const openMessagePanel = () => {
-    window.dispatchEvent(new Event("open-contact"));
-  };
 
   return (
     <>
@@ -93,11 +90,9 @@ const Podcast = () => {
           style={{
             background: `linear-gradient(
               180deg,
-              hsl(var(--brand-gold)) 0%,
-              hsl(var(--accent)) 25%,
+              hsl(var(--accent)) 0%,
               hsl(var(--primary)) 50%,
-              hsl(var(--accent)) 75%,
-              hsl(var(--brand-gold)) 100%
+              hsl(var(--accent)) 100%
             )`
           }}
         />

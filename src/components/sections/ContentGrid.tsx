@@ -120,8 +120,8 @@ const ContentGrid = () => {
               <p className="text-muted-foreground mb-4">
                 Something on your mind about this?
               </p>
-              <button
-                onClick={() => window.dispatchEvent(new Event("open-contact"))}
+              <a
+                href="/contact"
                 className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors group"
               >
                 <span className="underline underline-offset-4">Drop a thought</span>
