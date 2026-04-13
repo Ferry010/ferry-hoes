@@ -40,12 +40,9 @@ const AboutBlock = () => {
             <img 
               src={ferryPhoto}
               alt="Ferry Hoes speaking on stage in front of an audience"
-              className="w-full aspect-[4/3] object-cover"
+              className="w-full aspect-[4/3] object-cover object-top"
             />
-            <p 
-              className="text-center mt-3 text-lg text-foreground/70 italic"
-              style={{ fontFamily: "'Caveat', cursive" }}
-            >
+            <p className="text-center mt-3 text-lg text-foreground/70 font-caveat">
               Often times listening is more important than talking
             </p>
           </div>

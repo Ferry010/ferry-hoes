@@ -50,21 +50,32 @@ const HeroVideo = () => {
                 className="self-end mt-2 opacity-0 animate-fade-up inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent text-accent-foreground text-sm font-semibold hover:bg-accent/90 transition-colors shadow-soft"
                 style={{ animationDelay: "3.8s" }}
               >
-                <MessageCircle className="h-4 w-4" />
+              <MessageCircle className="h-4 w-4" />
                 Continue the conversation
               </button>
+
+              {/* Intro card */}
+              <div
+                className="mt-6 opacity-0 animate-fade-up bg-white/60 backdrop-blur-sm rounded-2xl px-5 py-4 border border-border/50 max-w-md"
+                style={{ animationDelay: "4.5s" }}
+              >
+                <p className="font-display text-base font-bold text-foreground">Ferry Hoes</p>
+                <p className="text-sm text-muted-foreground leading-relaxed mt-1">
+                  International keynote speaker. Author. Entrepreneur. Helping organizations stay powerfully human in a world full of AI.
+                </p>
+              </div>
             </div>
           </div>
 
           {/* Right: Polaroid with video */}
           <div className="flex items-center justify-center order-first md:order-last">
             <div
-              className="bg-white p-3 pb-20 rounded-sm shadow-xl rotate-1 hover:rotate-0 transition-transform duration-500 max-w-md w-full opacity-0 animate-fade-up relative"
+              className="bg-white p-3 pb-12 rounded-sm shadow-xl rotate-1 hover:rotate-0 transition-transform duration-500 max-w-md w-full opacity-0 animate-fade-up relative"
               style={{ animationDelay: "0.5s" }}
             >
               <div className="aspect-[4/3] overflow-hidden rounded-sm">
                 <video
-                  className="w-full h-full object-cover pointer-events-none"
+                  className="w-full h-full object-cover object-center pointer-events-none"
                   src="/videos/Ferry_Hero_vid_2026.webm"
                   autoPlay
                   muted
@@ -73,15 +84,9 @@ const HeroVideo = () => {
                   preload="auto"
                 />
               </div>
-              {/* Caption on the paper area */}
-              <div className="absolute bottom-4 left-4 right-4 text-center">
-                <p className="font-display text-sm font-bold tracking-wide text-foreground/80 uppercase">
-                  Ferry Hoes
-                </p>
-                <p className="font-caveat text-base text-muted-foreground leading-snug mt-1">
-                  International keynote speaker. Author. Entrepreneur. Helping organizations stay powerfully human in a world full of AI.
-                </p>
-              </div>
+              <p className="absolute bottom-3 left-3 right-3 text-center font-caveat text-base text-muted-foreground">
+                Ferry Hoes, 2026
+              </p>
             </div>
           </div>
         </div>
