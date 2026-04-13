@@ -8,7 +8,7 @@ const HeroVideo = () => {
   };
 
   return (
-    <section className="relative min-h-[90vh] flex items-end overflow-hidden pb-16 md:pb-20">
+    <section className="relative h-screen flex items-end overflow-hidden pb-16 md:pb-20">
       {/* Video background */}
       <video
         className="absolute inset-0 w-full h-full object-cover pointer-events-none"
