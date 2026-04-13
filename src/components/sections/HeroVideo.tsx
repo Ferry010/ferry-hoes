@@ -54,16 +54,17 @@ const HeroVideo = () => {
                 Continue the conversation
               </button>
 
-              {/* Intro card */}
-              <div
-                className="mt-6 opacity-0 animate-fade-up bg-white/60 backdrop-blur-sm rounded-2xl px-5 py-4 border border-border/50 max-w-md"
-                style={{ animationDelay: "4.5s" }}
-              >
-                <p className="font-display text-base font-bold text-foreground">Ferry Hoes</p>
-                <p className="text-sm text-muted-foreground leading-relaxed mt-1">
-                  International keynote speaker. Author. Entrepreneur. Helping organizations stay powerfully human in a world full of AI.
-                </p>
-              </div>
+            </div>
+
+            {/* Intro card */}
+            <div
+              className="mt-10 opacity-0 animate-fade-up bg-white/60 backdrop-blur-sm rounded-2xl px-5 py-4 border border-border/50 max-w-md"
+              style={{ animationDelay: "4.5s" }}
+            >
+              <p className="font-display text-base font-bold text-foreground">Ferry Hoes</p>
+              <p className="text-sm text-muted-foreground leading-relaxed mt-1">
+                International keynote speaker. Author. Entrepreneur. Helping organizations stay powerfully human in a world full of AI.
+              </p>
             </div>
           </div>
 
@@ -84,8 +85,8 @@ const HeroVideo = () => {
                   preload="auto"
                 />
               </div>
-              <p className="absolute bottom-3 left-3 right-3 text-center font-caveat text-base text-muted-foreground">
-                Ferry Hoes, 2026
+              <p className="absolute bottom-3 left-3 right-3 text-center font-caveat text-lg text-muted-foreground">
+                My passion
               </p>
             </div>
           </div>
