@@ -23,8 +23,8 @@ const HeroVideo = () => {
       <div className="absolute inset-0 bg-black/50" />
 
       {/* Content overlay */}
-      <div className="container relative z-10 px-6 md:px-8">
-        <div className="max-w-xl">
+      <div className="relative z-10 w-full px-6 md:px-8">
+        <div className="max-w-xl mx-auto">
           <div className="flex flex-col gap-3">
             {/* Visitor bubble - right aligned, teal */}
             <div
