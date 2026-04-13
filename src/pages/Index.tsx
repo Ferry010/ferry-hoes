@@ -8,7 +8,6 @@ import SpeakerSection from "@/components/sections/SpeakerSection";
 import BookSection from "@/components/sections/BookSection";
 import PodcastSection from "@/components/sections/PodcastSection";
 import BlogSection from "@/components/sections/BlogSection";
-import AboutFerryLLM from "@/components/sections/AboutFerryLLM";
 import CommunitySection from "@/components/sections/CommunitySection";
 import Footer from "@/components/sections/Footer";
 
@@ -57,7 +56,6 @@ const Index = () => {
           <article>
             <BlogSection />
           </article>
-          <AboutFerryLLM />
           <CommunitySection />
         </main>
 

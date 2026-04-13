@@ -15,7 +15,6 @@ import PostEditor from "./pages/PostEditor";
 import AdminMessages from "./pages/AdminMessages";
 import About from "./pages/About";
 import Press from "./pages/Press";
-import Conversation from "./pages/Conversation";
 import Podcast from "./pages/Podcast";
 import Contact from "./pages/Contact";
 import Now from "./pages/Now";
@@ -24,7 +23,6 @@ import AdminLayout from "./components/admin/AdminLayout";
 import { ScrollToTop } from "./components/ScrollToTop";
 import IndexNavigation from "./components/IndexNavigation";
 import CookieConsent from "./components/CookieConsent";
-import AskFerryBubble from "./components/AskFerryBubble";
 import { usePageTracking } from "./hooks/usePageTracking";
 
 const queryClient = new QueryClient();
@@ -45,7 +43,6 @@ const App = () => (
           <PageTracker />
           <IndexNavigation />
           <CookieConsent />
-          <AskFerryBubble />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/blog" element={<Blog />} />
@@ -53,7 +50,6 @@ const App = () => (
             <Route path="/speaking" element={<Speaking />} />
             <Route path="/about" element={<About />} />
             <Route path="/podcast" element={<Podcast />} />
-            <Route path="/conversation" element={<Conversation />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/now" element={<Now />} />
             <Route path="/press" element={<Press />} />
