@@ -32,7 +32,7 @@ const HeroVideo = () => {
               style={{ animationDelay: "0.8s" }}
             >
               <div className="rounded-2xl rounded-bl-md px-4 py-2.5 bg-white text-primary text-sm md:text-base font-medium">
-                So what do you actually do?
+                What I actually do?
               </div>
             </div>
 
