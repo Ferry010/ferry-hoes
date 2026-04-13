@@ -41,7 +41,7 @@ const KEYNOTE_TOPICS = [
   {
     title: "The AI conversation most organisations skip",
     description:
-      "Most AI conversations start with tools and end with confusion. Ferry flips the script: he demystifies the technology, cuts through vendor hype, and helps your audience build a shared vocabulary so they can make smarter decisions about "Most AI conversations start with tools and end with confusion. Ferry flips the script: he demystifies the technology, cuts through vendor hype, and helps your audience build a shared vocabulary so they can make smarter decisions about where AI fits, and where it doesn't.",,
+      "Most AI conversations start with tools and end with confusion. Ferry flips the script: he demystifies the technology, cuts through vendor hype, and helps your audience build a shared vocabulary so they can make smarter decisions about where AI fits, and where it does not.",
     audience: "Executive teams, innovation leads, and organisations early in their AI journey.",
     takeaways: [
       "A clear, jargon-free understanding of what AI can and cannot do today",
@@ -52,7 +52,7 @@ const KEYNOTE_TOPICS = [
   {
     title: "Leading when AI has a say",
     description:
-      "When algorithms recommend who to hire, what to prioritise, and how to allocate resources, the leader's role fundamentally changes. This talk explores what human-centred leadership looks like "When algorithms recommend who to hire, what to prioritise, and how to allocate resources, the leader's role fundamentally changes. This talk explores what human-centred leadership looks like when machines have a seat at the table, and why the best leaders will be those who know when not to listen to the data.", will be those who know when not to listen to the data.",
+      "When algorithms recommend who to hire, what to prioritise, and how to allocate resources, the leader's role fundamentally changes. This talk explores what human-centred leadership looks like when machines have a seat at the table, and why the best leaders will be those who know when not to listen to the data.",
     audience: "C-suite leaders, HR directors, and anyone managing teams in an AI-augmented environment.",
     takeaways: [
       "Why algorithmic recommendations require a new kind of leadership judgment",
@@ -74,7 +74,7 @@ const KEYNOTE_TOPICS = [
   {
     title: "From AI law to AI advantage: literacy as a strategic foundation",
     description:
-      "The EU AI Act is not just a compliance exercise. It is an opportunity to build organisational AI literacy from the ground up. Ferry explains what the regulation requires in plain language and shows how the smartest organisations are using it as a catalyst for strategic advantage rather than a bureaucratic burden.", to build organisational AI literacy from the ground up. Ferry explains what the regulation requires in plain language and shows how the smartest organisations are using it as a catalyst for strategic advantage rather than a bureaucratic burden.",
+      "The EU AI Act is not just a compliance exercise. It is an opportunity to build organisational AI literacy from the ground up. Ferry explains what the regulation requires in plain language and shows how the smartest organisations are using it as a catalyst for strategic advantage rather than a bureaucratic burden.",
     audience: "Compliance officers, legal teams, and leadership responsible for AI governance.",
     takeaways: [
       "A plain-language overview of what the EU AI Act requires from your organisation",
