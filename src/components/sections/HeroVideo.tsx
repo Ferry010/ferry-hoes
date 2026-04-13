@@ -10,9 +10,9 @@ const HeroVideo = () => {
   return (
     <section className="min-h-[90vh] flex items-center bg-background relative overflow-hidden py-8 md:py-0">
       <div className="container px-6 md:px-8">
-        <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+        <div className="grid md:grid-cols-[1fr_1.2fr] gap-6 md:gap-8 items-center">
           {/* Left: Chat bubbles */}
-          <div className="flex flex-col justify-center order-last md:order-first py-12 md:py-0">
+          <div className="flex flex-col justify-center order-first md:order-first py-6 md:py-0 md:pl-8 lg:pl-16">
             <div className="flex flex-col gap-3 max-w-md">
               {/* Visitor bubble - left aligned */}
               <div
@@ -58,9 +58,9 @@ const HeroVideo = () => {
           </div>
 
           {/* Right: Polaroid with video */}
-          <div className="flex items-center justify-center order-first md:order-last p-6 md:p-0">
+          <div className="flex items-center justify-center order-last md:order-last p-6 md:p-0">
             <div
-              className="bg-white p-3 pb-12 rounded-sm shadow-xl rotate-1 hover:rotate-0 transition-transform duration-500 max-w-md w-full opacity-0 animate-fade-up relative"
+              className="bg-white p-3 pb-12 rounded-sm shadow-xl rotate-1 hover:rotate-0 transition-transform duration-500 max-w-lg w-full opacity-0 animate-fade-up relative"
               style={{ animationDelay: "0.5s" }}
             >
               <div className="aspect-[4/3] overflow-hidden rounded-sm">
