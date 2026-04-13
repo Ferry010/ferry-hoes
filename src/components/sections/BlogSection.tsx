@@ -4,28 +4,23 @@ import { ArrowRight } from "lucide-react";
 import { useBlogPosts } from "@/hooks/useBlogPosts";
 import BlogCard from "@/components/blog/BlogCard";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import SectionLabel from "@/components/SectionLabel";
 
 const BlogSection = () => {
   const { data: posts, isLoading } = useBlogPosts(2);
   const revealRef = useScrollReveal();
 
   return (
-    <section className="py-24 md:py-32 bg-card relative overflow-hidden">
-      {/* Decorative elements */}
-      <div className="absolute top-1/4 -right-20 w-80 h-80 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-1/4 -left-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
-
+    <section className="py-16 md:py-24 bg-background relative overflow-hidden">
       <div className="container px-6 md:px-8 relative z-10">
         <div className="max-w-6xl mx-auto">
           {/* Section header */}
           <div ref={revealRef} className="scroll-reveal flex flex-col md:flex-row md:items-end justify-between mb-12 md:mb-16">
             <div>
-              <span className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 text-accent rounded-full text-sm font-medium mb-6">
-                <span className="w-2 h-2 rounded-full bg-accent" />
-                The Blog
-              </span>
-              <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground font-bold">
+              <SectionLabel text="The Blog" />
+              <h2 className="font-display text-4xl md:text-5xl text-foreground font-bold">
                 Ideas worth <span className="text-accent">sharing</span>
+                <span className="inline-block w-2 h-2 bg-accent rounded-full ml-1.5 mb-1 align-baseline" />
               </h2>
             </div>
             <p className="text-muted-foreground text-lg mt-4 md:mt-0 max-w-md">

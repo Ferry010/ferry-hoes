@@ -2,24 +2,23 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import ferryPhoto from "@/assets/ferry-speaking-audience.jpg";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import SectionLabel from "@/components/SectionLabel";
 
 const AboutBlock = () => {
   const revealRef = useScrollReveal();
 
   return (
-    <section className="min-h-screen bg-background/95 backdrop-blur-sm relative">
-      <div className="grid md:grid-cols-2 min-h-screen">
+    <section className="bg-background relative">
+      <div className="grid md:grid-cols-2 min-h-[80vh]">
         {/* Left: Text content */}
         <div ref={revealRef} className="scroll-reveal flex flex-col justify-center px-6 md:px-12 lg:px-20 py-16 md:py-0">
-          <span className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 text-accent rounded-full text-sm font-medium mb-6">
-            <span className="w-2 h-2 rounded-full bg-accent" />
-            My Story
-          </span>
+          <SectionLabel text="My Story" />
           <p className="font-display text-2xl md:text-3xl lg:text-4xl font-bold text-accent mb-6">
             Ferry Hoes
+            <span className="inline-block w-1.5 h-1.5 bg-accent rounded-full ml-1.5 mb-1 align-baseline" />
           </p>
           
-          <h2 className="font-display text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold leading-[1.15] mb-10 text-foreground">
+          <h2 className="font-display text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold leading-[1.2] mb-10 text-foreground">
             Most people make technology complicated. I make it <span className="text-accent">human</span>. Through <span className="text-primary">keynotes</span>, a <span className="text-primary">book</span>, and one big idea that's been ten years in the making. That's it. That's the job.
           </h2>
           
@@ -33,7 +32,7 @@ const AboutBlock = () => {
         </div>
         
         {/* Right: Polaroid photo */}
-        <div className="relative min-h-[400px] md:min-h-screen order-first md:order-last flex items-center justify-center p-8 md:p-12">
+        <div className="relative min-h-[400px] md:min-h-[80vh] order-first md:order-last flex items-center justify-center p-8 md:p-12">
           <div 
             className="relative bg-white p-2 pb-10 shadow-[4px_6px_24px_rgba(0,0,0,0.12)] max-w-lg w-full"
             style={{ transform: "rotate(-1.5deg)" }}

@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Menu, X } from "lucide-react";
-import logoBlack from "@/assets/ferry-hoes-logo-black.png";
+import logo2026 from "@/assets/ferry-hoes-logo-2026.png";
 
 const NAV_ITEMS = [
   { label: "My Story", route: "/about", ariaLabel: "About Ferry Hoes" },
@@ -75,8 +75,7 @@ const SiteHeader = () => {
         <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-14 flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="hover:brightness-[1.03] transition-none">
-            <img src={logoBlack} alt="Ferry Hoes" className="h-6 md:h-7 w-auto" />
-            <span className="w-1.5 h-1.5 rounded-full bg-accent inline-block ml-1 mb-3" />
+            <img src={logo2026} alt="Ferry Hoes" className="h-6 md:h-7 w-auto" />
           </Link>
 
           {/* Desktop nav */}

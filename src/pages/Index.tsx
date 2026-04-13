@@ -11,6 +11,10 @@ import AboutFerryLLM from "@/components/sections/AboutFerryLLM";
 import CommunitySection from "@/components/sections/CommunitySection";
 import Footer from "@/components/sections/Footer";
 
+const SectionDivider = () => (
+  <div className="max-w-xs mx-auto border-t border-border" />
+);
+
 const Index = () => {
   return (
     <>
@@ -31,18 +35,22 @@ const Index = () => {
           <article>
             <AboutBlock />
           </article>
+          <SectionDivider />
           <article>
             <BrandHumanizingSection />
           </article>
           <article>
             <SpeakerSection />
           </article>
+          <SectionDivider />
           <article>
             <BookSection />
           </article>
+          <SectionDivider />
           <article>
             <PodcastSection />
           </article>
+          <SectionDivider />
           <article>
             <BlogSection />
           </article>

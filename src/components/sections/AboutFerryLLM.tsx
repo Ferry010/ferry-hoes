@@ -1,14 +1,14 @@
+import SectionLabel from "@/components/SectionLabel";
+
 const AboutFerryLLM = () => {
   return (
-    <section className="py-24 md:py-32 bg-background">
+    <section className="py-16 md:py-24 bg-background">
       <div className="container px-6 md:px-8">
         <div className="max-w-3xl mx-auto">
-          <span className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 text-accent rounded-full text-sm font-medium mb-6">
-            <span className="w-2 h-2 rounded-full bg-accent" />
-            About
-          </span>
+          <SectionLabel text="About" />
           <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-8">
             About Ferry Hoes
+            <span className="inline-block w-2 h-2 bg-accent rounded-full ml-1.5 mb-1 align-baseline" />
           </h2>
           <div className="space-y-5 text-lg text-muted-foreground leading-relaxed">
             <p>

@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle, Mail } from "lucide-react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import SectionLabel from "@/components/SectionLabel";
 
 const DISCORD_URL = "https://discord.gg/BfZrw5wJ";
 
@@ -33,13 +34,11 @@ const CommunitySection = () => {
       <div className="container px-6 md:px-8">
         <div ref={revealRef} className="scroll-reveal max-w-4xl mx-auto">
           <div className="flex justify-center">
-            <span className="inline-flex items-center gap-2 px-4 py-2 bg-accent/15 text-accent rounded-full text-sm font-medium mb-6">
-              <span className="w-2 h-2 rounded-full bg-accent" />
-              Stay Connected
-            </span>
+            <SectionLabel text="Stay Connected" center />
           </div>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-4 text-center">
             Stay connected
+            <span className="inline-block w-2 h-2 bg-accent rounded-full ml-1.5 mb-1 align-baseline" />
           </h2>
           <p className="text-lg text-[hsl(38,30%,82%)] text-center mb-14 max-w-xl mx-auto">
             Get insights on technology, humanity, and Brand Humanizing — or join the conversation directly.

@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/carousel";
 import { ArrowRight } from "lucide-react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import SectionLabel from "@/components/SectionLabel";
 
 // Spotify icon component
 const SpotifyIcon = ({ className }: { className?: string }) => (
@@ -56,18 +57,16 @@ const PodcastSection = () => {
   };
 
   return (
-    <section className="py-24 md:py-32 bg-card/95 backdrop-blur-sm overflow-hidden relative">
+    <section className="py-16 md:py-24 bg-background overflow-hidden relative">
       <div className="container px-6 md:px-8">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <div ref={revealRef} className="scroll-reveal text-center mb-16">
-            <span className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 text-accent rounded-full text-sm font-medium mb-6">
-              <span className="w-2 h-2 rounded-full bg-accent" />
-              The Podcast
-            </span>
+            <SectionLabel text="The Podcast" center />
             
-            <h2 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6">
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
               Conversations that <span className="text-accent">matter</span>
+              <span className="inline-block w-2 h-2 bg-accent rounded-full ml-1.5 mb-1 align-baseline" />
             </h2>
             
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
