@@ -46,7 +46,7 @@ const AboutBlock = () => {
               className="text-center mt-3 text-lg text-foreground/70 italic"
               style={{ fontFamily: "'Caveat', cursive" }}
             >
-              Ferry, actual human
+              Often times listening is more important than talking
             </p>
           </div>
         </div>
