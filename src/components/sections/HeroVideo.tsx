@@ -28,10 +28,10 @@ const HeroVideo = () => {
           <div className="flex flex-col gap-3">
             {/* Visitor bubble - right aligned, teal */}
             <div
-              className="self-end opacity-0 animate-fade-up max-w-[80%]"
+              className="self-start opacity-0 animate-fade-up max-w-[80%]"
               style={{ animationDelay: "0.8s" }}
             >
-              <div className="rounded-2xl rounded-br-md px-4 py-2.5 bg-brand-teal text-white text-sm md:text-base font-medium">
+              <div className="rounded-2xl rounded-bl-md px-4 py-2.5 bg-white text-primary text-sm md:text-base font-medium">
                 So what do you actually do?
               </div>
             </div>
@@ -76,7 +76,7 @@ const HeroVideo = () => {
               Ferry Hoes
             </p>
             <p className="mt-1 text-base md:text-xl font-bold text-white/50">
-              International keynote speaker. Author. Entrepreneur. Helping organizations stay powerfully human in a world full of AI.
+              International keynote speaker. Author. Entrepreneur.
             </p>
           </div>
         </div>
