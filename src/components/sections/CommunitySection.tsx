@@ -56,7 +56,7 @@ const CommunitySection = () => {
                 No noise — just the ideas that matter, straight to your inbox.
               </p>
               {status === "success" ? (
-                <div className="inline-flex items-center gap-2 text-sm font-medium text-primary">
+                <div className="inline-flex items-center gap-2 text-sm font-medium text-accent">
                   <CheckCircle className="h-4 w-4" />
                   You're in. Talk soon.
                 </div>
