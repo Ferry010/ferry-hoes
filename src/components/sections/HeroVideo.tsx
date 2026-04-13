@@ -85,7 +85,7 @@ const HeroVideo = () => {
                   preload="auto"
                 />
               </div>
-              <p className="absolute bottom-3 left-3 right-3 text-center font-caveat text-lg text-muted-foreground">
+              <p className="absolute bottom-3 left-3 right-3 text-center font-signature text-2xl text-muted-foreground">
                 My passion
               </p>
             </div>

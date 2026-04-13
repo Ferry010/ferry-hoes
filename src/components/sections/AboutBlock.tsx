@@ -42,7 +42,7 @@ const AboutBlock = () => {
               alt="Ferry Hoes speaking on stage in front of an audience"
               className="w-full aspect-[4/3] object-cover object-top"
             />
-            <p className="text-center mt-3 text-lg text-foreground/70 font-caveat">
+            <p className="text-center mt-3 text-2xl text-foreground/70 font-signature">
               Often times listening is more important than talking
             </p>
           </div>
