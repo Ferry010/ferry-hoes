@@ -82,7 +82,7 @@ const About = () => {
               <div className="max-w-3xl text-center">
                 <SectionLabel text="My Story" center />
                 <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 animate-fade-in" style={{ animationDelay: "0.3s", animationFillMode: "both" }}>
-                  About Ferry Hoes — International AI <span className="text-accent">Keynote Speaker</span>
+                  About Ferry Hoes. International AI <span className="text-accent">Keynote Speaker</span>
                   <HeadingDot />
                 </h1>
                 <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed animate-fade-in" style={{ animationDelay: "0.45s", animationFillMode: "both" }}>

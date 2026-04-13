@@ -160,7 +160,7 @@ const Press = () => {
                 <div key={img.label} className="group">
                   <a href={img.src} target="_blank" rel="noopener noreferrer">
                     <div className="aspect-[3/4] rounded-xl overflow-hidden shadow-sm group-hover:shadow-lg transition-shadow">
-                      <img src={img.src} alt={`Ferry Hoes — ${img.label}`} loading="lazy" width={400} height={533} className="w-full h-full object-cover" />
+                      <img src={img.src} alt={<img src={img.src} alt={`Ferry Hoes, ${img.label}`} loading="lazy" width={400} height={533} className="w-full h-full object-cover" />} loading="lazy" width={400} height={533} className="w-full h-full object-cover" />
                     </div>
                   </a>
                   <div className="flex items-center justify-between mt-2">

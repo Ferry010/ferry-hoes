@@ -34,14 +34,14 @@ const KEYNOTE_TOPICS = [
     audience: "Leadership teams, marketing directors, and brand strategists navigating AI adoption.",
     takeaways: [
       "A practical framework for identifying what makes your brand irreplaceably human",
-      "How to use AI to amplify — not replace — your distinctive qualities",
+      "How to use AI to amplify (not replace) your distinctive qualities",
       "Real-world examples of organisations that turned their human edge into growth",
     ],
   },
   {
     title: "The AI conversation most organisations skip",
     description:
-      "Most AI conversations start with tools and end with confusion. Ferry flips the script: he demystifies the technology, cuts through vendor hype, and helps your audience build a shared vocabulary so they can make smarter decisions about where AI fits — and where it doesn't.",
+      "Most AI conversations start with tools and end with confusion. Ferry flips the script: he demystifies the technology, cuts through vendor hype, and helps your audience build a shared vocabulary so they can make smarter decisions about where AI fits, and where it does not.",
     audience: "Executive teams, innovation leads, and organisations early in their AI journey.",
     takeaways: [
       "A clear, jargon-free understanding of what AI can and cannot do today",
@@ -52,7 +52,7 @@ const KEYNOTE_TOPICS = [
   {
     title: "Leading when AI has a say",
     description:
-      "When algorithms recommend who to hire, what to prioritise, and how to allocate resources, the leader's role fundamentally changes. This talk explores what human-centred leadership looks like when machines have a seat at the table — and why the best leaders will be those who know when not to listen to the data.",
+      "When algorithms recommend who to hire, what to prioritise, and how to allocate resources, the leader's role fundamentally changes. This talk explores what human-centred leadership looks like when machines have a seat at the table, and why the best leaders will be those who know when not to listen to the data.",
     audience: "C-suite leaders, HR directors, and anyone managing teams in an AI-augmented environment.",
     takeaways: [
       "Why algorithmic recommendations require a new kind of leadership judgment",
@@ -66,7 +66,7 @@ const KEYNOTE_TOPICS = [
       "Organisations are racing to adopt AI without first asking the most important question: what problem are we actually solving? Ferry shares real-world examples of costly missteps and offers a practical framework for making sure your AI investments solve the right problems in the right order.",
     audience: "Strategy teams, digital transformation leads, and boards overseeing AI investments.",
     takeaways: [
-      "The most common and costly AI adoption mistakes — and how to avoid them",
+      "The most common and costly AI adoption mistakes, and how to avoid them",
       "A step-by-step framework for prioritising AI use cases by real impact",
       "How to prevent solution-first thinking from derailing your AI strategy",
     ],
@@ -74,7 +74,7 @@ const KEYNOTE_TOPICS = [
   {
     title: "From AI law to AI advantage: literacy as a strategic foundation",
     description:
-      "The EU AI Act is not just a compliance exercise — it is an opportunity to build organisational AI literacy from the ground up. Ferry explains what the regulation requires in plain language and shows how the smartest organisations are using it as a catalyst for strategic advantage rather than a bureaucratic burden.",
+      "The EU AI Act is not just a compliance exercise. It is an opportunity to build organisational AI literacy from the ground up. Ferry explains what the regulation requires in plain language and shows how the smartest organisations are using it as a catalyst for strategic advantage rather than a bureaucratic burden.",
     audience: "Compliance officers, legal teams, and leadership responsible for AI governance.",
     takeaways: [
       "A plain-language overview of what the EU AI Act requires from your organisation",
@@ -308,7 +308,7 @@ const Speaking = () => {
                       </div>
                     </div>
                     <p className="text-muted-foreground leading-relaxed mb-6 max-w-4xl">
-                      Ferry regularly develops custom keynotes tailored to specific industries, themes, or internal challenges. Whether it is a board retreat, a leadership offsite, or a large-scale conference — let's explore how we can create something that fits your event perfectly.
+                      Ferry regularly develops custom keynotes tailored to specific industries, themes, or internal challenges. Whether it is a board retreat, a leadership offsite, Ferry regularly develops custom keynotes tailored to specific industries, themes, or internal challenges. Whether it is a board retreat, a leadership offsite, or a large-scale conference, let's explore how we can create something that fits your event perfectly. how we can create something that fits your event perfectly.
                     </p>
                     <Button asChild variant="outline" size="sm" className="rounded-full border-accent text-accent hover:bg-accent hover:text-accent-foreground">
                       <Link to="/contact" state={{ from: "speaking" }}>
@@ -364,9 +364,9 @@ const Speaking = () => {
                 </div>
                 <div className="grid md:grid-cols-2 gap-6">
                   {[
-                    { title: "Pre-event alignment call", desc: "Ferry schedules a call with your team to understand the audience, objectives, and context — so the talk hits the right notes." },
+                    { title: "Pre-event alignment call", desc: "Ferry schedules a call with your team to understand the audience, objectives, and context so the talk hits the right notes." },
                     { title: "Fully customised content", desc: "No copy-paste keynotes. Every talk is tailored with industry-specific examples, relevant case studies, and audience-appropriate depth." },
-                    { title: "Professional delivery", desc: "Engaging, energetic, and visual. Ferry uses slides that support the story — not replace it — and keeps audiences engaged throughout." },
+                    { title: "Professional delivery", desc: "Engaging, energetic, and visual. Ferry uses slides that support the story, not replace it, and keeps audiences engaged throughout." },
                     { title: "Post-event follow-up", desc: "After the event, Ferry is available for a brief debrief and happy to share key resources or frameworks with your team." },
                   ].map((item) => (
                     <div key={item.title} className="rounded-2xl border border-border p-6 bg-gradient-to-br from-background to-accent/[0.03]">

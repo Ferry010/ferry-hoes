@@ -46,7 +46,7 @@ const AboutBlock = () => {
               className="text-center mt-3 text-lg text-foreground/70 italic"
               style={{ fontFamily: "'Caveat', cursive" }}
             >
-              Ferry — actual human
+              Ferry, actual human
             </p>
           </div>
         </div>

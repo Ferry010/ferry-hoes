@@ -28,7 +28,7 @@ const NotFound = () => {
   return (
     <>
       <Helmet>
-        <title>Page Not Found — Ferry Hoes</title>
+        <title>Page Not Found | Ferry Hoes</title>
         <meta name="robots" content="noindex, nofollow" />
         <meta
           name="description"
@@ -95,7 +95,7 @@ const NotFound = () => {
 
         <p className="mt-16 text-xs text-muted-foreground/60">
           <ArrowLeft className="mr-1 inline h-3 w-3" />
-          Or hit the back button — that works too.
+          Or hit the back button. That works too.
         </p>
       </div>
     </>
