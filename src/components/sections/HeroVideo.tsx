@@ -23,8 +23,8 @@ const HeroVideo = () => {
       <div className="absolute inset-0 bg-black/50" />
 
       {/* Content overlay */}
-      <div className="container relative z-10 px-6 md:px-8">
-        <div className="max-w-xl">
+      <div className="relative z-10 w-full px-6 md:px-8">
+        <div className="max-w-xl mx-auto">
           <div className="flex flex-col gap-3">
             {/* Visitor bubble - right aligned, teal */}
             <div
@@ -72,10 +72,10 @@ const HeroVideo = () => {
             className="mt-10 opacity-0 animate-fade-up"
             style={{ animationDelay: "4.8s" }}
           >
-            <p className="text-xs md:text-sm font-semibold tracking-[0.2em] uppercase text-white/70">
+            <p className="text-xs md:text-sm font-semibold tracking-[0.2em] uppercase text-white/40">
               Ferry Hoes
             </p>
-            <h1 className="mt-1 text-3xl md:text-5xl font-bold text-white">
+            <h1 className="mt-1 text-3xl md:text-5xl font-bold text-white/50">
               AI & Technology Keynote Speaker
             </h1>
           </div>
