@@ -41,7 +41,7 @@ const CommunitySection = () => {
             <span className="inline-block w-2 h-2 bg-accent rounded-full ml-1.5 mb-1 align-baseline" />
           </h2>
           <p className="text-lg text-[hsl(38,30%,82%)] text-center mb-14 max-w-xl mx-auto">
-            Get insights on technology, humanity, and Brand Humanizing — or join the conversation directly.
+            Get insights on technology, humanity, and Brand Humanizing. Or join the conversation directly.
           </p>
 
           <div className="grid md:grid-cols-2 gap-8 md:gap-12">
@@ -52,7 +52,7 @@ const CommunitySection = () => {
                 <span className="text-sm font-medium text-[hsl(38,30%,88%)]">Newsletter</span>
               </div>
               <p className="text-[hsl(38,30%,82%)] text-sm mb-4">
-                No noise — just the ideas that matter, straight to your inbox.
+                No noise. Just the ideas that matter, straight to your inbox.
               </p>
               {status === "success" ? (
                 <div className="inline-flex items-center gap-2 text-sm font-medium text-accent">
