@@ -20,7 +20,7 @@ const SpeakerSection = () => {
                 src={stagePhoto}
                 alt="Ferry Hoes presenting on stage"
                 loading="lazy"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-top"
               />
             </div>
             <p className="absolute bottom-3 left-3 right-3 text-center font-caveat text-base text-muted-foreground">
