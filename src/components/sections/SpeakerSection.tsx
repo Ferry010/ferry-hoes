@@ -23,7 +23,7 @@ const SpeakerSection = () => {
                 className="w-full h-full object-cover object-top"
               />
             </div>
-            <p className="absolute bottom-3 left-3 right-3 text-center font-caveat text-lg text-muted-foreground">
+            <p className="absolute bottom-3 left-3 right-3 text-center font-signature text-2xl text-muted-foreground">
               Ferry during his Woningbouwers 2025 keynote
             </p>
           </div>

@@ -58,7 +58,7 @@ const HeroVideo = () => {
 
             {/* Intro card */}
             <div
-              className="mt-10 opacity-0 animate-fade-up bg-white/60 backdrop-blur-sm rounded-2xl px-5 py-4 border border-border/50 max-w-md"
+              className="mt-[3.5rem] opacity-0 animate-fade-up bg-white/60 backdrop-blur-sm rounded-2xl px-5 py-4 border border-border/50 max-w-md"
               style={{ animationDelay: "4.5s" }}
             >
               <p className="font-display text-base font-bold text-foreground">Ferry Hoes</p>
@@ -85,7 +85,7 @@ const HeroVideo = () => {
                   preload="auto"
                 />
               </div>
-              <p className="absolute bottom-3 left-3 right-3 text-center font-caveat text-lg text-muted-foreground">
+              <p className="absolute bottom-3 left-3 right-3 text-center font-signature text-2xl text-muted-foreground">
                 My passion
               </p>
             </div>

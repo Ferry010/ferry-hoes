@@ -16,6 +16,7 @@ export default {
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],
         display: ["Plus Jakarta Sans", "system-ui", "sans-serif"],
+        signature: ["The Nautigal", "cursive"],
       },
       colors: {
         border: "hsl(var(--border))",
