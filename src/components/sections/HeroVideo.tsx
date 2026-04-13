@@ -55,17 +55,6 @@ const HeroVideo = () => {
               </button>
 
             </div>
-
-            {/* Intro card */}
-            <div
-              className="mt-[3.5rem] opacity-0 animate-fade-up bg-white/60 backdrop-blur-sm rounded-2xl px-5 py-4 border border-border/50 max-w-md"
-              style={{ animationDelay: "4.5s" }}
-            >
-              <p className="font-display text-base font-bold text-foreground">Ferry Hoes</p>
-              <p className="text-sm text-muted-foreground leading-relaxed mt-1">
-                International keynote speaker. Author. Entrepreneur. Helping organizations stay powerfully human in a world full of AI.
-              </p>
-            </div>
           </div>
 
           {/* Right: Polaroid with video */}
