@@ -30,7 +30,7 @@ const BrandHumanizingSection = () => {
 
           {/* Pull quote */}
           <p
-            className="text-2xl md:text-3xl text-primary py-10 pl-4 md:pl-8 rotate-[-2deg] max-w-md"
+            className="text-2xl md:text-3xl text-primary py-10 pl-4 md:pl-8 rotate-[-2deg] max-w-md whitespace-nowrap"
             style={{ fontFamily: "'Caveat', cursive" }}
           >
             Sounds obvious. Turns out it isn't.
