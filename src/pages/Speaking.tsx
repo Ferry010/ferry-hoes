@@ -17,6 +17,11 @@ import ferryPresenting from "@/assets/ferry-presenting.jpg";
 
 import SpeakingQA from "@/components/sections/SpeakingQA";
 import ClientLogos from "@/components/sections/ClientLogos";
+import SectionLabel from "@/components/SectionLabel";
+
+const HeadingDot = () => (
+  <span className="inline-block w-2 h-2 bg-accent rounded-full ml-1.5 mb-1 align-baseline" />
+);
 
 const BOOKING_URL = "https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966";
 
@@ -142,13 +147,11 @@ const Speaking = () => {
           />
           <div className="container px-6 md:px-8 py-24 md:py-32 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
-              <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 text-white backdrop-blur-sm rounded-full text-sm font-medium mb-8">
-                <Mic className="h-4 w-4" />
-                Keynote Speaker
-              </span>
+              <SectionLabel text="Keynote Speaker" center />
               <h1 className="font-display text-4xl md:text-5xl lg:text-7xl font-bold mb-6 text-white">
                 AI Keynote Speaker for{" "}
                 <span className="text-accent">Conferences &amp; Corporate Events</span>
+                <HeadingDot />
               </h1>
               <p className="text-xl md:text-2xl text-white leading-relaxed max-w-2xl mx-auto mb-12">
                 No death-by-PowerPoint. Just{" "}
@@ -185,8 +188,8 @@ const Speaking = () => {
           <section className="py-16 bg-background">
             <div className="container px-6 md:px-8">
               <div className="max-w-4xl mx-auto text-center">
-                <span className="text-accent font-medium text-sm mb-2 block">Calendar</span>
-                <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-6">Upcoming Events</h2>
+                <SectionLabel text="Calendar" center />
+                <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-6">Upcoming Events<HeadingDot /></h2>
                 <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
                   Dates are announced regularly. Follow Ferry on LinkedIn for the latest schedule and event announcements.
                 </p>
@@ -213,8 +216,8 @@ const Speaking = () => {
                 </div>
 
                 <div>
-                  <span className="text-accent font-medium text-sm mb-2 block">About</span>
-                  <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-foreground">Meet Ferry</h2>
+                   <SectionLabel text="About" />
+                  <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-foreground">Meet Ferry<HeadingDot /></h2>
                   <div className="space-y-4 text-muted-foreground text-lg leading-relaxed">
                     <p>
                       Ferry spent over a decade at the intersection of technology, marketing, and human behaviour before stepping onto stages worldwide. He built the concept of Brand Humanizing from scratch. Not borrowed, not adapted. He has spent years stress-testing it with global organisations.
@@ -241,8 +244,8 @@ const Speaking = () => {
             <div className="container px-6 md:px-8">
               <div className="max-w-6xl mx-auto">
                 <div className="text-center mb-16">
-                  <span className="text-accent font-medium text-sm mb-2 block">What I talk about</span>
-                  <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-foreground">Keynote topics</h2>
+                  <SectionLabel text="What I talk about" center />
+                  <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-foreground">Keynote topics<HeadingDot /></h2>
                   <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
                     Each talk is tailored to your audience, industry, and event goals.
                   </p>
@@ -334,8 +337,8 @@ const Speaking = () => {
           <section id="speaker-reel" className="py-24 md:py-32 bg-secondary/30 scroll-mt-16">
             <div className="container px-6 md:px-8">
               <div className="max-w-4xl mx-auto text-center">
-                <span className="text-accent font-medium text-sm mb-2 block">Watch</span>
-                <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-foreground">See Ferry in action</h2>
+                <SectionLabel text="Watch" center />
+                <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-foreground">See Ferry in action<HeadingDot /></h2>
                 <p className="text-xl text-muted-foreground mb-12">Get a taste of what Ferry brings to the stage.</p>
                 <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl">
                   <iframe
@@ -356,8 +359,8 @@ const Speaking = () => {
             <div className="container px-6 md:px-8">
               <div className="max-w-4xl mx-auto">
                 <div className="text-center mb-16">
-                  <span className="text-accent font-medium text-sm mb-2 block">For event organisers</span>
-                  <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-foreground">What to expect when booking Ferry</h2>
+                  <SectionLabel text="For event organisers" center />
+                  <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-foreground">What to expect when booking Ferry<HeadingDot /></h2>
                 </div>
                 <div className="grid md:grid-cols-2 gap-6">
                   {[
@@ -381,8 +384,8 @@ const Speaking = () => {
             <div className="container px-6 md:px-8">
               <div className="max-w-6xl mx-auto">
                 <div className="text-center mb-16">
-                  <span className="text-accent font-medium text-sm mb-2 block">Testimonials</span>
-                  <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-foreground">What organisers say</h2>
+                  <SectionLabel text="Testimonials" center />
+                  <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-foreground">What organisers say<HeadingDot /></h2>
                   <p className="text-xl text-muted-foreground max-w-2xl mx-auto">Feedback from event organisers who have worked with Ferry.</p>
                 </div>
 
@@ -410,7 +413,7 @@ const Speaking = () => {
           <section className="py-24 md:py-32 bg-foreground text-background">
             <div className="container px-6 md:px-8">
               <div className="max-w-3xl mx-auto text-center">
-                <h2 className="font-display text-4xl md:text-5xl font-bold mb-6">Ready to inspire your audience?</h2>
+                <h2 className="font-display text-4xl md:text-5xl font-bold mb-6">Ready to inspire your audience?<HeadingDot /></h2>
                 <p className="text-xl text-white/70 mb-12">Let's discuss how Ferry can bring energy and insight to your next event.</p>
                 <Button asChild size="lg" className="rounded-full px-8 bg-accent text-accent-foreground hover:bg-accent/90 group">
                   <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
