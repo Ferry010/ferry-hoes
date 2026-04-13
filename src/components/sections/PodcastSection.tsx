@@ -61,13 +61,13 @@ const PodcastSection = () => {
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <div ref={revealRef} className="scroll-reveal text-center mb-16">
-            <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-6">
-              <span className="w-2 h-2 rounded-full bg-primary" />
+            <span className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 text-accent rounded-full text-sm font-medium mb-6">
+              <span className="w-2 h-2 rounded-full bg-accent" />
               The Podcast
             </span>
             
             <h2 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6">
-              Conversations that <span className="text-primary">matter</span>
+              Conversations that <span className="text-accent">matter</span>
             </h2>
             
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">

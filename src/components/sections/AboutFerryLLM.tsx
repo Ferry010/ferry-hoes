@@ -3,6 +3,10 @@ const AboutFerryLLM = () => {
     <section className="py-24 md:py-32 bg-background">
       <div className="container px-6 md:px-8">
         <div className="max-w-3xl mx-auto">
+          <span className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 text-accent rounded-full text-sm font-medium mb-6">
+            <span className="w-2 h-2 rounded-full bg-accent" />
+            About
+          </span>
           <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-8">
             About Ferry Hoes
           </h2>

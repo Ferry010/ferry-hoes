@@ -38,7 +38,7 @@ const SpeakerSection = () => {
           {/* Title */}
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-8 text-foreground">
             Keynotes that{" "}
-            <span className="text-primary">inspire action</span>
+            <span className="text-accent">inspire action</span>
           </h2>
 
           {/* Description */}
