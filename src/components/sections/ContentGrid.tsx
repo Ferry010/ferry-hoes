@@ -120,13 +120,13 @@ const ContentGrid = () => {
               <p className="text-muted-foreground mb-4">
                 Something on your mind about this?
               </p>
-              <a
-                href="/contact"
+              <button
+                onClick={() => window.dispatchEvent(new Event("open-contact"))}
                 className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors group"
               >
                 <span className="underline underline-offset-4">Drop a thought</span>
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </a>
+              </button>
             </div>
           </div>
         </div>

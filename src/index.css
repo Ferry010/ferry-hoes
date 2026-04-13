@@ -4,105 +4,113 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Ferry Hoes Design System — BHI Style
-   Navy + Orange palette
+/* Ferry Hoes Design System
+   Teal + Coral complementary palette
    Typography: Plus Jakarta Sans (headlines) + Inter (body)
 */
 
 @layer base {
   :root {
-    /* Core — warm off-white base, navy text */
-    --background: 40 33% 98%;
-    --foreground: 240 20% 14%;
+    /* Core brand colors - warm cream base */
+    --background: 38 30% 97.5%;
+    --foreground: 200 25% 12%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 240 20% 14%;
+    --card: 38 25% 99%;
+    --card-foreground: 200 25% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 240 20% 14%;
+    --popover-foreground: 200 25% 12%;
 
-    /* BHI Orange #E8712B */
-    --primary: 24 78% 53%;
+    /* Teal primary #0E7490 */
+    --primary: 188 80% 31%;
     --primary-foreground: 0 0% 100%;
 
-    /* Light warm gray */
-    --secondary: 38 25% 95%;
-    --secondary-foreground: 240 20% 20%;
+    /* Warm cream secondary */
+    --secondary: 38 30% 95%;
+    --secondary-foreground: 200 25% 20%;
 
     --muted: 38 20% 94%;
-    --muted-foreground: 240 10% 45%;
+    --muted-foreground: 200 15% 45%;
 
-    /* Accent = same orange */
-    --accent: 24 78% 53%;
+    /* Coral accent - complementary */
+    --accent: 15 85% 55%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 30 10% 90%;
-    --input: 30 10% 92%;
-    --ring: 24 78% 53%;
+    --border: 38 15% 90%;
+    --input: 38 15% 92%;
+    --ring: 188 80% 31%;
 
     --radius: 1rem;
 
     /* Extended palette */
-    --brand-orange: 24 78% 53%;
-    --brand-orange-light: 24 60% 95%;
-    --brand-orange-dark: 24 85% 40%;
-    --soft-shadow: 240 20% 30%;
+    --brand-teal: 188 80% 31%;
+    --brand-teal-light: 188 50% 95%;
+    --brand-teal-dark: 188 85% 22%;
+    --brand-coral: 15 85% 55%;
+    --brand-coral-light: 15 60% 95%;
+    --brand-gold: 45 100% 50%;
+    --brand-gold-light: 45 100% 94%;
+    --soft-shadow: 200 30% 40%;
 
-    --sidebar-background: 40 20% 98%;
-    --sidebar-foreground: 240 20% 14%;
-    --sidebar-primary: 24 78% 53%;
+    --sidebar-background: 180 15% 98%;
+    --sidebar-foreground: 200 25% 12%;
+    --sidebar-primary: 188 80% 31%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 38 20% 96%;
-    --sidebar-accent-foreground: 240 20% 14%;
-    --sidebar-border: 30 10% 90%;
-    --sidebar-ring: 24 78% 53%;
+    --sidebar-accent: 180 15% 96%;
+    --sidebar-accent-foreground: 200 25% 12%;
+    --sidebar-border: 180 12% 90%;
+    --sidebar-ring: 188 80% 31%;
   }
 
   .dark {
-    --background: 240 20% 8%;
-    --foreground: 40 20% 95%;
+    --background: 200 25% 8%;
+    --foreground: 180 15% 95%;
 
-    --card: 240 20% 12%;
-    --card-foreground: 40 20% 95%;
+    --card: 200 25% 12%;
+    --card-foreground: 180 15% 95%;
 
-    --popover: 240 20% 12%;
-    --popover-foreground: 40 20% 95%;
+    --popover: 200 25% 12%;
+    --popover-foreground: 180 15% 95%;
 
-    --primary: 24 75% 50%;
+    --primary: 188 75% 40%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 240 15% 18%;
-    --secondary-foreground: 40 20% 95%;
+    --secondary: 200 20% 18%;
+    --secondary-foreground: 180 15% 95%;
 
-    --muted: 240 15% 18%;
-    --muted-foreground: 40 10% 60%;
+    --muted: 200 20% 18%;
+    --muted-foreground: 180 12% 60%;
 
-    --accent: 24 75% 50%;
+    --accent: 15 80% 55%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62% 40%;
     --destructive-foreground: 0 0% 95%;
 
-    --border: 240 15% 20%;
-    --input: 240 15% 20%;
-    --ring: 24 75% 50%;
+    --border: 200 20% 20%;
+    --input: 200 20% 20%;
+    --ring: 188 75% 40%;
 
-    --brand-orange: 24 75% 50%;
-    --brand-orange-light: 24 40% 20%;
-    --brand-orange-dark: 24 80% 38%;
+    --brand-teal: 188 75% 40%;
+    --brand-teal-light: 188 40% 20%;
+    --brand-teal-dark: 188 80% 30%;
+    --brand-coral: 15 80% 55%;
+    --brand-coral-light: 15 40% 20%;
+    --brand-gold: 45 100% 50%;
+    --brand-gold-light: 45 50% 20%;
     --soft-shadow: 0 0% 0%;
 
-    --sidebar-background: 240 20% 10%;
-    --sidebar-foreground: 40 15% 90%;
-    --sidebar-primary: 24 75% 50%;
+    --sidebar-background: 200 25% 10%;
+    --sidebar-foreground: 180 15% 90%;
+    --sidebar-primary: 188 75% 40%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 15% 18%;
-    --sidebar-accent-foreground: 40 15% 95%;
-    --sidebar-border: 240 15% 20%;
-    --sidebar-ring: 24 75% 50%;
+    --sidebar-accent: 200 20% 18%;
+    --sidebar-accent-foreground: 180 15% 95%;
+    --sidebar-border: 200 20% 20%;
+    --sidebar-ring: 188 75% 40%;
   }
 }
 
@@ -132,6 +140,10 @@
   .gradient-text {
     @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
   }
+
+  .brand-hero-overlay {
+    @apply absolute inset-0 bg-gradient-to-br from-primary/30 via-transparent to-accent/20 pointer-events-none;
+  }
 }
 
 /* Scroll reveal animations */
@@ -159,7 +171,7 @@
 .scroll-reveal-stagger.revealed > *:nth-child(5) { transition-delay: 320ms; opacity: 1; transform: translateY(0); }
 .scroll-reveal-stagger.revealed > *:nth-child(6) { transition-delay: 400ms; opacity: 1; transform: translateY(0); }
 
-/* TipTap / Prose */
+/* TipTap / Prose: ensure empty paragraphs keep their height */
 .prose p:empty::before,
 .ProseMirror p:empty::before {
   content: '\00a0';

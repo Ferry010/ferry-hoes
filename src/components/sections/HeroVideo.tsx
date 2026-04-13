@@ -1,47 +1,83 @@
-import { ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
+import { MessageCircle } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const HeroVideo = () => {
+  const navigate = useNavigate();
+  const handleCTA = () => {
+    navigate("/conversation");
+  };
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-background">
-      <div className="container relative z-10 px-6 md:px-8">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold leading-[1.05] tracking-tight mb-8 text-foreground">
-            Everyone can copy your technology.{" "}
-            <span className="text-accent">No one can copy your people.</span>
-          </h1>
+    <section className="relative h-screen flex items-end overflow-hidden pb-16 md:pb-20">
+      {/* Video background */}
+      <video
+        className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+        src="/videos/Ferry_Hero_vid_2026.webm"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+      />
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-black/50" />
 
-          <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed">
-            International keynote speaker, published author, and entrepreneur helping organisations stay powerfully human in a world full of AI.
-          </p>
+      {/* Content overlay */}
+      <div className="relative z-10 w-full px-6 md:px-8">
+        <div className="max-w-xl mx-auto">
+          <div className="flex flex-col gap-3">
+            {/* Visitor bubble - right aligned, teal */}
+            <div
+              className="self-start opacity-0 animate-fade-up max-w-[80%]"
+              style={{ animationDelay: "0.8s" }}
+            >
+              <div className="rounded-2xl rounded-bl-md px-4 py-2.5 bg-white text-primary text-sm md:text-base font-medium">
+                What I actually do?
+              </div>
+            </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              asChild
-              size="lg"
-              className="text-lg px-8 py-6 rounded-full bg-accent text-accent-foreground hover:bg-accent/90 group"
+            {/* Ferry bubble 1 - left aligned, white */}
+            <div
+              className="self-start opacity-0 animate-fade-up max-w-[80%]"
+              style={{ animationDelay: "1.8s" }}
             >
-              <a
-                href="https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Book a keynote
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </a>
-            </Button>
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="text-lg px-8 py-6 rounded-full border-2 border-foreground text-foreground hover:bg-foreground hover:text-background transition-all"
+              <div className="rounded-2xl rounded-bl-md px-4 py-2.5 bg-white text-primary text-sm md:text-base">
+                I help brands become more human.
+              </div>
+            </div>
+
+            {/* Ferry bubble 2 - left aligned, white */}
+            <div
+              className="self-start opacity-0 animate-fade-up max-w-[85%]"
+              style={{ animationDelay: "2.8s" }}
             >
-              <Link to="/speaking">
-                See topics
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-            </Button>
+              <div className="rounded-2xl rounded-bl-md px-4 py-2.5 bg-white text-primary text-sm md:text-base">
+                Through keynotes, a book, and one big idea: Brand Humanizing.
+              </div>
+            </div>
+
+            {/* CTA - left aligned, orange */}
+            <button
+              onClick={handleCTA}
+              className="self-start mt-2 opacity-0 animate-fade-up inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent text-accent-foreground text-sm font-semibold hover:bg-accent/90 transition-colors shadow-soft"
+              style={{ animationDelay: "3.8s" }}
+            >
+              <MessageCircle className="h-4 w-4" />
+              Continue the conversation
+            </button>
+          </div>
+
+          {/* Name + tagline */}
+          <div
+            className="mt-10 opacity-0 animate-fade-up"
+            style={{ animationDelay: "4.8s" }}
+          >
+            <p className="text-xs md:text-sm font-semibold tracking-[0.2em] uppercase text-white/40">
+              Ferry Hoes
+            </p>
+            <p className="mt-1 text-base md:text-xl font-bold text-white/50">
+              International keynote speaker. Author. Entrepreneur.
+            </p>
           </div>
         </div>
       </div>

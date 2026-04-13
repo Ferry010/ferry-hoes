@@ -63,9 +63,13 @@ export default {
           ring: "hsl(var(--sidebar-ring))",
         },
         brand: {
-          orange: "hsl(var(--brand-orange))",
-          "orange-light": "hsl(var(--brand-orange-light))",
-          "orange-dark": "hsl(var(--brand-orange-dark))",
+          teal: "hsl(var(--brand-teal))",
+          "teal-light": "hsl(var(--brand-teal-light))",
+          "teal-dark": "hsl(var(--brand-teal-dark))",
+          coral: "hsl(var(--brand-coral))",
+          "coral-light": "hsl(var(--brand-coral-light))",
+          gold: "hsl(var(--brand-gold))",
+          "gold-light": "hsl(var(--brand-gold-light))",
         },
       },
       borderRadius: {

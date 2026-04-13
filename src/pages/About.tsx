@@ -270,7 +270,7 @@ const About = () => {
             <div className="max-w-3xl mx-auto text-center">
               <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
                 Want to{" "}
-                <span className="text-accent">work together?</span>
+                <span className="text-brand-gold">work together?</span>
                 <HeadingDot />
               </h2>
               <p className="text-xl text-white/70 mb-12 leading-relaxed">

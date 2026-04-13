@@ -124,7 +124,7 @@ const Speaking = () => {
         <div
           className="fixed left-0 top-0 w-1 h-full z-50 pointer-events-none"
           style={{
-            background: `linear-gradient(180deg, hsl(var(--accent)) 0%, hsl(var(--primary)) 50%, hsl(var(--accent)) 100%)`,
+            background: `linear-gradient(180deg, hsl(var(--brand-gold)) 0%, hsl(var(--accent)) 25%, hsl(var(--primary)) 50%, hsl(var(--accent)) 75%, hsl(var(--brand-gold)) 100%)`,
           }}
         />
 
