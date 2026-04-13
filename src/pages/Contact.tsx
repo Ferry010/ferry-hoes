@@ -19,6 +19,7 @@ import { Clock, Mic, MessageCircle } from "lucide-react";
 import Footer from "@/components/sections/Footer";
 import SEOHead from "@/components/blog/SEOHead";
 import StructuredData, { contactPageSchema, breadcrumbSchema } from "@/components/StructuredData";
+import SectionLabel from "@/components/SectionLabel";
 
 const KEYNOTE_TOPICS = [
   { value: "brand-humanizing", label: "Brand Humanizing: become irreplaceable in a world of AI" },
@@ -218,7 +219,11 @@ const Contact = () => {
         {/* Header */}
         <section className="pt-32 pb-12 md:pt-40 md:pb-16">
           <div className="container px-6 md:px-8 max-w-2xl mx-auto">
-            <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4">Contact</h1>
+            <SectionLabel text="Contact" />
+            <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4">
+              Contact
+              <span className="inline-block w-2 h-2 bg-accent rounded-full ml-1.5 mb-1 align-baseline" />
+            </h1>
             <h2 className="font-display text-2xl md:text-3xl font-semibold text-accent mb-6">Book Ferry for Your Event</h2>
             <p className="text-muted-foreground text-lg leading-relaxed">Choose the option that fits your enquiry best.</p>
           </div>
@@ -343,31 +348,31 @@ const Contact = () => {
                       <Select value={general.inquiryType} onValueChange={(v) => updateGeneral("inquiryType", v)}>
                         <SelectTrigger className={generalErrors.inquiryType ? "border-destructive" : ""}><SelectValue placeholder="Select an option" /></SelectTrigger>
                         <SelectContent>
-                          {INQUIRY_OPTIONS.map((opt) => <SelectItem key={opt.value} value={opt.value}>{opt.label}</SelectItem>)}
+                          {INQUIRY_OPTIONS.map((o) => <SelectItem key={o.value} value={o.value}>{o.label}</SelectItem>)}
                         </SelectContent>
                       </Select>
                       {generalErrors.inquiryType && <p className="text-sm text-destructive">{generalErrors.inquiryType}</p>}
                     </div>
 
                     {general.inquiryType === "other" && (
-                      <div className="space-y-2 animate-fade-in">
-                        <Label htmlFor="g-other">Tell me more</Label>
+                      <div className="space-y-2">
+                        <Label htmlFor="g-other">Please specify</Label>
                         <Input id="g-other" value={general.inquiryOther} onChange={(e) => updateGeneral("inquiryOther", e.target.value)} />
                       </div>
                     )}
 
                     <div className="space-y-2">
-                      <Label htmlFor="g-message">Tell me about your request <span className="text-destructive">*</span></Label>
-                      <Textarea id="g-message" rows={6} placeholder="What are you thinking?" value={general.message} onChange={(e) => updateGeneral("message", e.target.value)} className={generalErrors.message ? "border-destructive" : ""} />
+                      <Label htmlFor="g-message">Your message <span className="text-destructive">*</span></Label>
+                      <Textarea id="g-message" rows={5} placeholder="Share some context about what you're looking for…" value={general.message} onChange={(e) => updateGeneral("message", e.target.value)} className={generalErrors.message ? "border-destructive" : ""} />
                       {generalErrors.message && <p className="text-sm text-destructive">{generalErrors.message}</p>}
                     </div>
 
                     <div className="space-y-2">
-                      <Label>Preferred timeline</Label>
+                      <Label>Timeline</Label>
                       <Select value={general.timeline} onValueChange={(v) => updateGeneral("timeline", v)}>
-                        <SelectTrigger><SelectValue placeholder="Select a timeline" /></SelectTrigger>
+                        <SelectTrigger><SelectValue placeholder="When do you need this?" /></SelectTrigger>
                         <SelectContent>
-                          {TIMELINE_OPTIONS.map((opt) => <SelectItem key={opt.value} value={opt.value}>{opt.label}</SelectItem>)}
+                          {TIMELINE_OPTIONS.map((t) => <SelectItem key={t.value} value={t.value}>{t.label}</SelectItem>)}
                         </SelectContent>
                       </Select>
                     </div>

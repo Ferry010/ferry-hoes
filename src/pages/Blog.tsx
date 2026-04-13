@@ -4,6 +4,7 @@ import { useBlogPosts } from "@/hooks/useBlogPosts";
 import BlogCard from "@/components/blog/BlogCard";
 import SEOHead from "@/components/blog/SEOHead";
 import StructuredData, { breadcrumbSchema } from "@/components/StructuredData";
+import SectionLabel from "@/components/SectionLabel";
 
 const Blog = () => {
   const { data: posts, isLoading } = useBlogPosts();
@@ -35,13 +36,11 @@ const Blog = () => {
                 Back to home
               </Link>
 
-              <span className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 text-accent rounded-full text-sm font-medium mb-6">
-                <Pen className="w-4 h-4" />
-                The Blog
-              </span>
+              <SectionLabel text="The Blog" />
 
               <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
                 Insights on AI, Technology &amp; <span className="text-accent">Brand Humanizing</span>
+                <span className="inline-block w-2 h-2 bg-accent rounded-full ml-1.5 mb-1 align-baseline" />
               </h1>
 
               <p className="text-xl text-muted-foreground max-w-2xl">

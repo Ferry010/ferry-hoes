@@ -3,12 +3,17 @@ import { ArrowRight } from "lucide-react";
 import Footer from "@/components/sections/Footer";
 import SEOHead from "@/components/blog/SEOHead";
 import StructuredData, { personSchema, breadcrumbSchema } from "@/components/StructuredData";
+import SectionLabel from "@/components/SectionLabel";
 
 import ferryBrandHumanizing from "@/assets/ferry-brand-humanizing.jpg";
 import ferrySpeakingAudience from "@/assets/ferry-speaking-audience.jpg";
 import ferryBookstore from "@/assets/ferry-bookstore.jpg";
 import ferryPresenting from "@/assets/ferry-presenting.jpg";
 import ferryBts from "@/assets/ferry-bts.jpg";
+
+const HeadingDot = () => (
+  <span className="inline-block w-2 h-2 bg-accent rounded-full ml-1.5 mb-1 align-baseline" />
+);
 
 const About = () => {
   return (
@@ -75,8 +80,10 @@ const About = () => {
 
               {/* Headline + Subtitle */}
               <div className="max-w-3xl text-center">
-                <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 animate-fade-in" style={{ animationDelay: "0.3s", animationFillMode: "both" }}>
+                <SectionLabel text="My Story" center />
+                <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 animate-fade-in" style={{ animationDelay: "0.3s", animationFillMode: "both" }}>
                   About Ferry Hoes — International AI <span className="text-accent">Keynote Speaker</span>
+                  <HeadingDot />
                 </h1>
                 <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed animate-fade-in" style={{ animationDelay: "0.45s", animationFillMode: "both" }}>
                   International speaker, published author, and entrepreneur on a mission to unleash super-human potential with the help of technology.
@@ -93,7 +100,7 @@ const About = () => {
 
               {/* The early years */}
               <section className="mb-16">
-                <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-6">The early years</h2>
+                <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-6">The early years<HeadingDot /></h2>
                 <div className="space-y-5 text-lg text-muted-foreground leading-relaxed">
                   <p>
                     I was born in 1987 in Delft, the Netherlands, into a home with a hardworking father and a stay-at-home mom. There was always someone around, always conversation in the house, always movement and energy.
@@ -117,7 +124,7 @@ const About = () => {
 
               {/* Discovering the stage */}
               <section className="mb-16">
-                <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-6">Discovering the stage</h2>
+                <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-6">Discovering the stage<HeadingDot /></h2>
                 <div className="space-y-5 text-lg text-muted-foreground leading-relaxed">
                   <p>
                     High school was where something fundamental changed. I didn't just discover music, I discovered <em>making</em> music. I started writing lyrics, recording them over beats, and teaching myself how to mix and master tracks.
@@ -133,7 +140,7 @@ const About = () => {
 
               {/* From tech sales to big ideas */}
               <section className="mb-16">
-                <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-6">From tech sales to big ideas</h2>
+                <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-6">From tech sales to big ideas<HeadingDot /></h2>
                 <div className="space-y-5 text-lg text-muted-foreground leading-relaxed">
                   <p>
                     After studying development, and realising I didn't enjoy it, a teacher pulled me aside: <em>"You should probably do something in marketing. Something where you can talk."</em> It sounded like casual advice, but in hindsight it was a golden insight.
@@ -156,7 +163,7 @@ const About = () => {
 
               {/* The birth of Brand Humanizing */}
               <section className="mb-16">
-                <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-6">The birth of Brand Humanizing</h2>
+                <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-6">The birth of Brand Humanizing<HeadingDot /></h2>
                 <div className="space-y-5 text-lg text-muted-foreground leading-relaxed">
                   <p>
                     In 2017, I was having lunch with my best friend Jonathan. We were both working as growth hackers, and during that conversation something clicked. We realised that much of what we were doing felt off. Endless experiments on consumers, all for marginal revenue gains. Technology being used to manipulate instead of empower.
@@ -172,7 +179,7 @@ const About = () => {
 
               {/* Where I am now */}
               <section className="mb-16">
-                <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-6">Where I am now</h2>
+                <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-6">Where I am now<HeadingDot /></h2>
                 <div className="space-y-5 text-lg text-muted-foreground leading-relaxed">
                   <p>
                     One day, someone found me on LinkedIn and asked me to speak at a small corporate event. The talk went well, and I used that momentum to apply to a speakers agency. From there things moved quickly. Speaking across the country, then internationally, working with major organisations from fast-growing companies to global corporates.
@@ -194,8 +201,10 @@ const About = () => {
         <section className="py-24 bg-background">
           <div className="container px-6 md:px-8">
             <div className="max-w-3xl mx-auto">
+              <SectionLabel text="Timeline" center />
               <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-12 md:text-center">
                 Key <span className="text-accent">milestones</span>
+                <HeadingDot />
               </h2>
               <div className="relative">
                 <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-border md:-translate-x-px" />
@@ -262,6 +271,7 @@ const About = () => {
               <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
                 Want to{" "}
                 <span className="text-brand-gold">work together?</span>
+                <HeadingDot />
               </h2>
               <p className="text-xl text-white/70 mb-12 leading-relaxed">
                 Because what I love most is helping people and technology work together

@@ -8,6 +8,11 @@ import Footer from "@/components/sections/Footer";
 import ClientLogos from "@/components/sections/ClientLogos";
 import SEOHead from "@/components/blog/SEOHead";
 import StructuredData, { personSchema, breadcrumbSchema, pressItemListSchema } from "@/components/StructuredData";
+import SectionLabel from "@/components/SectionLabel";
+
+const HeadingDot = () => (
+  <span className="inline-block w-2 h-2 bg-accent rounded-full ml-1.5 mb-1 align-baseline" />
+);
 
 import ferryPortrait from "@/assets/ferry-portrait.jpg";
 import ferrySpeaking from "@/assets/ferry-speaking.jpg";
@@ -70,12 +75,9 @@ const Press = () => {
         {/* Header */}
         <section className="pt-32 pb-12 md:pt-40 md:pb-16">
           <div className="container px-6 md:px-8 max-w-3xl mx-auto">
-            <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-6">
-              <User className="h-4 w-4" />
-              {isDutch ? "Pers & Media" : "Press & Media"}
-            </span>
+            <SectionLabel text={isDutch ? "Pers & Media" : "Press & Media"} />
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
-              Media Kit
+              Media Kit<HeadingDot />
             </h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
               {isDutch
@@ -98,13 +100,13 @@ const Press = () => {
             {!isDutch ? (
               <>
                 <div>
-                  <h2 className="font-display text-2xl font-bold text-foreground mb-4">Short bio (50 words)</h2>
+                  <h2 className="font-display text-2xl font-bold text-foreground mb-4">Short bio (50 words)<HeadingDot /></h2>
                   <p className="text-muted-foreground leading-relaxed">
                     Ferry Hoes is an international keynote speaker, author of <em>Brand Humanizing</em>, and founder of the Brand Humanizing Institute. He helps organisations use technology to become more human, not less. Ferry speaks at conferences and corporate events worldwide, blending storytelling with actionable insight.
                   </p>
                 </div>
                 <div>
-                  <h2 className="font-display text-2xl font-bold text-foreground mb-4">Extended bio (150 words)</h2>
+                  <h2 className="font-display text-2xl font-bold text-foreground mb-4">Extended bio (150 words)<HeadingDot /></h2>
                   <p className="text-muted-foreground leading-relaxed mb-4">
                     Ferry Hoes spent over a decade at the intersection of technology, marketing, and human behaviour before stepping onto stages worldwide. In 2017, he coined the term <strong>Brand Humanizing</strong>, a framework for using technology to make brands more distinctive and human, and spent years stress-testing it with global organisations.
                   </p>
@@ -119,13 +121,13 @@ const Press = () => {
             ) : (
               <>
                 <div>
-                  <h2 className="font-display text-2xl font-bold text-foreground mb-4">Korte bio (50 woorden)</h2>
+                  <h2 className="font-display text-2xl font-bold text-foreground mb-4">Korte bio (50 woorden)<HeadingDot /></h2>
                   <p className="text-muted-foreground leading-relaxed">
                     Ferry Hoes is een internationaal keynote spreker, auteur van <em>Brand Humanizing</em> en oprichter van het Brand Humanizing Institute. Hij helpt organisaties technologie te gebruiken om menselijker te worden, niet minder. Ferry spreekt op conferenties en zakelijke evenementen wereldwijd en combineert storytelling met praktische inzichten.
                   </p>
                 </div>
                 <div>
-                  <h2 className="font-display text-2xl font-bold text-foreground mb-4">Uitgebreide bio (150 woorden)</h2>
+                  <h2 className="font-display text-2xl font-bold text-foreground mb-4">Uitgebreide bio (150 woorden)<HeadingDot /></h2>
                   <p className="text-muted-foreground leading-relaxed mb-4">
                     Ferry Hoes werkte ruim tien jaar op het snijvlak van technologie, marketing en menselijk gedrag voordat hij wereldwijd podia betrad. In 2017 introduceerde hij het concept <strong>Brand Humanizing</strong>, een raamwerk om technologie in te zetten zodat merken onderscheidender en menselijker worden. Hij heeft dit jarenlang getest en verfijnd bij internationale organisaties.
                   </p>
@@ -196,9 +198,7 @@ const Press = () => {
         {/* Technical Requirements */}
         <section className="py-16">
           <div className="container px-6 md:px-8 max-w-3xl mx-auto">
-            <h2 className="font-display text-2xl font-bold text-foreground mb-4">
-              {isDutch ? "Technische vereisten" : "Technical Requirements"}
-            </h2>
+            <h2 className="font-display text-2xl font-bold text-foreground mb-4">{isDutch ? "Technische vereisten" : "Technical Requirements"}<HeadingDot /></h2>
             <p className="text-muted-foreground leading-relaxed mb-8">
               {isDutch
                 ? "Ferry presenteert met zijn eigen MacBook Air (Apple Keynote) en neemt zijn eigen adapters mee. Hij vraagt de organisatie het volgende te voorzien:"
@@ -259,7 +259,7 @@ const Press = () => {
         <section className="py-16 md:py-24 bg-foreground text-background">
           <div className="container px-6 md:px-8 max-w-3xl mx-auto text-center">
             <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
-              {isDutch ? "Media-aanvraag?" : "Media enquiry?"}
+              {isDutch ? "Media-aanvraag?" : "Media enquiry?"}<HeadingDot />
             </h2>
             <p className="text-white/70 text-lg mb-8">
               {isDutch
