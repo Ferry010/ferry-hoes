@@ -75,9 +75,9 @@ const HeroVideo = () => {
             <p className="text-xs md:text-sm font-semibold tracking-[0.2em] uppercase text-white/40">
               Ferry Hoes
             </p>
-            <h1 className="mt-1 text-3xl md:text-5xl font-bold text-white/50">
-              AI & Technology Keynote Speaker
-            </h1>
+            <p className="mt-1 text-xl md:text-3xl font-bold text-white/50">
+              International keynote speaker. Author. Entrepreneur. Helping organizations stay powerfully human in a world full of AI.
+            </p>
           </div>
         </div>
       </div>
