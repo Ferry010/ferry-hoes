@@ -18,9 +18,13 @@ const AboutBlock = () => {
             <span className="inline-block w-1.5 h-1.5 bg-accent rounded-full ml-1.5 mb-1 align-baseline" />
           </p>
           
-          <h2 className="font-display text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold leading-[1.2] mb-10 text-foreground">
-            Most people make technology complicated. I make it <span className="text-accent">human</span>. Through <span className="text-primary">keynotes</span>, a <span className="text-primary">book</span>, and one big idea that's been ten years in the making. That's it. That's the job.
+          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.05] mb-8 text-foreground">
+            I help brands become more <span className="text-accent">human</span>
+            <span className="inline-block w-2 h-2 bg-accent rounded-full ml-1.5 mb-1 align-baseline" />
           </h2>
+          <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-10 max-w-xl">
+            Through keynotes, a book, and one big idea ten years in the making. That's it. That's the job.
+          </p>
           
           <Link 
             to="/about"

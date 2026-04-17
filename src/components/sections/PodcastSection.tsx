@@ -64,8 +64,8 @@ const PodcastSection = () => {
           <div ref={revealRef} className="scroll-reveal text-center mb-16">
             <SectionLabel text="The Podcast" center />
             
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
-              Conversations that <span className="text-accent">matter</span>
+            <h2 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-[1.05]">
+              Conversations worth your <span className="text-accent">commute</span>
               <span className="inline-block w-2 h-2 bg-accent rounded-full ml-1.5 mb-1 align-baseline" />
             </h2>
             

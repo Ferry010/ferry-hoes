@@ -49,9 +49,9 @@ const BookSection = () => {
             <div className="order-2 lg:order-1">
               <SectionLabel text="The Book" />
               
-              <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground mb-6 font-bold">
-                <span className="text-foreground">Brand</span><br />
-                <span className="text-accent">Humanizing</span>
+              <h2 className="font-display text-5xl md:text-6xl lg:text-7xl text-foreground mb-6 font-bold leading-[1.05]">
+                I wrote the book on it.{" "}
+                <span className="text-accent">Literally</span>
                 <span className="inline-block w-2 h-2 bg-accent rounded-full ml-1.5 mb-1 align-baseline" />
               </h2>
               

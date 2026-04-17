@@ -14,9 +14,8 @@ const BrandHumanizingSection = () => {
             <SectionLabel text="Life's Work" center />
           </div>
 
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-10 text-center">
-            <span className="text-foreground">Brand</span>{" "}
-            <span className="text-accent">Humanizing</span>
+          <h2 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold mb-10 text-center leading-[1.05]">
+            A strategy for the <span className="text-accent">digital age</span>
             <span className="inline-block w-2 h-2 bg-accent rounded-full ml-1.5 mb-1 align-baseline" />
           </h2>
 
