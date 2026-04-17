@@ -33,9 +33,9 @@ const SpeakerSection = () => {
         <div ref={revealRef} className="scroll-reveal flex flex-col justify-center px-6 md:px-12 lg:px-16 py-16 md:py-0 relative z-10">
           <SectionLabel text="On Stage" />
 
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-8 text-foreground">
-            Keynotes that{" "}
-            <span className="text-accent">inspire action</span>
+          <h2 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold mb-8 text-foreground leading-[1.05]">
+            On stages where it{" "}
+            <span className="text-accent">matters</span>
             <span className="inline-block w-2 h-2 bg-accent rounded-full ml-1.5 mb-1 align-baseline" />
           </h2>
 

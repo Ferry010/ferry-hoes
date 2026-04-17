@@ -18,7 +18,7 @@ const BlogSection = () => {
           <div ref={revealRef} className="scroll-reveal flex flex-col md:flex-row md:items-end justify-between mb-12 md:mb-16">
             <div>
               <SectionLabel text="The Blog" />
-              <h2 className="font-display text-4xl md:text-5xl text-foreground font-bold">
+              <h2 className="font-display text-5xl md:text-6xl lg:text-7xl text-foreground font-bold leading-[1.05]">
                 Ideas worth <span className="text-accent">sharing</span>
                 <span className="inline-block w-2 h-2 bg-accent rounded-full ml-1.5 mb-1 align-baseline" />
               </h2>

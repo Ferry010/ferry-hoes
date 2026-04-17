@@ -1,6 +1,7 @@
 import SEOHead from "@/components/blog/SEOHead";
 import StructuredData, { personSchema, bookSchema, websiteSchema } from "@/components/StructuredData";
 import HeroVideo from "@/components/sections/HeroVideo";
+import QuickFacts from "@/components/sections/QuickFacts";
 import ClientLogos from "@/components/sections/ClientLogos";
 import AboutBlock from "@/components/sections/AboutBlock";
 import BrandHumanizingSection from "@/components/sections/BrandHumanizingSection";
@@ -32,6 +33,7 @@ const Index = () => {
           <HeroVideo />
         </header>
 
+        <QuickFacts />
         <ClientLogos />
 
         <main>
