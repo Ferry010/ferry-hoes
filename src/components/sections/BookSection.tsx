@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ArrowRight, CheckCircle } from "lucide-react";
+import { CheckCircle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import bookCover from "@/assets/brand-humanizing-book.jpg";
+import { Eyebrow, Period } from "@/components/HeadingDot";
+import PillButton from "@/components/PillButton";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import SectionLabel from "@/components/SectionLabel";
 
 const BookSection = () => {
   const [email, setEmail] = useState("");
@@ -29,90 +29,95 @@ const BookSection = () => {
   };
 
   return (
-    <section id="book" className="py-20 md:py-28 bg-background overflow-hidden relative">
-      <div className="container px-6 md:px-8">
-        <div className="max-w-6xl mx-auto">
-          <div ref={revealRef} className="scroll-reveal grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Book cover */}
-            <div className="relative flex justify-center lg:justify-end order-1">
-              <div className="relative">
-                <div className="absolute inset-0 bg-foreground/20 rounded-lg blur-2xl translate-x-4 translate-y-4" />
-                <img 
-                  src={bookCover} 
-                  alt="Brand Humanizing - The superpower that makes your brand more human and your business grow faster" 
-                  className="relative z-10 w-full max-w-sm rounded-lg shadow-soft-xl hover:scale-105 transition-transform duration-500"
-                />
-              </div>
+    <section
+      id="the-book"
+      className="bg-background-alt py-20 md:py-28 border-y border-border/60"
+    >
+      <div className="container max-w-[1280px] px-6 md:px-10 lg:px-14">
+        <div
+          ref={revealRef}
+          className="scroll-reveal grid lg:grid-cols-12 gap-12 lg:gap-16 items-center"
+        >
+          {/* Book cover */}
+          <div className="lg:col-span-5 flex justify-center lg:justify-end">
+            <div className="relative">
+              <div className="absolute inset-0 bg-foreground/10 rounded-lg blur-2xl translate-x-3 translate-y-4" />
+              <img
+                src={bookCover}
+                alt="Brand Humanizing — the book by Ferry Hoes and Jonathan Flores"
+                loading="lazy"
+                className="relative z-10 w-full max-w-xs rounded-md shadow-soft-xl"
+              />
             </div>
-            
-            {/* Text content */}
-            <div className="order-2 lg:order-1">
-              <SectionLabel text="The Book" />
-              
-              <h2 className="font-display text-5xl md:text-6xl lg:text-7xl text-foreground mb-6 font-bold leading-[1.05]">
-                I wrote the book on it.{" "}
-                <span className="text-accent">Literally</span>
-                <span className="inline-block w-2 h-2 bg-accent rounded-full ml-1.5 mb-1 align-baseline" />
-              </h2>
-              
-              <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-6">
-                The superpower that makes your brand more human and your business grow faster.
-              </p>
-              
-              <p className="text-muted-foreground leading-relaxed mb-6">
-                Featuring case studies from a.s.r., Ben & Jerry's, Dove, Octopus Energy, Patagonia and other 
-                organisations showing how to use technology to become more human, not less.
-              </p>
-              
-              <p className="text-sm text-muted-foreground mb-8">
-                Co-authored with Jonathan Flores
-              </p>
-              
-              <div className="flex flex-wrap gap-4 mb-8">
-                <Button 
-                  size="lg"
-                  className="rounded-full px-8 bg-accent hover:bg-accent/90"
-                  asChild
-                >
-                  <a href="https://brandhumanizingboek.nl" target="_blank" rel="noopener noreferrer">
-                    Get the book
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </a>
-                </Button>
-              </div>
+          </div>
 
-              {/* English edition waitlist */}
-              <div className="bg-background/60 backdrop-blur rounded-2xl p-6 border border-border">
-                <p className="text-sm text-foreground font-semibold mb-1">
-                  Currently available in Dutch only.
+          {/* Copy */}
+          <div className="lg:col-span-7">
+            <Eyebrow>The Book</Eyebrow>
+
+            <h2
+              className="font-display font-bold text-foreground leading-[1.02]"
+              style={{ fontSize: "clamp(40px, 6vw, 88px)" }}
+            >
+              We wrote the book on it.{" "}
+              <span className="text-primary">Literally</span>
+              <Period />
+            </h2>
+
+            <p className="mt-7 text-lg md:text-xl text-foreground/80 leading-[1.55] max-w-xl">
+              Brand Humanizing — the superpower that makes your brand more human
+              and your business grow faster. Co-authored with Jonathan Flores.
+            </p>
+
+            <p className="mt-3 text-sm text-muted-foreground">
+              Featuring case studies from a.s.r., Ben &amp; Jerry's, Dove,
+              Octopus Energy, Patagonia and more.
+            </p>
+
+            <div className="mt-8">
+              <PillButton
+                href="https://brandhumanizingboek.nl"
+                target="_blank"
+                rel="noopener noreferrer"
+                variant="primary"
+              >
+                Get the book
+              </PillButton>
+            </div>
+
+            {/* English waitlist */}
+            <div className="mt-10 max-w-md">
+              <p className="text-sm font-semibold text-foreground mb-1">
+                Currently available in Dutch only.
+              </p>
+              <p className="text-sm text-muted-foreground mb-4">
+                Get notified when the English edition launches.
+              </p>
+              {status === "success" ? (
+                <p className="inline-flex items-center gap-2 text-sm text-primary font-medium animate-fade-in">
+                  <CheckCircle className="h-4 w-4" />
+                  Got it. You'll hear from Ferry first.
                 </p>
-                <p className="text-sm text-muted-foreground mb-4">
-                  Get notified when the English edition launches.
+              ) : (
+                <form onSubmit={handleWaitlist} className="flex gap-2">
+                  <Input
+                    type="email"
+                    placeholder="your@email.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    className="text-sm"
+                  />
+                  <PillButton type="submit" variant="primary" arrow={false}>
+                    {status === "loading" ? "..." : "Join the waitlist"}
+                  </PillButton>
+                </form>
+              )}
+              {status === "error" && (
+                <p className="text-xs text-destructive mt-2">
+                  Something went wrong. Please try again.
                 </p>
-                {status === "success" ? (
-                  <p className="inline-flex items-center gap-2 text-sm text-primary font-medium animate-fade-in">
-                    <CheckCircle className="h-4 w-4" />
-                    You're on the list!
-                  </p>
-                ) : (
-                  <form onSubmit={handleWaitlist} className="flex gap-2">
-                    <Input
-                      type="email"
-                      placeholder="your@email.com"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                      className="max-w-xs text-sm"
-                    />
-                    <Button type="submit" size="sm" disabled={status === "loading"}>
-                      {status === "loading" ? "..." : "Join the waitlist"}
-                    </Button>
-                  </form>
-                )}
-                {status === "error" && (
-                  <p className="text-xs text-destructive mt-2">Something went wrong. Please try again.</p>
-                )}
-              </div>
+              )}
             </div>
           </div>
         </div>

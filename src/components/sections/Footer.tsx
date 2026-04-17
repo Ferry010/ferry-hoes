@@ -1,93 +1,140 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { CheckCircle } from "lucide-react";
-import logoWhite from "@/assets/ferry-hoes-logo-white.png";
+import { ArrowUpRight } from "lucide-react";
 
+/**
+ * Editorial footer.
+ * Left: bio + newsletter promise. Middle: site links. Right: "Also by Ferry".
+ */
 const Footer = () => {
-  const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "success">("idle");
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email.trim()) return;
-    setStatus("loading");
-    await supabase.from("email_subscribers" as any).insert({
-      email: email.trim(),
-      source: "newsletter",
-    } as any);
-    setStatus("success");
-    setEmail("");
-  };
-
   return (
-    <footer className="py-16 text-background" style={{ backgroundColor: "hsl(25, 15%, 13%)" }}>
-      <div className="container px-6 md:px-8">
-        <div className="max-w-6xl mx-auto">
-          {/* Main footer content */}
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-12">
-            <div>
-              <img src={logoWhite} alt="Ferry Hoes" className="h-8 md:h-10 w-auto" />
-            </div>
-            <nav className="flex flex-wrap gap-6 md:gap-8">
-              <Link to="/" className="text-[hsl(38,30%,88%)] hover:text-white transition-colors">Home</Link>
-              <Link to="/about" className="text-[hsl(38,30%,88%)] hover:text-white transition-colors">About</Link>
-              <Link to="/speaking" className="text-[hsl(38,30%,88%)] hover:text-white transition-colors">Speaking</Link>
-              <Link to="/podcast" className="text-[hsl(38,30%,88%)] hover:text-white transition-colors">Podcast</Link>
-              <Link to="/blog" className="text-[hsl(38,30%,88%)] hover:text-white transition-colors">Blog</Link>
-              <a href="/#book" className="text-[hsl(38,30%,88%)] hover:text-white transition-colors">The Book</a>
-              <Link to="/now" className="text-[hsl(38,30%,88%)] hover:text-white transition-colors">Now</Link>
-              <Link to="/contact" className="text-[hsl(38,30%,88%)] hover:text-white transition-colors">Contact</Link>
-              <Link to="/press" className="text-[hsl(38,30%,88%)] hover:text-white transition-colors">Press</Link>
-            </nav>
-          </div>
-
-          {/* Divider */}
-          <div className="border-t border-white/10 pt-8">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-              {/* Social links */}
-              <div className="flex gap-6">
-                <a href="https://www.linkedin.com/in/ferryhoes/" target="_blank" rel="noopener noreferrer" className="text-[hsl(38,30%,75%)] hover:text-white transition-colors text-sm">LinkedIn</a>
-                <a href="https://www.youtube.com/@ferry-hoes" target="_blank" rel="noopener noreferrer" className="text-[hsl(38,30%,75%)] hover:text-white transition-colors text-sm">YouTube</a>
-                <a href="https://discord.gg/BfZrw5wJ" target="_blank" rel="noopener noreferrer" className="text-[hsl(38,30%,75%)] hover:text-white transition-colors text-sm">Discord</a>
-              </div>
-
-              {/* Inline newsletter */}
-              {status === "success" ? (
-                <span className="inline-flex items-center gap-1.5 text-[hsl(38,30%,75%)] text-sm">
-                  <CheckCircle className="h-3.5 w-3.5" />
-                  Subscribed
-                </span>
-              ) : (
-                <form onSubmit={handleSubmit} className="flex gap-2">
-                  <Input
-                    type="email"
-                    placeholder="your@email.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    className="h-8 w-48 text-xs bg-white/5 border-white/10 text-white placeholder:text-white/30 focus-visible:ring-white/20"
-                  />
-                  <Button
-                    type="submit"
-                    disabled={status === "loading"}
-                    size="sm"
-                    className="h-8 px-3 text-xs bg-white/10 hover:bg-white/20 text-white"
-                  >
-                    Subscribe
-                  </Button>
-                </form>
-              )}
-            </div>
-          </div>
-
-          {/* Copyright */}
-          <div className="text-center mt-8">
-            <p className="text-[hsl(38,30%,40%)] text-xs">
-              © {new Date().getFullYear()} Ferry Hoes. All rights reserved.
+    <footer className="bg-foreground text-background pt-20 pb-10 border-t border-border/20">
+      <div className="container max-w-[1280px] px-6 md:px-10 lg:px-14">
+        <div className="grid md:grid-cols-12 gap-12 md:gap-10">
+          {/* Bio */}
+          <div className="md:col-span-5">
+            <p className="font-display text-2xl md:text-3xl font-bold tracking-tight">
+              Ferry Hoes<span className="text-primary">.</span>
             </p>
+            <p className="mt-4 text-base text-background/70 leading-relaxed max-w-sm">
+              Keynote speaker, author of Brand Humanizing, host of The Human
+              Era Podcast.
+            </p>
+            <p className="mt-6 text-sm text-background/60 max-w-sm">
+              A short letter, once a month. No fluff.
+            </p>
+            <Link
+              to="/#the-letter"
+              className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+            >
+              Join the letter →
+            </Link>
+          </div>
+
+          {/* Site links */}
+          <div className="md:col-span-3">
+            <p className="text-[11px] uppercase tracking-[0.16em] font-semibold text-background/50 mb-5">
+              Site
+            </p>
+            <ul className="space-y-3 text-sm">
+              {[
+                { to: "/the-idea", label: "The Idea" },
+                { to: "/my-story", label: "My Story" },
+                { to: "/on-stage", label: "On Stage" },
+                { to: "/podcast", label: "Podcast" },
+                { to: "/writing", label: "Writing" },
+                { to: "/the-book", label: "The Book" },
+                { to: "/book", label: "Book Ferry" },
+              ].map((link) => (
+                <li key={link.to}>
+                  <Link
+                    to={link.to}
+                    className="text-background/80 hover:text-primary transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Also by Ferry */}
+          <div className="md:col-span-4">
+            <p className="text-[11px] uppercase tracking-[0.16em] font-semibold text-background/50 mb-5">
+              Also by Ferry
+            </p>
+            <div className="space-y-3">
+              <a
+                href="https://brandhumanizing.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-start justify-between gap-3 p-4 rounded-xl bg-background/[0.04] hover:bg-background/[0.08] transition-colors"
+              >
+                <div>
+                  <p className="font-semibold text-background">
+                    Brand Humanizing Institute
+                  </p>
+                  <p className="text-xs text-background/60 mt-1">
+                    Advisory · Method · Research
+                  </p>
+                </div>
+                <ArrowUpRight className="h-4 w-4 text-background/60 group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0 mt-1" />
+              </a>
+              <a
+                href="https://aigeletterdheid.academy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-start justify-between gap-3 p-4 rounded-xl bg-background/[0.04] hover:bg-background/[0.08] transition-colors"
+              >
+                <div>
+                  <p className="font-semibold text-background">AIGA Academy</p>
+                  <p className="text-xs text-background/60 mt-1">
+                    AI literacy training (NL)
+                  </p>
+                </div>
+                <ArrowUpRight className="h-4 w-4 text-background/60 group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0 mt-1" />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom bar */}
+        <div className="mt-16 pt-6 border-t border-background/10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <p className="text-xs text-background/50">
+            © {new Date().getFullYear()} Ferry Hoes.
+          </p>
+          <div className="flex gap-5 text-xs">
+            <a
+              href="https://www.linkedin.com/in/ferryhoes/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-background/60 hover:text-primary transition-colors"
+            >
+              LinkedIn
+            </a>
+            <a
+              href="https://open.spotify.com/show/6eGkXe767cYZ5Rw627Xpgu"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-background/60 hover:text-primary transition-colors"
+            >
+              Spotify
+            </a>
+            <a
+              href="https://podcasts.apple.com/nl/podcast/the-human-era-podcast/id1598552331"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-background/60 hover:text-primary transition-colors"
+            >
+              Apple Podcasts
+            </a>
+            <a
+              href="https://www.youtube.com/@ferry-hoes"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-background/60 hover:text-primary transition-colors"
+            >
+              YouTube
+            </a>
           </div>
         </div>
       </div>

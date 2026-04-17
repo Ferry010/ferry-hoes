@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
@@ -22,9 +22,12 @@ import Now from "./pages/Now";
 import AdminNowPage from "./pages/AdminNowPage";
 import AdminLayout from "./components/admin/AdminLayout";
 import { ScrollToTop } from "./components/ScrollToTop";
-import IndexNavigation from "./components/IndexNavigation";
-import CookieConsent from "./components/CookieConsent";
-import AskFerryBubble from "./components/AskFerryBubble";
+import TheIdea from "./pages/TheIdea";
+import MyStory from "./pages/MyStory";
+import OnStage from "./pages/OnStage";
+import Writing from "./pages/Writing";
+import TheBook from "./pages/TheBook";
+import Book from "./pages/Book";
 import { usePageTracking } from "./hooks/usePageTracking";
 
 const queryClient = new QueryClient();
@@ -43,20 +46,37 @@ const App = () => (
         <BrowserRouter>
           <ScrollToTop />
           <PageTracker />
-          <IndexNavigation />
-          <CookieConsent />
-          <AskFerryBubble />
           <Routes>
             <Route path="/" element={<Index />} />
+
+            {/* New IA */}
+            <Route path="/the-idea" element={<TheIdea />} />
+            <Route path="/my-story" element={<MyStory />} />
+            <Route path="/on-stage" element={<OnStage />} />
+            <Route path="/writing" element={<Writing />} />
+            <Route path="/the-book" element={<TheBook />} />
+            <Route path="/book" element={<Book />} />
+
+            {/* Legacy → new IA redirects */}
+            <Route path="/about" element={<Navigate to="/my-story" replace />} />
+            <Route path="/speaking" element={<Navigate to="/on-stage" replace />} />
+            <Route path="/contact" element={<Navigate to="/book" replace />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
-            <Route path="/speaking" element={<Speaking />} />
-            <Route path="/about" element={<About />} />
+
+            {/* Existing pages still in use */}
             <Route path="/podcast" element={<Podcast />} />
-            <Route path="/conversation" element={<Conversation />} />
-            <Route path="/contact" element={<Contact />} />
             <Route path="/now" element={<Now />} />
             <Route path="/press" element={<Press />} />
+
+            {/* Easter egg / hidden */}
+            <Route path="/conversation" element={<Conversation />} />
+
+            {/* Old routes kept reachable for back-compat */}
+            <Route path="/about-legacy" element={<About />} />
+            <Route path="/speaking-legacy" element={<Speaking />} />
+            <Route path="/contact-legacy" element={<Contact />} />
+
             <Route path="/admin" element={<AdminLogin />} />
             <Route path="/admin" element={<AdminLayout />}>
               <Route path="dashboard" element={<AdminDashboard />} />
