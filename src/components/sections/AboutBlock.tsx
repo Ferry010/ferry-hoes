@@ -1,54 +1,56 @@
-import { ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Eyebrow, Period } from "@/components/HeadingDot";
+import Polaroid from "@/components/Polaroid";
+import PillButton from "@/components/PillButton";
 import ferryPhoto from "@/assets/ferry-speaking-audience.jpg";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import SectionLabel from "@/components/SectionLabel";
 
+/**
+ * My Story — short narrative block with a polaroid.
+ * Editorial cadence, one accent word, period.
+ */
 const AboutBlock = () => {
   const revealRef = useScrollReveal();
 
   return (
-    <section className="bg-background relative">
-      <div className="grid md:grid-cols-2 min-h-[80vh]">
-        {/* Left: Text content */}
-        <div ref={revealRef} className="scroll-reveal flex flex-col justify-center px-6 md:px-12 lg:px-20 py-16 md:py-0">
-          <SectionLabel text="My Story" />
-          <p className="font-display text-2xl md:text-3xl lg:text-4xl font-bold text-accent mb-6">
-            Ferry Hoes
-            <span className="inline-block w-1.5 h-1.5 bg-accent rounded-full ml-1.5 mb-1 align-baseline" />
-          </p>
-          
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.05] mb-8 text-foreground">
-            I help brands become more <span className="text-accent">human</span>
-            <span className="inline-block w-2 h-2 bg-accent rounded-full ml-1.5 mb-1 align-baseline" />
-          </h2>
-          <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-10 max-w-xl">
-            Through keynotes, a book, and one big idea ten years in the making. That's it. That's the job.
-          </p>
-          
-          <Link 
-            to="/about"
-            className="group inline-flex items-center text-sm tracking-[0.2em] uppercase text-foreground hover:text-accent transition-colors"
-          >
-            About Ferry
-            <ArrowRight className="ml-3 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-          </Link>
-        </div>
-        
-        {/* Right: Polaroid photo */}
-        <div className="relative min-h-[400px] md:min-h-[80vh] order-first md:order-last flex items-center justify-center p-8 md:p-12">
-          <div 
-            className="relative bg-white p-2 pb-10 shadow-[4px_6px_24px_rgba(0,0,0,0.12)] max-w-lg w-full"
-            style={{ transform: "rotate(-1.5deg)" }}
-          >
-            <img 
-              src={ferryPhoto}
-              alt="Ferry Hoes speaking on stage in front of an audience"
-              className="w-full aspect-[4/3] object-cover object-top"
-            />
-            <p className="text-center mt-3 text-2xl text-foreground/70 font-signature">
-              Often times listening is more important than talking
+    <section className="bg-background py-20 md:py-28">
+      <div className="container max-w-[1280px] px-6 md:px-10 lg:px-14">
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          {/* Photo */}
+          <div className="lg:col-span-5 order-first lg:order-first flex justify-center lg:justify-start">
+            <div className="w-full max-w-sm">
+              <Polaroid
+                src={ferryPhoto}
+                alt="Ferry Hoes on stage in front of an audience"
+                caption="Mid-keynote, somewhere in 2025."
+                rotate={-2}
+              />
+            </div>
+          </div>
+
+          {/* Copy */}
+          <div ref={revealRef} className="scroll-reveal lg:col-span-7">
+            <Eyebrow>My Story</Eyebrow>
+
+            <h2
+              className="font-display font-bold text-foreground leading-[1.02]"
+              style={{ fontSize: "clamp(40px, 6vw, 88px)" }}
+            >
+              I help brands become more <span className="text-primary">human</span>
+              <Period />
+            </h2>
+
+            <p className="mt-7 text-lg md:text-xl text-foreground/80 leading-[1.55] max-w-xl">
+              Ten years ago I noticed something simple. The brands that win in
+              the long run aren't the ones with the best technology. They're the
+              ones that feel most human. That observation became a method, then
+              a book, then a body of work.
             </p>
+
+            <div className="mt-9">
+              <PillButton to="/my-story" variant="ghost">
+                More about Ferry
+              </PillButton>
+            </div>
           </div>
         </div>
       </div>

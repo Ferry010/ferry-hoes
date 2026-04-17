@@ -1,48 +1,30 @@
 import { useState, useEffect, useCallback } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { Menu, X } from "lucide-react";
-import logo2026 from "@/assets/ferry-hoes-logo-2026.png";
+import { Menu, X, ArrowRight } from "lucide-react";
 
 const NAV_ITEMS = [
-  { label: "My Story", route: "/about", ariaLabel: "About Ferry Hoes" },
-  { label: "The Idea", route: "/#brand-humanizing", ariaLabel: "Brand Humanizing concept" },
-  { label: "On Stage", route: "/speaking", ariaLabel: "Keynote speaking and booking" },
-  { label: "Podcast", route: "/podcast", ariaLabel: "The Human Era Podcast" },
-  { label: "Blog", route: "/blog", ariaLabel: "Blog – insights on AI and technology" },
-  { label: "The Book", route: "/#book", ariaLabel: "Brand Humanizing book" },
+  { label: "The Idea", route: "/the-idea" },
+  { label: "My Story", route: "/my-story" },
+  { label: "On Stage", route: "/on-stage" },
+  { label: "Podcast", route: "/podcast" },
+  { label: "Writing", route: "/writing" },
+  { label: "The Book", route: "/the-book" },
 ];
 
 const SiteHeader = () => {
   const location = useLocation();
-  const navigate = useNavigate();
   const isMobile = useIsMobile();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  const handleNavClick = useCallback((e: React.MouseEvent, route: string) => {
-    if (route.startsWith("/#")) {
-      e.preventDefault();
-      const hash = route.slice(1);
-      if (location.pathname === "/") {
-        document.querySelector(hash)?.scrollIntoView({ behavior: "smooth" });
-      } else {
-        navigate("/");
-        setTimeout(() => {
-          document.querySelector(hash)?.scrollIntoView({ behavior: "smooth" });
-        }, 100);
-      }
-      setMobileOpen(false);
-    }
-  }, [location.pathname, navigate]);
-
-  const isActive = (route: string) => {
-    if (route.startsWith("/#")) return false;
-    return location.pathname === route;
-  };
+  const isActive = useCallback(
+    (route: string) => location.pathname === route,
+    [location.pathname]
+  );
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => setScrolled(window.scrollY > 8);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -52,61 +34,54 @@ const SiteHeader = () => {
   }, [location.pathname]);
 
   useEffect(() => {
-    if (mobileOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => {
       document.body.style.overflow = "";
-    }
-    return () => { document.body.style.overflow = ""; };
+    };
   }, [mobileOpen]);
 
-  // Hide on admin routes
   if (location.pathname.startsWith("/admin")) return null;
 
   return (
     <>
       <header
-        className="fixed top-0 left-0 right-0 z-[900] bg-white/95 backdrop-blur-sm transition-all duration-200"
-        style={{
-          paddingTop: scrolled ? "0.625rem" : "1rem",
-          paddingBottom: scrolled ? "0.625rem" : "1rem",
-        }}
+        className={`fixed top-0 left-0 right-0 z-[900] bg-background/95 backdrop-blur-sm transition-all duration-200 ${
+          scrolled ? "border-b border-border" : "border-b border-transparent"
+        }`}
       >
-        <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-14 flex items-center justify-between">
-          {/* Logo */}
-          <Link to="/" className="hover:brightness-[1.03] transition-none">
-            <img src={logo2026} alt="Ferry Hoes" className="h-6 md:h-7 w-auto" />
+        <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-14 h-16 md:h-[72px] flex items-center justify-between">
+          {/* Wordmark */}
+          <Link
+            to="/"
+            className="font-display font-bold text-base md:text-[17px] tracking-tight text-foreground hover:opacity-80 transition-opacity"
+            aria-label="Ferry Hoes — Home"
+          >
+            FERRY HOES<span className="text-primary">.</span>
           </Link>
 
           {/* Desktop nav */}
           {!isMobile && (
-            <nav className="flex items-center gap-8 lg:gap-10">
+            <nav className="flex items-center gap-7 lg:gap-9">
               {NAV_ITEMS.map((item) => (
                 <Link
                   key={item.route}
                   to={item.route}
-                  onClick={(e) => handleNavClick(e, item.route)}
-                  aria-label={item.ariaLabel}
-                  className="group relative font-sans text-sm font-medium tracking-wide text-foreground/80 hover:text-foreground transition-colors duration-150"
+                  className={`text-sm font-medium tracking-tight transition-colors duration-150 ${
+                    isActive(item.route)
+                      ? "text-primary"
+                      : "text-foreground/75 hover:text-foreground"
+                  }`}
                 >
                   {item.label}
-                  <span
-                    className="absolute left-0 -bottom-0.5 h-px bg-foreground origin-left transition-transform duration-200 ease-out"
-                    style={{
-                      transform: isActive(item.route) ? "scaleX(1)" : "scaleX(0)",
-                      width: "100%",
-                    }}
-                  />
-                  <span className="absolute left-0 -bottom-0.5 h-px w-full bg-foreground origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-200 ease-out" />
                 </Link>
               ))}
 
-              {/* CTA */}
               <Link
-                to="/contact"
-                className="ml-2 px-5 py-2 bg-primary text-primary-foreground font-sans text-sm font-medium rounded-md hover:brightness-[1.05] active:scale-[0.97] transition-all duration-120"
+                to="/book"
+                className="ml-2 inline-flex items-center gap-1.5 px-5 py-2.5 bg-primary text-primary-foreground text-sm font-semibold rounded-full hover:brightness-95 active:scale-[0.97] transition-all duration-150 group"
               >
-                Get in touch
+                Book Ferry
+                <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
               </Link>
             </nav>
           )}
@@ -118,16 +93,16 @@ const SiteHeader = () => {
               className="text-foreground p-1"
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
             >
-              {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+              {mobileOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
           )}
         </div>
       </header>
 
-      {/* Mobile slide-down menu */}
+      {/* Mobile menu */}
       {isMobile && (
         <div
-          className="fixed inset-0 z-[899] bg-white flex flex-col transition-all duration-200 ease-out"
+          className="fixed inset-0 z-[899] bg-background flex flex-col transition-all duration-200 ease-out"
           style={{
             opacity: mobileOpen ? 1 : 0,
             pointerEvents: mobileOpen ? "auto" : "none",
@@ -139,19 +114,19 @@ const SiteHeader = () => {
               <Link
                 key={item.route}
                 to={item.route}
-                onClick={(e) => { handleNavClick(e, item.route); setMobileOpen(false); }}
-                className="font-sans text-xl font-medium text-foreground py-4 border-b border-border/40 hover:text-primary transition-colors duration-150"
+                onClick={() => setMobileOpen(false)}
+                className="font-display text-2xl font-bold text-foreground py-4 border-b border-border/50 hover:text-primary transition-colors"
               >
                 {item.label}
               </Link>
             ))}
 
             <Link
-              to="/contact"
+              to="/book"
               onClick={() => setMobileOpen(false)}
-              className="mt-8 w-full text-center px-6 py-3.5 bg-primary text-primary-foreground font-sans text-base font-medium rounded-md hover:brightness-[1.05] active:scale-[0.97] transition-all duration-120"
+              className="mt-8 w-full text-center px-6 py-4 bg-primary text-primary-foreground font-semibold rounded-full hover:brightness-95 transition-all"
             >
-              Get in touch
+              Book Ferry →
             </Link>
           </div>
         </div>

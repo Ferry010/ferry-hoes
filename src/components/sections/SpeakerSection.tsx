@@ -1,75 +1,80 @@
-import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
-import stagePhoto from "@/assets/ferry-speaking.jpg";
+import { Eyebrow, Period } from "@/components/HeadingDot";
+import PillButton from "@/components/PillButton";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import SectionLabel from "@/components/SectionLabel";
 
+const topics = [
+  {
+    title: "AI, without the noise",
+    summary:
+      "What AI actually changes for organisations, what it doesn't, and how to tell the difference.",
+  },
+  {
+    title: "Brand Humanizing",
+    summary:
+      "Using technology to make your brand more distinctive, more trusted, and more useful.",
+  },
+  {
+    title: "The Human Era of Work",
+    summary:
+      "Why the most valuable skills in the next decade are the ones machines can't fake.",
+  },
+];
+
+/**
+ * On Stage — speaker section with three talk-topic cards.
+ */
 const SpeakerSection = () => {
   const revealRef = useScrollReveal();
 
   return (
-    <section className="relative overflow-hidden bg-background">
-      {/* Two-column grid */}
-      <div className="grid md:grid-cols-2 min-h-[80vh]">
-        {/* Left: Polaroid Photo */}
-        <div className="relative min-h-[400px] md:min-h-[80vh] order-last md:order-first flex items-center justify-center p-8 md:p-12">
-          <div className="bg-white p-3 pb-14 rounded-sm shadow-xl -rotate-1 hover:rotate-0 transition-transform duration-500 max-w-md w-full relative">
-            <div className="aspect-[4/3] overflow-hidden rounded-sm">
-              <img 
-                src={stagePhoto}
-                alt="Ferry Hoes presenting on stage"
-                loading="lazy"
-                className="w-full h-full object-cover object-top"
-              />
-            </div>
-            <p className="absolute bottom-3 left-3 right-3 text-center font-signature text-2xl text-muted-foreground">
-              Ferry during his Woningbouwers 2025 keynote
-            </p>
-          </div>
-        </div>
+    <section className="bg-background py-20 md:py-28">
+      <div className="container max-w-[1280px] px-6 md:px-10 lg:px-14">
+        <div ref={revealRef} className="scroll-reveal max-w-3xl mb-14 md:mb-16">
+          <Eyebrow>On Stage</Eyebrow>
 
-        {/* Right: Content */}
-        <div ref={revealRef} className="scroll-reveal flex flex-col justify-center px-6 md:px-12 lg:px-16 py-16 md:py-0 relative z-10">
-          <SectionLabel text="On Stage" />
-
-          <h2 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold mb-8 text-foreground leading-[1.05]">
+          <h2
+            className="font-display font-bold text-foreground leading-[1.02]"
+            style={{ fontSize: "clamp(40px, 6vw, 88px)" }}
+          >
             On stages where it{" "}
-            <span className="text-accent">matters</span>
-            <span className="inline-block w-2 h-2 bg-accent rounded-full ml-1.5 mb-1 align-baseline" />
+            <span className="text-primary">matters</span>
+            <Period />
           </h2>
 
-          <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl mb-12">
-            From AI and the future of work to human-centered design and brand transformation. 
-            Talks that challenge assumptions, spark conversations, and leave audiences with actionable insights.
+          <p className="mt-7 text-lg md:text-xl text-foreground/80 leading-[1.55] max-w-2xl">
+            From AI and the future of work to brand transformation. Talks that
+            challenge assumptions, spark conversations, and leave audiences with
+            something they'll actually use on Monday.
           </p>
+        </div>
 
-          {/* CTA */}
-          <div className="flex flex-col sm:flex-row gap-4 mb-8">
-            <Button 
-              asChild
-              size="lg"
-              className="rounded-full px-8 bg-accent text-accent-foreground hover:bg-accent/90 group"
+        {/* Topic cards */}
+        <div className="grid md:grid-cols-3 gap-5 md:gap-7 mb-14">
+          {topics.map((t) => (
+            <article
+              key={t.title}
+              className="group bg-background-alt border border-border rounded-2xl p-7 md:p-8 transition-all duration-300 hover:border-primary/40 hover:-translate-y-1"
             >
-              <a 
-                href="https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966" 
-                target="_blank" 
-                rel="noopener noreferrer"
-              >
-                Speaker enquiries
-                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </a>
-            </Button>
-          </div>
+              <span className="text-[11px] uppercase tracking-[0.16em] font-semibold text-primary">
+                • Talk topic
+              </span>
+              <h3 className="mt-4 font-display text-2xl md:text-[26px] font-bold text-foreground leading-tight">
+                {t.title}
+              </h3>
+              <p className="mt-3 text-foreground/75 leading-relaxed">
+                {t.summary}
+              </p>
+            </article>
+          ))}
+        </div>
 
-          {/* Micro-engagement */}
-          <Link
-            to="/speaking"
-            className="inline-flex items-center gap-2 text-accent hover:text-accent/80 font-medium transition-colors group w-fit"
-          >
-            <span className="underline underline-offset-4">More about Ferry as speaker</span>
-            <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-          </Link>
+        <div className="flex flex-wrap gap-3 md:gap-4">
+          <PillButton to="/book" variant="primary">
+            Speaker enquiries
+          </PillButton>
+          <PillButton to="/on-stage" variant="ghost">
+            See talks &amp; reel
+          </PillButton>
         </div>
       </div>
     </section>

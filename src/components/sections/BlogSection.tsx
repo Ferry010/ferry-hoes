@@ -1,78 +1,79 @@
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useBlogPosts } from "@/hooks/useBlogPosts";
-import BlogCard from "@/components/blog/BlogCard";
+import { Eyebrow, Period } from "@/components/HeadingDot";
+import PillButton from "@/components/PillButton";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import SectionLabel from "@/components/SectionLabel";
 
 const BlogSection = () => {
-  const { data: posts, isLoading } = useBlogPosts(2);
+  const { data: posts, isLoading } = useBlogPosts(6);
   const revealRef = useScrollReveal();
 
   return (
-    <section className="py-16 md:py-24 bg-background relative overflow-hidden">
-      <div className="container px-6 md:px-8 relative z-10">
-        <div className="max-w-6xl mx-auto">
-          {/* Section header */}
-          <div ref={revealRef} className="scroll-reveal flex flex-col md:flex-row md:items-end justify-between mb-12 md:mb-16">
-            <div>
-              <SectionLabel text="The Blog" />
-              <h2 className="font-display text-5xl md:text-6xl lg:text-7xl text-foreground font-bold leading-[1.05]">
-                Ideas worth <span className="text-accent">sharing</span>
-                <span className="inline-block w-2 h-2 bg-accent rounded-full ml-1.5 mb-1 align-baseline" />
-              </h2>
-            </div>
-            <p className="text-muted-foreground text-lg mt-4 md:mt-0 max-w-md">
-              Essays, insights, and perspectives on technology, humanity, and
-              everything in between.
-            </p>
-          </div>
+    <section className="bg-background-alt py-20 md:py-28 border-y border-border/60">
+      <div className="container max-w-[1280px] px-6 md:px-10 lg:px-14">
+        <div ref={revealRef} className="scroll-reveal max-w-3xl mb-14 md:mb-16">
+          <Eyebrow>Writing</Eyebrow>
 
-          {/* Blog grid */}
-          {isLoading ? (
-            <div className="grid md:grid-cols-2 gap-6 md:gap-8 mb-12">
-              {[1, 2].map((i) => (
-                <div key={i} className="bg-card rounded-2xl overflow-hidden animate-pulse">
-                  <div className="aspect-[16/10] bg-muted" />
-                  <div className="p-6 md:p-8 space-y-4">
-                    <div className="h-6 bg-muted rounded w-3/4" />
-                    <div className="h-4 bg-muted rounded w-full" />
-                    <div className="h-4 bg-muted rounded w-1/2" />
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : posts && posts.length > 0 ? (
-            <div className="grid md:grid-cols-2 gap-6 md:gap-8 mb-12">
-              {posts.map((post, index) => (
-                <BlogCard key={post.id} post={post} colorIndex={index} />
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-16 mb-12">
-              <p className="text-muted-foreground text-lg">
-                No blog posts yet. Check back soon!
-              </p>
-            </div>
-          )}
-
-          {/* CTA */}
-          {posts && posts.length > 0 && (
-            <div className="text-center">
-              <Button
-                asChild
-                size="lg"
-                className="rounded-full px-8 group bg-accent text-accent-foreground hover:bg-accent/90"
-              >
-                <Link to="/blog">
-                  View all articles
-                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </Button>
-            </div>
-          )}
+          <h2
+            className="font-display font-bold text-foreground leading-[1.02]"
+            style={{ fontSize: "clamp(40px, 6vw, 88px)" }}
+          >
+            Short essays on humans, technology, and the work in{" "}
+            <span className="text-primary">between</span>
+            <Period />
+          </h2>
         </div>
+
+        {/* Editorial grid */}
+        {isLoading ? (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12">
+            {[1, 2, 3, 4].map((i) => (
+              <div key={i} className="space-y-4 animate-pulse">
+                <div className="h-3 bg-muted rounded w-20" />
+                <div className="h-7 bg-muted rounded w-3/4" />
+                <div className="h-4 bg-muted rounded w-full" />
+                <div className="h-4 bg-muted rounded w-1/2" />
+              </div>
+            ))}
+          </div>
+        ) : posts && posts.length > 0 ? (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 mb-12">
+            {posts.slice(0, 6).map((post) => (
+              <Link
+                key={post.id}
+                to={`/blog/${post.slug}`}
+                className="group block"
+              >
+                <span className="text-[11px] uppercase tracking-[0.16em] font-semibold text-primary">
+                  • Essay
+                </span>
+                <h3 className="mt-3 font-display text-xl md:text-2xl font-bold text-foreground leading-snug group-hover:text-primary transition-colors">
+                  {post.title}
+                </h3>
+                {post.excerpt && (
+                  <p className="mt-3 text-foreground/75 leading-relaxed line-clamp-2">
+                    {post.excerpt}
+                  </p>
+                )}
+                <span className="mt-4 inline-flex items-center gap-2 text-sm text-muted-foreground">
+                  Read essay
+                  <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+                </span>
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <p className="text-muted-foreground text-lg mb-12">
+            New essays coming soon.
+          </p>
+        )}
+
+        {posts && posts.length > 0 && (
+          <PillButton to="/writing" variant="ghost">
+            All writing
+          </PillButton>
+        )}
       </div>
     </section>
   );

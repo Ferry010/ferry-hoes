@@ -1,55 +1,50 @@
-import { ArrowRight } from "lucide-react";
+import { Eyebrow, Period } from "@/components/HeadingDot";
+import PillButton from "@/components/PillButton";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import SectionLabel from "@/components/SectionLabel";
 
+/**
+ * The Idea — hook section. Short, declarative, ends with CTA to /the-idea.
+ */
 const BrandHumanizingSection = () => {
   const revealRef = useScrollReveal();
 
   return (
-    <section id="brand-humanizing" className="py-20 md:py-28 flex items-center justify-center relative overflow-hidden bg-background">
-      {/* Content */}
-      <div className="container relative z-10 px-6 md:px-8">
-        <div ref={revealRef} className="scroll-reveal max-w-3xl mx-auto">
-          <div className="text-center">
-            <SectionLabel text="Life's Work" center />
-          </div>
+    <section
+      id="the-idea"
+      className="bg-background-alt py-24 md:py-32 border-y border-border/60"
+    >
+      <div className="container max-w-[1280px] px-6 md:px-10 lg:px-14">
+        <div ref={revealRef} className="scroll-reveal max-w-4xl">
+          <Eyebrow>The Idea</Eyebrow>
 
-          <h2 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold mb-10 text-center leading-[1.05]">
-            A strategy for the <span className="text-accent">digital age</span>
-            <span className="inline-block w-2 h-2 bg-accent rounded-full ml-1.5 mb-1 align-baseline" />
+          <h2
+            className="font-display font-bold text-foreground leading-[1.02]"
+            style={{ fontSize: "clamp(40px, 6vw, 88px)" }}
+          >
+            Everyone can copy your technology. No one can copy your{" "}
+            <span className="text-primary">people</span>
+            <Period />
           </h2>
 
-          <p className="text-lg md:text-xl text-muted-foreground leading-relaxed text-center">
-            Brand Humanizing is my idea. I co-created it, I wrote a book about it, and I've spent the last ten years putting it on stages across the world.
-          </p>
+          <div className="mt-10 space-y-6 text-lg md:text-xl text-foreground/80 leading-[1.6] max-w-2xl">
+            <p>
+              Brand Humanizing is a strategy for the digital age. It says the
+              point of technology isn't to replace what makes us human. It's to
+              amplify it.
+            </p>
+            <p>
+              The brands that get this right become more distinctive, more
+              trusted, and more useful. The ones that don't become noise.
+            </p>
+            <p className="font-handwritten text-2xl md:text-3xl text-ink-navy not-italic">
+              Sounds obvious. Turns out it isn't.
+            </p>
+          </div>
 
-          <p className="text-lg md:text-xl text-muted-foreground leading-relaxed text-center mt-6">
-            Technology should make organisations more human, not less.
-          </p>
-
-          {/* Pull quote */}
-          <p
-            className="text-2xl md:text-3xl text-primary py-10 pl-4 md:pl-8 rotate-[-2deg] max-w-md whitespace-nowrap"
-            style={{ fontFamily: "'Caveat', cursive" }}
-          >
-            Sounds obvious. Turns out it isn't.
-          </p>
-
-          <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-12 text-center">
-            It's not a framework I borrowed. It's something I built from scratch.
-          </p>
-
-          {/* Micro-engagement */}
-          <div className="text-center">
-            <a
-              href="https://brandhumanizing.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-accent hover:text-accent/80 font-medium transition-colors group"
-            >
-              <span className="underline underline-offset-4">Want to learn more about this?</span>
-              <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-            </a>
+          <div className="mt-10">
+            <PillButton to="/the-idea" variant="primary">
+              Read the full idea
+            </PillButton>
           </div>
         </div>
       </div>

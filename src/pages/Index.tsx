@@ -1,65 +1,46 @@
 import SEOHead from "@/components/blog/SEOHead";
 import StructuredData, { personSchema, bookSchema, websiteSchema } from "@/components/StructuredData";
-import HeroVideo from "@/components/sections/HeroVideo";
-import QuickFacts from "@/components/sections/QuickFacts";
-import ClientLogos from "@/components/sections/ClientLogos";
-import AboutBlock from "@/components/sections/AboutBlock";
+import SiteHeader from "@/components/SiteHeader";
+import Hero from "@/components/sections/Hero";
+import TrustLine from "@/components/sections/TrustLine";
 import BrandHumanizingSection from "@/components/sections/BrandHumanizingSection";
+import AboutBlock from "@/components/sections/AboutBlock";
 import SpeakerSection from "@/components/sections/SpeakerSection";
 import BookSection from "@/components/sections/BookSection";
 import PodcastSection from "@/components/sections/PodcastSection";
 import BlogSection from "@/components/sections/BlogSection";
-import AboutFerryLLM from "@/components/sections/AboutFerryLLM";
+import AlsoByFerry from "@/components/sections/AlsoByFerry";
 import CommunitySection from "@/components/sections/CommunitySection";
 import Footer from "@/components/sections/Footer";
-
-const SectionDivider = () => (
-  <div className="max-w-xs mx-auto border-t border-border" />
-);
 
 const Index = () => {
   return (
     <>
       <SEOHead
-        title="Keynote Speaker on AI & Brand Humanizing | Ferry Hoes"
-        description="Ferry Hoes is an international keynote speaker on AI, technology, and Brand Humanizing. Trusted by Vodafone, GlaxoSmithKline, and Toshiba. Book for your next conference or corporate event."
+        title="Ferry Hoes — Keynote Speaker, Author of Brand Humanizing"
+        description="Most people make AI complicated. Ferry Hoes makes it human. International keynote speaker, author of Brand Humanizing, host of The Human Era Podcast."
         ogType="website"
         canonicalUrl="/"
       />
       <StructuredData data={[personSchema, bookSchema, websiteSchema]} />
 
+      <SiteHeader />
+
       <div className="overflow-x-hidden relative">
         <header>
-          <HeroVideo />
+          <Hero />
         </header>
 
-        <QuickFacts />
-        <ClientLogos />
+        <TrustLine />
 
         <main>
-          <article>
-            <AboutBlock />
-          </article>
-          <SectionDivider />
-          <article>
-            <BrandHumanizingSection />
-          </article>
-          <article>
-            <SpeakerSection />
-          </article>
-          <SectionDivider />
-          <article>
-            <BookSection />
-          </article>
-          <SectionDivider />
-          <article>
-            <PodcastSection />
-          </article>
-          <SectionDivider />
-          <article>
-            <BlogSection />
-          </article>
-          <AboutFerryLLM />
+          <article><BrandHumanizingSection /></article>
+          <article><AboutBlock /></article>
+          <article><SpeakerSection /></article>
+          <article><BookSection /></article>
+          <article><PodcastSection /></article>
+          <article><BlogSection /></article>
+          <AlsoByFerry />
           <CommunitySection />
         </main>
 
