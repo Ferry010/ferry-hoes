@@ -1,103 +1,79 @@
 
 
-## What you're asking for
+## Copy + CTA overhaul (no design changes)
 
-A full editorial repositioning of the homepage as a **thinker's home base**, not a speaker sales page. Plus scaffolded routes for the new IA so the nav works end-to-end. New visual system (no teal, no hero video, polaroid-led, orange-only accent), new headline formula, new microcopy, new section order, and outbound cards to BHI + AIGA.
+Pure text/link work. Zero design, layout, or component changes. Constants used:
+- `SPEAKERS_ACADEMY_URL = "https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966"`
+- `BOOK_RETAILER_URL = "https://brandhumanizingboek.nl"`
 
-I'll keep the homepage polished and ship the rest of the pages as scaffolded placeholders you'll fill in later passes.
+### 1. Homepage — `Hero.tsx`
 
-## Conflicts with prior decisions (flagging before I touch anything)
+- Eyebrow stays.
+- H1 → `The 'now what' after AI. For the` `humans running the place.` (orange + Period). Two-line wrap preserved via existing `<br />` structure.
+- Sub → "AI is settling. The economy has shifted. The real question isn't which tool to buy next — it's how to lead organisations that still feel human. That's the work of Brand Humanizing. Ten years in the making."
+- Primary CTA stays: `Read the idea` → `/the-idea`.
+- Ghost CTA `Book Ferry` → swap from `to="/book"` to `href={SPEAKERS_ACADEMY_URL}` with `target="_blank" rel="noopener noreferrer"`. (Will pass `href` instead of `to` to `PillButton`; component already supports it — confirmed in `BookSection`.)
+- Polaroid + caption untouched.
 
-1. **Teal is killed entirely.** Current site uses teal as secondary (nav CTA "Get in touch", some highlights, current `--primary` token). I'll repoint `--primary` to coral and remove all teal usage. Saved memory will be updated.
-2. **No hero video.** Current `HeroVideo.tsx` autoplays a webm. I'll replace with the polaroid-led editorial hero. The video file stays in `/videos/` (you can reuse later).
-3. **Navy `#0B2447` is new.** I'll add it as `--ink-navy` for the handwritten captions and the BHI/AIGA cards.
-4. **Headline formula change.** Currently the accent word + dot pattern is in place but the dot is outside the period. New rule: `plain. accent.` (the period itself is part of the brand, in orange, replacing the dot graphic on H1/H2). I'll repurpose `HeadingDot` so it can render either as a standalone dot bullet (eyebrows) or as a coral period inside headlines.
-5. **Plausible analytics + no cookie banner.** Current site has GA4 + `CookieConsent`. I'll leave GA4 in place but hide the cookie banner (since you want Plausible eventually). Swapping to Plausible is a separate pass — flag it if you want it in this build.
-6. **Chatbot widget removed.** `AskFerryBubble` (floating chat) and the "Or continue the conversation" link in hero will be removed from the homepage. The `/conversation` page itself stays as an easter egg accessible by URL only.
+### 2. Homepage — `SpeakerSection.tsx`
 
-## Build plan
+- Intro paragraph → "From Brand Humanizing and the future of work to AI leadership. Talks that challenge assumptions, spark conversations, and leave audiences with something they'll actually use on Monday."
+- Reorder topics array so **Brand Humanizing is #1**, **The Human Era of Work #2**, **AI, without the noise #3** (copy already matches the spec).
+- Primary CTA: change label `Speaker enquiries` → `Book Ferry` and route externally to `SPEAKERS_ACADEMY_URL` (new tab).
+- Ghost CTA `See talks & reel` → `/on-stage` (unchanged).
 
-### 1. Design tokens — rewrite `src/index.css` + `tailwind.config.ts`
+### 3. Homepage — `BookSection.tsx`
 
-- `--background` → `#F6F1EA` (warm cream)
-- `--background-alt` → `#EFE7DB` (deeper cream for alt sections)
-- `--foreground` (ink) → `#0F1115`
-- `--primary` → `#F2542D` (orange — replaces teal everywhere)
-- `--accent` → same orange (collapse the two tokens to one)
-- `--ink-navy` → `#0B2447`
-- `--muted-foreground` → `#5C5A55`
-- `--border` → `#E3D9C9`
-- New fonts: Inter Tight (display, 700/800, tight tracking), Inter (body), Caveat (handwritten). Load via Google Fonts in `index.html`. Drop Plus Jakarta + The Nautigal.
-- Add `@keyframes` for the 8px headline rise + reduced-motion media query.
+- Body unchanged.
+- Change primary CTA label from `Get the book` → `See the book` and route from external `brandhumanizingboek.nl` → internal `to="/the-book"`.
+- Waitlist form unchanged.
 
-### 2. New signature primitives
+### 4. `SiteHeader.tsx` — Book Ferry pill
 
-- `HeadingDot` → repurposed into two exports: `<Eyebrow>` (orange dot + uppercase tracked label) and `<Period>` (the orange period closing every headline).
-- `<Polaroid>` → reusable white-bordered card, configurable rotation (-2 to +3 deg), optional Caveat caption, drop shadow, hover-to-straighten.
-- `<PillButton variant="primary|ghost">` → orange-filled or ink-outlined pill with arrow.
+- Desktop pill: replace `<Link to="/book">` with `<a href={SPEAKERS_ACADEMY_URL} target="_blank" rel="noopener noreferrer">`. Keep classes/icon identical.
+- Mobile menu pill: same swap.
 
-### 3. Homepage rebuild — section by section
+### 5. `App.tsx` + `/book` route
 
-Replace `HeroVideo` with `Hero` (polaroid + editorial copy, no video), then rebuild each section to match the spec:
+- Replace `<Route path="/book" element={<Book />} />` with a tiny `BookRedirect` component that does `window.location.replace(SPEAKERS_ACADEMY_URL)` on mount and renders null. Keeps any stray legacy links functional. `Book.tsx` import removed.
+- The legacy `/contact` redirect currently goes to `/book` — repoint it directly to the same external URL via the same redirect pattern (or to `/`). Will route `/contact` → `BookRedirect` for consistency.
 
-| Section | Component | Status |
-|---|---|---|
-| Hero | new `Hero.tsx` | rewrite |
-| Trust line (plain text, no logos) | new `TrustLine.tsx` | replaces `ClientLogos` on home |
-| The Idea (hook) | rewrite `BrandHumanizingSection.tsx` | new copy + CTA `Read the full idea →` |
-| My Story | rewrite `AboutBlock.tsx` | shorter, polaroid stays |
-| On Stage | rewrite `SpeakerSection.tsx` | + 3 talk-topic cards |
-| The Book | rewrite `BookSection.tsx` | new headline `We wrote the book on it. Literally.` |
-| The Podcast | rewrite `PodcastSection.tsx` | keep Spotify-green inside cards only |
-| Writing | rewrite `BlogSection.tsx` | 4-6 editorial cards |
-| Also by Ferry | new `AlsoByFerry.tsx` | BHI navy card + AIGA purple card, outbound |
-| The Letter | rewrite `CommunitySection.tsx` | newsletter only, drop Discord from home |
-| Footer | rewrite `Footer.tsx` | left bio + middle links + right "Also by Ferry" mini cards |
+### 6. `/on-stage` — promote `Speaking.tsx`
 
-`QuickFacts.tsx` and `ClientLogos.tsx` are removed from the homepage (kept in repo for reuse on `/on-stage`).
+- Change `<Route path="/on-stage" element={<OnStage />} />` to render `<Speaking />` (rename file optional; minimum-touch = swap the element). `OnStage.tsx` placeholder no longer used (kept in repo).
+- Inside `Speaking.tsx`:
+  - **Hero sub** → "Talks on Brand Humanizing, the future of work, and AI leadership. No death-by-PowerPoint. Just stories, insights, and practical ideas that spark real conversations and drive meaningful change."
+  - **Hero CTA** "Book Ferry for your event" stays external (already correct URL); rename label to `Book Ferry →` per spec. Add a "Watch the reel" anchor link beside it pointing to `#speaker-reel` (uses existing scroll target).
+  - **Keynote topics array** → replace entry index 1 (`The AI conversation most organisations skip`) with **The Human Era of Work** (title, body, audience, takeaways) per spec. Keep entries 0, 2, 3, 4 untouched.
+  - **"Enquire about this talk"** buttons inside each topic card → change `<Link to="/contact">` to external anchor → `SPEAKERS_ACADEMY_URL` (new tab). Same for "Discuss a custom keynote" inside the custom-topic card.
+  - **Final CTA** H2 → "Ready to inspire your `audience`." (orange word + Period). Body → "Ferry replies personally within two working days. For formal bookings he is exclusively represented by Speakers Academy." CTA label → `Book Ferry →` (already external).
+  - **SEO** title/description on this page: leave for now (spec says only homepage meta updates).
 
-### 4. Global nav — rewrite `SiteHeader.tsx`
+### 7. `/the-idea` and `/my-story`
 
-New items: `The Idea` (/the-idea) · `My Story` (/my-story) · `On Stage` (/on-stage) · `Podcast` (/podcast) · `Writing` (/writing) · `The Book` (/the-book). CTA pill (orange): `Book Ferry →` → `/book`. Sticky cream bg, hairline border on scroll.
+Both are still placeholders today (no "Bring this talk to your team" / "Book Ferry" CTAs exist on them). Spec asks to update those CTAs at the bottom — but they don't exist yet. **No-op for this pass**; will be wired when the long-form copy lands. Noting this so it's not silently skipped.
 
-### 5. Scaffold the new routes (placeholder pages)
+### 8. `/the-book` — `TheBook.tsx`
 
-Add to `App.tsx`: `/the-idea`, `/my-story`, `/on-stage`, `/writing`, `/the-book`, `/book`. Each page = `<SiteHeader />` + Eyebrow + H1 with accent word + Period + one-line "Coming soon" + `<Footer />`. Existing `/about`, `/speaking`, `/blog`, `/contact`, `/podcast` routes stay and redirect to the new URLs (301-style via `<Navigate />`).
+Currently a `PlaceholderPage` (no hero CTAs to swap). Spec says "Hero CTAs — UPDATE: Change 'Get the Dutch edition' primary CTA to external link." Since no such CTA exists yet, **add a single primary `PillButton` to the placeholder** linking externally to `BOOK_RETAILER_URL` (new tab) labelled `Get the Dutch edition →`. This is the smallest possible addition that satisfies the spec without changing layout.
 
-### 6. Microcopy + a11y pass
+### 9. `/podcast`
 
-- Replace banned words globally (no "leverage", "unlock", "disrupt", "game-changer").
-- Confirmation toasts → "Got it. Ferry will read this himself and reply within two working days."
-- New `404` page: `This page is missing.` + 3 useful links.
-- Verify orange #F2542D contrast: only on cream and as headline accent / button fill — never as body text.
-- Keyboard focus: 2px orange outline globally.
+Already exists (`Podcast.tsx`). Per spec: skip.
 
-### 7. Cleanup / removals
+### 10. SEO meta — homepage only
 
-- Remove `AskFerryBubble` from `App.tsx`.
-- Hide `CookieConsent` (keep file).
-- Remove `ClientLogos` and `QuickFacts` from `Index.tsx` (files retained).
-- Remove the chat-link "Or continue the conversation" from hero.
+`Index.tsx` `SEOHead description` → "The 'now what' after AI. Ferry Hoes helps organisations stay human in a tech-heavy world. International keynote speaker, author of Brand Humanizing, host of The Human Era Podcast."
 
-### 8. Memory updates
+### Files touched
 
-Update `mem://style/color-palette` (kill teal), `mem://style/visual-direction` (no hero video, polaroid-led), `mem://style/typography` (Inter Tight + Caveat, no Plus Jakarta), and add `mem://features/homepage-IA-2026` documenting the new section order.
+`src/components/sections/Hero.tsx`, `src/components/sections/SpeakerSection.tsx`, `src/components/sections/BookSection.tsx`, `src/components/SiteHeader.tsx`, `src/App.tsx`, `src/pages/Speaking.tsx`, `src/pages/TheBook.tsx`, `src/pages/Index.tsx`. New tiny inline `BookRedirect` component (in `App.tsx`, no new file needed).
 
-## Out of scope for this pass
+### Out of scope (unchanged)
 
-- Filling in `/the-idea`, `/my-story`, `/on-stage`, `/writing`, `/the-book` long-form content (you said you'll do these).
-- Migrating GA4 → Plausible.
-- MDX content pipeline for blog posts (current Supabase-backed blog stays for now).
-- Dutch i18n toggle (scaffold only later).
-- Speaker enquiry form on `/on-stage` (you'll fill `/book` page in next pass).
-- OG image generator (separate pass).
-- Prerendering (separate pass — was approved earlier but deferred so we don't double-rip the site this round).
-
-## Files touched
-
-**Rewrite:** `src/index.css`, `tailwind.config.ts`, `index.html` (fonts), `src/components/SiteHeader.tsx`, `src/components/sections/Footer.tsx`, `src/components/HeadingDot.tsx`, `src/components/SectionLabel.tsx`, `src/components/sections/AboutBlock.tsx`, `src/components/sections/BrandHumanizingSection.tsx`, `src/components/sections/SpeakerSection.tsx`, `src/components/sections/BookSection.tsx`, `src/components/sections/PodcastSection.tsx`, `src/components/sections/BlogSection.tsx`, `src/components/sections/CommunitySection.tsx`, `src/pages/Index.tsx`, `src/pages/NotFound.tsx`, `src/App.tsx`.
-
-**New:** `src/components/sections/Hero.tsx`, `src/components/sections/TrustLine.tsx`, `src/components/sections/AlsoByFerry.tsx`, `src/components/Polaroid.tsx`, `src/components/PillButton.tsx`, `src/pages/TheIdea.tsx`, `src/pages/MyStory.tsx`, `src/pages/OnStage.tsx`, `src/pages/Writing.tsx`, `src/pages/TheBook.tsx`, `src/pages/Book.tsx`.
-
-**Delete from homepage (keep file):** `HeroVideo.tsx`, `QuickFacts.tsx`, `ClientLogos.tsx`, `AskFerryBubble` mount in `App.tsx`.
+- All visual styling, fonts, colors, spacing, components, animations.
+- Polaroid image/caption.
+- Trust line, The Idea block, My Story block, Podcast block, Writing block, Also by Ferry, Newsletter.
+- All other page meta.
+- `/the-idea` and `/my-story` long-form CTAs (page bodies don't exist yet).
 
