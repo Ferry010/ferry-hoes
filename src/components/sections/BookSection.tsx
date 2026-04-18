@@ -75,13 +75,8 @@ const BookSection = () => {
             </p>
 
             <div className="mt-8">
-              <PillButton
-                href="https://brandhumanizingboek.nl"
-                target="_blank"
-                rel="noopener noreferrer"
-                variant="primary"
-              >
-                Get the book
+              <PillButton to="/the-book" variant="primary">
+                See the book
               </PillButton>
             </div>
 
