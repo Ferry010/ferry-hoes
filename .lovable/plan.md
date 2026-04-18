@@ -1,79 +1,111 @@
 
 
-## Copy + CTA overhaul (no design changes)
+## Copy + IA overhaul (no design changes)
 
-Pure text/link work. Zero design, layout, or component changes. Constants used:
-- `SPEAKERS_ACADEMY_URL = "https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966"`
+Pure text/link/order work. Constants:
+- `SPEAKERS_ACADEMY_URL` (already in code)
 - `BOOK_RETAILER_URL = "https://brandhumanizingboek.nl"`
+- `PITCH_EMAIL = "ferry@brandhumanizing.com"`
 
-### 1. Homepage — `Hero.tsx`
+### 1. Homepage — `Index.tsx` (section reorder + SEO)
 
-- Eyebrow stays.
-- H1 → `The 'now what' after AI. For the` `humans running the place.` (orange + Period). Two-line wrap preserved via existing `<br />` structure.
-- Sub → "AI is settling. The economy has shifted. The real question isn't which tool to buy next — it's how to lead organisations that still feel human. That's the work of Brand Humanizing. Ten years in the making."
-- Primary CTA stays: `Read the idea` → `/the-idea`.
-- Ghost CTA `Book Ferry` → swap from `to="/book"` to `href={SPEAKERS_ACADEMY_URL}` with `target="_blank" rel="noopener noreferrer"`. (Will pass `href` instead of `to` to `PillButton`; component already supports it — confirmed in `BookSection`.)
+Reorder `<main>` to: BrandHumanizingSection (kept) is moved DOWN; new order:
+1. Hero
+2. TrustLine
+3. **BlogSection** (Writing)
+4. **BookSection**
+5. **SpeakerSection** (On Stage)
+6. **PodcastSection**
+7. **BrandHumanizingSection** (The Idea)
+8. **AboutBlock** (My Story)
+9. AlsoByFerry
+10. CommunitySection (Newsletter)
+
+SEO meta description → "Ferry Hoes writes, speaks, and podcasts about one idea: technology should make us more human, not less. Essays, the book Brand Humanizing, The Human Era Podcast, and keynotes."
+
+### 2. `Hero.tsx`
+
+- Eyebrow unchanged.
+- H1 → `Technology should make us more` `human,` (orange) ` not less` `.` (orange Period). Preserve current two-line `<br />` so wrapping reads naturally.
+- Sub → "I'm Ferry Hoes. I write, speak, and podcast about one idea ten years in the making: technology that amplifies what's human instead of replacing it. Everything below is a way in."
+- Primary CTA → `Read the latest essay →`. Use `useBlogPosts(1)` to fetch the most recent post; if a slug exists, link to `/blog/{slug}`, otherwise fallback to `/writing`. (Component supports `to` prop already.)
+- Ghost CTA stays: `Book Ferry →` external to Speakers Academy.
 - Polaroid + caption untouched.
 
-### 2. Homepage — `SpeakerSection.tsx`
+### 3. `TrustLine.tsx`
 
-- Intro paragraph → "From Brand Humanizing and the future of work to AI leadership. Talks that challenge assumptions, spark conversations, and leave audiences with something they'll actually use on Monday."
-- Reorder topics array so **Brand Humanizing is #1**, **The Human Era of Work #2**, **AI, without the noise #3** (copy already matches the spec).
-- Primary CTA: change label `Speaker enquiries` → `Book Ferry` and route externally to `SPEAKERS_ACADEMY_URL` (new tab).
-- Ghost CTA `See talks & reel` → `/on-stage` (unchanged).
+- Replace sentence with: `Teams I've worked with: Vodafone, GSK, Toshiba, Atos, ASR, Chubb, and the Dutch Ministry of Finance.`
 
-### 3. Homepage — `BookSection.tsx`
+### 4. `BlogSection.tsx` (Writing — moved up)
 
-- Body unchanged.
-- Change primary CTA label from `Get the book` → `See the book` and route from external `brandhumanizingboek.nl` → internal `to="/the-book"`.
-- Waitlist form unchanged.
+- H2 → "The latest from my `desk`." (orange + Period).
+- Add a sub paragraph under the headline: "Short essays on humans, technology, and the work in between. New ones when there's something worth saying."
+- Empty state copy → "The first essays are being written. Check back soon."
+- CTA stays: `All writing →`.
 
-### 4. `SiteHeader.tsx` — Book Ferry pill
+### 5. `BookSection.tsx` (moved up, more prominent)
 
-- Desktop pill: replace `<Link to="/book">` with `<a href={SPEAKERS_ACADEMY_URL} target="_blank" rel="noopener noreferrer">`. Keep classes/icon identical.
-- Mobile menu pill: same swap.
+- H2 → "The full argument, on `paper`." (orange + Period).
+- Body paragraph (replaces current 2 paragraphs) → "Brand Humanizing — co-written with my best friend Jonathan Flores. Ten years of thinking, a framework, and case studies from the organisations actually getting it right. Available in Dutch now. English edition on the way."
+- Case-studies row already exists ("Featuring case studies from a.s.r., Ben & Jerry's, Dove, Octopus Energy, Patagonia and more.") — keep as is, it satisfies the spec.
+- Add ghost CTA `English waitlist` next to primary `See the book →`. Ghost links to `/the-book#waitlist`. (Anchor target lives on the homepage form too — using `/the-book` page anchor is consistent with spec; on the home page the form is right there so the anchor is purely for users who navigate first.)
+- Waitlist form copy unchanged.
 
-### 5. `App.tsx` + `/book` route
+### 6. `SpeakerSection.tsx` (On Stage)
 
-- Replace `<Route path="/book" element={<Book />} />` with a tiny `BookRedirect` component that does `window.location.replace(SPEAKERS_ACADEMY_URL)` on mount and renders null. Keeps any stray legacy links functional. `Book.tsx` import removed.
-- The legacy `/contact` redirect currently goes to `/book` — repoint it directly to the same external URL via the same redirect pattern (or to `/`). Will route `/contact` → `BookRedirect` for consistency.
+- H2 → "Want this in your `room`." (orange + Period).
+- Sub → "I give around 40 keynotes a year to boards, leadership teams, and everyone trying to figure out what 'human' means in a tech-heavy world. My agent handles bookings."
+- Three topic cards already in correct order (Brand Humanizing → Human Era of Work → AI without the noise). No changes.
+- CTAs unchanged: primary `Book Ferry →` external, ghost `See talks & reel →` to /on-stage.
 
-### 6. `/on-stage` — promote `Speaking.tsx`
+### 7. `PodcastSection.tsx`
 
-- Change `<Route path="/on-stage" element={<OnStage />} />` to render `<Speaking />` (rename file optional; minimum-touch = swap the element). `OnStage.tsx` placeholder no longer used (kept in repo).
-- Inside `Speaking.tsx`:
-  - **Hero sub** → "Talks on Brand Humanizing, the future of work, and AI leadership. No death-by-PowerPoint. Just stories, insights, and practical ideas that spark real conversations and drive meaningful change."
-  - **Hero CTA** "Book Ferry for your event" stays external (already correct URL); rename label to `Book Ferry →` per spec. Add a "Watch the reel" anchor link beside it pointing to `#speaker-reel` (uses existing scroll target).
-  - **Keynote topics array** → replace entry index 1 (`The AI conversation most organisations skip`) with **The Human Era of Work** (title, body, audience, takeaways) per spec. Keep entries 0, 2, 3, 4 untouched.
-  - **"Enquire about this talk"** buttons inside each topic card → change `<Link to="/contact">` to external anchor → `SPEAKERS_ACADEMY_URL` (new tab). Same for "Discuss a custom keynote" inside the custom-topic card.
-  - **Final CTA** H2 → "Ready to inspire your `audience`." (orange word + Period). Body → "Ferry replies personally within two working days. For formal bookings he is exclusively represented by Speakers Academy." CTA label → `Book Ferry →` (already external).
-  - **SEO** title/description on this page: leave for now (spec says only homepage meta updates).
+- H2 → "Long conversations, no `soundbites`." (orange + Period).
+- Sub → "I host The Human Era Podcast. Guests include CEOs, professors, artists, and entrepreneurs asking good questions about the balance between efficiency and meaning."
+- Episode cards unchanged.
+- CTAs: keep primary `Listen on Spotify` (external). Replace second pill `Listen on Apple` with ghost `All episodes →` linking to `/podcast`. (Spec asks for these two CTAs; the Apple link still lives on /podcast page itself.)
 
-### 7. `/the-idea` and `/my-story`
+### 8. `BrandHumanizingSection.tsx` (The Idea)
 
-Both are still placeholders today (no "Bring this talk to your team" / "Book Ferry" CTAs exist on them). Spec asks to update those CTAs at the bottom — but they don't exist yet. **No-op for this pass**; will be wired when the long-form copy lands. Noting this so it's not silently skipped.
+- H2 → "One idea, ten years in the `making`." (orange + Period).
+- Body → replace 3 paragraphs with: 
+  1. "Technology should amplify what's human, not replace it. It sounds obvious. It isn't."
+  2. "Most organisations are still racing in the wrong direction — using tech to do more of the same, faster. The brands that win in the long run do the opposite."
+- Keep handwritten line: "Sounds obvious. Turns out it isn't."
+- CTA stays: `Read the full idea →`.
 
-### 8. `/the-book` — `TheBook.tsx`
+### 9. `AboutBlock.tsx` (My Story)
 
-Currently a `PlaceholderPage` (no hero CTAs to swap). Spec says "Hero CTAs — UPDATE: Change 'Get the Dutch edition' primary CTA to external link." Since no such CTA exists yet, **add a single primary `PillButton` to the placeholder** linking externally to `BOOK_RETAILER_URL` (new tab) labelled `Get the Dutch edition →`. This is the smallest possible addition that satisfies the spec without changing layout.
+- H2 → "How I got `here`." (orange + Period).
+- Body → "Talkative kid from Delft. Introverted student. Teenager writing lyrics. IT sales account manager. Growth hacker. Then one lunch with my best friend Jonathan in 2017 and a term that stuck: Brand Humanizing. This is the long version."
+- Polaroid caption stays "Mid-keynote, somewhere in 2025." (already matches).
+- CTA label → `More about me` (was "More about Ferry").
 
-### 9. `/podcast`
+### 10. `Speaking.tsx` (/on-stage page) — final CTA only
 
-Already exists (`Podcast.tsx`). Per spec: skip.
+- Final CTA "Book Ferry" already external — no change.
+- Spec also asks to update talk 02 to "Human Era of Work" — already done in previous pass. Verified.
+- Hero, takeaways, all other content untouched.
 
-### 10. SEO meta — homepage only
+### 11. `Podcast.tsx` page — small additions
 
-`Index.tsx` `SEOHead description` → "The 'now what' after AI. Ferry Hoes helps organisations stay human in a tech-heavy world. International keynote speaker, author of Brand Humanizing, host of The Human Era Podcast."
+- Hero H1 stays as the existing styled headline (page already exists; spec says "create if doesn't exist" → skip recreation). 
+- Update only the bottom CTA: replace `<Link to="/contact" state={{ from: "podcast" }}>` "Got a topic suggestion?" with `<a href="mailto:ferry@brandhumanizing.com">` labelled `Pitch a guest →`. Everything else on this page stays.
+
+### 12. `TheBook.tsx`
+
+Already has the external `Get the Dutch edition` button to `brandhumanizingboek.nl`. No change needed.
+
+### 13. Out of scope (unchanged)
+
+- All visual styling, layout, components, fonts, colors, spacing, animations.
+- Polaroid images and captions.
+- AlsoByFerry, CommunitySection, Footer.
+- /the-idea, /my-story, /writing pages (still placeholders/intentional).
+- /book route (already redirects externally from previous pass).
+- Header nav (already has /podcast).
 
 ### Files touched
 
-`src/components/sections/Hero.tsx`, `src/components/sections/SpeakerSection.tsx`, `src/components/sections/BookSection.tsx`, `src/components/SiteHeader.tsx`, `src/App.tsx`, `src/pages/Speaking.tsx`, `src/pages/TheBook.tsx`, `src/pages/Index.tsx`. New tiny inline `BookRedirect` component (in `App.tsx`, no new file needed).
-
-### Out of scope (unchanged)
-
-- All visual styling, fonts, colors, spacing, components, animations.
-- Polaroid image/caption.
-- Trust line, The Idea block, My Story block, Podcast block, Writing block, Also by Ferry, Newsletter.
-- All other page meta.
-- `/the-idea` and `/my-story` long-form CTAs (page bodies don't exist yet).
+`src/pages/Index.tsx`, `src/components/sections/Hero.tsx`, `src/components/sections/TrustLine.tsx`, `src/components/sections/BlogSection.tsx`, `src/components/sections/BookSection.tsx`, `src/components/sections/SpeakerSection.tsx`, `src/components/sections/PodcastSection.tsx`, `src/components/sections/BrandHumanizingSection.tsx`, `src/components/sections/AboutBlock.tsx`, `src/pages/Podcast.tsx`.
 
