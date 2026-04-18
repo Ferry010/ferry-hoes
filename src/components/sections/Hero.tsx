@@ -1,7 +1,5 @@
 import { Eyebrow, Period } from "@/components/HeadingDot";
 import PillButton from "@/components/PillButton";
-import Polaroid from "@/components/Polaroid";
-import ferryPhoto from "@/assets/ferry-speaking-audience.jpg";
 import { useBlogPosts } from "@/hooks/useBlogPosts";
 
 /**
@@ -58,17 +56,29 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Polaroid column */}
+          {/* Polaroid-framed keynote video */}
           <div className="lg:col-span-5 flex justify-center lg:justify-end">
             <div className="w-full max-w-md">
-              <Polaroid
-                src={ferryPhoto}
-                alt="Ferry Hoes mid-conversation with an audience"
-                caption="Listening, mostly."
-                rotate={2}
-                aspect="portrait"
-                loading="eager"
-              />
+              <div
+                className="relative bg-white p-2.5 pb-8 shadow-polaroid transition-transform duration-300 ease-out hover:!rotate-0"
+                style={{ transform: "rotate(2deg)" }}
+              >
+                <div className="aspect-[4/5] overflow-hidden bg-muted">
+                  <video
+                    src="/videos/Ferry_Hero_vid_2026.webm"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="auto"
+                    aria-hidden="true"
+                    className="w-full h-full object-cover object-top"
+                  />
+                </div>
+                <p className="text-center mt-3 font-handwritten text-xl md:text-2xl text-ink-navy leading-tight">
+                  Listening, mostly.
+                </p>
+              </div>
             </div>
           </div>
         </div>
