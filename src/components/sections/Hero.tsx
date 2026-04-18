@@ -44,7 +44,7 @@ const Hero = () => {
 
             <div className="mt-10 flex flex-wrap gap-3 md:gap-4">
               <PillButton to={essayHref} variant="primary">
-                Read the latest essay
+                Read the latest thought
               </PillButton>
               <PillButton
                 href="https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966"

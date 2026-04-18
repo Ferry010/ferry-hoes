@@ -44,7 +44,7 @@ const BookSection = () => {
               <div className="absolute inset-0 bg-foreground/10 rounded-lg blur-2xl translate-x-3 translate-y-4" />
               <img
                 src={bookCover}
-                alt="Brand Humanizing — the book by Ferry Hoes and Jonathan Flores"
+                alt="Brand Humanizing, the book by Ferry Hoes and Jonathan Flores"
                 loading="lazy"
                 className="relative z-10 w-full max-w-xs rounded-md shadow-soft-xl"
               />
@@ -65,7 +65,7 @@ const BookSection = () => {
             </h2>
 
             <p className="mt-7 text-lg md:text-xl text-foreground/80 leading-[1.55] max-w-xl">
-              Brand Humanizing — co-written with my best friend Jonathan Flores.
+              Brand Humanizing, co-written with my best friend Jonathan Flores.
               Ten years of thinking, a framework, and case studies from the
               organisations actually getting it right. Available in Dutch now.
               English edition on the way.

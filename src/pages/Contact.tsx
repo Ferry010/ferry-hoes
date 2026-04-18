@@ -32,9 +32,9 @@ const KEYNOTE_TOPICS = [
 
 const AUDIENCE_SIZES = [
   { value: "under-50", label: "Under 50" },
-  { value: "50-100", label: "50–100" },
-  { value: "100-300", label: "100–300" },
-  { value: "300-1000", label: "300–1,000" },
+  { value: "50-100", label: "50 to 100" },
+  { value: "100-300", label: "100 to 300" },
+  { value: "300-1000", label: "300 to 1,000" },
   { value: "1000+", label: "1,000+" },
 ];
 
@@ -50,7 +50,7 @@ const INQUIRY_OPTIONS = [
 
 const TIMELINE_OPTIONS = [
   { value: "weeks", label: "Within a few weeks" },
-  { value: "1-3months", label: "1–3 months" },
+  { value: "1-3months", label: "1 to 3 months" },
   { value: "flexible", label: "Flexible" },
   { value: "exploring", label: "Just exploring" },
 ];

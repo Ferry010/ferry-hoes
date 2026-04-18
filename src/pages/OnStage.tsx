@@ -2,7 +2,7 @@ import PlaceholderPage from "./PlaceholderPage";
 
 const OnStage = () => (
   <PlaceholderPage
-    title="On Stage — Keynote Speaker | Ferry Hoes"
+    title="On Stage: Keynote Speaker | Ferry Hoes"
     seoDescription="Keynote topics, speaker reel, sample audiences, and testimonials. Ferry Hoes is exclusively represented by Speakers Academy."
     canonicalUrl="/on-stage"
     eyebrow="On Stage"

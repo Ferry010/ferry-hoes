@@ -13,7 +13,7 @@ const Blog = () => {
     <>
       <SEOHead
         title="Blog | Ferry Hoes: Insights on AI, Technology & Brand Humanizing"
-        description="Essays and perspectives on artificial intelligence, the future of work, human-centred leadership, and Brand Humanizing by keynote speaker Ferry Hoes."
+        description="Thoughts and perspectives on artificial intelligence, the future of work, human-centred leadership, and Brand Humanizing by keynote speaker Ferry Hoes."
         ogType="website"
         canonicalUrl="/blog"
       />
@@ -44,7 +44,7 @@ const Blog = () => {
               </h1>
 
               <p className="text-xl text-muted-foreground max-w-2xl">
-                Essays, insights, and perspectives on artificial intelligence, the future of work,
+                Thoughts, insights, and perspectives on artificial intelligence, the future of work,
                 and everything in between.
               </p>
             </div>

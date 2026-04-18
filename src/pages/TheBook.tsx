@@ -7,8 +7,8 @@ import PillButton from "@/components/PillButton";
 const TheBook = () => (
   <>
     <SEOHead
-      title="The Book — Brand Humanizing | Ferry Hoes"
-      description="Brand Humanizing — the book by Ferry Hoes and Jonathan Flores. Available in Dutch. English edition launching soon."
+      title="The Book: Brand Humanizing | Ferry Hoes"
+      description="Brand Humanizing, the book by Ferry Hoes and Jonathan Flores. Available in Dutch. English edition launching soon."
       canonicalUrl="/the-book"
     />
     <SiteHeader />
