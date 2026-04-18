@@ -21,20 +21,20 @@ const BrandHumanizingSection = () => {
             className="font-display font-bold text-foreground leading-[1.02]"
             style={{ fontSize: "clamp(40px, 6vw, 88px)" }}
           >
-            Everyone can copy your technology. No one can copy your{" "}
-            <span className="text-primary">people</span>
+            One idea, ten years in the{" "}
+            <span className="text-primary">making</span>
             <Period />
           </h2>
 
           <div className="mt-10 space-y-6 text-lg md:text-xl text-foreground/80 leading-[1.6] max-w-2xl">
             <p>
-              Brand Humanizing is a strategy for the digital age. It says the
-              point of technology isn't to replace what makes us human. It's to
-              amplify it.
+              Technology should amplify what's human, not replace it. It sounds
+              obvious. It isn't.
             </p>
             <p>
-              The brands that get this right become more distinctive, more
-              trusted, and more useful. The ones that don't become noise.
+              Most organisations are still racing in the wrong direction —
+              using tech to do more of the same, faster. The brands that win in
+              the long run do the opposite.
             </p>
             <p className="font-handwritten text-2xl md:text-3xl text-ink-navy not-italic">
               Sounds obvious. Turns out it isn't.

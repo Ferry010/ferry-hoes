@@ -36,15 +36,15 @@ const SpeakerSection = () => {
             className="font-display font-bold text-foreground leading-[1.02]"
             style={{ fontSize: "clamp(40px, 6vw, 88px)" }}
           >
-            On stages where it{" "}
-            <span className="text-primary">matters</span>
+            Want this in your{" "}
+            <span className="text-primary">room</span>
             <Period />
           </h2>
 
           <p className="mt-7 text-lg md:text-xl text-foreground/80 leading-[1.55] max-w-2xl">
-            From Brand Humanizing and the future of work to AI leadership. Talks
-            that challenge assumptions, spark conversations, and leave audiences
-            with something they'll actually use on Monday.
+            I give around 40 keynotes a year to boards, leadership teams, and
+            everyone trying to figure out what "human" means in a tech-heavy
+            world. My agent handles bookings.
           </p>
         </div>
 

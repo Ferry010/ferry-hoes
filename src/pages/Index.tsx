@@ -18,7 +18,7 @@ const Index = () => {
     <>
       <SEOHead
         title="Ferry Hoes — Keynote Speaker, Author of Brand Humanizing"
-        description="The 'now what' after AI. Ferry Hoes helps organisations stay human in a tech-heavy world. International keynote speaker, author of Brand Humanizing, host of The Human Era Podcast."
+        description="Ferry Hoes writes, speaks, and podcasts about one idea: technology should make us more human, not less. Essays, the book Brand Humanizing, The Human Era Podcast, and keynotes."
         ogType="website"
         canonicalUrl="/"
       />
@@ -34,12 +34,12 @@ const Index = () => {
         <TrustLine />
 
         <main>
+          <article><BlogSection /></article>
+          <article><BookSection /></article>
+          <article><SpeakerSection /></article>
+          <article><PodcastSection /></article>
           <article><BrandHumanizingSection /></article>
           <article><AboutBlock /></article>
-          <article><SpeakerSection /></article>
-          <article><BookSection /></article>
-          <article><PodcastSection /></article>
-          <article><BlogSection /></article>
           <AlsoByFerry />
           <CommunitySection />
         </main>

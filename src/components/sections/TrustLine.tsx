@@ -9,8 +9,8 @@ const TrustLine = () => (
   >
     <div className="container max-w-[1280px] px-6 md:px-10 lg:px-14 py-8 md:py-10">
       <p className="text-sm md:text-base text-muted-foreground leading-relaxed max-w-4xl">
-        Trusted by teams at Vodafone, GSK, Toshiba, Atos, ASR, Chubb, and the
-        Dutch Ministry of Finance.
+        Teams I've worked with: Vodafone, GSK, Toshiba, Atos, ASR, Chubb, and
+        the Dutch Ministry of Finance.
       </p>
     </div>
   </section>
