@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Mic, Quote, Play, MessageSquarePlus, Globe, CheckCircle2, Users, Lightbulb } from "lucide-react";
+import SiteHeader from "@/components/SiteHeader";
 import Footer from "@/components/sections/Footer";
 
 import SEOHead from "@/components/blog/SEOHead";
@@ -100,6 +101,7 @@ const TESTIMONIALS = [
 const Speaking = () => {
   return (
     <>
+      <SiteHeader />
       <SEOHead
         title="AI Keynote Speaker for Conferences & Corporate Events | Ferry Hoes"
         description="Book Ferry Hoes for your next event. Keynote talks on AI, the future of work, human-centred leadership, and Brand Humanizing. Trusted by global organisations. Available internationally."
