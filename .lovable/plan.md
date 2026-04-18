@@ -1,92 +1,63 @@
 
 
-## Restructure homepage + 2 new sections (no design changes)
+## Fix-up pass: page copy + missing nav + hero check
 
-Most copy is already correct from previous passes. This pass adds **two new sections**, **swaps the hero photo for a silent video**, **reorders the homepage**, and does small cleanup. No design system, typography, color, or spacing changes.
+Three issues. Tightly scoped. No homepage or design-system changes.
 
-### What's already correct (no-op, verified in code)
+### Issue 1 — Restore full copy on /my-story, /the-idea, /writing
 
-- Hero H1, sub, CTAs, eyebrow — already match spec.
-- Trust line label "Teams I've worked with" — already correct.
-- Writing block H2 + sub + empty state — correct.
-- Book block H2, body, case studies strip, CTAs — correct (waitlist anchors to `/the-book#waitlist`; will retarget ghost to `#waitlist` since the form lives on the homepage section too).
-- Speaker section H2, sub, three topics in correct order — correct.
-- Podcast section H2, sub, CTAs — correct.
-- The Idea block H2, body, handwritten line, CTA — correct.
-- `/podcast` page already exists with hero, episodes, mailto CTA — only small subscribe-strip addition needed.
-- `/the-book` external CTA, `/book` redirect, `/on-stage` talk 02, all "Book Ferry" external — done.
+These three pages are currently `PlaceholderPage` stubs.
 
-### 1. Hero — swap polaroid for silent looping keynote video
+**`src/pages/MyStory.tsx`** — full rebuild as a real page (no longer uses PlaceholderPage):
+- `<SiteHeader />` + `<SEOHead />` + `<Footer />`.
+- Hero with eyebrow, H1 "I help brands become more **human**.", sub, and a portrait polaroid (`ferry-portrait.jpg`) with handwritten caption "Where it all started."
+- Six narrative sections in editorial 2-column rhythm (eyebrow + H2 + body), with two pull quotes styled in Inter Tight large + orange period, and the "Mid-keynote, somewhere in 2025." polaroid mid-page using `ferry-on-stage.jpg`, plus "The book, finally on a shelf." polaroid using `ferry-bookstore.jpg`.
+- Timeline section: vertical list, year + dash + milestone, ink type with orange year.
+- Final CTA block: H2 "Want to work **together**.", body, primary `Book Ferry →` (external Speakers Academy, new tab), ghost `Read the idea →` to `/the-idea`.
+- All copy verbatim from spec. No em/en dashes (already none in spec text except the timeline year separator "—" which I'll render as a comma per the no-dash rule).
 
-`src/components/sections/Hero.tsx`
+**`src/pages/TheIdea.tsx`** — full rebuild:
+- Same scaffolding (SiteHeader, SEOHead, Footer).
+- Hero: eyebrow "• THE IDEA", H1 "Everyone can copy your technology. No one can copy your **people**.", sub.
+- Three sections (The premise, The shift, The method) with eyebrow + H2 + body. Pull quote ("Efficiency is not a strategy. It's table stakes.") rendered as a handwritten Caveat block in navy, matching site treatment.
+- The method's three numbered items rendered as a 3-column grid on desktop (each with `01.` orange numeral + bold question + body), stacking on mobile. Same pattern as `SpeakerSection` topic cards but no border (editorial restraint).
+- Final CTA: primary `See the book →` to `/the-book`, ghost `Bring this talk to your team →` external to Speakers Academy.
+- All "—" in spec body text replaced with commas (no dashes rule).
 
-Replace the right column `<Polaroid>` with a self-contained polaroid-styled `<video>` using the existing `/videos/Ferry_Hero_vid_2026.webm` asset. Same wrapper dimensions (`max-w-md`, portrait aspect), same rotation (`rotate(2deg)`), same paper frame, same handwritten caption "Listening, mostly." underneath. `autoPlay muted loop playsInline preload="auto"` with `aria-hidden="true"`. Polaroid component import removed from this file only — keep the file in repo since it's used elsewhere (AboutBlock).
+**`src/pages/Writing.tsx`** — replace placeholder with the real blog index:
+- Reuse the existing `useBlogPosts()` hook and `BlogCard` component (already used by `/blog`).
+- `<SiteHeader />`, `<SEOHead />` (canonical `/writing`), `<Footer />`.
+- Hero: eyebrow "• WRITING", H1 "Short essays on humans, technology, and the work in **between**.", sub.
+- Category filter row (pill buttons): All · Brand Humanizing · AI · Leadership · Future of Work. Client-side filter on post title/excerpt match (case-insensitive contains) since posts have no category column. "All" is default and active by default; this is a soft filter that gracefully shows everything when no posts match — meets spec without DB schema change.
+- Grid: 3-column desktop, 2 tablet, 1 mobile. Uses `BlogCard` default variant.
+- Empty state: "The first essays are being written. Check back soon."
+- Loading skeleton matches `/blog` page.
 
-### 2. NEW — Credentials strip
+The existing `/blog` route remains for back-compat; `/writing` becomes the canonical blog index per spec.
 
-`src/components/sections/CredentialsStrip.tsx` (new file)
+### Issue 2 — Missing global nav on /on-stage and /podcast
 
-Thin section directly below `<Hero>`, above `<TrustLine>`. Single horizontal row on desktop, wraps gracefully on mobile. One-line rule above and below (`border-y border-border/60`). Each entry styled like an eyebrow (uppercase, tracked, small), separated by `·` pipes. Each is a link with terracotta hover (`hover:text-primary`).
+Both pages currently render `<Footer />` but no `<SiteHeader />`. Fix:
 
-Content:
-- "International Keynote Speaker" → `/on-stage`
-- "Author of *Brand Humanizing*" → `/the-book` (italic on book title)
-- "Host of *The Human Era Podcast*" → `/podcast` (italic on show title)
-- "Co-founder of Brand Humanizing Institute" → `https://brandhumanizing.com` (external, new tab)
+- **`src/pages/Speaking.tsx`**: import `SiteHeader` and render `<SiteHeader />` as the first element inside the returned fragment, before existing content. No other changes to this file.
+- **`src/pages/Podcast.tsx`**: same — add `<SiteHeader />` as the first element. No other changes.
 
-Mounted in `Index.tsx` between `<Hero>` and `<TrustLine>`.
+### Issue 3 — Hero "off-brand" feedback
 
-### 3. NEW — Three Roads block (replaces `AboutBlock` slot)
+I checked: the current `Hero.tsx` already follows the documented design system (Eyebrow + orange Period + polaroid + Caveat handwritten caption + Inter Tight display). The spec mentions Fraunces, but the project's typography memory (`mem://style/typography`) explicitly uses **Inter Tight + Inter + Caveat**, not Fraunces. The Hero matches every other page on the site.
 
-`src/components/sections/ThreeRoads.tsx` (new file)
-
-Replaces `<AboutBlock />` in the homepage section list. `AboutBlock.tsx` stays in repo, just unmounted from Index.
-
-Layout: `Eyebrow` "• Ways in", H2 "Three ways to plug **in**." (orange + Period), sub paragraph. Then a 3-column grid (stacked on mobile) using the same card pattern as `SpeakerSection` topic cards (`bg-background-alt border border-border rounded-2xl p-7`, hover lift, `• <tag>` eyebrow, H3, body, ghost arrow link). Each card includes a portrait photo at the top using existing assets:
-
-- Card 1 "The Human / My story." — photo `ferry-portrait.jpg` → `/my-story` ("Read the story →")
-- Card 2 "The Speaker / On stage." — photo `ferry-on-stage.jpg` → `/on-stage` ("See talks & reel →")
-- Card 3 "The Writer / My writing." — photo `ferry-bookstore.jpg` → `/writing` ("Read essays →")
-
-Photos rendered inside each card with `aspect-[4/3] object-cover rounded-xl mb-5`, matching the editorial restraint.
-
-### 4. Reorder `Index.tsx`
-
-New order under `<main>`:
-
-```
-<CredentialsStrip />        ← NEW (between Hero and TrustLine, outside main)
-<TrustLine />
-<main>
-  <ThreeRoads />            ← NEW, replaces AboutBlock
-  <BlogSection />           (Writing)
-  <BookSection />
-  <SpeakerSection />        (On Stage)
-  <PodcastSection />
-  <BrandHumanizingSection /> (The Idea)
-  <AlsoByFerry />
-  <CommunitySection />      (Newsletter)
-</main>
-```
-
-Spec puts ThreeRoads after TrustLine — that matches above. AboutBlock import removed.
-
-### 5. Tiny tweaks
-
-- `BookSection.tsx`: change ghost CTA href from `/the-book#waitlist` to `#waitlist` and add `id="waitlist"` to the waitlist `<div>` so the homepage anchor scrolls in-page (the form is on the homepage). `/the-book` page already has its own waitlist anchor.
-- `Podcast.tsx` page: add YouTube + RSS buttons to the existing subscribe strip in the hero. Use placeholder hrefs (`#`) for YouTube/RSS with a TODO comment if no real URL is in code — actually I'll route YouTube to a search and RSS to `https://anchor.fm/s/.../podcast/rss` if discoverable; otherwise leave the two existing buttons (Spotify, Apple) as-is since spec is "if it doesn't exist, create" and the page already exists with two of four. Will add the two missing buttons as visually identical pills with `#` href + `aria-disabled` if no source URL exists, so the design stays clean.
-
-### 6. Out of scope (untouched)
-
-- All visual styling, fonts, colors, spacing, animations.
-- AboutBlock.tsx file (kept; just unmounted).
-- /the-idea, /my-story, /writing, /the-book pages.
-- Header nav and footer.
-- Speaking.tsx page (talk 02 already updated in prior pass).
+I won't change the Hero. If the user wants Fraunces introduced site-wide, that's a separate, larger design-system change and should be raised explicitly. Calling it out here so the user can confirm or correct.
 
 ### Files touched
 
-**New:** `src/components/sections/CredentialsStrip.tsx`, `src/components/sections/ThreeRoads.tsx`.
+- **Rewritten**: `src/pages/MyStory.tsx`, `src/pages/TheIdea.tsx`, `src/pages/Writing.tsx`.
+- **Edited (one-line nav add)**: `src/pages/Speaking.tsx`, `src/pages/Podcast.tsx`.
+- **Untouched**: Hero, homepage, all other components and pages.
 
-**Edited:** `src/pages/Index.tsx`, `src/components/sections/Hero.tsx`, `src/components/sections/BookSection.tsx`, `src/pages/Podcast.tsx`.
+### Out of scope
+
+- Homepage (Hero, CredentialsStrip, ThreeRoads, all sections).
+- Design system, fonts, colors, spacing.
+- Blog CMS / Supabase schema.
+- Adding category column to `blog_posts` (filter is client-side).
 
