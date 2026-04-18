@@ -7,7 +7,7 @@ const MyStory = () => (
     canonicalUrl="/my-story"
     eyebrow="My Story"
     headline={<>I help brands become more <span className="text-primary">human</span></>}
-    intro="Ten years of work, three companies, one big idea — told as a story rather than a CV."
+    intro="Ten years of work, three companies, one big idea, told as a story rather than a CV."
   />
 );
 

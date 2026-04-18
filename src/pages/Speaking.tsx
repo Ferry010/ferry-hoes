@@ -357,7 +357,7 @@ const Speaking = () => {
                 <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl">
                   <iframe
                     src="https://www.youtube.com/embed/foEehJ_pwck?start=2&controls=0&rel=0&modestbranding=1"
-                    title="Ferry Hoes – Speaker Reel"
+                    title="Ferry Hoes, Speaker Reel"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                     loading="lazy"

@@ -13,7 +13,7 @@ const cards = [
     accent: "text-primary",
   },
   {
-    name: "AIGA — AI Geletterdheid Academy",
+    name: "AIGA, AI Geletterdheid Academy",
     blurb:
       "The #1 AI literacy training for Dutch organisations. AI Act-compliant.",
     href: "https://aigeletterdheid.academy",

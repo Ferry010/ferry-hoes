@@ -66,7 +66,7 @@ const ContentGrid = () => {
               </h2>
             </div>
             <p className="text-muted-foreground text-lg mt-4 md:mt-0 max-w-md">
-              Essays, ideas, and experiments. No clickbait. No fluff.
+              Thoughts, ideas, and experiments. No clickbait. No fluff.
             </p>
           </div>
 

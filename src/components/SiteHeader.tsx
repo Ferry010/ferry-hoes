@@ -54,7 +54,7 @@ const SiteHeader = () => {
           <Link
             to="/"
             className="font-display font-bold text-base md:text-[17px] tracking-tight text-foreground hover:opacity-80 transition-opacity"
-            aria-label="Ferry Hoes — Home"
+            aria-label="Ferry Hoes, Home"
           >
             FERRY HOES<span className="text-primary">.</span>
           </Link>

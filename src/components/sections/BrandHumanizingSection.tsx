@@ -32,7 +32,7 @@ const BrandHumanizingSection = () => {
               obvious. It isn't.
             </p>
             <p>
-              Most organisations are still racing in the wrong direction —
+              Most organisations are still racing in the wrong direction,
               using tech to do more of the same, faster. The brands that win in
               the long run do the opposite.
             </p>

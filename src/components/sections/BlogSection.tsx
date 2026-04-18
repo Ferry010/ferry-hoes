@@ -24,7 +24,7 @@ const BlogSection = () => {
           </h2>
 
           <p className="mt-7 text-lg md:text-xl text-foreground/80 leading-[1.55]">
-            Short essays on humans, technology, and the work in between. New
+            Short thoughts on humans, technology, and the work in between. New
             ones when there's something worth saying.
           </p>
         </div>
@@ -50,7 +50,7 @@ const BlogSection = () => {
                 className="group block"
               >
                 <span className="text-[11px] uppercase tracking-[0.16em] font-semibold text-primary">
-                  • Essay
+                  • Thought
                 </span>
                 <h3 className="mt-3 font-display text-xl md:text-2xl font-bold text-foreground leading-snug group-hover:text-primary transition-colors">
                   {post.title}
@@ -61,7 +61,7 @@ const BlogSection = () => {
                   </p>
                 )}
                 <span className="mt-4 inline-flex items-center gap-2 text-sm text-muted-foreground">
-                  Read essay
+                  Read thought
                   <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
                 </span>
               </Link>
@@ -69,7 +69,7 @@ const BlogSection = () => {
           </div>
         ) : (
           <p className="text-muted-foreground text-lg mb-12">
-            The first essays are being written. Check back soon.
+            The first thoughts are being written. Check back soon.
           </p>
         )}
 
