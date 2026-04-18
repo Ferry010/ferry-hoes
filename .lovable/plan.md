@@ -1,41 +1,92 @@
 
 
-## Copy tweak: "essay" → "thoughts" + remove all en/em dashes
+## Restructure homepage + 2 new sections (no design changes)
 
-Two small global copy passes. No design changes.
+Most copy is already correct from previous passes. This pass adds **two new sections**, **swaps the hero photo for a silent video**, **reorders the homepage**, and does small cleanup. No design system, typography, color, or spacing changes.
 
-### 1. Replace "essay/essays" with "thought/thoughts"
+### What's already correct (no-op, verified in code)
 
-Affected files (case-preserving):
-- `Hero.tsx`: "Read the latest essay" → "Read the latest thought"
-- `BlogSection.tsx`: 
-  - Eyebrow stays "Writing"
-  - "• Essay" pill → "• Thought"
-  - "Read essay" → "Read thought"
-  - "Short essays on humans..." → "Short thoughts on humans..."
-  - Empty state "The first essays are being written." → "The first thoughts are being written."
+- Hero H1, sub, CTAs, eyebrow — already match spec.
+- Trust line label "Teams I've worked with" — already correct.
+- Writing block H2 + sub + empty state — correct.
+- Book block H2, body, case studies strip, CTAs — correct (waitlist anchors to `/the-book#waitlist`; will retarget ghost to `#waitlist` since the form lives on the homepage section too).
+- Speaker section H2, sub, three topics in correct order — correct.
+- Podcast section H2, sub, CTAs — correct.
+- The Idea block H2, body, handwritten line, CTA — correct.
+- `/podcast` page already exists with hero, episodes, mailto CTA — only small subscribe-strip addition needed.
+- `/the-book` external CTA, `/book` redirect, `/on-stage` talk 02, all "Book Ferry" external — done.
 
-I'll also scan the rest of the codebase for any other "essay" copy strings I missed and update them in the same pass.
+### 1. Hero — swap polaroid for silent looping keynote video
 
-### 2. Remove em/en dashes from copy
+`src/components/sections/Hero.tsx`
 
-Replace `—` (em dash) and `–` (en dash) with either a comma, period, or colon depending on flow. Targeted strings I already know need fixing:
+Replace the right column `<Polaroid>` with a self-contained polaroid-styled `<video>` using the existing `/videos/Ferry_Hero_vid_2026.webm` asset. Same wrapper dimensions (`max-w-md`, portrait aspect), same rotation (`rotate(2deg)`), same paper frame, same handwritten caption "Listening, mostly." underneath. `autoPlay muted loop playsInline preload="auto"` with `aria-hidden="true"`. Polaroid component import removed from this file only — keep the file in repo since it's used elsewhere (AboutBlock).
 
-- `Hero.tsx` sub: "...one idea ten years in the making: technology that amplifies what's human instead of replacing it." (already a colon, fine)
-- `BookSection.tsx`: "Brand Humanizing — co-written with my best friend Jonathan Flores. Ten years of thinking, a framework, and case studies..." → "Brand Humanizing, co-written with my best friend Jonathan Flores. Ten years of thinking..."
-- `BookSection.tsx` case studies row: "Featuring case studies from a.s.r., Ben & Jerry's, Dove, Octopus Energy, Patagonia and more." (no dash, fine)
-- `BrandHumanizingSection.tsx`: "Most organisations are still racing in the wrong direction — using tech to do more of the same, faster." → "Most organisations are still racing in the wrong direction, using tech to do more of the same, faster."
-- `Speaking.tsx` (talk 02 body): "The AI hype has settled. The real question now is how to lead organisations where humans and machines work side by side without losing what makes work meaningful."  (no dash currently, fine)
-- Any other section bodies (`AboutBlock`, `SpeakerSection`, `PodcastSection`, `TrustLine`, `Speaking.tsx`, `Podcast.tsx`, `TheBook.tsx`) — full grep, replace each `—`/`–` with a contextual comma or period.
+### 2. NEW — Credentials strip
 
-I'll do a project-wide search for `—` and `–` in `src/**/*.{tsx,ts}` and fix every user-facing string. Code/comments untouched.
+`src/components/sections/CredentialsStrip.tsx` (new file)
 
-### Files likely touched
+Thin section directly below `<Hero>`, above `<TrustLine>`. Single horizontal row on desktop, wraps gracefully on mobile. One-line rule above and below (`border-y border-border/60`). Each entry styled like an eyebrow (uppercase, tracked, small), separated by `·` pipes. Each is a link with terracotta hover (`hover:text-primary`).
 
-`src/components/sections/Hero.tsx`, `src/components/sections/BlogSection.tsx`, `src/components/sections/BookSection.tsx`, `src/components/sections/BrandHumanizingSection.tsx`, `src/components/sections/AboutBlock.tsx`, `src/components/sections/SpeakerSection.tsx`, `src/components/sections/PodcastSection.tsx`, `src/components/sections/TrustLine.tsx`, `src/pages/Speaking.tsx`, `src/pages/Podcast.tsx`, `src/pages/TheBook.tsx`, `src/pages/Index.tsx` (SEO meta).
+Content:
+- "International Keynote Speaker" → `/on-stage`
+- "Author of *Brand Humanizing*" → `/the-book` (italic on book title)
+- "Host of *The Human Era Podcast*" → `/podcast` (italic on show title)
+- "Co-founder of Brand Humanizing Institute" → `https://brandhumanizing.com` (external, new tab)
 
-### Out of scope
+Mounted in `Index.tsx` between `<Hero>` and `<TrustLine>`.
 
-- No design, layout, or component changes.
-- Blog post content stored in Supabase (DB) is not touched — only static UI copy in the codebase.
+### 3. NEW — Three Roads block (replaces `AboutBlock` slot)
+
+`src/components/sections/ThreeRoads.tsx` (new file)
+
+Replaces `<AboutBlock />` in the homepage section list. `AboutBlock.tsx` stays in repo, just unmounted from Index.
+
+Layout: `Eyebrow` "• Ways in", H2 "Three ways to plug **in**." (orange + Period), sub paragraph. Then a 3-column grid (stacked on mobile) using the same card pattern as `SpeakerSection` topic cards (`bg-background-alt border border-border rounded-2xl p-7`, hover lift, `• <tag>` eyebrow, H3, body, ghost arrow link). Each card includes a portrait photo at the top using existing assets:
+
+- Card 1 "The Human / My story." — photo `ferry-portrait.jpg` → `/my-story` ("Read the story →")
+- Card 2 "The Speaker / On stage." — photo `ferry-on-stage.jpg` → `/on-stage` ("See talks & reel →")
+- Card 3 "The Writer / My writing." — photo `ferry-bookstore.jpg` → `/writing` ("Read essays →")
+
+Photos rendered inside each card with `aspect-[4/3] object-cover rounded-xl mb-5`, matching the editorial restraint.
+
+### 4. Reorder `Index.tsx`
+
+New order under `<main>`:
+
+```
+<CredentialsStrip />        ← NEW (between Hero and TrustLine, outside main)
+<TrustLine />
+<main>
+  <ThreeRoads />            ← NEW, replaces AboutBlock
+  <BlogSection />           (Writing)
+  <BookSection />
+  <SpeakerSection />        (On Stage)
+  <PodcastSection />
+  <BrandHumanizingSection /> (The Idea)
+  <AlsoByFerry />
+  <CommunitySection />      (Newsletter)
+</main>
+```
+
+Spec puts ThreeRoads after TrustLine — that matches above. AboutBlock import removed.
+
+### 5. Tiny tweaks
+
+- `BookSection.tsx`: change ghost CTA href from `/the-book#waitlist` to `#waitlist` and add `id="waitlist"` to the waitlist `<div>` so the homepage anchor scrolls in-page (the form is on the homepage). `/the-book` page already has its own waitlist anchor.
+- `Podcast.tsx` page: add YouTube + RSS buttons to the existing subscribe strip in the hero. Use placeholder hrefs (`#`) for YouTube/RSS with a TODO comment if no real URL is in code — actually I'll route YouTube to a search and RSS to `https://anchor.fm/s/.../podcast/rss` if discoverable; otherwise leave the two existing buttons (Spotify, Apple) as-is since spec is "if it doesn't exist, create" and the page already exists with two of four. Will add the two missing buttons as visually identical pills with `#` href + `aria-disabled` if no source URL exists, so the design stays clean.
+
+### 6. Out of scope (untouched)
+
+- All visual styling, fonts, colors, spacing, animations.
+- AboutBlock.tsx file (kept; just unmounted).
+- /the-idea, /my-story, /writing, /the-book pages.
+- Header nav and footer.
+- Speaking.tsx page (talk 02 already updated in prior pass).
+
+### Files touched
+
+**New:** `src/components/sections/CredentialsStrip.tsx`, `src/components/sections/ThreeRoads.tsx`.
+
+**Edited:** `src/pages/Index.tsx`, `src/components/sections/Hero.tsx`, `src/components/sections/BookSection.tsx`, `src/pages/Podcast.tsx`.
 
