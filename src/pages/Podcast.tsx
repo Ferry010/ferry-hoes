@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Headphones, Mic2 } from "lucide-react";
 import podcastHero from "@/assets/podcast-hero.jpg";
+import SiteHeader from "@/components/SiteHeader";
 import Footer from "@/components/sections/Footer";
 
 import SEOHead from "@/components/blog/SEOHead";
