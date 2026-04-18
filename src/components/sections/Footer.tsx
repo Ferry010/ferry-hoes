@@ -1,161 +1,140 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Input } from "@/components/ui/input";
-import { Eyebrow } from "@/components/HeadingDot";
-import { CheckCircle } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
-import { SPEAKERS_ACADEMY_URL, EXTERNAL_LINKS } from "@/config/site";
+import { ArrowUpRight } from "lucide-react";
 
-const SITE_LINKS = [
-  { to: "/the-idea", label: "The Idea" },
-  { to: "/my-story", label: "My Story" },
-  { to: "/on-stage", label: "On Stage" },
-  { to: "/podcast", label: "Podcast" },
-  { to: "/writing", label: "Writing" },
-  { to: "/the-book", label: "The Book" },
-];
-
+/**
+ * Editorial footer.
+ * Left: bio + newsletter promise. Middle: site links. Right: "Also by Ferry".
+ */
 const Footer = () => {
-  const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email.trim()) return;
-    setStatus("loading");
-    const { error } = await supabase
-      .from("email_subscribers" as any)
-      .insert({ email: email.trim(), source: "footer" } as any);
-    if (error && !error.message.includes("duplicate")) {
-      setStatus("error");
-      return;
-    }
-    setStatus("success");
-    setEmail("");
-  };
-
   return (
-    <footer className="bg-background border-t border-border pt-20 pb-10">
+    <footer className="bg-foreground text-background pt-20 pb-10 border-t border-border/20">
       <div className="container max-w-[1280px] px-6 md:px-10 lg:px-14">
         <div className="grid md:grid-cols-12 gap-12 md:gap-10">
           {/* Bio */}
-          <div className="md:col-span-4">
-            <p className="font-display text-3xl tracking-tight text-foreground" style={{ fontWeight: 500 }}>
-              Ferry Hoes.
+          <div className="md:col-span-5">
+            <p className="font-display text-2xl md:text-3xl font-bold tracking-tight">
+              Ferry Hoes<span className="text-primary">.</span>
             </p>
-            <p className="mt-5 text-base text-foreground/75 leading-relaxed max-w-sm">
-              Keynote speaker, author of Brand Humanizing, host of The Human Era Podcast.
+            <p className="mt-4 text-base text-background/70 leading-relaxed max-w-sm">
+              Keynote speaker, author of Brand Humanizing, host of The Human
+              Era Podcast.
             </p>
+            <p className="mt-6 text-sm text-background/60 max-w-sm">
+              A short letter, once a month. No fluff.
+            </p>
+            <Link
+              to="/#the-letter"
+              className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+            >
+              Join the letter →
+            </Link>
           </div>
 
-          {/* The Letter */}
-          <div className="md:col-span-4">
-            <Eyebrow>The Letter</Eyebrow>
-            <h3 className="font-display text-[28px] leading-[1.15] text-foreground" style={{ fontWeight: 500 }}>
-              A short letter. Once a month.
-            </h3>
-            <p className="mt-3 text-[15px] text-foreground/70">
-              No fluff. Unsubscribe in one click.
+          {/* Site links */}
+          <div className="md:col-span-3">
+            <p className="text-[11px] uppercase tracking-[0.16em] font-semibold text-background/50 mb-5">
+              Site
             </p>
-
-            <div className="mt-5 max-w-sm">
-              {status === "success" ? (
-                <p className="inline-flex items-center gap-2 text-sm text-accent font-medium">
-                  <CheckCircle className="h-4 w-4" />
-                  Got it. Ferry will write to you soon.
-                </p>
-              ) : (
-                <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2">
-                  <Input
-                    type="email"
-                    placeholder="your@email.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    className="flex-1 h-11 text-base bg-background border-foreground/30 rounded-none"
-                  />
-                  <button
-                    type="submit"
-                    disabled={status === "loading"}
-                    className="px-4 h-11 bg-foreground text-background text-[12px] uppercase tracking-[0.14em] font-medium hover:bg-accent transition-colors disabled:opacity-50"
+            <ul className="space-y-3 text-sm">
+              {[
+                { to: "/the-idea", label: "The Idea" },
+                { to: "/my-story", label: "My Story" },
+                { to: "/on-stage", label: "On Stage" },
+                { to: "/podcast", label: "Podcast" },
+                { to: "/writing", label: "Writing" },
+                { to: "/the-book", label: "The Book" },
+                { to: "/book", label: "Book Ferry" },
+              ].map((link) => (
+                <li key={link.to}>
+                  <Link
+                    to={link.to}
+                    className="text-background/80 hover:text-primary transition-colors"
                   >
-                    {status === "loading" ? "..." : "Join the letter →"}
-                  </button>
-                </form>
-              )}
-              {status === "error" && (
-                <p className="text-sm text-destructive mt-2">
-                  Something went wrong. Please try again.
-                </p>
-              )}
-            </div>
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
 
           {/* Also by Ferry */}
           <div className="md:col-span-4">
-            <Eyebrow>Also by Ferry</Eyebrow>
-            <div className="space-y-4">
+            <p className="text-[11px] uppercase tracking-[0.16em] font-semibold text-background/50 mb-5">
+              Also by Ferry
+            </p>
+            <div className="space-y-3">
               <a
-                href={EXTERNAL_LINKS.brandHumanizing}
+                href="https://brandhumanizing.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block group"
+                className="group flex items-start justify-between gap-3 p-4 rounded-xl bg-background/[0.04] hover:bg-background/[0.08] transition-colors"
               >
-                <p className="font-display text-lg text-foreground group-hover:text-accent transition-colors" style={{ fontWeight: 500 }}>
-                  Brand Humanizing Institute →
-                </p>
-                <p className="text-sm text-foreground/65 mt-1">
-                  Advisory, method, and research.
-                </p>
+                <div>
+                  <p className="font-semibold text-background">
+                    Brand Humanizing Institute
+                  </p>
+                  <p className="text-xs text-background/60 mt-1">
+                    Advisory · Method · Research
+                  </p>
+                </div>
+                <ArrowUpRight className="h-4 w-4 text-background/60 group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0 mt-1" />
               </a>
               <a
-                href={EXTERNAL_LINKS.aiga}
+                href="https://aigeletterdheid.academy"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block group"
+                className="group flex items-start justify-between gap-3 p-4 rounded-xl bg-background/[0.04] hover:bg-background/[0.08] transition-colors"
               >
-                <p className="font-display text-lg text-foreground group-hover:text-accent transition-colors" style={{ fontWeight: 500 }}>
-                  AIGA Academy →
-                </p>
-                <p className="text-sm text-foreground/65 mt-1">
-                  AI literacy training (Dutch).
-                </p>
+                <div>
+                  <p className="font-semibold text-background">AIGA Academy</p>
+                  <p className="text-xs text-background/60 mt-1">
+                    AI literacy training (NL)
+                  </p>
+                </div>
+                <ArrowUpRight className="h-4 w-4 text-background/60 group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0 mt-1" />
               </a>
             </div>
           </div>
         </div>
 
-        {/* Site links */}
-        <div className="mt-16 pt-8 border-t border-border flex flex-wrap gap-x-6 gap-y-2 text-[13px]">
-          {SITE_LINKS.map((l) => (
-            <Link
-              key={l.to}
-              to={l.to}
-              className="text-foreground/70 hover:text-accent transition-colors link-draw"
-            >
-              {l.label}
-            </Link>
-          ))}
-          <a
-            href={SPEAKERS_ACADEMY_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-foreground/70 hover:text-accent transition-colors link-draw"
-          >
-            Book Ferry ↗
-          </a>
-        </div>
-
-        {/* Bottom */}
-        <div className="mt-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
-          <p className="text-xs text-foreground/55">
+        {/* Bottom bar */}
+        <div className="mt-16 pt-6 border-t border-background/10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <p className="text-xs text-background/50">
             © {new Date().getFullYear()} Ferry Hoes.
           </p>
           <div className="flex gap-5 text-xs">
-            <a href={EXTERNAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" className="text-foreground/60 hover:text-accent transition-colors">LinkedIn</a>
-            <a href={EXTERNAL_LINKS.spotify} target="_blank" rel="noopener noreferrer" className="text-foreground/60 hover:text-accent transition-colors">Spotify</a>
-            <a href={EXTERNAL_LINKS.applePodcasts} target="_blank" rel="noopener noreferrer" className="text-foreground/60 hover:text-accent transition-colors">Apple Podcasts</a>
-            <a href={EXTERNAL_LINKS.youtube} target="_blank" rel="noopener noreferrer" className="text-foreground/60 hover:text-accent transition-colors">YouTube</a>
+            <a
+              href="https://www.linkedin.com/in/ferryhoes/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-background/60 hover:text-primary transition-colors"
+            >
+              LinkedIn
+            </a>
+            <a
+              href="https://open.spotify.com/show/6eGkXe767cYZ5Rw627Xpgu"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-background/60 hover:text-primary transition-colors"
+            >
+              Spotify
+            </a>
+            <a
+              href="https://podcasts.apple.com/nl/podcast/the-human-era-podcast/id1598552331"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-background/60 hover:text-primary transition-colors"
+            >
+              Apple Podcasts
+            </a>
+            <a
+              href="https://www.youtube.com/@ferry-hoes"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-background/60 hover:text-primary transition-colors"
+            >
+              YouTube
+            </a>
           </div>
         </div>
       </div>

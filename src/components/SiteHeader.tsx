@@ -1,8 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { Menu, X } from "lucide-react";
-import { SPEAKERS_ACADEMY_URL } from "@/config/site";
+import { Menu, X, ArrowRight } from "lucide-react";
 
 const NAV_ITEMS = [
   { label: "The Idea", route: "/the-idea" },
@@ -46,47 +45,48 @@ const SiteHeader = () => {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-[900] bg-background/90 backdrop-blur-md transition-all duration-200 ${
+        className={`fixed top-0 left-0 right-0 z-[900] bg-background/95 backdrop-blur-sm transition-all duration-200 ${
           scrolled ? "border-b border-border" : "border-b border-transparent"
         }`}
       >
         <div className="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-14 h-16 md:h-[72px] flex items-center justify-between">
+          {/* Wordmark */}
           <Link
             to="/"
-            className="font-display text-[18px] tracking-[-0.01em] text-foreground hover:text-accent transition-colors"
-            style={{ fontWeight: 500 }}
+            className="font-display font-bold text-base md:text-[17px] tracking-tight text-foreground hover:opacity-80 transition-opacity"
             aria-label="Ferry Hoes — Home"
           >
-            FERRY HOES.
+            FERRY HOES<span className="text-primary">.</span>
           </Link>
 
+          {/* Desktop nav */}
           {!isMobile && (
-            <nav className="flex items-center gap-7 lg:gap-8">
+            <nav className="flex items-center gap-7 lg:gap-9">
               {NAV_ITEMS.map((item) => (
                 <Link
                   key={item.route}
                   to={item.route}
-                  className={`text-[14px] tracking-tight link-draw transition-colors ${
+                  className={`text-sm font-medium tracking-tight transition-colors duration-150 ${
                     isActive(item.route)
-                      ? "text-accent"
-                      : "text-foreground/80 hover:text-terracotta"
+                      ? "text-primary"
+                      : "text-foreground/75 hover:text-foreground"
                   }`}
                 >
                   {item.label}
                 </Link>
               ))}
 
-              <a
-                href={SPEAKERS_ACADEMY_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="ml-2 inline-flex items-center gap-2 px-5 py-2.5 bg-foreground text-background text-[12px] uppercase tracking-[0.14em] font-medium border border-foreground hover:bg-accent hover:border-accent transition-colors"
+              <Link
+                to="/book"
+                className="ml-2 inline-flex items-center gap-1.5 px-5 py-2.5 bg-primary text-primary-foreground text-sm font-semibold rounded-full hover:brightness-95 active:scale-[0.97] transition-all duration-150 group"
               >
-                Book Ferry →
-              </a>
+                Book Ferry
+                <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
+              </Link>
             </nav>
           )}
 
+          {/* Mobile hamburger */}
           {isMobile && (
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
@@ -99,6 +99,7 @@ const SiteHeader = () => {
         </div>
       </header>
 
+      {/* Mobile menu */}
       {isMobile && (
         <div
           className="fixed inset-0 z-[899] bg-background flex flex-col transition-all duration-200 ease-out"
@@ -114,22 +115,19 @@ const SiteHeader = () => {
                 key={item.route}
                 to={item.route}
                 onClick={() => setMobileOpen(false)}
-                className="font-display text-3xl text-foreground py-4 border-b border-border hover:text-accent transition-colors"
-                style={{ fontWeight: 500 }}
+                className="font-display text-2xl font-bold text-foreground py-4 border-b border-border/50 hover:text-primary transition-colors"
               >
                 {item.label}
               </Link>
             ))}
 
-            <a
-              href={SPEAKERS_ACADEMY_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/book"
               onClick={() => setMobileOpen(false)}
-              className="mt-8 w-full text-center px-6 py-4 bg-foreground text-background text-[12px] uppercase tracking-[0.14em] font-medium hover:bg-accent transition-colors"
+              className="mt-8 w-full text-center px-6 py-4 bg-primary text-primary-foreground font-semibold rounded-full hover:brightness-95 transition-all"
             >
               Book Ferry →
-            </a>
+            </Link>
           </div>
         </div>
       )}

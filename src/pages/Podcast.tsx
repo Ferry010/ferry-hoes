@@ -1,30 +1,79 @@
-import SiteHeader from "@/components/SiteHeader";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { ArrowRight, Headphones, Mic2 } from "lucide-react";
+import podcastHero from "@/assets/podcast-hero.jpg";
 import Footer from "@/components/sections/Footer";
+
 import SEOHead from "@/components/blog/SEOHead";
 import StructuredData, { podcastSchema, breadcrumbSchema } from "@/components/StructuredData";
-import { Eyebrow } from "@/components/HeadingDot";
-import RuleLine from "@/components/RuleLine";
-import { EXTERNAL_LINKS } from "@/config/site";
+import SectionLabel from "@/components/SectionLabel";
 
-const EPISODES = [
-  { n: "01", title: "Not a Diversity Checkbox: The Real Work of Inclusive Leadership", guest: "Simone Moissidis", role: "Inclusion strategist", duration: "65 min", date: "2025" },
-  { n: "02", title: "The Power of Talking to People You Disagree With", guest: "Ruben Treurniet", role: "Founder, The Common Ground", duration: "73 min", date: "2025" },
-  { n: "03", title: "From Local to Global: The New Era of Talent Acquisition", guest: "Marco Boomsma", role: "Talent leader", duration: "71 min", date: "2025" },
-];
+const HeadingDot = () => (
+  <span className="inline-block w-2 h-2 bg-accent rounded-full ml-1.5 mb-1 align-baseline" />
+);
 
-const SUBSCRIBE = [
-  { label: "Spotify", href: EXTERNAL_LINKS.spotify },
-  { label: "Apple Podcasts", href: EXTERNAL_LINKS.applePodcasts },
-  { label: "YouTube", href: EXTERNAL_LINKS.youtube },
-  { label: "RSS", href: "https://anchor.fm/s/6e1bb318/podcast/rss" },
+// Spotify icon component
+const SpotifyIcon = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+  </svg>
+);
+
+// Apple Podcasts icon component
+const ApplePodcastsIcon = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M5.34 0A5.328 5.328 0 000 5.34v13.32A5.328 5.328 0 005.34 24h13.32A5.328 5.328 0 0024 18.66V5.34A5.328 5.328 0 0018.66 0H5.34zm6.525 2.568c2.336 0 4.448.902 6.025 2.371.075.074.15.15.221.228a.693.693 0 01-.07.975.687.687 0 01-.987-.043 7.152 7.152 0 00-.205-.212 7.019 7.019 0 00-4.984-2.015 7.019 7.019 0 00-4.983 2.015 7.018 7.018 0 00-.206.212.687.687 0 01-.986.043.693.693 0 01-.07-.975c.07-.078.145-.154.22-.228a8.387 8.387 0 016.025-2.371zm.006 2.795a5.297 5.297 0 013.757 1.547 5.297 5.297 0 011.547 3.757 5.297 5.297 0 01-1.547 3.757 5.297 5.297 0 01-3.757 1.547 5.297 5.297 0 01-3.757-1.547 5.297 5.297 0 01-1.547-3.757 5.297 5.297 0 011.547-3.757 5.297 5.297 0 013.757-1.547zm0 1.37a3.924 3.924 0 00-2.784 1.146 3.924 3.924 0 00-1.146 2.784 3.924 3.924 0 001.146 2.784 3.924 3.924 0 002.784 1.146 3.924 3.924 0 002.784-1.146 3.924 3.924 0 001.146-2.784 3.924 3.924 0 00-1.146-2.784 3.924 3.924 0 00-2.784-1.146zm0 2.058a1.691 1.691 0 011.691 1.691 1.691 1.691 0 01-1.691 1.691 1.691 1.691 0 01-1.691-1.691 1.691 1.691 0 011.691-1.691zm0 4.775c.659 0 1.304.218 1.828.618.183.14.22.402.08.585a.416.416 0 01-.585.08 2.17 2.17 0 00-1.323-.453 2.17 2.17 0 00-1.323.453.416.416 0 01-.585-.08.416.416 0 01.08-.585 3.01 3.01 0 011.828-.618zm-.007 1.555c.396 0 .737.285.737.737v4.542c0 .398-.282.737-.737.737-.396 0-.737-.282-.737-.737v-4.542c0-.396.285-.737.737-.737z"/>
+  </svg>
+);
+
+const SPOTIFY_SHOW_URL = "https://open.spotify.com/show/6eGkXe767cYZ5Rw627Xpgu";
+const APPLE_PODCASTS_URL = "https://podcasts.apple.com/nl/podcast/the-human-era-podcast/id1598552331";
+
+const allEpisodes = [
+  {
+    title: "Not a Diversity Checkbox: The Real Work of Inclusive Leadership",
+    guest: "Simone Moissidis",
+    duration: "65 min",
+    description: "Simone Moissidis shares what inclusive leadership really looks like beyond checkboxes and quotas. We explore how organizations can move from performative diversity to genuine belonging, and why the hardest conversations are often the most important ones.",
+    spotifyUrl: "https://podcasters.spotify.com/pod/show/thehumanerapodcast/episodes/Not-a-Diversity-Checkbox-The-Real-Work-of-Inclusive-Leadership-with-Simone-Moissidis-e34fcs3",
+  },
+  {
+    title: "The Power of Talking to People You Disagree With",
+    guest: "Ruben Treurniet",
+    duration: "73 min",
+    spotifyUrl: "https://podcasters.spotify.com/pod/show/thehumanerapodcast/episodes/The-Power-of-Talking-to-People-You-Disagree-With-with-Ruben-Treurniet-e30mai6",
+  },
+  {
+    title: "From Local to Global: The New Era of Talent Acquisition",
+    guest: "Marco Boomsma",
+    duration: "71 min",
+    spotifyUrl: "https://podcasters.spotify.com/pod/show/thehumanerapodcast/episodes/From-Local-to-Global-The-New-Era-of-Talent-Acquisition-with-Marco-Boomsma-from-Bullhorn-e2lthrj",
+  },
+  {
+    title: "How Generational Preferences and Technology Influence Work Culture",
+    guest: "Valérie de Haan",
+    duration: "62 min",
+    spotifyUrl: "https://podcasters.spotify.com/pod/show/thehumanerapodcast/episodes/How-generational-preferences-and-technology-influence-work-culture-with-Toshibas-Valrie-de-Haan-e2fiqo2",
+  },
+  {
+    title: "Why Football Club Panathinaikos FC Sees a Future in E-sports",
+    guest: "Paraskevas Spiliopoulos",
+    duration: "67 min",
+    spotifyUrl: "https://podcasters.spotify.com/pod/show/thehumanerapodcast/episodes/Why-football-club-Panathinaikos-FC-sees-a-future-in-E-sports-with-Paraskevas-Spiliopoulos-e1ui1uq",
+  },
 ];
 
 const Podcast = () => {
+  const openMessagePanel = () => {
+    window.dispatchEvent(new Event("open-contact"));
+  };
+
   return (
     <>
       <SEOHead
-        title="The Human Era Podcast | Ferry Hoes"
-        description="Deep dives with founders, artists, scientists, and anyone doing interesting work at the intersection of humans and technology."
+        title="The Human Era Podcast | Ferry Hoes – Conversations on Humans & Technology"
+        description="Deep conversations with founders, artists, scientists, and anyone doing interesting work at the intersection of humans and technology. Hosted by Ferry Hoes."
+        ogType="website"
         canonicalUrl="/podcast"
       />
       <StructuredData
@@ -37,133 +86,260 @@ const Podcast = () => {
         ]}
       />
 
-      <SiteHeader />
+      <div className="overflow-x-hidden relative">
+        {/* Continuous visual thread */}
+        <div 
+          className="fixed left-0 top-0 w-1 h-full z-50 pointer-events-none"
+          style={{
+            background: `linear-gradient(
+              180deg,
+              hsl(var(--brand-gold)) 0%,
+              hsl(var(--accent)) 25%,
+              hsl(var(--primary)) 50%,
+              hsl(var(--accent)) 75%,
+              hsl(var(--brand-gold)) 100%
+            )`
+          }}
+        />
 
-      <main className="bg-background min-h-screen">
-        {/* Hero */}
-        <section className="pt-36 md:pt-44 pb-12">
-          <div className="container max-w-[1280px] px-6 md:px-10 lg:px-14">
-            <div className="max-w-[720px]">
-              <Eyebrow>The Human Era Podcast</Eyebrow>
-              <h1
-                className="font-display headline-muted text-balance"
-                style={{ fontSize: "clamp(48px, 7vw, 88px)", fontWeight: 500, lineHeight: 1.04 }}
-              >
-                Conversations worth your <strong>commute.</strong>
+        {/* Hero Section */}
+        <header className="min-h-[80vh] relative overflow-hidden flex items-center">
+          <img
+            src={podcastHero}
+            alt="Ferry Hoes recording The Human Era Podcast"
+            loading="eager"
+            fetchPriority="high"
+            className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+          />
+          <div className="absolute inset-0 backdrop-blur-[6px]" />
+          <div className="absolute inset-0 bg-gradient-to-br from-foreground/90 via-foreground/80 to-primary/70" />
+          <div 
+            className="absolute inset-0 opacity-[0.07]"
+            style={{
+              backgroundImage: `radial-gradient(circle, hsl(var(--foreground)) 1px, transparent 1px)`,
+              backgroundSize: '20px 20px',
+            }}
+          />
+
+          <div className="container px-6 md:px-8 py-24 md:py-32 relative z-10">
+            <div className="max-w-4xl mx-auto text-center">
+              <SectionLabel text="Podcast" center />
+              
+              <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-white">
+                The Human Era{" "}
+                <span className="text-accent">Podcast</span>
+                <HeadingDot />
               </h1>
-              <p className="mt-8 text-[19px] md:text-[21px] text-foreground/80 leading-[1.6]">
-                Deep dives with founders, artists, scientists, and anyone doing interesting work at
-                the intersection of humans and technology. No scripts. No soundbites. Hosted by
-                Ferry Hoes.
+              
+              <p className="text-xl md:text-2xl text-white leading-relaxed max-w-2xl mx-auto mb-12">
+                Deep dives with founders, artists, scientists, and anyone doing interesting work at the{" "}
+                <span className="bg-accent/95 px-1 py-0.5 rounded">intersection of humans and technology</span>.
               </p>
-            </div>
-          </div>
-        </section>
 
-        {/* Subscribe strip */}
-        <section className="py-8">
-          <div className="container max-w-[1280px] px-6 md:px-10 lg:px-14">
-            <RuleLine />
-            <div className="flex flex-wrap gap-x-8 gap-y-3 my-6 justify-center md:justify-start">
-              <p className="text-[12px] uppercase tracking-[0.15em] text-terracotta font-medium self-center">
-                • Subscribe
-              </p>
-              {SUBSCRIBE.map((s) => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[14px] text-foreground/80 hover:text-accent link-draw"
+              <div className="flex flex-wrap justify-center gap-4">
+                <Button 
+                  asChild
+                  size="lg"
+                  className="rounded-full px-8 bg-[#1DB954] hover:bg-[#1DB954]/90 text-white group"
                 >
-                  {s.label} ↗
-                </a>
-              ))}
-            </div>
-            <RuleLine />
-          </div>
-        </section>
-
-        {/* Episode list */}
-        <section className="py-20 md:py-24">
-          <div className="container max-w-[1280px] px-6 md:px-10 lg:px-14">
-            <div className="mb-10">
-              <Eyebrow>Episodes</Eyebrow>
-              <h2 className="font-display text-[28px] md:text-[36px] text-foreground" style={{ fontWeight: 500 }}>
-                All episodes.
-              </h2>
-            </div>
-
-            <div className="max-w-5xl">
-              <RuleLine />
-              {EPISODES.map((ep) => (
-                <div key={ep.n}>
-                  <a
-                    href={EXTERNAL_LINKS.spotify}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block py-7 md:py-8 grid md:grid-cols-12 gap-4 md:gap-6 hover:bg-background-alt/60 transition-colors -mx-4 px-4 group"
-                  >
-                    <p className="md:col-span-1 font-display italic text-terracotta text-base" style={{ fontWeight: 500 }}>{ep.n}</p>
-                    <h3 className="md:col-span-6 font-display text-[20px] md:text-[24px] text-foreground leading-[1.2] group-hover:text-accent transition-colors" style={{ fontWeight: 500 }}>
-                      {ep.title}
-                    </h3>
-                    <p className="md:col-span-3 text-[14px] text-foreground/75 self-center">
-                      {ep.guest}
-                      <br />
-                      <span className="text-foreground/55">{ep.role}</span>
-                    </p>
-                    <p className="md:col-span-2 text-[13px] text-foreground/55 self-center">
-                      {ep.duration} · {ep.date}
-                    </p>
+                  <a href={SPOTIFY_SHOW_URL} target="_blank" rel="noopener noreferrer">
+                    <SpotifyIcon className="mr-2 h-5 w-5" />
+                    Listen on Spotify
                   </a>
-                  <RuleLine />
+                </Button>
+                
+                <Button 
+                  asChild
+                  size="lg"
+                  className="rounded-full px-8 bg-[#9933FF] hover:bg-[#9933FF]/90 text-white border-none group"
+                >
+                  <a href={APPLE_PODCASTS_URL} target="_blank" rel="noopener noreferrer">
+                    <ApplePodcastsIcon className="mr-2 h-5 w-5" />
+                    Apple Podcasts
+                  </a>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <main>
+          {/* About the Podcast */}
+          <section className="py-16 md:py-20 bg-secondary/30">
+            <div className="container px-6 md:px-8">
+              <div className="max-w-3xl mx-auto text-center">
+                <SectionLabel text="About the show" center />
+                <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-foreground">
+                  No scripts. No soundbites.<HeadingDot />
+                </h2>
+                <p className="text-muted-foreground text-lg leading-relaxed">
+                  Honest, unscripted conversations with fascinating people about technology, leadership, and what it means to be human. No pre-written questions. Just thinking out loud about the things that matter.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* Episodes Grid */}
+          <section className="pt-12 md:pt-16 pb-24 md:pb-32 bg-background">
+            <div className="container px-6 md:px-8">
+              <div className="max-w-6xl mx-auto">
+                <div className="text-center mb-10">
+                  <SectionLabel text="Episodes" center />
+                  <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 text-foreground">
+                    Recent conversations<HeadingDot />
+                  </h2>
+                  <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                    Dive into the latest episodes.
+                  </p>
                 </div>
-              ))}
-              <p className="mt-10 text-[16px] text-foreground/60 italic font-display">
-                More episodes loading soon.
-              </p>
-            </div>
-          </div>
-        </section>
 
-        {/* About the show */}
-        <section className="py-20 md:py-24 bg-background-alt border-y border-border">
-          <div className="container max-w-[1280px] px-6 md:px-10 lg:px-14">
-            <div className="max-w-[720px]">
-              <Eyebrow>About the Show</Eyebrow>
-              <h2 className="font-display headline-muted text-balance mb-8" style={{ fontSize: "clamp(32px, 4.5vw, 48px)", fontWeight: 500 }}>
-                Why the show <strong>exists.</strong>
-              </h2>
-              <p className="text-[18px] md:text-[19px] text-foreground/85 leading-[1.7]">
-                The Human Era Podcast is Ferry's conversation with the people shaping how humans
-                and technology work together. Guests include CEOs, professors, artists, and
-                entrepreneurs — anyone asking good questions about the balance between efficiency
-                and meaning. Episodes run long on purpose. The best ideas don't fit in clips.
-              </p>
-            </div>
-          </div>
-        </section>
+                <div className="grid gap-6 md:grid-cols-2">
+                  {/* Featured latest episode - left side */}
+                  <article 
+                    className="group relative overflow-hidden bg-gradient-to-br from-background to-[#1DB954]/[0.05] rounded-2xl p-10 shadow-soft hover:shadow-soft-lg transition-all duration-300 border-l-4 border-[#1DB954]/40 hover:border-[#1DB954] flex flex-col justify-between"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      className="absolute bottom-6 right-6 w-40 h-24 text-muted-foreground opacity-[0.06] group-hover:opacity-[0.12] transition-opacity duration-500"
+                      viewBox="0 0 120 60"
+                      fill="currentColor"
+                    >
+                      <rect x="8" y="20" width="6" height="25" rx="3" />
+                      <rect x="22" y="10" width="6" height="40" rx="3" />
+                      <rect x="36" y="25" width="6" height="20" rx="3" />
+                      <rect x="50" y="5" width="6" height="50" rx="3" />
+                      <rect x="64" y="18" width="6" height="30" rx="3" />
+                      <rect x="78" y="12" width="6" height="38" rx="3" />
+                      <rect x="92" y="22" width="6" height="22" rx="3" />
+                      <rect x="106" y="28" width="6" height="15" rx="3" />
+                    </svg>
 
-        {/* CTA */}
-        <section className="py-20 md:py-24">
-          <div className="container max-w-[1280px] px-6 md:px-10 lg:px-14">
-            <div className="max-w-[720px]">
-              <h2 className="font-display headline-muted text-balance" style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 500 }}>
-                Know someone who should be on the show.
-              </h2>
-              <a
-                href="mailto:ferry@brandhumanizing.com?subject=Pitch%20a%20guest%20for%20The%20Human%20Era%20Podcast"
-                className="mt-8 inline-flex items-center gap-2 px-5 py-3 bg-foreground text-background text-[12px] uppercase tracking-[0.14em] font-medium hover:bg-accent transition-colors"
-              >
-                Pitch a guest →
-              </a>
-            </div>
-          </div>
-        </section>
-      </main>
+                    <div>
+                      <div className="flex items-start justify-between mb-6 relative z-10">
+                        <span className="inline-flex items-center gap-2 text-sm font-semibold text-accent bg-accent/10 px-3 py-1 rounded-full">
+                          <Mic2 className="h-3.5 w-3.5" />
+                          Latest Episode
+                        </span>
+                        <span className="inline-flex items-center gap-1.5 text-sm text-muted-foreground">
+                          {allEpisodes[0].duration}
+                        </span>
+                      </div>
+                      
+                      <h3 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-4">
+                        {allEpisodes[0].title}
+                      </h3>
+                      
+                      <p className="text-lg text-muted-foreground mb-4">
+                        with {allEpisodes[0].guest}
+                      </p>
+                      <p className="text-base text-muted-foreground/80 leading-relaxed mb-8">
+                        {allEpisodes[0].description}
+                      </p>
+                    </div>
+                    
+                    <a 
+                      href={allEpisodes[0].spotifyUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-[#1DB954] font-medium text-lg hover:underline transition-colors"
+                    >
+                      <SpotifyIcon className="h-5 w-5" />
+                      Listen on Spotify
+                      <ArrowRight className="h-4 w-4" />
+                    </a>
+                  </article>
 
-      <Footer />
+                  {/* Right side: stacked cards */}
+                  <div className="flex flex-col gap-4">
+                    {allEpisodes.slice(1, 5).map((episode) => (
+                      <article 
+                        key={episode.title}
+                        className="group relative overflow-hidden bg-gradient-to-br from-background to-[#1DB954]/[0.03] rounded-2xl p-5 shadow-soft hover:shadow-soft-lg transition-all duration-300 border-l-2 border-[#1DB954]/30 hover:border-[#1DB954] flex flex-col"
+                      >
+                        <div className="flex items-start justify-between mb-2 relative z-10">
+                          <span className="text-xs font-medium text-primary">Episode</span>
+                          <span className="text-xs text-muted-foreground">
+                            {episode.duration}
+                          </span>
+                        </div>
+                        
+                        <h3 className="font-display text-sm font-semibold text-foreground mb-1.5 leading-snug">
+                          {episode.title}
+                        </h3>
+                        
+                        <p className="text-xs text-muted-foreground mb-3">
+                          with {episode.guest}
+                        </p>
+                        
+                        <a 
+                          href={episode.spotifyUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 text-[#1DB954] font-medium text-xs hover:underline transition-colors mt-auto"
+                        >
+                          <SpotifyIcon className="h-3.5 w-3.5" />
+                          Listen
+                          <ArrowRight className="h-3 w-3" />
+                        </a>
+                      </article>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Platform CTAs */}
+          <section className="py-24 md:py-32 bg-foreground text-background">
+            <div className="container px-6 md:px-8">
+              <div className="max-w-3xl mx-auto text-center">
+                <h2 className="font-display text-4xl md:text-5xl font-bold mb-6">
+                  Subscribe & never miss an episode<HeadingDot />
+                </h2>
+                <p className="text-xl text-white/70 mb-12">
+                  Available on all major podcast platforms.
+                </p>
+                <div className="flex flex-wrap justify-center gap-4 mb-8">
+                  <Button 
+                    size="lg" 
+                    className="rounded-full px-8 bg-[#1DB954] hover:bg-[#1DB954]/90"
+                    asChild
+                  >
+                    <a href={SPOTIFY_SHOW_URL} target="_blank" rel="noopener noreferrer">
+                      <SpotifyIcon className="mr-2 h-5 w-5" />
+                      Listen on Spotify
+                    </a>
+                  </Button>
+                  
+                  <Button 
+                    size="lg" 
+                    variant="outline"
+                    className="rounded-full px-8 bg-[#9933FF] hover:bg-[#9933FF]/90 text-white border-none"
+                    asChild
+                  >
+                    <a href={APPLE_PODCASTS_URL} target="_blank" rel="noopener noreferrer">
+                      <ApplePodcastsIcon className="mr-2 h-5 w-5" />
+                      Listen on Apple
+                    </a>
+                  </Button>
+                </div>
+                
+                <Link
+                  to="/contact"
+                  state={{ from: "podcast" }}
+                  className="inline-flex items-center gap-2 text-white/50 hover:text-white font-medium transition-colors group"
+                >
+                  <span className="underline underline-offset-4">Got a topic suggestion?</span>
+                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
+            </div>
+          </section>
+        </main>
+
+        <Footer />
+        
+      </div>
     </>
   );
 };

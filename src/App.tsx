@@ -8,13 +8,16 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
+import Speaking from "./pages/Speaking";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import PostEditor from "./pages/PostEditor";
 import AdminMessages from "./pages/AdminMessages";
+import About from "./pages/About";
 import Press from "./pages/Press";
 import Conversation from "./pages/Conversation";
 import Podcast from "./pages/Podcast";
+import Contact from "./pages/Contact";
 import Now from "./pages/Now";
 import AdminNowPage from "./pages/AdminNowPage";
 import AdminLayout from "./components/admin/AdminLayout";
@@ -24,8 +27,7 @@ import MyStory from "./pages/MyStory";
 import OnStage from "./pages/OnStage";
 import Writing from "./pages/Writing";
 import TheBook from "./pages/TheBook";
-import ExternalRedirect from "./components/ExternalRedirect";
-import { SPEAKERS_ACADEMY_URL } from "./config/site";
+import Book from "./pages/Book";
 import { usePageTracking } from "./hooks/usePageTracking";
 
 const queryClient = new QueryClient();
@@ -47,31 +49,33 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
 
-            {/* Credibility hub IA */}
+            {/* New IA */}
             <Route path="/the-idea" element={<TheIdea />} />
             <Route path="/my-story" element={<MyStory />} />
             <Route path="/on-stage" element={<OnStage />} />
-            <Route path="/podcast" element={<Podcast />} />
             <Route path="/writing" element={<Writing />} />
             <Route path="/the-book" element={<TheBook />} />
-
-            {/* Book Ferry → external agent (Speakers Academy) */}
-            <Route path="/book" element={<ExternalRedirect to={SPEAKERS_ACADEMY_URL} />} />
-            <Route path="/contact" element={<ExternalRedirect to={SPEAKERS_ACADEMY_URL} />} />
+            <Route path="/book" element={<Book />} />
 
             {/* Legacy → new IA redirects */}
             <Route path="/about" element={<Navigate to="/my-story" replace />} />
             <Route path="/speaking" element={<Navigate to="/on-stage" replace />} />
-            <Route path="/blog" element={<Navigate to="/writing" replace />} />
+            <Route path="/contact" element={<Navigate to="/book" replace />} />
+            <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
-            <Route path="/blog-archive" element={<Blog />} />
 
             {/* Existing pages still in use */}
+            <Route path="/podcast" element={<Podcast />} />
             <Route path="/now" element={<Now />} />
             <Route path="/press" element={<Press />} />
 
             {/* Easter egg / hidden */}
             <Route path="/conversation" element={<Conversation />} />
+
+            {/* Old routes kept reachable for back-compat */}
+            <Route path="/about-legacy" element={<About />} />
+            <Route path="/speaking-legacy" element={<Speaking />} />
+            <Route path="/contact-legacy" element={<Contact />} />
 
             <Route path="/admin" element={<AdminLogin />} />
             <Route path="/admin" element={<AdminLayout />}>
