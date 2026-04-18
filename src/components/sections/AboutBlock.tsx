@@ -35,20 +35,20 @@ const AboutBlock = () => {
               className="font-display font-bold text-foreground leading-[1.02]"
               style={{ fontSize: "clamp(40px, 6vw, 88px)" }}
             >
-              I help brands become more <span className="text-primary">human</span>
+              How I got <span className="text-primary">here</span>
               <Period />
             </h2>
 
             <p className="mt-7 text-lg md:text-xl text-foreground/80 leading-[1.55] max-w-xl">
-              Ten years ago I noticed something simple. The brands that win in
-              the long run aren't the ones with the best technology. They're the
-              ones that feel most human. That observation became a method, then
-              a book, then a body of work.
+              Talkative kid from Delft. Introverted student. Teenager writing
+              lyrics. IT sales account manager. Growth hacker. Then one lunch
+              with my best friend Jonathan in 2017 and a term that stuck: Brand
+              Humanizing. This is the long version.
             </p>
 
             <div className="mt-9">
               <PillButton to="/my-story" variant="ghost">
-                More about Ferry
+                More about me
               </PillButton>
             </div>
           </div>

@@ -59,14 +59,16 @@ const BookSection = () => {
               className="font-display font-bold text-foreground leading-[1.02]"
               style={{ fontSize: "clamp(40px, 6vw, 88px)" }}
             >
-              We wrote the book on it.{" "}
-              <span className="text-primary">Literally</span>
+              The full argument, on{" "}
+              <span className="text-primary">paper</span>
               <Period />
             </h2>
 
             <p className="mt-7 text-lg md:text-xl text-foreground/80 leading-[1.55] max-w-xl">
-              Brand Humanizing — the superpower that makes your brand more human
-              and your business grow faster. Co-authored with Jonathan Flores.
+              Brand Humanizing — co-written with my best friend Jonathan Flores.
+              Ten years of thinking, a framework, and case studies from the
+              organisations actually getting it right. Available in Dutch now.
+              English edition on the way.
             </p>
 
             <p className="mt-3 text-sm text-muted-foreground">
@@ -74,9 +76,12 @@ const BookSection = () => {
               Octopus Energy, Patagonia and more.
             </p>
 
-            <div className="mt-8">
+            <div className="mt-8 flex flex-wrap gap-3 md:gap-4">
               <PillButton to="/the-book" variant="primary">
                 See the book
+              </PillButton>
+              <PillButton to="/the-book#waitlist" variant="ghost">
+                English waitlist
               </PillButton>
             </div>
 

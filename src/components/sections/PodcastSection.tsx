@@ -64,15 +64,15 @@ const PodcastSection = () => {
             className="font-display font-bold text-foreground leading-[1.02]"
             style={{ fontSize: "clamp(40px, 6vw, 88px)" }}
           >
-            Conversations worth your{" "}
-            <span className="text-primary">commute</span>
+            Long conversations, no{" "}
+            <span className="text-primary">soundbites</span>
             <Period />
           </h2>
 
           <p className="mt-7 text-lg md:text-xl text-foreground/80 leading-[1.55]">
-            Deep dives with founders, artists, scientists, and anyone doing
-            interesting work at the intersection of humans and technology. No
-            scripts. No soundbites.
+            I host The Human Era Podcast. Guests include CEOs, professors,
+            artists, and entrepreneurs asking good questions about the balance
+            between efficiency and meaning.
           </p>
         </div>
 
@@ -129,15 +129,8 @@ const PodcastSection = () => {
             <SpotifyIcon className="h-4 w-4" />
             Listen on Spotify
           </PillButton>
-          <PillButton
-            href={APPLE_PODCASTS_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            variant="ghost"
-            arrow={false}
-          >
-            <ApplePodcastsIcon className="h-4 w-4" />
-            Listen on Apple
+          <PillButton to="/podcast" variant="ghost">
+            All episodes
           </PillButton>
         </div>
       </div>

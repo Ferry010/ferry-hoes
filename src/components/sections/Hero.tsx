@@ -2,12 +2,17 @@ import { Eyebrow, Period } from "@/components/HeadingDot";
 import PillButton from "@/components/PillButton";
 import Polaroid from "@/components/Polaroid";
 import ferryPhoto from "@/assets/ferry-speaking-audience.jpg";
+import { useBlogPosts } from "@/hooks/useBlogPosts";
 
 /**
  * Editorial hero — replaces HeroVideo.
  * Polaroid-led, no video, no chat. The signature headline carries the page.
  */
 const Hero = () => {
+  const { data: posts } = useBlogPosts(1);
+  const latestSlug = posts?.[0]?.slug;
+  const essayHref = latestSlug ? `/blog/${latestSlug}` : "/writing";
+
   return (
     <section className="relative bg-background pt-32 md:pt-40 pb-20 md:pb-28 overflow-hidden">
       <div className="container px-6 md:px-10 lg:px-14 max-w-[1280px]">
@@ -25,22 +30,21 @@ const Hero = () => {
                 letterSpacing: "-0.025em",
               }}
             >
-              The 'now what' after AI<Period />
+              Technology should make us more{" "}
+              <span className="text-primary">human,</span>
               <br />
-              For the <span className="text-primary">humans running the place</span>
-              <Period />
+              not less<Period />
             </h1>
 
             <p className="mt-8 text-lg md:text-xl text-foreground/80 max-w-2xl leading-[1.55]">
-              AI is settling. The economy has shifted. The real question isn't
-              which tool to buy next — it's how to lead organisations that still
-              feel human. That's the work of Brand Humanizing. Ten years in the
-              making.
+              I'm Ferry Hoes. I write, speak, and podcast about one idea ten
+              years in the making: technology that amplifies what's human
+              instead of replacing it. Everything below is a way in.
             </p>
 
             <div className="mt-10 flex flex-wrap gap-3 md:gap-4">
-              <PillButton to="/the-idea" variant="primary">
-                Read the idea
+              <PillButton to={essayHref} variant="primary">
+                Read the latest essay
               </PillButton>
               <PillButton
                 href="https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966"

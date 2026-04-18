@@ -324,14 +324,13 @@ const Podcast = () => {
                   </Button>
                 </div>
                 
-                <Link
-                  to="/contact"
-                  state={{ from: "podcast" }}
+                <a
+                  href="mailto:ferry@brandhumanizing.com"
                   className="inline-flex items-center gap-2 text-white/50 hover:text-white font-medium transition-colors group"
                 >
-                  <span className="underline underline-offset-4">Got a topic suggestion?</span>
+                  <span className="underline underline-offset-4">Pitch a guest</span>
                   <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
+                </a>
               </div>
             </div>
           </section>

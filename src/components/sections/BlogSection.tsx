@@ -19,10 +19,14 @@ const BlogSection = () => {
             className="font-display font-bold text-foreground leading-[1.02]"
             style={{ fontSize: "clamp(40px, 6vw, 88px)" }}
           >
-            Short essays on humans, technology, and the work in{" "}
-            <span className="text-primary">between</span>
+            The latest from my <span className="text-primary">desk</span>
             <Period />
           </h2>
+
+          <p className="mt-7 text-lg md:text-xl text-foreground/80 leading-[1.55]">
+            Short essays on humans, technology, and the work in between. New
+            ones when there's something worth saying.
+          </p>
         </div>
 
         {/* Editorial grid */}
@@ -65,7 +69,7 @@ const BlogSection = () => {
           </div>
         ) : (
           <p className="text-muted-foreground text-lg mb-12">
-            New essays coming soon.
+            The first essays are being written. Check back soon.
           </p>
         )}
 
