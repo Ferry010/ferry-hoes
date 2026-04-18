@@ -336,7 +336,7 @@ const Speaking = () => {
                 <div className="text-center mt-12">
                   <Button asChild size="lg" className="rounded-full px-8 bg-accent text-accent-foreground hover:bg-accent/90 group">
                     <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
-                      Book Ferry for your event
+                      Book Ferry
                       <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                     </a>
                   </Button>
