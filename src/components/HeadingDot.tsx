@@ -34,6 +34,11 @@ export const Eyebrow = ({
  */
 export const Period = () => null;
 
-/** Legacy default — kept as a no-op shim. */
-const HeadingDot = () => null;
+interface HeadingDotProps {
+  size?: "sm" | "md" | "lg";
+  className?: string;
+}
+
+/** Legacy default — renders nothing. The new headline formula uses bold words, not orange dots. */
+const HeadingDot = (_: HeadingDotProps = {}) => null;
 export default HeadingDot;
