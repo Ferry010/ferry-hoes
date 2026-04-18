@@ -1,79 +1,66 @@
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
-import { useBlogPosts } from "@/hooks/useBlogPosts";
-import { Eyebrow, Period } from "@/components/HeadingDot";
-import PillButton from "@/components/PillButton";
+import { Eyebrow } from "@/components/HeadingDot";
+import ActionButton from "@/components/Button";
+import { useBlogPosts, getReadTime, formatPostDate } from "@/hooks/useBlogPosts";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const BlogSection = () => {
-  const { data: posts, isLoading } = useBlogPosts(6);
-  const revealRef = useScrollReveal();
+  const ref = useScrollReveal();
+  const { data: posts, isLoading } = useBlogPosts(3);
 
   return (
-    <section className="bg-background-alt py-20 md:py-28 border-y border-border/60">
+    <section className="bg-background-alt py-24 md:py-32 border-y border-border">
       <div className="container max-w-[1280px] px-6 md:px-10 lg:px-14">
-        <div ref={revealRef} className="scroll-reveal max-w-3xl mb-14 md:mb-16">
+        <div ref={ref} className="scroll-reveal max-w-3xl mb-12 md:mb-16">
           <Eyebrow>Writing</Eyebrow>
-
           <h2
-            className="font-display font-bold text-foreground leading-[1.02]"
-            style={{ fontSize: "clamp(40px, 6vw, 88px)" }}
+            className="font-display headline-muted text-balance"
+            style={{ fontSize: "clamp(36px, 5vw, 64px)", fontWeight: 500 }}
           >
-            Short essays on humans, technology, and the work in{" "}
-            <span className="text-primary">between</span>
-            <Period />
+            Short essays on humans, technology, and the work in <strong>between.</strong>
           </h2>
         </div>
 
-        {/* Editorial grid */}
-        {isLoading ? (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12">
-            {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="space-y-4 animate-pulse">
-                <div className="h-3 bg-muted rounded w-20" />
-                <div className="h-7 bg-muted rounded w-3/4" />
-                <div className="h-4 bg-muted rounded w-full" />
-                <div className="h-4 bg-muted rounded w-1/2" />
-              </div>
-            ))}
-          </div>
-        ) : posts && posts.length > 0 ? (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 mb-12">
-            {posts.slice(0, 6).map((post) => (
+        {isLoading ? null : posts && posts.length > 0 ? (
+          <div className="grid md:grid-cols-3 gap-10 md:gap-8">
+            {posts.map((post) => (
               <Link
                 key={post.id}
                 to={`/blog/${post.slug}`}
                 className="group block"
               >
-                <span className="text-[11px] uppercase tracking-[0.16em] font-semibold text-primary">
+                <p className="text-[11px] uppercase tracking-[0.15em] text-terracotta font-medium mb-3">
                   • Essay
-                </span>
-                <h3 className="mt-3 font-display text-xl md:text-2xl font-bold text-foreground leading-snug group-hover:text-primary transition-colors">
+                </p>
+                <h3
+                  className="font-display text-[24px] md:text-[26px] text-foreground leading-[1.2] group-hover:text-accent transition-colors"
+                  style={{ fontWeight: 500 }}
+                >
                   {post.title}
                 </h3>
                 {post.excerpt && (
-                  <p className="mt-3 text-foreground/75 leading-relaxed line-clamp-2">
+                  <p className="mt-3 text-[15px] text-foreground/70 leading-[1.6] line-clamp-3">
                     {post.excerpt}
                   </p>
                 )}
-                <span className="mt-4 inline-flex items-center gap-2 text-sm text-muted-foreground">
-                  Read essay
-                  <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
-                </span>
+                <p className="mt-5 text-[13px] text-foreground/55">
+                  {formatPostDate(post.published_at)} · {getReadTime(post.content)} ·{" "}
+                  <span className="link-draw text-foreground/80">Read essay →</span>
+                </p>
               </Link>
             ))}
           </div>
         ) : (
-          <p className="text-muted-foreground text-lg mb-12">
-            New essays coming soon.
+          <p className="text-[18px] text-foreground/60 italic font-display">
+            The first essays are being written. Check back soon.
           </p>
         )}
 
-        {posts && posts.length > 0 && (
-          <PillButton to="/writing" variant="ghost">
+        <div className="mt-14">
+          <ActionButton to="/writing" variant="ghost">
             All writing
-          </PillButton>
-        )}
+          </ActionButton>
+        </div>
       </div>
     </section>
   );
