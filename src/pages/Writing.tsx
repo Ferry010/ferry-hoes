@@ -1,20 +1,32 @@
+import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import SiteHeader from "@/components/SiteHeader";
 import Footer from "@/components/sections/Footer";
 import SEOHead from "@/components/blog/SEOHead";
 import StructuredData, { breadcrumbSchema } from "@/components/StructuredData";
-import { Eyebrow, Period } from "@/components/HeadingDot";
+import { Eyebrow } from "@/components/HeadingDot";
 import { useBlogPosts, getReadTime, formatPostDate } from "@/hooks/useBlogPosts";
-import { ArrowRight } from "lucide-react";
+
+const CATEGORIES = ["All", "Brand Humanizing", "AI", "Leadership", "Future of Work"] as const;
 
 const Writing = () => {
   const { data: posts, isLoading } = useBlogPosts();
+  const [active, setActive] = useState<string>("All");
+
+  const filtered = useMemo(() => {
+    if (!posts) return [];
+    if (active === "All") return posts;
+    return posts.filter(
+      (p) =>
+        p.seo_keywords?.some((k) => k.toLowerCase() === active.toLowerCase()) ?? false
+    );
+  }, [posts, active]);
 
   return (
     <>
       <SEOHead
         title="Writing — Essays | Ferry Hoes"
-        description="Short essays on humans, technology, and the work in between. Essays on AI, Brand Humanizing, leadership, and the future of work."
+        description="Short essays on humans, technology, and the work in between. Essays on Brand Humanizing, AI, leadership, and the future of work."
         canonicalUrl="/writing"
       />
       <StructuredData
@@ -28,77 +40,75 @@ const Writing = () => {
 
       <main className="bg-background min-h-screen">
         {/* Hero */}
-        <section className="pt-36 md:pt-44 pb-16 md:pb-20">
+        <section className="pt-36 md:pt-44 pb-12">
           <div className="container max-w-[1280px] px-6 md:px-10 lg:px-14">
-            <div className="max-w-4xl">
+            <div className="max-w-[720px]">
               <Eyebrow>Writing</Eyebrow>
               <h1
-                className="font-display font-bold text-foreground leading-[1.02]"
-                style={{ fontSize: "clamp(48px, 8vw, 128px)" }}
+                className="font-display headline-muted text-balance"
+                style={{ fontSize: "clamp(48px, 7vw, 88px)", fontWeight: 500, lineHeight: 1.04 }}
               >
-                Short essays on humans, technology, and the work in{" "}
-                <span className="text-primary">between</span>
-                <Period />
+                Short essays on humans, technology, and the work in <strong>between.</strong>
               </h1>
-              <p className="mt-8 text-lg md:text-xl text-foreground/80 leading-[1.55] max-w-2xl">
-                A small library, not a content firehose. Quality over volume.
-                Updated when there's something worth saying.
+              <p className="mt-8 text-[19px] md:text-[21px] text-foreground/80 leading-[1.6]">
+                A small library, not a content firehose. Quality over volume. Updated when there's
+                something worth saying.
               </p>
             </div>
           </div>
         </section>
 
-        {/* Posts */}
-        <section className="pb-24 md:pb-32 border-t border-border/60">
-          <div className="container max-w-[1280px] px-6 md:px-10 lg:px-14 pt-16 md:pt-20">
-            {isLoading ? (
-              <div className="grid md:grid-cols-2 gap-8 md:gap-12">
-                {[1, 2, 3, 4].map((i) => (
-                  <div key={i} className="animate-pulse space-y-4">
-                    <div className="aspect-[16/10] bg-background-alt rounded-xl" />
-                    <div className="h-6 bg-background-alt rounded w-3/4" />
-                    <div className="h-4 bg-background-alt rounded w-full" />
-                  </div>
-                ))}
-              </div>
-            ) : posts && posts.length > 0 ? (
-              <div className="grid md:grid-cols-2 gap-10 md:gap-14">
-                {posts.map((post) => (
-                  <article key={post.id} className="group">
-                    <Link to={`/blog/${post.slug}`} className="block">
-                      {post.header_image_url && (
-                        <div className="aspect-[16/10] overflow-hidden rounded-xl bg-background-alt mb-5">
-                          <img
-                            src={post.header_image_url}
-                            alt={post.title}
-                            loading="lazy"
-                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                          />
-                        </div>
-                      )}
-                      <div className="flex items-center gap-3 text-xs uppercase tracking-[0.14em] text-muted-foreground mb-3">
-                        <span>{formatPostDate(post.published_at)}</span>
-                        <span>·</span>
-                        <span>{getReadTime(post.content)}</span>
-                      </div>
-                      <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground leading-tight group-hover:text-primary transition-colors">
-                        {post.title}
-                      </h2>
-                      {post.excerpt && (
-                        <p className="mt-3 text-base md:text-lg text-foreground/75 leading-relaxed line-clamp-3">
-                          {post.excerpt}
-                        </p>
-                      )}
-                      <span className="inline-flex items-center gap-2 mt-5 text-sm font-semibold text-primary">
-                        Read essay
-                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                      </span>
-                    </Link>
-                  </article>
+        {/* Filter */}
+        <section className="pb-10 border-b border-border">
+          <div className="container max-w-[1280px] px-6 md:px-10 lg:px-14">
+            <div className="flex flex-wrap gap-2">
+              {CATEGORIES.map((c) => (
+                <button
+                  key={c}
+                  onClick={() => setActive(c)}
+                  className={`text-[13px] uppercase tracking-[0.12em] px-4 py-2 border transition-colors ${
+                    active === c
+                      ? "bg-foreground text-background border-foreground"
+                      : "border-border text-foreground/70 hover:border-foreground hover:text-foreground"
+                  }`}
+                >
+                  {c}
+                </button>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Grid */}
+        <section className="py-16 md:py-20">
+          <div className="container max-w-[1280px] px-6 md:px-10 lg:px-14">
+            {isLoading ? null : filtered.length > 0 ? (
+              <div className="grid md:grid-cols-3 gap-x-8 gap-y-14">
+                {filtered.map((post) => (
+                  <Link key={post.id} to={`/blog/${post.slug}`} className="group block">
+                    <p className="text-[11px] uppercase tracking-[0.15em] text-terracotta font-medium mb-3">
+                      • {post.seo_keywords?.[0] ?? "Essay"}
+                    </p>
+                    <h3
+                      className="font-display text-[24px] md:text-[28px] text-foreground leading-[1.2] group-hover:text-accent transition-colors line-clamp-2"
+                      style={{ fontWeight: 500 }}
+                    >
+                      {post.title}
+                    </h3>
+                    {post.excerpt && (
+                      <p className="mt-3 text-[15px] text-foreground/70 leading-[1.6] line-clamp-3">
+                        {post.excerpt}
+                      </p>
+                    )}
+                    <p className="mt-5 text-[13px] text-foreground/55">
+                      {formatPostDate(post.published_at)} · {getReadTime(post.content)} ·{" "}
+                      <span className="link-draw text-foreground/80">Read essay →</span>
+                    </p>
+                  </Link>
                 ))}
               </div>
             ) : (
-              <p className="text-lg text-foreground/70">
+              <p className="text-[18px] text-foreground/60 italic font-display">
                 The first essays are being written. Check back soon.
               </p>
             )}

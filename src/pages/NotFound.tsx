@@ -3,8 +3,8 @@ import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import SiteHeader from "@/components/SiteHeader";
 import Footer from "@/components/sections/Footer";
-import { Eyebrow, Period } from "@/components/HeadingDot";
-import PillButton from "@/components/PillButton";
+import { Eyebrow } from "@/components/HeadingDot";
+import ActionButton from "@/components/Button";
 
 const NotFound = () => {
   const location = useLocation();
@@ -21,10 +21,7 @@ const NotFound = () => {
       <Helmet>
         <title>This page is missing. | Ferry Hoes</title>
         <meta name="robots" content="noindex, nofollow" />
-        <meta
-          name="description"
-          content="The page you're looking for doesn't exist. Head back to ferryhoes.com to explore the idea, the book, the podcast, and more."
-        />
+        <meta name="description" content="The page you're looking for doesn't exist." />
       </Helmet>
 
       <SiteHeader />
@@ -34,61 +31,39 @@ const NotFound = () => {
           <div className="max-w-3xl">
             <Eyebrow>404</Eyebrow>
             <h1
-              className="font-display font-bold text-foreground leading-[1.02]"
-              style={{ fontSize: "clamp(48px, 8vw, 128px)" }}
+              className="font-display headline-muted text-balance"
+              style={{ fontSize: "clamp(48px, 7vw, 88px)", fontWeight: 500, lineHeight: 1.04 }}
             >
-              This page is <span className="text-primary">missing</span>
-              <Period />
+              This page is <strong>missing.</strong>
             </h1>
 
             <p className="mt-8 text-lg md:text-xl text-foreground/80 leading-[1.55] max-w-xl">
               The path{" "}
-              <code className="px-2 py-0.5 rounded bg-background-alt text-foreground/80 text-base">
+              <code className="px-2 py-0.5 bg-background-alt text-foreground/80 text-base">
                 {location.pathname}
               </code>{" "}
               doesn't exist. Try one of these instead.
             </p>
 
             <div className="mt-10 grid sm:grid-cols-3 gap-3 max-w-xl">
-              <Link
-                to="/the-idea"
-                className="group p-5 rounded-xl bg-background-alt border border-border hover:border-primary/40 transition-colors"
-              >
-                <p className="text-[11px] uppercase tracking-[0.16em] font-semibold text-primary mb-2">
-                  • Read
-                </p>
-                <p className="font-display text-lg font-bold text-foreground group-hover:text-primary transition-colors">
-                  The Idea
-                </p>
-              </Link>
-              <Link
-                to="/podcast"
-                className="group p-5 rounded-xl bg-background-alt border border-border hover:border-primary/40 transition-colors"
-              >
-                <p className="text-[11px] uppercase tracking-[0.16em] font-semibold text-primary mb-2">
-                  • Listen
-                </p>
-                <p className="font-display text-lg font-bold text-foreground group-hover:text-primary transition-colors">
-                  Podcast
-                </p>
-              </Link>
-              <Link
-                to="/book"
-                className="group p-5 rounded-xl bg-background-alt border border-border hover:border-primary/40 transition-colors"
-              >
-                <p className="text-[11px] uppercase tracking-[0.16em] font-semibold text-primary mb-2">
-                  • Talk
-                </p>
-                <p className="font-display text-lg font-bold text-foreground group-hover:text-primary transition-colors">
-                  Book Ferry
-                </p>
-              </Link>
+              {[
+                { to: "/the-idea", label: "The Idea", eyebrow: "Read" },
+                { to: "/podcast", label: "Podcast", eyebrow: "Listen" },
+                { to: "/the-book", label: "The Book", eyebrow: "Read" },
+              ].map((c) => (
+                <Link key={c.to} to={c.to} className="group p-5 border border-border hover:border-foreground transition-colors">
+                  <p className="text-[11px] uppercase tracking-[0.15em] text-terracotta font-medium mb-2">
+                    • {c.eyebrow}
+                  </p>
+                  <p className="font-display text-lg text-foreground group-hover:text-accent transition-colors" style={{ fontWeight: 500 }}>
+                    {c.label}
+                  </p>
+                </Link>
+              ))}
             </div>
 
             <div className="mt-10">
-              <PillButton to="/" variant="primary">
-                Back home
-              </PillButton>
+              <ActionButton to="/" variant="primary">Back home</ActionButton>
             </div>
           </div>
         </div>
