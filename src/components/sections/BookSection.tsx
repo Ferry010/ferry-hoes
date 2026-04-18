@@ -80,13 +80,13 @@ const BookSection = () => {
               <PillButton to="/the-book" variant="primary">
                 See the book
               </PillButton>
-              <PillButton to="/the-book#waitlist" variant="ghost">
+              <PillButton to="#waitlist" variant="ghost">
                 English waitlist
               </PillButton>
             </div>
 
             {/* English waitlist */}
-            <div className="mt-10 max-w-md">
+            <div id="waitlist" className="mt-10 max-w-md scroll-mt-24">
               <p className="text-sm font-semibold text-foreground mb-1">
                 Currently available in Dutch only.
               </p>

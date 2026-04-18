@@ -2,9 +2,10 @@ import SEOHead from "@/components/blog/SEOHead";
 import StructuredData, { personSchema, bookSchema, websiteSchema } from "@/components/StructuredData";
 import SiteHeader from "@/components/SiteHeader";
 import Hero from "@/components/sections/Hero";
+import CredentialsStrip from "@/components/sections/CredentialsStrip";
 import TrustLine from "@/components/sections/TrustLine";
+import ThreeRoads from "@/components/sections/ThreeRoads";
 import BrandHumanizingSection from "@/components/sections/BrandHumanizingSection";
-import AboutBlock from "@/components/sections/AboutBlock";
 import SpeakerSection from "@/components/sections/SpeakerSection";
 import BookSection from "@/components/sections/BookSection";
 import PodcastSection from "@/components/sections/PodcastSection";
@@ -31,15 +32,16 @@ const Index = () => {
           <Hero />
         </header>
 
+        <CredentialsStrip />
         <TrustLine />
 
         <main>
+          <article><ThreeRoads /></article>
           <article><BlogSection /></article>
           <article><BookSection /></article>
           <article><SpeakerSection /></article>
           <article><PodcastSection /></article>
           <article><BrandHumanizingSection /></article>
-          <article><AboutBlock /></article>
           <AlsoByFerry />
           <CommunitySection />
         </main>
