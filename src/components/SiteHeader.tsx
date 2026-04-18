@@ -76,13 +76,15 @@ const SiteHeader = () => {
                 </Link>
               ))}
 
-              <Link
-                to="/book"
+              <a
+                href="https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="ml-2 inline-flex items-center gap-1.5 px-5 py-2.5 bg-primary text-primary-foreground text-sm font-semibold rounded-full hover:brightness-95 active:scale-[0.97] transition-all duration-150 group"
               >
                 Book Ferry
                 <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
-              </Link>
+              </a>
             </nav>
           )}
 
@@ -121,13 +123,15 @@ const SiteHeader = () => {
               </Link>
             ))}
 
-            <Link
-              to="/book"
+            <a
+              href="https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966"
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setMobileOpen(false)}
               className="mt-8 w-full text-center px-6 py-4 bg-primary text-primary-foreground font-semibold rounded-full hover:brightness-95 transition-all"
             >
               Book Ferry →
-            </Link>
+            </a>
           </div>
         </div>
       )}

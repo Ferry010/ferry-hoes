@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
+import { useEffect } from "react";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Blog from "./pages/Blog";
@@ -24,13 +25,21 @@ import AdminLayout from "./components/admin/AdminLayout";
 import { ScrollToTop } from "./components/ScrollToTop";
 import TheIdea from "./pages/TheIdea";
 import MyStory from "./pages/MyStory";
-import OnStage from "./pages/OnStage";
 import Writing from "./pages/Writing";
 import TheBook from "./pages/TheBook";
-import Book from "./pages/Book";
 import { usePageTracking } from "./hooks/usePageTracking";
 
 const queryClient = new QueryClient();
+
+const SPEAKERS_ACADEMY_URL =
+  "https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966";
+
+const BookRedirect = () => {
+  useEffect(() => {
+    window.location.replace(SPEAKERS_ACADEMY_URL);
+  }, []);
+  return null;
+};
 
 const PageTracker = () => {
   usePageTracking();
@@ -52,15 +61,15 @@ const App = () => (
             {/* New IA */}
             <Route path="/the-idea" element={<TheIdea />} />
             <Route path="/my-story" element={<MyStory />} />
-            <Route path="/on-stage" element={<OnStage />} />
+            <Route path="/on-stage" element={<Speaking />} />
             <Route path="/writing" element={<Writing />} />
             <Route path="/the-book" element={<TheBook />} />
-            <Route path="/book" element={<Book />} />
+            <Route path="/book" element={<BookRedirect />} />
 
             {/* Legacy → new IA redirects */}
             <Route path="/about" element={<Navigate to="/my-story" replace />} />
             <Route path="/speaking" element={<Navigate to="/on-stage" replace />} />
-            <Route path="/contact" element={<Navigate to="/book" replace />} />
+            <Route path="/contact" element={<BookRedirect />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
 

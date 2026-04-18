@@ -4,11 +4,6 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const topics = [
   {
-    title: "AI, without the noise",
-    summary:
-      "What AI actually changes for organisations, what it doesn't, and how to tell the difference.",
-  },
-  {
     title: "Brand Humanizing",
     summary:
       "Using technology to make your brand more distinctive, more trusted, and more useful.",
@@ -17,6 +12,11 @@ const topics = [
     title: "The Human Era of Work",
     summary:
       "Why the most valuable skills in the next decade are the ones machines can't fake.",
+  },
+  {
+    title: "AI, without the noise",
+    summary:
+      "What AI actually changes for organisations, what it doesn't, and how to tell the difference.",
   },
 ];
 
@@ -42,9 +42,9 @@ const SpeakerSection = () => {
           </h2>
 
           <p className="mt-7 text-lg md:text-xl text-foreground/80 leading-[1.55] max-w-2xl">
-            From AI and the future of work to brand transformation. Talks that
-            challenge assumptions, spark conversations, and leave audiences with
-            something they'll actually use on Monday.
+            From Brand Humanizing and the future of work to AI leadership. Talks
+            that challenge assumptions, spark conversations, and leave audiences
+            with something they'll actually use on Monday.
           </p>
         </div>
 
@@ -69,8 +69,13 @@ const SpeakerSection = () => {
         </div>
 
         <div className="flex flex-wrap gap-3 md:gap-4">
-          <PillButton to="/book" variant="primary">
-            Speaker enquiries
+          <PillButton
+            href="https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966"
+            target="_blank"
+            rel="noopener noreferrer"
+            variant="primary"
+          >
+            Book Ferry
           </PillButton>
           <PillButton to="/on-stage" variant="ghost">
             See talks &amp; reel

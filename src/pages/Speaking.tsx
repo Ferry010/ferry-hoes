@@ -39,14 +39,14 @@ const KEYNOTE_TOPICS = [
     ],
   },
   {
-    title: "The AI conversation most organisations skip",
+    title: "The Human Era of Work",
     description:
-      "Most AI conversations start with tools and end with confusion. Ferry flips the script: he demystifies the technology, cuts through vendor hype, and helps your audience build a shared vocabulary so they can make smarter decisions about where AI fits, and where it does not.",
-    audience: "Executive teams, innovation leads, and organisations early in their AI journey.",
+      "The AI hype has settled. The real question now is how to lead organisations where humans and machines work side by side without losing what makes work meaningful. Ferry explores the skills, culture, and leadership choices that separate thriving organisations from ones that merely survive the transition.",
+    audience: "HR directors, L&D leads, and C-suite leaders shaping the next era of work.",
     takeaways: [
-      "A clear, jargon-free understanding of what AI can and cannot do today",
-      "A framework for evaluating AI opportunities without falling for hype",
-      "Shared language and vocabulary your team can use to make better AI decisions",
+      "The human skills that will define value creation in the next decade",
+      "How to design roles and teams that use AI without hollowing out culture",
+      "Why the 'now what' moment after AI is a leadership problem, not a tech problem",
     ],
   },
   {
@@ -154,16 +154,30 @@ const Speaking = () => {
                 <HeadingDot />
               </h1>
               <p className="text-xl md:text-2xl text-white leading-relaxed max-w-2xl mx-auto mb-12">
-                No death-by-PowerPoint. Just{" "}
-                <span className="bg-accent/95 px-1 py-0.5 rounded">stories, insights, and practical ideas</span>{" "}
-                that spark real conversations and drive meaningful change.
+                Talks on{" "}
+                <span className="bg-accent/95 px-1 py-0.5 rounded">Brand Humanizing, the future of work, and AI leadership</span>
+                . No death-by-PowerPoint. Just stories, insights, and practical
+                ideas that spark real conversations and drive meaningful change.
               </p>
-              <Button asChild size="lg" className="rounded-full px-8 bg-accent text-accent-foreground hover:bg-accent/90 group">
-                <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
-                  Book Ferry for your event
-                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                </a>
-              </Button>
+              <div className="flex flex-wrap gap-3 justify-center">
+                <Button asChild size="lg" className="rounded-full px-8 bg-accent text-accent-foreground hover:bg-accent/90 group">
+                  <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
+                    Book Ferry
+                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  </a>
+                </Button>
+                <Button
+                  asChild
+                  variant="outline"
+                  size="lg"
+                  className="rounded-full px-8 border-white/40 text-white hover:bg-white hover:text-foreground"
+                >
+                  <a href="#speaker-reel">
+                    <Play className="mr-2 h-4 w-4" />
+                    Watch the reel
+                  </a>
+                </Button>
+              </div>
             </div>
           </div>
         </header>
@@ -289,10 +303,10 @@ const Speaking = () => {
 
                       <div className="mt-6">
                         <Button asChild variant="outline" size="sm" className="rounded-full border-accent text-accent hover:bg-accent hover:text-accent-foreground">
-                          <Link to="/contact" state={{ from: "speaking" }}>
+                          <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
                             Enquire about this talk
                             <ArrowRight className="ml-2 h-3.5 w-3.5" />
-                          </Link>
+                          </a>
                         </Button>
                       </div>
                     </article>
@@ -311,10 +325,10 @@ const Speaking = () => {
                       Ferry regularly develops custom keynotes tailored to specific industries, themes, or internal challenges. Whether it is a board retreat, a leadership offsite, Ferry regularly develops custom keynotes tailored to specific industries, themes, or internal challenges. Whether it is a board retreat, a leadership offsite, or a large-scale conference, let's explore how we can create something that fits your event perfectly. how we can create something that fits your event perfectly.
                     </p>
                     <Button asChild variant="outline" size="sm" className="rounded-full border-accent text-accent hover:bg-accent hover:text-accent-foreground">
-                      <Link to="/contact" state={{ from: "speaking" }}>
+                      <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
                         Discuss a custom keynote
                         <ArrowRight className="ml-2 h-3.5 w-3.5" />
-                      </Link>
+                      </a>
                     </Button>
                   </article>
                 </div>
@@ -322,7 +336,7 @@ const Speaking = () => {
                 <div className="text-center mt-12">
                   <Button asChild size="lg" className="rounded-full px-8 bg-accent text-accent-foreground hover:bg-accent/90 group">
                     <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
-                      Book Ferry for your event
+                      Book Ferry
                       <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                     </a>
                   </Button>
@@ -413,11 +427,16 @@ const Speaking = () => {
           <section className="py-24 md:py-32 bg-foreground text-background">
             <div className="container px-6 md:px-8">
               <div className="max-w-3xl mx-auto text-center">
-                <h2 className="font-display text-4xl md:text-5xl font-bold mb-6">Ready to inspire your audience?<HeadingDot /></h2>
-                <p className="text-xl text-white/70 mb-12">Let's discuss how Ferry can bring energy and insight to your next event.</p>
+                <h2 className="font-display text-4xl md:text-5xl font-bold mb-6">
+                  Ready to inspire your <span className="text-accent">audience</span><HeadingDot />
+                </h2>
+                <p className="text-xl text-white/70 mb-12">
+                  Ferry replies personally within two working days. For formal
+                  bookings he is exclusively represented by Speakers Academy.
+                </p>
                 <Button asChild size="lg" className="rounded-full px-8 bg-accent text-accent-foreground hover:bg-accent/90 group">
                   <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
-                    Get in touch via Speakers Academy
+                    Book Ferry
                     <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                   </a>
                 </Button>

@@ -25,24 +25,30 @@ const Hero = () => {
                 letterSpacing: "-0.025em",
               }}
             >
-              Most people make AI{" "}
-              <span className="text-primary">complicated</span>
-              <Period />
+              The 'now what' after AI<Period />
               <br />
-              I make it <span className="text-primary">human</span>
+              For the <span className="text-primary">humans running the place</span>
               <Period />
             </h1>
 
             <p className="mt-8 text-lg md:text-xl text-foreground/80 max-w-2xl leading-[1.55]">
-              Through keynotes, a book, and one big idea ten years in the making:
-              Brand Humanizing.
+              AI is settling. The economy has shifted. The real question isn't
+              which tool to buy next — it's how to lead organisations that still
+              feel human. That's the work of Brand Humanizing. Ten years in the
+              making.
             </p>
 
             <div className="mt-10 flex flex-wrap gap-3 md:gap-4">
               <PillButton to="/the-idea" variant="primary">
                 Read the idea
               </PillButton>
-              <PillButton to="/book" variant="ghost" arrow={false}>
+              <PillButton
+                href="https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966"
+                target="_blank"
+                rel="noopener noreferrer"
+                variant="ghost"
+                arrow={false}
+              >
                 Book Ferry
               </PillButton>
             </div>
