@@ -34,12 +34,12 @@ const Index = () => {
         <TrustLine />
 
         <main>
+          <article><BlogSection /></article>
+          <article><BookSection /></article>
+          <article><SpeakerSection /></article>
+          <article><PodcastSection /></article>
           <article><BrandHumanizingSection /></article>
           <article><AboutBlock /></article>
-          <article><SpeakerSection /></article>
-          <article><BookSection /></article>
-          <article><PodcastSection /></article>
-          <article><BlogSection /></article>
           <AlsoByFerry />
           <CommunitySection />
         </main>
