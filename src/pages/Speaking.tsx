@@ -101,6 +101,7 @@ const TESTIMONIALS = [
 const Speaking = () => {
   return (
     <>
+      <SiteHeader />
       <SEOHead
         title="AI Keynote Speaker for Conferences & Corporate Events | Ferry Hoes"
         description="Book Ferry Hoes for your next event. Keynote talks on AI, the future of work, human-centred leadership, and Brand Humanizing. Trusted by global organisations. Available internationally."
