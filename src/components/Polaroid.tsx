@@ -4,7 +4,7 @@ interface PolaroidProps {
   src: string;
   alt: string;
   caption?: ReactNode;
-  /** Rotation in degrees, -3 to +3 recommended */
+  /** Rotation in degrees, -2 to +2 recommended */
   rotate?: number;
   className?: string;
   aspect?: "square" | "portrait" | "landscape";
@@ -12,18 +12,19 @@ interface PolaroidProps {
 }
 
 /**
- * Polaroid card: white-bordered photo, slight tilt, hover-straightens.
- * Optional handwritten caption in navy ink (Caveat).
+ * Editorial photo card. Soft white border, slight tilt, hover-straightens.
+ * Caption renders in Caveat (handwritten) below the image.
  */
 const Polaroid = ({
   src,
   alt,
   caption,
-  rotate = -1.5,
+  rotate = -1,
   className = "",
   aspect = "landscape",
   loading = "lazy",
 }: PolaroidProps) => {
+  const clamped = Math.max(-2, Math.min(2, rotate));
   const aspectClass =
     aspect === "square"
       ? "aspect-square"
@@ -32,24 +33,25 @@ const Polaroid = ({
       : "aspect-[4/3]";
 
   return (
-    <div
-      className={`relative bg-white p-2.5 pb-8 shadow-polaroid transition-transform duration-300 ease-out hover:!rotate-0 ${className}`}
-      style={{ transform: `rotate(${rotate}deg)` }}
+    <figure
+      className={`relative bg-card p-2 pb-2 shadow-polaroid transition-transform duration-500 ease-out hover:!rotate-0 ${className}`}
+      style={{ transform: `rotate(${clamped}deg)` }}
     >
-      <div className={`${aspectClass} overflow-hidden bg-muted`}>
+      <div className={`${aspectClass} overflow-hidden bg-muted relative group`}>
         <img
           src={src}
           alt={alt}
           loading={loading}
-          className="w-full h-full object-cover object-top"
+          className="w-full h-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.02]"
         />
+        <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/[0.04] transition-colors duration-500" />
       </div>
       {caption && (
-        <p className="text-center mt-3 font-handwritten text-xl md:text-2xl text-ink-navy leading-tight">
+        <figcaption className="text-center mt-3 mb-1 font-handwritten text-2xl md:text-3xl text-foreground leading-tight">
           {caption}
-        </p>
+        </figcaption>
       )}
-    </div>
+    </figure>
   );
 };
 

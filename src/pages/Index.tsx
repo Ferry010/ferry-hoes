@@ -18,7 +18,7 @@ const Index = () => {
     <>
       <SEOHead
         title="Ferry Hoes — Keynote Speaker, Author of Brand Humanizing"
-        description="Most people make AI complicated. Ferry Hoes makes it human. International keynote speaker, author of Brand Humanizing, host of The Human Era Podcast."
+        description="The 'now what' after AI. Ferry Hoes helps organisations stay human in a tech-heavy world. International keynote speaker, author of Brand Humanizing, host of The Human Era Podcast."
         ogType="website"
         canonicalUrl="/"
       />

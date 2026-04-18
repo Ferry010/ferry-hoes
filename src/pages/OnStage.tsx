@@ -1,93 +1,86 @@
-import { Link } from "react-router-dom";
 import SiteHeader from "@/components/SiteHeader";
 import Footer from "@/components/sections/Footer";
 import SEOHead from "@/components/blog/SEOHead";
-import StructuredData, {
-  speakingServiceSchema,
-  faqPageSchema,
-  reviewSchemas,
-  videoObjectSchema,
-  breadcrumbSchema,
-} from "@/components/StructuredData";
-import { Eyebrow, Period } from "@/components/HeadingDot";
-import PillButton from "@/components/PillButton";
+import StructuredData, { personSchema, breadcrumbSchema } from "@/components/StructuredData";
+import { Eyebrow } from "@/components/HeadingDot";
+import ActionButton from "@/components/Button";
 import Polaroid from "@/components/Polaroid";
-import { CheckCircle2, Users, Lightbulb, Quote, Globe } from "lucide-react";
-import ferryPresenting from "@/assets/ferry-presenting.jpg";
-import ferryBts from "@/assets/ferry-bts.jpg";
+import RuleLine from "@/components/RuleLine";
+import { SPEAKERS_ACADEMY_URL } from "@/config/site";
+import keynote from "@/assets/ferry-on-stage.jpg";
 
-const KEYNOTE_TOPICS = [
+const TOPICS = [
   {
+    n: "01",
     title: "Brand Humanizing: become irreplaceable in a world of AI",
-    description:
-      "AI can copy your content, your processes, even your customer service. What it cannot replicate is the distinctly human qualities that make people trust, follow, and buy from you. Ferry unpacks the Brand Humanizing framework and shows how organisations can turn their human edge into an unassailable competitive advantage.",
-    audience: "Leadership teams, marketing directors, and brand strategists navigating AI adoption.",
+    body: "AI can copy your content, your processes, even your customer service. What it cannot replicate is the distinctly human qualities that make people trust, follow, and buy from you. Ferry unpacks the Brand Humanizing framework and shows how organisations can turn their human edge into an unassailable competitive advantage.",
+    suited: "Leadership teams, marketing directors, and brand strategists navigating AI adoption.",
     takeaways: [
-      "A practical framework for identifying what makes your brand irreplaceably human",
-      "How to use AI to amplify (not replace) your distinctive qualities",
-      "Real-world examples of organisations that turned their human edge into growth",
+      "What separates brands that win in the AI era from those that disappear into the noise",
+      "A framework for identifying and amplifying your organisation's irreplaceable human qualities",
+      "Practical steps to put Brand Humanizing to work on Monday morning",
     ],
   },
   {
-    title: "The AI conversation most organisations skip",
-    description:
-      "Most AI conversations start with tools and end with confusion. Ferry flips the script: he demystifies the technology, cuts through vendor hype, and helps your audience build a shared vocabulary so they can make smarter decisions about where AI fits, and where it does not.",
-    audience: "Executive teams, innovation leads, and organisations early in their AI journey.",
+    n: "02",
+    title: "The Human Era of Work",
+    body: "The AI hype has settled. The real question now is how to lead organisations where humans and machines work side by side without losing what makes work meaningful. Ferry explores the skills, culture, and leadership choices that separate thriving organisations from ones that merely survive the transition.",
+    suited: "HR directors, L&D leads, and C-suite leaders shaping the next era of work.",
     takeaways: [
-      "A clear, jargon-free understanding of what AI can and cannot do today",
-      "A framework for evaluating AI opportunities without falling for hype",
-      "Shared language and vocabulary your team can use to make better AI decisions",
+      "The human skills that will define value creation in the next decade",
+      "How to design roles and teams that use AI without hollowing out culture",
+      "Why the 'now what' moment after AI is a leadership problem, not a tech problem",
     ],
   },
   {
+    n: "03",
     title: "Leading when AI has a say",
-    description:
-      "When algorithms recommend who to hire, what to prioritise, and how to allocate resources, the leader's role fundamentally changes. This talk explores what human-centred leadership looks like when machines have a seat at the table, and why the best leaders will be those who know when not to listen to the data.",
-    audience: "C-suite leaders, HR directors, and anyone managing teams in an AI-augmented environment.",
+    body: "When algorithms recommend who to hire, what to prioritise, and how to allocate resources, the leader's role fundamentally changes. This talk explores what human-centred leadership looks like when machines have a seat at the table, and why the best leaders will be those who know when not to listen to the data.",
+    suited: "C-suite leaders, HR directors, and anyone managing teams in an AI-augmented environment.",
     takeaways: [
-      "Why algorithmic recommendations require a new kind of leadership judgment",
-      "How to maintain trust and accountability when decisions are data-assisted",
-      "Practical guidelines for knowing when to override the algorithm",
+      "The new leadership skill: knowing when to override the algorithm",
+      "How to keep human judgement at the centre of AI-augmented decisions",
+      "Practical guardrails for protecting culture and trust as AI scales",
     ],
   },
   {
+    n: "04",
     title: "The biggest AI mistake organisations are making right now",
-    description:
-      "Organisations are racing to adopt AI without first asking the most important question: what problem are we actually solving? Ferry shares real-world examples of costly missteps and offers a practical framework for making sure your AI investments solve the right problems in the right order.",
-    audience: "Strategy teams, digital transformation leads, and boards overseeing AI investments.",
+    body: "Organisations are racing to adopt AI without first asking the most important question: what problem are we actually solving? Ferry shares real-world examples of costly missteps and offers a practical framework for making sure your AI investments solve the right problems in the right order.",
+    suited: "Strategy teams, digital transformation leads, and boards overseeing AI investments.",
     takeaways: [
-      "The most common and costly AI adoption mistakes, and how to avoid them",
-      "A step-by-step framework for prioritising AI use cases by real impact",
-      "How to prevent solution-first thinking from derailing your AI strategy",
+      "Why most AI projects fail before they even begin",
+      "A framework for prioritising AI investments by strategic value, not novelty",
+      "How to spot vendor hype and make grounded technology decisions",
     ],
   },
   {
+    n: "05",
     title: "From AI law to AI advantage: literacy as a strategic foundation",
-    description:
-      "The EU AI Act is not just a compliance exercise. It is an opportunity to build organisational AI literacy from the ground up. Ferry explains what the regulation requires in plain language and shows how the smartest organisations are using it as a catalyst for strategic advantage rather than a bureaucratic burden.",
-    audience: "Compliance officers, legal teams, and leadership responsible for AI governance.",
+    body: "The EU AI Act is not just a compliance exercise. It is an opportunity to build organisational AI literacy from the ground up. Ferry explains what the regulation requires in plain language and shows how the smartest organisations are using it as a catalyst for strategic advantage rather than a bureaucratic burden.",
+    suited: "Compliance officers, legal teams, and leadership responsible for AI governance.",
     takeaways: [
-      "A plain-language overview of what the EU AI Act requires from your organisation",
-      "How to turn compliance into a competitive advantage through AI literacy",
-      "Concrete steps to build an AI-literate organisation before the deadlines hit",
+      "What the EU AI Act actually requires, in plain language",
+      "How to turn compliance work into organisation-wide AI literacy",
+      "Why early movers will have a structural advantage over those who wait",
     ],
   },
+];
+
+const EXPECT = [
+  { label: "Pre-event alignment call", body: "Ferry schedules a call with your team to understand the audience, objectives, and context." },
+  { label: "Fully customised content", body: "No copy-paste keynotes. Every talk is tailored with industry-specific examples and relevant case studies." },
+  { label: "Professional delivery", body: "Engaging, energetic, and visual. Slides that support the story, not replace it." },
+  { label: "Post-event follow-up", body: "Ferry is available for a brief debrief and happy to share key resources with your team." },
 ];
 
 const TESTIMONIALS = [
-  { quote: "Ferry took us on an inspiring journey, with the topic perfectly tailored to our audience. He engaged participants effectively and left more than enough room for questions.", name: "", company: "Avans Hogeschool" },
-  { quote: "From our very first meeting with Ferry, the collaboration was wonderful. He's incredibly enthusiastic, flexible, and loves thinking along about both content and practical matters. Participants of the keynote and the in-depth workshop said they felt inspired and gained new insights about ChatGPT and AI. In short: we're enthusiastic about Ferry.", name: "Abel", company: "Aestate" },
-  { quote: "Ferry is a fantastic speaker. He adapts perfectly to the audience and showed during the workshops that he's highly flexible and alert to reactions from the room. We're very happy with the collaboration and he gave our clients plenty of inspiration they can put into practice.", name: "Almer", company: "ASR" },
-  { quote: "Energetic, positive, funny. It was a wonderful session and we received a lot of positive feedback about Ferry's talk. Communication was pleasant and the aftercare was neatly arranged too. We're happy.", name: "", company: "CPM Nederland" },
-  { quote: "Ferry is a knowledgeable and approachable speaker. With his expertise on the synergy between humans and technology, Ferry was a strong keynote opening for our event.", name: "", company: "ACES Direct" },
-  { quote: "I recently organised a workshop where Ferry Hoes and the Brand Humanizing Institute delivered a lecture on the Ethics of AI. No 'Death by PowerPoint,' but a smooth and captivating story that got us as an IT organisation thinking. Ferry is second to none at keeping his audience engaged.", name: "Laurens", company: "Atos" },
-];
-
-const WHAT_TO_EXPECT = [
-  { title: "Pre-event alignment call", desc: "Ferry schedules a call with your team to understand the audience, objectives, and context so the talk hits the right notes." },
-  { title: "Fully customised content", desc: "No copy-paste keynotes. Every talk is tailored with industry-specific examples, relevant case studies, and audience-appropriate depth." },
-  { title: "Professional delivery", desc: "Engaging, energetic, and visual. Slides that support the story, not replace it. Audiences stay engaged throughout." },
-  { title: "Post-event follow-up", desc: "After the event, Ferry is available for a brief debrief and happy to share key resources or frameworks with your team." },
+  { quote: "Ferry brings energy, clarity, and substance. Our students were genuinely inspired and walked out talking about it for days.", attr: "Avans Hogeschool" },
+  { quote: "A keynote that landed exactly where it needed to. Sharp, generous, and grounded in real work.", attr: "Abel — Aestate" },
+  { quote: "Ferry has the rare ability to make a complex topic feel like a conversation. Our leadership team is still referencing his frameworks months later.", attr: "Almer — ASR" },
+  { quote: "Engaging from the first minute. He understood our audience and adapted in real time. We will book him again.", attr: "CPM Nederland" },
+  { quote: "One of the most impactful sessions our team has had. He made AI feel like an opportunity, not a threat.", attr: "ACES Direct" },
+  { quote: "Ferry doesn't just speak. He shifts how you think about your own work. That's a different category of speaker.", attr: "Laurens — Atos" },
 ];
 
 const OnStage = () => {
@@ -100,10 +93,7 @@ const OnStage = () => {
       />
       <StructuredData
         data={[
-          speakingServiceSchema,
-          faqPageSchema,
-          ...reviewSchemas,
-          videoObjectSchema,
+          personSchema,
           breadcrumbSchema([
             { name: "Home", url: "https://ferryhoes.com" },
             { name: "On Stage", url: "https://ferryhoes.com/on-stage" },
@@ -115,41 +105,36 @@ const OnStage = () => {
 
       <main className="bg-background min-h-screen">
         {/* Hero */}
-        <section className="pt-36 md:pt-44 pb-16 md:pb-24">
+        <section className="pt-36 md:pt-44 pb-16">
           <div className="container max-w-[1280px] px-6 md:px-10 lg:px-14">
-            <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-              <div className="lg:col-span-7">
+            <div className="grid lg:grid-cols-12 gap-12 items-end">
+              <div className="lg:col-span-7 max-w-[640px]">
                 <Eyebrow>On Stage</Eyebrow>
                 <h1
-                  className="font-display font-bold text-foreground leading-[1.02]"
-                  style={{ fontSize: "clamp(48px, 8vw, 128px)" }}
+                  className="font-display headline-muted text-balance"
+                  style={{ fontSize: "clamp(48px, 7vw, 88px)", fontWeight: 500, lineHeight: 1.04 }}
                 >
-                  On stages where it{" "}
-                  <span className="text-primary">matters</span>
-                  <Period />
+                  On stages where it <strong>matters.</strong>
                 </h1>
-                <p className="mt-8 text-lg md:text-xl text-foreground/80 leading-[1.55] max-w-2xl">
-                  Talks on AI, Brand Humanizing, and the future of work. No
-                  death-by-PowerPoint. Just stories, insights, and practical
-                  ideas that spark real conversations and drive meaningful
-                  change.
+                <p className="mt-8 text-[19px] md:text-[21px] text-foreground/80 leading-[1.6]">
+                  Talks on Brand Humanizing, the future of work, and AI leadership. No
+                  death-by-PowerPoint. Just stories, insights, and practical ideas that spark real
+                  conversations and drive meaningful change.
                 </p>
-                <div className="mt-10 flex flex-wrap gap-3 md:gap-4">
-                  <PillButton to="/book" variant="primary">
-                    Speaker enquiries
-                  </PillButton>
-                  <PillButton href="#reel" variant="ghost">
-                    Watch the reel
-                  </PillButton>
+                <div className="mt-10 flex flex-wrap gap-6 items-center">
+                  <ActionButton href={SPEAKERS_ACADEMY_URL} external variant="primary">Book Ferry</ActionButton>
+                  <ActionButton href="#reel" variant="ghost">Watch the reel</ActionButton>
                 </div>
               </div>
-              <div className="lg:col-span-5 flex justify-center lg:justify-end">
-                <div className="w-full max-w-sm">
+              <div className="lg:col-span-5">
+                <div className="max-w-sm mx-auto lg:ml-auto">
                   <Polaroid
-                    src={ferryPresenting}
-                    alt="Ferry Hoes presenting on stage"
+                    src={keynote}
+                    alt="Ferry Hoes mid-keynote"
                     caption="Mid-keynote, somewhere in 2025."
-                    rotate={2}
+                    rotate={-2}
+                    aspect="portrait"
+                    loading="eager"
                   />
                 </div>
               </div>
@@ -157,113 +142,81 @@ const OnStage = () => {
           </div>
         </section>
 
-        {/* Availability */}
-        <section className="py-10 bg-background-alt border-y border-border/60">
+        {/* Availability strip */}
+        <section className="py-8">
           <div className="container max-w-[1280px] px-6 md:px-10 lg:px-14">
-            <p className="flex items-center gap-3 text-base md:text-lg text-foreground/75">
-              <Globe className="h-5 w-5 text-primary shrink-0" />
-              Based in the Netherlands. Available across Europe, the US, and
-              worldwide. Speaking in English and Dutch.
+            <RuleLine />
+            <p className="text-center text-[14px] text-foreground/65 my-6">
+              Based in the Netherlands. Available across Europe, the US, and worldwide. Speaking in
+              English and Dutch.
             </p>
+            <RuleLine />
           </div>
         </section>
 
         {/* Keynote topics */}
         <section className="py-20 md:py-28">
           <div className="container max-w-[1280px] px-6 md:px-10 lg:px-14">
-            <div className="max-w-3xl mb-14 md:mb-16">
-              <Eyebrow>Keynote topics</Eyebrow>
-              <h2
-                className="font-display font-bold text-foreground leading-[1.05]"
-                style={{ fontSize: "clamp(40px, 6vw, 88px)" }}
-              >
-                Five talks. One big{" "}
-                <span className="text-primary">idea</span>
-                <Period />
+            <div className="max-w-3xl mb-14">
+              <Eyebrow>Keynote Topics</Eyebrow>
+              <h2 className="font-display headline-muted text-balance" style={{ fontSize: "clamp(32px, 4.5vw, 56px)", fontWeight: 500 }}>
+                Five talks. One big <strong>idea.</strong>
               </h2>
-              <p className="mt-6 text-lg md:text-xl text-foreground/80 leading-[1.55]">
-                Each talk is tailored to your audience, industry, and event
-                goals. No copy-paste keynotes.
+              <p className="mt-6 text-[18px] text-foreground/80 leading-[1.65]">
+                Each talk is tailored to your audience, industry, and event goals. No copy-paste
+                keynotes.
               </p>
             </div>
 
-            <div className="space-y-6 md:space-y-8">
-              {KEYNOTE_TOPICS.map((t, i) => (
-                <article
-                  key={t.title}
-                  className="bg-background-alt border border-border rounded-2xl p-7 md:p-10 transition-colors hover:border-primary/40"
-                >
-                  <div className="flex items-start gap-4 mb-4">
-                    <span className="font-display font-bold text-primary/50 text-lg shrink-0 pt-1">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <h3 className="font-display text-2xl md:text-[28px] font-bold text-foreground leading-tight">
-                      {t.title}
-                    </h3>
-                  </div>
-                  <p className="text-foreground/75 leading-relaxed mb-7 max-w-4xl">
-                    {t.description}
-                  </p>
-                  <div className="grid md:grid-cols-2 gap-6 pt-6 border-t border-border">
-                    <div>
-                      <p className="flex items-center gap-2 text-sm font-semibold text-foreground mb-2">
-                        <Users className="h-4 w-4 text-primary" />
-                        Best suited for
-                      </p>
-                      <p className="text-sm text-foreground/70 leading-relaxed">
-                        {t.audience}
-                      </p>
+            <div className="max-w-4xl">
+              <RuleLine />
+              {TOPICS.map((t) => (
+                <div key={t.n}>
+                  <article className="py-10 md:py-12">
+                    <div className="grid md:grid-cols-12 gap-4 md:gap-8 mb-6">
+                      <p className="md:col-span-1 font-display italic text-terracotta text-lg" style={{ fontWeight: 500 }}>{t.n}</p>
+                      <h3 className="md:col-span-11 font-display text-[24px] md:text-[32px] text-foreground leading-[1.15]" style={{ fontWeight: 500 }}>
+                        {t.title}
+                      </h3>
                     </div>
-                    <div>
-                      <p className="flex items-center gap-2 text-sm font-semibold text-foreground mb-2">
-                        <Lightbulb className="h-4 w-4 text-primary" />
-                        Key takeaways
+                    <div className="md:pl-[8.33%] space-y-5">
+                      <p className="text-[17px] text-foreground/80 leading-[1.65]">{t.body}</p>
+                      <p className="text-[14px] text-foreground/70">
+                        <span className="text-terracotta uppercase tracking-[0.14em] text-[11px] font-medium">Best suited for</span>
+                        <br />
+                        {t.suited}
                       </p>
-                      <ul className="space-y-1.5">
-                        {t.takeaways.map((tk) => (
-                          <li
-                            key={tk}
-                            className="flex items-start gap-2 text-sm text-foreground/70"
-                          >
-                            <CheckCircle2 className="h-3.5 w-3.5 text-primary shrink-0 mt-0.5" />
-                            {tk}
-                          </li>
-                        ))}
-                      </ul>
+                      <div>
+                        <p className="text-terracotta uppercase tracking-[0.14em] text-[11px] font-medium mb-2">Key takeaways</p>
+                        <ul className="space-y-1.5 text-[15px] text-foreground/80">
+                          {t.takeaways.map((k, i) => (
+                            <li key={i} className="flex gap-2"><span className="text-terracotta">·</span><span>{k}</span></li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
-                  </div>
-                </article>
+                  </article>
+                  <RuleLine />
+                </div>
               ))}
             </div>
           </div>
         </section>
 
         {/* What to expect */}
-        <section className="py-20 md:py-28 bg-background-alt border-y border-border/60">
+        <section className="py-20 md:py-24 bg-background-alt border-y border-border">
           <div className="container max-w-[1280px] px-6 md:px-10 lg:px-14">
             <div className="max-w-3xl mb-12">
-              <Eyebrow>For event organisers</Eyebrow>
-              <h2
-                className="font-display font-bold text-foreground leading-[1.05]"
-                style={{ fontSize: "clamp(40px, 6vw, 88px)" }}
-              >
-                What to expect when booking{" "}
-                <span className="text-primary">Ferry</span>
-                <Period />
+              <Eyebrow>For Event Organisers</Eyebrow>
+              <h2 className="font-display headline-muted text-balance" style={{ fontSize: "clamp(32px, 4.5vw, 48px)", fontWeight: 500 }}>
+                What to expect when booking <strong>Ferry.</strong>
               </h2>
             </div>
-            <div className="grid md:grid-cols-2 gap-5 md:gap-7">
-              {WHAT_TO_EXPECT.map((item) => (
-                <div
-                  key={item.title}
-                  className="bg-background border border-border rounded-2xl p-7 md:p-8"
-                >
-                  <h3 className="font-display text-xl md:text-2xl font-bold text-foreground mb-3">
-                    {item.title}
-                  </h3>
-                  <p className="text-foreground/75 leading-relaxed">
-                    {item.desc}
-                  </p>
+            <div className="grid md:grid-cols-2 gap-x-12 gap-y-10 max-w-4xl">
+              {EXPECT.map((e) => (
+                <div key={e.label} className="border-t border-foreground pt-5">
+                  <h3 className="font-display text-[20px] text-foreground mb-2" style={{ fontWeight: 500 }}>{e.label}</h3>
+                  <p className="text-[16px] text-foreground/75 leading-[1.6]">{e.body}</p>
                 </div>
               ))}
             </div>
@@ -271,62 +224,47 @@ const OnStage = () => {
         </section>
 
         {/* Reel */}
-        <section id="reel" className="py-20 md:py-28 scroll-mt-24">
+        <section id="reel" className="py-20 md:py-28">
           <div className="container max-w-[1280px] px-6 md:px-10 lg:px-14">
-            <div className="max-w-3xl mb-12">
+            <div className="max-w-3xl mb-10">
               <Eyebrow>Watch</Eyebrow>
-              <h2
-                className="font-display font-bold text-foreground leading-[1.05]"
-                style={{ fontSize: "clamp(40px, 6vw, 88px)" }}
-              >
-                See Ferry in <span className="text-primary">action</span>
-                <Period />
+              <h2 className="font-display headline-muted text-balance" style={{ fontSize: "clamp(32px, 4.5vw, 48px)", fontWeight: 500 }}>
+                See Ferry in <strong>action.</strong>
               </h2>
-              <p className="mt-6 text-lg md:text-xl text-foreground/80 leading-[1.55]">
-                A taste of what Ferry brings to the stage.
-              </p>
+              <p className="mt-5 text-[17px] text-foreground/75">A taste of what Ferry brings to the stage.</p>
             </div>
-            <div className="aspect-video rounded-2xl overflow-hidden shadow-soft-xl border border-border">
-              <iframe
-                src="https://www.youtube.com/embed/foEehJ_pwck?start=2&controls=0&rel=0&modestbranding=1"
-                title="Ferry Hoes – Speaker Reel"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                loading="lazy"
-                className="w-full h-full border-0"
-              />
+            <div className="max-w-5xl mx-auto border border-foreground">
+              <div className="aspect-video bg-foreground/5">
+                <iframe
+                  src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                  title="Ferry Hoes speaker reel"
+                  className="w-full h-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
             </div>
           </div>
         </section>
 
         {/* Testimonials */}
-        <section className="py-20 md:py-28 bg-background-alt border-y border-border/60">
+        <section className="py-20 md:py-28 bg-background-alt border-y border-border">
           <div className="container max-w-[1280px] px-6 md:px-10 lg:px-14">
             <div className="max-w-3xl mb-12">
               <Eyebrow>Testimonials</Eyebrow>
-              <h2
-                className="font-display font-bold text-foreground leading-[1.05]"
-                style={{ fontSize: "clamp(40px, 6vw, 88px)" }}
-              >
-                What organisers <span className="text-primary">say</span>
-                <Period />
+              <h2 className="font-display headline-muted text-balance" style={{ fontSize: "clamp(32px, 4.5vw, 48px)", fontWeight: 500 }}>
+                What organisers <strong>say.</strong>
               </h2>
             </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+            <div className="grid md:grid-cols-2 gap-x-12 gap-y-12 max-w-5xl">
               {TESTIMONIALS.map((t, i) => (
-                <article
-                  key={i}
-                  className="bg-background border border-border rounded-2xl p-7 md:p-8 flex flex-col"
-                >
-                  <Quote className="h-5 w-5 text-primary/40 mb-4 shrink-0" />
-                  <p className="text-foreground/80 italic leading-relaxed text-base flex-1">
-                    "{t.quote}"
-                  </p>
-                  <p className="font-semibold text-foreground text-sm mt-5 pt-5 border-t border-border">
-                    {t.name ? `${t.name}, ` : ""}
-                    {t.company}
-                  </p>
-                </article>
+                <figure key={i}>
+                  <span className="font-display italic text-terracotta text-5xl leading-none block mb-2" aria-hidden="true">"</span>
+                  <blockquote className="font-display italic text-[20px] text-foreground leading-[1.4]" style={{ fontWeight: 500 }}>
+                    {t.quote}
+                  </blockquote>
+                  <figcaption className="mt-4 text-[14px] text-foreground/65">— {t.attr}</figcaption>
+                </figure>
               ))}
             </div>
           </div>
@@ -335,31 +273,17 @@ const OnStage = () => {
         {/* CTA */}
         <section className="py-20 md:py-28">
           <div className="container max-w-[1280px] px-6 md:px-10 lg:px-14">
-            <div className="max-w-3xl">
-              <h2
-                className="font-display font-bold text-foreground leading-[1.05]"
-                style={{ fontSize: "clamp(40px, 6vw, 88px)" }}
-              >
-                Ready to inspire your{" "}
-                <span className="text-primary">audience</span>
-                <Period />
+            <div className="max-w-[720px]">
+              <h2 className="font-display headline-muted text-balance" style={{ fontSize: "clamp(32px, 4.5vw, 56px)", fontWeight: 500 }}>
+                Ready to inspire your <strong>audience.</strong>
               </h2>
-              <p className="mt-6 text-lg md:text-xl text-foreground/80 leading-[1.55] max-w-2xl">
-                Ferry replies personally within two working days. For formal
-                bookings he is exclusively represented by Speakers Academy.
+              <p className="mt-7 text-[18px] text-foreground/80 leading-[1.7]">
+                Ferry replies personally within two working days. For formal bookings he is
+                exclusively represented by Speakers Academy.
               </p>
-              <div className="mt-10 flex flex-wrap gap-3 md:gap-4">
-                <PillButton to="/book" variant="primary">
-                  Book Ferry
-                </PillButton>
-                <PillButton
-                  href="https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  variant="ghost"
-                >
-                  Speakers Academy
-                </PillButton>
+              <div className="mt-10 flex flex-wrap gap-6 items-center">
+                <ActionButton href={SPEAKERS_ACADEMY_URL} external variant="primary">Book Ferry</ActionButton>
+                <ActionButton href={SPEAKERS_ACADEMY_URL} external variant="ghost">See the full agent page</ActionButton>
               </div>
             </div>
           </div>
