@@ -7,17 +7,15 @@ export default {
   theme: {
     container: {
       center: true,
-      padding: "2rem",
-      screens: {
-        "2xl": "1280px",
-      },
+      padding: "1.5rem",
+      screens: { "2xl": "1280px" },
     },
     extend: {
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],
-        display: ["Inter Tight", "Inter", "system-ui", "sans-serif"],
+        display: ["Fraunces", "Georgia", "serif"],
+        serif: ["Fraunces", "Georgia", "serif"],
         handwritten: ["Caveat", "cursive"],
-        signature: ["Caveat", "cursive"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -26,6 +24,11 @@ export default {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         "background-alt": "hsl(var(--background-alt))",
+        terracotta: {
+          DEFAULT: "hsl(var(--terracotta))",
+          foreground: "hsl(var(--terracotta-foreground))",
+        },
+        highlight: "hsl(var(--highlight))",
         "ink-navy": {
           DEFAULT: "hsl(var(--ink-navy))",
           foreground: "hsl(var(--ink-navy-foreground))",
@@ -71,16 +74,13 @@ export default {
       },
       borderRadius: {
         lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
-        "2xl": "1.5rem",
-        "3xl": "2rem",
+        md: "var(--radius)",
+        sm: "var(--radius)",
       },
       boxShadow: {
-        soft: "0 4px 20px -2px hsl(var(--soft-shadow) / 0.08)",
-        "soft-lg": "0 10px 40px -10px hsl(var(--soft-shadow) / 0.12)",
-        "soft-xl": "0 20px 60px -15px hsl(var(--soft-shadow) / 0.16)",
-        polaroid: "4px 6px 24px rgba(15, 17, 21, 0.14)",
+        soft: "0 1px 2px hsl(var(--soft-shadow) / 0.04)",
+        "soft-lg": "0 8px 32px -12px hsl(var(--soft-shadow) / 0.10)",
+        polaroid: "0 1px 1px rgba(0,0,0,0.06), 0 8px 24px -12px rgba(0,0,0,0.18)",
       },
       keyframes: {
         "accordion-down": {
@@ -92,7 +92,7 @@ export default {
           to: { height: "0" },
         },
         "fade-up": {
-          "0%": { opacity: "0", transform: "translateY(8px)" },
+          "0%": { opacity: "0", transform: "translateY(10px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
         "fade-in": {
@@ -103,7 +103,7 @@ export default {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "fade-up": "fade-up 0.3s ease-out forwards",
+        "fade-up": "fade-up 0.4s ease-out forwards",
         "fade-in": "fade-in 0.4s ease-out forwards",
       },
     },
