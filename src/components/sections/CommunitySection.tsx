@@ -38,7 +38,7 @@ const CommunitySection = () => {
 
           <h2
             className="font-display font-bold text-foreground leading-[1.02]"
-            style={{ fontSize: "clamp(40px, 6vw, 88px)" }}
+            style={{ fontSize: "clamp(36px, 5.4vw, 80px)" }}
           >
             A short letter. Once a <span className="text-primary">month</span>
             <Period />
