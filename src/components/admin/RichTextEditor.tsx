@@ -75,7 +75,7 @@ const RichTextEditor = ({ value, onChange }: RichTextEditorProps) => {
       }),
       Placeholder.configure({ placeholder: "Start writing your post…" }),
       TextAlign.configure({ types: ["heading", "paragraph"] }),
-    ],
+    ] as any,
     content: value,
     onUpdate: ({ editor }) => {
       onChange(editor.getHTML());
