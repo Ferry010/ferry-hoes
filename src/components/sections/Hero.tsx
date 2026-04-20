@@ -24,7 +24,7 @@ const Hero = () => {
             <h1
               className="font-display font-bold text-foreground leading-[0.98]"
               style={{
-                fontSize: "clamp(48px, 8.5vw, 128px)",
+                fontSize: "clamp(42px, 7.6vw, 116px)",
                 letterSpacing: "-0.025em",
               }}
             >

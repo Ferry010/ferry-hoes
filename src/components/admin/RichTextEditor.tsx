@@ -75,7 +75,7 @@ const RichTextEditor = ({ value, onChange }: RichTextEditorProps) => {
       }),
       Placeholder.configure({ placeholder: "Start writing your post…" }),
       TextAlign.configure({ types: ["heading", "paragraph"] }),
-    ],
+    ] as any,
     content: value,
     onUpdate: ({ editor }) => {
       onChange(editor.getHTML());
@@ -160,51 +160,53 @@ const RichTextEditor = ({ value, onChange }: RichTextEditorProps) => {
 
   if (!editor) return null;
 
+  const editorAny = editor as any;
+
   return (
     <div className="border border-border rounded-md overflow-hidden bg-background">
       {/* Toolbar */}
       <div className="flex flex-wrap items-center gap-0.5 px-2 py-1.5 border-b border-border bg-muted/30">
         {/* Text formatting */}
-        <Toggle size="sm" pressed={editor.isActive("bold")} onPressedChange={() => editor.chain().focus().toggleBold().run()} aria-label="Bold">
+        <Toggle size="sm" pressed={editor.isActive("bold")} onPressedChange={() => editorAny.chain().focus().toggleBold().run()} aria-label="Bold">
           <Bold className="w-4 h-4" />
         </Toggle>
-        <Toggle size="sm" pressed={editor.isActive("italic")} onPressedChange={() => editor.chain().focus().toggleItalic().run()} aria-label="Italic">
+        <Toggle size="sm" pressed={editor.isActive("italic")} onPressedChange={() => editorAny.chain().focus().toggleItalic().run()} aria-label="Italic">
           <Italic className="w-4 h-4" />
         </Toggle>
-        <Toggle size="sm" pressed={editor.isActive("underline")} onPressedChange={() => editor.chain().focus().toggleUnderline().run()} aria-label="Underline">
+        <Toggle size="sm" pressed={editor.isActive("underline")} onPressedChange={() => editorAny.chain().focus().toggleUnderline().run()} aria-label="Underline">
           <UnderlineIcon className="w-4 h-4" />
         </Toggle>
-        <Toggle size="sm" pressed={editor.isActive("strike")} onPressedChange={() => editor.chain().focus().toggleStrike().run()} aria-label="Strikethrough">
+        <Toggle size="sm" pressed={editor.isActive("strike")} onPressedChange={() => editorAny.chain().focus().toggleStrike().run()} aria-label="Strikethrough">
           <Strikethrough className="w-4 h-4" />
         </Toggle>
 
         <Separator orientation="vertical" className="h-6 mx-1" />
 
         {/* Headings */}
-        <Toggle size="sm" pressed={editor.isActive("heading", { level: 2 })} onPressedChange={() => editor.chain().focus().toggleHeading({ level: 2 }).run()} aria-label="Heading 2">
+        <Toggle size="sm" pressed={editor.isActive("heading", { level: 2 })} onPressedChange={() => editorAny.chain().focus().toggleHeading({ level: 2 }).run()} aria-label="Heading 2">
           <Heading2 className="w-4 h-4" />
         </Toggle>
-        <Toggle size="sm" pressed={editor.isActive("heading", { level: 3 })} onPressedChange={() => editor.chain().focus().toggleHeading({ level: 3 }).run()} aria-label="Heading 3">
+        <Toggle size="sm" pressed={editor.isActive("heading", { level: 3 })} onPressedChange={() => editorAny.chain().focus().toggleHeading({ level: 3 }).run()} aria-label="Heading 3">
           <Heading3 className="w-4 h-4" />
         </Toggle>
 
         <Separator orientation="vertical" className="h-6 mx-1" />
 
         {/* Lists */}
-        <Toggle size="sm" pressed={editor.isActive("bulletList")} onPressedChange={() => editor.chain().focus().toggleBulletList().run()} aria-label="Bullet list">
+        <Toggle size="sm" pressed={editor.isActive("bulletList")} onPressedChange={() => editorAny.chain().focus().toggleBulletList().run()} aria-label="Bullet list">
           <List className="w-4 h-4" />
         </Toggle>
-        <Toggle size="sm" pressed={editor.isActive("orderedList")} onPressedChange={() => editor.chain().focus().toggleOrderedList().run()} aria-label="Ordered list">
+        <Toggle size="sm" pressed={editor.isActive("orderedList")} onPressedChange={() => editorAny.chain().focus().toggleOrderedList().run()} aria-label="Ordered list">
           <ListOrdered className="w-4 h-4" />
         </Toggle>
 
         <Separator orientation="vertical" className="h-6 mx-1" />
 
         {/* Block */}
-        <Toggle size="sm" pressed={editor.isActive("blockquote")} onPressedChange={() => editor.chain().focus().toggleBlockquote().run()} aria-label="Blockquote">
+        <Toggle size="sm" pressed={editor.isActive("blockquote")} onPressedChange={() => editorAny.chain().focus().toggleBlockquote().run()} aria-label="Blockquote">
           <Quote className="w-4 h-4" />
         </Toggle>
-        <Toggle size="sm" pressed={false} onPressedChange={() => editor.chain().focus().setHorizontalRule().run()} aria-label="Horizontal rule">
+        <Toggle size="sm" pressed={false} onPressedChange={() => editorAny.chain().focus().setHorizontalRule().run()} aria-label="Horizontal rule">
           <Minus className="w-4 h-4" />
         </Toggle>
 
