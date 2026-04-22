@@ -23,11 +23,11 @@ const TrustLine = () => (
         • Teams I've worked with
       </span>
       <p
-        className="mt-4 font-display font-semibold text-background leading-[1.3]"
-        style={{ fontSize: "clamp(18px, 2.4vw, 30px)" }}
+        className="mt-4 font-display font-semibold text-background leading-[1.3] break-words"
+        style={{ fontSize: "clamp(15px, 2.4vw, 30px)", wordBreak: "break-word" }}
       >
         {TEAMS.map((name, i) => (
-          <span key={name}>
+          <span key={name} className="whitespace-nowrap">
             <span className="hover:text-primary transition-colors">{name}</span>
             {i < TEAMS.length - 1 && (
               <span className="text-primary/70 mx-1.5 md:mx-3">/</span>
