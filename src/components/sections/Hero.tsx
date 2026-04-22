@@ -1,7 +1,6 @@
 import { Eyebrow, Period } from "@/components/HeadingDot";
 import PillButton from "@/components/PillButton";
 import { useBlogPosts } from "@/hooks/useBlogPosts";
-import ferryPresenting from "@/assets/ferry-presenting.jpg";
 
 /**
  * Editorial hero — replaces HeroVideo.
@@ -63,11 +62,15 @@ const Hero = () => {
                 style={{ transform: "rotate(2deg)" }}
               >
                 <div className="aspect-[4/5] overflow-hidden bg-muted">
-                  <img
-                    src={ferryPresenting}
-                    alt="Ferry Hoes speaking on stage"
-                    className="w-full h-full object-cover object-center"
-                    loading="eager"
+                  <video
+                    src="/videos/Ferry_Hero_vid_2026.webm"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="auto"
+                    aria-hidden="true"
+                    className="w-full h-full object-cover object-top"
                   />
                 </div>
                 <p className="text-center mt-3 font-handwritten text-xl md:text-2xl text-ink-navy leading-tight">
