@@ -4,7 +4,7 @@ import { Eyebrow, Period } from "@/components/HeadingDot";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import ferryPortrait from "@/assets/ferry-portrait.jpg";
 import ferryOnStage from "@/assets/ferry-on-stage.jpg";
-import bookCover from "@/assets/brand-humanizing-book.jpg";
+import ferryWithBook from "@/assets/ferry-bookstore.jpg";
 
 const roads = [
   {
@@ -38,10 +38,10 @@ const roads = [
       "Short essays on humans, technology, and the work in between. New when there's something worth saying.",
     cta: "Read essays",
     to: "/writing",
-    image: bookCover,
-    alt: "Brand Humanizing book cover",
+    image: ferryWithBook,
+    alt: "Ferry Hoes holding his book",
     bg: "bg-ink-navy",
-    objectPos: "center center",
+    objectPos: "center 25%",
     dark: true,
   },
 ];
