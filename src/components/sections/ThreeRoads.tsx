@@ -38,10 +38,10 @@ const roads = [
       "Short essays on humans, technology, and the work in between. New when there's something worth saying.",
     cta: "Read essays",
     to: "/writing",
-    image: bookCover,
-    alt: "Brand Humanizing book cover",
+    image: ferryWithBook,
+    alt: "Ferry Hoes holding his book",
     bg: "bg-ink-navy",
-    objectPos: "center center",
+    objectPos: "center 25%",
     dark: true,
   },
 ];
