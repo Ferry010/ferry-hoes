@@ -38,10 +38,7 @@ const Index = () => {
         <main>
           <article><ThreeRoads /></article>
           <article><BlogSection /></article>
-          <article><BookSection /></article>
-          <article><SpeakerSection /></article>
           <article><PodcastSection /></article>
-          <article><BrandHumanizingSection /></article>
           <AlsoByFerry />
           <CommunitySection />
         </main>
