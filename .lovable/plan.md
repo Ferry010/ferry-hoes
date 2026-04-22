@@ -1,59 +1,55 @@
 
 
-## Tighten copy + align speaker/podcast hero with brand
+# Blog Editor Upgrade + On-Brand Author Card
 
-Three small fixes. No design system changes.
+The current editor is already a TipTap WYSIWYG with bold/italic/underline/strike, H1–H3, lists, blockquote, code, links, images (URL + upload), alignment and undo/redo, and the SEO panel already has title, description, keywords with click-to-add suggestions, OG image, slug, Google preview, social card preview, and word count + reading time. Two real gaps remain: a Yoast-style **Focus Keyphrase** with usage checks, and a **brand-on-point author experience** (portrait byline + end-of-post bio, with reading time made more visible).
 
-### 1. Add Unilever to TrustLine
+## What changes for you
 
-`src/components/sections/TrustLine.tsx`: insert "Unilever" into the `TEAMS` array between Atos and ASR.
+**In the post editor (`/admin/posts/...`):**
+- New **Focus Keyphrase** field at the top of the SEO panel (single primary phrase).
+- Live **SEO checklist** based on that keyphrase:
+  - In SEO Title? In Meta Description? In Slug? In first paragraph? In any subheading (H2/H3)? Density 0.5–2.5% in body? Slug ≤ 60 chars? Title 50–60 chars? Description 140–160 chars? Has alt-able header image?
+  - Each item shows green/amber/red with a one-line fix tip.
+- An overall **SEO score** (0–100) and **Readability** mini-score (sentence length, paragraph length, passive voice hints) shown next to word count.
+- Existing fields (SEO title, meta description, keywords, OG image, slug) stay; small polish: focus phrase auto-adds itself to keywords if missing.
 
-### 2. Connect "Three ways to plug in" cards to the headline
+**On every blog post page (`/blog/:slug`):**
+- Replace the "FH" circle with a real **portrait byline** using `src/assets/ferry-portrait.jpg` (round, 48px), name, role, date · reading time on a second line. Reading time becomes always-visible (it's currently only in the hero overlay).
+- New **"About the author"** card after the post (before related posts): portrait, "Ferry Hoes", one-line role, 2–3 sentence on-brand bio, and two quiet links — *More about Ferry* → `/about`, *Book Ferry to speak* → `/contact`.
+- Both new pieces use the warm editorial style (cream surface, soft border, accent dot), no hype copy, matches `mem://brand/identity-and-tone`.
 
-Currently the H2 says "Three ways to plug in" but the card eyebrows ("The Human / The Speaker / The Writer") don't echo that idea, so the metaphor goes nowhere.
+## Technical changes
 
-`src/components/sections/ThreeRoads.tsx` — rewrite each card's eyebrow + body so each card *literally is* a plug-in path:
+**New files**
+- `src/lib/seoAnalysis.ts` — pure functions: `analyzeFocusKeyphrase({ keyphrase, title, slug, metaDescription, content, headings })` returns `{ score, checks: [{ id, label, status, hint }] }`. Also `readabilityScore(plainText)` (Flesch-ish, sentence/paragraph length).
+- `src/components/admin/FocusKeyphrasePanel.tsx` — the field + checklist UI (uses `seoAnalysis.ts`, renders rows with `CheckCircle`/`AlertCircle`/`AlertTriangle` and color tokens already in `SEOFields`).
+- `src/components/blog/AuthorByline.tsx` — compact byline (portrait + name + role + date · read time).
+- `src/components/blog/AuthorBioCard.tsx` — rich end-of-post bio card.
 
-- Card 1 — eyebrow "Plug into the room" / title **On stage.** / body: "Plug in by booking a keynote. Around 40 a year — boards, leadership teams, and anyone trying to figure out what 'human' means in a tech-heavy world."
-- Card 2 — eyebrow "Plug into the page" / title **My writing.** / body: "Plug in by reading. Short essays on humans, technology, and the work in between."
-- Card 3 — eyebrow "Plug into the story" / title **My story.** / body: "Plug in by getting to know me. How a talkative kid from Delft ended up coining Brand Humanizing."
+**DB / types**
+- Add column `seo_focus_keyphrase text` to `blog_posts` (migration). Update `BlogPost` interface in `src/hooks/useBlogPosts.ts` and `CreatePostData`/`UpdatePostData` in `src/hooks/useAdminPosts.ts`.
 
-Reorder so the strongest CTA (booking) leads, writing in the middle (the dark navy card stays as the visual anchor in the centre), story last.
+**Editor wiring (`src/pages/PostEditor.tsx`)**
+- New state `focusKeyphrase`, persisted on save.
+- Render `<FocusKeyphrasePanel>` at the top of the SEO section, passing title, slug, content (plain text via existing `stripHtml`), seoTitle, seoDescription. Extract H2/H3 from `content` HTML for the heading check.
 
-Sub-line under H2 changes to: *"Plug in on stage, on the page, or into the story behind it all. Pick your entry."*
+**SEO panel (`src/components/admin/SEOFields.tsx`)**
+- Add overall SEO score chip and readability chip in the header (next to "X words · Y min read").
+- Pass keyphrase through; if not in keywords list, show a one-click "Add to keywords".
 
-### 3. On-brand hero for `/on-stage` and `/podcast`
+**Post page (`src/pages/BlogPost.tsx`)**
+- Replace inline FH avatar block with `<AuthorByline date={...} readTime={...} />`.
+- Insert `<AuthorBioCard />` between `<PostCTA />` and Related Posts.
+- Reading time stays computed via existing `getReadTime`.
 
-Both heroes currently use a generic full-bleed video/photo + heavy dark gradient + centred chips, which clashes with the cream/ink editorial brand established on the homepage and `/my-story`, `/the-idea`, `/writing`, `/the-book`.
+**Brand**
+- Bio copy (final wording confirmed before write):
+  > "Ferry Hoes is a keynote speaker and author of *Brand Humanizing*. He helps leaders and teams put humans first in a world racing to automate everything."
+- No em dashes, no removed tagline (per `mem://brand/identity-and-tone`).
 
-Replace both with the same editorial-hero pattern those other pages use:
-
-- Cream `bg-background` (no full-bleed video, no dark blur overlay).
-- Two-column on desktop: left = eyebrow + big H1 (`clamp(48px, 7vw, 104px)`, ink type, accent highlight word, `Period` dot) + lede + primary action button. Right = a real photo treated as a polaroid (white frame, soft shadow, slight rotation, handwritten Caveat caption underneath).
-- Section padding `pt-28 md:pt-36 pb-16 md:pb-20`, container `max-w-[1280px]`.
-
-Specifically:
-
-**`src/pages/Speaking.tsx`** (`/on-stage`)
-- Drop the video element, the dark gradient stack, and the centred chip layout (lines ~133–185).
-- New hero: H1 "AI keynotes for **conferences and corporate events**." with the "&" highlighted as accent. Lede keeps the existing copy. Buttons: "Book Ferry" (primary pill) + "Watch the reel" (ghost). Right-side polaroid uses `ferry-presenting.jpg` (or `ferryBts`) with caption "Mid-flow on stage."
-- Keep all sections below unchanged.
-
-**`src/pages/Podcast.tsx`**
-- Drop the dark gradient + dotted overlay + blurred image stack (lines ~107–166).
-- New hero: H1 "The Human Era **Podcast.**" Lede: "Deep dives with founders, artists, scientists, and anyone doing interesting work at the intersection of humans and technology." Buttons: "Listen on Spotify" (green Spotify pill, kept) + "Apple Podcasts" (ghost). Right-side polaroid uses `podcast-hero.jpg` with caption "Mic on. Real talk."
-- Keep the continuous gradient rail, episode cards, and everything else below.
-
-### Files touched
-
-- `src/components/sections/TrustLine.tsx`
-- `src/components/sections/ThreeRoads.tsx`
-- `src/pages/Speaking.tsx` (hero block only)
-- `src/pages/Podcast.tsx` (hero block only)
-
-### Out of scope
-
-- Design tokens, fonts, palette.
-- Other sections of the speaker / podcast pages.
-- Homepage hero, blog, book page.
+## Out of scope
+- No changes to inline editing toolbar (already feature-complete).
+- No multi-author support.
+- No AI-generated SEO suggestions beyond what `seoSuggest.ts` already does.
 
