@@ -155,6 +155,8 @@ const BlogPost = () => {
 
             <PostCTA />
 
+            <AuthorBioCard />
+
             {/* Related Posts */}
             {relatedPosts.length > 0 && (
               <div className="mt-16 pt-8 border-t border-border">
