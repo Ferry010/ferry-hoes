@@ -90,9 +90,9 @@ const BlogSection = () => {
               </div>
             </Link>
 
-            {/* Secondary cards with images */}
+            {/* Secondary cards — 2 per row, larger */}
             {rest.length > 0 && (
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-7 mb-12">
+              <div className="grid md:grid-cols-2 gap-7 md:gap-9 mb-12">
                 {rest.map((post, i) => {
                   const tone = TONES[(i + 1) % TONES.length];
                   return (
@@ -101,7 +101,7 @@ const BlogSection = () => {
                       to={`/blog/${post.slug}`}
                       className={`group ${tone.bg} rounded-2xl overflow-hidden shadow-soft hover:shadow-soft-lg transition-all duration-300 hover:-translate-y-1 flex flex-col`}
                     >
-                      <div className="aspect-[16/10] overflow-hidden bg-muted">
+                      <div className="aspect-[16/9] overflow-hidden bg-muted">
                         {post.header_image_url ? (
                           <img
                             src={post.header_image_url}
@@ -111,18 +111,23 @@ const BlogSection = () => {
                           />
                         ) : (
                           <div className="w-full h-full bg-gradient-to-br from-primary/20 to-accent/15 flex items-center justify-center">
-                            <span className="text-4xl">✏️</span>
+                            <span className="text-5xl">✏️</span>
                           </div>
                         )}
                       </div>
-                      <div className="p-6 flex flex-col flex-1">
+                      <div className="p-7 md:p-9 flex flex-col flex-1">
                         <span className={`text-[11px] uppercase tracking-[0.16em] font-semibold ${tone.eyebrow}`}>
                           • Thought
                         </span>
-                        <h3 className={`mt-2 font-display text-lg md:text-xl font-bold leading-snug ${tone.title} group-hover:text-primary transition-colors`}>
+                        <h3 className={`mt-3 font-display text-2xl md:text-[28px] font-bold leading-[1.15] ${tone.title} group-hover:text-primary transition-colors`}>
                           {post.title}
                         </h3>
-                        <div className={`mt-auto pt-4 flex items-center gap-2 text-xs ${tone.meta}`}>
+                        {post.excerpt && (
+                          <p className={`mt-3 text-base leading-relaxed line-clamp-2 ${tone.body}`}>
+                            {post.excerpt}
+                          </p>
+                        )}
+                        <div className={`mt-6 pt-5 border-t border-current/10 flex items-center gap-2 text-xs ${tone.meta}`}>
                           <span>{formatPostDate(post.published_at)}</span>
                           <span>·</span>
                           <span>{getReadTime(post.content)}</span>
