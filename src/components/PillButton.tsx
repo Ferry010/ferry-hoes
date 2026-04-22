@@ -38,7 +38,7 @@ interface AsButtonProps extends BaseProps {
 type PillButtonProps = AsLinkProps | AsAnchorProps | AsButtonProps;
 
 const baseStyles =
-  "inline-flex items-center justify-center gap-2 rounded-full font-semibold text-[15px] tracking-tight px-6 py-3.5 transition-all duration-200 ease-out group focus-visible:outline-none";
+  "inline-flex items-center justify-center gap-2 rounded-full font-semibold text-[15px] tracking-tight px-5 sm:px-6 py-3 whitespace-nowrap transition-all duration-200 ease-out group focus-visible:outline-none";
 
 const variants: Record<Variant, string> = {
   primary:

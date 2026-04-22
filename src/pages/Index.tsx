@@ -5,9 +5,6 @@ import Hero from "@/components/sections/Hero";
 import CredentialsStrip from "@/components/sections/CredentialsStrip";
 import TrustLine from "@/components/sections/TrustLine";
 import ThreeRoads from "@/components/sections/ThreeRoads";
-import BrandHumanizingSection from "@/components/sections/BrandHumanizingSection";
-import SpeakerSection from "@/components/sections/SpeakerSection";
-import BookSection from "@/components/sections/BookSection";
 import PodcastSection from "@/components/sections/PodcastSection";
 import BlogSection from "@/components/sections/BlogSection";
 import AlsoByFerry from "@/components/sections/AlsoByFerry";
@@ -38,10 +35,7 @@ const Index = () => {
         <main>
           <article><ThreeRoads /></article>
           <article><BlogSection /></article>
-          <article><BookSection /></article>
-          <article><SpeakerSection /></article>
           <article><PodcastSection /></article>
-          <article><BrandHumanizingSection /></article>
           <AlsoByFerry />
           <CommunitySection />
         </main>

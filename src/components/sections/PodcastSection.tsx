@@ -84,30 +84,30 @@ const PodcastSection = () => {
                 key={episode.title}
                 className="pl-6 basis-full md:basis-1/2 lg:basis-1/3"
               >
-                <article className="group relative h-full bg-background-alt border border-border rounded-2xl p-7 md:p-8 border-l-2 border-l-[#1DB954]/40 hover:border-l-[#1DB954] transition-all duration-300 hover:-translate-y-1">
-                  <div className="flex items-start justify-between mb-5">
-                    <span className="text-[11px] uppercase tracking-[0.16em] font-semibold text-primary">
-                      • Episode
+                <article className="group relative h-full bg-ink-navy text-background rounded-2xl p-7 md:p-8 shadow-soft hover:shadow-soft-lg transition-all duration-300 hover:-translate-y-1 flex flex-col">
+                  <div className="flex items-center justify-between mb-5">
+                    <span className="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-[0.16em] font-semibold text-primary">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+                      Episode
                     </span>
-                    <span className="text-xs text-muted-foreground">
+                    <span className="text-xs text-background/60">
                       {episode.duration}
                     </span>
                   </div>
-                  <h3 className="font-display text-xl md:text-[22px] font-bold text-foreground mb-3 leading-tight">
+                  <h3 className="font-display text-xl md:text-[22px] font-bold text-background mb-3 leading-tight flex-1">
                     {episode.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground mb-6">
+                  <p className="text-sm text-primary font-medium mb-6">
                     with {episode.guest}
                   </p>
                   <a
                     href={episode.spotifyUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-[#1DB954] font-medium text-sm hover:underline"
+                    className="inline-flex items-center justify-center gap-2 self-start bg-[#1DB954] text-white font-semibold text-sm rounded-full px-5 py-2.5 hover:brightness-110 transition-all"
                   >
                     <SpotifyIcon className="h-4 w-4" />
-                    Listen on Spotify
-                    <ArrowRight className="h-3.5 w-3.5" />
+                    Play on Spotify
                   </a>
                 </article>
               </CarouselItem>

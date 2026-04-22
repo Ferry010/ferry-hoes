@@ -187,6 +187,47 @@ const Speaking = () => {
         <main>
           <ClientLogos />
 
+          {/* Want this in your room — quick overview */}
+          <section className="py-20 md:py-28 bg-background">
+            <div className="container max-w-[1280px] px-6 md:px-10 lg:px-14">
+              <div className="max-w-3xl mb-14 md:mb-16">
+                <p className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.16em] font-semibold text-accent mb-5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+                  Bring this to your stage
+                </p>
+                <h2 className="font-display font-bold text-foreground leading-[1.02]" style={{ fontSize: "clamp(36px, 5.4vw, 80px)", letterSpacing: "-0.02em" }}>
+                  Want this in your <span className="text-accent">room</span>
+                  <span className="inline-block w-2 h-2 bg-accent rounded-full ml-1.5 mb-1 align-baseline" />
+                </h2>
+                <p className="mt-7 text-lg md:text-xl text-foreground/80 leading-[1.55]">
+                  Three signature talks. Each tailored to your audience and event. Pick a starting point.
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-3 gap-5 md:gap-7 mb-12">
+                {[
+                  { title: "Brand Humanizing", body: "Why human edge becomes the durable advantage when AI commoditises everything else." },
+                  { title: "The Human Era of Work", body: "How to lead organisations where humans and machines work side by side without losing meaning." },
+                  { title: "AI without the noise", body: "A clear, practical look at where AI actually moves the needle — and where it just adds work." },
+                ].map((t) => (
+                  <article key={t.title} className="bg-background-alt border border-border rounded-2xl p-6 md:p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-soft-lg">
+                    <span className="text-[11px] uppercase tracking-[0.16em] font-semibold text-accent">• Talk</span>
+                    <h3 className="mt-3 font-display text-xl md:text-2xl font-bold text-foreground leading-tight">{t.title}</h3>
+                    <p className="mt-3 text-foreground/75 leading-relaxed">{t.body}</p>
+                  </article>
+                ))}
+              </div>
+
+              <Button asChild size="lg" className="rounded-full px-8 bg-accent text-accent-foreground hover:bg-accent/90 group">
+                <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
+                  Book Ferry
+                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </a>
+              </Button>
+            </div>
+          </section>
+
+
           {/* Geography / Availability Statement */}
           <section className="py-8 bg-secondary/30">
             <div className="container px-6 md:px-8">

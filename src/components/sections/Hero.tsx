@@ -12,7 +12,7 @@ const Hero = () => {
   const essayHref = latestSlug ? `/blog/${latestSlug}` : "/writing";
 
   return (
-    <section className="relative bg-background pt-32 md:pt-40 pb-20 md:pb-28 overflow-hidden">
+    <section className="relative bg-background pt-28 md:pt-32 pb-16 md:pb-20 overflow-hidden">
       <div className="container px-6 md:px-10 lg:px-14 max-w-[1280px]">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* Copy column */}
@@ -24,14 +24,12 @@ const Hero = () => {
             <h1
               className="font-display font-bold text-foreground leading-[0.98]"
               style={{
-                fontSize: "clamp(42px, 7.6vw, 116px)",
+                fontSize: "clamp(38px, 6.4vw, 96px)",
                 letterSpacing: "-0.025em",
               }}
             >
               Technology should make us more{" "}
-              <span className="text-primary">human,</span>
-              <br />
-              not less<Period />
+              <span className="text-primary">human,</span> not less<Period />
             </h1>
 
             <p className="mt-8 text-lg md:text-xl text-foreground/80 max-w-2xl leading-[1.55]">
@@ -76,7 +74,7 @@ const Hero = () => {
                   />
                 </div>
                 <p className="text-center mt-3 font-handwritten text-xl md:text-2xl text-ink-navy leading-tight">
-                  Listening, mostly.
+                  Doing what I love most.
                 </p>
               </div>
             </div>
