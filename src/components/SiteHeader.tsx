@@ -40,7 +40,13 @@ const SiteHeader = () => {
     };
   }, [mobileOpen]);
 
-  if (location.pathname.startsWith("/admin")) return null;
+  // Hide on admin and on the cinematic chat experiences
+  if (
+    location.pathname.startsWith("/admin") ||
+    location.pathname === "/now" ||
+    location.pathname === "/conversation"
+  )
+    return null;
 
   return (
     <>
