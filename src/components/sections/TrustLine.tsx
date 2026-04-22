@@ -23,8 +23,8 @@ const TrustLine = () => (
         • Teams I've worked with
       </span>
       <div
-        className="mt-4 flex flex-wrap items-baseline gap-y-2 font-display font-semibold text-background leading-[1.2] max-w-full"
-        style={{ fontSize: "clamp(14px, 3.6vw, 30px)" }}
+        className="mt-4 flex flex-wrap items-baseline gap-y-2 font-display font-semibold text-background leading-[1.15] max-w-full"
+        style={{ fontSize: "clamp(18px, 4.6vw, 40px)" }}
       >
         {TEAMS.map((name, i) => (
           <span key={name} className="inline-flex items-baseline">
@@ -40,6 +40,16 @@ const TrustLine = () => (
           .
         </span>
       </div>
+      <p className="mt-6">
+        <a
+          href="https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-sm font-medium text-background/70 hover:text-primary underline underline-offset-4 decoration-primary/40 hover:decoration-primary transition-colors"
+        >
+          Want to join this list?
+        </a>
+      </p>
     </div>
   </section>
 );
