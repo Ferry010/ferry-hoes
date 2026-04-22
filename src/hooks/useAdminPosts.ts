@@ -32,7 +32,7 @@ export function useAdminPosts() {
         .order("updated_at", { ascending: false });
 
       if (error) throw error;
-      return data as BlogPost[];
+      return data as unknown as BlogPost[];
     },
   });
 }
@@ -49,7 +49,7 @@ export function useAdminPost(id: string) {
         .single();
 
       if (error) throw error;
-      return data as BlogPost;
+      return data as unknown as BlogPost;
     },
     enabled: !!id,
   });
@@ -69,12 +69,12 @@ export function useCreatePost() {
           ...postData,
           author_id: user?.id,
           published_at: postData.published ? new Date().toISOString() : null,
-        })
+        } as any)
         .select()
         .single();
 
       if (error) throw error;
-      return data as BlogPost;
+      return data as unknown as BlogPost;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["admin-posts"] });
@@ -90,7 +90,7 @@ export function useUpdatePost() {
   return useMutation({
     mutationFn: async ({ id, ...postData }: UpdatePostData) => {
       // If publishing for the first time, set published_at
-      let updateData: Partial<BlogPost> = { ...postData };
+      let updateData: any = { ...postData };
       if (postData.published) {
         const { data: existingPost } = await supabase
           .from("blog_posts")
@@ -111,7 +111,7 @@ export function useUpdatePost() {
         .single();
 
       if (error) throw error;
-      return data as BlogPost;
+      return data as unknown as BlogPost;
     },
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["admin-posts"] });

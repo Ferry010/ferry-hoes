@@ -43,7 +43,7 @@ export function useBlogPosts(limit?: number) {
       const { data, error } = await query;
 
       if (error) throw error;
-      return data as BlogPost[];
+      return data as unknown as BlogPost[];
     },
   });
 }
@@ -60,7 +60,7 @@ export function useBlogPost(slug: string) {
         .single();
 
       if (error) throw error;
-      return data as BlogPost;
+      return data as unknown as BlogPost;
     },
     enabled: !!slug,
   });
