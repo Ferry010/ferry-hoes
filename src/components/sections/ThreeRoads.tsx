@@ -8,22 +8,10 @@ import ferryWithBook from "@/assets/ferry-bookstore.jpg";
 
 const roads = [
   {
-    tag: "The Human",
-    title: "My story.",
-    body:
-      "How a talkative kid from Delft ended up coining Brand Humanizing. The long version.",
-    cta: "Read the story",
-    to: "/my-story",
-    image: ferryPortrait,
-    alt: "Portrait of Ferry Hoes",
-    bg: "bg-[#F4E9DC]",
-    objectPos: "center 25%",
-  },
-  {
-    tag: "The Speaker",
+    tag: "Plug into the room",
     title: "On stage.",
     body:
-      "Around 40 keynotes a year. Boards, leadership teams, anyone trying to figure out what \u201Chuman\u201D means in a tech-heavy world.",
+      "Plug in by booking a keynote. Around 40 a year — boards, leadership teams, and anyone trying to figure out what \u201Chuman\u201D means in a tech-heavy world.",
     cta: "See talks & reel",
     to: "/on-stage",
     image: ferryOnStage,
@@ -32,10 +20,10 @@ const roads = [
     objectPos: "center 30%",
   },
   {
-    tag: "The Writer",
+    tag: "Plug into the page",
     title: "My writing.",
     body:
-      "Short essays on humans, technology, and the work in between. New when there's something worth saying.",
+      "Plug in by reading. Short essays on humans, technology, and the work in between. New ones when there's something worth saying.",
     cta: "Read essays",
     to: "/writing",
     image: ferryWithBook,
@@ -43,6 +31,18 @@ const roads = [
     bg: "bg-ink-navy",
     objectPos: "center 25%",
     dark: true,
+  },
+  {
+    tag: "Plug into the story",
+    title: "My story.",
+    body:
+      "Plug in by getting to know me. How a talkative kid from Delft ended up coining Brand Humanizing — the long version.",
+    cta: "Read the story",
+    to: "/my-story",
+    image: ferryPortrait,
+    alt: "Portrait of Ferry Hoes",
+    bg: "bg-[#F4E9DC]",
+    objectPos: "center 25%",
   },
 ];
 
@@ -69,8 +69,8 @@ const ThreeRoads = () => {
           </h2>
 
           <p className="mt-7 text-lg md:text-xl text-foreground/80 leading-[1.55] max-w-2xl">
-            You'll find me on stage, on paper, and on the page. Pick your
-            entry.
+            Plug in on stage, on the page, or into the story behind it all.
+            Pick your entry.
           </p>
         </div>
 
