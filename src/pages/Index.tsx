@@ -12,6 +12,7 @@ import PodcastSection from "@/components/sections/PodcastSection";
 import BlogSection from "@/components/sections/BlogSection";
 import AlsoByFerry from "@/components/sections/AlsoByFerry";
 import CommunitySection from "@/components/sections/CommunitySection";
+import BrandHumanizingSection from "@/components/sections/BrandHumanizingSection";
 import Footer from "@/components/sections/Footer";
 
 const Index = () => {
