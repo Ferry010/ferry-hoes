@@ -4,6 +4,8 @@ import { useBlogPost, useBlogPosts, formatPostDate, getReadTime } from "@/hooks/
 import SEOHead from "@/components/blog/SEOHead";
 import StructuredData, { breadcrumbSchema, blogPostingSchema } from "@/components/StructuredData";
 import PostCTA from "@/components/blog/PostCTA";
+import AuthorByline from "@/components/blog/AuthorByline";
+import AuthorBioCard from "@/components/blog/AuthorBioCard";
 
 /** Strip HTML tags and return plain text */
 const stripHtml = (html: string) =>
@@ -115,13 +117,10 @@ const BlogPost = () => {
         <article className="container px-6 md:px-8 py-12 md:py-16">
           <div className="max-w-3xl mx-auto">
             {/* Author byline */}
-            <div className="flex items-center gap-3 mb-8 pb-8 border-b border-border">
-              <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center text-accent font-bold text-sm">FH</div>
-              <div>
-                <Link to="/about" className="text-foreground font-medium hover:text-accent transition-colors">Ferry Hoes</Link>
-                <p className="text-xs text-muted-foreground">Keynote Speaker & Author</p>
-              </div>
-            </div>
+            <AuthorByline
+              date={formatPostDate(post.published_at)}
+              readTime={getReadTime(post.content)}
+            />
 
             <div className="w-24 h-1 bg-accent rounded-full mb-12" />
             <div
@@ -155,6 +154,8 @@ const BlogPost = () => {
             )}
 
             <PostCTA />
+
+            <AuthorBioCard />
 
             {/* Related Posts */}
             {relatedPosts.length > 0 && (

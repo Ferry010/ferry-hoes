@@ -16,6 +16,7 @@ export interface BlogPost {
   seo_title: string | null;
   seo_description: string | null;
   seo_keywords: string[] | null;
+  seo_focus_keyphrase: string | null;
   seo_og_image_url: string | null;
   sources: PostSource[] | null;
   published: boolean;

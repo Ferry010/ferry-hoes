@@ -11,6 +11,7 @@ export interface CreatePostData {
   seo_title?: string;
   seo_description?: string;
   seo_keywords?: string[];
+  seo_focus_keyphrase?: string;
   seo_og_image_url?: string;
   sources?: { title: string; url: string }[];
   published?: boolean;
