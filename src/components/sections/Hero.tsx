@@ -74,7 +74,7 @@ const Hero = () => {
                   />
                 </div>
                 <p className="text-center mt-3 font-handwritten text-xl md:text-2xl text-ink-navy leading-tight">
-                  Listening, mostly.
+                  Doing what I love most.
                 </p>
               </div>
             </div>
