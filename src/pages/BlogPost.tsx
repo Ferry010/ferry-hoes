@@ -45,6 +45,15 @@ const BlogPost = () => {
   // Related posts: up to 3 other posts
   const relatedPosts = allPosts?.filter((p) => p.slug !== post.slug).slice(0, 3) || [];
 
+  // Prev / next navigation (allPosts is ordered by published_at DESC)
+  const currentIdx = allPosts?.findIndex((p) => p.slug === post.slug) ?? -1;
+  const newerPost =
+    currentIdx > 0 && allPosts ? allPosts[currentIdx - 1] : undefined;
+  const olderPost =
+    allPosts && currentIdx >= 0 && currentIdx < allPosts.length - 1
+      ? allPosts[currentIdx + 1]
+      : undefined;
+
   return (
     <>
       <SEOHead
