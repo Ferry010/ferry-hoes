@@ -195,8 +195,7 @@ const Speaking = () => {
                   Bring this to your stage
                 </p>
                 <h2 className="font-display font-bold text-foreground leading-[1.02]" style={{ fontSize: "clamp(36px, 5.4vw, 80px)", letterSpacing: "-0.02em" }}>
-                  Want this in your <span className="text-accent">room</span>
-                  <span className="inline-block w-2 h-2 bg-accent rounded-full ml-1.5 mb-1 align-baseline" />
+                  Want this in your <span className="whitespace-nowrap"><span className="text-accent">room</span><span className="text-accent">?</span></span>
                 </h2>
                 <p className="mt-7 text-lg md:text-xl text-foreground/80 leading-[1.55]">
                   Three signature talks. Each tailored to your audience and event. Pick a starting point.
