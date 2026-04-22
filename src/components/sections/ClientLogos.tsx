@@ -9,10 +9,12 @@ import logoGsk from "@/assets/logos/gsk.png";
 import logoToshiba from "@/assets/logos/toshiba.png";
 import logoVodafone from "@/assets/logos/vodafone.png";
 import logoZiggo from "@/assets/logos/ziggo.png";
+import logoUnilever from "@/assets/logos/unilever.png";
 
 const logos = [
   { src: logoAtos, alt: "Atos", className: "max-h-16 max-w-[200px]" },
   { src: logoVodafone, alt: "Vodafone", className: "max-h-16 max-w-[220px]" },
+  { src: logoUnilever, alt: "Unilever", className: "max-h-20 max-w-[180px]" },
   { src: logoGsk, alt: "GlaxoSmithKline", className: "max-h-[72px] max-w-[220px]" },
   { src: logoToshiba, alt: "Toshiba", className: "max-h-16 max-w-[210px]" },
   { src: logoAma, alt: "American Marketing Association", className: "max-h-16 max-w-[220px]" },
