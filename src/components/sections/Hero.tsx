@@ -12,9 +12,9 @@ const Hero = () => {
   const essayHref = latestSlug ? `/blog/${latestSlug}` : "/writing";
 
   return (
-    <section className="relative bg-background pt-20 md:pt-32 pb-12 md:pb-20 overflow-hidden">
-      <div className="container px-5 md:px-10 lg:px-14 max-w-[1280px]">
-        <div className="grid lg:grid-cols-12 gap-8 md:gap-12 lg:gap-16 items-center">
+    <section className="relative bg-background pt-28 md:pt-32 pb-16 md:pb-20 overflow-hidden">
+      <div className="container px-6 md:px-10 lg:px-14 max-w-[1280px]">
+        <div className="grid lg:grid-cols-12 gap-10 md:gap-12 lg:gap-16 items-center">
           {/* Copy column */}
           <div className="lg:col-span-7">
             <Eyebrow>
