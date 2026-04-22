@@ -4,7 +4,7 @@ import { Eyebrow, Period } from "@/components/HeadingDot";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import ferryPortrait from "@/assets/ferry-portrait.jpg";
 import ferryOnStage from "@/assets/ferry-on-stage.jpg";
-import ferryBookstore from "@/assets/ferry-bookstore.jpg";
+import bookCover from "@/assets/brand-humanizing-book.jpg";
 
 const roads = [
   {
@@ -16,6 +16,8 @@ const roads = [
     to: "/my-story",
     image: ferryPortrait,
     alt: "Portrait of Ferry Hoes",
+    bg: "bg-[#F4E9DC]",
+    objectPos: "center 25%",
   },
   {
     tag: "The Speaker",
@@ -26,6 +28,8 @@ const roads = [
     to: "/on-stage",
     image: ferryOnStage,
     alt: "Ferry Hoes mid-keynote",
+    bg: "bg-[#F9DCD0]",
+    objectPos: "center 30%",
   },
   {
     tag: "The Writer",
@@ -34,8 +38,11 @@ const roads = [
       "Short essays on humans, technology, and the work in between. New when there's something worth saying.",
     cta: "Read essays",
     to: "/writing",
-    image: ferryBookstore,
-    alt: "Ferry Hoes in a bookstore",
+    image: bookCover,
+    alt: "Brand Humanizing book cover",
+    bg: "bg-ink-navy",
+    objectPos: "center center",
+    dark: true,
   },
 ];
 
@@ -72,7 +79,7 @@ const ThreeRoads = () => {
             <Link
               key={road.title}
               to={road.to}
-              className="group bg-background-alt border border-border rounded-2xl p-5 md:p-6 transition-all duration-300 hover:border-primary/40 hover:-translate-y-1 flex flex-col"
+              className={`group ${road.bg} border border-border/40 rounded-2xl p-5 md:p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-soft-lg flex flex-col`}
             >
               <div className="aspect-[4/3] overflow-hidden rounded-xl mb-5 bg-muted">
                 <img
@@ -80,16 +87,17 @@ const ThreeRoads = () => {
                   alt={road.alt}
                   loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  style={{ objectPosition: road.objectPos }}
                 />
               </div>
 
-              <span className="text-[11px] uppercase tracking-[0.16em] font-semibold text-primary">
+              <span className={`text-[11px] uppercase tracking-[0.16em] font-semibold ${road.dark ? "text-primary" : "text-primary"}`}>
                 • {road.tag}
               </span>
-              <h3 className="mt-3 font-display text-2xl md:text-[26px] font-bold text-foreground leading-tight">
+              <h3 className={`mt-3 font-display text-2xl md:text-[26px] font-bold leading-tight ${road.dark ? "text-background" : "text-foreground"}`}>
                 {road.title}
               </h3>
-              <p className="mt-3 text-foreground/75 leading-relaxed flex-1">
+              <p className={`mt-3 leading-relaxed flex-1 ${road.dark ? "text-background/80" : "text-foreground/75"}`}>
                 {road.body}
               </p>
 
