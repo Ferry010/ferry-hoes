@@ -14,7 +14,13 @@ import ImageUpload from "@/components/admin/ImageUpload";
 import RichTextEditor from "@/components/admin/RichTextEditor";
 import SEOFields from "@/components/admin/SEOFields";
 import { toast } from "@/hooks/use-toast";
-import { ArrowLeft, Save, Send } from "lucide-react";
+import { ArrowLeft, Save, Send, Plus, Trash2 } from "lucide-react";
+import { autoExcerpt, smartTruncate, stripHtml } from "@/lib/seoSuggest";
+
+interface SourceRow {
+  title: string;
+  url: string;
+}
 
 const PostEditor = () => {
   const { id } = useParams<{ id: string }>();
@@ -36,6 +42,8 @@ const PostEditor = () => {
   const [seoTitle, setSeoTitle] = useState("");
   const [seoDescription, setSeoDescription] = useState("");
   const [seoKeywords, setSeoKeywords] = useState("");
+  const [seoOgImageUrl, setSeoOgImageUrl] = useState<string | undefined>();
+  const [sources, setSources] = useState<SourceRow[]>([]);
   const [slugManuallyEdited, setSlugManuallyEdited] = useState(false);
 
   // Load existing post data
@@ -49,6 +57,9 @@ const PostEditor = () => {
       setSeoTitle(existingPost.seo_title || "");
       setSeoDescription(existingPost.seo_description || "");
       setSeoKeywords(existingPost.seo_keywords?.join(", ") || "");
+      setSeoOgImageUrl(existingPost.seo_og_image_url || undefined);
+      const raw = (existingPost as any).sources;
+      setSources(Array.isArray(raw) ? (raw as SourceRow[]) : []);
       setSlugManuallyEdited(true);
     }
   }, [existingPost]);
@@ -60,13 +71,11 @@ const PostEditor = () => {
     }
   }, [title, slugManuallyEdited]);
 
-  // Auto-generate excerpt from content
+  // Auto-generate excerpt from content (only when both empty so we don't override the user)
   useEffect(() => {
     if (!excerpt && content) {
-      const firstParagraph = content.split("\n\n")[0];
-      if (firstParagraph && firstParagraph.length > 10) {
-        setExcerpt(firstParagraph.slice(0, 160));
-      }
+      const guess = autoExcerpt(content, 160);
+      if (guess) setExcerpt(guess);
     }
   }, [content, excerpt]);
 
@@ -94,17 +103,28 @@ const PostEditor = () => {
       return;
     }
 
+    // Smart SEO fallbacks at save time
+    const finalSeoTitle = seoTitle.trim() || smartTruncate(title.trim(), 60);
+    const finalSeoDescription =
+      seoDescription.trim() ||
+      excerpt.trim() ||
+      autoExcerpt(content, 160) ||
+      undefined;
+    const finalOgImage = seoOgImageUrl || headerImageUrl;
+
     const postData = {
       title: title.trim(),
       slug: slug.trim(),
       content: content.trim() || undefined,
       excerpt: excerpt.trim() || undefined,
       header_image_url: headerImageUrl,
-      seo_title: seoTitle.trim() || title.trim(),
-      seo_description: seoDescription.trim() || excerpt.trim() || undefined,
+      seo_title: finalSeoTitle,
+      seo_description: finalSeoDescription,
       seo_keywords: seoKeywords
         ? seoKeywords.split(",").map((k) => k.trim()).filter(Boolean)
         : undefined,
+      seo_og_image_url: finalOgImage,
+      sources: sources.filter((s) => s.title.trim() || s.url.trim()),
       published: publish,
     };
 
@@ -249,15 +269,78 @@ const PostEditor = () => {
           </p>
         </div>
 
+        {/* Sources */}
+        <div className="space-y-3">
+          <div className="flex items-center justify-between">
+            <Label className="text-base font-medium">Sources</Label>
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              className="gap-1.5"
+              onClick={() => setSources([...sources, { title: "", url: "" }])}
+            >
+              <Plus className="w-3.5 h-3.5" /> Add source
+            </Button>
+          </div>
+          {sources.length === 0 ? (
+            <p className="text-sm text-muted-foreground">
+              Optional. Listed at the bottom of the post.
+            </p>
+          ) : (
+            <div className="space-y-2">
+              {sources.map((source, i) => (
+                <div key={i} className="flex gap-2 items-start">
+                  <Input
+                    placeholder="Title (e.g. Harvard Business Review)"
+                    value={source.title}
+                    onChange={(e) => {
+                      const next = [...sources];
+                      next[i] = { ...next[i], title: e.target.value };
+                      setSources(next);
+                    }}
+                    className="flex-1"
+                  />
+                  <Input
+                    placeholder="https://…"
+                    value={source.url}
+                    onChange={(e) => {
+                      const next = [...sources];
+                      next[i] = { ...next[i], url: e.target.value };
+                      setSources(next);
+                    }}
+                    className="flex-1"
+                  />
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="icon"
+                    className="shrink-0 text-muted-foreground hover:text-destructive"
+                    onClick={() => setSources(sources.filter((_, j) => j !== i))}
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </Button>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
         {/* SEO Fields */}
         <SEOFields
-          seoTitle={seoTitle || title}
-          seoDescription={seoDescription || excerpt}
+          postTitle={title}
+          postExcerpt={excerpt}
+          postContent={content}
+          headerImageUrl={headerImageUrl}
+          seoTitle={seoTitle}
+          seoDescription={seoDescription}
           seoKeywords={seoKeywords}
+          seoOgImageUrl={seoOgImageUrl}
           slug={slug}
           onSeoTitleChange={setSeoTitle}
           onSeoDescriptionChange={setSeoDescription}
           onSeoKeywordsChange={setSeoKeywords}
+          onSeoOgImageChange={setSeoOgImageUrl}
         />
 
         {/* Bottom actions */}

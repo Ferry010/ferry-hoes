@@ -125,9 +125,34 @@ const BlogPost = () => {
 
             <div className="w-24 h-1 bg-accent rounded-full mb-12" />
             <div
-              className="prose prose-lg max-w-none text-foreground/90 prose-headings:text-foreground prose-headings:font-display prose-a:text-accent prose-strong:text-foreground mb-16"
+              className="prose prose-lg max-w-none text-foreground/90 prose-headings:text-foreground prose-headings:font-display prose-a:text-accent prose-strong:text-foreground prose-blockquote:border-l-accent prose-blockquote:bg-accent/5 prose-blockquote:rounded-r-lg prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:not-italic mb-16"
               dangerouslySetInnerHTML={{ __html: post.content || "" }}
             />
+
+            {/* Sources */}
+            {Array.isArray((post as any).sources) && (post as any).sources.length > 0 && (
+              <div className="mb-16 pt-8 border-t border-border">
+                <h3 className="font-display text-lg font-bold text-foreground mb-4">Sources</h3>
+                <ol className="space-y-2 list-decimal list-inside text-sm text-muted-foreground">
+                  {((post as any).sources as { title: string; url: string }[]).map((s, i) => (
+                    <li key={i}>
+                      {s.url ? (
+                        <a
+                          href={s.url}
+                          target="_blank"
+                          rel="noopener nofollow"
+                          className="text-accent hover:underline"
+                        >
+                          {s.title || s.url}
+                        </a>
+                      ) : (
+                        <span>{s.title}</span>
+                      )}
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            )}
 
             <PostCTA />
 

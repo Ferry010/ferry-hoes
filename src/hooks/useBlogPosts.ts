@@ -1,6 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 
+export interface PostSource {
+  title: string;
+  url: string;
+}
+
 export interface BlogPost {
   id: string;
   title: string;
@@ -12,6 +17,7 @@ export interface BlogPost {
   seo_description: string | null;
   seo_keywords: string[] | null;
   seo_og_image_url: string | null;
+  sources: PostSource[] | null;
   published: boolean;
   published_at: string | null;
   author_id: string | null;
@@ -37,7 +43,7 @@ export function useBlogPosts(limit?: number) {
       const { data, error } = await query;
 
       if (error) throw error;
-      return data as BlogPost[];
+      return data as unknown as BlogPost[];
     },
   });
 }
@@ -54,7 +60,7 @@ export function useBlogPost(slug: string) {
         .single();
 
       if (error) throw error;
-      return data as BlogPost;
+      return data as unknown as BlogPost;
     },
     enabled: !!slug,
   });
