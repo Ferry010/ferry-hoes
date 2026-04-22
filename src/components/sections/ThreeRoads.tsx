@@ -74,7 +74,7 @@ const ThreeRoads = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-5 md:gap-7">
+        <div className="grid md:grid-cols-3 gap-5 md:gap-7 max-w-sm md:max-w-none mx-auto">
           {roads.map((road) => (
             <Link
               key={road.title}
