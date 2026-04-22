@@ -16,15 +16,15 @@ const TEAMS = [
 const TrustLine = () => (
   <section
     aria-label="Organisations Ferry has worked with"
-    className="bg-ink-navy border-y border-border/60"
+    className="bg-ink-navy border-y border-border/60 overflow-hidden"
   >
     <div className="container max-w-[1280px] px-5 md:px-10 lg:px-14 py-8 md:py-14">
       <span className="text-[11px] uppercase tracking-[0.18em] font-semibold text-primary">
         • Teams I've worked with
       </span>
       <div
-        className="mt-4 flex flex-wrap items-baseline gap-y-2 font-display font-semibold text-background leading-[1.2]"
-        style={{ fontSize: "clamp(15px, 4.5vw, 30px)" }}
+        className="mt-4 flex flex-wrap items-baseline gap-y-2 font-display font-semibold text-background leading-[1.2] max-w-full"
+        style={{ fontSize: "clamp(14px, 3.6vw, 30px)" }}
       >
         {TEAMS.map((name, i) => (
           <span key={name} className="inline-flex items-baseline">
