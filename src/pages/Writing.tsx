@@ -35,7 +35,7 @@ const Writing = () => {
       <SiteHeader />
       <SEOHead
         title="Writing: Thoughts | Ferry Hoes"
-        description="Short essays on humans, technology, and the work in between. A small library, not a content firehose. Quality over volume."
+        description="Short articles on humans, technology, and the work in between. A small library, not a content firehose. Quality over volume."
         canonicalUrl="/writing"
       />
 
@@ -51,7 +51,7 @@ const Writing = () => {
                 letterSpacing: "-0.025em",
               }}
             >
-              Short essays on humans, technology, and the work in{" "}
+              Short articles on humans, technology, and the work in{" "}
               <span className="text-primary">between</span>
               <Period />
             </h1>
@@ -108,7 +108,7 @@ const Writing = () => {
             ) : (
               <div className="py-20 text-center">
                 <p className="font-handwritten text-3xl md:text-4xl text-ink-navy">
-                  The first essays are being written. Check back soon.
+                  The first articles are being written. Check back soon.
                 </p>
               </div>
             )}

@@ -4,8 +4,6 @@ import { useBlogPost, useBlogPosts, formatPostDate, getReadTime } from "@/hooks/
 import SEOHead from "@/components/blog/SEOHead";
 import StructuredData, { breadcrumbSchema, blogPostingSchema } from "@/components/StructuredData";
 import PostCTA from "@/components/blog/PostCTA";
-import AuthorByline from "@/components/blog/AuthorByline";
-import AuthorBioCard from "@/components/blog/AuthorBioCard";
 
 /** Strip HTML tags and return plain text */
 const stripHtml = (html: string) =>
@@ -46,6 +44,15 @@ const BlogPost = () => {
 
   // Related posts: up to 3 other posts
   const relatedPosts = allPosts?.filter((p) => p.slug !== post.slug).slice(0, 3) || [];
+
+  // Prev / next navigation (allPosts is ordered by published_at DESC)
+  const currentIdx = allPosts?.findIndex((p) => p.slug === post.slug) ?? -1;
+  const newerPost =
+    currentIdx > 0 && allPosts ? allPosts[currentIdx - 1] : undefined;
+  const olderPost =
+    allPosts && currentIdx >= 0 && currentIdx < allPosts.length - 1
+      ? allPosts[currentIdx + 1]
+      : undefined;
 
   return (
     <>
@@ -116,11 +123,12 @@ const BlogPost = () => {
         {/* Content */}
         <article className="container px-6 md:px-8 py-12 md:py-16">
           <div className="max-w-3xl mx-auto">
-            {/* Author byline */}
-            <AuthorByline
-              date={formatPostDate(post.published_at)}
-              readTime={getReadTime(post.content)}
-            />
+            {/* Meta line */}
+            <div className="flex items-center gap-3 text-sm text-muted-foreground mb-10 pb-8 border-b border-border">
+              <span>{formatPostDate(post.published_at)}</span>
+              <span className="text-muted-foreground/40">·</span>
+              <span>{getReadTime(post.content)}</span>
+            </div>
 
             <div className="w-24 h-1 bg-accent rounded-full mb-12" />
             <div
@@ -155,7 +163,47 @@ const BlogPost = () => {
 
             <PostCTA />
 
-            <AuthorBioCard />
+            {/* Prev / Next navigation */}
+            {(newerPost || olderPost) && (
+              <nav
+                aria-label="More articles"
+                className="mt-16 grid gap-4 md:grid-cols-2"
+              >
+                {olderPost ? (
+                  <Link
+                    to={`/blog/${olderPost.slug}`}
+                    className="group flex flex-col p-6 rounded-2xl border border-border bg-card hover:border-accent/40 hover:bg-accent/[0.03] transition-colors"
+                  >
+                    <span className="inline-flex items-center gap-2 text-xs uppercase tracking-wider text-muted-foreground font-medium">
+                      <ArrowLeft className="h-3.5 w-3.5" />
+                      Previous article
+                    </span>
+                    <span className="font-display text-lg md:text-xl font-bold text-foreground group-hover:text-accent transition-colors mt-3 line-clamp-2">
+                      {olderPost.title}
+                    </span>
+                  </Link>
+                ) : (
+                  <span className="hidden md:block" />
+                )}
+
+                {newerPost ? (
+                  <Link
+                    to={`/blog/${newerPost.slug}`}
+                    className="group flex flex-col p-6 rounded-2xl border border-border bg-card hover:border-accent/40 hover:bg-accent/[0.03] transition-colors md:text-right"
+                  >
+                    <span className="inline-flex items-center gap-2 text-xs uppercase tracking-wider text-muted-foreground font-medium md:justify-end">
+                      Next article
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </span>
+                    <span className="font-display text-lg md:text-xl font-bold text-foreground group-hover:text-accent transition-colors mt-3 line-clamp-2">
+                      {newerPost.title}
+                    </span>
+                  </Link>
+                ) : (
+                  <span className="hidden md:block" />
+                )}
+              </nav>
+            )}
 
             {/* Related Posts */}
             {relatedPosts.length > 0 && (

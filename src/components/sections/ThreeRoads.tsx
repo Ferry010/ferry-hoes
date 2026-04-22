@@ -23,8 +23,8 @@ const roads = [
     tag: "Plug into the page",
     title: "My writing.",
     body:
-      "Plug in by reading. Short essays on humans, technology, and the work in between. New ones when there's something worth saying.",
-    cta: "Read essays",
+      "Plug in by reading. Short articles on humans, technology, and the work in between. New ones when there's something worth saying.",
+    cta: "Read articles",
     to: "/writing",
     image: ferryWithBook,
     alt: "Ferry Hoes holding his book",
