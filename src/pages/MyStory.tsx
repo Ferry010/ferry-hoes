@@ -103,7 +103,7 @@ const MyStory = () => {
                     alt="Ferry Hoes portrait"
                     aspect="portrait"
                     rotate={2}
-                    caption="Where it all started."
+                    caption="Me, an actual human being."
                     loading="eager"
                   />
                 </div>
