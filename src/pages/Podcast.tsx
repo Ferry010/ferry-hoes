@@ -8,6 +8,7 @@ import Footer from "@/components/sections/Footer";
 import SEOHead from "@/components/blog/SEOHead";
 import StructuredData, { podcastSchema, breadcrumbSchema } from "@/components/StructuredData";
 import SectionLabel from "@/components/SectionLabel";
+import Polaroid from "@/components/Polaroid";
 
 const HeadingDot = () => (
   <span className="inline-block w-2 h-2 bg-accent rounded-full ml-1.5 mb-1 align-baseline" />
@@ -104,62 +105,58 @@ const Podcast = () => {
           }}
         />
 
-        {/* Hero Section */}
-        <header className="min-h-[80vh] relative overflow-hidden flex items-center">
-          <img
-            src={podcastHero}
-            alt="Ferry Hoes recording The Human Era Podcast"
-            loading="eager"
-            fetchPriority="high"
-            className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-          />
-          <div className="absolute inset-0 backdrop-blur-[6px]" />
-          <div className="absolute inset-0 bg-gradient-to-br from-foreground/90 via-foreground/80 to-primary/70" />
-          <div 
-            className="absolute inset-0 opacity-[0.07]"
-            style={{
-              backgroundImage: `radial-gradient(circle, hsl(var(--foreground)) 1px, transparent 1px)`,
-              backgroundSize: '20px 20px',
-            }}
-          />
-
-          <div className="container px-6 md:px-8 py-24 md:py-32 relative z-10">
-            <div className="max-w-4xl mx-auto text-center">
-              <SectionLabel text="Podcast" center />
-              
-              <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-white">
-                The Human Era{" "}
-                <span className="text-accent">Podcast</span>
-                <HeadingDot />
-              </h1>
-              
-              <p className="text-xl md:text-2xl text-white leading-relaxed max-w-2xl mx-auto mb-12">
-                Deep dives with founders, artists, scientists, and anyone doing interesting work at the{" "}
-                <span className="bg-accent/95 px-1 py-0.5 rounded">intersection of humans and technology</span>.
-              </p>
-
-              <div className="flex flex-wrap justify-center gap-4">
-                <Button 
-                  asChild
-                  size="lg"
-                  className="rounded-full px-8 bg-[#1DB954] hover:bg-[#1DB954]/90 text-white group"
+        {/* Hero Section — editorial, on-brand */}
+        <header className="bg-background pt-28 md:pt-36 pb-16 md:pb-20">
+          <div className="container max-w-[1280px] px-6 md:px-10 lg:px-14">
+            <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+              <div className="lg:col-span-7">
+                <SectionLabel text="Podcast" />
+                <h1
+                  className="mt-5 font-display font-bold text-foreground leading-[1.02]"
+                  style={{ fontSize: "clamp(44px, 7vw, 96px)", letterSpacing: "-0.02em" }}
                 >
-                  <a href={SPOTIFY_SHOW_URL} target="_blank" rel="noopener noreferrer">
-                    <SpotifyIcon className="mr-2 h-5 w-5" />
-                    Listen on Spotify
-                  </a>
-                </Button>
-                
-                <Button 
-                  asChild
-                  size="lg"
-                  className="rounded-full px-8 bg-[#9933FF] hover:bg-[#9933FF]/90 text-white border-none group"
-                >
-                  <a href={APPLE_PODCASTS_URL} target="_blank" rel="noopener noreferrer">
-                    <ApplePodcastsIcon className="mr-2 h-5 w-5" />
-                    Apple Podcasts
-                  </a>
-                </Button>
+                  The Human Era{" "}
+                  <span className="text-primary">Podcast</span>
+                  <HeadingDot />
+                </h1>
+                <p className="mt-7 text-lg md:text-xl text-foreground/80 leading-[1.55] max-w-2xl">
+                  Deep dives with founders, artists, scientists, and anyone doing
+                  interesting work at the intersection of humans and technology.
+                </p>
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <Button
+                    asChild
+                    size="lg"
+                    className="rounded-full px-8 bg-[#1DB954] hover:bg-[#1DB954]/90 text-white group"
+                  >
+                    <a href={SPOTIFY_SHOW_URL} target="_blank" rel="noopener noreferrer">
+                      <SpotifyIcon className="mr-2 h-5 w-5" />
+                      Listen on Spotify
+                    </a>
+                  </Button>
+                  <Button
+                    asChild
+                    variant="outline"
+                    size="lg"
+                    className="rounded-full px-8 border-foreground/30 text-foreground hover:bg-foreground hover:text-background"
+                  >
+                    <a href={APPLE_PODCASTS_URL} target="_blank" rel="noopener noreferrer">
+                      <ApplePodcastsIcon className="mr-2 h-5 w-5" />
+                      Apple Podcasts
+                    </a>
+                  </Button>
+                </div>
+              </div>
+              <div className="lg:col-span-5 flex justify-center lg:justify-end">
+                <Polaroid
+                  src={podcastHero}
+                  alt="Ferry Hoes recording The Human Era Podcast"
+                  caption="Mic on. Real talk."
+                  rotate={2}
+                  aspect="portrait"
+                  loading="eager"
+                  className="max-w-[360px] w-full"
+                />
               </div>
             </div>
           </div>
