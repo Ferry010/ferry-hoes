@@ -205,37 +205,6 @@ const BlogPost = () => {
               </nav>
             )}
 
-            {/* Related Posts */}
-            {relatedPosts.length > 0 && (
-              <div className="mt-16 pt-8 border-t border-border">
-                <h3 className="font-display text-xl font-bold text-foreground mb-6">You might also like</h3>
-                <div className="grid gap-4">
-                  {relatedPosts.map((rp) => (
-                    <Link
-                      key={rp.slug}
-                      to={`/blog/${rp.slug}`}
-                      className="flex items-center gap-4 p-4 rounded-xl border border-border hover:border-accent/30 hover:bg-accent/[0.03] transition-colors group"
-                    >
-                      {rp.header_image_url && (
-                        <img src={rp.header_image_url} alt={rp.title} loading="lazy" width={80} height={56} className="w-20 h-14 object-cover rounded-lg shrink-0" />
-                      )}
-                      <div className="flex-1 min-w-0">
-                        <p className="font-medium text-foreground group-hover:text-accent transition-colors line-clamp-1">{rp.title}</p>
-                        <p className="text-xs text-muted-foreground mt-1">{formatPostDate(rp.published_at)} · {getReadTime(rp.content)}</p>
-                      </div>
-                      <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-accent shrink-0" />
-                    </Link>
-                  ))}
-                </div>
-
-                <div className="mt-6">
-                  <Link to="/speaking" className="inline-flex items-center gap-2 text-sm text-accent hover:underline">
-                    See Ferry's keynote topics <ArrowRight className="h-3.5 w-3.5" />
-                  </Link>
-                </div>
-              </div>
-            )}
-
             <div className="mt-12 pt-8 border-t border-border">
               <Link
                 to="/blog"
