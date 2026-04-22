@@ -1,25 +1,27 @@
 
 
-# Fix blog rendering + clean up post page
+# Bigger logos + "Want to join this list?" link
 
-## What's wrong
+Two small tweaks to `src/components/sections/ClientLogos.tsx`:
 
-The editor IS rich — bold/italic, H1–H3, lists, quotes, links, images all work and are saved as proper HTML. The problem is on the **public side**: `@tailwindcss/typography` (the `prose` plugin) is installed in `package.json` but missing from `tailwind.config.ts`, so every `prose-*` class on the blog page is silently ignored. That's why your post collapses into "one big alinea" with no paragraph spacing, no heading hierarchy, and no list bullets — even though the HTML is correct underneath.
+**1. Slightly larger logos**
+Bump each logo's max-height by one step (≈30%) and widen the max-width to match, keeping the marquee balanced:
+- `max-h-12` (48px) → `max-h-16` (64px)
+- `max-h-14` (56px) → `max-h-[72px]`
+- `max-h-16` (64px) → `max-h-20` (80px)
+- Widths grow proportionally (e.g. `160px` → `200px`, `180px` → `220px`)
 
-## Changes
+Result: logos read more confidently without overpowering the "I've had the pleasure to work with…" eyebrow above. Marquee animation, opacity (50% grayscale → 80% on hover), spacing and mask gradient stay untouched.
 
-**1. Enable rich rendering (the real fix)**
-- Register `@tailwindcss/typography` in `tailwind.config.ts` plugins.
-- Result on `/blog/:slug`: paragraphs get proper spacing, H1/H2/H3 scale and weight correctly, bullet & numbered lists show markers and indentation, blockquotes get the accent left-border + cream background, inline code and code blocks render styled, links pick up the accent color and underline, images keep their rounded corners. Same will apply inside the editor itself (it uses the same `prose` classes), so the writing surface in `/admin/posts/...` will finally look like the published article — true WYSIWYG, matching the Brand Humanizing Institute editor feel.
+**2. Add a quiet text link below the marquee**
+Centered under the logo strip:
 
-**2. Remove "You might also like"**
-- In `src/pages/BlogPost.tsx`, delete the entire Related Posts block (the `{relatedPosts.length > 0 && …}` section, lines ~209–237) including the "See Ferry's keynote topics" link below it.
-- Also drop the now-unused `relatedPosts` calculation.
-- Keep the Previous / Next two-card nav (already in place).
-- Keep the "Back to all articles" link at the bottom.
+> *Want to join this list?*
+
+Styled as an understated underlined link (small, foreground/70, primary on hover, underline-offset-4) so it feels like an editorial footnote, not a CTA button. Opens the Speakers Academy quote form in a new tab:
+`https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966`
 
 ## Out of scope
-- No changes to the editor toolbar (already complete).
-- No changes to the SEO / focus-keyphrase panel.
-- No DB migration needed.
+- No changes to logo set, ordering, marquee speed, or section padding.
+- No changes elsewhere on the page.
 
