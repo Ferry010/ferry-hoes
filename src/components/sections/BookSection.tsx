@@ -60,8 +60,8 @@ const BookSection = () => {
               style={{ fontSize: "clamp(36px, 5.4vw, 80px)" }}
             >
               The full argument, on{" "}
-              <span className="text-primary">paper</span>
-              <Period />
+              <span className="whitespace-nowrap"><span className="text-primary">paper</span><Period />
+              <span className="text-primary">?</span></span>
             </h2>
 
             <p className="mt-7 text-lg md:text-xl text-foreground/80 leading-[1.55] max-w-xl">

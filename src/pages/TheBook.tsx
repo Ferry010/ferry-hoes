@@ -53,8 +53,8 @@ const TheBook = () => {
                   }}
                 >
                   The full argument, on{" "}
-                  <span className="text-primary">paper</span>
-                  <Period />
+                  <span className="whitespace-nowrap"><span className="text-primary">paper</span><Period />
+                  <span className="text-primary">?</span></span>
                 </h1>
                 <p className="mt-8 text-lg md:text-xl text-foreground/80 max-w-2xl leading-[1.55]">
                   Brand Humanizing, co-written with my best friend Jonathan
