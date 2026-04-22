@@ -1,4 +1,3 @@
-import SiteHeader from "@/components/SiteHeader";
 import Footer from "@/components/sections/Footer";
 import SEOHead from "@/components/blog/SEOHead";
 import { Eyebrow, Period } from "@/components/HeadingDot";
@@ -43,7 +42,6 @@ const Section = ({
 const TheIdea = () => {
   return (
     <>
-      <SiteHeader />
       <SEOHead
         title="The Idea: Brand Humanizing | Ferry Hoes"
         description="Brand Humanizing is a strategy for the digital age. The point of technology isn't to replace what makes us human. It's to amplify it."

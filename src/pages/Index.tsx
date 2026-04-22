@@ -1,6 +1,5 @@
 import SEOHead from "@/components/blog/SEOHead";
 import StructuredData, { personSchema, bookSchema, websiteSchema } from "@/components/StructuredData";
-import SiteHeader from "@/components/SiteHeader";
 import Hero from "@/components/sections/Hero";
 import CredentialsStrip from "@/components/sections/CredentialsStrip";
 import TrustLine from "@/components/sections/TrustLine";
@@ -22,7 +21,6 @@ const Index = () => {
       />
       <StructuredData data={[personSchema, bookSchema, websiteSchema]} />
 
-      <SiteHeader />
 
       <div className="overflow-x-hidden relative">
         <header>

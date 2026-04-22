@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import SiteHeader from "@/components/SiteHeader";
 import Footer from "@/components/sections/Footer";
 import SEOHead from "@/components/blog/SEOHead";
 import { Eyebrow, Period } from "@/components/HeadingDot";
@@ -33,7 +32,6 @@ const PlaceholderPage = ({
         description={seoDescription}
         canonicalUrl={canonicalUrl}
       />
-      <SiteHeader />
       <main className="bg-background min-h-screen">
         <div className="container max-w-[1280px] px-6 md:px-10 lg:px-14 pt-36 md:pt-44 pb-24 md:pb-32">
           <div className="max-w-3xl">
