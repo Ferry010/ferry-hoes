@@ -339,21 +339,28 @@ const MyStory = () => {
             Key <span className="text-primary">milestones</span>
             <Period />
           </h2>
-          <ul className="mt-12 max-w-2xl divide-y divide-border/60">
-            {TIMELINE.map((item, i) => (
-              <li
-                key={i}
-                className="grid grid-cols-[88px_1fr] gap-6 py-5 items-baseline"
-              >
-                <span className="font-display font-bold text-primary text-xl md:text-2xl tracking-tight">
-                  {item.year}
-                </span>
-                <span className="text-base md:text-lg text-foreground/85 leading-[1.55]">
-                  {item.text}
-                </span>
-              </li>
-            ))}
-          </ul>
+          <div className="mt-12 max-w-2xl relative">
+            {/* vertical orange rail */}
+            <div className="absolute left-[7px] top-2 bottom-2 w-[2px] bg-primary/30" aria-hidden="true" />
+            <ul className="space-y-8">
+              {TIMELINE.map((item, i) => (
+                <li
+                  key={i}
+                  className="grid grid-cols-[32px_88px_1fr] gap-4 md:gap-6 items-baseline"
+                >
+                  <span className="relative flex justify-center">
+                    <span className="block w-4 h-4 rounded-full bg-primary border-4 border-background ring-1 ring-primary/30" />
+                  </span>
+                  <span className="font-display font-bold text-primary text-xl md:text-2xl tracking-tight">
+                    {item.year}
+                  </span>
+                  <span className="text-base md:text-lg text-foreground/85 leading-[1.55]">
+                    {item.text}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </Section>
 
         {/* Final CTA */}
