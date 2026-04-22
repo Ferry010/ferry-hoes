@@ -23,6 +23,7 @@ import Now from "./pages/Now";
 import AdminNowPage from "./pages/AdminNowPage";
 import AdminLayout from "./components/admin/AdminLayout";
 import { ScrollToTop } from "./components/ScrollToTop";
+import SiteHeader from "./components/SiteHeader";
 import TheIdea from "./pages/TheIdea";
 import MyStory from "./pages/MyStory";
 import Writing from "./pages/Writing";
@@ -55,6 +56,7 @@ const App = () => (
         <BrowserRouter>
           <ScrollToTop />
           <PageTracker />
+          <SiteHeader />
           <Routes>
             <Route path="/" element={<Index />} />
 

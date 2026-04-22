@@ -1,5 +1,4 @@
 import { useState } from "react";
-import SiteHeader from "@/components/SiteHeader";
 import Footer from "@/components/sections/Footer";
 import SEOHead from "@/components/blog/SEOHead";
 import { Eyebrow, Period } from "@/components/HeadingDot";
@@ -38,7 +37,6 @@ const TheBook = () => {
         description="Brand Humanizing, the book by Ferry Hoes and Jonathan Flores. Available in Dutch. English edition launching soon."
         canonicalUrl="/the-book"
       />
-      <SiteHeader />
 
       <main className="bg-background">
         {/* Hero */}

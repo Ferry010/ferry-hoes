@@ -1,7 +1,6 @@
 import { useLocation, Link } from "react-router-dom";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import SiteHeader from "@/components/SiteHeader";
 import Footer from "@/components/sections/Footer";
 import { Eyebrow, Period } from "@/components/HeadingDot";
 import PillButton from "@/components/PillButton";
@@ -27,7 +26,6 @@ const NotFound = () => {
         />
       </Helmet>
 
-      <SiteHeader />
 
       <main className="bg-background min-h-screen">
         <div className="container max-w-[1280px] px-6 md:px-10 lg:px-14 pt-36 md:pt-44 pb-24 md:pb-32">

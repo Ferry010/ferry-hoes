@@ -1,4 +1,3 @@
-import SiteHeader from "@/components/SiteHeader";
 import Footer from "@/components/sections/Footer";
 import SEOHead from "@/components/blog/SEOHead";
 import { Eyebrow, Period } from "@/components/HeadingDot";
@@ -65,7 +64,6 @@ const PullQuote = ({
 const MyStory = () => {
   return (
     <>
-      <SiteHeader />
       <SEOHead
         title="My Story | Ferry Hoes"
         description="The long version: how a talkative kid from Delft ended up coining Brand Humanizing, writing a book, and giving forty keynotes a year."

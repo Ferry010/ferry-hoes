@@ -1,5 +1,4 @@
 import { useMemo, useState } from "react";
-import SiteHeader from "@/components/SiteHeader";
 import Footer from "@/components/sections/Footer";
 import SEOHead from "@/components/blog/SEOHead";
 import { Eyebrow, Period } from "@/components/HeadingDot";
@@ -32,7 +31,6 @@ const Writing = () => {
 
   return (
     <>
-      <SiteHeader />
       <SEOHead
         title="Writing: Thoughts | Ferry Hoes"
         description="Short articles on humans, technology, and the work in between. A small library, not a content firehose. Quality over volume."
