@@ -1,6 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 
+export interface PostSource {
+  title: string;
+  url: string;
+}
+
 export interface BlogPost {
   id: string;
   title: string;
@@ -12,6 +17,7 @@ export interface BlogPost {
   seo_description: string | null;
   seo_keywords: string[] | null;
   seo_og_image_url: string | null;
+  sources: PostSource[] | null;
   published: boolean;
   published_at: string | null;
   author_id: string | null;

@@ -11,12 +11,15 @@ import {
   Italic,
   Underline as UnderlineIcon,
   Strikethrough,
+  Heading1,
   Heading2,
   Heading3,
   List,
   ListOrdered,
   Quote,
   Minus,
+  Code,
+  Code2,
   Link as LinkIcon,
   ImageIcon,
   AlignLeft,
@@ -83,7 +86,7 @@ const RichTextEditor = ({ value, onChange }: RichTextEditorProps) => {
     editorProps: {
       attributes: {
         class:
-          "min-h-[500px] px-6 py-4 text-base text-foreground focus:outline-none prose prose-base max-w-none prose-headings:text-foreground prose-headings:font-display prose-p:text-foreground/90 prose-strong:text-foreground prose-ul:text-foreground/90 prose-ol:text-foreground/90 prose-blockquote:border-accent prose-blockquote:text-muted-foreground prose-a:text-accent prose-img:rounded-md",
+          "min-h-[600px] px-6 py-4 text-base text-foreground focus:outline-none prose prose-lg max-w-none prose-headings:text-foreground prose-headings:font-display prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-p:text-foreground/90 prose-strong:text-foreground prose-ul:text-foreground/90 prose-ol:text-foreground/90 prose-li:text-foreground/90 prose-blockquote:border-l-accent prose-blockquote:bg-accent/5 prose-blockquote:rounded-r-lg prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:not-italic prose-blockquote:text-foreground/80 prose-a:text-accent prose-img:rounded-md prose-code:text-accent prose-code:bg-muted prose-code:px-1 prose-code:rounded prose-code:before:content-none prose-code:after:content-none prose-pre:bg-muted prose-pre:text-foreground",
       },
     },
   });
@@ -183,6 +186,9 @@ const RichTextEditor = ({ value, onChange }: RichTextEditorProps) => {
         <Separator orientation="vertical" className="h-6 mx-1" />
 
         {/* Headings */}
+        <Toggle size="sm" pressed={editor.isActive("heading", { level: 1 })} onPressedChange={() => editorAny.chain().focus().toggleHeading({ level: 1 }).run()} aria-label="Heading 1">
+          <Heading1 className="w-4 h-4" />
+        </Toggle>
         <Toggle size="sm" pressed={editor.isActive("heading", { level: 2 })} onPressedChange={() => editorAny.chain().focus().toggleHeading({ level: 2 }).run()} aria-label="Heading 2">
           <Heading2 className="w-4 h-4" />
         </Toggle>
@@ -205,6 +211,12 @@ const RichTextEditor = ({ value, onChange }: RichTextEditorProps) => {
         {/* Block */}
         <Toggle size="sm" pressed={editor.isActive("blockquote")} onPressedChange={() => editorAny.chain().focus().toggleBlockquote().run()} aria-label="Blockquote">
           <Quote className="w-4 h-4" />
+        </Toggle>
+        <Toggle size="sm" pressed={editor.isActive("code")} onPressedChange={() => editorAny.chain().focus().toggleCode().run()} aria-label="Inline code">
+          <Code className="w-4 h-4" />
+        </Toggle>
+        <Toggle size="sm" pressed={editor.isActive("codeBlock")} onPressedChange={() => editorAny.chain().focus().toggleCodeBlock().run()} aria-label="Code block">
+          <Code2 className="w-4 h-4" />
         </Toggle>
         <Toggle size="sm" pressed={false} onPressedChange={() => editorAny.chain().focus().setHorizontalRule().run()} aria-label="Horizontal rule">
           <Minus className="w-4 h-4" />
