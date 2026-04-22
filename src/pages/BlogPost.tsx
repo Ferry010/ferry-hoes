@@ -4,8 +4,6 @@ import { useBlogPost, useBlogPosts, formatPostDate, getReadTime } from "@/hooks/
 import SEOHead from "@/components/blog/SEOHead";
 import StructuredData, { breadcrumbSchema, blogPostingSchema } from "@/components/StructuredData";
 import PostCTA from "@/components/blog/PostCTA";
-import AuthorByline from "@/components/blog/AuthorByline";
-import AuthorBioCard from "@/components/blog/AuthorBioCard";
 
 /** Strip HTML tags and return plain text */
 const stripHtml = (html: string) =>
