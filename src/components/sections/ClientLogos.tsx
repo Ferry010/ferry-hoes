@@ -11,17 +11,17 @@ import logoVodafone from "@/assets/logos/vodafone.png";
 import logoZiggo from "@/assets/logos/ziggo.png";
 
 const logos = [
-  { src: logoAtos, alt: "Atos", className: "max-h-12 max-w-[160px]" },
-  { src: logoVodafone, alt: "Vodafone", className: "max-h-12 max-w-[180px]" },
-  { src: logoGsk, alt: "GlaxoSmithKline", className: "max-h-14 max-w-[180px]" },
-  { src: logoToshiba, alt: "Toshiba", className: "max-h-12 max-w-[170px]" },
-  { src: logoAma, alt: "American Marketing Association", className: "max-h-12 max-w-[180px]" },
-  { src: logoZiggo, alt: "Ziggo", className: "max-h-12 max-w-[180px]" },
-  { src: logoChubb, alt: "Chubb Fire & Security", className: "max-h-12 max-w-[160px]" },
-  { src: logoAsr, alt: "a.s.r.", className: "max-h-16 max-w-[160px]" },
-  { src: logoUwv, alt: "UWV", className: "max-h-14 max-w-[160px]" },
-  { src: logoMinfin, alt: "Ministerie van Financiën", className: "max-h-16 max-w-[140px]" },
-  { src: logoEindhoven, alt: "Gemeente Eindhoven", className: "max-h-16 max-w-[140px]" },
+  { src: logoAtos, alt: "Atos", className: "max-h-16 max-w-[200px]" },
+  { src: logoVodafone, alt: "Vodafone", className: "max-h-16 max-w-[220px]" },
+  { src: logoGsk, alt: "GlaxoSmithKline", className: "max-h-[72px] max-w-[220px]" },
+  { src: logoToshiba, alt: "Toshiba", className: "max-h-16 max-w-[210px]" },
+  { src: logoAma, alt: "American Marketing Association", className: "max-h-16 max-w-[220px]" },
+  { src: logoZiggo, alt: "Ziggo", className: "max-h-16 max-w-[220px]" },
+  { src: logoChubb, alt: "Chubb Fire & Security", className: "max-h-16 max-w-[200px]" },
+  { src: logoAsr, alt: "a.s.r.", className: "max-h-20 max-w-[200px]" },
+  { src: logoUwv, alt: "UWV", className: "max-h-[72px] max-w-[200px]" },
+  { src: logoMinfin, alt: "Ministerie van Financiën", className: "max-h-20 max-w-[180px]" },
+  { src: logoEindhoven, alt: "Gemeente Eindhoven", className: "max-h-20 max-w-[180px]" },
 ];
 
 const ClientLogos = () => {
@@ -62,6 +62,16 @@ const ClientLogos = () => {
               ))}
             </div>
           </div>
+          <p className="text-center mt-10">
+            <a
+              href="https://www.speakersacademy.com/en/request-a-quote/?speaker_id=153966"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm font-medium text-foreground/70 hover:text-primary underline underline-offset-4 decoration-primary/40 hover:decoration-primary transition-colors"
+            >
+              Want to join this list?
+            </a>
+          </p>
         </div>
       </div>
     </section>
