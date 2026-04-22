@@ -22,20 +22,24 @@ const TrustLine = () => (
       <span className="text-[11px] uppercase tracking-[0.18em] font-semibold text-primary">
         • Teams I've worked with
       </span>
-      <p
-        className="mt-4 font-display font-semibold text-background leading-[1.3] break-words"
-        style={{ fontSize: "clamp(15px, 2.4vw, 30px)", wordBreak: "break-word" }}
+      <div
+        className="mt-4 flex flex-wrap items-baseline gap-y-2 font-display font-semibold text-background leading-[1.2]"
+        style={{ fontSize: "clamp(15px, 4.5vw, 30px)" }}
       >
         {TEAMS.map((name, i) => (
-          <span key={name} className="whitespace-nowrap">
+          <span key={name} className="inline-flex items-baseline">
             <span className="hover:text-primary transition-colors">{name}</span>
             {i < TEAMS.length - 1 && (
-              <span className="text-primary/70 mx-1.5 md:mx-3">/</span>
+              <span className="text-primary/70 px-2 md:px-3" aria-hidden="true">
+                /
+              </span>
             )}
           </span>
         ))}
-        <span className="text-primary">.</span>
-      </p>
+        <span className="text-primary" aria-hidden="true">
+          .
+        </span>
+      </div>
     </div>
   </section>
 );
