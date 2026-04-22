@@ -70,7 +70,10 @@ const TheBook = () => {
                   >
                     Get the Dutch edition
                   </PillButton>
-                  <PillButton to="#waitlist" variant="ghost">
+                  <PillButton
+                    onClick={() => window.dispatchEvent(new Event("open-contact"))}
+                    variant="ghost"
+                  >
                     English waitlist
                   </PillButton>
                 </div>

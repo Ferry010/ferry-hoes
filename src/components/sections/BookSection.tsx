@@ -80,7 +80,10 @@ const BookSection = () => {
               <PillButton to="/the-book" variant="primary">
                 See the book
               </PillButton>
-              <PillButton to="#waitlist" variant="ghost">
+              <PillButton
+                onClick={() => window.dispatchEvent(new Event("open-contact"))}
+                variant="ghost"
+              >
                 English waitlist
               </PillButton>
             </div>
