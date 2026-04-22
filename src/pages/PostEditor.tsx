@@ -13,6 +13,7 @@ import {
 import ImageUpload from "@/components/admin/ImageUpload";
 import RichTextEditor from "@/components/admin/RichTextEditor";
 import SEOFields from "@/components/admin/SEOFields";
+import FocusKeyphrasePanel from "@/components/admin/FocusKeyphrasePanel";
 import { toast } from "@/hooks/use-toast";
 import { ArrowLeft, Save, Send, Plus, Trash2 } from "lucide-react";
 import { autoExcerpt, smartTruncate, stripHtml } from "@/lib/seoSuggest";
@@ -42,6 +43,7 @@ const PostEditor = () => {
   const [seoTitle, setSeoTitle] = useState("");
   const [seoDescription, setSeoDescription] = useState("");
   const [seoKeywords, setSeoKeywords] = useState("");
+  const [seoFocusKeyphrase, setSeoFocusKeyphrase] = useState("");
   const [seoOgImageUrl, setSeoOgImageUrl] = useState<string | undefined>();
   const [sources, setSources] = useState<SourceRow[]>([]);
   const [slugManuallyEdited, setSlugManuallyEdited] = useState(false);
@@ -57,6 +59,7 @@ const PostEditor = () => {
       setSeoTitle(existingPost.seo_title || "");
       setSeoDescription(existingPost.seo_description || "");
       setSeoKeywords(existingPost.seo_keywords?.join(", ") || "");
+      setSeoFocusKeyphrase((existingPost as any).seo_focus_keyphrase || "");
       setSeoOgImageUrl(existingPost.seo_og_image_url || undefined);
       const raw = (existingPost as any).sources;
       setSources(Array.isArray(raw) ? (raw as SourceRow[]) : []);
@@ -123,6 +126,7 @@ const PostEditor = () => {
       seo_keywords: seoKeywords
         ? seoKeywords.split(",").map((k) => k.trim()).filter(Boolean)
         : undefined,
+      seo_focus_keyphrase: seoFocusKeyphrase.trim() || undefined,
       seo_og_image_url: finalOgImage,
       sources: sources.filter((s) => s.title.trim() || s.url.trim()),
       published: publish,
@@ -325,6 +329,30 @@ const PostEditor = () => {
             </div>
           )}
         </div>
+
+        {/* Focus Keyphrase + Yoast-style checks */}
+        <FocusKeyphrasePanel
+          keyphrase={seoFocusKeyphrase}
+          onKeyphraseChange={setSeoFocusKeyphrase}
+          title={seoTitle || title}
+          slug={slug}
+          metaDescription={seoDescription || excerpt}
+          contentHtml={content}
+          hasImage={!!headerImageUrl}
+          currentKeywords={seoKeywords
+            .split(",")
+            .map((k) => k.trim())
+            .filter(Boolean)}
+          onAddKeyword={(k) => {
+            const list = seoKeywords
+              .split(",")
+              .map((x) => x.trim())
+              .filter(Boolean);
+            if (!list.some((x) => x.toLowerCase() === k.toLowerCase())) {
+              setSeoKeywords([...list, k].join(", "));
+            }
+          }}
+        />
 
         {/* SEO Fields */}
         <SEOFields
