@@ -17,7 +17,7 @@ const NAV_ITEMS: NavItem[] = [
   {
     label: "THE IDEA",
     route: "/#brand-humanizing",
-    copy: "Brand Humanizing and essays exploring how organizations stay distinctive.",
+    copy: "Brand Humanizing and articles exploring how organizations stay distinctive.",
   },
   {
     label: "ON STAGE",
@@ -32,7 +32,7 @@ const NAV_ITEMS: NavItem[] = [
   {
     label: "BLOG",
     route: "/blog",
-    copy: "Essays, ideas, and experiments worth reading.",
+    copy: "Articles, ideas, and experiments worth reading.",
   },
   {
     label: "THE BOOK",
