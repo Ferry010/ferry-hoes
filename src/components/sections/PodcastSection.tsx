@@ -55,21 +55,21 @@ const PodcastSection = () => {
   const revealRef = useScrollReveal();
 
   return (
-    <section className="bg-background py-20 md:py-28">
-      <div className="container max-w-[1280px] px-6 md:px-10 lg:px-14">
-        <div ref={revealRef} className="scroll-reveal max-w-3xl mb-14 md:mb-16">
+    <section className="bg-background py-16 md:py-28">
+      <div className="container max-w-[1280px] px-5 md:px-10 lg:px-14">
+        <div ref={revealRef} className="scroll-reveal max-w-3xl mb-10 md:mb-16">
           <Eyebrow>The Human Era Podcast</Eyebrow>
 
           <h2
-            className="font-display font-bold text-foreground leading-[1.02]"
-            style={{ fontSize: "clamp(36px, 5.4vw, 80px)" }}
+            className="font-display font-bold text-foreground leading-[1.05]"
+            style={{ fontSize: "clamp(30px, 6vw, 80px)" }}
           >
             Long conversations, no{" "}
             <span className="text-primary">soundbites</span>
             <Period />
           </h2>
 
-          <p className="mt-7 text-lg md:text-xl text-foreground/80 leading-[1.55]">
+          <p className="mt-5 md:mt-7 text-base md:text-xl text-foreground/80 leading-[1.55]">
             I host The Human Era Podcast. Guests include CEOs, professors,
             artists, and entrepreneurs asking good questions about the balance
             between efficiency and meaning.
