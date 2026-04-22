@@ -30,6 +30,7 @@ export type Database = {
           seo_title: string | null
           slug: string
           sort_order: number
+          sources: Json
           title: string
           updated_at: string
         }
@@ -48,6 +49,7 @@ export type Database = {
           seo_title?: string | null
           slug: string
           sort_order?: number
+          sources?: Json
           title: string
           updated_at?: string
         }
@@ -66,6 +68,7 @@ export type Database = {
           seo_title?: string | null
           slug?: string
           sort_order?: number
+          sources?: Json
           title?: string
           updated_at?: string
         }
