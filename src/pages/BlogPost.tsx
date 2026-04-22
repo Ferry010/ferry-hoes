@@ -42,9 +42,6 @@ const BlogPost = () => {
     || post.excerpt
     || (post.content ? stripHtml(post.content).slice(0, 155) : undefined);
 
-  // Related posts: up to 3 other posts
-  const relatedPosts = allPosts?.filter((p) => p.slug !== post.slug).slice(0, 3) || [];
-
   // Prev / next navigation (allPosts is ordered by published_at DESC)
   const currentIdx = allPosts?.findIndex((p) => p.slug === post.slug) ?? -1;
   const newerPost =
