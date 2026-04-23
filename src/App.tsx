@@ -14,6 +14,7 @@ import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import PostEditor from "./pages/PostEditor";
 import AdminMessages from "./pages/AdminMessages";
+import AdminWaitlist from "./pages/AdminWaitlist";
 import About from "./pages/About";
 import Press from "./pages/Press";
 import Conversation from "./pages/Conversation";
@@ -95,6 +96,7 @@ const App = () => (
               <Route path="posts/new" element={<PostEditor />} />
               <Route path="posts/:id" element={<PostEditor />} />
               <Route path="now" element={<AdminNowPage />} />
+              <Route path="waitlist" element={<AdminWaitlist />} />
             </Route>
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

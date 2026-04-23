@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useNavigate, Outlet, Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
-import { LogOut, Pen, Home, Mail, Clock } from "lucide-react";
+import { LogOut, Pen, Home, Mail, Clock, BookOpen } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 
@@ -93,6 +93,18 @@ const AdminLayout = () => {
               >
                 <Clock className="w-4 h-4 inline mr-1.5" />
                 Now Page
+              </Link>
+              <Link
+                to="/admin/waitlist"
+                className={cn(
+                  "px-3 py-1.5 rounded-md text-sm font-medium transition-colors",
+                  location.pathname === "/admin/waitlist"
+                    ? "bg-accent/10 text-accent"
+                    : "text-muted-foreground hover:text-foreground"
+                )}
+              >
+                <BookOpen className="w-4 h-4 inline mr-1.5" />
+                Waitlist
               </Link>
             </nav>
           </div>

@@ -9,21 +9,50 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const BookSection = () => {
   const [email, setEmail] = useState("");
+  const [website, setWebsite] = useState(""); // honeypot
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const revealRef = useScrollReveal();
 
+  const scrollToWaitlist = () => {
+    const el = document.getElementById("waitlist");
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+  };
+
   const handleWaitlist = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email.trim()) return;
+    if (website) return; // bot
+    const normalized = email.trim().toLowerCase();
+    if (!normalized) return;
     setStatus("loading");
+
     const { error } = await supabase.from("email_subscribers" as any).insert({
-      email: email.trim(),
+      email: normalized,
       source: "english_waitlist",
     } as any);
-    if (error && !error.message.includes("duplicate")) {
+
+    const isDuplicate = error?.message?.includes("duplicate");
+    if (error && !isDuplicate) {
       setStatus("error");
       return;
     }
+
+    // Fire-and-forget Slack notification (don't block success)
+    if (!isDuplicate) {
+      try {
+        const { count } = await supabase
+          .from("email_subscribers" as any)
+          .select("*", { count: "exact", head: true })
+          .eq("source", "english_waitlist");
+        supabase.functions
+          .invoke("notify-waitlist", {
+            body: { email: normalized, total: count ?? undefined },
+          })
+          .catch((err) => console.error("notify-waitlist failed", err));
+      } catch (err) {
+        console.error("notify-waitlist dispatch failed", err);
+      }
+    }
+
     setStatus("success");
     setEmail("");
   };
@@ -80,10 +109,7 @@ const BookSection = () => {
               <PillButton to="/the-book" variant="primary">
                 See the book
               </PillButton>
-              <PillButton
-                onClick={() => window.dispatchEvent(new Event("open-contact"))}
-                variant="ghost"
-              >
+              <PillButton onClick={scrollToWaitlist} variant="ghost">
                 English waitlist
               </PillButton>
             </div>
@@ -103,12 +129,24 @@ const BookSection = () => {
                 </p>
               ) : (
                 <form onSubmit={handleWaitlist} className="flex gap-2">
+                  {/* Honeypot */}
+                  <input
+                    type="text"
+                    name="website"
+                    value={website}
+                    onChange={(e) => setWebsite(e.target.value)}
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                    className="hidden"
+                  />
                   <Input
                     type="email"
                     placeholder="your@email.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
+                    maxLength={255}
                     className="text-sm"
                   />
                   <PillButton type="submit" variant="primary" arrow={false}>
