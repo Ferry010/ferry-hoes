@@ -1,52 +1,34 @@
 
 
-# English book waitlist — proper end-to-end flow
+# Show all logos as a static grid on /on-stage
 
-The waitlist form **already exists** (on the homepage `BookSection` and on `/the-book`) and writes to `email_subscribers` with `source: "english_waitlist"`. But it's incomplete: the "English waitlist" buttons open the contact panel instead of jumping to the form, there's no Slack notification, and there's no admin view to actually see who signed up. This makes it a real waitlist.
+On `/on-stage` (which renders `Speaking.tsx`), the client logos currently appear as a scrolling marquee via `<ClientLogos />`. Replace that with a static, fully-visible grid so visitors can see every brand at a glance — fitting for the speaker page where credibility matters more than motion.
 
 ## What changes
 
-### 1. Fix the "English waitlist" buttons
-In `BookSection.tsx` and `TheBook.tsx`, the ghost button currently dispatches `open-contact` (opens the message panel — wrong). Change both to scroll to `#waitlist` (the email form already on the page). Same intent both for Dutch and English UI.
+**1. New component: `src/components/sections/ClientLogosGrid.tsx`**
+- Imports the same 12 logos from `@/assets/logos/*` as `ClientLogos.tsx` (single source of truth stays in sync visually because we're using the same files).
+- Renders them in a responsive grid inside a soft card:
+  - Mobile: 2 columns
+  - `sm`: 3 columns
+  - `md`: 4 columns
+  - `lg`: 6 columns
+- Each cell: centered, fixed height (~`h-20`), `object-contain`, `opacity-60 grayscale` with `hover:opacity-100 hover:grayscale-0` transition (matches the marquee's tone but slightly more vivid since they're stationary).
+- Wrapped in a `bg-background-alt border border-border rounded-2xl p-8 md:p-10` card so the grid feels intentional rather than floating.
+- Same eyebrow copy as the marquee: *"I've had the pleasure to work with great brands like"*.
+- Same "Want to join this list?" link underneath, pointing to the Speakers Academy quote URL.
+- Uses `useScrollReveal` for a subtle fade-in (consistent with other Speaking.tsx sections).
 
-### 2. Slack notification on signup
-New edge function `notify-waitlist` (mirrors `notify-contact` but simpler — just email + source). Posts to the same `#ferryhoes` Slack channel:
-
-> 📚 *New English book waitlist signup* — `someone@example.com`  · Total: 42
-
-Called from the form `onSubmit` in both `BookSection.tsx` and `TheBook.tsx` after the DB insert succeeds. Failure to notify never blocks the success state.
-
-### 3. Admin view at `/admin/waitlist`
-New page `src/pages/AdminWaitlist.tsx` listed in the admin sidebar (`AdminLayout.tsx`):
-- Table: email, signed-up date, source
-- Total count at top
-- "Export CSV" button (client-side download — no backend needed)
-- Sortable by date (newest first by default)
-
-Requires the existing admin auth (same pattern as `AdminMessages.tsx`).
-
-### 4. RLS policy for admin SELECT
-The `email_subscribers` table currently has **no SELECT policy**, so even admins can't read it. Add:
-```sql
-CREATE POLICY "Admins can view subscribers"
-  ON email_subscribers FOR SELECT
-  TO authenticated
-  USING (has_role(auth.uid(), 'admin'));
-```
-
-### 5. Small polish on the form itself
-- Trim + lowercase the email before insert (prevents duplicate-with-different-case rows).
-- On duplicate, still show the success state (don't surprise returning users).
-- Honeypot field (`website` input, hidden, must stay empty) to block bots — same trick used elsewhere in the project.
+**2. Edit `src/pages/Speaking.tsx`**
+- Replace `import ClientLogos from "@/components/sections/ClientLogos"` with `import ClientLogosGrid from "@/components/sections/ClientLogosGrid"`.
+- Replace `<ClientLogos />` with `<ClientLogosGrid />` (line 187).
 
 ## Out of scope
-- No double opt-in / confirmation email (can add later if deliverability becomes an issue).
-- No separate `waitlists` table — `email_subscribers` with `source` filter is already the right shape.
-- No changes to the Dutch book purchase flow.
-- No public count / "join 200 others" social proof on the form.
+- No changes to `ClientLogos.tsx` — the marquee version stays as-is for the homepage and `/press`.
+- No changes to the logo set, ordering, or assets.
+- No changes to other sections of `Speaking.tsx`.
 
 ## Files touched
-- **New**: `supabase/functions/notify-waitlist/index.ts`, `src/pages/AdminWaitlist.tsx`
-- **Edited**: `src/components/sections/BookSection.tsx`, `src/pages/TheBook.tsx`, `src/components/admin/AdminLayout.tsx`, `src/App.tsx` (route)
-- **Migration**: SELECT policy on `email_subscribers`
+- **New**: `src/components/sections/ClientLogosGrid.tsx`
+- **Edited**: `src/pages/Speaking.tsx` (import + one tag swap)
 
