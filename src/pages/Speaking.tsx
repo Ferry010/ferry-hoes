@@ -16,7 +16,7 @@ import ferryBts from "@/assets/ferry-bts.jpg";
 import ferryPresenting from "@/assets/ferry-presenting.jpg";
 
 import SpeakingQA from "@/components/sections/SpeakingQA";
-import ClientLogos from "@/components/sections/ClientLogos";
+import ClientLogosGrid from "@/components/sections/ClientLogosGrid";
 import SectionLabel from "@/components/SectionLabel";
 import Polaroid from "@/components/Polaroid";
 
@@ -184,7 +184,7 @@ const Speaking = () => {
         </header>
 
         <main>
-          <ClientLogos />
+          <ClientLogosGrid />
 
           {/* Want this in your room — quick overview */}
           <section className="py-20 md:py-28 bg-background">
