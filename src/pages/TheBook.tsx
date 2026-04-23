@@ -197,12 +197,24 @@ const TheBook = () => {
                 </p>
               ) : (
                 <form onSubmit={handleWaitlist} className="flex gap-2">
+                  {/* Honeypot */}
+                  <input
+                    type="text"
+                    name="website"
+                    value={website}
+                    onChange={(e) => setWebsite(e.target.value)}
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                    className="hidden"
+                  />
                   <Input
                     type="email"
                     placeholder="your@email.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
+                    maxLength={255}
                     className="text-sm"
                   />
                   <PillButton type="submit" variant="primary" arrow={false}>
