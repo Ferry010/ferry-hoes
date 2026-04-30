@@ -29,6 +29,8 @@ import TheIdea from "./pages/TheIdea";
 import MyStory from "./pages/MyStory";
 import Writing from "./pages/Writing";
 import TheBook from "./pages/TheBook";
+import NoCookies from "./pages/NoCookies";
+import CookieBanner from "./components/CookieBanner";
 import { usePageTracking } from "./hooks/usePageTracking";
 
 const queryClient = new QueryClient();
@@ -58,6 +60,7 @@ const App = () => (
           <ScrollToTop />
           <PageTracker />
           <SiteHeader />
+          <CookieBanner />
           <Routes>
             <Route path="/" element={<Index />} />
 
@@ -80,6 +83,7 @@ const App = () => (
             <Route path="/podcast" element={<Podcast />} />
             <Route path="/now" element={<Now />} />
             <Route path="/press" element={<Press />} />
+            <Route path="/no-cookies" element={<NoCookies />} />
 
             {/* Easter egg / hidden */}
             <Route path="/conversation" element={<Conversation />} />

@@ -99,9 +99,16 @@ const Footer = () => {
 
         {/* Bottom bar */}
         <div className="mt-16 pt-6 border-t border-background/10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-          <p className="text-xs text-background/50">
-            © {new Date().getFullYear()} Ferry Hoes.
-          </p>
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-background/50">
+            <p>© {new Date().getFullYear()} Ferry Hoes.</p>
+            <span aria-hidden="true">·</span>
+            <Link
+              to="/no-cookies"
+              className="hover:text-primary transition-colors"
+            >
+              The No-Cookies Cookie Policy
+            </Link>
+          </div>
           <div className="flex gap-5 text-xs">
             <a
               href="https://www.linkedin.com/in/ferryhoes/"

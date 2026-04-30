@@ -1,4 +1,11 @@
-const GA_MEASUREMENT_ID = "G-039HEJE92H";
+/**
+ * Analytics is intentionally disabled.
+ *
+ * Ferry doesn't use tracking cookies — see /no-cookies for the full story.
+ * These functions are kept as no-ops so existing call sites (e.g. the page
+ * tracker hook and old cookie-consent flows) continue to compile without
+ * loading any third-party scripts or storing any state.
+ */
 
 declare global {
   interface Window {
@@ -8,28 +15,13 @@ declare global {
 }
 
 export function loadGoogleAnalytics() {
-  if (document.getElementById("ga-script")) return;
-
-  const script = document.createElement("script");
-  script.id = "ga-script";
-  script.async = true;
-  script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
-  document.head.appendChild(script);
-
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = function (...args: unknown[]) {
-    window.dataLayer.push(args);
-  };
-  window.gtag("js", new Date());
-  window.gtag("config", GA_MEASUREMENT_ID, { send_page_view: true });
+  // No-op. We don't load Google Analytics.
 }
 
-export function trackPageView(path: string) {
-  if (typeof window.gtag === "function") {
-    window.gtag("event", "page_view", { page_path: path });
-  }
+export function trackPageView(_path: string) {
+  // No-op. We don't track page views.
 }
 
 export function hasConsented(): boolean {
-  return localStorage.getItem("cookie-consent") === "accepted";
+  return false;
 }
