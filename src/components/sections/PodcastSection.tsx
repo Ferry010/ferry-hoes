@@ -104,10 +104,10 @@ const PodcastSection = () => {
                     href={episode.spotifyUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 self-start bg-[#1DB954] text-white font-semibold text-sm rounded-full px-5 py-2.5 hover:brightness-110 transition-all"
+                    className="inline-flex items-center justify-center gap-2 self-start bg-[#1DB954] text-white font-semibold text-sm rounded-full px-5 py-2.5 hover:brightness-110 transition-all whitespace-nowrap"
                   >
-                    <SpotifyIcon className="h-4 w-4" />
-                    Play on Spotify
+                    <SpotifyIcon className="h-4 w-4 shrink-0" />
+                    <span className="whitespace-nowrap">Play on Spotify</span>
                   </a>
                 </article>
               </CarouselItem>
@@ -125,9 +125,10 @@ const PodcastSection = () => {
             rel="noopener noreferrer"
             variant="primary"
             arrow={false}
+            className="whitespace-nowrap"
           >
-            <SpotifyIcon className="h-4 w-4" />
-            Listen on Spotify
+            <SpotifyIcon className="h-4 w-4 shrink-0" />
+            <span className="whitespace-nowrap">Listen on Spotify</span>
           </PillButton>
           <PillButton to="/podcast" variant="ghost">
             All episodes
