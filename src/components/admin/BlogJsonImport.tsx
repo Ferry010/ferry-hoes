@@ -17,6 +17,7 @@ export interface BlogJsonImportData {
   seo_keywords?: string[] | string;
   seo_og_image_url?: string;
   sources?: { title: string; url: string }[] | Record<string, string>;
+  scheduled_at?: string;
 }
 
 interface BlogJsonImportProps {
