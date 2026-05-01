@@ -88,6 +88,48 @@ const PostEditor = () => {
     setSlugManuallyEdited(true);
   };
 
+  const applyJsonImport = (data: BlogJsonImportData) => {
+    if (typeof data.title === "string") setTitle(data.title);
+    if (typeof data.slug === "string" && data.slug.trim()) {
+      setSlug(generateSlug(data.slug));
+      setSlugManuallyEdited(true);
+    }
+    if (typeof data.content === "string") setContent(data.content);
+    if (typeof data.excerpt === "string") setExcerpt(data.excerpt);
+    if (typeof data.header_image_url === "string")
+      setHeaderImageUrl(data.header_image_url || undefined);
+    if (typeof data.seo_title === "string") setSeoTitle(data.seo_title);
+    if (typeof data.seo_description === "string")
+      setSeoDescription(data.seo_description);
+    if (typeof data.seo_focus_keyphrase === "string")
+      setSeoFocusKeyphrase(data.seo_focus_keyphrase);
+    if (data.seo_keywords !== undefined) {
+      if (Array.isArray(data.seo_keywords)) {
+        setSeoKeywords(data.seo_keywords.filter(Boolean).join(", "));
+      } else if (typeof data.seo_keywords === "string") {
+        setSeoKeywords(data.seo_keywords);
+      }
+    }
+    if (typeof data.seo_og_image_url === "string")
+      setSeoOgImageUrl(data.seo_og_image_url || undefined);
+    if (data.sources !== undefined) {
+      if (Array.isArray(data.sources)) {
+        setSources(
+          data.sources
+            .filter((s) => s && (s.title || s.url))
+            .map((s) => ({ title: s.title || "", url: s.url || "" }))
+        );
+      } else if (typeof data.sources === "object" && data.sources !== null) {
+        setSources(
+          Object.entries(data.sources).map(([title, url]) => ({
+            title,
+            url: String(url),
+          }))
+        );
+      }
+    }
+  };
+
   const savePost = async (publish: boolean) => {
     if (!title.trim()) {
       toast({
