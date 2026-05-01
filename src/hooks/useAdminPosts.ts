@@ -8,6 +8,8 @@ export interface CreatePostData {
   content?: string;
   excerpt?: string;
   header_image_url?: string;
+  hero_image_url?: string;
+  category?: string;
   seo_title?: string;
   seo_description?: string;
   seo_keywords?: string[];

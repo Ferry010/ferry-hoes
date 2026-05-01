@@ -13,6 +13,8 @@ export interface BlogPost {
   content: string | null;
   excerpt: string | null;
   header_image_url: string | null;
+  hero_image_url: string | null;
+  category: string | null;
   seo_title: string | null;
   seo_description: string | null;
   seo_keywords: string[] | null;
