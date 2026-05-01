@@ -357,6 +357,37 @@ const PostEditor = () => {
           </div>
         </div>
 
+        {/* Schedule */}
+        <div className="space-y-2">
+          <Label htmlFor="scheduled_at" className="text-base font-medium">
+            Schedule publish
+          </Label>
+          <div className="flex flex-wrap items-center gap-2">
+            <Input
+              id="scheduled_at"
+              type="datetime-local"
+              value={scheduledAt}
+              onChange={(e) => setScheduledAt(e.target.value)}
+              className="max-w-xs"
+            />
+            {scheduledAt && (
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                onClick={() => setScheduledAt("")}
+              >
+                Clear
+              </Button>
+            )}
+          </div>
+          <p className="text-xs text-muted-foreground">
+            {scheduledAt
+              ? `Will auto-publish on ${new Date(scheduledAt).toLocaleString()} (your local time). The Publish button becomes "Schedule".`
+              : "Optional. Leave empty to publish immediately when you hit Publish."}
+          </p>
+        </div>
+
         {/* Category */}
         <div className="space-y-2">
           <Label htmlFor="category" className="text-base font-medium">
