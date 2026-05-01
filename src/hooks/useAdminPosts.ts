@@ -96,9 +96,15 @@ export function useUpdatePost() {
 
   return useMutation({
     mutationFn: async ({ id, ...postData }: UpdatePostData) => {
-      // If publishing for the first time, set published_at
       let updateData: any = { ...postData };
-      if (postData.published) {
+      const isScheduled = !!postData.scheduled_at;
+
+      if (isScheduled) {
+        // Scheduled post: keep unpublished until cron flips it.
+        updateData.published = false;
+        updateData.published_at = null;
+      } else if (postData.published) {
+        // Publishing now: set published_at if not already set.
         const { data: existingPost } = await supabase
           .from("blog_posts")
           .select("published_at")
