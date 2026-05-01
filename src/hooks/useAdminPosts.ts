@@ -17,6 +17,7 @@ export interface CreatePostData {
   seo_og_image_url?: string;
   sources?: { title: string; url: string }[];
   published?: boolean;
+  scheduled_at?: string | null;
 }
 
 export interface UpdatePostData extends Partial<CreatePostData> {
