@@ -295,10 +295,60 @@ const PostEditor = () => {
           </div>
         </div>
 
-        {/* Header Image */}
+        {/* Category */}
         <div className="space-y-2">
-          <Label className="text-base font-medium">Header Image</Label>
+          <Label htmlFor="category" className="text-base font-medium">
+            Category
+          </Label>
+          <Select
+            value={CATEGORY_PRESETS.includes(category) ? category : (category ? "__other__" : "")}
+            onValueChange={(v) => {
+              if (v === "__other__") {
+                // keep current custom value or clear so user can type
+                if (CATEGORY_PRESETS.includes(category)) setCategory("");
+              } else {
+                setCategory(v);
+              }
+            }}
+          >
+            <SelectTrigger id="category">
+              <SelectValue placeholder="Select a category" />
+            </SelectTrigger>
+            <SelectContent>
+              {CATEGORY_PRESETS.map((c) => (
+                <SelectItem key={c} value={c}>{c}</SelectItem>
+              ))}
+              <SelectItem value="__other__">Other…</SelectItem>
+            </SelectContent>
+          </Select>
+          {!CATEGORY_PRESETS.includes(category) && (
+            <Input
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              placeholder="Custom category (e.g. Culture)"
+            />
+          )}
+          <p className="text-xs text-muted-foreground">
+            Shown as an eyebrow above the post title (e.g. "AI · 4 min read"). Optional.
+          </p>
+        </div>
+
+        {/* Preview & social image */}
+        <div className="space-y-2">
+          <Label className="text-base font-medium">Preview &amp; social image</Label>
           <ImageUpload value={headerImageUrl} onChange={setHeaderImageUrl} />
+          <p className="text-xs text-muted-foreground">
+            Used in blog overviews and when shared on LinkedIn/X. Text on the image is fine here.
+          </p>
+        </div>
+
+        {/* Hero image */}
+        <div className="space-y-2">
+          <Label className="text-base font-medium">Hero image (clean, no text)</Label>
+          <ImageUpload value={heroImageUrl} onChange={setHeroImageUrl} />
+          <p className="text-xs text-muted-foreground">
+            Sits behind the H1 on the post page. Keep it text-free; an overlay is applied for legibility. Falls back to the preview image if empty.
+          </p>
         </div>
 
         {/* Content */}
