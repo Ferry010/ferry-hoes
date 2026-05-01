@@ -38,6 +38,7 @@ export function useBlogPosts(limit?: number) {
         .from("blog_posts")
         .select("*")
         .eq("published", true)
+        .or(`published_at.is.null,published_at.lte.${new Date().toISOString()}`)
         .order("published_at", { ascending: false });
 
       if (limit) {
