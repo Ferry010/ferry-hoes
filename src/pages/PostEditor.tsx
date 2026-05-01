@@ -59,6 +59,7 @@ const PostEditor = () => {
   const [seoOgImageUrl, setSeoOgImageUrl] = useState<string | undefined>();
   const [sources, setSources] = useState<SourceRow[]>([]);
   const [slugManuallyEdited, setSlugManuallyEdited] = useState(false);
+  const [scheduledAt, setScheduledAt] = useState<string>(""); // datetime-local string
 
   // Load existing post data
   useEffect(() => {
