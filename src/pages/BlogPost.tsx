@@ -76,46 +76,82 @@ const BlogPost = () => {
       />
 
       <main className="min-h-screen bg-background">
-        {/* Hero Image */}
-        {post.header_image_url ? (
-          <div className="relative h-[50vh] md:h-[65vh] overflow-hidden">
-            <img
-              src={post.header_image_url}
-              alt={post.title}
-              className="w-full h-full object-cover"
-              loading="eager"
-              fetchPriority="high"
-            />
-            <div className="absolute inset-0 bg-foreground/50" />
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 md:px-8">
-              <div className="max-w-3xl mx-auto">
-                <h1 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight uppercase tracking-tight">
+        {/* Hero */}
+        {(() => {
+          const heroSrc = (post as any).hero_image_url || post.header_image_url;
+          const eyebrow = [
+            (post as any).category,
+            getReadTime(post.content),
+          ]
+            .filter(Boolean)
+            .join(" · ");
+
+          if (heroSrc) {
+            return (
+              <header className="relative h-[60vh] md:h-[75vh] min-h-[420px] overflow-hidden">
+                <img
+                  src={heroSrc}
+                  alt=""
+                  aria-hidden="true"
+                  className="absolute inset-0 w-full h-full object-cover"
+                  loading="eager"
+                  fetchPriority="high"
+                />
+                {/* Bottom-weighted gradient so the top of the image stays clean */}
+                <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/40 to-transparent" />
+                <div className="relative h-full container px-6 md:px-8 flex items-end pb-12 md:pb-16">
+                  <div className="max-w-3xl mx-auto w-full text-center text-white">
+                    {eyebrow && (
+                      <p className="text-[11px] md:text-xs uppercase tracking-[0.18em] text-white/80 font-medium mb-5">
+                        {eyebrow}
+                      </p>
+                    )}
+                    <h1 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold leading-tight uppercase tracking-tight">
+                      {post.title}
+                      <span className="inline-block w-2 h-2 bg-accent rounded-full ml-1.5 mb-1 align-baseline" />
+                    </h1>
+                    <p className="mt-6 text-sm text-white/80">
+                      <Link
+                        to="/my-story"
+                        className="underline-offset-4 hover:underline hover:text-white transition-colors"
+                      >
+                        By Ferry
+                      </Link>
+                      <span className="mx-2 text-white/50">·</span>
+                      <span>{formatPostDate(post.published_at)}</span>
+                    </p>
+                  </div>
+                </div>
+              </header>
+            );
+          }
+
+          return (
+            <header className="container px-6 md:px-8 pt-16 md:pt-24 pb-4">
+              <div className="max-w-3xl mx-auto text-center">
+                {eyebrow && (
+                  <p className="text-[11px] md:text-xs uppercase tracking-[0.18em] text-muted-foreground font-medium mb-5">
+                    {eyebrow}
+                  </p>
+                )}
+                <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight uppercase">
                   {post.title}
                   <span className="inline-block w-2 h-2 bg-accent rounded-full ml-1.5 mb-1 align-baseline" />
                 </h1>
-                <div className="flex items-center justify-center gap-3 text-sm text-white/70">
+                <p className="mt-6 text-sm text-muted-foreground">
+                  <Link
+                    to="/my-story"
+                    className="underline-offset-4 hover:underline hover:text-foreground transition-colors"
+                  >
+                    By Ferry
+                  </Link>
+                  <span className="mx-2 text-muted-foreground/50">·</span>
                   <span>{formatPostDate(post.published_at)}</span>
-                  <span className="text-white/40">|</span>
-                  <span>{getReadTime(post.content)}</span>
-                </div>
+                </p>
               </div>
-            </div>
-          </div>
-        ) : (
-          <div className="container px-6 md:px-8 pt-10 md:pt-14">
-            <div className="max-w-3xl mx-auto">
-              <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight uppercase">
-                {post.title}
-                <span className="inline-block w-2 h-2 bg-accent rounded-full ml-1.5 mb-1 align-baseline" />
-              </h1>
-              <div className="flex items-center gap-3 text-sm text-muted-foreground mt-4">
-                <span>{formatPostDate(post.published_at)}</span>
-                <span>·</span>
-                <span>{getReadTime(post.content)}</span>
-              </div>
-            </div>
-          </div>
-        )}
+            </header>
+          );
+        })()}
 
         {/* Content */}
         <article className="container px-6 md:px-8 py-12 md:py-16">
