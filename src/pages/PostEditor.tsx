@@ -234,6 +234,7 @@ const PostEditor = () => {
         </div>
 
         <div className="flex items-center gap-3">
+          <BlogJsonImport onImport={applyJsonImport} />
           <Button
             variant="outline"
             onClick={() => savePost(false)}
