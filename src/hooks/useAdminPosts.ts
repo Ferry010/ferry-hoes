@@ -66,13 +66,16 @@ export function useCreatePost() {
   return useMutation({
     mutationFn: async (postData: CreatePostData) => {
       const { data: { user } } = await supabase.auth.getUser();
+      const isScheduled = !!postData.scheduled_at;
       
       const { data, error } = await supabase
         .from("blog_posts")
         .insert({
           ...postData,
           author_id: user?.id,
-          published_at: postData.published ? new Date().toISOString() : null,
+          // If scheduled: keep unpublished until cron flips it. Otherwise publish immediately.
+          published: isScheduled ? false : !!postData.published,
+          published_at: postData.published && !isScheduled ? new Date().toISOString() : null,
         } as any)
         .select()
         .single();
