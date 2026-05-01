@@ -158,7 +158,7 @@ const PostEditor = () => {
     }
   };
 
-  const savePost = async (publish: boolean) => {
+  const savePost = async (mode: "draft" | "publish" | "schedule") => {
     if (!title.trim()) {
       toast({
         title: "Title required",
