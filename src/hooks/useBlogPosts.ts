@@ -23,6 +23,7 @@ export interface BlogPost {
   sources: PostSource[] | null;
   published: boolean;
   published_at: string | null;
+  scheduled_at: string | null;
   author_id: string | null;
   created_at: string;
   updated_at: string;
@@ -37,6 +38,7 @@ export function useBlogPosts(limit?: number) {
         .from("blog_posts")
         .select("*")
         .eq("published", true)
+        .or(`published_at.is.null,published_at.lte.${new Date().toISOString()}`)
         .order("published_at", { ascending: false });
 
       if (limit) {

@@ -17,6 +17,7 @@ export interface CreatePostData {
   seo_og_image_url?: string;
   sources?: { title: string; url: string }[];
   published?: boolean;
+  scheduled_at?: string | null;
 }
 
 export interface UpdatePostData extends Partial<CreatePostData> {
@@ -65,13 +66,16 @@ export function useCreatePost() {
   return useMutation({
     mutationFn: async (postData: CreatePostData) => {
       const { data: { user } } = await supabase.auth.getUser();
+      const isScheduled = !!postData.scheduled_at;
       
       const { data, error } = await supabase
         .from("blog_posts")
         .insert({
           ...postData,
           author_id: user?.id,
-          published_at: postData.published ? new Date().toISOString() : null,
+          // If scheduled: keep unpublished until cron flips it. Otherwise publish immediately.
+          published: isScheduled ? false : !!postData.published,
+          published_at: postData.published && !isScheduled ? new Date().toISOString() : null,
         } as any)
         .select()
         .single();
@@ -92,9 +96,15 @@ export function useUpdatePost() {
 
   return useMutation({
     mutationFn: async ({ id, ...postData }: UpdatePostData) => {
-      // If publishing for the first time, set published_at
       let updateData: any = { ...postData };
-      if (postData.published) {
+      const isScheduled = !!postData.scheduled_at;
+
+      if (isScheduled) {
+        // Scheduled post: keep unpublished until cron flips it.
+        updateData.published = false;
+        updateData.published_at = null;
+      } else if (postData.published) {
+        // Publishing now: set published_at if not already set.
         const { data: existingPost } = await supabase
           .from("blog_posts")
           .select("published_at")

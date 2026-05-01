@@ -59,6 +59,7 @@ const PostEditor = () => {
   const [seoOgImageUrl, setSeoOgImageUrl] = useState<string | undefined>();
   const [sources, setSources] = useState<SourceRow[]>([]);
   const [slugManuallyEdited, setSlugManuallyEdited] = useState(false);
+  const [scheduledAt, setScheduledAt] = useState<string>(""); // datetime-local string
 
   // Load existing post data
   useEffect(() => {
@@ -77,6 +78,17 @@ const PostEditor = () => {
       setSeoOgImageUrl(existingPost.seo_og_image_url || undefined);
       const raw = (existingPost as any).sources;
       setSources(Array.isArray(raw) ? (raw as SourceRow[]) : []);
+      const sched = (existingPost as any).scheduled_at;
+      if (sched) {
+        // Convert ISO -> local datetime-local format (YYYY-MM-DDTHH:mm)
+        const d = new Date(sched);
+        const pad = (n: number) => String(n).padStart(2, "0");
+        setScheduledAt(
+          `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`
+        );
+      } else {
+        setScheduledAt("");
+      }
       setSlugManuallyEdited(true);
     }
   }, [existingPost]);
@@ -144,9 +156,18 @@ const PostEditor = () => {
         );
       }
     }
+    if (typeof data.scheduled_at === "string" && data.scheduled_at) {
+      const d = new Date(data.scheduled_at);
+      if (!isNaN(d.getTime())) {
+        const pad = (n: number) => String(n).padStart(2, "0");
+        setScheduledAt(
+          `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`
+        );
+      }
+    }
   };
 
-  const savePost = async (publish: boolean) => {
+  const savePost = async (mode: "draft" | "publish" | "schedule") => {
     if (!title.trim()) {
       toast({
         title: "Title required",
@@ -174,6 +195,30 @@ const PostEditor = () => {
       undefined;
     const finalOgImage = seoOgImageUrl || headerImageUrl;
 
+    let scheduledISO: string | null = null;
+    if (mode === "schedule") {
+      if (!scheduledAt) {
+        toast({
+          title: "Schedule date required",
+          description: "Pick a future date and time to schedule this post.",
+          variant: "destructive",
+        });
+        return;
+      }
+      const d = new Date(scheduledAt);
+      if (isNaN(d.getTime()) || d.getTime() <= Date.now()) {
+        toast({
+          title: "Schedule must be in the future",
+          description: "Pick a date and time later than right now.",
+          variant: "destructive",
+        });
+        return;
+      }
+      scheduledISO = d.toISOString();
+    }
+
+    const publish = mode === "publish";
+
     const postData = {
       title: title.trim(),
       slug: slug.trim(),
@@ -191,25 +236,31 @@ const PostEditor = () => {
       seo_og_image_url: finalOgImage,
       sources: sources.filter((s) => s.title.trim() || s.url.trim()),
       published: publish,
+      scheduled_at: scheduledISO,
     };
+
+    const successTitle =
+      mode === "schedule"
+        ? "Post scheduled"
+        : mode === "publish"
+        ? "Post published!"
+        : isEditing
+        ? "Post saved"
+        : "Draft saved";
+    const successDesc =
+      mode === "schedule"
+        ? `Will go live on ${new Date(scheduledISO!).toLocaleString()}.`
+        : mode === "publish"
+        ? "Your post is now live."
+        : "Your changes have been saved.";
 
     try {
       if (isEditing) {
         await updatePost.mutateAsync({ id, ...postData });
-        toast({
-          title: publish ? "Post published!" : "Post saved",
-          description: publish
-            ? "Your post is now live."
-            : "Your changes have been saved.",
-        });
+        toast({ title: successTitle, description: successDesc });
       } else {
         const newPost = await createPost.mutateAsync(postData);
-        toast({
-          title: publish ? "Post published!" : "Draft saved",
-          description: publish
-            ? "Your post is now live."
-            : "Your draft has been saved.",
-        });
+        toast({ title: successTitle, description: successDesc });
         navigate(`/admin/posts/${newPost.id}`, { replace: true });
       }
     } catch (error: any) {
@@ -255,20 +306,31 @@ const PostEditor = () => {
           <BlogJsonImport onImport={applyJsonImport} />
           <Button
             variant="outline"
-            onClick={() => savePost(false)}
+            onClick={() => savePost("draft")}
             disabled={isSaving}
           >
             <Save className="w-4 h-4 mr-2" />
             Save Draft
           </Button>
-          <Button
-            onClick={() => savePost(true)}
-            disabled={isSaving}
-            className="bg-accent text-accent-foreground hover:bg-accent/90"
-          >
-            <Send className="w-4 h-4 mr-2" />
-            Publish
-          </Button>
+          {scheduledAt ? (
+            <Button
+              onClick={() => savePost("schedule")}
+              disabled={isSaving}
+              className="bg-accent text-accent-foreground hover:bg-accent/90"
+            >
+              <Send className="w-4 h-4 mr-2" />
+              Schedule
+            </Button>
+          ) : (
+            <Button
+              onClick={() => savePost("publish")}
+              disabled={isSaving}
+              className="bg-accent text-accent-foreground hover:bg-accent/90"
+            >
+              <Send className="w-4 h-4 mr-2" />
+              Publish
+            </Button>
+          )}
         </div>
       </div>
 
@@ -302,6 +364,37 @@ const PostEditor = () => {
               placeholder="your-post-slug"
             />
           </div>
+        </div>
+
+        {/* Schedule */}
+        <div className="space-y-2">
+          <Label htmlFor="scheduled_at" className="text-base font-medium">
+            Schedule publish
+          </Label>
+          <div className="flex flex-wrap items-center gap-2">
+            <Input
+              id="scheduled_at"
+              type="datetime-local"
+              value={scheduledAt}
+              onChange={(e) => setScheduledAt(e.target.value)}
+              className="max-w-xs"
+            />
+            {scheduledAt && (
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                onClick={() => setScheduledAt("")}
+              >
+                Clear
+              </Button>
+            )}
+          </div>
+          <p className="text-xs text-muted-foreground">
+            {scheduledAt
+              ? `Will auto-publish on ${new Date(scheduledAt).toLocaleString()} (your local time). The Publish button becomes "Schedule".`
+              : "Optional. Leave empty to publish immediately when you hit Publish."}
+          </p>
         </div>
 
         {/* Category */}
@@ -487,20 +580,31 @@ const PostEditor = () => {
         <div className="flex items-center justify-end gap-3 pt-8 border-t border-border">
           <Button
             variant="outline"
-            onClick={() => savePost(false)}
+            onClick={() => savePost("draft")}
             disabled={isSaving}
           >
             <Save className="w-4 h-4 mr-2" />
             Save Draft
           </Button>
-          <Button
-            onClick={() => savePost(true)}
-            disabled={isSaving}
-            className="bg-accent text-accent-foreground hover:bg-accent/90"
-          >
-            <Send className="w-4 h-4 mr-2" />
-            Publish
-          </Button>
+          {scheduledAt ? (
+            <Button
+              onClick={() => savePost("schedule")}
+              disabled={isSaving}
+              className="bg-accent text-accent-foreground hover:bg-accent/90"
+            >
+              <Send className="w-4 h-4 mr-2" />
+              Schedule
+            </Button>
+          ) : (
+            <Button
+              onClick={() => savePost("publish")}
+              disabled={isSaving}
+              className="bg-accent text-accent-foreground hover:bg-accent/90"
+            >
+              <Send className="w-4 h-4 mr-2" />
+              Publish
+            </Button>
+          )}
         </div>
       </div>
     </div>
