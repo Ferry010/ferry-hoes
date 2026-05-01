@@ -5,6 +5,15 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+const CATEGORY_PRESETS = ["General", "AI", "Speaking", "Brand", "Leadership", "Personal"];
+import {
   useAdminPost,
   useCreatePost,
   useUpdatePost,
@@ -41,6 +50,8 @@ const PostEditor = () => {
   const [content, setContent] = useState("");
   const [excerpt, setExcerpt] = useState("");
   const [headerImageUrl, setHeaderImageUrl] = useState<string | undefined>();
+  const [heroImageUrl, setHeroImageUrl] = useState<string | undefined>();
+  const [category, setCategory] = useState<string>("");
   const [seoTitle, setSeoTitle] = useState("");
   const [seoDescription, setSeoDescription] = useState("");
   const [seoKeywords, setSeoKeywords] = useState("");
@@ -57,6 +68,8 @@ const PostEditor = () => {
       setContent(existingPost.content || "");
       setExcerpt(existingPost.excerpt || "");
       setHeaderImageUrl(existingPost.header_image_url || undefined);
+      setHeroImageUrl((existingPost as any).hero_image_url || undefined);
+      setCategory((existingPost as any).category || "");
       setSeoTitle(existingPost.seo_title || "");
       setSeoDescription(existingPost.seo_description || "");
       setSeoKeywords(existingPost.seo_keywords?.join(", ") || "");
@@ -98,6 +111,9 @@ const PostEditor = () => {
     if (typeof data.excerpt === "string") setExcerpt(data.excerpt);
     if (typeof data.header_image_url === "string")
       setHeaderImageUrl(data.header_image_url || undefined);
+    if (typeof data.hero_image_url === "string")
+      setHeroImageUrl(data.hero_image_url || undefined);
+    if (typeof data.category === "string") setCategory(data.category);
     if (typeof data.seo_title === "string") setSeoTitle(data.seo_title);
     if (typeof data.seo_description === "string")
       setSeoDescription(data.seo_description);
@@ -164,6 +180,8 @@ const PostEditor = () => {
       content: content.trim() || undefined,
       excerpt: excerpt.trim() || undefined,
       header_image_url: headerImageUrl,
+      hero_image_url: heroImageUrl,
+      category: category.trim() || undefined,
       seo_title: finalSeoTitle,
       seo_description: finalSeoDescription,
       seo_keywords: seoKeywords
@@ -286,10 +304,60 @@ const PostEditor = () => {
           </div>
         </div>
 
-        {/* Header Image */}
+        {/* Category */}
         <div className="space-y-2">
-          <Label className="text-base font-medium">Header Image</Label>
+          <Label htmlFor="category" className="text-base font-medium">
+            Category
+          </Label>
+          <Select
+            value={CATEGORY_PRESETS.includes(category) ? category : (category ? "__other__" : "")}
+            onValueChange={(v) => {
+              if (v === "__other__") {
+                // keep current custom value or clear so user can type
+                if (CATEGORY_PRESETS.includes(category)) setCategory("");
+              } else {
+                setCategory(v);
+              }
+            }}
+          >
+            <SelectTrigger id="category">
+              <SelectValue placeholder="Select a category" />
+            </SelectTrigger>
+            <SelectContent>
+              {CATEGORY_PRESETS.map((c) => (
+                <SelectItem key={c} value={c}>{c}</SelectItem>
+              ))}
+              <SelectItem value="__other__">Other…</SelectItem>
+            </SelectContent>
+          </Select>
+          {!CATEGORY_PRESETS.includes(category) && (
+            <Input
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              placeholder="Custom category (e.g. Culture)"
+            />
+          )}
+          <p className="text-xs text-muted-foreground">
+            Shown as an eyebrow above the post title (e.g. "AI · 4 min read"). Optional.
+          </p>
+        </div>
+
+        {/* Preview & social image */}
+        <div className="space-y-2">
+          <Label className="text-base font-medium">Preview &amp; social image</Label>
           <ImageUpload value={headerImageUrl} onChange={setHeaderImageUrl} />
+          <p className="text-xs text-muted-foreground">
+            Used in blog overviews and when shared on LinkedIn/X. Text on the image is fine here.
+          </p>
+        </div>
+
+        {/* Hero image */}
+        <div className="space-y-2">
+          <Label className="text-base font-medium">Hero image (clean, no text)</Label>
+          <ImageUpload value={heroImageUrl} onChange={setHeroImageUrl} />
+          <p className="text-xs text-muted-foreground">
+            Sits behind the H1 on the post page. Keep it text-free; an overlay is applied for legibility. Falls back to the preview image if empty.
+          </p>
         </div>
 
         {/* Content */}
