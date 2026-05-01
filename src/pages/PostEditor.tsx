@@ -41,6 +41,8 @@ const PostEditor = () => {
   const [content, setContent] = useState("");
   const [excerpt, setExcerpt] = useState("");
   const [headerImageUrl, setHeaderImageUrl] = useState<string | undefined>();
+  const [heroImageUrl, setHeroImageUrl] = useState<string | undefined>();
+  const [category, setCategory] = useState<string>("");
   const [seoTitle, setSeoTitle] = useState("");
   const [seoDescription, setSeoDescription] = useState("");
   const [seoKeywords, setSeoKeywords] = useState("");
@@ -57,6 +59,8 @@ const PostEditor = () => {
       setContent(existingPost.content || "");
       setExcerpt(existingPost.excerpt || "");
       setHeaderImageUrl(existingPost.header_image_url || undefined);
+      setHeroImageUrl((existingPost as any).hero_image_url || undefined);
+      setCategory((existingPost as any).category || "");
       setSeoTitle(existingPost.seo_title || "");
       setSeoDescription(existingPost.seo_description || "");
       setSeoKeywords(existingPost.seo_keywords?.join(", ") || "");
@@ -98,6 +102,9 @@ const PostEditor = () => {
     if (typeof data.excerpt === "string") setExcerpt(data.excerpt);
     if (typeof data.header_image_url === "string")
       setHeaderImageUrl(data.header_image_url || undefined);
+    if (typeof data.hero_image_url === "string")
+      setHeroImageUrl(data.hero_image_url || undefined);
+    if (typeof data.category === "string") setCategory(data.category);
     if (typeof data.seo_title === "string") setSeoTitle(data.seo_title);
     if (typeof data.seo_description === "string")
       setSeoDescription(data.seo_description);
@@ -164,6 +171,8 @@ const PostEditor = () => {
       content: content.trim() || undefined,
       excerpt: excerpt.trim() || undefined,
       header_image_url: headerImageUrl,
+      hero_image_url: heroImageUrl,
+      category: category.trim() || undefined,
       seo_title: finalSeoTitle,
       seo_description: finalSeoDescription,
       seo_keywords: seoKeywords
