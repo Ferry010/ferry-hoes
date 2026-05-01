@@ -186,6 +186,30 @@ const PostEditor = () => {
       undefined;
     const finalOgImage = seoOgImageUrl || headerImageUrl;
 
+    let scheduledISO: string | null = null;
+    if (mode === "schedule") {
+      if (!scheduledAt) {
+        toast({
+          title: "Schedule date required",
+          description: "Pick a future date and time to schedule this post.",
+          variant: "destructive",
+        });
+        return;
+      }
+      const d = new Date(scheduledAt);
+      if (isNaN(d.getTime()) || d.getTime() <= Date.now()) {
+        toast({
+          title: "Schedule must be in the future",
+          description: "Pick a date and time later than right now.",
+          variant: "destructive",
+        });
+        return;
+      }
+      scheduledISO = d.toISOString();
+    }
+
+    const publish = mode === "publish";
+
     const postData = {
       title: title.trim(),
       slug: slug.trim(),
@@ -203,25 +227,31 @@ const PostEditor = () => {
       seo_og_image_url: finalOgImage,
       sources: sources.filter((s) => s.title.trim() || s.url.trim()),
       published: publish,
+      scheduled_at: scheduledISO,
     };
+
+    const successTitle =
+      mode === "schedule"
+        ? "Post scheduled"
+        : mode === "publish"
+        ? "Post published!"
+        : isEditing
+        ? "Post saved"
+        : "Draft saved";
+    const successDesc =
+      mode === "schedule"
+        ? `Will go live on ${new Date(scheduledISO!).toLocaleString()}.`
+        : mode === "publish"
+        ? "Your post is now live."
+        : "Your changes have been saved.";
 
     try {
       if (isEditing) {
         await updatePost.mutateAsync({ id, ...postData });
-        toast({
-          title: publish ? "Post published!" : "Post saved",
-          description: publish
-            ? "Your post is now live."
-            : "Your changes have been saved.",
-        });
+        toast({ title: successTitle, description: successDesc });
       } else {
         const newPost = await createPost.mutateAsync(postData);
-        toast({
-          title: publish ? "Post published!" : "Draft saved",
-          description: publish
-            ? "Your post is now live."
-            : "Your draft has been saved.",
-        });
+        toast({ title: successTitle, description: successDesc });
         navigate(`/admin/posts/${newPost.id}`, { replace: true });
       }
     } catch (error: any) {
