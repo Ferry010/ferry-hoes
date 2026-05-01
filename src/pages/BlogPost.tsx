@@ -156,13 +156,6 @@ const BlogPost = () => {
         {/* Content */}
         <article className="container px-6 md:px-8 py-12 md:py-16">
           <div className="max-w-3xl mx-auto">
-            {/* Meta line */}
-            <div className="flex items-center gap-3 text-sm text-muted-foreground mb-10 pb-8 border-b border-border">
-              <span>{formatPostDate(post.published_at)}</span>
-              <span className="text-muted-foreground/40">·</span>
-              <span>{getReadTime(post.content)}</span>
-            </div>
-
             <div className="w-24 h-1 bg-accent rounded-full mb-12" />
             <div
               className="prose prose-lg max-w-none text-foreground/90 prose-headings:text-foreground prose-headings:font-display prose-a:text-accent prose-strong:text-foreground prose-blockquote:border-l-accent prose-blockquote:bg-accent/5 prose-blockquote:rounded-r-lg prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:not-italic mb-16"
