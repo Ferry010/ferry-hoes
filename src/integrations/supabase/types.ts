@@ -26,6 +26,7 @@ export type Database = {
           id: string
           published: boolean
           published_at: string | null
+          scheduled_at: string | null
           seo_description: string | null
           seo_focus_keyphrase: string | null
           seo_keywords: string[] | null
@@ -48,6 +49,7 @@ export type Database = {
           id?: string
           published?: boolean
           published_at?: string | null
+          scheduled_at?: string | null
           seo_description?: string | null
           seo_focus_keyphrase?: string | null
           seo_keywords?: string[] | null
@@ -70,6 +72,7 @@ export type Database = {
           id?: string
           published?: boolean
           published_at?: string | null
+          scheduled_at?: string | null
           seo_description?: string | null
           seo_focus_keyphrase?: string | null
           seo_keywords?: string[] | null
@@ -221,6 +224,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      publish_due_scheduled_posts: { Args: never; Returns: undefined }
     }
     Enums: {
       app_role: "admin" | "moderator" | "user"
