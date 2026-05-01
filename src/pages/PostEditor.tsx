@@ -156,6 +156,15 @@ const PostEditor = () => {
         );
       }
     }
+    if (typeof data.scheduled_at === "string" && data.scheduled_at) {
+      const d = new Date(data.scheduled_at);
+      if (!isNaN(d.getTime())) {
+        const pad = (n: number) => String(n).padStart(2, "0");
+        setScheduledAt(
+          `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`
+        );
+      }
+    }
   };
 
   const savePost = async (mode: "draft" | "publish" | "schedule") => {
