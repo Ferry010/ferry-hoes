@@ -14,6 +14,7 @@ import ImageUpload from "@/components/admin/ImageUpload";
 import RichTextEditor from "@/components/admin/RichTextEditor";
 import SEOFields from "@/components/admin/SEOFields";
 import FocusKeyphrasePanel from "@/components/admin/FocusKeyphrasePanel";
+import BlogJsonImport, { type BlogJsonImportData } from "@/components/admin/BlogJsonImport";
 import { toast } from "@/hooks/use-toast";
 import { ArrowLeft, Save, Send, Plus, Trash2 } from "lucide-react";
 import { autoExcerpt, smartTruncate, stripHtml } from "@/lib/seoSuggest";
