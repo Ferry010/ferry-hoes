@@ -23,6 +23,7 @@ export interface BlogPost {
   sources: PostSource[] | null;
   published: boolean;
   published_at: string | null;
+  scheduled_at: string | null;
   author_id: string | null;
   created_at: string;
   updated_at: string;
