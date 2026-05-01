@@ -78,6 +78,17 @@ const PostEditor = () => {
       setSeoOgImageUrl(existingPost.seo_og_image_url || undefined);
       const raw = (existingPost as any).sources;
       setSources(Array.isArray(raw) ? (raw as SourceRow[]) : []);
+      const sched = (existingPost as any).scheduled_at;
+      if (sched) {
+        // Convert ISO -> local datetime-local format (YYYY-MM-DDTHH:mm)
+        const d = new Date(sched);
+        const pad = (n: number) => String(n).padStart(2, "0");
+        setScheduledAt(
+          `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`
+        );
+      } else {
+        setScheduledAt("");
+      }
       setSlugManuallyEdited(true);
     }
   }, [existingPost]);
