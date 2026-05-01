@@ -297,20 +297,31 @@ const PostEditor = () => {
           <BlogJsonImport onImport={applyJsonImport} />
           <Button
             variant="outline"
-            onClick={() => savePost(false)}
+            onClick={() => savePost("draft")}
             disabled={isSaving}
           >
             <Save className="w-4 h-4 mr-2" />
             Save Draft
           </Button>
-          <Button
-            onClick={() => savePost(true)}
-            disabled={isSaving}
-            className="bg-accent text-accent-foreground hover:bg-accent/90"
-          >
-            <Send className="w-4 h-4 mr-2" />
-            Publish
-          </Button>
+          {scheduledAt ? (
+            <Button
+              onClick={() => savePost("schedule")}
+              disabled={isSaving}
+              className="bg-accent text-accent-foreground hover:bg-accent/90"
+            >
+              <Send className="w-4 h-4 mr-2" />
+              Schedule
+            </Button>
+          ) : (
+            <Button
+              onClick={() => savePost("publish")}
+              disabled={isSaving}
+              className="bg-accent text-accent-foreground hover:bg-accent/90"
+            >
+              <Send className="w-4 h-4 mr-2" />
+              Publish
+            </Button>
+          )}
         </div>
       </div>
 
