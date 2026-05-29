@@ -30,6 +30,7 @@ import MyStory from "./pages/MyStory";
 import Writing from "./pages/Writing";
 import TheBook from "./pages/TheBook";
 import NoCookies from "./pages/NoCookies";
+import AIGeletterdheid from "./pages/AIGeletterdheid";
 import CookieBanner from "./components/CookieBanner";
 import { usePageTracking } from "./hooks/usePageTracking";
 
