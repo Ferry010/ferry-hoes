@@ -30,6 +30,7 @@ import MyStory from "./pages/MyStory";
 import Writing from "./pages/Writing";
 import TheBook from "./pages/TheBook";
 import NoCookies from "./pages/NoCookies";
+import AIGeletterdheid from "./pages/AIGeletterdheid";
 import CookieBanner from "./components/CookieBanner";
 import { usePageTracking } from "./hooks/usePageTracking";
 
@@ -84,6 +85,7 @@ const App = () => (
             <Route path="/now" element={<Now />} />
             <Route path="/press" element={<Press />} />
             <Route path="/no-cookies" element={<NoCookies />} />
+            <Route path="/ai-geletterdheid" element={<AIGeletterdheid />} />
 
             {/* Easter egg / hidden */}
             <Route path="/conversation" element={<Conversation />} />
