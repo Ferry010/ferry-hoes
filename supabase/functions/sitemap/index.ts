@@ -16,6 +16,7 @@ const STATIC_PAGES = [
   { loc: "https://ferryhoes.com/contact", changefreq: "monthly", priority: "0.6" },
   { loc: "https://ferryhoes.com/press", changefreq: "monthly", priority: "0.6" },
   { loc: "https://ferryhoes.com/now", changefreq: "weekly", priority: "0.3" },
+  { loc: "https://ferryhoes.com/ai-geletterdheid", changefreq: "monthly", priority: "0.9" },
 ];
 
 Deno.serve(async (req) => {
