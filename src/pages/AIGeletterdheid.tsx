@@ -23,7 +23,7 @@ const faqs: { q: string; a: string }[] = [
   },
   {
     q: "Wanneer wordt AI geletterdheid wettelijk verplicht?",
-    a: "De EU AI Act is op 1 augustus 2024 in werking getreden. Artikel 4 — dat aantoonbare AI geletterdheid eist van iedereen die met AI-systemen werkt — wordt gehandhaafd vanaf 2 augustus 2026. Vanaf die datum riskeren organisaties die het niet op orde hebben boetes die kunnen oplopen tot 35 miljoen euro of 7% van de wereldwijde jaaromzet.",
+    a: "De EU AI Act is op 1 augustus 2024 in werking getreden. Artikel 4, dat aantoonbare AI geletterdheid eist van iedereen die met AI-systemen werkt, wordt gehandhaafd vanaf 2 augustus 2026. Vanaf die datum riskeren organisaties die het niet op orde hebben boetes die kunnen oplopen tot 35 miljoen euro of 7% van de wereldwijde jaaromzet.",
   },
   {
     q: "Wat zegt Artikel 4 van de EU AI-wet precies?",
@@ -35,7 +35,7 @@ const faqs: { q: string; a: string }[] = [
   },
   {
     q: "Wat is het verschil tussen AIGA en het Brand Humanizing Institute?",
-    a: "Het Brand Humanizing Institute ontwikkelt het strategische denkkader rond mens en technologie. AIGA — AI Geletterdheid Academy — is een samenwerking tussen het Brand Humanizing Institute en Speakers Academy, en vertaalt dat denkkader naar een gecertificeerde training die voldoet aan Artikel 4 van de EU AI Act.",
+    a: "Het Brand Humanizing Institute ontwikkelt het strategische denkkader rond mens en technologie. AIGA, AI Geletterdheid Academy, is een samenwerking tussen het Brand Humanizing Institute en Speakers Academy, en vertaalt dat denkkader naar een gecertificeerde training die voldoet aan Artikel 4 van de EU AI Act.",
   },
   {
     q: "Hoe lang duurt de training en wat levert het op?",
@@ -46,14 +46,14 @@ const faqs: { q: string; a: string }[] = [
 const courseSchema = {
   "@context": "https://schema.org",
   "@type": "Course",
-  name: "AIGA — AI Geletterdheid Training",
+  name: "AIGA, AI Geletterdheid Training",
   description:
     "Gecertificeerde Nederlandstalige AI geletterdheid training die voldoet aan Artikel 4 van de EU AI Act. Een samenwerking tussen het Brand Humanizing Institute en Speakers Academy.",
   url: AIGA_URL,
   inLanguage: "nl",
   provider: {
     "@type": "Organization",
-    name: "AIGA — AI Geletterdheid Academy",
+    name: "AIGA, AI Geletterdheid Academy",
     url: AIGA_URL,
     sameAs: [BH_URL, "https://www.speakersacademy.com"],
   },
@@ -86,7 +86,7 @@ const AIGeletterdheid = () => {
   return (
     <>
       <SEOHead
-        title="AI Geletterdheid — verplicht vanaf 2 augustus 2026"
+        title="AI Geletterdheid, verplicht vanaf 2 augustus 2026"
         description="Vanaf 2 augustus 2026 verplicht de EU AI Act aantoonbare AI geletterdheid. De AIGA-training van Brand Humanizing Institute en Speakers Academy maakt jouw organisatie klaar."
         keywords={[
           "ai geletterdheid",
@@ -124,7 +124,7 @@ const AIGeletterdheid = () => {
                   Vanaf <strong>2 augustus 2026</strong> zijn organisaties
                   wettelijk verplicht om te zorgen dat hun medewerkers
                   voldoende AI-geletterd zijn. Geen suggestie, geen
-                  richtlijn — een eis met boetes tot 35 miljoen euro.
+                  richtlijn, een eis met boetes tot 35 miljoen euro.
                 </p>
                 <p>
                   Maar echte AI geletterdheid is meer dan een
@@ -259,7 +259,7 @@ const AIGeletterdheid = () => {
                 },
                 {
                   t: "Emotionele intelligentie & ethiek",
-                  d: "Het oordeel om te herkennen wanneer een AI-beslissing menselijk toezicht vereist — en de moed om dat ook te zeggen.",
+                  d: "Het oordeel om te herkennen wanneer een AI-beslissing menselijk toezicht vereist, en de moed om dat ook te zeggen.",
                 },
               ].map((p) => (
                 <div key={p.t}>
@@ -296,7 +296,7 @@ const AIGeletterdheid = () => {
               <ul className="mt-8 space-y-4 text-lg text-foreground/85">
                 {[
                   "Certificaat dat geldt als documentatie voor EU AI Act Artikel 4-naleving.",
-                  "Echt begrip van hoe AI-systemen werken — en waar ze structureel falen.",
+                  "Echt begrip van hoe AI-systemen werken, en waar ze structureel falen.",
                   "Het vermogen om te beoordelen waar AI betrouwbaar is en waar niet.",
                   "Een gedeelde taal binnen jouw organisatie over mens en technologie.",
                 ].map((t) => (
@@ -337,7 +337,7 @@ const AIGeletterdheid = () => {
               </h2>
               <div className="mt-8 space-y-5 text-lg text-foreground/80 leading-[1.6]">
                 <p>
-                  AIGA — de{" "}
+                  AIGA, de{" "}
                   <a
                     href={AIGA_URL}
                     target="_blank"
@@ -346,7 +346,7 @@ const AIGeletterdheid = () => {
                   >
                     AI Geletterdheid Academy
                   </a>{" "}
-                  — is een samenwerking tussen het Brand Humanizing
+                 , is een samenwerking tussen het Brand Humanizing
                   Institute en Speakers Academy. Brand Humanizing
                   ontwikkelt al jaren de strategische kaders voor
                   organisaties die menselijke en technologische krachten
@@ -359,7 +359,7 @@ const AIGeletterdheid = () => {
                   vereist zowel inhoudelijke diepte als de didactische
                   kwaliteit om het begrijpelijk over te brengen aan mensen
                   die geen technici zijn. AIGA brengt beide samen in een
-                  training die inhoudelijk robuust is — en die mensen ook
+                  training die inhoudelijk robuust is, en die mensen ook
                   echt iets leert.
                 </p>
                 <p>
@@ -448,7 +448,7 @@ const AIGeletterdheid = () => {
               </h2>
               <p className="mt-6 text-lg md:text-xl text-background/80 leading-[1.55] max-w-2xl">
                 De AIGA-training is nu beschikbaar. Bereid jouw
-                organisatie voor — voordat de korte tijdlijn dat voor je
+                organisatie voor, voordat de korte tijdlijn dat voor je
                 doet.
               </p>
               <div className="mt-10">
