@@ -85,6 +85,7 @@ const App = () => (
             <Route path="/now" element={<Now />} />
             <Route path="/press" element={<Press />} />
             <Route path="/no-cookies" element={<NoCookies />} />
+            <Route path="/ai-geletterdheid" element={<AIGeletterdheid />} />
 
             {/* Easter egg / hidden */}
             <Route path="/conversation" element={<Conversation />} />
