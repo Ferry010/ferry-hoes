@@ -24,6 +24,7 @@ const Polaroid = ({
   rotate = -1.5,
   className = "",
   aspect = "landscape",
+  objectPosition,
   loading = "lazy",
 }: PolaroidProps) => {
   const aspectClass =
@@ -43,7 +44,8 @@ const Polaroid = ({
           src={src}
           alt={alt}
           loading={loading}
-          className="w-full h-full object-cover object-top"
+          className={`w-full h-full object-cover ${objectPosition ? "" : "object-top"}`}
+          style={objectPosition ? { objectPosition } : undefined}
         />
       </div>
       {caption && (
