@@ -171,8 +171,9 @@ const Speaking = () => {
               </div>
               <div className="lg:col-span-5 flex justify-center lg:justify-end">
                 <Polaroid
-                  src={ferryPresenting}
+                  src={ferryStageWarehouse.url}
                   alt="Ferry Hoes mid-keynote on stage"
+                  objectPosition="72% 40%"
                   caption="Mid-flow on stage."
                   rotate={-2}
                   aspect="portrait"
