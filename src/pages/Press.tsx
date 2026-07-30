@@ -22,6 +22,7 @@ import ferryKallenbach from "@/assets/ferry-kallenbach.jpg";
 import ferryAcesDirect from "@/assets/ferry-aces-direct.png";
 import ferrySpeaking3 from "@/assets/ferry-speaking-3.jpg";
 import jarigeJobLogo from "@/assets/jarige-job-logo.png";
+import ferryStageWarehouseAsset from "@/assets/ferry-stage-warehouse.jpg.asset.json";
 
 const HEADSHOTS = [
   { src: ferryPortrait, label: "Portrait" },
@@ -31,6 +32,7 @@ const HEADSHOTS = [
   { src: ferryKallenbach, label: "Portrait © Walter Kallenbach" },
   { src: ferryAcesDirect, label: "Speaking at Aces Direct" },
   { src: ferrySpeaking3, label: "Keynote with audience" },
+  { src: ferryStageWarehouseAsset.url, label: "On stage © Jasmyn Mazloum" },
 ];
 
 const TOPICS = [
