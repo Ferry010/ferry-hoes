@@ -18,7 +18,7 @@ const roads = [
     image: ferryOnStage,
     alt: "Ferry Hoes mid-keynote",
     bg: "bg-[#F9DCD0]",
-    objectPos: "center 30%",
+    objectPos: "72% 40%",
   },
   {
     tag: "Plug into the page",
