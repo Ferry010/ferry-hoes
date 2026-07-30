@@ -14,6 +14,7 @@ import StructuredData, {
 import stagePhoto from "@/assets/ferry-filming.jpg";
 import ferryBts from "@/assets/ferry-bts.jpg";
 import ferryPresenting from "@/assets/ferry-presenting.jpg";
+import ferryStageWarehouse from "@/assets/ferry-stage-warehouse.jpg.asset.json";
 
 import SpeakingQA from "@/components/sections/SpeakingQA";
 import ClientLogosGrid from "@/components/sections/ClientLogosGrid";
@@ -170,8 +171,9 @@ const Speaking = () => {
               </div>
               <div className="lg:col-span-5 flex justify-center lg:justify-end">
                 <Polaroid
-                  src={ferryPresenting}
+                  src={ferryStageWarehouse.url}
                   alt="Ferry Hoes mid-keynote on stage"
+                  objectPosition="72% 40%"
                   caption="Mid-flow on stage."
                   rotate={-2}
                   aspect="portrait"

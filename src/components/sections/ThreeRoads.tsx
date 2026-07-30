@@ -3,7 +3,8 @@ import { ArrowRight } from "lucide-react";
 import { Eyebrow, Period } from "@/components/HeadingDot";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import ferryPortrait from "@/assets/ferry-portrait.jpg";
-import ferryOnStage from "@/assets/ferry-on-stage.jpg";
+import ferryStageWarehouse from "@/assets/ferry-stage-warehouse.jpg.asset.json";
+const ferryOnStage: string = ferryStageWarehouse.url;
 import ferryWithBook from "@/assets/ferry-bookstore.jpg";
 
 const roads = [
@@ -17,7 +18,7 @@ const roads = [
     image: ferryOnStage,
     alt: "Ferry Hoes mid-keynote",
     bg: "bg-[#F9DCD0]",
-    objectPos: "center 30%",
+    objectPos: "72% 40%",
   },
   {
     tag: "Plug into the page",
