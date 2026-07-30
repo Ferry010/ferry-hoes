@@ -3,7 +3,8 @@ import { ArrowRight } from "lucide-react";
 import { Eyebrow, Period } from "@/components/HeadingDot";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import ferryPortrait from "@/assets/ferry-portrait.jpg";
-import ferryOnStage from "@/assets/ferry-stage-warehouse.jpg.asset.json";
+import ferryStageWarehouse from "@/assets/ferry-stage-warehouse.jpg.asset.json";
+const ferryOnStage: string = ferryStageWarehouse.url;
 import ferryWithBook from "@/assets/ferry-bookstore.jpg";
 
 const roads = [
