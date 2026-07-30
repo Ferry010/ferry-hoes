@@ -14,6 +14,7 @@ import StructuredData, {
 import stagePhoto from "@/assets/ferry-filming.jpg";
 import ferryBts from "@/assets/ferry-bts.jpg";
 import ferryPresenting from "@/assets/ferry-presenting.jpg";
+import ferryStageWarehouse from "@/assets/ferry-stage-warehouse.jpg.asset.json";
 
 import SpeakingQA from "@/components/sections/SpeakingQA";
 import ClientLogosGrid from "@/components/sections/ClientLogosGrid";
