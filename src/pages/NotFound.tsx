@@ -31,7 +31,7 @@ const NotFound = () => {
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             {/* Left: editorial copy */}
             <div className="lg:col-span-8">
-              <Eyebrow>404 — Lost in thought</Eyebrow>
+              <Eyebrow>404, Lost in thought</Eyebrow>
               <h1
                 className="font-display font-bold text-foreground leading-[1.02]"
                 style={{ fontSize: "clamp(44px, 8vw, 112px)" }}
