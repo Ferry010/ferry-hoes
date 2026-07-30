@@ -208,7 +208,7 @@ const Speaking = () => {
                 {[
                   { title: "Brand Humanizing", body: "Why human edge becomes the durable advantage when AI commoditises everything else." },
                   { title: "The Human Era of Work", body: "How to lead organisations where humans and machines work side by side without losing meaning." },
-                  { title: "AI without the noise", body: "A clear, practical look at where AI actually moves the needle — and where it just adds work." },
+                  { title: "AI without the noise", body: "A clear, practical look at where AI actually moves the needle, and where it just adds work." },
                 ].map((t) => (
                   <article key={t.title} className="bg-background-alt border border-border rounded-2xl p-6 md:p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-soft-lg">
                     <span className="text-[11px] uppercase tracking-[0.16em] font-semibold text-accent">• Talk</span>

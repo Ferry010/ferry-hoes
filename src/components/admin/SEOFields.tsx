@@ -287,7 +287,7 @@ const SEOFields = ({
             {suggested.length > 0 && (
               <div className="pt-2">
                 <p className="text-xs text-muted-foreground mb-2 flex items-center gap-1">
-                  <Sparkles className="w-3 h-3" /> Suggestions from your post —
+                  <Sparkles className="w-3 h-3" /> Suggestions from your post,
                   click to add
                 </p>
                 <div className="flex flex-wrap gap-1.5">

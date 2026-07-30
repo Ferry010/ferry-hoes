@@ -94,7 +94,7 @@ export function analyzeFocusKeyphrase({
     id: "in-title",
     label: "Focus keyphrase appears in the SEO title",
     status: includesPhrase(title, kp) ? "good" : "bad",
-    hint: "Add the phrase to the SEO title — ideally near the start.",
+    hint: "Add the phrase to the SEO title, ideally near the start.",
   });
 
   // 2. In meta description
@@ -141,15 +141,15 @@ export function analyzeFocusKeyphrase({
   let densityHint = "Aim for 0.5%–2.5% density.";
   if (wordCount < 100) {
     densityStatus = "warn";
-    densityHint = "Post is short — write more body copy before judging density.";
+    densityHint = "Post is short: write more body copy before judging density.";
   } else if (density === 0) {
     densityStatus = "bad";
   } else if (density < 0.5) {
     densityStatus = "warn";
-    densityHint = "Density is low — use the phrase a few more times.";
+    densityHint = "Density is low: use the phrase a few more times.";
   } else if (density > 2.5) {
     densityStatus = "warn";
-    densityHint = "Density is high — risk of keyword stuffing.";
+    densityHint = "Density is high: risk of of keyword stuffing.";
   } else {
     densityStatus = "good";
   }
@@ -192,7 +192,7 @@ export function analyzeFocusKeyphrase({
     id: "image",
     label: "Post has a header image",
     status: hasImage ? "good" : "warn",
-    hint: "Add a header image — used for social cards and search visuals.",
+    hint: "Add a header image, used for social cards and search visuals.",
   });
 
   // 11. Content length
@@ -233,10 +233,10 @@ export function readabilityScore(plainText: string): Readability {
   const score = Math.max(0, Math.min(100, Math.round(flesch)));
 
   const hints: string[] = [];
-  if (avgSentenceLen > 22) hints.push("Sentences are long — break some up.");
+  if (avgSentenceLen > 22) hints.push("Sentences are long, break some up.");
   const longSentences = sentences.filter((s) => s.split(/\s+/).length > 25).length;
   if (longSentences > 0) hints.push(`${longSentences} sentence(s) exceed 25 words.`);
-  if (avgSyllables > 1.7) hints.push("Word choice is dense — try simpler words.");
+  if (avgSyllables > 1.7) hints.push("Word choice is dense, try simpler words.");
 
   const label: Readability["label"] = score >= 70 ? "easy" : score >= 50 ? "ok" : "hard";
   if (hints.length === 0) hints.push("Reads cleanly.");

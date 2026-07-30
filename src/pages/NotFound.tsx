@@ -48,11 +48,11 @@ const NotFound = () => {
                   <code className="px-2 py-0.5 rounded bg-background-alt text-foreground/80 text-base">
                     {location.pathname}
                   </code>{" "}
-                  doesn't exist — or it did once and I tidied up. Either way,
+                  doesn't exist, or it did once and I tidied up. Either way,
                   you're here now. Let's make it count.
                 </p>
                 <p className="font-handwritten text-2xl md:text-3xl text-ink-navy not-italic leading-snug">
-                  P.S. — getting lost is underrated.
+                  P.S. getting lost is underrated.
                 </p>
               </div>
 
