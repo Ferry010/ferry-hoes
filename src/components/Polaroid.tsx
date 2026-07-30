@@ -8,6 +8,8 @@ interface PolaroidProps {
   rotate?: number;
   className?: string;
   aspect?: "square" | "portrait" | "landscape";
+  /** CSS object-position for the photo, e.g. "70% 30%" */
+  objectPosition?: string;
   loading?: "eager" | "lazy";
 }
 
