@@ -12,7 +12,7 @@ const roads = [
     tag: "Plug into the room",
     title: "On stage.",
     body:
-      "Plug in by booking a keynote. Around 40 a year — boards, leadership teams, and anyone trying to figure out what \u201Chuman\u201D means in a tech-heavy world.",
+      "Plug in by booking a keynote. Around 40 a year: boards, leadership teams, and anyone trying to figure out what \u201Chuman\u201D means in a tech-heavy world.",
     cta: "See talks & reel",
     to: "/on-stage",
     image: ferryOnStage,
@@ -37,7 +37,7 @@ const roads = [
     tag: "Plug into the story",
     title: "My story.",
     body:
-      "Plug in by getting to know me. How a talkative kid from Delft ended up coining Brand Humanizing — the long version.",
+      "Plug in by getting to know me. How a talkative kid from Delft ended up coining Brand Humanizing, the long version.",
     cta: "Read the story",
     to: "/my-story",
     image: ferryPortrait,

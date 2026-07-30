@@ -31,7 +31,7 @@ const NotFound = () => {
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             {/* Left: editorial copy */}
             <div className="lg:col-span-8">
-              <Eyebrow>404 — Lost in thought</Eyebrow>
+              <Eyebrow>404, Lost in thought</Eyebrow>
               <h1
                 className="font-display font-bold text-foreground leading-[1.02]"
                 style={{ fontSize: "clamp(44px, 8vw, 112px)" }}
@@ -48,11 +48,11 @@ const NotFound = () => {
                   <code className="px-2 py-0.5 rounded bg-background-alt text-foreground/80 text-base">
                     {location.pathname}
                   </code>{" "}
-                  doesn't exist — or it did once and I tidied up. Either way,
+                  doesn't exist, or it did once and I tidied up. Either way,
                   you're here now. Let's make it count.
                 </p>
                 <p className="font-handwritten text-2xl md:text-3xl text-ink-navy not-italic leading-snug">
-                  P.S. — getting lost is underrated.
+                  P.S. getting lost is underrated.
                 </p>
               </div>
 

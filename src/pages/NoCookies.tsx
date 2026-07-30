@@ -59,7 +59,7 @@ const NoCookies = () => {
             <p className="text-lg md:text-xl leading-relaxed text-foreground/90">
               I don't use tracking cookies. I have no idea what you're doing on
               this website, because I can't follow you around. This is a
-              conscious decision — if I invited you to my office, I wouldn't
+              conscious decision: if I invited you to my office, I wouldn't
               tail your every move either.
             </p>
           </section>
@@ -89,7 +89,7 @@ const NoCookies = () => {
             </h2>
             <p className="text-foreground/75 leading-relaxed text-lg">
               It started back when Jonathan and I were Growth Hackers. Our
-              daily job was to optimise websites, forms and shops — using tools
+              daily job was to optimise websites, forms and shops, using tools
               like Google Analytics and Hotjar to measure every move anyone
               made. We were{" "}
               <span className="text-primary font-semibold">
@@ -143,7 +143,7 @@ const NoCookies = () => {
             </div>
             <p className="text-foreground/75 leading-relaxed text-lg">
               Out here, you're completely anonymous. I won't even know you
-              were here until you decide to reach out. Don't get me wrong — I
+              were here until you decide to reach out. Don't get me wrong, I
               love data and tech as much as the next person. But all in good
               use, and with a purpose. Following people around online and
               treating them as datapoints just isn't mine.
