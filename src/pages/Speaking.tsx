@@ -106,6 +106,8 @@ const Speaking = () => {
         title="AI Keynote Speaker for Conferences & Corporate Events | Ferry Hoes"
         description="Book Ferry Hoes for your next event. Keynote talks on AI, the future of work, human-centred leadership, and Brand Humanizing. Trusted by global organisations. Available internationally."
         ogType="website"
+        ogImage={`https://ferryhoes.com${ferryStageWarehouse.url}`}
+        ogImageAlt="Ferry Hoes speaking on stage to a live audience"
         canonicalUrl="/speaking"
       />
       <StructuredData
